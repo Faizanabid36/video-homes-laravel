@@ -69,7 +69,7 @@ class Subscribers extends React.Component {
                 <br/>
                 <Bar
                     data={this.state.Data}
-                    height={45}
+                    height={30}
                     options={{maintainAspectRatio: false}}
                 />
             </div>

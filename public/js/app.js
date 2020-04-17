@@ -110305,7 +110305,7 @@ var Subscribers = /*#__PURE__*/function (_React$Component) {
         value: "this_year"
       }, "This year")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_chartjs_2__WEBPACK_IMPORTED_MODULE_3__["Bar"], {
         data: this.state.Data,
-        height: 45,
+        height: 30,
         options: {
           maintainAspectRatio: false
         }
@@ -110412,8 +110412,8 @@ if (document.getElementById('container')) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\video-homes\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\video-homes\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\video-homes-laravel\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\video-homes-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
