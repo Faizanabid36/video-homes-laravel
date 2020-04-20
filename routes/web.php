@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+Route::view('/{path?}', 'container');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/dashboard','DashboardController@dashboard')->name('dashboard');
-Route::get('/dashboard/{type}','DashboardController@dashboard_type')->name('dashboard_type');
+Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard');
+Route::get('/dashboard/{type}', 'DashboardController@dashboard_type')->name('dashboard_type');

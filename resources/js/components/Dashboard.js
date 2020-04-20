@@ -1,11 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter, Link, Route, Switch} from 'react-router-dom';
-import ChannelAnalytics from './DashboardComponents/ChannelAnalytics';
-import LastMonthComparison from "./DashboardComponents/LastMonthComparison";
-import Subscribers from "./DashboardComponents/Subscribers";
+import DashboardComponents from "./DashboardComponents/DashboardComponents";
+import Comments from "./Comments";
+
 
 class Dashboard extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    componentDidMount() {
+        // if()
+    }
+
     render() {
         return <div>
             <div id="main-container" className="container main-content" data-logged="true">
@@ -22,25 +29,24 @@ class Dashboard extends React.Component {
                                 </h4>
                                 <div className="tp_vid_fltr_tabs">
                                     <ul className="list-unstyled">
-                                        <li className="selected">
-                                            <a href="#">Dashboard</a>
+                                        <li className={location.pathname.includes("dashboard")?"selected":""}>
+                                            <Link to="/dashboard">Dashboard</Link>
                                         </li>
-                                        <li>
+                                        <li className={location.pathname.includes("videos")?"selected":""}>
                                             <a href="#">Videos</a>
                                         </li>
-                                        <li>
-                                            <a href="#">Comments</a>
+                                        <li className={location.pathname.includes("comments")?"selected":""}>
+                                            <Link to="/comments">Comments</Link>
                                         </li>
                                     </ul>
                                 </div>
                                 <div className="clear"></div>
                                 <hr/>
+                                {location.pathname.includes("dashboard")?
+                                    <DashboardComponents/>
+                                    :location.pathname.includes("comments")?
+                                        <Comments/>:<div></div>}
                             </div>
-                            <ChannelAnalytics/>
-                            <hr/>
-                            <LastMonthComparison/>
-                            <hr/>
-                            <Subscribers/>
                         </div>
                     </div>
                     <br/>
