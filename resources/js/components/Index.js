@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import Dashboard from "./Dashboard";
 import Comments from "./Comments";
+import UploadVideos from "./Videos/UploadVideos";
 
 class Index extends React.Component{
     render() {
@@ -10,6 +11,7 @@ class Index extends React.Component{
             <Switch>
                 <Route path='/dashboard' component={Dashboard} />
                 <Route path="/comments" component={Dashboard} />
+                <Route path="/upload-video" component={UploadVideos} />
             </Switch>
         </main>
     }
