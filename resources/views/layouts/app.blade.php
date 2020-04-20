@@ -98,7 +98,7 @@
 {{--                    <h4>Video Homes</h4>--}}
 {{--                </a>--}}
 {{--            </div>--}}
-{{--            <ul class="nav navbar-nav navbar-right" style="display: inline;float: right !important">--}}
+{{--            <ul class="nav navbar-nav navbar-right" >--}}
 {{--                <li class="hide-from-mobile">--}}
 {{--                    <a href="{{route('upload-video')}}" class="btn upload-button">--}}
 {{--                        <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24">--}}
@@ -126,14 +126,43 @@
 {{--</header>--}}
 <header>
     <nav class="navbar navbar-findcond navbar-fixed-top header-layout">
-        <div class="pt_main_hdr" id="header_change">
-            <div class="navbar-header">
-                <a class="navbar-brand logo-img" href="http://localhost/video-homes(old)/beta//">
-                    <h4>Video Homes</h4>
-                </a>
-            </div>
-            <ul class="nav navbar-nav navbar-right">
+        <div class="navbar-header" style="position: fixed;float: left">
+            <a class="navbar-brand logo-img" href="#">
+                <h4>Video Homes</h4>
+            </a>
+        </div>
+        <div class="pt_main_hdr pull-right" id="header_change">
+            <ul class="nav navbar-nav navbar-right" style="display: inline;float: right !important">
                 @if(auth()->user())
+                    <li class="hide-from-mobile pull-left top-header">
+                        <a href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M20,2H4A2,2 0 0,0 2,4V22L6,18H20A2,2 0 0,0 22,16V4A2,2 0 0,0 20,2M6,9H18V11H6M14,14H6V12H14M18,8H6V6H18"></path>
+                            </svg>
+                            <span id="new-messages"></span>
+                        </a>
+                    </li>
+                    <li class="hide-from-mobile dropdown pull-left top-header">
+                        <a href="javascript:void(0);" id="get-notifications" class=" dropdown-toggle"
+                           data-toggle="dropdown">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                      d="M21,19V20H3V19L5,17V11C5,7.9 7.03,5.17 10,4.29C10,4.19 10,4.1 10,4A2,2 0 0,1 12,2A2,2 0 0,1 14,4C14,4.1 14,4.19 14,4.29C16.97,5.17 19,7.9 19,11V17L21,19M14,21A2,2 0 0,1 12,23A2,2 0 0,1 10,21M19.75,3.19L18.33,4.61C20.04,6.3 21,8.6 21,11H23C23,8.07 21.84,5.25 19.75,3.19M1,11H3C3,8.6 3.96,6.3 5.67,4.61L4.25,3.19C2.16,5.25 1,8.07 1,11Z"></path>
+                            </svg>
+                            <span id="new-notifications"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right notfi-dropdown" id="notifications">
+                            <li>
+                                <h5>
+                                    <b id="all-notifications"></b> Notifications
+                                    <i class="fa fa-circle-o-notch spin hidden"></i>
+                                </h5>
+                            </li>
+                            <li>
+                                <ul id="notifications-list"></ul>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="dropdown hide-from-mobile pull-left profile-nav">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             <img class="header-image"
@@ -142,7 +171,8 @@
                         <ul class="dropdown-menu" role="menu">
                             <li>
                                 <a href="#">
-                                    <img width="20" src="{{asset('upload/photos/d-avatar.jpg')}}" >{{auth()->user()->name}}
+                                    <img width="20"
+                                         src="{{asset('upload/photos/d-avatar.jpg')}}">{{auth()->user()->name}}
                                     <div><span>My Channel</span></div>
                                 </a>
                             </li>
@@ -165,7 +195,7 @@
                                 </a>
                             </li>
                             <li class="hid_svg">
-                                <a href="#" >
+                                <a href="#">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                         <path fill="currentColor"
                                               d="M20,8H4V6H20M20,18H4V12H20M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"></path>
@@ -222,15 +252,13 @@
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <form action="" method="POST">
-                                    <a href="{{route('logout')}}">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                            <path fill="currentColor"
-                                                  d="M16.56,5.44L15.11,6.89C16.84,7.94 18,9.83 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12C6,9.83 7.16,7.94 8.88,6.88L7.44,5.44C5.36,6.88 4,9.28 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12C20,9.28 18.64,6.88 16.56,5.44M13,3H11V13H13"></path>
-                                        </svg>
-                                        Log out
-                                    </a>
-                                </form>
+                                <a href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                        <path fill="currentColor"
+                                              d="M16.56,5.44L15.11,6.89C16.84,7.94 18,9.83 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12C6,9.83 7.16,7.94 8.88,6.88L7.44,5.44C5.36,6.88 4,9.28 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12C20,9.28 18.64,6.88 16.56,5.44M13,3H11V13H13"></path>
+                                    </svg>
+                                    Log out
+                                </a>
                             </li>
                             <li class="divider"></li>
 
