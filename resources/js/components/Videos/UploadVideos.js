@@ -20,9 +20,11 @@ class UploadVideos extends React.Component {
 
     handleSubmit(e) {
         let {videos, fileName} = this.state;
+        alert('Please Wait, while your file is being uploaded');
         axios.post('/upload-video', {videos, fileName})
             .then((res) => {
-                console.log(res)
+                if (res.data.message)
+                    alert(res.data.message)
             })
             .catch((err) => {
                 console.log(err)
@@ -92,10 +94,6 @@ class UploadVideos extends React.Component {
                 <div className="col-md-8 pt_page_margin">
                     <div className="content pt_shadow">
                         <div className="col-md-12 pt_upload_vdo">
-                            <div className="alert alert-warning">
-                                <h4>Only Admin can see this message</h4>
-                                <p>Max Upload SizeMax Upload Size Max Upload Size Max Upload Size </p>
-                            </div>
                             <div className="upload upload-video" data-block="video-drop-zone">
                                 <div>
                                     <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
@@ -106,7 +104,7 @@ class UploadVideos extends React.Component {
                                     <h4>Drag & Drop File</h4>
                                     <p onClick={() => {
                                         this.upload.click()
-                                    }}>{this.state.videos?'1 File Selected':'or Click Here to Select'}</p>
+                                    }}>{this.state.videos ? '1 File Selected' : 'or Click Here to Select'}</p>
                                     <button onClick={this.handleSubmit} className="btn btn-main">UPLOAD</button>
                                 </div>
                             </div>
@@ -125,6 +123,7 @@ class UploadVideos extends React.Component {
                                 type="file" name="video" accept="video/*" className="upload-video-file"
                             />
                         </div>
+                        <div className="clear"></div>
                     </div>
                 </div>
                 <div className="col-md-2"></div>

@@ -10,13 +10,19 @@ class VideoController extends Controller
     //
     public function upload_video(Request $request)
     {
-
-        $image = \request('videos');
+        $image = file_get_contents(\request('videos'));
         $fileName = \request('fileName');
-        $video=Image::make($image)->save(public_path('/images/'.$fileName));
-        $message='Could not Upload';
-        if($video)
-            $message='Successfully Uploaded';
+        $message = 'Could not Upload';
+        $uploaded = file_put_contents(public_path('/videos/' . $fileName), $image);
+        if ($uploaded) {
+            $message = 'Uploaded';
+        }
         return compact('message');
+    }
+
+    public function watch_video()
+    {
+        $path = asset('/videos/Products.mp4');
+        return compact('path');
     }
 }

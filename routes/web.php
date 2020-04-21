@@ -18,9 +18,11 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::view('/{path?}', 'container');
+//Route::view('/{path?}', 'container');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard');
 Route::get('/dashboard/{type}', 'DashboardController@dashboard_type')->name('dashboard_type');
-Route::view('/upload-video','container')->name('upload-video');
-Route::post('/upload-video','VideoController@upload_video');
+Route::view('/upload-video', 'container')->name('upload-video');
+Route::post('/upload-video', 'VideoController@upload_video');
+Route::view('/watch', 'container');
+Route::get('/watch_video','VideoController@watch_video');

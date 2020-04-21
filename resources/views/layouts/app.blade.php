@@ -134,10 +134,20 @@
         <div class="pt_main_hdr pull-right" id="header_change">
             <ul class="nav navbar-nav navbar-right" style="display: inline;float: right !important">
                 @if(auth()->user())
+                    <li class="hide-from-mobile">
+                        <a href="{{route('upload-video')}}" class="btn upload-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path fill="currentColor"
+                                      d="M14,13V17H10V13H7L12,8L17,13M19.35,10.03C18.67,6.59 15.64,4 12,4C9.11,4 6.6,5.64 5.35,8.03C2.34,8.36 0,10.9 0,14A6,6 0 0,0 6,20H19A5,5 0 0,0 24,15C24,12.36 21.95,10.22 19.35,10.03Z"></path>
+                            </svg>
+                            <span class="hide-in-mobile">Upload</span>
+                        </a>
+                    </li>
                     <li class="hide-from-mobile pull-left top-header">
                         <a href="#">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                <path fill="currentColor" d="M20,2H4A2,2 0 0,0 2,4V22L6,18H20A2,2 0 0,0 22,16V4A2,2 0 0,0 20,2M6,9H18V11H6M14,14H6V12H14M18,8H6V6H18"></path>
+                                <path fill="currentColor"
+                                      d="M20,2H4A2,2 0 0,0 2,4V22L6,18H20A2,2 0 0,0 22,16V4A2,2 0 0,0 20,2M6,9H18V11H6M14,14H6V12H14M18,8H6V6H18"></path>
                             </svg>
                             <span id="new-messages"></span>
                         </a>
