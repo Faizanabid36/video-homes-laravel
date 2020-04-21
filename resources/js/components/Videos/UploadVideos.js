@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter, Link, Route, Switch} from 'react-router-dom';
 
 class UploadVideos extends React.Component {
     constructor() {
@@ -8,6 +7,8 @@ class UploadVideos extends React.Component {
         this.state = {
             videos: null,
             fileName: '',
+            duration: 0,
+            size: 0,
         }
         this.uploadFile = this.uploadFile.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -19,9 +20,9 @@ class UploadVideos extends React.Component {
     }
 
     handleSubmit(e) {
-        let {videos, fileName} = this.state;
+        let {videos, fileName, duration, size} = this.state;
         alert('Please Wait, while your file is being uploaded');
-        axios.post('/upload-video', {videos, fileName})
+        axios.post('/upload-video', {videos, fileName, duration, size})
             .then((res) => {
                 if (res.data.message)
                     alert(res.data.message)
@@ -35,14 +36,26 @@ class UploadVideos extends React.Component {
         await this.setState({videos: e.target.files})
         let files = await this.state.videos
         let reader = await new FileReader();
+        let duration = 0;
+        let that = this;
         reader.onload = async (e) => {
+            var videoElement = document.createElement('video');
+            videoElement.src = e.target.result;
+            var timer = await setInterval(async function () {
+                if (videoElement.readyState === 4) {
+                    duration = await videoElement.duration.toFixed(2);
+                    await clearInterval(timer);
+                    await that.setState({duration})
+                    console.log(this.state)
+                }
+            }, 200)
             await this.setState({
-                videos: e.target.result
+                videos: e.target.result,
             })
         };
-        // console.log(files);
         let fileName = files[0].name
-        this.setState({fileName});
+        let size = files[0].size;
+        this.setState({fileName, size});
         await reader.readAsDataURL(files[0]);
     }
 

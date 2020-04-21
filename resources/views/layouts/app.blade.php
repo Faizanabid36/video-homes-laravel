@@ -135,6 +135,11 @@
             <ul class="nav navbar-nav navbar-right" style="display: inline;float: right !important">
                 @if(auth()->user())
                     <li class="hide-from-mobile">
+                        <a  class="btn" href="{{route('watch')}}">
+                            <span class="btn-secondary p-2">Watch</span>
+                        </a>
+                    </li>
+                    <li class="hide-from-mobile">
                         <a href="{{route('upload-video')}}" class="btn upload-button">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                 <path fill="currentColor"

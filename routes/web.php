@@ -25,4 +25,6 @@ Route::get('/dashboard/{type}', 'DashboardController@dashboard_type')->name('das
 Route::view('/upload-video', 'container')->name('upload-video');
 Route::post('/upload-video', 'VideoController@upload_video');
 Route::view('/watch', 'container');
-Route::get('/watch_video','VideoController@watch_video');
+Route::post('/watch_video', 'VideoController@watch_video');
+Route::get('/all_videos', 'VideoController@list_of_videos');
+Route::view('/watch_videos', 'container')->name('watch');

@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import Dashboard from "./Dashboard";
 import WatchVideo from "./Videos/WatchVideo";
 import UploadVideos from "./Videos/UploadVideos";
+import Videos from "./Videos/Videos";
 
 class Index extends React.Component{
     render() {
@@ -13,6 +14,7 @@ class Index extends React.Component{
                 <Route path="/comments" component={Dashboard} />
                 <Route path="/upload-video" component={UploadVideos} />
                 <Route path='/watch' component={WatchVideo}/>
+                <Route path='/watch_videos' component={Videos}/>
             </Switch>
         </main>
     }
