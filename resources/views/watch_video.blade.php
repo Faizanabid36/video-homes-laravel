@@ -39,7 +39,7 @@
 {{--                                                </p>--}}
 {{--                                            </video>--}}
                                             <video id="my-video_html5"
-
+                                                   style="width: 100%; height: 451.872px; position: relative;"
                                                    poster="{{asset("storage/$thumbnail")}}"
                                                    preload="none"
                                                    src="{{asset("storage/$stream_path")}}">
