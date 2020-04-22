@@ -26,10 +26,10 @@
                                                 preload="auto"
                                                 width="640"
                                                 height="264"
-                                                poster='{{asset("storage/public/$thumbnail")}}'
+                                                poster='{{asset("storage/$thumbnail")}}'
                                                 data-setup="{}"
                                             >
-                                                <source src='{{asset("storage/public/$stream_path")}}' type="video/mp4" data-quality="360p" title="360p" label="360p" res="360"/>
+                                                <source src='{{asset("storage/$stream_path")}}' type="video/mp4" data-quality="360p" title="360p" label="360p" res="360"/>
                                                 <p class="vjs-no-js">
                                                     To view this video please enable JavaScript, and consider upgrading to a
                                                     web browser that
@@ -53,9 +53,9 @@
                                     </div>
                                     <div class="mejs__layers">
                                         <div class="mejs__poster mejs__layer"
-                                             style="background-image: url({{asset("storage/public/$thumbnail")}}); width: 100%; height: 100%;">
+                                             style="background-image: url({{asset("storage/$thumbnail")}}); width: 100%; height: 100%;">
                                             <img class="mejs__poster-img" width="0" height="0"
-                                                 src="{{asset("storage/public/$thumbnail")}}"></div>
+                                                 src="{{asset("storage/$thumbnail")}}"></div>
                                         <div class="mejs__overlay mejs__layer"
                                              style="display: none; width: 100%; height: 100%;">
                                             <div class="mejs__overlay-loading"><span
