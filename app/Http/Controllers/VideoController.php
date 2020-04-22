@@ -52,12 +52,9 @@ class VideoController extends Controller {
     }
 
     public function watch_video() {
-        $video_id = \request( 'video_id' );
-        $video    = Video::where( 'video_id', $video_id )->first();
-        $videoUrl = $video->stream_path;
-        $title    = $video->title;
-
-        return compact( 'videoUrl', 'title' );
+        $video    = Video::where( 'video_id', request('v') )->first();
+        abort_if($video->proceesed,409,'Video Encoding is in process, Please wait a while');
+        return view('watch_video',$video);
     }
 
     public function list_of_videos() {
