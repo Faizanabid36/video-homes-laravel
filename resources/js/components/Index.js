@@ -14,7 +14,7 @@ class Index extends React.Component{
                 {/*<Route path="/comments" exact  component={Dashboard} />*/}
                 <Route path="/upload-video" exact  component={UploadVideos} />
                 <Route path='/watch' exact  component={WatchVideo}/>
-                <Route path='/watch_videos' exact  component={Videos}/>
+                {/*<Route path='/watch_videos' exact  component={Videos}/>*/}
             </Switch>
         </main>
     }
@@ -23,6 +23,7 @@ class Index extends React.Component{
 export default Index;
 
 if (document.getElementById('container')) {
+    window.axios.defaults.baseURL = window.VIDEO_APP.base_url;
     ReactDOM.render(
         <BrowserRouter>
             <Index />
