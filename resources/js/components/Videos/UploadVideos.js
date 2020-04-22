@@ -130,8 +130,20 @@ function MyDropzone() {
                             <label for="title">Title</label>
                             <input
                                 type="text"
+                                value={state.title}
                                 onChange={e=>{
                                     state.title = e.target.value;
+                                    setState(state)
+                                }}
+                                className="form-control" placeholder="" aria-describedby="helpId"/>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="title">Description</label>
+                            <input
+                                type="text"
+
+                                onChange={e => {
+                                    state.description = e.target.value;
                                     setState(state)
                                 }}
                                 className="form-control" placeholder="" aria-describedby="helpId"/>
