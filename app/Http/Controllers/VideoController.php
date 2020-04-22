@@ -25,7 +25,7 @@ class VideoController extends Controller {
         $divide_result = floor($media->getDurationInSeconds() / 5);
         $newThumbnail = [];
         for($i=1;$i<=5;$i++){
-            $newThumbnail[$i] = str_replace( "." . request()->video->getClientOriginalExtension(), "-1.png", $path );
+            $newThumbnail[$i] = str_replace( "." . request()->video->getClientOriginalExtension(), "-$i.png", $path );
             $media->getFrameFromSeconds( $divide_result )->export()->save( $newThumbnail[$i] );
             $divide_result += $divide_result;
         }
