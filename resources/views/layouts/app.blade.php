@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap-select.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('js/emoji/emojionearea/dist/emojionearea.min.css')}}"/>
+    <link href="https://vjs.zencdn.net/7.7.5/video-js.css" rel="stylesheet" />
 
     <script>
         window.VIDEO_APP = {
@@ -315,6 +316,7 @@
 <script src="{{asset('js/owl.carousel.min')}}.js"></script>
 <script src="{{asset('js/Fingerprintjs2/fingerprint2.js')}}"></script>
 <script src="{{asset('js/emoji/emojionearea/dist/emojionearea.js')}}"></script>
+<script src="https://vjs.zencdn.net/7.7.5/video.js"></script>
 
 </body>
 </html>
