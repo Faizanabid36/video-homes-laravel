@@ -53,7 +53,7 @@ class VideoController extends Controller {
 
     public function watch_video() {
         $video    = Video::where( 'video_id', request('v') )->first();
-        abort_if(!$video->proceesed,409,'Video Encoding is in process, Please wait a while');
+        abort_if(!$video->proceesed,201,'Video Encoding is in process, Please wait a while');
         return view('watch_video',$video);
     }
 
