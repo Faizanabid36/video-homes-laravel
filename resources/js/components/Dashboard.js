@@ -8,12 +8,27 @@ import Comments from "./Comments";
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            tab:"dashboard"
+        }
+        this.renderTemplate = this.renderTemplate.bind(this);
     }
     componentDidMount() {
         // if()
     }
+    renderTemplate(){
+        switch(this.state.tab){
+            case 'videos':
+                return <div>video will be heres</div>;
+            case 'comments':
+                return <Comments/>;
+            default:
+                return <DashboardComponents/>
+        }
+    }
 
     render() {
+
         return <div>
             <div id="main-container" className="container main-content" data-logged="true">
                 <div id="container_content">
@@ -30,22 +45,21 @@ class Dashboard extends React.Component {
                                 <div className="tp_vid_fltr_tabs">
                                     <ul className="list-unstyled">
                                         <li className={location.pathname.includes("dashboard")?"selected":""}>
-                                            <Link to="/dashboard">Dashboard</Link>
+                                            <button onClick={e=>this.setState({tab:'dashboard'})}>Dashboard</button>
                                         </li>
                                         <li className={location.pathname.includes("videos")?"selected":""}>
-                                            <a href="#">Videos</a>
+                                            {/*<a href="#">Videos</a>*/}
+                                            <button onClick={e=>this.setState({tab:'videos'})}>Videos</button>
                                         </li>
                                         <li className={location.pathname.includes("comments")?"selected":""}>
-                                            <Link to="/comments">Comments</Link>
+                                            {/*<Link to="/comments">Comments</Link>*/}
+                                            <button onClick={e=>this.setState({tab:'comments'})}>Comments</button>
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="clear"></div>
+                                <div className="clear"/>
                                 <hr/>
-                                {location.pathname.includes("dashboard")?
-                                    <DashboardComponents/>
-                                    :location.pathname.includes("comments")?
-                                        <Comments/>:<div></div>}
+                                {this.renderTemplate()}
                             </div>
                         </div>
                     </div>
