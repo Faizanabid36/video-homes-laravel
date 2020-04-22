@@ -25,7 +25,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('js/emoji/emojionearea/dist/emojionearea.min.css')}}"/>
 
     <script>
-        let VIDEO_APP = {
+        window.VIDEO_APP = {
             base_url: '{{url('/')}}',
         }
     </script>

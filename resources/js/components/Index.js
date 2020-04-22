@@ -23,7 +23,6 @@ class Index extends React.Component{
 export default Index;
 
 if (document.getElementById('container')) {
-    window.axios.defaults.baseURL = window.VIDEO_APP.base_url;
     ReactDOM.render(
         <BrowserRouter>
             <Index />
