@@ -19,35 +19,35 @@
                                 <div class="mejs__inner">
                                     <div class="mejs__mediaelement">
                                         <mediaelementwrapper id="my-video">
-                                            <video
-                                                id="my-video_html5"
-                                                class="video-js"
-                                                controls
-                                                preload="auto"
-                                                width="640"
-                                                height="264"
-                                                poster='{{asset("storage/$thumbnail")}}'
-                                                data-setup="{}"
-                                            >
-                                                <source src='{{asset("storage/$stream_path")}}' type="video/mp4" data-quality="360p" title="360p" label="360p" res="360"/>
-                                                <p class="vjs-no-js">
-                                                    To view this video please enable JavaScript, and consider upgrading to a
-                                                    web browser that
-                                                    <a href="https://videojs.com/html5-video-support/" target="_blank"
-                                                    >supports HTML5 video</a
-                                                    >
-                                                </p>
-                                            </video>
-{{--                                            <video id="my-video_html5"--}}
-{{--                                                   style="width: 803.328px; height: 451.872px; position: relative;"--}}
-{{--                                                   poster="{{http://localhost:9002//upload/photos/2020/04/r9iNPbQj4MfaoXFI8ezc_04_1a2e85073c867251df9bc76c985fc37e_image.jpg}}"--}}
-{{--                                                   preload="none"--}}
-{{--                                                   src="http://localhost:9002//upload/videos/2020/04/zSLhVHhByx2Bv9Cd2K2o_04_6fe71b9a71bca33b0e7483d858824168_video.mp4">--}}
-{{--                                                <source src="{{storage_path($stream_path)}}" type="video/mp4"--}}
-{{--                                                        data-quality="360p" title="360p" label="360p" res="360">--}}
-{{--                                                Your browser does not support HTML5 video.--}}
-{{--                                                <!-- //src="http://www.youtube.com/watch?v=nOEw9iiopwI" type="video/youtube" -->--}}
+{{--                                            <video--}}
+{{--                                                id="my-video_html5"--}}
+{{--                                                class="video-js"--}}
+{{--                                                controls--}}
+{{--                                                preload="auto"--}}
+{{--                                                width="640"--}}
+{{--                                                height="264"--}}
+{{--                                                poster='{{asset("storage/$thumbnail")}}'--}}
+{{--                                                data-setup="{}"--}}
+{{--                                            >--}}
+{{--                                                <source src='{{asset("storage/$stream_path")}}' type="video/mp4" data-quality="360p" title="360p" label="360p" res="360"/>--}}
+{{--                                                <p class="vjs-no-js">--}}
+{{--                                                    To view this video please enable JavaScript, and consider upgrading to a--}}
+{{--                                                    web browser that--}}
+{{--                                                    <a href="https://videojs.com/html5-video-support/" target="_blank"--}}
+{{--                                                    >supports HTML5 video</a--}}
+{{--                                                    >--}}
+{{--                                                </p>--}}
 {{--                                            </video>--}}
+                                            <video id="my-video_html5"
+                                                   style="width: 803.328px; height: 451.872px; position: relative;"
+                                                   poster="{{asset("storage/$thumbnail")}}"
+                                                   preload="none"
+                                                   src="{{asset("storage/$stream_path")}}">
+                                                <source src="{{storage_path($stream_path)}}" type="video/mp4"
+                                                        data-quality="360p" title="360p" label="360p" res="360">
+                                                Your browser does not support HTML5 video.
+                                                <!-- //src="http://www.youtube.com/watch?v=nOEw9iiopwI" type="video/youtube" -->
+                                            </video>
                                         </mediaelementwrapper>
 
                                     </div>
@@ -1161,179 +1161,160 @@
     </div>
 @endsection
 @section('footer_script')
-    <script>
-        var fingerprintReport = function () {
-            Fingerprint2.get(function (components) {
-                var murmur = Fingerprint2.x64hash128(components.map(function (pair) {
-                    return pair.value
-                }).join(), 31)
-                $.post('http://localhost:9002//aj/views?hash=' + $('.main_session').val() + '&type_=set', {finger: murmur}, function (data, textStatus, xhr) {
+{{--    --}}
+{{--    <script>--}}
+{{--        jQuery(document).ready(function ($) {--}}
+
+{{--            var sort_comments_by = 2;--}}
+
+{{--            $("li.sort-comments").click(function (event) {--}}
+{{--                sort_comments_by = $(this).attr('id');--}}
+{{--                var video_id = $('#video-id').val();--}}
+{{--                var data_obj = {--}}
+{{--                    video_id: video_id,--}}
+{{--                    sort_by: sort_comments_by--}}
+{{--                };--}}
+
+{{--                $('#video-user-comments').empty();--}}
+{{--                $(".comments-loading").removeClass('hidden');--}}
+
+{{--                $.post('http://localhost:9002//aj/sort-comments', data_obj, function (data, textStatus, xhr) {--}}
+{{--                    if (data.status == 200) {--}}
+{{--                        PT_Delay(function () {--}}
+{{--                            $(".comments-loading").addClass('hidden');--}}
+{{--                            $('#video-user-comments').html(data.comments);--}}
+{{--                        }, 200);--}}
+{{--                    } else {--}}
+{{--                        PT_Delay(function () {--}}
+{{--                            $(".comments-loading").addClass('hidden');--}}
+{{--                        }, 200);--}}
+{{--                    }--}}
+{{--                });--}}
+
+{{--            });--}}
+
+{{--            $.fn.scrollTo = function (speed) {--}}
+{{--                if (typeof (speed) === 'undefined')--}}
+{{--                    speed = 500;--}}
+
+{{--                $('html, body').animate({--}}
+{{--                    scrollTop: ($(this).offset().top - 100)--}}
+{{--                }, speed);--}}
+
+{{--                return $(this);--}}
+{{--            };--}}
 
 
-                    $.post('http://localhost:9002//aj/views?hash=' + $('.main_session').val() + '&type_=add', {video_id: 1}, function (data, textStatus, xhr) {
-                        if (data.status == 200) {
-                            $('#video-views-count').html(data.count);
-                        }
-                    });
+{{--            $('#comment-textarea').on('click', function (event) {--}}
+{{--                event.preventDefault();--}}
+{{--                var logged = $('#main-container').attr('data-logged');--}}
+{{--                if (!logged) {--}}
+
+{{--                    window.location.href = "http://localhost:9002//login?to=http://localhost:9002//watch/14-march-2020-loom-recording_MVVIbINPjrRSP69.html";--}}
+{{--                    return false;--}}
+{{--                }--}}
+{{--                $(this).css('border', '1px solid #888');--}}
+{{--            });--}}
+
+{{--            $('.comments-load').on('click', function (event) {--}}
+{{--                event.preventDefault();--}}
+{{--                var last_id = $('.main-comment:last').attr('data-id');--}}
+{{--                var video_id = $('#video-id').val();--}}
+{{--                var data_obj = {--}}
+{{--                    last_id: last_id,--}}
+{{--                    video_id: video_id,--}}
+{{--                    sort_by: sort_comments_by--}}
+{{--                };--}}
+
+{{--                if (sort_comments_by == 1) {--}}
+{{--                    var comment_ids = [];--}}
+{{--                    $('.main-comment').each(function (index, el) {--}}
+{{--                        comment_ids.push($(el).attr('data-id'));--}}
+{{--                    });--}}
+
+{{--                    data_obj['comments'] = comment_ids.join()--}}
+{{--                }--}}
+
+{{--                $.post('http://localhost:9002//aj/load-more-comments', data_obj, function (data, textStatus, xhr) {--}}
+{{--                    if (data.status == 200) {--}}
+{{--                        $('#video-user-comments').append(data.comments);--}}
+{{--                    } else {--}}
+{{--                        $('.comments-load').text(data.message);--}}
+{{--                    }--}}
+{{--                });--}}
+{{--            });--}}
+{{--        });--}}
 
 
-                });
-            })
-        }
-        fingerprintReport();
-    </script>
-    <script>
-        jQuery(document).ready(function ($) {
-
-            var sort_comments_by = 2;
-
-            $("li.sort-comments").click(function (event) {
-                sort_comments_by = $(this).attr('id');
-                var video_id = $('#video-id').val();
-                var data_obj = {
-                    video_id: video_id,
-                    sort_by: sort_comments_by
-                };
-
-                $('#video-user-comments').empty();
-                $(".comments-loading").removeClass('hidden');
-
-                $.post('http://localhost:9002//aj/sort-comments', data_obj, function (data, textStatus, xhr) {
-                    if (data.status == 200) {
-                        PT_Delay(function () {
-                            $(".comments-loading").addClass('hidden');
-                            $('#video-user-comments').html(data.comments);
-                        }, 200);
-                    } else {
-                        PT_Delay(function () {
-                            $(".comments-loading").addClass('hidden');
-                        }, 200);
-                    }
-                });
-
-            });
-
-            $.fn.scrollTo = function (speed) {
-                if (typeof (speed) === 'undefined')
-                    speed = 500;
-
-                $('html, body').animate({
-                    scrollTop: ($(this).offset().top - 100)
-                }, speed);
-
-                return $(this);
-            };
+{{--        function PT_PostComment(button) {--}}
+{{--            var text = $('#comment-textarea').val();--}}
+{{--            if (!text) {--}}
+{{--                $('#comment-textarea').css('border', '1px solid red');--}}
+{{--                return false;--}}
+{{--            }--}}
+{{--            var video_id = $('#video-id').val();--}}
+{{--            if (!video_id) {--}}
+{{--                return false;--}}
+{{--            }--}}
+{{--            $(button).attr('disabled', true);--}}
+{{--            $.post('http://localhost:9002//aj/add-comment', {--}}
+{{--                video_id: video_id,--}}
+{{--                text: text--}}
+{{--            }, function (data, textStatus, xhr) {--}}
+{{--                if (data.status == 200) {--}}
+{{--                    if ($('.no-comments-found').length > 0) {--}}
+{{--                        $('.no-comments-found').remove();--}}
+{{--                    }--}}
+{{--                    $('#comment-textarea').val('');--}}
+{{--                    $('#video-user-comments').prepend(data.comment);--}}
+{{--                }--}}
+{{--                $(button).attr('disabled', false);--}}
+{{--            });--}}
+{{--        }--}}
 
 
-            $('#comment-textarea').on('click', function (event) {
-                event.preventDefault();
-                var logged = $('#main-container').attr('data-logged');
-                if (!logged) {
+{{--        function PT_DeleteComment(id) {--}}
+{{--            if (!id) {--}}
+{{--                return false;--}}
+{{--            }--}}
+{{--            if (!confirm('Are you sure you want to delete your comment?')) {--}}
+{{--                return false;--}}
+{{--            }--}}
+{{--            $('#comment-' + id).slideUp('fast');--}}
+{{--            $.post('http://localhost:9002//aj/delete-comment', {id: id});--}}
+{{--        }--}}
 
-                    window.location.href = "http://localhost:9002//login?to=http://localhost:9002//watch/14-march-2020-loom-recording_MVVIbINPjrRSP69.html";
-                    return false;
-                }
-                $(this).css('border', '1px solid #888');
-            });
+{{--        function PT_PinComment(id, pin) {--}}
+{{--            if (!id) {--}}
+{{--                return false;--}}
+{{--            }--}}
+{{--            let pinned_comments = $('#pinned-comment');--}}
 
-            $('.comments-load').on('click', function (event) {
-                event.preventDefault();
-                var last_id = $('.main-comment:last').attr('data-id');
-                var video_id = $('#video-id').val();
-                var data_obj = {
-                    last_id: last_id,
-                    video_id: video_id,
-                    sort_by: sort_comments_by
-                };
+{{--            if (pin) {--}}
+{{--                $("#comment-" + id).slideUp(200, function () {--}}
+{{--                    Snackbar.show({text: 'Comment pinned to top'});--}}
+{{--                })--}}
+{{--            } else {--}}
+{{--                pinned_comments.empty();--}}
+{{--                Snackbar.show({text: 'Comment unpinned'});--}}
+{{--            }--}}
 
-                if (sort_comments_by == 1) {
-                    var comment_ids = [];
-                    $('.main-comment').each(function (index, el) {
-                        comment_ids.push($(el).attr('data-id'));
-                    });
+{{--            $.post('http://localhost:9002//aj/pin-comment', {id: id}, function (data) {--}}
+{{--                if (data.status == 200) {--}}
 
-                    data_obj['comments'] = comment_ids.join()
-                }
+{{--                    $("#comment-" + id).slideUp(100, function () {--}}
+{{--                        $(this).remove();--}}
+{{--                        pinned_comments.scrollTo();--}}
+{{--                    });--}}
 
-                $.post('http://localhost:9002//aj/load-more-comments', data_obj, function (data, textStatus, xhr) {
-                    if (data.status == 200) {
-                        $('#video-user-comments').append(data.comments);
-                    } else {
-                        $('.comments-load').text(data.message);
-                    }
-                });
-            });
-        });
-
-
-        function PT_PostComment(button) {
-            var text = $('#comment-textarea').val();
-            if (!text) {
-                $('#comment-textarea').css('border', '1px solid red');
-                return false;
-            }
-            var video_id = $('#video-id').val();
-            if (!video_id) {
-                return false;
-            }
-            $(button).attr('disabled', true);
-            $.post('http://localhost:9002//aj/add-comment', {
-                video_id: video_id,
-                text: text
-            }, function (data, textStatus, xhr) {
-                if (data.status == 200) {
-                    if ($('.no-comments-found').length > 0) {
-                        $('.no-comments-found').remove();
-                    }
-                    $('#comment-textarea').val('');
-                    $('#video-user-comments').prepend(data.comment);
-                }
-                $(button).attr('disabled', false);
-            });
-        }
-
-
-        function PT_DeleteComment(id) {
-            if (!id) {
-                return false;
-            }
-            if (!confirm('Are you sure you want to delete your comment?')) {
-                return false;
-            }
-            $('#comment-' + id).slideUp('fast');
-            $.post('http://localhost:9002//aj/delete-comment', {id: id});
-        }
-
-        function PT_PinComment(id, pin) {
-            if (!id) {
-                return false;
-            }
-            let pinned_comments = $('#pinned-comment');
-
-            if (pin) {
-                $("#comment-" + id).slideUp(200, function () {
-                    Snackbar.show({text: 'Comment pinned to top'});
-                })
-            } else {
-                pinned_comments.empty();
-                Snackbar.show({text: 'Comment unpinned'});
-            }
-
-            $.post('http://localhost:9002//aj/pin-comment', {id: id}, function (data) {
-                if (data.status == 200) {
-
-                    $("#comment-" + id).slideUp(100, function () {
-                        $(this).remove();
-                        pinned_comments.scrollTo();
-                    });
-
-                    pinned_comments.html(data.html);
-                } else if (data.status == 304) {
-                    $("#video-user-comments").append(data.html);
-                }
-            });
-        }
-    </script>
+{{--                    pinned_comments.html(data.html);--}}
+{{--                } else if (data.status == 304) {--}}
+{{--                    $("#video-user-comments").append(data.html);--}}
+{{--                }--}}
+{{--            });--}}
+{{--        }--}}
+{{--    </script>--}}
+{{--    --}}
     <script type="text/javascript">
 
 
