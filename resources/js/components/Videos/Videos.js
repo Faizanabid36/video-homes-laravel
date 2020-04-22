@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import VideoThumbnail from 'react-video-thumbnail';
+// import VideoThumbnail from 'react-video-thumbnail';
 import {BrowserRouter, Route, Link} from "react-router-dom";
 
 class Videos extends React.Component {
@@ -64,15 +64,13 @@ class Videos extends React.Component {
 
                             {this.state.videos.map((item, index) => {
                                 let link = '/watch?v=' + item.video_id;
-                                console.log(link);
+                                console.log(link,item);
                                 return <div key={index}
                                             className="col-md-3 col-sm-6 no-padding-right-at-all no-padding-mobile-left">
                                     <div className="video-latest-list video-wrapper">
                                         <div className="video-thumb">
                                             <Link to={link}>
-                                                <VideoThumbnail
-                                                    videoUrl={item.video_path}
-                                                />
+                                                <img src={`storage/${item.thumbnail}`} alt=""/>
                                                 <div className="play_hover_btn" onMouseEnter="show_gif(this,'')"
                                                      onMouseLeave="hide_gif(this)">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -80,14 +78,14 @@ class Videos extends React.Component {
                                                          strokeWidth="2" strokeLinecap="round"
                                                          strokeLinejoin="round"
                                                          className="feather feather-play-circle">
-                                                        <circle cx="12" cy="12" r="10"></circle>
-                                                        <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                                                        <circle cx="12" cy="12" r="10"/>
+                                                        <polygon points="10 8 16 12 10 16 10 8"/>
                                                     </svg>
                                                 </div>
                                             </Link>
                                             <div className="video-duration">
-                                                {/*{Math.floor(item.duration / 60)}:{item.duration - Math.floor(item.duration / 60) * 60}*/}
-                                                xx:xx
+                                                {Math.floor(item.duration / 60)}:{item.duration - Math.floor(item.duration / 60) * 60}
+                                                {/*xx:xx*/}
                                             </div>
                                         </div>
                                         <div className="video-title">
