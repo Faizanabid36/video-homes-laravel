@@ -410,158 +410,7 @@
                         </div>
                         <input type="hidden" id="video-id" value="1">
 
-                        <script>
-                            jQuery(document).ready(function ($) {
 
-                                var sort_comments_by = 2;
-
-                                $("li.sort-comments").click(function (event) {
-                                    sort_comments_by = $(this).attr('id');
-                                    var video_id = $('#video-id').val();
-                                    var data_obj = {
-                                        video_id: video_id,
-                                        sort_by: sort_comments_by
-                                    };
-
-                                    $('#video-user-comments').empty();
-                                    $(".comments-loading").removeClass('hidden');
-
-                                    $.post('http://localhost:9002//aj/sort-comments', data_obj, function (data, textStatus, xhr) {
-                                        if (data.status == 200) {
-                                            PT_Delay(function () {
-                                                $(".comments-loading").addClass('hidden');
-                                                $('#video-user-comments').html(data.comments);
-                                            }, 200);
-                                        } else {
-                                            PT_Delay(function () {
-                                                $(".comments-loading").addClass('hidden');
-                                            }, 200);
-                                        }
-                                    });
-
-                                });
-
-                                $.fn.scrollTo = function (speed) {
-                                    if (typeof (speed) === 'undefined')
-                                        speed = 500;
-
-                                    $('html, body').animate({
-                                        scrollTop: ($(this).offset().top - 100)
-                                    }, speed);
-
-                                    return $(this);
-                                };
-
-
-                                $('#comment-textarea').on('click', function (event) {
-                                    event.preventDefault();
-                                    var logged = $('#main-container').attr('data-logged');
-                                    if (!logged) {
-
-                                        window.location.href = "http://localhost:9002//login?to=http://localhost:9002//watch/14-march-2020-loom-recording_MVVIbINPjrRSP69.html";
-                                        return false;
-                                    }
-                                    $(this).css('border', '1px solid #888');
-                                });
-
-                                $('.comments-load').on('click', function (event) {
-                                    event.preventDefault();
-                                    var last_id = $('.main-comment:last').attr('data-id');
-                                    var video_id = $('#video-id').val();
-                                    var data_obj = {
-                                        last_id: last_id,
-                                        video_id: video_id,
-                                        sort_by: sort_comments_by
-                                    };
-
-                                    if (sort_comments_by == 1) {
-                                        var comment_ids = [];
-                                        $('.main-comment').each(function (index, el) {
-                                            comment_ids.push($(el).attr('data-id'));
-                                        });
-
-                                        data_obj['comments'] = comment_ids.join()
-                                    }
-
-                                    $.post('http://localhost:9002//aj/load-more-comments', data_obj, function (data, textStatus, xhr) {
-                                        if (data.status == 200) {
-                                            $('#video-user-comments').append(data.comments);
-                                        } else {
-                                            $('.comments-load').text(data.message);
-                                        }
-                                    });
-                                });
-                            });
-
-
-                            function PT_PostComment(button) {
-                                var text = $('#comment-textarea').val();
-                                if (!text) {
-                                    $('#comment-textarea').css('border', '1px solid red');
-                                    return false;
-                                }
-                                var video_id = $('#video-id').val();
-                                if (!video_id) {
-                                    return false;
-                                }
-                                $(button).attr('disabled', true);
-                                $.post('http://localhost:9002//aj/add-comment', {
-                                    video_id: video_id,
-                                    text: text
-                                }, function (data, textStatus, xhr) {
-                                    if (data.status == 200) {
-                                        if ($('.no-comments-found').length > 0) {
-                                            $('.no-comments-found').remove();
-                                        }
-                                        $('#comment-textarea').val('');
-                                        $('#video-user-comments').prepend(data.comment);
-                                    }
-                                    $(button).attr('disabled', false);
-                                });
-                            }
-
-
-                            function PT_DeleteComment(id) {
-                                if (!id) {
-                                    return false;
-                                }
-                                if (!confirm('Are you sure you want to delete your comment?')) {
-                                    return false;
-                                }
-                                $('#comment-' + id).slideUp('fast');
-                                $.post('http://localhost:9002//aj/delete-comment', {id: id});
-                            }
-
-                            function PT_PinComment(id, pin) {
-                                if (!id) {
-                                    return false;
-                                }
-                                let pinned_comments = $('#pinned-comment');
-
-                                if (pin) {
-                                    $("#comment-" + id).slideUp(200, function () {
-                                        Snackbar.show({text: 'Comment pinned to top'});
-                                    })
-                                } else {
-                                    pinned_comments.empty();
-                                    Snackbar.show({text: 'Comment unpinned'});
-                                }
-
-                                $.post('http://localhost:9002//aj/pin-comment', {id: id}, function (data) {
-                                    if (data.status == 200) {
-
-                                        $("#comment-" + id).slideUp(100, function () {
-                                            $(this).remove();
-                                            pinned_comments.scrollTo();
-                                        });
-
-                                        pinned_comments.html(data.html);
-                                    } else if (data.status == 304) {
-                                        $("#video-user-comments").append(data.html);
-                                    }
-                                });
-                            }
-                        </script>
 
                     </div>
                     <div class="col-md-4 no-padding-left pull-right mobile">
@@ -697,451 +546,7 @@
                     </div>
                 </div>
             </div>
-            <script type="text/javascript">
 
-
-                function PT_OpenStripe(pkg, self, video_id = 0, price = 0, user_id = 0) {
-
-                    $('#pay-go-pro').modal('hide');
-                    $('#stripe_modal').modal('show');
-                    stripe_array['video_id'] = video_id;
-                    stripe_array['user_id'] = user_id;
-                    if (pkg == 'rent') {
-                        stripe_array['pay_type'] = 'rent';
-                    } else {
-                        stripe_array['pay_type'] = '';
-                    }
-                }
-
-
-                var sources = [];
-                for (var i = 0; i < $('video').find('source').length; i++) {
-                    sources[i] = parseFloat($($('video').find('source')[i]).attr('res'));
-                }
-
-                // var imageAddr = "http://www.kenrockwell.com/contax/images/g2/examples/31120037-5mb.jpg";
-                // var downloadSize = 4995374;
-                var imageAddr = site_url + "/upload/photos/speed.jpg";
-                var downloadSize = 1082828;
-
-                function getQuality() {
-                    MeasureConnectionSpeed();
-
-
-                    function MeasureConnectionSpeed() {
-                        if (getCookie('internet_speed') > 0) {
-                            showResults(getCookie('internet_speed'));
-                        } else {
-                            var startTime, endTime;
-                            var download = new Image();
-                            download.onload = function () {
-                                endTime = (new Date()).getTime();
-                                showResults();
-                            }
-
-                            download.onerror = function (err, msg) {
-                                ShowProgressMessage(0);
-                            }
-
-                            startTime = (new Date()).getTime();
-                            var cacheBuster = "?nnn=" + startTime;
-                            download.src = imageAddr + cacheBuster;
-                        }
-
-                        //console.log($.cookie("internet_speed"));
-
-
-                        function showResults(speed = 0) {
-                            if (speed == 0) {
-                                var duration = (endTime - startTime) / 1000;
-                                var bitsLoaded = downloadSize * 8;
-                                var speedBps = (bitsLoaded / duration).toFixed(2);
-                                var speedKbps = (speedBps / 1024).toFixed(2);
-                                var speedMbps = (speedKbps / 1024).toFixed(2);
-                                setCookie("internet_speed", speedKbps, 1);
-
-                            } else {
-                                speedKbps = speed;
-                                if (speed < 240) {
-                                    speedKbps = 250;
-                                }
-                            }
-                            for (var i = 0; i < sources.length; i++) {
-                                if (sources[i] < parseFloat(speedKbps)) {
-                                    is_clicked = true;
-                                    video_source = sources[i];
-                                    $('#' + $('.mejs__container').attr('id') + '-qualities-' + video_source + 'p').click();
-                                    $('.mejs__qualities-button').find('button').text('auto');
-                                    $('.mejs__qualities-selector-label').removeClass('mejs__qualities-selected');
-                                    $('#quality__auto').addClass('mejs__qualities-selected');
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                function setAuto(self) {
-                    $('.mejs__qualities-button').find('button').text('auto');
-                    $('.mejs__qualities-selector-label').removeClass('mejs__qualities-selected');
-                    $('#quality__auto').addClass('mejs__qualities-selected');
-                    getQuality();
-                    setTimeout(function (argument) {
-                        setCookie('auto', 'auto', 1);
-                    }, 1000);
-
-                }
-
-                $(document).ready(function () {
-                    document.querySelector('video').addEventListener("loadeddata", function () {
-                        setCookie('auto', '', 1);
-                    });
-                });
-
-            </script>
-
-            <script type="text/javascript">
-                function go_to_duration(duration) {
-                    window.scrollTo(0, 0);
-                    var vid = document.querySelector("video");
-                    vid.currentTime = duration;
-                    vid.play();
-                }
-            </script>
-            <script type="text/javascript">
-
-
-                $('video').mediaelementplayer({
-                    pluginPath: 'https://cdnjs.com/libraries/mediaelement-plugins/',
-                    shimScriptAccess: 'always',
-                    autoplay: true,
-                    features: ['playpause', 'current', 'progress', 'duration', 'speed', 'skipback', 'jumpforward', 'tracks', 'markers', 'volume', 'chromecast', 'contextmenu', 'flash', 'fullscreen'],
-                    vastAdTagUrl: '',
-                    vastAdsType: '',
-                    jumpForwardInterval: 20,
-                    adsPrerollMediaUrl: [''],
-                    adsPrerollAdUrl: [''],
-                    adsPrerollAdEnableSkip: false,
-                    adsPrerollAdSkipSeconds: 0,
-                    success: function (media) {
-                        media.addEventListener('ended', function (e) {
-
-                            if ($('#autoplay').is(":checked")) {
-                                var url = $('#next-video').find('.video-title').find('a').attr('href');
-                                if (url) {
-                                    window.location.href = url;
-                                }
-                            } else {
-                                /* pass */
-                            }
-                        }, false);
-
-                        media.addEventListener('playing', function (e) {
-                            if (pt_elexists('.ads-overlay-info')) {
-                                $('.ads-overlay-info').remove();
-                            }
-
-                            $('.ads-test').remove();
-
-                            if ($('body').attr('resized') == 'true') {
-                                PT_Resize(true);
-                            }
-                            $('.mejs__container').css('height', ($('.mejs__container').width() / 1.77176216) + 'px');
-                            $('video, iframe').css('height', '100%');
-                        });
-                    },
-                });
-
-
-                if (sources.length > 1) {
-                    setTimeout(function () {
-                        $('.mejs__qualities-selector-list').append('<li class="mejs__qualities-selector-list-item" onclick="setAuto(this)"><input class="mejs__qualities-selector-input" type="radio" name="mep_0_qualities" value="auto" id="mep_0-qualities-auto"><label for="mep_0-qualities-auto" class="mejs__qualities-selector-label" id="quality__auto">auto</label></li>');
-                    }, 1000);
-                }
-
-
-            </script>
-
-            <script>
-
-
-                jQuery(window).ready(function ($) {
-                    var width = $('.video-player').width().toString();
-                    var width = width.substring(0, width.lastIndexOf("."))
-                    $('.fb-video').attr('data-width', width);
-                    //$( 'iframe' ).attr( 'src', function ( i, val ) { return val; });
-                    $("#load-related-videos").click(function (event) {
-                        let id = 0;
-                        if ($("div[data-sidebar-video]").length > 0) {
-                            id = $("div[data-sidebar-video]").last().attr('data-sidebar-video');
-                        }
-
-                        $("#load-related-videos").find('i.spin').removeClass('hidden');
-
-                        $.ajax({
-                            url: 'http://localhost:9002//aj/load-related-videos',
-                            type: 'GET',
-                            dataType: 'json',
-                            data: {id: id, video_id: '1'},
-                        })
-                            .done(function (data) {
-                                if (data.status == 200) {
-                                    $(".related-videos").append(data.html);
-                                } else {
-                                    $("#load-related-videos").find('span').text('No more videos found');
-                                }
-                                $("#load-related-videos").find('i.spin').addClass('hidden');
-
-                            });
-                    });
-                });
-
-                $('.ad-link').on('click', function (event) {
-                    $('.ad-link').remove();
-                    $('video')[0].play();
-                });
-
-                $('.autoplay-video').on('change', function (event) {
-                    event.preventDefault();
-                    checked = 1;
-                    if ($(this).is(":checked")) {
-                        checked = 2;
-                    }
-                    $.post('http://localhost:9002//aj/set-cookies', {name: 'autoplay', value: checked});
-                });
-                $('.ads-test').on('click', function (event) {
-                    $(this).remove();
-                });
-
-
-                $(function () {
-                    $('.rad-transaction').click(function (event) {
-                        $(this).off("click").removeClass('rad-transaction');
-                        $.get('http://localhost:9002//aj/ads/rad-transaction', function (data) { /* pass */
-                        });
-                    });
-
-                    if ($('[data-litsitem-id]').length > 4) {
-                        var listItemtopPos = $("div[data-litsitem-id=MVVIbINPjrRSP69]").offset();
-                        $('.play-list-cont').scrollTop((listItemtopPos.top - 170));
-                    }
-
-
-                    $('#share-video').on('click', function (event) {
-                        event.preventDefault();
-                        $('.share-video').toggleClass('hidden');
-                        if (!$('.embed-placement').hasClass('hidden')) {
-                            $('.embed-placement').toggleClass('hidden');
-                        }
-                        if (!$('.download-placement').hasClass('hidden')) {
-                            $('.download-placement').toggleClass('hidden');
-                        }
-                    });
-                    $('#embed-video').on('click', function (event) {
-                        event.preventDefault();
-                        $('.embed-placement').toggleClass('hidden');
-                        if (!$('.share-video').hasClass('hidden')) {
-                            $('.share-video').toggleClass('hidden');
-                        }
-                        if (!$('.download-placement').hasClass('hidden')) {
-                            $('.download-placement').toggleClass('hidden');
-                        }
-                    });
-                    $('#download-video').on('click', function (event) {
-                        event.preventDefault();
-                        $('.download-placement').toggleClass('hidden');
-                        if (!$('.embed-placement').hasClass('hidden')) {
-                            $('.embed-placement').toggleClass('hidden');
-                        }
-                        if (!$('.share-video').hasClass('hidden')) {
-                            $('.share-video').toggleClass('hidden');
-                        }
-                    });
-
-                    $('#save-button').on('click', function (event) {
-                        event.preventDefault();
-                        var logged = $('#main-container').attr('data-logged');
-                        if (!logged) {
-                            window.location.href = "http://localhost:9002//login?to=http://localhost:9002%2F%2Fpage_loading.php%3Flink1%3Dwatch%26id%3D14-march-2020-loom-recording_MVVIbINPjrRSP69.html%26hash%3D5eb422b39a69f7fec5c053501c62460114fa6e16%26_%3D1587557139927";
-                            return false;
-                        }
-                        var video_id = $('#video-id').val();
-                        if ($(this).attr('saved')) {
-                            $(this).html('<i class="fa fa-floppy-o fa-fw"></i> Save');
-                            $(this).removeAttr('saved');
-                        } else {
-                            $(this).html('<i class="fa fa-check fa-fw"></i> Saved');
-                            $(this).attr('saved', 'true');
-                        }
-                        $.post('http://localhost:9002//aj/save-video', {video_id: video_id});
-                    });
-                    $('.desc').on('click', function (event) {
-                        event.preventDefault();
-                        if ($(this).hasClass('expended')) {
-                            $('.watch-video-description').css({
-                                'max-height': '100px',
-                                'height': '100px',
-                                'overflow': 'hidden'
-                            });
-                            $(this).removeClass('expended');
-                            $(this).text("Show more");
-                        } else {
-                            $('.watch-video-description').css({
-                                'max-height': '4000px',
-                                'height': 'auto',
-                                'overflow': 'auto'
-                            });
-                            $(this).addClass('expended');
-                            $(this).text("Show less");
-                        }
-                    });
-
-
-                    $('.expend-player').on('click', function (event) {
-                        event.preventDefault();
-                        var resize = 0;
-                        if ($('.player-video').hasClass('col-md-12')) {
-                            resize = 0;
-                        } else {
-                            resize = 1;
-                        }
-                        $.post('http://localhost:9002//aj/set-cookies', {name: 'resize', value: resize});
-                        PT_Resize();
-                    });
-
-                    // $('video').mediaelementplayer({
-                    //   pluginPath: 'https://cdnjs.com/libraries/mediaelement-plugins/',
-                    //   shimScriptAccess: 'always',
-                    //   autoplay: true,
-                    //   features: ['playpause', 'current', 'progress', 'duration', 'speed', 'skipback', 'jumpforward', 'tracks', 'markers', 'volume', 'chromecast', 'contextmenu', 'flash'   , 'fullscreen'],
-                    //   vastAdTagUrl: '',
-                    //   vastAdsType: '',
-                    //   jumpForwardInterval: 20,
-                    //   adsPrerollMediaUrl: [''],
-                    //   adsPrerollAdUrl: [''],
-                    //   adsPrerollAdEnableSkip: false,
-                    //   adsPrerollAdSkipSeconds: 0,
-                    //   success: function (media) {
-                    //       media.addEventListener('ended', function (e) {
-
-                    //         if ($('#autoplay').is(":checked")) {
-                    //            var url = $('#next-video').find('.video-title').find('a').attr('href');
-                    //            if (url) {
-                    //               window.location.href = url;
-                    //            }
-                    //         }
-                    //         else{
-                    //           /* pass */
-                    //         }
-                    //       }, false);
-
-                    //       media.addEventListener('playing', function (e) {
-                    //         if (pt_elexists('.ads-overlay-info')) {
-                    //           $('.ads-overlay-info').remove();
-                    //         }
-
-                    //         $('.ads-test').remove();
-
-                    //         if ($('body').attr('resized') == 'true') {
-                    //             PT_Resize(true);
-                    //         }
-                    //         $('.mejs__container').css('height', ($('.mejs__container').width() / 1.77176216) + 'px');
-                    //         $('video, iframe').css('height', '100%');
-                    //       });
-                    //   },
-                    // });
-
-                    // $('.expend-player').on('click', function(event) {
-                    //  event.preventDefault();
-                    //  var resize = 0;
-                    //  if ($('.player-video').hasClass('col-md-12')) {
-                    //    resize = 0;
-                    //  } else {
-                    //    resize = 1;
-                    //  }
-                    //  $.post('http://localhost:9002//aj/set-cookies', {name: 'resize', value:resize});
-                    //  PT_Resize();
-                    // });
-                    $(window).resize(function (event) {
-                        if ($('body').attr('resized') == 'true') {
-                            PT_Resize(true);
-                        }
-                    });
-
-                });
-
-
-                if (document.addEventListener) {
-                    document.addEventListener('webkitfullscreenchange', exitHandler, false);
-                    document.addEventListener('mozfullscreenchange', exitHandler, false);
-                    document.addEventListener('fullscreenchange', exitHandler, false);
-                    document.addEventListener('MSFullscreenChange', exitHandler, false);
-                }
-
-                function exitHandler() {
-                    if (document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement !== null) {
-                        setTimeout(function () {
-                            PT_Resize(false);
-                        }, 100);
-                    }
-                }
-
-                function PT_Resize(type) {
-
-                    if ($('.player-video').hasClass('col-md-12') && type != true) {
-                        $('.mejs__layer').css('display', 'none');
-                        $('.player-video').addClass('col-md-8');
-                        $('.player-video').removeClass('col-md-12');
-                        $('.player-video').css('margin-bottom', '0');
-                        $('.player-video').css('margin-top', '0');
-                        $('.mejs__container, video, iframe').css('width', '100%');
-                        $('.mejs__container').css('height', ($('.mejs__container').width() / 1.77176216) + 'px');
-                        $('video, iframe').css('height', '100%');
-                        $('.second-header-layout').removeClass('hidden');
-                        $('.header-layout').css('background', '#fff');
-                        $('.header-layout').css('border-bottom', '1px solid #f1f1f1');
-                        $('#search-bar').css('border', '1px solid #f5f5f5');
-                        $('#search-bar').css('color', '#444');
-                        $('nav.navbar-findcond ul.navbar-nav.sec_lay_hdr a').css('color', '#3e3e3e');
-                        $('.hide-resize').removeClass('hidden');
-                        $('.logo-img').find('img').attr('src', 'http://localhost:9002//themes/default/img/logo.png');
-                        $('.top-header a').css('color', '#444');
-                        $('#background').addClass('hidden');
-                        $('body').attr('resized', 'false');
-                        $('body').css('padding-top', '0px');
-                    } else {
-                        var pixels = ($(window).height() / 100) * 88;
-                        $('.player-video').removeClass('col-md-8');
-                        $('.player-video').addClass('col-md-12');
-                        $('.second-header-layout').addClass('hidden');
-                        $('.player-video').css('margin-bottom', '10px');
-                        $('.player-video').css('margin-top', '0px');
-                        $('body').css('padding-top', '57px !important');
-                        $('.mejs__container, video, iframe').css('width', '100%');
-                        $('.mejs__container').css('height', pixels + 'px');
-                        $('video, iframe').css('height', '100%');
-                        $('.header-layout').css('background', 'rgb(32,32,32)');
-                        $('.header-layout').css('border-bottom', 'none');
-                        $('#search-bar').css('border', '1px solid #555');
-                        $('#search-bar').css('color', '#fff');
-                        $('nav.navbar-findcond ul.navbar-nav.sec_lay_hdr a').css('color', '#fff');
-                        $('.hide-resize').addClass('hidden');
-                        $('.logo-img').find('img').attr('src', 'http://localhost:9002//themes/default/img/logo-light.png');
-                        $('.top-header a').css('color', '#fff');
-                        $('#background').removeClass('hidden');
-                        $('#background').css('height', '89.4%');
-                        $('body').attr('resized', 'true');
-                    }
-                }
-
-                $('.player-video').hover(function () {
-                    $('.icons').removeClass('hidden');
-                });
-                $('.player-video').mouseleave(function () {
-                    $('.icons').addClass('hidden');
-                });
-
-            </script>
 
             <style>
                 /*.mejs__fullscreen .mejs__container {
@@ -1168,27 +573,7 @@
                 }
             </style>
 
-            <script>
-                var fingerprintReport = function () {
-                    Fingerprint2.get(function (components) {
-                        var murmur = Fingerprint2.x64hash128(components.map(function (pair) {
-                            return pair.value
-                        }).join(), 31)
-                        $.post('http://localhost:9002//aj/views?hash=' + $('.main_session').val() + '&type_=set', {finger: murmur}, function (data, textStatus, xhr) {
 
-
-                            $.post('http://localhost:9002//aj/views?hash=' + $('.main_session').val() + '&type_=add', {video_id: 1}, function (data, textStatus, xhr) {
-                                if (data.status == 200) {
-                                    $('#video-views-count').html(data.count);
-                                }
-                            });
-
-
-                        });
-                    })
-                }
-                fingerprintReport();
-            </script>
 
             <div class="modal fade matdialog" id="2checkout_modal" role="dialog" data-keyboard="false"
                  style="overflow-y: auto;">
@@ -1776,6 +1161,624 @@
     </div>
 @endsection
 @section('footer_script')
+    <script>
+        var fingerprintReport = function () {
+            Fingerprint2.get(function (components) {
+                var murmur = Fingerprint2.x64hash128(components.map(function (pair) {
+                    return pair.value
+                }).join(), 31)
+                $.post('http://localhost:9002//aj/views?hash=' + $('.main_session').val() + '&type_=set', {finger: murmur}, function (data, textStatus, xhr) {
+
+
+                    $.post('http://localhost:9002//aj/views?hash=' + $('.main_session').val() + '&type_=add', {video_id: 1}, function (data, textStatus, xhr) {
+                        if (data.status == 200) {
+                            $('#video-views-count').html(data.count);
+                        }
+                    });
+
+
+                });
+            })
+        }
+        fingerprintReport();
+    </script>
+    <script>
+        jQuery(document).ready(function ($) {
+
+            var sort_comments_by = 2;
+
+            $("li.sort-comments").click(function (event) {
+                sort_comments_by = $(this).attr('id');
+                var video_id = $('#video-id').val();
+                var data_obj = {
+                    video_id: video_id,
+                    sort_by: sort_comments_by
+                };
+
+                $('#video-user-comments').empty();
+                $(".comments-loading").removeClass('hidden');
+
+                $.post('http://localhost:9002//aj/sort-comments', data_obj, function (data, textStatus, xhr) {
+                    if (data.status == 200) {
+                        PT_Delay(function () {
+                            $(".comments-loading").addClass('hidden');
+                            $('#video-user-comments').html(data.comments);
+                        }, 200);
+                    } else {
+                        PT_Delay(function () {
+                            $(".comments-loading").addClass('hidden');
+                        }, 200);
+                    }
+                });
+
+            });
+
+            $.fn.scrollTo = function (speed) {
+                if (typeof (speed) === 'undefined')
+                    speed = 500;
+
+                $('html, body').animate({
+                    scrollTop: ($(this).offset().top - 100)
+                }, speed);
+
+                return $(this);
+            };
+
+
+            $('#comment-textarea').on('click', function (event) {
+                event.preventDefault();
+                var logged = $('#main-container').attr('data-logged');
+                if (!logged) {
+
+                    window.location.href = "http://localhost:9002//login?to=http://localhost:9002//watch/14-march-2020-loom-recording_MVVIbINPjrRSP69.html";
+                    return false;
+                }
+                $(this).css('border', '1px solid #888');
+            });
+
+            $('.comments-load').on('click', function (event) {
+                event.preventDefault();
+                var last_id = $('.main-comment:last').attr('data-id');
+                var video_id = $('#video-id').val();
+                var data_obj = {
+                    last_id: last_id,
+                    video_id: video_id,
+                    sort_by: sort_comments_by
+                };
+
+                if (sort_comments_by == 1) {
+                    var comment_ids = [];
+                    $('.main-comment').each(function (index, el) {
+                        comment_ids.push($(el).attr('data-id'));
+                    });
+
+                    data_obj['comments'] = comment_ids.join()
+                }
+
+                $.post('http://localhost:9002//aj/load-more-comments', data_obj, function (data, textStatus, xhr) {
+                    if (data.status == 200) {
+                        $('#video-user-comments').append(data.comments);
+                    } else {
+                        $('.comments-load').text(data.message);
+                    }
+                });
+            });
+        });
+
+
+        function PT_PostComment(button) {
+            var text = $('#comment-textarea').val();
+            if (!text) {
+                $('#comment-textarea').css('border', '1px solid red');
+                return false;
+            }
+            var video_id = $('#video-id').val();
+            if (!video_id) {
+                return false;
+            }
+            $(button).attr('disabled', true);
+            $.post('http://localhost:9002//aj/add-comment', {
+                video_id: video_id,
+                text: text
+            }, function (data, textStatus, xhr) {
+                if (data.status == 200) {
+                    if ($('.no-comments-found').length > 0) {
+                        $('.no-comments-found').remove();
+                    }
+                    $('#comment-textarea').val('');
+                    $('#video-user-comments').prepend(data.comment);
+                }
+                $(button).attr('disabled', false);
+            });
+        }
+
+
+        function PT_DeleteComment(id) {
+            if (!id) {
+                return false;
+            }
+            if (!confirm('Are you sure you want to delete your comment?')) {
+                return false;
+            }
+            $('#comment-' + id).slideUp('fast');
+            $.post('http://localhost:9002//aj/delete-comment', {id: id});
+        }
+
+        function PT_PinComment(id, pin) {
+            if (!id) {
+                return false;
+            }
+            let pinned_comments = $('#pinned-comment');
+
+            if (pin) {
+                $("#comment-" + id).slideUp(200, function () {
+                    Snackbar.show({text: 'Comment pinned to top'});
+                })
+            } else {
+                pinned_comments.empty();
+                Snackbar.show({text: 'Comment unpinned'});
+            }
+
+            $.post('http://localhost:9002//aj/pin-comment', {id: id}, function (data) {
+                if (data.status == 200) {
+
+                    $("#comment-" + id).slideUp(100, function () {
+                        $(this).remove();
+                        pinned_comments.scrollTo();
+                    });
+
+                    pinned_comments.html(data.html);
+                } else if (data.status == 304) {
+                    $("#video-user-comments").append(data.html);
+                }
+            });
+        }
+    </script>
+    <script type="text/javascript">
+
+
+        function PT_OpenStripe(pkg, self, video_id = 0, price = 0, user_id = 0) {
+
+            $('#pay-go-pro').modal('hide');
+            $('#stripe_modal').modal('show');
+            stripe_array['video_id'] = video_id;
+            stripe_array['user_id'] = user_id;
+            if (pkg == 'rent') {
+                stripe_array['pay_type'] = 'rent';
+            } else {
+                stripe_array['pay_type'] = '';
+            }
+        }
+
+
+        var sources = [];
+        for (var i = 0; i < $('video').find('source').length; i++) {
+            sources[i] = parseFloat($($('video').find('source')[i]).attr('res'));
+        }
+
+        // var imageAddr = "http://www.kenrockwell.com/contax/images/g2/examples/31120037-5mb.jpg";
+        // var downloadSize = 4995374;
+        var imageAddr = site_url + "/upload/photos/speed.jpg";
+        var downloadSize = 1082828;
+
+        function getQuality() {
+            MeasureConnectionSpeed();
+
+
+            function MeasureConnectionSpeed() {
+                if (getCookie('internet_speed') > 0) {
+                    showResults(getCookie('internet_speed'));
+                } else {
+                    var startTime, endTime;
+                    var download = new Image();
+                    download.onload = function () {
+                        endTime = (new Date()).getTime();
+                        showResults();
+                    }
+
+                    download.onerror = function (err, msg) {
+                        ShowProgressMessage(0);
+                    }
+
+                    startTime = (new Date()).getTime();
+                    var cacheBuster = "?nnn=" + startTime;
+                    download.src = imageAddr + cacheBuster;
+                }
+
+                //console.log($.cookie("internet_speed"));
+
+
+                function showResults(speed = 0) {
+                    if (speed == 0) {
+                        var duration = (endTime - startTime) / 1000;
+                        var bitsLoaded = downloadSize * 8;
+                        var speedBps = (bitsLoaded / duration).toFixed(2);
+                        var speedKbps = (speedBps / 1024).toFixed(2);
+                        var speedMbps = (speedKbps / 1024).toFixed(2);
+                        setCookie("internet_speed", speedKbps, 1);
+
+                    } else {
+                        speedKbps = speed;
+                        if (speed < 240) {
+                            speedKbps = 250;
+                        }
+                    }
+                    for (var i = 0; i < sources.length; i++) {
+                        if (sources[i] < parseFloat(speedKbps)) {
+                            is_clicked = true;
+                            video_source = sources[i];
+                            $('#' + $('.mejs__container').attr('id') + '-qualities-' + video_source + 'p').click();
+                            $('.mejs__qualities-button').find('button').text('auto');
+                            $('.mejs__qualities-selector-label').removeClass('mejs__qualities-selected');
+                            $('#quality__auto').addClass('mejs__qualities-selected');
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        function setAuto(self) {
+            $('.mejs__qualities-button').find('button').text('auto');
+            $('.mejs__qualities-selector-label').removeClass('mejs__qualities-selected');
+            $('#quality__auto').addClass('mejs__qualities-selected');
+            getQuality();
+            setTimeout(function (argument) {
+                setCookie('auto', 'auto', 1);
+            }, 1000);
+
+        }
+
+        $(document).ready(function () {
+            document.querySelector('video').addEventListener("loadeddata", function () {
+                setCookie('auto', '', 1);
+            });
+        });
+
+    </script>
+
+    <script type="text/javascript">
+        function go_to_duration(duration) {
+            window.scrollTo(0, 0);
+            var vid = document.querySelector("video");
+            vid.currentTime = duration;
+            vid.play();
+        }
+    </script>
+    <script type="text/javascript">
+
+
+        $('video').mediaelementplayer({
+            pluginPath: 'https://cdnjs.com/libraries/mediaelement-plugins/',
+            shimScriptAccess: 'always',
+            autoplay: true,
+            features: ['playpause', 'current', 'progress', 'duration', 'speed', 'skipback', 'jumpforward', 'tracks', 'markers', 'volume', 'chromecast', 'contextmenu', 'flash', 'fullscreen'],
+            vastAdTagUrl: '',
+            vastAdsType: '',
+            jumpForwardInterval: 20,
+            adsPrerollMediaUrl: [''],
+            adsPrerollAdUrl: [''],
+            adsPrerollAdEnableSkip: false,
+            adsPrerollAdSkipSeconds: 0,
+            success: function (media) {
+                media.addEventListener('ended', function (e) {
+
+                    if ($('#autoplay').is(":checked")) {
+                        var url = $('#next-video').find('.video-title').find('a').attr('href');
+                        if (url) {
+                            window.location.href = url;
+                        }
+                    } else {
+                        /* pass */
+                    }
+                }, false);
+
+                media.addEventListener('playing', function (e) {
+                    if (pt_elexists('.ads-overlay-info')) {
+                        $('.ads-overlay-info').remove();
+                    }
+
+                    $('.ads-test').remove();
+
+                    if ($('body').attr('resized') == 'true') {
+                        PT_Resize(true);
+                    }
+                    $('.mejs__container').css('height', ($('.mejs__container').width() / 1.77176216) + 'px');
+                    $('video, iframe').css('height', '100%');
+                });
+            },
+        });
+
+
+        if (sources.length > 1) {
+            setTimeout(function () {
+                $('.mejs__qualities-selector-list').append('<li class="mejs__qualities-selector-list-item" onclick="setAuto(this)"><input class="mejs__qualities-selector-input" type="radio" name="mep_0_qualities" value="auto" id="mep_0-qualities-auto"><label for="mep_0-qualities-auto" class="mejs__qualities-selector-label" id="quality__auto">auto</label></li>');
+            }, 1000);
+        }
+
+
+    </script>
+
+    <script>
+
+
+        jQuery(window).ready(function ($) {
+            var width = $('.video-player').width().toString();
+            var width = width.substring(0, width.lastIndexOf("."))
+            $('.fb-video').attr('data-width', width);
+            //$( 'iframe' ).attr( 'src', function ( i, val ) { return val; });
+            $("#load-related-videos").click(function (event) {
+                let id = 0;
+                if ($("div[data-sidebar-video]").length > 0) {
+                    id = $("div[data-sidebar-video]").last().attr('data-sidebar-video');
+                }
+
+                $("#load-related-videos").find('i.spin').removeClass('hidden');
+
+                $.ajax({
+                    url: 'http://localhost:9002//aj/load-related-videos',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: {id: id, video_id: '1'},
+                })
+                    .done(function (data) {
+                        if (data.status == 200) {
+                            $(".related-videos").append(data.html);
+                        } else {
+                            $("#load-related-videos").find('span').text('No more videos found');
+                        }
+                        $("#load-related-videos").find('i.spin').addClass('hidden');
+
+                    });
+            });
+        });
+
+        $('.ad-link').on('click', function (event) {
+            $('.ad-link').remove();
+            $('video')[0].play();
+        });
+
+        $('.autoplay-video').on('change', function (event) {
+            event.preventDefault();
+            checked = 1;
+            if ($(this).is(":checked")) {
+                checked = 2;
+            }
+            $.post('http://localhost:9002//aj/set-cookies', {name: 'autoplay', value: checked});
+        });
+        $('.ads-test').on('click', function (event) {
+            $(this).remove();
+        });
+
+
+        $(function () {
+            $('.rad-transaction').click(function (event) {
+                $(this).off("click").removeClass('rad-transaction');
+                $.get('http://localhost:9002//aj/ads/rad-transaction', function (data) { /* pass */
+                });
+            });
+
+            if ($('[data-litsitem-id]').length > 4) {
+                var listItemtopPos = $("div[data-litsitem-id=MVVIbINPjrRSP69]").offset();
+                $('.play-list-cont').scrollTop((listItemtopPos.top - 170));
+            }
+
+
+            $('#share-video').on('click', function (event) {
+                event.preventDefault();
+                $('.share-video').toggleClass('hidden');
+                if (!$('.embed-placement').hasClass('hidden')) {
+                    $('.embed-placement').toggleClass('hidden');
+                }
+                if (!$('.download-placement').hasClass('hidden')) {
+                    $('.download-placement').toggleClass('hidden');
+                }
+            });
+            $('#embed-video').on('click', function (event) {
+                event.preventDefault();
+                $('.embed-placement').toggleClass('hidden');
+                if (!$('.share-video').hasClass('hidden')) {
+                    $('.share-video').toggleClass('hidden');
+                }
+                if (!$('.download-placement').hasClass('hidden')) {
+                    $('.download-placement').toggleClass('hidden');
+                }
+            });
+            $('#download-video').on('click', function (event) {
+                event.preventDefault();
+                $('.download-placement').toggleClass('hidden');
+                if (!$('.embed-placement').hasClass('hidden')) {
+                    $('.embed-placement').toggleClass('hidden');
+                }
+                if (!$('.share-video').hasClass('hidden')) {
+                    $('.share-video').toggleClass('hidden');
+                }
+            });
+
+            $('#save-button').on('click', function (event) {
+                event.preventDefault();
+                var logged = $('#main-container').attr('data-logged');
+                if (!logged) {
+                    window.location.href = "http://localhost:9002//login?to=http://localhost:9002%2F%2Fpage_loading.php%3Flink1%3Dwatch%26id%3D14-march-2020-loom-recording_MVVIbINPjrRSP69.html%26hash%3D5eb422b39a69f7fec5c053501c62460114fa6e16%26_%3D1587557139927";
+                    return false;
+                }
+                var video_id = $('#video-id').val();
+                if ($(this).attr('saved')) {
+                    $(this).html('<i class="fa fa-floppy-o fa-fw"></i> Save');
+                    $(this).removeAttr('saved');
+                } else {
+                    $(this).html('<i class="fa fa-check fa-fw"></i> Saved');
+                    $(this).attr('saved', 'true');
+                }
+                $.post('http://localhost:9002//aj/save-video', {video_id: video_id});
+            });
+            $('.desc').on('click', function (event) {
+                event.preventDefault();
+                if ($(this).hasClass('expended')) {
+                    $('.watch-video-description').css({
+                        'max-height': '100px',
+                        'height': '100px',
+                        'overflow': 'hidden'
+                    });
+                    $(this).removeClass('expended');
+                    $(this).text("Show more");
+                } else {
+                    $('.watch-video-description').css({
+                        'max-height': '4000px',
+                        'height': 'auto',
+                        'overflow': 'auto'
+                    });
+                    $(this).addClass('expended');
+                    $(this).text("Show less");
+                }
+            });
+
+
+            $('.expend-player').on('click', function (event) {
+                event.preventDefault();
+                var resize = 0;
+                if ($('.player-video').hasClass('col-md-12')) {
+                    resize = 0;
+                } else {
+                    resize = 1;
+                }
+                $.post('http://localhost:9002//aj/set-cookies', {name: 'resize', value: resize});
+                PT_Resize();
+            });
+
+            // $('video').mediaelementplayer({
+            //   pluginPath: 'https://cdnjs.com/libraries/mediaelement-plugins/',
+            //   shimScriptAccess: 'always',
+            //   autoplay: true,
+            //   features: ['playpause', 'current', 'progress', 'duration', 'speed', 'skipback', 'jumpforward', 'tracks', 'markers', 'volume', 'chromecast', 'contextmenu', 'flash'   , 'fullscreen'],
+            //   vastAdTagUrl: '',
+            //   vastAdsType: '',
+            //   jumpForwardInterval: 20,
+            //   adsPrerollMediaUrl: [''],
+            //   adsPrerollAdUrl: [''],
+            //   adsPrerollAdEnableSkip: false,
+            //   adsPrerollAdSkipSeconds: 0,
+            //   success: function (media) {
+            //       media.addEventListener('ended', function (e) {
+
+            //         if ($('#autoplay').is(":checked")) {
+            //            var url = $('#next-video').find('.video-title').find('a').attr('href');
+            //            if (url) {
+            //               window.location.href = url;
+            //            }
+            //         }
+            //         else{
+            //           /* pass */
+            //         }
+            //       }, false);
+
+            //       media.addEventListener('playing', function (e) {
+            //         if (pt_elexists('.ads-overlay-info')) {
+            //           $('.ads-overlay-info').remove();
+            //         }
+
+            //         $('.ads-test').remove();
+
+            //         if ($('body').attr('resized') == 'true') {
+            //             PT_Resize(true);
+            //         }
+            //         $('.mejs__container').css('height', ($('.mejs__container').width() / 1.77176216) + 'px');
+            //         $('video, iframe').css('height', '100%');
+            //       });
+            //   },
+            // });
+
+            // $('.expend-player').on('click', function(event) {
+            //  event.preventDefault();
+            //  var resize = 0;
+            //  if ($('.player-video').hasClass('col-md-12')) {
+            //    resize = 0;
+            //  } else {
+            //    resize = 1;
+            //  }
+            //  $.post('http://localhost:9002//aj/set-cookies', {name: 'resize', value:resize});
+            //  PT_Resize();
+            // });
+            $(window).resize(function (event) {
+                if ($('body').attr('resized') == 'true') {
+                    PT_Resize(true);
+                }
+            });
+
+        });
+
+
+        if (document.addEventListener) {
+            document.addEventListener('webkitfullscreenchange', exitHandler, false);
+            document.addEventListener('mozfullscreenchange', exitHandler, false);
+            document.addEventListener('fullscreenchange', exitHandler, false);
+            document.addEventListener('MSFullscreenChange', exitHandler, false);
+        }
+
+        function exitHandler() {
+            if (document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement !== null) {
+                setTimeout(function () {
+                    PT_Resize(false);
+                }, 100);
+            }
+        }
+
+        function PT_Resize(type) {
+
+            if ($('.player-video').hasClass('col-md-12') && type != true) {
+                $('.mejs__layer').css('display', 'none');
+                $('.player-video').addClass('col-md-8');
+                $('.player-video').removeClass('col-md-12');
+                $('.player-video').css('margin-bottom', '0');
+                $('.player-video').css('margin-top', '0');
+                $('.mejs__container, video, iframe').css('width', '100%');
+                $('.mejs__container').css('height', ($('.mejs__container').width() / 1.77176216) + 'px');
+                $('video, iframe').css('height', '100%');
+                $('.second-header-layout').removeClass('hidden');
+                $('.header-layout').css('background', '#fff');
+                $('.header-layout').css('border-bottom', '1px solid #f1f1f1');
+                $('#search-bar').css('border', '1px solid #f5f5f5');
+                $('#search-bar').css('color', '#444');
+                $('nav.navbar-findcond ul.navbar-nav.sec_lay_hdr a').css('color', '#3e3e3e');
+                $('.hide-resize').removeClass('hidden');
+                $('.logo-img').find('img').attr('src', 'http://localhost:9002//themes/default/img/logo.png');
+                $('.top-header a').css('color', '#444');
+                $('#background').addClass('hidden');
+                $('body').attr('resized', 'false');
+                $('body').css('padding-top', '0px');
+            } else {
+                var pixels = ($(window).height() / 100) * 88;
+                $('.player-video').removeClass('col-md-8');
+                $('.player-video').addClass('col-md-12');
+                $('.second-header-layout').addClass('hidden');
+                $('.player-video').css('margin-bottom', '10px');
+                $('.player-video').css('margin-top', '0px');
+                $('body').css('padding-top', '57px !important');
+                $('.mejs__container, video, iframe').css('width', '100%');
+                $('.mejs__container').css('height', pixels + 'px');
+                $('video, iframe').css('height', '100%');
+                $('.header-layout').css('background', 'rgb(32,32,32)');
+                $('.header-layout').css('border-bottom', 'none');
+                $('#search-bar').css('border', '1px solid #555');
+                $('#search-bar').css('color', '#fff');
+                $('nav.navbar-findcond ul.navbar-nav.sec_lay_hdr a').css('color', '#fff');
+                $('.hide-resize').addClass('hidden');
+                $('.logo-img').find('img').attr('src', 'http://localhost:9002//themes/default/img/logo-light.png');
+                $('.top-header a').css('color', '#fff');
+                $('#background').removeClass('hidden');
+                $('#background').css('height', '89.4%');
+                $('body').attr('resized', 'true');
+            }
+        }
+
+        $('.player-video').hover(function () {
+            $('.icons').removeClass('hidden');
+        });
+        $('.player-video').mouseleave(function () {
+            $('.icons').addClass('hidden');
+        });
+
+    </script>
     <script type="text/javascript">
 
 
