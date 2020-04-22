@@ -13,12 +13,12 @@
 
 
                             <span class="mejs__offscreen">Video Player</span>
-                            <div id="mep_0" class="mejs__container mejs__container-keyboard-inactive mejs__video"
-                                 tabindex="0" role="application" aria-label="Video Player"
-                                 style="width: 803.328px; height: 451.872px; min-width: 303px;">
-                                <div class="mejs__inner">
-                                    <div class="mejs__mediaelement">
-                                        <mediaelementwrapper id="my-video">
+{{--                            <div id="mep_0" class="mejs__container mejs__container-keyboard-inactive mejs__video"--}}
+{{--                                 tabindex="0" role="application" aria-label="Video Player"--}}
+{{--                                 style="width: 803.328px; height: 451.872px; min-width: 303px;">--}}
+{{--                                <div class="mejs__inner">--}}
+{{--                                    <div class="mejs__mediaelement">--}}
+{{--                                        <mediaelementwrapper id="my-video">--}}
 {{--                                            <video--}}
 {{--                                                id="my-video_html5"--}}
 {{--                                                class="video-js"--}}
@@ -38,19 +38,19 @@
 {{--                                                    >--}}
 {{--                                                </p>--}}
 {{--                                            </video>--}}
-                                            <video id="my-video_html5"
-                                                   style="width: 100%; height: 451.872px; position: relative;"
-                                                   poster="{{asset("storage/$thumbnail")}}"
-                                                   preload="none"
-                                                   src="{{asset("storage/$stream_path")}}">
-                                                <source src="{{storage_path($stream_path)}}" type="video/mp4"
-                                                        data-quality="360p" title="360p" label="360p" res="360">
-                                                Your browser does not support HTML5 video.
-                                                <!-- //src="http://www.youtube.com/watch?v=nOEw9iiopwI" type="video/youtube" -->
-                                            </video>
-                                        </mediaelementwrapper>
+{{--                                            <video id="my-video_html5"--}}
+{{--                                                   style="width: 100%; height: 451.872px; position: relative;"--}}
+{{--                                                   poster="{{asset("storage/$thumbnail")}}"--}}
+{{--                                                   preload="none"--}}
+{{--                                                   src="{{asset("storage/$stream_path")}}">--}}
+{{--                                                <source src="{{storage_path($stream_path)}}" type="video/mp4"--}}
+{{--                                                        data-quality="360p" title="360p" label="360p" res="360">--}}
+{{--                                                Your browser does not support HTML5 video.--}}
+{{--                                                <!-- //src="http://www.youtube.com/watch?v=nOEw9iiopwI" type="video/youtube" -->--}}
+{{--                                            </video>--}}
+{{--                                        </mediaelementwrapper>--}}
 
-                                    </div>
+{{--                                    </div>--}}
 {{--                                    <div class="mejs__layers">--}}
 {{--                                        <div class="mejs__poster mejs__layer"--}}
 {{--                                             style="background-image: url({{asset("storage/$thumbnail")}}); width: 100%; height: 100%;">--}}
@@ -151,9 +151,18 @@
 {{--                                                    aria-label="Fullscreen" tabindex="0"></button>--}}
 {{--                                        </div>--}}
 {{--                                    </div>--}}
-                                </div>
-                            </div>
-
+{{--                                </div>--}}
+{{--                            </div>--}}
+                            <video id="my-video_html5"
+                                   style="width: 100%; height: 451.872px; position: relative;"
+                                   poster="{{asset("storage/$thumbnail")}}"
+                                   preload="none"
+                                   src="{{asset("storage/$stream_path")}}">
+                                <source src="{{storage_path($stream_path)}}" type="video/mp4"
+                                        data-quality="360p" title="360p" label="360p" res="360">
+                                Your browser does not support HTML5 video.
+                                <!-- //src="http://www.youtube.com/watch?v=nOEw9iiopwI" type="video/youtube" -->
+                            </video>
                             <div class="icons hidden">
                                 <span class="expend-player"><i class="fa fa-expand fa-fw"></i></span>
                             </div>
