@@ -10,7 +10,7 @@ class Index extends React.Component{
     render() {
         return <main>
             <Switch>
-                <Route path='/dashboard' component={Dashboard} />
+                <Route path='/' component={Dashboard} />
                 <Route path="/comments" component={Dashboard} />
                 <Route path="/upload-video" component={UploadVideos} />
                 <Route path='/watch' component={WatchVideo}/>
