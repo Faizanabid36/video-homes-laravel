@@ -26,7 +26,7 @@ function MyDropzone() {
                 setUploading(false);
                 console.log(data.video);
                 setState({...data.video});
-                window.location.href = window.location.toString().replace("upload-video",'watch')+"?v="+data.video.video_id;
+                // window.location.href = window.location.toString().replace("upload-video",'watch')+"?v="+data.video.video_id;
                 console.log(state);
             })
             .catch((err) => {
