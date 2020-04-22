@@ -22,7 +22,13 @@ class VideoController extends Controller {
         $thumbnail = str_replace( "." . request()->video->getClientOriginalExtension(), ".png", $path );
         $media     = \FFMpeg::open( $path );
 //        dd($media);
-        $media->getFrameFromSeconds( 10 )->export()->save( $thumbnail );
+        $divide_result = floor($media->getDurationInSeconds() / 5);
+        $newThumbnail = [];
+        for($i=1;$i<=5;$i++){
+            $newThumbnail[$i] = str_replace( "." . request()->video->getClientOriginalExtension(), "-1.png", $path );
+            $media->getFrameFromSeconds( $divide_result )->export()->save( $newThumbnail[$i] );
+            $divide_result += $divide_result;
+        }
 
         $video = Video::create( [
             'disk'          => 'public',
@@ -40,7 +46,7 @@ class VideoController extends Controller {
         ConvertVideoForStreaming::dispatch( $video );
         $message = "Video is uploading... in backgroud";
 
-        return compact( 'message', 'video' );
+        return compact( 'message', 'video','newThumbnail' );
     }
 
     public function watch_video() {
