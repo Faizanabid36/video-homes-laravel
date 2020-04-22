@@ -34,7 +34,7 @@ class VideoController extends Controller {
 
         $video = Video::create( [
             'disk'          => 'public',
-            'thumbnail'     => $newThumbnail[0],
+            'thumbnail'     => $newThumbnail[1],
             'original_name' => request()->video->getClientOriginalName(),
             'video_path'    => $path,
             'title'         => request()->video->getClientOriginalName(),
