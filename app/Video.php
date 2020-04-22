@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Video extends Model
 {
     //
-    protected $table = 'videos';
     protected $guarded = [];
+    protected $dates = [
+        'converted_for_streaming_at',
+    ];
 }

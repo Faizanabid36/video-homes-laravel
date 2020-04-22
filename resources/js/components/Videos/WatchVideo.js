@@ -28,7 +28,7 @@ class WatchVideo extends React.Component {
                     this.player = videojs(this.videoPlayer, {
                         width: '700px', height: '425px'
                     }, () => {
-                        this.videoPlayer.src = this.state.videoUrl
+                        this.videoPlayer.src = "storage/"+this.state.videoUrl
                     });
                 })
             })
@@ -48,7 +48,7 @@ class WatchVideo extends React.Component {
                                        ref={(c) => {
                                            this.videoPlayer = c;
                                        }} className="video-js" controls>
-                                    <source type="video/mp4" src={this.state.videoUrl}/>
+                                    <source type="video/mp4" src={`storage/${this.state.videoUrl}`}/>
                                 </video>
                                 <h1>{this.state.title}</h1>
                             </div>

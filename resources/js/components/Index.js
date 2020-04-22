@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import { HashRouter as BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import Dashboard from "./Dashboard";
 import WatchVideo from "./Videos/WatchVideo";
 import UploadVideos from "./Videos/UploadVideos";
@@ -10,11 +10,11 @@ class Index extends React.Component{
     render() {
         return <main>
             <Switch>
-                <Route path='/dashboard' component={Dashboard} />
-                <Route path="/comments" component={Dashboard} />
-                <Route path="/upload-video" component={UploadVideos} />
-                <Route path='/watch' component={WatchVideo}/>
-                <Route path='/watch_videos' component={Videos}/>
+                <Route path='/' exact component={Dashboard} />
+                {/*<Route path="/comments" exact  component={Dashboard} />*/}
+                <Route path="/upload-video" exact  component={UploadVideos} />
+                <Route path='/watch' exact  component={WatchVideo}/>
+                <Route path='/watch_videos' exact  component={Videos}/>
             </Switch>
         </main>
     }

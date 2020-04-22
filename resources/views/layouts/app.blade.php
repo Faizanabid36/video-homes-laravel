@@ -8,9 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <!-- Fonts -->
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/jquery-ui.min.css')}}">
@@ -22,20 +20,15 @@
     <link rel="stylesheet" href="{{asset('css/lib/notifIt/notifIt/css/notifIt.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}" id="style-css">
     <link rel="stylesheet" href="{{asset('css/custom.style.css')}}">
-    <link rel="stylesheet" href="{{asset('css/custom.style.css')}}">
-    <script src="{{asset('js/jquery-3.min.js')}}"></script>
-    <script src="{{asset('js/jquery-ui.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/jquery.form.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/tag-it.min.js')}}"></script>
-    <script src="{{asset('js/lib/sweetalert2/dist/sweetalert2.js')}}"></script>
-    <script src="{{asset('js/lib/notifIt/notifIt/js/notifIt.min.js')}}"></script>
     <link rel="stylesheet" href="{{asset('css/bootstrap-select.min.css')}}">
-    <script src="{{asset('js/bootstrap-select.min.js')}}"></script>
     <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
-    <script src="{{asset('js/owl.carousel.min')}}.js"></script>
-    <script src="{{asset('js/Fingerprintjs2/fingerprint2.js')}}"></script>
-    <script src="{{asset('js/emoji/emojionearea/dist/emojionearea.js')}}"></script>
     <link rel="stylesheet" type="text/css" href="{{asset('js/emoji/emojionearea/dist/emojionearea.min.css')}}"/>
+
+    <script>
+        let VIDEO_APP = {
+            base_url: '{{url('/')}}',
+        }
+    </script>
     @yield('links')
 </head>
 <body id="pt-body">
@@ -134,13 +127,13 @@
         <div class="pt_main_hdr pull-right" id="header_change">
             <ul class="nav navbar-nav navbar-right" style="display: inline;float: right !important">
                 @if(auth()->user())
-                    <li class="hide-from-mobile">
-                        <a  class="btn" href="{{route('watch')}}">
-                            <span class="btn-secondary p-2">Watch</span>
-                        </a>
-                    </li>
-                    <li class="hide-from-mobile">
-                        <a href="{{route('upload-video')}}" class="btn upload-button">
+{{--                    <li class="hide-from-mobile">--}}
+{{--                        <a  class="btn" href="{{route('watch')}}">--}}
+{{--                            <span class="btn-secondary p-2">Watch</span>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
+                    <li>
+                        <a href="#/upload-video" class="btn upload-button">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                 <path fill="currentColor"
                                       d="M14,13V17H10V13H7L12,8L17,13M19.35,10.03C18.67,6.59 15.64,4 12,4C9.11,4 6.6,5.64 5.35,8.03C2.34,8.36 0,10.9 0,14A6,6 0 0,0 6,20H19A5,5 0 0,0 24,15C24,12.36 21.95,10.22 19.35,10.03Z"></path>
@@ -256,15 +249,15 @@
                                     Settings
                                 </a>
                             </li>
-                            <li class="hid_svg">
-                                <a href="#">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                        <path fill="currentColor"
-                                              d="M13,3V9H21V3M13,21H21V11H13M3,21H11V15H3M3,13H11V3H3V13Z"></path>
-                                    </svg>
-                                    Admin Panel
-                                </a>
-                            </li>
+{{--                            <li class="hid_svg">--}}
+{{--                                <a href="#">--}}
+{{--                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">--}}
+{{--                                        <path fill="currentColor"--}}
+{{--                                              d="M13,3V9H21V3M13,21H21V11H13M3,21H11V15H3M3,13H11V3H3V13Z"></path>--}}
+{{--                                    </svg>--}}
+{{--                                    Admin Panel--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
                             <li class="divider"></li>
                             <li>
                                 <a href="#">
@@ -303,5 +296,19 @@
     <div class="clear"></div>
 </header>
 @yield('container')
+
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{asset('js/jquery-3.min.js')}}"></script>
+<script src="{{asset('js/jquery-ui.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/jquery.form.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/tag-it.min.js')}}"></script>
+<script src="{{asset('js/lib/sweetalert2/dist/sweetalert2.js')}}"></script>
+<script src="{{asset('js/lib/notifIt/notifIt/js/notifIt.min.js')}}"></script>
+<script src="{{asset('js/bootstrap-select.min.js')}}"></script>
+<script src="{{asset('js/owl.carousel.min')}}.js"></script>
+<script src="{{asset('js/Fingerprintjs2/fingerprint2.js')}}"></script>
+<script src="{{asset('js/emoji/emojionearea/dist/emojionearea.js')}}"></script>
+
 </body>
 </html>

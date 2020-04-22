@@ -27,7 +27,7 @@
                                 <input type="submit" class="button" value="Log In">
                             </div>
                             <div class="new-here text-center">
-                                New here? <a class="dec" href="#">Sign Up!</a>
+                                New here? <a class="dec" href="{{route('register')}}">Sign Up!</a>
                             </div>
                         </form>
                     </div>
