@@ -28,7 +28,7 @@ Route::group( [ 'before' => 'auth' ], function () {
     Route::post('/update-video/{video_id}', 'VideoController@update_video');
 //    Route::view('/watch', 'container');
     Route::post('{username}/', 'VideoController@watch_video');
-    Route::get('{username}/watch_video', 'VideoController@watch_video');
+    Route::get('watch_video', 'VideoController@watch_video');
     Route::get('/all_videos', 'VideoController@list_of_videos');
 //    Route::view('/watch_videos', 'container')->name('watch');
 } );
