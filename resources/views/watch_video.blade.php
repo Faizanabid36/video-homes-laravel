@@ -128,7 +128,7 @@
                         </div>
                         <div class="clear"></div>
                         <div class="video-published">
-                            Published on {{$created_at->format('M d Y'}} / In
+                            Published on {{$created_at->format('M d Y')}} / In
 {{--                            <a href="http://localhost:9002//videos/category/5" data-load="?link1=videos&amp;page=category&amp;id=5">Sports</a>          --}}
                         </div>
                         <div class="watch-video-description">
