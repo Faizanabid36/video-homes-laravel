@@ -22,17 +22,19 @@ class VideoController extends Controller {
         $thumbnail = str_replace( "." . request()->video->getClientOriginalExtension(), ".png", $path );
         $media     = \FFMpeg::open( $path );
 //        dd($media);
-        $divide_result = floor($media->getDurationInSeconds() / 5);
-        $newThumbnail = [];
-        for($i=1;$i<=5;$i++){
-            $newThumbnail[$i] = str_replace( "." . request()->video->getClientOriginalExtension(), "-$i.png", $path );
-            $media->getFrameFromSeconds( $divide_result )->export()->save( $newThumbnail[$i] );
+        $thumbnail_shots = 5;
+        $divide_result   = $media->getDurationInSeconds() >= $thumbnail_shots ? floor( $media->getDurationInSeconds() / $thumbnail_shots ) : floor( $media->getDurationInSeconds() / 1 );
+        $thumbnail_shots = $media->getDurationInSeconds() >= $thumbnail_shots ? $thumbnail_shots : 1;
+        $newThumbnail    = [];
+        for ( $i = 1; $i <= $thumbnail_shots; $i ++ ) {
+            $newThumbnail[ $i ] = str_replace( "." . request()->video->getClientOriginalExtension(), "-$i.png", $path );
+            $media->getFrameFromSeconds( $divide_result )->export()->save( $newThumbnail[ $i ] );
             $divide_result += $divide_result;
         }
 
         $video = Video::create( [
             'disk'          => 'public',
-            'thumbnail'     => $thumbnail,
+            'thumbnail'     => $newThumbnail[0],
             'original_name' => request()->video->getClientOriginalName(),
             'video_path'    => $path,
             'title'         => request()->video->getClientOriginalName(),
@@ -46,7 +48,7 @@ class VideoController extends Controller {
         ConvertVideoForStreaming::dispatch( $video );
         $message = "Video is uploading... in backgroud";
 
-        return compact( 'message', 'video','newThumbnail' );
+        return compact( 'message', 'video', 'newThumbnail' );
     }
 
     public function watch_video() {
