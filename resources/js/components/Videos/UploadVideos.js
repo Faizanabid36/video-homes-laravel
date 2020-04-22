@@ -130,7 +130,7 @@ function MyDropzone() {
                             <label for="title">Title</label>
                             <input
                                 type="text"
-                                value={state.title}
+                                defaultValue={state.title}
                                 onChange={e=>{
                                     state.title = e.target.value;
                                     setState(state)
