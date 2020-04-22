@@ -61,7 +61,7 @@ class VideoController extends Controller {
     }
 
     public function list_of_videos() {
-        $videos = Video::all();
+        $videos = Video::whereUserId(auth()->id())->latest()->get();
 
         return compact( 'videos' );
     }
