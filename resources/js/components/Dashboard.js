@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter, Link, Route, Switch} from 'react-router-dom';
 import DashboardComponents from "./DashboardComponents/DashboardComponents";
 import Comments from "./Comments";
+import Videos from "./Videos/Videos";
 
 
 class Dashboard extends React.Component {
@@ -19,7 +20,7 @@ class Dashboard extends React.Component {
     renderTemplate(){
         switch(this.state.tab){
             case 'videos':
-                return <div>video will be heres</div>;
+                return <Videos/>;
             case 'comments':
                 return <Comments/>;
             default:
