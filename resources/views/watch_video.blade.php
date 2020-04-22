@@ -1561,110 +1561,7 @@
                     </div>
                 </div>
             </div>
-            <script type="text/javascript">
 
-
-                $(document).on('change', '#thumbnail', function (event) {
-                    let imgPath = $(this)[0].files[0].name;
-                    if (typeof (FileReader) != "undefined") {
-                        let reader = new FileReader();
-                        reader.onload = function (e) {
-                            $('#receipt_img_preview').attr('src', e.target.result);
-                        }
-                        reader.readAsDataURL(this.files[0]);
-                    }
-                    $('#bank_transfer_modal').addClass('up_rec_img_ready');
-                });
-
-
-                $(document).on('change', '#thumbnail_2', function (event) {
-                    let imgPath = $(this)[0].files[0].name;
-                    if (typeof (FileReader) != "undefined") {
-                        let reader = new FileReader();
-                        reader.onload = function (e) {
-                            $('.bank_image_2').attr('src', e.target.result);
-                        }
-                        reader.readAsDataURL(this.files[0]);
-                    }
-                    $('#bank_transfer_modal_2').addClass('up_rec_img_ready');
-                });
-
-                jQuery(document).ready(function ($) {
-                    $('#bank_transfer_form').ajaxForm({
-                        url: 'http://localhost:9002//aj/go_pro/bank_pay_to_see',
-                        beforeSend: function () {
-                            $('#bank_transfer_form').find('.ball-pulse').fadeIn(100);
-                        },
-                        success: function (data) {
-                            if (data['status'] == 200) {
-                                $("#blog-alert").html('<div class="alert alert-success">' + data['message'] + '</div>');
-                                setTimeout(function () {
-                                    window.location = "http://localhost:9002/";
-                                    $(".prv-img").html('<div class="thumbnail-rendderer"><div><div class="error-text-renderer"></div><div><p>http://localhost:9002//browse_to_upload</p></div></div> </div>');
-                                    $("#blog-alert").html('');
-                                    $('#configreset').click();
-
-                                }, 3000)
-                            } else if (data['message']) {
-                                $("#blog-alert").html('<div class="alert alert-danger">' + data['message'] + '</div>');
-                            }
-                            $('#bank_transfer_form').find('.ball-pulse').fadeOut(100);
-                        }
-                    });
-
-                    $('#bank_transfer_form_2').ajaxForm({
-                        url: 'http://localhost:9002//aj/go_pro/subscribe',
-                        beforeSend: function () {
-                            $('#bank_transfer_form_2').find('.ball-pulse').fadeIn(100);
-                        },
-                        success: function (data) {
-                            if (data['status'] == 200) {
-                                $("#blog-alert-2").html('<div class="alert alert-success">' + data['message'] + '</div>');
-                                setTimeout(function () {
-                                    window.location = "http://localhost:9002/";
-                                    $(".prv-img").html('<div class="thumbnail-rendderer"><div><div class="error-text-renderer"></div><div><p>http://localhost:9002//browse_to_upload</p></div></div> </div>');
-                                    $("#blog-alert-2").html('');
-                                    $('#configreset_2').click();
-
-                                }, 3000)
-                            } else if (data['message']) {
-                                $("#blog-alert-2").html('<div class="alert alert-danger">' + data['message'] + '</div>');
-                            }
-                            $('#bank_transfer_form_2').find('.ball-pulse').fadeOut(100);
-                        }
-                    });
-
-
-                });
-
-                function PT_OpenBank(pkg, self, video_id = 0, price = 0, user_id) {
-                    if (!pkg || !self) {
-                        return false;
-                    }
-                    $(self).text("Please wait..").attr('disabled', 'true');
-                    $('#pay-go-pro').modal('hide');
-                    if (user_id > 0) {
-                        $('#bank_transfer_user').val(user_id)
-                        $('#configreset_2').click();
-                        $("#blog-alert-2").html('');
-                        $('#bank_transfer_modal_2').modal({
-                            show: true
-                        });
-
-                    } else {
-                        video = '1';
-                        $('#bank_transfer_video').val(video)
-                        $('#configreset').click();
-                        $("#blog-alert").html('');
-                        $('.bank_pay_type').val(pkg);
-                        $('#bank_transfer_modal').modal({
-                            show: true
-                        });
-                    }
-
-
-                }
-            </script>
 
             <div class="modal fade matdialog" id="bank_transfer_modal_2" role="dialog" data-keyboard="false"
                  style="overflow-y: auto;">
@@ -1878,3 +1775,109 @@
         </div>
     </div>
 @endsection
+@section('footer_script')
+    <script type="text/javascript">
+
+
+        $(document).on('change', '#thumbnail', function (event) {
+            let imgPath = $(this)[0].files[0].name;
+            if (typeof (FileReader) != "undefined") {
+                let reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#receipt_img_preview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+            $('#bank_transfer_modal').addClass('up_rec_img_ready');
+        });
+
+
+        $(document).on('change', '#thumbnail_2', function (event) {
+            let imgPath = $(this)[0].files[0].name;
+            if (typeof (FileReader) != "undefined") {
+                let reader = new FileReader();
+                reader.onload = function (e) {
+                    $('.bank_image_2').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+            $('#bank_transfer_modal_2').addClass('up_rec_img_ready');
+        });
+
+        jQuery(document).ready(function ($) {
+            $('#bank_transfer_form').ajaxForm({
+                url: 'http://localhost:9002//aj/go_pro/bank_pay_to_see',
+                beforeSend: function () {
+                    $('#bank_transfer_form').find('.ball-pulse').fadeIn(100);
+                },
+                success: function (data) {
+                    if (data['status'] == 200) {
+                        $("#blog-alert").html('<div class="alert alert-success">' + data['message'] + '</div>');
+                        setTimeout(function () {
+                            window.location = "http://localhost:9002/";
+                            $(".prv-img").html('<div class="thumbnail-rendderer"><div><div class="error-text-renderer"></div><div><p>http://localhost:9002//browse_to_upload</p></div></div> </div>');
+                            $("#blog-alert").html('');
+                            $('#configreset').click();
+
+                        }, 3000)
+                    } else if (data['message']) {
+                        $("#blog-alert").html('<div class="alert alert-danger">' + data['message'] + '</div>');
+                    }
+                    $('#bank_transfer_form').find('.ball-pulse').fadeOut(100);
+                }
+            });
+
+            $('#bank_transfer_form_2').ajaxForm({
+                url: 'http://localhost:9002//aj/go_pro/subscribe',
+                beforeSend: function () {
+                    $('#bank_transfer_form_2').find('.ball-pulse').fadeIn(100);
+                },
+                success: function (data) {
+                    if (data['status'] == 200) {
+                        $("#blog-alert-2").html('<div class="alert alert-success">' + data['message'] + '</div>');
+                        setTimeout(function () {
+                            window.location = "http://localhost:9002/";
+                            $(".prv-img").html('<div class="thumbnail-rendderer"><div><div class="error-text-renderer"></div><div><p>http://localhost:9002//browse_to_upload</p></div></div> </div>');
+                            $("#blog-alert-2").html('');
+                            $('#configreset_2').click();
+
+                        }, 3000)
+                    } else if (data['message']) {
+                        $("#blog-alert-2").html('<div class="alert alert-danger">' + data['message'] + '</div>');
+                    }
+                    $('#bank_transfer_form_2').find('.ball-pulse').fadeOut(100);
+                }
+            });
+
+
+        });
+
+        function PT_OpenBank(pkg, self, video_id = 0, price = 0, user_id) {
+            if (!pkg || !self) {
+                return false;
+            }
+            $(self).text("Please wait..").attr('disabled', 'true');
+            $('#pay-go-pro').modal('hide');
+            if (user_id > 0) {
+                $('#bank_transfer_user').val(user_id)
+                $('#configreset_2').click();
+                $("#blog-alert-2").html('');
+                $('#bank_transfer_modal_2').modal({
+                    show: true
+                });
+
+            } else {
+                video = '1';
+                $('#bank_transfer_video').val(video)
+                $('#configreset').click();
+                $("#blog-alert").html('');
+                $('.bank_pay_type').val(pkg);
+                $('#bank_transfer_modal').modal({
+                    show: true
+                });
+            }
+
+
+        }
+    </script>
+@stop

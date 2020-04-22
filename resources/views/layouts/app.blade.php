@@ -317,6 +317,6 @@
 <script src="{{asset('js/Fingerprintjs2/fingerprint2.js')}}"></script>
 <script src="{{asset('js/emoji/emojionearea/dist/emojionearea.js')}}"></script>
 <script src="https://vjs.zencdn.net/7.7.5/video.js"></script>
-
+@yield('footer_script')
 </body>
 </html>
