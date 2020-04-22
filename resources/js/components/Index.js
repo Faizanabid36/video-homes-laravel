@@ -11,10 +11,7 @@ class Index extends React.Component{
         return <main>
             <Switch>
                 <Route path='/' exact component={Dashboard} />
-                {/*<Route path="/comments" exact  component={Dashboard} />*/}
-                <Route path="/upload-video" exact  component={UploadVideos} />
-                <Route path='/watch' exact  component={WatchVideo}/>
-                {/*<Route path='/watch_videos' exact  component={Videos}/>*/}
+                <Route path="/upload_video" exact  component={UploadVideos} />
             </Switch>
         </main>
     }

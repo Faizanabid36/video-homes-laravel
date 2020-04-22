@@ -32,6 +32,11 @@ class AddFieldsToVideos extends Migration
     {
         Schema::table('videos', function (Blueprint $table) {
             //
+            $table->dropColumn('original_name');
+            $table->dropColumn('disk');
+            $table->dropColumn('stream_path');
+            $table->dropColumn('processed');
+            $table->dropColumn('converted_for_streaming_at');
         });
     }
 }
