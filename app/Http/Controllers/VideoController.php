@@ -54,7 +54,7 @@ class VideoController extends Controller {
     public function watch_video() {
         $video_id = \request( 'video_id' );
         $video    = Video::where( 'video_id', $video_id )->first();
-        $videoUrl = $video->video_path;
+        $videoUrl = $video->stream_path;
         $title    = $video->title;
 
         return compact( 'videoUrl', 'title' );
