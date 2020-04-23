@@ -38,7 +38,7 @@ function MyDropzone() {
         axios.post('update-video/'+state.id,{...state}).then(({data})=>{
             window.location.href = window.location.toString().replace("upload-video",'watch')+"?v="+state.video_id;
         })
-    },[]);
+    },[state]);
 
     React.useEffect(() => {
         if (state) {
