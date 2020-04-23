@@ -13,5 +13,5 @@ class Video extends Model {
     protected $hidden = [ 'created_at',
         'disk',
         'updated_at',
-        'duration', 'original_name', 'size', 'video_id', 'video_path' ];
+        'duration', 'original_name', 'size', 'video_id', 'video_path','user_id' ];
 }
