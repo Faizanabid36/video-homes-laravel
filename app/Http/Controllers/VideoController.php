@@ -72,7 +72,7 @@ class VideoController extends Controller {
             die($e->getMessage());
         }
         return [
-            'status' => $video->update( request( [ 'description', 'title', 'thumbnail' ] ) ),
+            'status' => $video->update( request( [ 'description' ] ) ),
             'data'   => request()->all()
         ];
     }
