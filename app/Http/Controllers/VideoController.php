@@ -64,6 +64,6 @@ class VideoController extends Controller {
     }
 
     public function update_video( Video $video ) {
-        return $video->update( request()->all() );
+        return ['status'=>$video->update( request()->all() ),"data"=>request()->all()];
     }
 }

@@ -36,6 +36,7 @@ function MyDropzone() {
     const onUpdate = useCallback(e=>{
         console.log("update",state);
         axios.post('update-video/'+state.id,{...state}).then(({data})=>{
+            console.log(data);
             window.location.href = window.location.toString().replace("upload-video",'watch')+"?v="+state.video_id;
         })
     },[state]);
