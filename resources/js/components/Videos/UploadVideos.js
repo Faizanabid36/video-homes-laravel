@@ -27,7 +27,7 @@ function MyDropzone() {
                 console.log(data.video);
                 setState({...data.video});
                 // window.location.href = window.location.toString().replace("upload-video",'watch')+"?v="+data.video.video_id;
-                console.log(state);
+
             })
             .catch((err) => {
                 setUploading(false);
@@ -38,6 +38,12 @@ function MyDropzone() {
             window.location.href = window.location.toString().replace("upload-video",'watch')+"?v="+state.video_id;
         })
     },[]);
+
+    React.useEffect(() => {
+        if (state) {
+            console.log(state);
+        }
+    }, [count]);
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
     return <div className="container main-content" id="main-container">
         <div id="container_content">
