@@ -52,19 +52,28 @@ class VideoController extends Controller {
     }
 
     public function watch_video() {
-        $video    = Video::where( 'video_id', request('v') )->first();
-        abort_if(!$video->processed,201,'Video Encoding is in process, Please wait a while');
-        return view('watch_video',$video);
+        $video = Video::where( 'video_id', request( 'v' ) )->first();
+        abort_if( ! $video->processed, 201, 'Video Encoding is in process, Please wait a while' );
+
+        return view( 'watch_video', $video );
     }
 
     public function list_of_videos() {
-        $videos = Video::whereUserId(auth()->id())->latest()->get();
+        $videos = Video::whereUserId( auth()->id() )->latest()->get();
 
         return compact( 'videos' );
     }
 
     public function update_video( Video $video ) {
         //dd($video);
-        return ['status'=>$video->update( request(['description','title','thumbnail']) ),"data"=>request()->all()];
+        try{
+            $video->update( request( [ 'description', 'title', 'thumbnail' ] ) )
+        }catch(\Exception $e){
+            die($e->getMessage());
+        }
+        return [
+            'status' => $video->update( request( [ 'description', 'title', 'thumbnail' ] ) ),
+            'data'   => request()->all()
+        ];
     }
 }
