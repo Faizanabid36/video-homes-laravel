@@ -66,6 +66,7 @@ class VideoController extends Controller {
 
     public function update_video( Video $video ) {
         //dd($video);
+        return boolval($video->update( ["description"=>"Essa one"] ));
         try{
             $video->update( request( [ 'description', 'title', 'thumbnail' ] ) );
         }catch(\Exception $e){
