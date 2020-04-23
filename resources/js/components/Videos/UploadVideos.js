@@ -34,6 +34,7 @@ function MyDropzone() {
             });
     }, []);
     const onUpdate = useCallback(e=>{
+        console.log("update",state);
         axios.post('update-video/'+state.id,{...state}).then(({data})=>{
             window.location.href = window.location.toString().replace("upload-video",'watch')+"?v="+state.video_id;
         })
@@ -41,7 +42,7 @@ function MyDropzone() {
 
     React.useEffect(() => {
         if (state) {
-            console.log(state);
+            console.log("effect",state);
         }
     }, [state]);
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
