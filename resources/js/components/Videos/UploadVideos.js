@@ -43,7 +43,7 @@ function MyDropzone() {
         if (state) {
             console.log(state);
         }
-    }, [count]);
+    }, [state]);
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
     return <div className="container main-content" id="main-container">
         <div id="container_content">
