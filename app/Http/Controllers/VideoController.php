@@ -67,7 +67,7 @@ class VideoController extends Controller {
     public function update_video( Video $video ) {
         //dd($video);
         try{
-            $video->update( request( [ 'description', 'title', 'thumbnail' ] ) )
+            $video->update( request( [ 'description', 'title', 'thumbnail' ] ) );
         }catch(\Exception $e){
             die($e->getMessage());
         }
