@@ -26,7 +26,7 @@ class VideoController extends Controller {
             ->videos()
             ->first()
             ->getDimensions();
-        dd($dimension->toArray());
+        return $dimension;
         $thumbnail_shots = 5;
         $divide_result   = $media->getDurationInSeconds() >= $thumbnail_shots ? floor( $media->getDurationInSeconds() / $thumbnail_shots ) : floor( $media->getDurationInSeconds() / 1 );
         $thumbnail_shots = $media->getDurationInSeconds() >= $thumbnail_shots ? $thumbnail_shots : 1;
