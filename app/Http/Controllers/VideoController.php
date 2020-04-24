@@ -18,6 +18,7 @@ class VideoController extends Controller
         request()->video->storeAs( 'public/uploads/', $file );
         $path          = 'uploads/' . $file;
         $media         = \FFMpeg::open( $path );
+        $dimension = $media->getStreams()->videos()->first()->getDimensions();
         $newThumbnails = generateThumbnailsFromVideo( $media,$path, 3 );
         $video         = Video::create( [
             'thumbnail'     => $newThumbnails[1],
@@ -28,7 +29,7 @@ class VideoController extends Controller
             'size'          => request()->video->getSize(),
             'video_motion'  => 'Animation',
             'video_type'    => 'Public',
-            'width'         => $media->getStreams()->videos()->first()->getDimensions()->getWidth()
+            'width'         => $dimension->getWidth()
         ] );
         ConvertVideoForStreaming::dispatch( $video, 320, 240 );
         if ( $this->width >= 640 ) {
