@@ -79,7 +79,7 @@ function MyDropzone() {
                 </div>
             </div>
             <div className="row">
-                {!uploading && !state && <div {...getRootProps()} className="col-8 mx-auto pt_page_margin">
+                {!state && <div {...getRootProps()} className="col-8 mx-auto pt_page_margin">
                     <div className="content pt_shadow">
                         <div className="col-md-12 pt_upload_vdo">
                             <div className="upload upload-video" data-block="video-drop-zone">
@@ -131,7 +131,7 @@ function MyDropzone() {
             {state && <div className="row">
                 <div className="col-8 mx-auto">
                     <Carousel>
-                        {state.thumbnails.map(v=>{
+                        {thumbnails.map(v=>{
                             <Carousel.Item>
                                 <img
                                     className="d-block w-100"
