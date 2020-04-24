@@ -22,11 +22,19 @@ class VideoController extends Controller {
         $thumbnail = str_replace( "." . request()->video->getClientOriginalExtension(), ".png", $path );
         $media     = \FFMpeg::open( $path );
 //        dd($media);
-        $media->getFrameFromSeconds( 10 )->export()->save( $thumbnail );
+        $thumbnail_shots = 5;
+        $divide_result   = $media->getDurationInSeconds() >= $thumbnail_shots ? floor( $media->getDurationInSeconds() / $thumbnail_shots ) : floor( $media->getDurationInSeconds() / 1 );
+        $thumbnail_shots = $media->getDurationInSeconds() >= $thumbnail_shots ? $thumbnail_shots : 1;
+        $newThumbnail    = [];
+        for ( $i = 1; $i <= $thumbnail_shots; $i ++ ) {
+            $newThumbnail[ $i ] = str_replace( "." . request()->video->getClientOriginalExtension(), "-$i.png", $path );
+            $media->getFrameFromSeconds( $divide_result )->export()->save( $newThumbnail[ $i ] );
+            $divide_result += $divide_result;
+        }
 
         $video = Video::create( [
             'disk'          => 'public',
-            'thumbnail'     => $thumbnail,
+            'thumbnail'     => $newThumbnail[1],
             'original_name' => request()->video->getClientOriginalName(),
             'video_path'    => $path,
             'title'         => request()->video->getClientOriginalName(),
@@ -40,25 +48,28 @@ class VideoController extends Controller {
         ConvertVideoForStreaming::dispatch( $video );
         $message = "Video is uploading... in backgroud";
 
-        return compact( 'message', 'video' );
+        return compact( 'message', 'video', 'newThumbnail' );
     }
 
     public function watch_video() {
-        $video_id = \request( 'video_id' );
-        $video    = Video::where( 'video_id', $video_id )->first();
-        $videoUrl = $video->video_path;
-        $title    = $video->title;
+        $video = Video::where( 'video_id', request( 'v' ) )->first();
+        abort_if( ! $video->processed, 201, 'Video Encoding is in process, Please wait a while' );
 
-        return compact( 'videoUrl', 'title' );
+        return view( 'watch_video', $video );
     }
 
     public function list_of_videos() {
-        $videos = Video::all();
+        $videos = Video::whereUserId( auth()->id() )->latest()->get();
 
         return compact( 'videos' );
     }
 
     public function update_video( Video $video ) {
-        return $video->update( request()->all() );
+        //dd($video);
+
+        return [
+            'status' => $video->update( request( [ 'description', 'title', 'thumbnail' ] ) ),
+            'data'   => request()->all()
+        ];
     }
 }

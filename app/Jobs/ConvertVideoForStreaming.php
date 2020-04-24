@@ -50,6 +50,7 @@ class ConvertVideoForStreaming implements ShouldQueue {
             'processed'                  => true,
             'stream_path'                => $converted_name
         ] );
+
     }
 
     private function getCleanFileName( $filename ): string {

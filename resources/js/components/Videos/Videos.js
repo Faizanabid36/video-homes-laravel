@@ -23,8 +23,8 @@ class Videos extends React.Component {
 
     render() {
 
-        return <div className="videos-latest-list row">
-            <h1 className="text-center">Latest videos</h1>
+        return <><h1 className="text-center">Uploaded videos</h1><div className="videos-latest-list row">
+
             {this.state.videos.map((item, index) => {
                 let link = '/watch?v=' + item.video_id;
                 console.log(link,item);
@@ -65,7 +65,7 @@ class Videos extends React.Component {
                     </div>
                 </div>
             })}
-        </div>;
+        </div></>;
     }
 }
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddThumbnailToVideos extends Migration
+class AddUsernameToUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class AddThumbnailToVideos extends Migration
      */
     public function up()
     {
-        Schema::table('videos', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             //
-            $table->string('thumbnail', 100);
+            $table->string('username')->unique();
         });
     }
 
@@ -26,9 +26,9 @@ class AddThumbnailToVideos extends Migration
      */
     public function down()
     {
-        Schema::table('videos', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             //
-            $table->dropColumn('thumbnail');
+            $table->dropColumn('username');
         });
     }
 }

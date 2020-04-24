@@ -20,7 +20,7 @@ class WatchVideo extends React.Component {
     }
 
     componentDidMount() {
-        const urlParams = new URLSearchParams(window.location.search);
+        const urlParams = new URLSearchParams(this.props.location.search);
         const video_id = urlParams.get('v');
         axios.post('/watch_video', {video_id})
             .then((res) => {
