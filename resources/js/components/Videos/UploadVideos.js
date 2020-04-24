@@ -1,11 +1,12 @@
 import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone'
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import "react-circular-progressbar/dist/styles.css";
+import {Carousel} from 'react-bootstrap';
+
 function MyDropzone() {
     const [uploadProgress, updateUploadProgress] = useState(0);
     const [uploading, setUploading] = useState(false);
     const [state, setState] = useState(false);
+    const [thumbnails, setThumbnails] = useState(false);
 
     const onDrop = useCallback(files => {
         // Do something with the files
@@ -26,6 +27,7 @@ function MyDropzone() {
                 setUploading(false);
                 console.log(data.video);
                 setState({...data.video});
+                setThumbnails({...data.newThumbnail});
                 // window.location.href = window.location.toString().replace("upload-video",'watch')+"?v="+data.video.video_id;
 
             })
@@ -33,19 +35,12 @@ function MyDropzone() {
                 setUploading(false);
             });
     }, []);
-    const onUpdate = useCallback(e=>{
-        console.log("update",state);
-        axios.put('update-video/'+state.id,{...state}).then(({data})=>{
-            console.log(data);
-            window.location.href = window.location.toString().replace("upload-video",'watch')+"?v="+state.video_id;
+    const onUpdate = useCallback(e => {
+        axios.put('update-video/' + state.id, {...state}).then(({data}) => {
+            window.location.href = window.VIDEO_APP.base_url + "watch_video?v=" + state.video_id;
         })
-    },[state]);
-
-    React.useEffect(() => {
-        if (state) {
-            console.log("effect",state);
-        }
     }, [state]);
+
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
     return <div className="container main-content" id="main-container">
         <div id="container_content">
@@ -84,7 +79,7 @@ function MyDropzone() {
                 </div>
             </div>
             <div className="row">
-                <div {...getRootProps()}  className="col-8 mx-auto pt_page_margin">
+                {!uploading && !state && <div {...getRootProps()} className="col-8 mx-auto pt_page_margin">
                     <div className="content pt_shadow">
                         <div className="col-md-12 pt_upload_vdo">
                             <div className="upload upload-video" data-block="video-drop-zone">
@@ -124,44 +119,55 @@ function MyDropzone() {
                         </div>
                         <div className="clear"/>
                     </div>
-                </div>
-                <div className="col-12">
-                    {uploading && <div className="progress">
-                        <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style={{width:uploadProgress+"%"}}>{`${uploadProgress}% uploaded`}</div>
-                    </div>}
-                </div>
+                </div>}
+                {uploading && <div className="col-8 mx-auto">
+                    <div className="progress h-25">
+                        <div className="progress-bar progress-bar-success progress-bar-striped progress-bar-animated"
+                             role="progressbar" aria-valuenow={uploadProgress} aria-valuemin="0" aria-valuemax="100"
+                             style={{width: uploadProgress + "%"}}>{`${uploadProgress}% uploaded`}</div>
+                    </div>
+                </div>}
             </div>
-            <div className="row">
+            {state && <div className="row">
                 <div className="col-8 mx-auto">
-                    {state && <div>
-                        <div className="form-group">
-                            <label for="title">Title</label>
-                            <input
-                                type="text"
-                                defaultValue={state.title}
-                                onChange={e=>{
-                                    state.title = e.target.value;
-                                    setState(state)
-                                }}
-                                className="form-control" placeholder="" aria-describedby="helpId"/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="title">Description</label>
-                            <input
-                                type="text"
-
-                                onChange={e => {
-                                    state.description = e.target.value;
-                                    setState(state)
-                                }}
-                                className="form-control" placeholder="" aria-describedby="helpId"/>
-                        </div>
-                        <div className="form-group">
-                            <button onClick={onUpdate} className="btn btn-main">Update and Preview Video</button>
-                        </div>
-                    </div>}
+                    <Carousel>
+                        {state.thumbnails.map(v=>{
+                            <Carousel.Item>
+                                <img
+                                    className="d-block w-100"
+                                    src={window.VIDEO_APP.base_url+"storage/"+v}
+                                />
+                            </Carousel.Item>
+                        })}
+                    </Carousel>
+                    <div className="form-group">
+                        <label htmlFor="title">Title</label>
+                        <input
+                            type="text"
+                            id="title"
+                            defaultValue={state.title}
+                            onChange={e => {
+                                state.title = e.target.value;
+                                setState(state);
+                            }}
+                            className="form-control" placeholder="Title"/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="description">Description</label>
+                        <input
+                            type="text"
+                            id="description"
+                            onChange={e => {
+                                state.description = e.target.value;
+                                setState(state)
+                            }}
+                            className="form-control" placeholder="Description"/>
+                    </div>
+                    <div className="form-group">
+                        <button onClick={onUpdate} className="btn btn-main">Update and Preview Video</button>
+                    </div>
                 </div>
-            </div>
+            </div>}
         </div>
     </div>;
 }
