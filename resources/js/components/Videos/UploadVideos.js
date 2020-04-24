@@ -1,5 +1,5 @@
-import React, { useCallback, useState, useEffect } from 'react';
-import { useDropzone } from 'react-dropzone'
+import React, {useCallback, useState, useEffect} from 'react';
+import {useDropzone} from 'react-dropzone'
 import {Carousel} from 'react-bootstrap';
 
 function MyDropzone() {
@@ -13,7 +13,7 @@ function MyDropzone() {
         setIndex(selectedIndex);
         state.thumbnail = thumbnails[selectedIndex + 1];
         setState(state);
-    },[state]);
+    }, [state]);
     const onDrop = useCallback(files => {
         // Do something with the files
         const formData = new FormData();
@@ -45,14 +45,11 @@ function MyDropzone() {
         axios.put('update-video/' + state.id, {...state}).then(({data}) => {
             window.location.href = window.VIDEO_APP.base_url + "watch_video?v=" + state.video_id;
         })
-    }, [state,thumbnails]);
+    }, [state, thumbnails]);
 
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
     useEffect(() => {
-        console.log(thumbnails,Object.values(thumbnails),"effects");
-        // return () => {
-        //     effect
-        // };
+        console.log(thumbnails, Object.values(thumbnails), "effects");
     }, [thumbnails]);
 
     return <div className="container main-content" id="main-container">
@@ -144,11 +141,11 @@ function MyDropzone() {
             {state && <div className="row">
                 <div className="col-8 mx-auto">
                     <Carousel activeIndex={index} onSelect={handleSelect}>
-                        {thumbnails && Object.values(thumbnails).map(v=>{
+                        {thumbnails && Object.values(thumbnails).map(v => {
                             <Carousel.Item>
                                 <img
                                     className="d-block w-100"
-                                    src={window.VIDEO_APP.base_url+"/storage/"+v}
+                                    src={window.VIDEO_APP.base_url + "/storage/" + v}
                                 />
 
                             </Carousel.Item>

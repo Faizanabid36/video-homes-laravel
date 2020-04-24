@@ -33,4 +33,4 @@ Route::group( [ 'middleware' => 'auth' ], function () {
 //    Route::view('/watch_videos', 'container')->name('watch');
 } );
 
-Route::get('watch_video', 'VideoController@watch_video');
+Route::get('{username}/watch_video', 'VideoController@watch_video');

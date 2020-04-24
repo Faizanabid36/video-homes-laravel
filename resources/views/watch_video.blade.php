@@ -7,169 +7,21 @@
                 <div class="row">
                     <div id="background" class="hidden"></div>
                     <div class="col-md-8 player-video" style="margin-top: 0 !important">
-
-
                         <div class="video-player pt_video_player ">
-
-
                             <span class="mejs__offscreen">Video Player</span>
-{{--                            <div id="mep_0" class="mejs__container mejs__container-keyboard-inactive mejs__video"--}}
-{{--                                 tabindex="0" role="application" aria-label="Video Player"--}}
-{{--                                 style="width: 803.328px; height: 451.872px; min-width: 303px;">--}}
-{{--                                <div class="mejs__inner">--}}
-{{--                                    <div class="mejs__mediaelement">--}}
-{{--                                        <mediaelementwrapper id="my-video">--}}
-{{--                                            <video--}}
-{{--                                                id="my-video_html5"--}}
-{{--                                                class="video-js"--}}
-{{--                                                controls--}}
-{{--                                                preload="auto"--}}
-{{--                                                width="640"--}}
-{{--                                                height="264"--}}
-{{--                                                poster='{{asset("storage/$thumbnail")}}'--}}
-{{--                                                data-setup="{}"--}}
-{{--                                            >--}}
-{{--                                                <source src='{{asset("storage/$stream_path")}}' type="video/mp4" data-quality="360p" title="360p" label="360p" res="360"/>--}}
-{{--                                                <p class="vjs-no-js">--}}
-{{--                                                    To view this video please enable JavaScript, and consider upgrading to a--}}
-{{--                                                    web browser that--}}
-{{--                                                    <a href="https://videojs.com/html5-video-support/" target="_blank"--}}
-{{--                                                    >supports HTML5 video</a--}}
-{{--                                                    >--}}
-{{--                                                </p>--}}
-{{--                                            </video>--}}
-{{--                                            <video id="my-video_html5"--}}
-{{--                                                   style="width: 100%; height: 451.872px; position: relative;"--}}
-{{--                                                   poster="{{asset("storage/$thumbnail")}}"--}}
-{{--                                                   preload="none"--}}
-{{--                                                   src="{{asset("storage/$stream_path")}}">--}}
-{{--                                                <source src="{{storage_path($stream_path)}}" type="video/mp4"--}}
-{{--                                                        data-quality="360p" title="360p" label="360p" res="360">--}}
-{{--                                                Your browser does not support HTML5 video.--}}
-{{--                                                <!-- //src="http://www.youtube.com/watch?v=nOEw9iiopwI" type="video/youtube" -->--}}
-{{--                                            </video>--}}
-{{--                                        </mediaelementwrapper>--}}
-
-{{--                                    </div>--}}
-{{--                                    <div class="mejs__layers">--}}
-{{--                                        <div class="mejs__poster mejs__layer"--}}
-{{--                                             style="background-image: url({{asset("storage/$thumbnail")}}); width: 100%; height: 100%;">--}}
-{{--                                            <img class="mejs__poster-img" width="0" height="0"--}}
-{{--                                                 src="{{asset("storage/$thumbnail")}}"></div>--}}
-{{--                                        <div class="mejs__overlay mejs__layer"--}}
-{{--                                             style="display: none; width: 100%; height: 100%;">--}}
-{{--                                            <div class="mejs__overlay-loading"><span--}}
-{{--                                                    class="mejs__overlay-loading-bg-img"></span></div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="mejs__overlay mejs__layer"--}}
-{{--                                             style="display: none; width: 100%; height: 100%;">--}}
-{{--                                            <div class="mejs__overlay-error"></div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="mejs__overlay mejs__layer mejs__overlay-play"--}}
-{{--                                             style="width: 100%; height: 100%;">--}}
-{{--                                            <div class="mejs__overlay-button" role="button" tabindex="0"--}}
-{{--                                                 aria-label="Play" aria-pressed="false"></div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="mejs__controls">--}}
-{{--                                        <div class="mejs__button mejs__playpause-button mejs__play">--}}
-{{--                                            <button type="button" aria-controls="mep_0" title="Play" aria-label="Play"--}}
-{{--                                                    tabindex="0"></button>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="mejs__time mejs__currenttime-container" role="timer"--}}
-{{--                                             aria-live="off"><span class="mejs__currenttime">00:00</span></div>--}}
-{{--                                        <div class="mejs__time-rail"><span class="mejs__time-total mejs__time-slider"--}}
-{{--                                                                           role="slider" tabindex="0"--}}
-{{--                                                                           aria-label="Time Slider" aria-valuemin="0"--}}
-{{--                                                                           aria-valuemax="NaN" aria-valuenow="0"--}}
-{{--                                                                           aria-valuetext="00:00"><span--}}
-{{--                                                    class="mejs__time-buffering" style="display: none;"></span><span--}}
-{{--                                                    class="mejs__time-loaded"></span><span--}}
-{{--                                                    class="mejs__time-current"></span><span--}}
-{{--                                                    class="mejs__time-hovered no-hover"></span><span--}}
-{{--                                                    class="mejs__time-handle"><span--}}
-{{--                                                        class="mejs__time-handle-content"></span></span><span--}}
-{{--                                                    class="mejs__time-float"><span class="mejs__time-float-current">00:00</span><span--}}
-{{--                                                        class="mejs__time-float-corner"></span></span></span></div>--}}
-{{--                                        <div class="mejs__time mejs__duration-container"><span class="mejs__duration">00:00</span>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="mejs__button mejs__speed-button">--}}
-{{--                                            <button type="button" aria-controls="mep_0" title="Speed Rate"--}}
-{{--                                                    aria-label="Speed Rate" tabindex="0">1.00x--}}
-{{--                                            </button>--}}
-{{--                                            <div class="mejs__speed-selector mejs__offscreen">--}}
-{{--                                                <ul class="mejs__speed-selector-list">--}}
-{{--                                                    <li class="mejs__speed-selector-list-item"><input--}}
-{{--                                                            class="mejs__speed-selector-input" type="radio"--}}
-{{--                                                            name="mep_0_speed" value="2.00" id="mep_0-speed-2.00"><label--}}
-{{--                                                            for="mep_0-speed-2.00" class="mejs__speed-selector-label">2.00x</label>--}}
-{{--                                                    </li>--}}
-{{--                                                    <li class="mejs__speed-selector-list-item"><input--}}
-{{--                                                            class="mejs__speed-selector-input" type="radio"--}}
-{{--                                                            name="mep_0_speed" value="1.50" id="mep_0-speed-1.50"><label--}}
-{{--                                                            for="mep_0-speed-1.50" class="mejs__speed-selector-label">1.50x</label>--}}
-{{--                                                    </li>--}}
-{{--                                                    <li class="mejs__speed-selector-list-item"><input--}}
-{{--                                                            class="mejs__speed-selector-input" type="radio"--}}
-{{--                                                            name="mep_0_speed" value="1.25" id="mep_0-speed-1.25"><label--}}
-{{--                                                            for="mep_0-speed-1.25" class="mejs__speed-selector-label">1.25x</label>--}}
-{{--                                                    </li>--}}
-{{--                                                    <li class="mejs__speed-selector-list-item"><input--}}
-{{--                                                            class="mejs__speed-selector-input" type="radio"--}}
-{{--                                                            name="mep_0_speed" value="1.00" id="mep_0-speed-1.00"--}}
-{{--                                                            checked="checked"><label for="mep_0-speed-1.00"--}}
-{{--                                                                                     class="mejs__speed-selector-label mejs__speed-selected">1.00x</label>--}}
-{{--                                                    </li>--}}
-{{--                                                    <li class="mejs__speed-selector-list-item"><input--}}
-{{--                                                            class="mejs__speed-selector-input" type="radio"--}}
-{{--                                                            name="mep_0_speed" value="0.75" id="mep_0-speed-0.75"><label--}}
-{{--                                                            for="mep_0-speed-0.75" class="mejs__speed-selector-label">0.75x</label>--}}
-{{--                                                    </li>--}}
-{{--                                                </ul>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="mejs__button mejs__jump-forward-button">--}}
-{{--                                            <button type="button" aria-controls="mep_0" title="Jump forward 20 seconds"--}}
-{{--                                                    aria-label="Jump forward 20 seconds" tabindex="0">20--}}
-{{--                                            </button>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="mejs__button mejs__volume-button mejs__mute">--}}
-{{--                                            <button type="button" aria-controls="mep_0" title="Mute" aria-label="Mute"--}}
-{{--                                                    tabindex="0"></button>--}}
-{{--                                            <a href="javascript:void(0);" class="mejs__volume-slider"--}}
-{{--                                               aria-label="Volume Slider" aria-valuemin="0" aria-valuemax="100"--}}
-{{--                                               role="slider" aria-orientation="vertical"><span class="mejs__offscreen">Use Up/Down Arrow keys to increase or decrease volume.</span>--}}
-{{--                                                <div class="mejs__volume-total">--}}
-{{--                                                    <div class="mejs__volume-current"--}}
-{{--                                                         style="bottom: 0px; height: 100%;"></div>--}}
-{{--                                                    <div class="mejs__volume-handle"--}}
-{{--                                                         style="bottom: 100%; margin-bottom: -3px;"></div>--}}
-{{--                                                </div>--}}
-{{--                                            </a></div>--}}
-{{--                                        <div class="mejs__button mejs__fullscreen-button">--}}
-{{--                                            <button type="button" aria-controls="mep_0" title="Fullscreen"--}}
-{{--                                                    aria-label="Fullscreen" tabindex="0"></button>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
                             <video id="my-video_html5"
                                    style="width: 100%; height: 451.872px; position: relative;"
-                                   poster="{{asset("storage/$thumbnail")}}"
+                                   poster="{{asset("storage/$video->thumbnail")}}"
                                    preload="none"
-                                   src="{{asset("storage/$stream_path")}}">
-                                <source src="{{storage_path($stream_path)}}" type="video/mp4"
+                                   src="{{asset("storage/$video->stream_path")}}">
+                                <source src="{{storage_path($video->stream_path)}}" type="video/mp4"
                                         data-quality="360p" title="360p" label="360p" res="360">
                                 Your browser does not support HTML5 video.
-                                <!-- //src="http://www.youtube.com/watch?v=nOEw9iiopwI" type="video/youtube" -->
                             </video>
                             <div class="icons hidden">
                                 <span class="expend-player"><i class="fa fa-expand fa-fw"></i></span>
                             </div>
-
-
                         </div>
-
                         <div class="clear"></div>
                     </div>
                     <div class="col-md-4 no-padding-left pull-right desktop">
@@ -192,15 +44,43 @@
                                 <div class="clear"></div>
                             </div>
                             <div class="videos-list pt_mn_wtch_rlts_prnt pt_mn_wtch_upnxt_prnt" id="next-video">
-
-                            </div>
-                            <hr>
-                            <div class="videos-list related-videos pt_mn_wtch_rlts_prnt">
-
+                                <div class="video-wrapper top-video-wrapper pt_video_side_vids pt_pt_mn_wtch_rltvids"
+                                     data-sidebar-video="2">
+                                    <div class="video-thumb">
+                                        <a href="{{url()->current().'?v='.$related_video->video_id}}">
+                                            <img
+                                                src="{{asset('storage/'.$related_video->thumbnail)}}"
+                                                alt="Products">
+                                            <div class="play_hover_btn" onmouseenter="show_gif(this,'')"
+                                                 onmouseleave="hide_gif(this)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                     class="feather feather-play-circle">
+                                                    <circle cx="12" cy="12" r="10"></circle>
+                                                    <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                                                </svg>
+                                            </div>
+                                            <div class="video-duration">2:16</div>
+                                        </a>
+                                    </div>
+                                    <div class="video-title">
+                                        <a href="#">{{$related_video->title}}</a>
+                                    </div>
+                                    <div class="vid_pub_info">
+                                        <a href="#"><span class="video-publisher">
+                                                <img class="header-image" src="{{asset('upload/photos/d-avatar.jpg')}}">
+                                                {{$related_video->user->username}}
+                                            </span></a>
+                                        <span class="bold">|</span>
+                                        <span class="video-views">2 Views</span>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
                             </div>
                             <div class="load-related-videos">
                                 <button class="btn btn-default" id="load-related-videos">
-                                    <span>Load more</span><i class="fa fa-circle-o-notch spin hidden"></i>
+                                    <span>Load More</span><i class="fa fa-circle-o-notch spin hidden"></i>
                                 </button>
                             </div>
                         </div>
@@ -210,7 +90,7 @@
                             <div class="video-title pt_video_info">
                                 <input type="hidden" value="1" id="video-id">
                                 <div class="video-big-title">
-                                    <h1 itemprop="title">{{$title}}
+                                    <h1 itemprop="title">{{$video->title}}
                                     </h1>
                                 </div>
                                 <div>
@@ -262,24 +142,22 @@
                                         </svg>
                                         Embed
                                     </button>
-                                    <a class="btn btn-share" href="http://localhost:9002//edit-video/1"
-                                       data-load="?link1=edit-video&amp;id=category&amp;id=1">
+                                    <a class="btn btn-share" href="#">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                              viewBox="0 0 24 24">
                                             <path fill="currentColor"
                                                   d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"></path>
                                         </svg>
                                         Edit video</a>
-                                    <a href="http://localhost:9002//view_analytics/MVVIbINPjrRSP69&amp;type=today"
-                                       class="btn-share"
-                                       data-load="?link1=view_analytics&amp;id=MVVIbINPjrRSP69&amp;type=today">
+                                    <a href="#"
+                                       class="btn-share">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                              viewBox="0 0 24 24">
                                             <path fill="currentColor"
                                                   d="M3,14L3.5,14.07L8.07,9.5C7.89,8.85 8.06,8.11 8.59,7.59C9.37,6.8 10.63,6.8 11.41,7.59C11.94,8.11 12.11,8.85 11.93,9.5L14.5,12.07L15,12C15.18,12 15.35,12 15.5,12.07L19.07,8.5C19,8.35 19,8.18 19,8A2,2 0 0,1 21,6A2,2 0 0,1 23,8A2,2 0 0,1 21,10C20.82,10 20.65,10 20.5,9.93L16.93,13.5C17,13.65 17,13.82 17,14A2,2 0 0,1 15,16A2,2 0 0,1 13,14L13.07,13.5L10.5,10.93C10.18,11 9.82,11 9.5,10.93L4.93,15.5L5,16A2,2 0 0,1 3,18A2,2 0 0,1 1,16A2,2 0 0,1 3,14Z"></path>
                                         </svg>
                                         Analytics</a>
-                                    <button class="btn-share btn-report pull-right" onclick="PT_ReportVideo('1',this);"
+                                    <button class="btn-share btn-report pull-right" onclick=""
                                             data-rep="1">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                              viewBox="0 0 24 24">
@@ -287,26 +165,17 @@
                                                   d="M14.4,6L14,4H5V21H7V14H12.6L13,16H20V6H14.4Z"></path>
                                         </svg>
                                         <span>Report</span></button>
-                                    <button class="btn-share pull-right" onclick="PT_AddToList('1');">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                             viewBox="0 0 24 24">
-                                            <path fill="currentColor"
-                                                  d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"></path>
-                                        </svg>
-                                        Add to
-                                    </button>
                                     <div class="embed-placement hidden">
                                         <textarea name="embed" id="embed" cols="30" rows="3" class="form-control">&lt;iframe src="http://localhost:9002//embed/MVVIbINPjrRSP69" frameborder="0" width="700" height="400" allowfullscreen&gt;&lt;/iframe&gt;</textarea>
                                     </div>
                                     <div class="share-video hidden">
                                         <div class="row share-input">
                                             <div class="col-md-4">
-                                                <input type="text" value="http://localhost:9002//v/mjBvaU"
+                                                <input type="text" value="{{\request()->fullUrl()}}"
                                                        class="form-control input-md" readonly=""
                                                        onclick="this.select();">
                                             </div>
                                         </div>
-
                                         <a href="#" class="fa fa-facebook"
                                            onclick="OpenShareWindow('https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A9002%2F%2Fwatch%2F14-march-2020-loom-recording_MVVIbINPjrRSP69.html')"></a>
                                         <a href="#" class="fa fa-twitter"
@@ -327,12 +196,13 @@
                                 </div>
                                 <div class="publisher-element pull-left pt_mn_wtch_pub">
                                     <div class="publisher-avatar pull-left hide-in-mobile-720">
-                                        <a href="http://localhost:9002//@admin"><img
-                                                src="http://localhost:9002//upload/photos/d-avatar.jpg" alt="admin"></a>
+                                        <a href="#">
+                                            <img class="header-image"
+                                                 src="{{asset('upload/photos/d-avatar.jpg')}}">
+                                        </a>
                                     </div>
                                     <div class="publisher-name">
-                                        <a href="http://localhost:9002//@admin"
-                                           data-load="?link1=timeline&amp;id=admin">admin</a>
+                                        <a href="#">{{$video->user->username}}</a>
                                     </div>
                                     <div class="publisher-subscribe-button"><a
                                             href="http://localhost:9002//video_studio" class="btn-subscribed pointer"
@@ -351,11 +221,10 @@
                                 </div>
                                 <div class="clear"></div>
                                 <div class="video-published">
-                                    Published on {{$created_at}} / In
-                                    {{--                            <a href="http://localhost:9002//videos/category/5" data-load="?link1=videos&amp;page=category&amp;id=5">Sports</a>          --}}
+                                    Published on {{$video->created_at}}
                                 </div>
                                 <div class="watch-video-description">
-                                    <p dir="auto" itemprop="description">{{$description}}</p>
+                                    <p dir="auto" itemprop="description">{{$video->description}}</p>
                                 </div>
                                 <div class="watch-video-show-more desc pt_mn_wtch_rdmre">Show more</div>
                             </div>
@@ -386,8 +255,8 @@
             </span>
                             </div>
                             <div class="w100 pt_blogcomm_combo">
-                                <img class="avatar" src="http://localhost:9002//upload/photos/d-avatar.jpg"
-                                     alt="admin avatar">
+                                <img class="header-image"
+                                     src="{{asset('upload/photos/d-avatar.jpg')}}">
                                 <textarea name="comment" class="form-control" id="comment-textarea"
                                           placeholder="Write your comment.."></textarea>
 
@@ -418,7 +287,6 @@
 
                         </div>
                         <input type="hidden" id="video-id" value="1">
-
 
 
                     </div>
@@ -581,7 +449,6 @@
                     opacity: 0;
                 }
             </style>
-
 
 
             <div class="modal fade matdialog" id="2checkout_modal" role="dialog" data-keyboard="false"
@@ -1170,160 +1037,160 @@
     </div>
 @endsection
 @section('footer_script')
-{{--    --}}
-{{--    <script>--}}
-{{--        jQuery(document).ready(function ($) {--}}
+    {{--    --}}
+    {{--    <script>--}}
+    {{--        jQuery(document).ready(function ($) {--}}
 
-{{--            var sort_comments_by = 2;--}}
+    {{--            var sort_comments_by = 2;--}}
 
-{{--            $("li.sort-comments").click(function (event) {--}}
-{{--                sort_comments_by = $(this).attr('id');--}}
-{{--                var video_id = $('#video-id').val();--}}
-{{--                var data_obj = {--}}
-{{--                    video_id: video_id,--}}
-{{--                    sort_by: sort_comments_by--}}
-{{--                };--}}
+    {{--            $("li.sort-comments").click(function (event) {--}}
+    {{--                sort_comments_by = $(this).attr('id');--}}
+    {{--                var video_id = $('#video-id').val();--}}
+    {{--                var data_obj = {--}}
+    {{--                    video_id: video_id,--}}
+    {{--                    sort_by: sort_comments_by--}}
+    {{--                };--}}
 
-{{--                $('#video-user-comments').empty();--}}
-{{--                $(".comments-loading").removeClass('hidden');--}}
+    {{--                $('#video-user-comments').empty();--}}
+    {{--                $(".comments-loading").removeClass('hidden');--}}
 
-{{--                $.post('http://localhost:9002//aj/sort-comments', data_obj, function (data, textStatus, xhr) {--}}
-{{--                    if (data.status == 200) {--}}
-{{--                        PT_Delay(function () {--}}
-{{--                            $(".comments-loading").addClass('hidden');--}}
-{{--                            $('#video-user-comments').html(data.comments);--}}
-{{--                        }, 200);--}}
-{{--                    } else {--}}
-{{--                        PT_Delay(function () {--}}
-{{--                            $(".comments-loading").addClass('hidden');--}}
-{{--                        }, 200);--}}
-{{--                    }--}}
-{{--                });--}}
+    {{--                $.post('http://localhost:9002//aj/sort-comments', data_obj, function (data, textStatus, xhr) {--}}
+    {{--                    if (data.status == 200) {--}}
+    {{--                        PT_Delay(function () {--}}
+    {{--                            $(".comments-loading").addClass('hidden');--}}
+    {{--                            $('#video-user-comments').html(data.comments);--}}
+    {{--                        }, 200);--}}
+    {{--                    } else {--}}
+    {{--                        PT_Delay(function () {--}}
+    {{--                            $(".comments-loading").addClass('hidden');--}}
+    {{--                        }, 200);--}}
+    {{--                    }--}}
+    {{--                });--}}
 
-{{--            });--}}
+    {{--            });--}}
 
-{{--            $.fn.scrollTo = function (speed) {--}}
-{{--                if (typeof (speed) === 'undefined')--}}
-{{--                    speed = 500;--}}
+    {{--            $.fn.scrollTo = function (speed) {--}}
+    {{--                if (typeof (speed) === 'undefined')--}}
+    {{--                    speed = 500;--}}
 
-{{--                $('html, body').animate({--}}
-{{--                    scrollTop: ($(this).offset().top - 100)--}}
-{{--                }, speed);--}}
+    {{--                $('html, body').animate({--}}
+    {{--                    scrollTop: ($(this).offset().top - 100)--}}
+    {{--                }, speed);--}}
 
-{{--                return $(this);--}}
-{{--            };--}}
-
-
-{{--            $('#comment-textarea').on('click', function (event) {--}}
-{{--                event.preventDefault();--}}
-{{--                var logged = $('#main-container').attr('data-logged');--}}
-{{--                if (!logged) {--}}
-
-{{--                    window.location.href = "http://localhost:9002//login?to=http://localhost:9002//watch/14-march-2020-loom-recording_MVVIbINPjrRSP69.html";--}}
-{{--                    return false;--}}
-{{--                }--}}
-{{--                $(this).css('border', '1px solid #888');--}}
-{{--            });--}}
-
-{{--            $('.comments-load').on('click', function (event) {--}}
-{{--                event.preventDefault();--}}
-{{--                var last_id = $('.main-comment:last').attr('data-id');--}}
-{{--                var video_id = $('#video-id').val();--}}
-{{--                var data_obj = {--}}
-{{--                    last_id: last_id,--}}
-{{--                    video_id: video_id,--}}
-{{--                    sort_by: sort_comments_by--}}
-{{--                };--}}
-
-{{--                if (sort_comments_by == 1) {--}}
-{{--                    var comment_ids = [];--}}
-{{--                    $('.main-comment').each(function (index, el) {--}}
-{{--                        comment_ids.push($(el).attr('data-id'));--}}
-{{--                    });--}}
-
-{{--                    data_obj['comments'] = comment_ids.join()--}}
-{{--                }--}}
-
-{{--                $.post('http://localhost:9002//aj/load-more-comments', data_obj, function (data, textStatus, xhr) {--}}
-{{--                    if (data.status == 200) {--}}
-{{--                        $('#video-user-comments').append(data.comments);--}}
-{{--                    } else {--}}
-{{--                        $('.comments-load').text(data.message);--}}
-{{--                    }--}}
-{{--                });--}}
-{{--            });--}}
-{{--        });--}}
+    {{--                return $(this);--}}
+    {{--            };--}}
 
 
-{{--        function PT_PostComment(button) {--}}
-{{--            var text = $('#comment-textarea').val();--}}
-{{--            if (!text) {--}}
-{{--                $('#comment-textarea').css('border', '1px solid red');--}}
-{{--                return false;--}}
-{{--            }--}}
-{{--            var video_id = $('#video-id').val();--}}
-{{--            if (!video_id) {--}}
-{{--                return false;--}}
-{{--            }--}}
-{{--            $(button).attr('disabled', true);--}}
-{{--            $.post('http://localhost:9002//aj/add-comment', {--}}
-{{--                video_id: video_id,--}}
-{{--                text: text--}}
-{{--            }, function (data, textStatus, xhr) {--}}
-{{--                if (data.status == 200) {--}}
-{{--                    if ($('.no-comments-found').length > 0) {--}}
-{{--                        $('.no-comments-found').remove();--}}
-{{--                    }--}}
-{{--                    $('#comment-textarea').val('');--}}
-{{--                    $('#video-user-comments').prepend(data.comment);--}}
-{{--                }--}}
-{{--                $(button).attr('disabled', false);--}}
-{{--            });--}}
-{{--        }--}}
+    {{--            $('#comment-textarea').on('click', function (event) {--}}
+    {{--                event.preventDefault();--}}
+    {{--                var logged = $('#main-container').attr('data-logged');--}}
+    {{--                if (!logged) {--}}
+
+    {{--                    window.location.href = "http://localhost:9002//login?to=http://localhost:9002//watch/14-march-2020-loom-recording_MVVIbINPjrRSP69.html";--}}
+    {{--                    return false;--}}
+    {{--                }--}}
+    {{--                $(this).css('border', '1px solid #888');--}}
+    {{--            });--}}
+
+    {{--            $('.comments-load').on('click', function (event) {--}}
+    {{--                event.preventDefault();--}}
+    {{--                var last_id = $('.main-comment:last').attr('data-id');--}}
+    {{--                var video_id = $('#video-id').val();--}}
+    {{--                var data_obj = {--}}
+    {{--                    last_id: last_id,--}}
+    {{--                    video_id: video_id,--}}
+    {{--                    sort_by: sort_comments_by--}}
+    {{--                };--}}
+
+    {{--                if (sort_comments_by == 1) {--}}
+    {{--                    var comment_ids = [];--}}
+    {{--                    $('.main-comment').each(function (index, el) {--}}
+    {{--                        comment_ids.push($(el).attr('data-id'));--}}
+    {{--                    });--}}
+
+    {{--                    data_obj['comments'] = comment_ids.join()--}}
+    {{--                }--}}
+
+    {{--                $.post('http://localhost:9002//aj/load-more-comments', data_obj, function (data, textStatus, xhr) {--}}
+    {{--                    if (data.status == 200) {--}}
+    {{--                        $('#video-user-comments').append(data.comments);--}}
+    {{--                    } else {--}}
+    {{--                        $('.comments-load').text(data.message);--}}
+    {{--                    }--}}
+    {{--                });--}}
+    {{--            });--}}
+    {{--        });--}}
 
 
-{{--        function PT_DeleteComment(id) {--}}
-{{--            if (!id) {--}}
-{{--                return false;--}}
-{{--            }--}}
-{{--            if (!confirm('Are you sure you want to delete your comment?')) {--}}
-{{--                return false;--}}
-{{--            }--}}
-{{--            $('#comment-' + id).slideUp('fast');--}}
-{{--            $.post('http://localhost:9002//aj/delete-comment', {id: id});--}}
-{{--        }--}}
+    {{--        function PT_PostComment(button) {--}}
+    {{--            var text = $('#comment-textarea').val();--}}
+    {{--            if (!text) {--}}
+    {{--                $('#comment-textarea').css('border', '1px solid red');--}}
+    {{--                return false;--}}
+    {{--            }--}}
+    {{--            var video_id = $('#video-id').val();--}}
+    {{--            if (!video_id) {--}}
+    {{--                return false;--}}
+    {{--            }--}}
+    {{--            $(button).attr('disabled', true);--}}
+    {{--            $.post('http://localhost:9002//aj/add-comment', {--}}
+    {{--                video_id: video_id,--}}
+    {{--                text: text--}}
+    {{--            }, function (data, textStatus, xhr) {--}}
+    {{--                if (data.status == 200) {--}}
+    {{--                    if ($('.no-comments-found').length > 0) {--}}
+    {{--                        $('.no-comments-found').remove();--}}
+    {{--                    }--}}
+    {{--                    $('#comment-textarea').val('');--}}
+    {{--                    $('#video-user-comments').prepend(data.comment);--}}
+    {{--                }--}}
+    {{--                $(button).attr('disabled', false);--}}
+    {{--            });--}}
+    {{--        }--}}
 
-{{--        function PT_PinComment(id, pin) {--}}
-{{--            if (!id) {--}}
-{{--                return false;--}}
-{{--            }--}}
-{{--            let pinned_comments = $('#pinned-comment');--}}
 
-{{--            if (pin) {--}}
-{{--                $("#comment-" + id).slideUp(200, function () {--}}
-{{--                    Snackbar.show({text: 'Comment pinned to top'});--}}
-{{--                })--}}
-{{--            } else {--}}
-{{--                pinned_comments.empty();--}}
-{{--                Snackbar.show({text: 'Comment unpinned'});--}}
-{{--            }--}}
+    {{--        function PT_DeleteComment(id) {--}}
+    {{--            if (!id) {--}}
+    {{--                return false;--}}
+    {{--            }--}}
+    {{--            if (!confirm('Are you sure you want to delete your comment?')) {--}}
+    {{--                return false;--}}
+    {{--            }--}}
+    {{--            $('#comment-' + id).slideUp('fast');--}}
+    {{--            $.post('http://localhost:9002//aj/delete-comment', {id: id});--}}
+    {{--        }--}}
 
-{{--            $.post('http://localhost:9002//aj/pin-comment', {id: id}, function (data) {--}}
-{{--                if (data.status == 200) {--}}
+    {{--        function PT_PinComment(id, pin) {--}}
+    {{--            if (!id) {--}}
+    {{--                return false;--}}
+    {{--            }--}}
+    {{--            let pinned_comments = $('#pinned-comment');--}}
 
-{{--                    $("#comment-" + id).slideUp(100, function () {--}}
-{{--                        $(this).remove();--}}
-{{--                        pinned_comments.scrollTo();--}}
-{{--                    });--}}
+    {{--            if (pin) {--}}
+    {{--                $("#comment-" + id).slideUp(200, function () {--}}
+    {{--                    Snackbar.show({text: 'Comment pinned to top'});--}}
+    {{--                })--}}
+    {{--            } else {--}}
+    {{--                pinned_comments.empty();--}}
+    {{--                Snackbar.show({text: 'Comment unpinned'});--}}
+    {{--            }--}}
 
-{{--                    pinned_comments.html(data.html);--}}
-{{--                } else if (data.status == 304) {--}}
-{{--                    $("#video-user-comments").append(data.html);--}}
-{{--                }--}}
-{{--            });--}}
-{{--        }--}}
-{{--    </script>--}}
-{{--    --}}
+    {{--            $.post('http://localhost:9002//aj/pin-comment', {id: id}, function (data) {--}}
+    {{--                if (data.status == 200) {--}}
+
+    {{--                    $("#comment-" + id).slideUp(100, function () {--}}
+    {{--                        $(this).remove();--}}
+    {{--                        pinned_comments.scrollTo();--}}
+    {{--                    });--}}
+
+    {{--                    pinned_comments.html(data.html);--}}
+    {{--                } else if (data.status == 304) {--}}
+    {{--                    $("#video-user-comments").append(data.html);--}}
+    {{--                }--}}
+    {{--            });--}}
+    {{--        }--}}
+    {{--    </script>--}}
+    {{--    --}}
     <script type="text/javascript">
 
 
@@ -1505,21 +1372,21 @@
 
                 $("#load-related-videos").find('i.spin').removeClass('hidden');
 
-                $.ajax({
-                    url: 'http://localhost:9002//aj/load-related-videos',
-                    type: 'GET',
-                    dataType: 'json',
-                    data: {id: id, video_id: '1'},
-                })
-                    .done(function (data) {
-                        if (data.status == 200) {
-                            $(".related-videos").append(data.html);
-                        } else {
-                            $("#load-related-videos").find('span').text('No more videos found');
-                        }
-                        $("#load-related-videos").find('i.spin').addClass('hidden');
-
-                    });
+                // $.ajax({
+                //     url: 'http://localhost:9002//aj/load-related-videos',
+                //     type: 'GET',
+                //     dataType: 'json',
+                //     data: {id: id, video_id: '1'},
+                // })
+                //     .done(function (data) {
+                //         if (data.status == 200) {
+                //             $(".related-videos").append(data.html);
+                //         } else {
+                //             $("#load-related-videos").find('span').text('No more videos found');
+                //         }
+                //         $("#load-related-videos").find('i.spin').addClass('hidden');
+                //
+                //     });
             });
         });
 
