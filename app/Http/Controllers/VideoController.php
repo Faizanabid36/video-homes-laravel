@@ -7,6 +7,7 @@ use App\Jobs\ConvertVideoForStreaming;
 use Image;
 use App\Video;
 use App\User;
+use Carbon\Carbon;
 
 class VideoController extends Controller {
 
@@ -20,7 +21,7 @@ class VideoController extends Controller {
         $dimension     = $media->getStreams()->videos()->first()->getDimensions();
         $newThumbnails = generateThumbnailsFromVideo( $media, $path, 3 );
 
-        $video         = Video::create( [
+        $video = Video::create( [
             'thumbnail'     => $newThumbnails[1],
             'original_name' => request()->video->getClientOriginalName(),
             'video_path'    => $path,
@@ -29,26 +30,27 @@ class VideoController extends Controller {
             'size'          => request()->video->getSize(),
             'video_motion'  => 'Animation',
             'video_type'    => 'Public',
-            'width'         => $dimension->getWidth()
+            'width'         => $dimension->getWidth(),
+            'stream_path'   => getCleanFileName( $path, '_240p_converted.mp4' )
         ] );
-        ConvertVideoForStreaming::dispatch( $video, 320, 240 );
+        ConvertVideoForStreaming::dispatch( $video, 320, 240, [ 'converted_for_streaming_at' => Carbon::now(), 'processed'=> true ] );
         if ( $video->width >= 640 ) {
             ConvertVideoForStreaming::dispatch( $video, 640, 360, [ '360p' => 1 ] );
         }
         if ( $video->width >= 854 ) {
-            ConvertVideoForStreaming::dispatch( $video, 854, 480, [ '480p' => 1 ],1000 );
+            ConvertVideoForStreaming::dispatch( $video, 854, 480, [ '480p' => 1 ], 1000 );
         }
         if ( $video->width >= 1280 ) {
-            ConvertVideoForStreaming::dispatch( $video, 1280, 720, [ '720p' => 1 ],1000 );
+            ConvertVideoForStreaming::dispatch( $video, 1280, 720, [ '720p' => 1 ], 1000 );
         }
         if ( $video->width >= 1920 ) {
-            ConvertVideoForStreaming::dispatch( $video, 1920, 1080, [ '1080p' => 1 ],1000 );
+            ConvertVideoForStreaming::dispatch( $video, 1920, 1080, [ '1080p' => 1 ], 1000 );
         }
         if ( $video->width >= 2560 ) {
-            ConvertVideoForStreaming::dispatch( $video, 2560, 1440, [ '2048p' => 1 ],1000 );
+            ConvertVideoForStreaming::dispatch( $video, 2560, 1440, [ '2048p' => 1 ], 1000 );
         }
         if ( $video->width >= 3840 ) {
-            ConvertVideoForStreaming::dispatch( $video, 3840, 2160, [ '4k' => 1 ],1000 );
+            ConvertVideoForStreaming::dispatch( $video, 3840, 2160, [ '4k' => 1 ], 1000 );
         }
         if ( $video->width >= 7680 ) {
             ConvertVideoForStreaming::dispatch( $video, 7680, 4320, [ '8k' => 1 ] );

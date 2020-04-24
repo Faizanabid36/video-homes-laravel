@@ -53,8 +53,8 @@ if ( ! function_exists( 'saveVideoStream' ) ) {
 }
 
 if ( ! function_exists( 'getCleanFileName' ) ) {
-    function getCleanFileName( $filename, $suffix ): string {
-        return preg_replace( '/\\.[^.\\s]{3,4}$/', '', $filename ) . $suffix;
+    function getCleanFileName( $filename, $suffix = '' ): string {
+        return preg_replace( '/\.[^.\s]{3,4}$/', '', $filename ) . $suffix;
     }
 }
 if ( ! function_exists( 'generateThumbnailsFromVideo' ) ) {
