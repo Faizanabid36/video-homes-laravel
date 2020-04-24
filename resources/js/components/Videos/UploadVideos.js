@@ -133,18 +133,20 @@ function MyDropzone() {
                         <div className="clear"/>
                     </div>
                 </div>}
-                {uploading && <div className="col-8 mx-auto">
+            </div>
+            {uploading && <div className="row">
+                <div className="col-8 mx-auto">
                     <div className="progress h-25">
                         <div className="progress-bar progress-bar-success progress-bar-striped progress-bar-animated"
                              role="progressbar" aria-valuenow={uploadProgress} aria-valuemin="0" aria-valuemax="100"
                              style={{width: uploadProgress + "%"}}>{`${uploadProgress}% uploaded`}</div>
                     </div>
-                </div>}
-            </div>
+                </div>
+            </div>}
             {state && <div className="row">
                 <div className="col-8 mx-auto">
                     <Carousel activeIndex={index} onSelect={handleSelect}>
-                        {thumbnails && Object.values(thumbnails).map(v=>{
+                        {thumbnails && Object.values(thumbnails).map(v=>
                             <Carousel.Item>
                                 <img
                                     className="d-block w-100"
@@ -152,7 +154,7 @@ function MyDropzone() {
                                 />
 
                             </Carousel.Item>
-                        })}
+                        )}
                     </Carousel>
                     <div className="form-group">
                         <label htmlFor="title">Title</label>
