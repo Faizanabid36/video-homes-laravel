@@ -37,15 +37,15 @@
         }
     },
     "autoload": {
+        "files": [
+            "app/Helpers/strings.php"
+        ],
         "psr-4": {
             "App\\": "app/"
         },
         "classmap": [
             "database/seeds",
             "database/factories"
-        ],
-        "files": [
-            "app/helpers.php"
         ]
     },
     "autoload-dev": {
