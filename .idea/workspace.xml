@@ -21,6 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8761c922-0faa-4e77-993b-9b63980bc61e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Videos/UploadVideos.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Videos/UploadVideos.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,7 +196,7 @@
       <workItem from="1587152547843" duration="210000" />
       <workItem from="1587384647731" duration="19537000" />
       <workItem from="1587457638199" duration="21537000" />
-      <workItem from="1587488573150" duration="44411000" />
+      <workItem from="1587488573150" duration="44908000" />
     </task>
     <servers />
   </component>

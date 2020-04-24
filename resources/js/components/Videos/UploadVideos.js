@@ -49,7 +49,7 @@ function MyDropzone() {
 
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
     useEffect(() => {
-        console.log(thumbnails,Object.keys(thumbnails),"effects");
+        console.log(thumbnails,Object.values(thumbnails),"effects");
         // return () => {
         //     effect
         // };
@@ -148,7 +148,7 @@ function MyDropzone() {
                             <Carousel.Item>
                                 <img
                                     className="d-block w-100"
-                                    src={window.VIDEO_APP.base_url+"storage/"+v}
+                                    src={window.VIDEO_APP.base_url+"/storage/"+v}
                                 />
 
                             </Carousel.Item>
