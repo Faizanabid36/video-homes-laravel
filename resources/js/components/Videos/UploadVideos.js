@@ -44,7 +44,7 @@ function MyDropzone() {
     }, []);
     const onUpdate = useCallback(e => {
         axios.put('update-video/' + state.id, {...state}).then(({data}) => {
-            window.location.href = window.VIDEO_APP.base_url + "watch_video?v=" + state.video_id;
+            window.location.href = window.VIDEO_APP.base_url + "/watch_video?v=" + state.video_id;
         })
     }, [state,thumbnails]);
 
@@ -114,15 +114,6 @@ function MyDropzone() {
 
                                 </div>
                             </div>
-                            {uploading &&
-                            <div className="progress">
-                                <span className="percent">{uploadProgress}%</span>
-                                <div className="progress_bar_parent">
-                                    <div className="bar upload-progress-bar progress-bar active"/>
-                                </div>
-                                <div className="clear"/>
-                                <div className="text-center pt_prcs_vdo"/>
-                            </div>}
                             <input
                                 {...getInputProps()}
                                 // ref={(ref) => this.upload = ref}
@@ -160,7 +151,7 @@ function MyDropzone() {
                             setState(state);
                         }} />
                     </Form.Group>
-                    <Form.Group controlId="title">
+                    <Form.Group controlId="description">
                         <Form.Label>Description</Form.Label>
                         <Form.Control placeholder="Description" defaultValue={state.description} onChange={e => {
                             state.description = e.target.value;
