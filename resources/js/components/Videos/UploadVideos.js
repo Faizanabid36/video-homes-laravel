@@ -31,7 +31,7 @@ function MyDropzone() {
         })
             .then(({data}) => {
                 setUploading(false);
-                console.log(data.video);
+                // console.log(data.video);
                 setState({...data.video});
                 setThumbnails(data.newThumbnail);
                 // window.location.href = window.location.toString().replace("upload-video",'watch')+"?v="+data.video.video_id;
@@ -47,13 +47,13 @@ function MyDropzone() {
         })
     }, [state,thumbnails]);
 
-    const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
-    useEffect(() => {
-        console.log(thumbnails,Object.values(thumbnails),"effects");
-        // return () => {
-        //     effect
-        // };
-    }, [thumbnails]);
+    // const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
+    // useEffect(() => {
+    //     console.log(thumbnails,Object.values(thumbnails),"effects");
+    //     // return () => {
+    //     //     effect
+    //     // };
+    // }, [thumbnails]);
 
     return <div className="container main-content" id="main-container">
         <div id="container_content">
