@@ -19,7 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8761c922-0faa-4e77-993b-9b63980bc61e" name="Default Changelist" comment="" />
+    <list default="true" id="8761c922-0faa-4e77-993b-9b63980bc61e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Jobs/ConvertVideoForDownloading.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Jobs/ConvertVideoForStreaming.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/ConvertVideoForStreaming.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/helpers.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -194,7 +199,7 @@
       <workItem from="1587384647731" duration="19537000" />
       <workItem from="1587457638199" duration="21537000" />
       <workItem from="1587488573150" duration="45892000" />
-      <workItem from="1587743396994" duration="1891000" />
+      <workItem from="1587743396994" duration="3698000" />
     </task>
     <servers />
   </component>
