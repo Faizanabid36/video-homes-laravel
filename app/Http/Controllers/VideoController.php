@@ -68,7 +68,7 @@ class VideoController extends Controller {
         //dd($video);
 
         return [
-            'status' => Video::updateOrCreate(compact('id'), request( [ 'description', 'title', 'thumbnail' ] ) ),
+            'status' => Video::find( $id )->update( request( [ 'description', 'title', 'thumbnail' ] ) ),
             'data'   => request()->all()
         ];
     }
