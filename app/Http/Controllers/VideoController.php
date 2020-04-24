@@ -31,7 +31,6 @@ class VideoController extends Controller {
             $media->getFrameFromSeconds( $divide_result )->export()->save( $newThumbnail[ $i ] );
             $divide_result += $divide_result;
         }
-        $newThumbnail = array_values($newThumbnail);
 
         $video = Video::create( [
             'disk'          => 'public',
