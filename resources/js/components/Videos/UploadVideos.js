@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone'
 import {Carousel} from 'react-bootstrap';
 
@@ -47,7 +47,14 @@ function MyDropzone() {
         })
     }, [state,thumbnails]);
 
-    const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
+    const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
+    useEffect(() => {
+        console.log(thumbnails,Object.keys(thumbnails),"effects");
+        // return () => {
+        //     effect
+        // };
+    }, [thumbnails]);
+
     return <div className="container main-content" id="main-container">
         <div id="container_content">
             <div className="wo_about_wrapper_parent">
