@@ -22,11 +22,11 @@ class VideoController extends Controller {
         $path      = 'uploads/' . $path;
         $thumbnail = str_replace( "." . request()->video->getClientOriginalExtension(), ".png", $path );
         $media     = \FFMpeg::open( $path );
-        $diemension = $media->getStreams()
+        $dimension = $media->getStreams()
             ->videos()
             ->first()
             ->getDimensions();
-        dd($diemension->width);
+        dd($dimension->toArray());
         $thumbnail_shots = 5;
         $divide_result   = $media->getDurationInSeconds() >= $thumbnail_shots ? floor( $media->getDurationInSeconds() / $thumbnail_shots ) : floor( $media->getDurationInSeconds() / 1 );
         $thumbnail_shots = $media->getDurationInSeconds() >= $thumbnail_shots ? $thumbnail_shots : 1;
