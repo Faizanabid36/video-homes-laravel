@@ -61,11 +61,12 @@ if ( ! function_exists( 'generateThumbnailsFromVideo' ) ) {
     function generateThumbnailsFromVideo( $media,$path,$thumbnail_shots = 3){
         $thumbnail_shots = $media->getDurationInSeconds() >= $thumbnail_shots ? $thumbnail_shots : 1;
         $divide_result   = (int) floor( $media->getDurationInSeconds() / $thumbnail_shots );
+        $seconds   = $divide_result;
         $newThumbnail    = [];
         for ( $i = 1; $i <= $thumbnail_shots; $i ++ ) {
             $newThumbnail[ $i ] = str_replace( "." . request()->video->getClientOriginalExtension(), "-$i.png", $path );
-            $media->getFrameFromSeconds( $divide_result )->export()->save( $newThumbnail[ $i ] );
-            $divide_result += $divide_result;
+            $media->getFrameFromSeconds( $seconds )->export()->save( $newThumbnail[ $i ] );
+            $seconds += $divide_result;
         }
         return $newThumbnail;
     }
