@@ -11,7 +11,7 @@ function MyDropzone() {
 
     const handleSelect = useCallback((selectedIndex, e) => {
         setIndex(selectedIndex);
-        state.thubmnail = thumbnails[selectedIndex + 1];
+        state.thumbnail = thumbnails[selectedIndex + 1];
         setState(state);
     },[state]);
     const onDrop = useCallback(files => {
