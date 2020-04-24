@@ -31,18 +31,19 @@ class ConvertVideoForStreaming implements ShouldQueue {
      * @return void
      */
     public function handle() {
-        // create a video format...
-
-        $converted_name = $this->getCleanFileName( $this->video->video_path );
-//die($converted_name);
-        $lowBitrateFormat = ( new X264( 'libmp3lame', 'libx264' ) )->setKiloBitrate( 500 );
-
-        \FFMpeg::open( $this->video->video_path )
-               ->addFilter( function ( $filters ) {
-                $filters->resize( new Dimension( 960, 540 ) );
-            } )
-               ->export()->inFormat( $lowBitrateFormat )
-               ->save( $converted_name );
+//        // create a video format...
+//
+//        $converted_name = $this->getCleanFileName( $this->video->video_path );
+////die($converted_name);
+//        $lowBitrateFormat = ( new X264( 'libmp3lame', 'libx264' ) )->setKiloBitrate( 500 );
+//
+//        \FFMpeg::open( $this->video->video_path )
+//               ->addFilter( function ( $filters ) {
+//                $filters->resize( new Dimension( 960, 540 ) );
+//            } )
+//               ->export()->inFormat( $lowBitrateFormat )
+//               ->save( $converted_name );
+        $converted_name = saveVideoByResolution('');
 
         // update the database so we know the convertion is done!
         $this->video->update( [

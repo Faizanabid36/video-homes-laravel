@@ -206,8 +206,13 @@
       <workItem from="1587152547843" duration="210000" />
       <workItem from="1587384647731" duration="19537000" />
       <workItem from="1587457638199" duration="21537000" />
+<<<<<<< HEAD
       <workItem from="1587488573150" duration="45170000" />
       <workItem from="1587739667711" duration="10571000" />
+=======
+      <workItem from="1587488573150" duration="45892000" />
+      <workItem from="1587743396994" duration="4284000" />
+>>>>>>> 466d8467a858f7ead72058e9accaa95120b82a34
     </task>
     <servers />
   </component>
@@ -274,12 +279,17 @@
     <state x="298" y="152" width="672" height="677" key="run.anything.popup" timestamp="1587738051278">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
+<<<<<<< HEAD
     <state x="298" y="152" width="672" height="677" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1587738051278" />
     <state x="341" y="24" width="756" height="810" key="search.everywhere.popup" timestamp="1587671423216">
+=======
+    <state x="298" y="152" width="672" height="677" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1587475742040" />
+    <state x="341" y="24" width="756" height="810" key="search.everywhere.popup" timestamp="1587752032829">
+>>>>>>> 466d8467a858f7ead72058e9accaa95120b82a34
       <screen x="0" y="23" width="1440" height="811" />
     </state>
     <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1587125777521" />
-    <state x="341" y="24" width="756" height="810" key="search.everywhere.popup/0.23.1440.811@0.23.1440.811" timestamp="1587671423216" />
+    <state x="341" y="24" width="756" height="810" key="search.everywhere.popup/0.23.1440.811@0.23.1440.811" timestamp="1587752032829" />
     <state x="341" y="24" width="756" height="810" key="search.everywhere.popup/0.23.1440.812@0.23.1440.812" timestamp="1587510893971" />
   </component>
 </project>

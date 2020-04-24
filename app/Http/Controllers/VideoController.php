@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVideoRequest;
 use App\Jobs\ConvertVideoForStreaming;
+use App\Jobs\ConvertVideoForDownloading;
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Format\Video\X264;
 use Illuminate\Http\Request;
@@ -17,6 +18,7 @@ use Pbmedia\LaravelFFMpeg\FFMpeg;
 class VideoController extends Controller
 {
     //
+<<<<<<< HEAD
     public function upload_video(StoreVideoRequest $request)
     {
         $path = \Str::random(16) . '.' . request()->video->getClientOriginalExtension();
@@ -25,6 +27,19 @@ class VideoController extends Controller
         $thumbnail = str_replace("." . request()->video->getClientOriginalExtension(), ".png", $path);
         $media = \FFMpeg::open($path);
 //        dd($media);
+=======
+    public function upload_video( StoreVideoRequest $request ) {
+        $path = \Str::random( 16 ) . '.' . request()->video->getClientOriginalExtension();
+        request()->video->storeAs( 'public/uploads/', $path );
+        $path      = 'uploads/' . $path;
+        $thumbnail = str_replace( "." . request()->video->getClientOriginalExtension(), ".png", $path );
+        $media     = \FFMpeg::open( $path );
+        $dimension = $media->getStreams()
+            ->videos()
+            ->first()
+            ->getDimensions();
+        return $dimension;
+>>>>>>> 466d8467a858f7ead72058e9accaa95120b82a34
         $thumbnail_shots = 5;
         $divide_result = $media->getDurationInSeconds() >= $thumbnail_shots ? floor($media->getDurationInSeconds() / $thumbnail_shots) : floor($media->getDurationInSeconds() / 1);
         $thumbnail_shots = $media->getDurationInSeconds() >= $thumbnail_shots ? $thumbnail_shots : 1;
