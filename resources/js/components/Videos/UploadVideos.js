@@ -34,7 +34,7 @@ function MyDropzone() {
                 setUploading(false);
                 // console.log(data.video);
                 setState({...data.video});
-                setThumbnails(data.newThumbnail);
+                setThumbnails(data.newThumbnails);
                 // window.location.href = window.location.toString().replace("upload-video",'watch')+"?v="+data.video.video_id;
 
             })

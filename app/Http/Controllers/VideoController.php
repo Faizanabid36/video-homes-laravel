@@ -4,15 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVideoRequest;
 use App\Jobs\ConvertVideoForStreaming;
-use App\Jobs\ConvertVideoForDownloading;
-use FFMpeg\Coordinate\Dimension;
-use FFMpeg\Format\Video\X264;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Image;
 use App\Video;
-use Illuminate\Support\Str;
-use Pbmedia\LaravelFFMpeg\FFMpeg;
 
 class VideoController extends Controller {
     //
@@ -63,7 +56,7 @@ class VideoController extends Controller {
 
     public function watch_video() {
         $video = Video::where( 'video_id', request( 'v' ) )->first();
-        abort_if( ! $video->processed, 201, 'Video Encoding is in process, Please wait a while' );
+        abort_if( ! $video->processed, 402, 'Video Encoding is in process, Please wait a while' );
 
         return view( 'watch_video', $video );
     }
