@@ -17,43 +17,48 @@ use Pbmedia\LaravelFFMpeg\FFMpeg;
 class VideoController extends Controller {
     //
     public function upload_video( StoreVideoRequest $request ) {
-        $path = \Str::random( 16 ) . '.' . request()->video->getClientOriginalExtension();
-        request()->video->storeAs( 'public/uploads/', $path );
-        $path      = 'uploads/' . $path;
-        $thumbnail = str_replace( "." . request()->video->getClientOriginalExtension(), ".png", $path );
-        $media     = \FFMpeg::open( $path );
-        $dimension = $media->getStreams()
-            ->videos()
-            ->first()
-            ->getDimensions();
-        return $dimension;
-        $thumbnail_shots = 5;
-        $divide_result   = $media->getDurationInSeconds() >= $thumbnail_shots ? floor( $media->getDurationInSeconds() / $thumbnail_shots ) : floor( $media->getDurationInSeconds() / 1 );
-        $thumbnail_shots = $media->getDurationInSeconds() >= $thumbnail_shots ? $thumbnail_shots : 1;
-        $newThumbnail    = [];
-        for ( $i = 1; $i <= $thumbnail_shots; $i ++ ) {
-            $newThumbnail[ $i ] = str_replace( "." . request()->video->getClientOriginalExtension(), "-$i.png", $path );
-            $media->getFrameFromSeconds( $divide_result )->export()->save( $newThumbnail[ $i ] );
-            $divide_result += $divide_result;
-        }
-
-        $video = Video::create( [
-            'disk'          => 'public',
-            'thumbnail'     => $newThumbnail[1],
+        $file = \Str::random( 16 ) . '.' . request()->video->getClientOriginalExtension();
+        request()->video->storeAs( 'public/uploads/', $file );
+        $path          = 'uploads/' . $file;
+        $media         = \FFMpeg::open( $path );
+        $newThumbnails = generateThumbnailsFromVideo( $media, 3 );
+        $video         = Video::create( [
+            'thumbnail'     => $newThumbnails[1],
             'original_name' => request()->video->getClientOriginalName(),
             'video_path'    => $path,
             'title'         => request()->video->getClientOriginalName(),
-            'user_id'       => auth()->id(),
-            'video_id'      => \Str::random( 16 ),
             'duration'      => $media->getDurationInSeconds(),
             'size'          => request()->video->getSize(),
             'video_motion'  => 'Animation',
             'video_type'    => 'Public',
+            'width'         => $media->getStreams()->videos()->first()->getDimensions()->getWidth()
         ] );
-        ConvertVideoForStreaming::dispatch( $video );
+        ConvertVideoForStreaming::dispatch( $video, 320, 240 );
+        if ( $this->width >= 640 ) {
+            ConvertVideoForStreaming::dispatch( $video, 640, 360, [ '360p' => 1 ] );
+        }
+        if ( $this->width >= 854 ) {
+            ConvertVideoForStreaming::dispatch( $video, 854, 480, [ '480p' => 1 ] );
+        }
+        if ( $this->width >= 1280 ) {
+            ConvertVideoForStreaming::dispatch( $video, 1280, 720, [ '720p' => 1 ] );
+        }
+        if ( $this->width >= 1920 ) {
+            ConvertVideoForStreaming::dispatch( $video, 1920, 1080, [ '1080p' => 1 ] );
+        }
+        if ( $this->width >= 2560 ) {
+            ConvertVideoForStreaming::dispatch( $video, 2560, 1440, [ '2048p' => 1 ] );
+        }
+        if ( $this->width >= 3840 ) {
+            ConvertVideoForStreaming::dispatch( $video, 3840, 2160, [ '4k' => 1 ] );
+        }
+        if ( $this->width >= 7680 ) {
+            ConvertVideoForStreaming::dispatch( $video, 7680, 4320, [ '8k' => 1 ] );
+        }
+
         $message = "Video is uploading... in backgroud";
 
-        return compact( 'message', 'video', 'newThumbnail' );
+        return compact( 'message', 'video', 'newThumbnails' );
     }
 
     public function watch_video() {
