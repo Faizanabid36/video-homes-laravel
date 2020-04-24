@@ -7,7 +7,11 @@ function MyDropzone() {
     const [uploading, setUploading] = useState(false);
     const [state, setState] = useState(false);
     const [thumbnails, setThumbnails] = useState(false);
+    const [index, setIndex] = useState(0);
 
+    const handleSelect = (selectedIndex, e) => {
+        setIndex(selectedIndex);
+    };
     const onDrop = useCallback(files => {
         // Do something with the files
         const formData = new FormData();
@@ -130,7 +134,7 @@ function MyDropzone() {
             </div>
             {state && <div className="row">
                 <div className="col-8 mx-auto">
-                    <Carousel>
+                    <Carousel activeIndex={index} onSelect={handleSelect}>
                         {thumbnails && Object.values(thumbnails).map(v=>{
                             <Carousel.Item>
                                 <img
