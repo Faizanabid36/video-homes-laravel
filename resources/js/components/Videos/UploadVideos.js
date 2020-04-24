@@ -141,6 +141,7 @@ function MyDropzone() {
                                     className="d-block w-100"
                                     src={window.VIDEO_APP.base_url+"storage/"+v}
                                 />
+
                             </Carousel.Item>
                         })}
                     </Carousel>
