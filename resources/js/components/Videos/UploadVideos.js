@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone'
-import {Carousel} from 'react-bootstrap';
+import {Carousel,Form,Row,Col,Container,ProgressBar,Button} from 'react-bootstrap';
 
 function MyDropzone() {
     const [uploadProgress, updateUploadProgress] = useState(0);
@@ -11,9 +11,10 @@ function MyDropzone() {
 
     const handleSelect = useCallback((selectedIndex, e) => {
         setIndex(selectedIndex);
+        console.log(thumbnails[selectedIndex + 1]);
         state.thumbnail = thumbnails[selectedIndex + 1];
         setState(state);
-    },[state]);
+    },[state,thumbnails]);
     const onDrop = useCallback(files => {
         // Do something with the files
         const formData = new FormData();
@@ -55,7 +56,7 @@ function MyDropzone() {
     //     // };
     // }, [thumbnails]);
 
-    return <div className="container main-content" id="main-container">
+    return <Container className="container main-content" id="main-container">
         <div id="container_content">
             <div className="wo_about_wrapper_parent">
                 <div className="wo_about_wrapper">
@@ -91,10 +92,10 @@ function MyDropzone() {
                     </svg>
                 </div>
             </div>
-            <div className="row">
-                {!state && <div {...getRootProps()} className="col-8 mx-auto pt_page_margin">
+            <Row>
+                {!state && <Col xs={8} {...getRootProps()} className="mx-auto pt_page_margin">
                     <div className="content pt_shadow">
-                        <div className="col-md-12 pt_upload_vdo">
+                        <Col className="pt_upload_vdo">
                             <div className="upload upload-video" data-block="video-drop-zone">
                                 <div>
                                     <svg fill="currentColor" height="24" viewBox="0 0 24 24" width="24"
@@ -113,14 +114,15 @@ function MyDropzone() {
 
                                 </div>
                             </div>
-                            <div className="progress hidden">
-                                <span className="percent">0%</span>
+                            {uploading &&
+                            <div className="progress">
+                                <span className="percent">{uploadProgress}%</span>
                                 <div className="progress_bar_parent">
                                     <div className="bar upload-progress-bar progress-bar active"/>
                                 </div>
                                 <div className="clear"/>
                                 <div className="text-center pt_prcs_vdo"/>
-                            </div>
+                            </div>}
                             <input
                                 {...getInputProps()}
                                 // ref={(ref) => this.upload = ref}
@@ -129,22 +131,14 @@ function MyDropzone() {
                                 type="file" name="video" accept="video/*"
                                 // className="upload-video-file"
                             />
-                        </div>
+                        </Col>
                         <div className="clear"/>
                     </div>
-                </div>}
-            </div>
-            {uploading && <div className="row">
-                <div className="col-8 mx-auto">
-                    <div className="progress h-25">
-                        <div className="progress-bar progress-bar-success progress-bar-striped progress-bar-animated"
-                             role="progressbar" aria-valuenow={uploadProgress} aria-valuemin="0" aria-valuemax="100"
-                             style={{width: uploadProgress + "%"}}>{`${uploadProgress}% uploaded`}</div>
-                    </div>
-                </div>
-            </div>}
-            {state && <div className="row">
-                <div className="col-8 mx-auto">
+                </Col>}
+            </Row>
+            {uploading && <Row><Col><ProgressBar animated now={uploadProgress} />{`${uploadProgress}% uploaded`}</Col></Row>}
+            {state && <Row>
+                <Col xs={8} className="mx-auto">
                     <Carousel activeIndex={index} onSelect={handleSelect}>
                         {thumbnails && Object.values(thumbnails).map(v=>{
                             console.log(v);
@@ -159,36 +153,27 @@ function MyDropzone() {
 
                         )}
                     </Carousel>
-                    <div className="form-group">
-                        <label htmlFor="title">Title</label>
-                        <input
-                            type="text"
-                            id="title"
-                            defaultValue={state.title}
-                            onChange={e => {
-                                state.title = e.target.value;
-                                setState(state);
-                            }}
-                            className="form-control" placeholder="Title"/>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="description">Description</label>
-                        <input
-                            type="text"
-                            id="description"
-                            onChange={e => {
-                                state.description = e.target.value;
-                                setState(state)
-                            }}
-                            className="form-control" placeholder="Description"/>
-                    </div>
-                    <div className="form-group">
-                        <button onClick={onUpdate} className="btn btn-main">Update and Preview Video</button>
-                    </div>
-                </div>
-            </div>}
+                    <Form.Group controlId="title">
+                        <Form.Label>Title</Form.Label>
+                        <Form.Control placeholder="Title" defaultValue={state.title} onChange={e => {
+                            state.title = e.target.value;
+                            setState(state);
+                        }} />
+                    </Form.Group>
+                    <Form.Group controlId="title">
+                        <Form.Label>Description</Form.Label>
+                        <Form.Control placeholder="Description" defaultValue={state.description} onChange={e => {
+                            state.description = e.target.value;
+                            setState(state);
+                        }} />
+                    </Form.Group>
+                    <Button variant="primary" onClick={onUpdate}>
+                        Update and Preview Video
+                    </Button>
+                </Col>
+            </Row>}
         </div>
-    </div>;
+    </Container>;
 }
 
 export default MyDropzone;
