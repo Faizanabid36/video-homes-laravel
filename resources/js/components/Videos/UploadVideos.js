@@ -47,7 +47,7 @@ function MyDropzone() {
         })
     }, [state,thumbnails]);
 
-    // const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
+    const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
     // useEffect(() => {
     //     console.log(thumbnails,Object.values(thumbnails),"effects");
     //     // return () => {
