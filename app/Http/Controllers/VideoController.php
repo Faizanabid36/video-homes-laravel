@@ -6,11 +6,7 @@ use App\Http\Requests\StoreVideoRequest;
 use App\Jobs\ConvertVideoForStreaming;
 use Image;
 use App\Video;
-
 use App\User;
-use Illuminate\Support\Str;
-use Pbmedia\LaravelFFMpeg\FFMpeg;
-
 
 class VideoController extends Controller
 {

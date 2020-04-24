@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Libs;
 
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Format\Video\X264;
-use \Illuminate\Support\Facades\File;
 
 if ( ! function_exists( 'dashboardChart' ) ) {
     function dashboardChart( $labels, $label, $data ) {
@@ -59,7 +57,7 @@ if ( ! function_exists( 'getCleanFileName' ) ) {
         return preg_replace( '/\\.[^.\\s]{3,4}$/', '', $filename ) . $suffix;
     }
 }
-if(!function_exists('generateThumbnailsFromVideo')){
+if ( ! function_exists( 'generateThumbnailsFromVideo' ) ) {
     function generateThumbnailsFromVideo( $media,$thumbnail_shots = 3){
         $thumbnail_shots = $media->getDurationInSeconds() >= $thumbnail_shots ? $thumbnail_shots : 1;
         $divide_result   = (int) floor( $media->getDurationInSeconds() / $thumbnail_shots );
