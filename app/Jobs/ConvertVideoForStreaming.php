@@ -49,7 +49,8 @@ class ConvertVideoForStreaming implements ShouldQueue {
                ->addFilter( function ( $filters ) {
                    $filters->resize( new Dimension( $this->width, $this->height ) );
                } )
-               ->export()->inFormat( $lowBitrateFormat )
+               ->export()
+               ->inFormat( $lowBitrateFormat )
                ->save( $converted_name );
 
         // update the database so we know the convertion is done!
@@ -57,6 +58,6 @@ class ConvertVideoForStreaming implements ShouldQueue {
     }
 
     private function getCleanFileName( $filename ): string {
-        return preg_replace( '/\\.[^.\\s]{3,4}$/', '', $filename ) . "_{$this->height}p_converted.mp4";
+        return preg_replace( '/\.[^.\s]{3,4}$/', '', $filename ) . "_{$this->height}p_converted.mp4";
     }
 }
