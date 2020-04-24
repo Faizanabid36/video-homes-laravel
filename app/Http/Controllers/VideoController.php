@@ -18,7 +18,7 @@ class VideoController extends Controller
         request()->video->storeAs( 'public/uploads/', $file );
         $path          = 'uploads/' . $file;
         $media         = \FFMpeg::open( $path );
-        $newThumbnails = generateThumbnailsFromVideo( $media, 3 );
+        $newThumbnails = generateThumbnailsFromVideo( $media,$path, 3 );
         $video         = Video::create( [
             'thumbnail'     => $newThumbnails[1],
             'original_name' => request()->video->getClientOriginalName(),
