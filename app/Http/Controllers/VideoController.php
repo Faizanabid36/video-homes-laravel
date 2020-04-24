@@ -19,7 +19,7 @@ class VideoController extends Controller {
         $media         = \FFMpeg::open( $path );
         $dimension     = $media->getStreams()->videos()->first()->getDimensions();
         $newThumbnails = generateThumbnailsFromVideo( $media, $path, 3 );
-        dd($dimension->getWidth());
+
         $video         = Video::create( [
             'thumbnail'     => $newThumbnails[1],
             'original_name' => request()->video->getClientOriginalName(),
@@ -32,25 +32,25 @@ class VideoController extends Controller {
             'width'         => $dimension->getWidth()
         ] );
         ConvertVideoForStreaming::dispatch( $video, 320, 240 );
-        if ( $this->width >= 640 ) {
+        if ( $video->width >= 640 ) {
             ConvertVideoForStreaming::dispatch( $video, 640, 360, [ '360p' => 1 ] );
         }
-        if ( $this->width >= 854 ) {
+        if ( $video->width >= 854 ) {
             ConvertVideoForStreaming::dispatch( $video, 854, 480, [ '480p' => 1 ],1000 );
         }
-        if ( $this->width >= 1280 ) {
+        if ( $video->width >= 1280 ) {
             ConvertVideoForStreaming::dispatch( $video, 1280, 720, [ '720p' => 1 ],1000 );
         }
-        if ( $this->width >= 1920 ) {
+        if ( $video->width >= 1920 ) {
             ConvertVideoForStreaming::dispatch( $video, 1920, 1080, [ '1080p' => 1 ],1000 );
         }
-        if ( $this->width >= 2560 ) {
+        if ( $video->width >= 2560 ) {
             ConvertVideoForStreaming::dispatch( $video, 2560, 1440, [ '2048p' => 1 ],1000 );
         }
-        if ( $this->width >= 3840 ) {
+        if ( $video->width >= 3840 ) {
             ConvertVideoForStreaming::dispatch( $video, 3840, 2160, [ '4k' => 1 ],1000 );
         }
-        if ( $this->width >= 7680 ) {
+        if ( $video->width >= 7680 ) {
             ConvertVideoForStreaming::dispatch( $video, 7680, 4320, [ '8k' => 1 ] );
         }
 
