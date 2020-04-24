@@ -7,9 +7,17 @@ use App\Jobs\ConvertVideoForStreaming;
 use Image;
 use App\Video;
 
-class VideoController extends Controller {
-    //
+use App\User;
+use Illuminate\Support\Str;
+use Pbmedia\LaravelFFMpeg\FFMpeg;
+
+
+class VideoController extends Controller
+{
+
+
     public function upload_video( StoreVideoRequest $request ) {
+
         $file = \Str::random( 16 ) . '.' . request()->video->getClientOriginalExtension();
         request()->video->storeAs( 'public/uploads/', $file );
         $path          = 'uploads/' . $file;
@@ -54,25 +62,31 @@ class VideoController extends Controller {
         return compact( 'message', 'video', 'newThumbnails' );
     }
 
-    public function watch_video() {
-        $video = Video::where( 'video_id', request( 'v' ) )->first();
-        abort_if( ! $video->processed, 402, 'Video Encoding is in process, Please wait a while' );
+    public function watch_video($username)
+    {
+        $user = User::whereUsername($username)->first();
+        $video = Video::where('video_id', request('v'))->where('user_id', $user->id)->with('user')->first();
+        abort_if(!$video->processed, 201, 'Video Encoding is in process, Please wait a while');
+        $related_video = Video::whereUserId($user->id)->where('video_id', '!=', request('v'))
+            ->with('user')->latest()->first();
+//        return compact('video', 'related_video');
+        return view('watch_video', compact('video', 'related_video'));
 
-        return view( 'watch_video', $video );
     }
 
-    public function list_of_videos() {
-        $videos = Video::whereUserId( auth()->id() )->latest()->get();
-
-        return compact( 'videos' );
+    public function list_of_videos()
+    {
+        $videos = Video::latest()->with('user')->get();
+        return compact('videos');
     }
 
-    public function update_video( Video $video ) {
+    public function update_video(Video $video)
+    {
         //dd($video);
 
         return [
-            'status' => $video->update( request( [ 'description', 'title', 'thumbnail' ] ) ),
-            'data'   => request()->all()
+            'status' => $video->update(request(['description', 'title', 'thumbnail'])),
+            'data' => request()->all()
         ];
     }
 }

@@ -1,6 +1,8 @@
+
 import React, { useCallback, useState, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone'
 import {Carousel,Form,Row,Col,Container,ProgressBar,Button} from 'react-bootstrap';
+
 
 function MyDropzone() {
     const [uploadProgress, updateUploadProgress] = useState(0);
@@ -46,7 +48,7 @@ function MyDropzone() {
         axios.put('update-video/' + state.id, {...state}).then(({data}) => {
             window.location.href = window.VIDEO_APP.base_url + "/watch_video?v=" + state.video_id;
         })
-    }, [state,thumbnails]);
+    }, [state, thumbnails]);
 
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
     // useEffect(() => {
@@ -136,7 +138,7 @@ function MyDropzone() {
                             return <Carousel.Item>
                                 <img
                                     className="d-block w-100"
-                                    src={window.VIDEO_APP.base_url+"/storage/"+v}
+                                    src={window.VIDEO_APP.base_url + "/storage/" + v}
                                 />
 
                             </Carousel.Item>

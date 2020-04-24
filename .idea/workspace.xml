@@ -19,7 +19,22 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8761c922-0faa-4e77-993b-9b63980bc61e" name="Default Changelist" comment="" />
+    <list default="true" id="8761c922-0faa-4e77-993b-9b63980bc61e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/public/css/mediaelementplayer.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/mediaelement-and-player.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/video-homes.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/video-homes.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VideoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VideoController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Video.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Video.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Videos/UploadVideos.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Videos/UploadVideos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Videos/Videos.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Videos/Videos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/watch_video.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/watch_video.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,9 +42,7 @@
   </component>
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution>
-      <executable />
-    </execution>
+    <execution />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -161,7 +174,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
@@ -193,26 +206,34 @@
       <workItem from="1587152547843" duration="210000" />
       <workItem from="1587384647731" duration="19537000" />
       <workItem from="1587457638199" duration="21537000" />
+<<<<<<< HEAD
+      <workItem from="1587488573150" duration="45170000" />
+      <workItem from="1587739667711" duration="10571000" />
+=======
       <workItem from="1587488573150" duration="45892000" />
+<<<<<<< HEAD
       <workItem from="1587743396994" duration="9408000" />
+=======
+      <workItem from="1587743396994" duration="4284000" />
+>>>>>>> 466d8467a858f7ead72058e9accaa95120b82a34
+>>>>>>> 4083d2451400cd62bca96f0352f8afc77355580b
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -234,30 +255,31 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="344" y="0" width="606" height="680" key="#phpunit.xml/0.0.1280.680@0.0.1280.680" timestamp="1587397725705" />
-    <state x="422" y="96" key="FileChooserDialogImpl" timestamp="1587401276694">
+    <state x="422" y="96" key="FileChooserDialogImpl" timestamp="1587490033594">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="422" y="96" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1587401276694" />
-    <state width="1237" height="163" key="GridCell.Tab.0.bottom" timestamp="1587384771358">
+    <state x="422" y="96" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1587490033594" />
+    <state width="1237" height="189" key="GridCell.Tab.0.bottom" timestamp="1587737987247">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1587384771358" />
-    <state width="1237" height="163" key="GridCell.Tab.0.center" timestamp="1587384771358">
+    <state width="1237" height="189" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1587737987247" />
+    <state width="1237" height="189" key="GridCell.Tab.0.center" timestamp="1587737987247">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1587384771358" />
-    <state width="1237" height="163" key="GridCell.Tab.0.left" timestamp="1587384771358">
+    <state width="1237" height="189" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1587737987247" />
+    <state width="1237" height="189" key="GridCell.Tab.0.left" timestamp="1587737987247">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1587384771358" />
-    <state width="1237" height="163" key="GridCell.Tab.0.right" timestamp="1587384771358">
+    <state width="1237" height="189" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1587737987247" />
+    <state width="1237" height="189" key="GridCell.Tab.0.right" timestamp="1587737987247">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1587384771358" />
+    <state width="1237" height="189" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1587737987247" />
     <state x="158" y="0" key="SettingsEditor" timestamp="1587481124381">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="158" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1587481124381" />
+<<<<<<< HEAD
     <state x="100" y="123" width="1240" height="611" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1587758811177">
       <screen x="0" y="23" width="1440" height="811" />
     </state>
@@ -267,10 +289,27 @@
     </state>
     <state x="368" y="169" width="703" height="518" key="find.popup/0.23.1440.811@0.23.1440.811" timestamp="1587752358786" />
     <state x="298" y="152" width="672" height="677" key="run.anything.popup" timestamp="1587475742040">
+=======
+    <state x="327" y="122" width="625" height="516" key="find.popup" timestamp="1587740122177">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state x="327" y="122" width="625" height="516" key="find.popup/0.0.1280.680@0.0.1280.680" timestamp="1587740122177" />
+    <state x="368" y="169" width="703" height="518" key="find.popup/0.23.1440.811@0.23.1440.811" timestamp="1587548179510" />
+    <state x="298" y="152" width="672" height="677" key="run.anything.popup" timestamp="1587738051278">
+>>>>>>> 4083d2451400cd62bca96f0352f8afc77355580b
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+<<<<<<< HEAD
+    <state x="298" y="152" width="672" height="677" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1587738051278" />
+    <state x="341" y="24" width="756" height="810" key="search.everywhere.popup" timestamp="1587671423216">
+=======
     <state x="298" y="152" width="672" height="677" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1587475742040" />
+<<<<<<< HEAD
     <state x="341" y="24" width="756" height="810" key="search.everywhere.popup" timestamp="1587759172661">
+=======
+    <state x="341" y="24" width="756" height="810" key="search.everywhere.popup" timestamp="1587752032829">
+>>>>>>> 466d8467a858f7ead72058e9accaa95120b82a34
+>>>>>>> 4083d2451400cd62bca96f0352f8afc77355580b
       <screen x="0" y="23" width="1440" height="811" />
     </state>
     <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1587125777521" />
