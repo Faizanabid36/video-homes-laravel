@@ -39,7 +39,7 @@ function MyDropzone() {
         axios.put('update-video/' + state.id, {...state}).then(({data}) => {
             window.location.href = window.VIDEO_APP.base_url + "watch_video?v=" + state.video_id;
         })
-    }, [state]);
+    }, [state,thumbnails]);
 
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
     return <div className="container main-content" id="main-container">
