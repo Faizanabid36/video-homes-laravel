@@ -64,11 +64,11 @@ class VideoController extends Controller {
         return compact( 'videos' );
     }
 
-    public function update_video( Video $video ) {
+    public function update_video( $id ) {
         //dd($video);
 
         return [
-            'status' => $video->update( request( [ 'description', 'title', 'thumbnail' ] ) ),
+            'status' => Video::update(compact('id'), request( [ 'description', 'title', 'thumbnail' ] ) ),
             'data'   => request()->all()
         ];
     }
