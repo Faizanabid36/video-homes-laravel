@@ -80,11 +80,6 @@ class VideoController extends Controller {
     }
 
     public function update_video( Video $video ) {
-        //dd($video);
-
-        return [
-            'status' => $video->update( request( [ 'description', 'title', 'thumbnail' ] ) ),
-            'data'   => request()->all()
-        ];
+        return [ 'status' => $video->update( request( [ 'description', 'title', 'thumbnail' ] ) ) ];
     }
 }

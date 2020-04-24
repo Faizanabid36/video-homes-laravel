@@ -13,24 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect('login');
-});
-
+Route::get('/', function () {return redirect('login');});
 Auth::routes();
-//Route::view('/{path?}', 'container');
 Route::group( [ 'middleware' => 'auth' ], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard');
     Route::get('/dashboard/{type}', 'DashboardController@dashboard_type')->name('dashboard_type');
-//    Route::view('/upload-video', 'container')->name('upload-video');
     Route::post('/upload-video', 'VideoController@upload_video');
     Route::put('/update-video/{video}', 'VideoController@update_video');
-//    Route::view('/watch', 'container');
-    Route::post('{username}/', 'VideoController@watch_video');
-
     Route::get('/all_videos', 'VideoController@list_of_videos');
-//    Route::view('/watch_videos', 'container')->name('watch');
 } );
-
 Route::get('{username}/watch_video', 'VideoController@watch_video');
+Route::post('{username}/', 'VideoController@watch_video');

@@ -3,7 +3,6 @@
 namespace App\Jobs;
 
 use App\Video;
-use Carbon\Carbon;
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Format\Video\X264;
 use Illuminate\Bus\Queueable;
@@ -11,6 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class ConvertVideoForStreaming implements ShouldQueue {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
@@ -48,6 +48,8 @@ class ConvertVideoForStreaming implements ShouldQueue {
                ->save( $this->video->stream_path . "_{$this->height}p_converted.mp4" );
 
         // update the database so we know the convertion is done!
+        Log::info('This is some useful information.',["file_path"=>$this->video->stream_path . "_{$this->height}p_converted.mp4","update"=>$this->update]);
+
         $this->video->update( $this->update );
     }
 
