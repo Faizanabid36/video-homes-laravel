@@ -131,7 +131,7 @@ function MyDropzone() {
             {state && <div className="row">
                 <div className="col-8 mx-auto">
                     <Carousel>
-                        {thumbnails && thumbnails.map(v=>{
+                        {thumbnails && Object.keys(thumbnails).map(v=>{
                             <Carousel.Item>
                                 <img
                                     className="d-block w-100"
