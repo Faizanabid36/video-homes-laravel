@@ -146,14 +146,17 @@ function MyDropzone() {
             {state && <div className="row">
                 <div className="col-8 mx-auto">
                     <Carousel activeIndex={index} onSelect={handleSelect}>
-                        {thumbnails && Object.values(thumbnails).map(v=>
-                            <Carousel.Item>
+                        {thumbnails && Object.values(thumbnails).map(v=>{
+                            console.log(v);
+                            return <Carousel.Item>
                                 <img
                                     className="d-block w-100"
                                     src={window.VIDEO_APP.base_url+"/storage/"+v}
                                 />
 
                             </Carousel.Item>
+                            }
+
                         )}
                     </Carousel>
                     <div className="form-group">
