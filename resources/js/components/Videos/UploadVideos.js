@@ -9,9 +9,11 @@ function MyDropzone() {
     const [thumbnails, setThumbnails] = useState(false);
     const [index, setIndex] = useState(0);
 
-    const handleSelect = (selectedIndex, e) => {
+    const handleSelect = useCallback((selectedIndex, e) => {
         setIndex(selectedIndex);
-    };
+        state.thubmnail = thumbnails[selectedIndex + 1];
+        setState(state);
+    },[state]);
     const onDrop = useCallback(files => {
         // Do something with the files
         const formData = new FormData();
