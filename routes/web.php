@@ -25,7 +25,7 @@ Route::group( [ 'middleware' => 'auth' ], function () {
     Route::get('/dashboard/{type}', 'DashboardController@dashboard_type')->name('dashboard_type');
 //    Route::view('/upload-video', 'container')->name('upload-video');
     Route::post('/upload-video', 'VideoController@upload_video');
-    Route::put('/update-video/{video_id}', 'VideoController@update_video');
+    Route::put('/update-video/{video}', 'VideoController@update_video');
 //    Route::view('/watch', 'container');
     Route::post('{username}/', 'VideoController@watch_video');
 
