@@ -18,7 +18,9 @@ class VideoController extends Controller {
         request()->video->storeAs( 'public/uploads/', $file );
         $path          = 'uploads/' . $file;
         $media         = \FFMpeg::open( $path );
-        $dimension     = $media->getStreams()->videos()->first()->getDimensions();
+        $videostream   = $media->getStreams()->videos()->first();
+        dd($videostream->has('tags'));
+        $dimension     = $videostream->getDimensions();
         $newThumbnails = generateThumbnailsFromVideo( $media, $path, 3 );
 
         $video = Video::create( [
@@ -33,7 +35,10 @@ class VideoController extends Controller {
             'width'         => $dimension->getWidth(),
             'stream_path'   => getCleanFileName( $path, '_240p_converted.mp4' )
         ] );
-        ConvertVideoForStreaming::dispatch( $video, 320, 240, [ 'converted_for_streaming_at' => Carbon::now(), 'processed'=> true ] );
+        ConvertVideoForStreaming::dispatch( $video, 320, 240, [
+            'converted_for_streaming_at' => Carbon::now(),
+            'processed'                  => true
+        ] );
         if ( $video->width >= 640 ) {
             ConvertVideoForStreaming::dispatch( $video, 640, 360, [ '360p' => 1 ] );
         }

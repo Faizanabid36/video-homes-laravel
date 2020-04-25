@@ -1252,7 +1252,11 @@
         // var downloadSize = 4995374;
         var imageAddr = site_url + "/upload/photos/speed.jpg";
         var downloadSize = 1082828;
-
+        function getCookie(name) {
+            var value = "; " + document.cookie;
+            var parts = value.split("; " + name + "=");
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        }
         function getQuality() {
             MeasureConnectionSpeed();
 
