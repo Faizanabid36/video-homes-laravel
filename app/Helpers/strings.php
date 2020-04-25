@@ -66,7 +66,8 @@ if ( ! function_exists( 'generateThumbnailsFromVideo' ) ) {
         for ( $i = 1; $i <= $thumbnail_shots; $i ++ ) {
             $newThumbnail[ $i ] = str_replace( "." . request()->video->getClientOriginalExtension(), "-$i.png", $path );
             if ( $angle ) {
-                $media->filters()->rotate( $angle )->getFrameFromSeconds( $seconds )->export()->save( $newThumbnail[ $i ] );
+                $media->filters()->rotate( $angle );
+                $media->getFrameFromSeconds( $seconds )->export()->save( $newThumbnail[ $i ] );
             } else {
                 $media->getFrameFromSeconds( $seconds )->export()->save( $newThumbnail[ $i ] );
             }
