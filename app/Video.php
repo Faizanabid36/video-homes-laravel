@@ -12,6 +12,7 @@ class Video extends Model
         'converted_for_streaming_at',
     ];
     protected $hidden = [];
+    protected $with = ['user'];
 
 
     protected static function boot() {
