@@ -44,7 +44,7 @@ class ConvertVideoForStreaming implements ShouldQueue {
 //        $media->filters()->rotate( $angle );
         \FFMpeg::open( $this->video->video_path )
                ->addFilter( function ( $filters ) {
-                   $filters->rotate(RotateFilter::ROTATE_180);
+//                   $filters->rotate(RotateFilter::ROTATE_180);
                    $filters->resize( new Dimension( $this->width, $this->height ) );
                } )
                ->export()

@@ -24,19 +24,16 @@ class VideoController extends Controller {
         if ( $rotation = getVideoRotation( $videostream ) ) {
             switch ( $rotation ) {
                 case 270:
-                case '-270':
                     $angle = RotateFilter::ROTATE_270;
                     Log::info( "ESsa: 270", [ "tes" => $angle ] );
                     $media->filters()->rotate( $angle );
                     break;
                 case 180:
-                case '-180':
                     $angle = RotateFilter::ROTATE_180;
                     Log::info( "ESsa: 180", [ "tes" => $angle ] );
                     $media->filters()->rotate( $angle );
                     break;
                 case 90:
-                case '-90':
                     $angle = RotateFilter::ROTATE_90;
                     Log::info( "ESsa: 90", [ "tes" => $angle ] );
                     $media->filters()->rotate( $angle );
