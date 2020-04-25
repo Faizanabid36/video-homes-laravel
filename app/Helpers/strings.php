@@ -65,13 +65,8 @@ if ( ! function_exists( 'generateThumbnailsFromVideo' ) ) {
         $newThumbnail    = [];
         for ( $i = 1; $i <= $thumbnail_shots; $i ++ ) {
             $newThumbnail[ $i ] = str_replace( "." . request()->video->getClientOriginalExtension(), "-$i.png", $path );
-//            if ( $angle ) {
-//                $frame = $media->frame(FFMpeg\Coordinate\TimeCode::fromSeconds($seconds));
-//                $frame->filters()->rotate( $angle )->save($newThumbnail[ $i ]);
-////                $media->getFrameFromSeconds( $seconds )->export()->filters()->rotate( $angle )->save( $newThumbnail[ $i ] );
-//            } else {
-                $media->getFrameFromSeconds( $seconds )->export()->save( $newThumbnail[ $i ] );
-//            }
+            $media->getFrameFromSeconds( $seconds )->export()->save( $newThumbnail[ $i ] );
+            imagepng(imagerotate(imagecreatefrompng($newThumbnail[ $i ]), 180, 0),$newThumbnail[ $i ]);
 
             $seconds += $divide_result;
         }

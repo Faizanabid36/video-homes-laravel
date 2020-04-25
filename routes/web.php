@@ -1,5 +1,7 @@
 <?php
 
+use FFMpeg\Coordinate\Dimension;
+use FFMpeg\Format\Video\X264;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +26,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/upload-video', 'VideoController@upload_video');
     Route::put('/update-video/{video}', 'VideoController@update_video');
     Route::get('/all_videos', 'VideoController@list_of_videos');
+
+
+    Route::get('testvideo', function (){
+        $filename = storage_path("app/public/uploads/essatesting.png");
+        imagepng(imagerotate(imagecreatefrompng($filename), 180, 0),$filename."test.png");
+    });
 });
 Route::get('{username}/watch_video', 'VideoController@watch_video');
 Route::post('{username}/', 'VideoController@watch_video');
