@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Video;
 use FFMpeg\Coordinate\Dimension;
+use FFMpeg\Filters\Video\RotateFilter;
 use FFMpeg\Format\Video\X264;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -38,9 +39,12 @@ class ConvertVideoForStreaming implements ShouldQueue {
     public function handle() {
         // create a video format...
         $lowBitrateFormat = ( new X264( 'libmp3lame', 'libx264' ) )->setKiloBitrate( $this->bitrate );
-
+//        $angle = RotateFilter::ROTATE_180;
+//        Log::info( "ESsa: 180", [ "tes" => $angle ] );
+//        $media->filters()->rotate( $angle );
         \FFMpeg::open( $this->video->video_path )
                ->addFilter( function ( $filters ) {
+//                   $filters->rotate(RotateFilter::ROTATE_180);
                    $filters->resize( new Dimension( $this->width, $this->height ) );
                } )
                ->export()

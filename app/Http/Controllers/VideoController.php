@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVideoRequest;
 use App\Jobs\ConvertVideoForStreaming;
-use FFMpeg\Filters\Video\ExtractMultipleFramesFilter;
 use Illuminate\Support\Facades\Log;
 use Image;
 use App\Video;
-use App\User;
 use Carbon\Carbon;
 use FFMpeg\Filters\Video\RotateFilter;
 
@@ -28,19 +26,16 @@ class VideoController extends Controller
         if ($rotation = getVideoRotation($videostream)) {
             switch ($rotation) {
                 case 270:
-                case '-270':
                     $angle = RotateFilter::ROTATE_270;
                     Log::info("ESsa: 270", ["tes" => $angle]);
                     $media->filters()->rotate($angle);
                     break;
                 case 180:
-                case '-180':
                     $angle = RotateFilter::ROTATE_180;
                     Log::info("ESsa: 180", ["tes" => $angle]);
                     $media->filters()->rotate($angle);
                     break;
                 case 90:
-                case '-90':
                     $angle = RotateFilter::ROTATE_90;
                     Log::info("ESsa: 90", ["tes" => $angle]);
                     $media->filters()->rotate($angle);
