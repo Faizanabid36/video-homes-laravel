@@ -22,8 +22,7 @@ class VideoController extends Controller {
         $media       = \FFMpeg::open( $path );
         $videostream = $media->getStreams()->videos()->first();
         if ( $rotation = getVideoRotation( $videostream ) ) {
-            dd($rotation);
-            switch ( $rotation ) {
+            switch ( $rotation['rotate'] ) {
                 case 270:
                 case '-270':
                     $angle = RotateFilter::ROTATE_270;
