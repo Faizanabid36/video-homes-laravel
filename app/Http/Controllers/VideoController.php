@@ -19,8 +19,12 @@ class VideoController extends Controller {
         $file = \Str::random( 16 ) . '.' . request()->video->getClientOriginalExtension();
         request()->video->storeAs( 'public/uploads/', $file );
         $path        = 'uploads/' . $file;
-        $media       = \FFMpeg::open( $path )->filters()->rotate(RotateFilter::ROTATE_90);
-//        $videostream = $media->getStreams()->videos()->first();
+        $media       = FFMpeg::open( $path );
+        $videostream = FFMpeg::getFFProbe()
+                                             ->streams($path)
+                                             ->videos()
+                                             ->first();
+        $media->filters()->rotate(RotateFilter::ROTATE_90);
 //        if ( $rotation = getVideoRotation( $videostream ) ) {
 //            switch ( $rotation ) {
 //                case 270:
