@@ -1347,6 +1347,8 @@
             features: ['playpause', 'current', 'progress', 'duration', 'speed', 'skipback', 'jumpforward', 'tracks', 'markers', 'volume', 'chromecast', 'contextmenu', 'flash', 'fullscreen'],
             vastAdTagUrl: '',
             vastAdsType: '',
+            setDimensions:true,
+            enableAutosize:true,
             jumpForwardInterval: 20,
             adsPrerollMediaUrl: [''],
             adsPrerollAdUrl: [''],
