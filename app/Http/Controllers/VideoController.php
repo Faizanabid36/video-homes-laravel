@@ -21,8 +21,8 @@ class VideoController extends Controller {
         $path        = 'uploads/' . $file;
         $media       = \FFMpeg::open( $path );
         $videostream = $media->getStreams()->videos()->first();
-        if ( $tags = $videostream->has( 'tags' ) ) {
-            Log::info("tag main hon", [$tags]);
+        if ($videostream->has( 'tags' ) ) {
+            $tags = $tags = $videostream->get('tags');
             if ( isset( $tags['rotate'] ) && $tags['rotate'] != 0 ) {
                 switch ( $tags['rotate'] ) {
                     case 270:
