@@ -19,8 +19,8 @@ class VideoController extends Controller {
         $file = \Str::random( 16 ) . '.' . request()->video->getClientOriginalExtension();
         request()->video->storeAs( 'public/uploads/', $file );
         $path        = 'uploads/' . $file;
-        $media       = FFMpeg::open( $path );
-        $videostream = FFMpeg::getFFProbe()
+        $media       = \FFMpeg::open( $path );
+        $videostream = \FFMpeg::getFFProbe()
                                              ->streams($path)
                                              ->videos()
                                              ->first();
