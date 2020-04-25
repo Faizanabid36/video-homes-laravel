@@ -14,38 +14,41 @@
                                    poster="{{asset("storage/$video->thumbnail")}}"
                                    preload="none"
                                    src="{{asset("storage/$video->stream_path")}}">
-                                <source src="{{storage_path($video->stream_path)}}" type="video/mp4"
+                                <source src="{{asset("storage/$video->stream_path")}}" type="video/mp4"
                                         data-quality="240p" title="240p" label="240p" res="240">
                                 @if($video->{'360p'})
-                                    <source src="{{storage_path(str_replace('240p','360p',$video->stream_path))}}" type="video/mp4"
-                                            data-quality="360p" title="360p" label="360p" res="360">
-                                @endif
-                                @if($video->{'360p'})
-                                    <source src="{{storage_path(str_replace('240p','360p',$video->stream_path))}}" type="video/mp4"
+                                    <source src="{{asset("storage/".str_replace('240p','360p',$video->stream_path))}}"
+                                            type="video/mp4"
                                             data-quality="360p" title="360p" label="360p" res="360">
                                 @endif
                                 @if($video->{'480p'})
-                                    <source src="{{storage_path(str_replace('240p','480p',$video->stream_path))}}" type="video/mp4"
+                                    <source src="{{asset("storage/".str_replace('240p','480p',$video->stream_path))}}"
+                                            type="video/mp4"
                                             data-quality="480p" title="480p" label="480p" res="480">
                                 @endif
                                 @if($video->{'720p'})
-                                    <source src="{{storage_path(str_replace('240p','720p',$video->stream_path))}}" type="video/mp4"
+                                    <source src="{{asset("storage/".str_replace('240p','720p',$video->stream_path))}}"
+                                            type="video/mp4"
                                             data-quality="720p" title="720p" label="720p" res="720">
                                 @endif
                                 @if($video->{'1080p'})
-                                    <source src="{{storage_path(str_replace('240p','1080p',$video->stream_path))}}" type="video/mp4"
+                                    <source src="{{asset("storage/".str_replace('240p','1080p',$video->stream_path))}}"
+                                            type="video/mp4"
                                             data-quality="1080p" title="1080p" label="1080p" res="1080">
                                 @endif
                                 @if($video->{'1440p'})
-                                    <source src="{{storage_path(str_replace('240p','1440p',$video->stream_path))}}" type="video/mp4"
+                                    <source src="{{asset("storage/".str_replace('240p','1440p',$video->stream_path))}}"
+                                            type="video/mp4"
                                             data-quality="1440p" title="1440p" label="1440p" res="1440">
                                 @endif
                                 @if($video->{'4K'})
-                                    <source src="{{storage_path(str_replace('240p','2160p',$video->stream_path))}}" type="video/mp4"
+                                    <source src="{{asset("storage/".str_replace('240p','2160p',$video->stream_path))}}"
+                                            type="video/mp4"
                                             data-quality="2160p" title="2160p" label="2160p" res="2160">
                                 @endif
                                 @if($video->{'8k'})
-                                    <source src="{{storage_path(str_replace('240p','4320p',$video->stream_path))}}" type="video/mp4"
+                                    <source src="{{asset("storage/".str_replace('240p','4320p',$video->stream_path))}}"
+                                            type="video/mp4"
                                             data-quality="4320p" title="4320p" label="4320p" res="4320">
                                 @endif
                                 Your browser does not support HTML5 video.
