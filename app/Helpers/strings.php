@@ -58,31 +58,38 @@ if ( ! function_exists( 'getCleanFileName' ) ) {
     }
 }
 if ( ! function_exists( 'generateThumbnailsFromVideo' ) ) {
-    function generateThumbnailsFromVideo( $media,$path,$thumbnail_shots = 3){
+    function generateThumbnailsFromVideo( $media, $path, $thumbnail_shots = 3, $angle ) {
         $thumbnail_shots = $media->getDurationInSeconds() >= $thumbnail_shots ? $thumbnail_shots : 1;
         $divide_result   = (int) floor( $media->getDurationInSeconds() / $thumbnail_shots );
-        $seconds   = $divide_result;
+        $seconds         = $divide_result;
         $newThumbnail    = [];
         for ( $i = 1; $i <= $thumbnail_shots; $i ++ ) {
             $newThumbnail[ $i ] = str_replace( "." . request()->video->getClientOriginalExtension(), "-$i.png", $path );
-            $media->getFrameFromSeconds( $seconds )->export()->save( $newThumbnail[ $i ] );
+            if ( $angle ) {
+                $media->filters()->rotate( $angle )->getFrameFromSeconds( $seconds )->export()->save( $newThumbnail[ $i ] );
+            } else {
+                $media->getFrameFromSeconds( $seconds )->export()->save( $newThumbnail[ $i ] );
+            }
+
             $seconds += $divide_result;
         }
+
         return $newThumbnail;
     }
 
 }
-function getVideoRotation($videostream){
-    if (! $videostream instanceof FFMpeg\FFProbe\DataMapping\Stream) {
-        throw new \Exception('No stream given');
+function getVideoRotation( $videostream ) {
+    if ( ! $videostream instanceof FFMpeg\FFProbe\DataMapping\Stream ) {
+        throw new \Exception( 'No stream given' );
     }
-    if (!$videostream->has('tags')) {
+    if ( ! $videostream->has( 'tags' ) ) {
         return false;
     }
-    $tags = $videostream->get('tags');
-    if (! isset($tags['rotate']) && $tags['rotate'] == 0) {
+    $tags = $videostream->get( 'tags' );
+    if ( ! isset( $tags['rotate'] ) && $tags['rotate'] == 0 ) {
         return false;
     }
+
 // do the rotation correction
     return $tags;
 }
