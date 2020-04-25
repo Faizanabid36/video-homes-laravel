@@ -133,6 +133,7 @@ function MyDropzone() {
                 <Col xs={8} className="mx-auto">
                     <Carousel activeIndex={index} onSelect={handleSelect}>
                         {thumbnails && Object.values(thumbnails).map(v=>{
+                            console.log(thumbnails)
                             console.log(v);
                             return <Carousel.Item>
                                 <img
