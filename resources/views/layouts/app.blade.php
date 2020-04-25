@@ -190,7 +190,7 @@
 <script src="{{asset('js/owl.carousel.min')}}.js"></script>
 <script src="{{asset('js/Fingerprintjs2/fingerprint2.js')}}"></script>
 <script src="{{asset('js/emoji/emojionearea/dist/emojionearea.js')}}"></script>
-<script src="http://localhost:9002//themes/default/player/js/mediaelement-and-player.min.js"></script>
+<script src="{{asset('js/mediaelement-and-player.min.js')}}"></script>
 @yield('footer_script')
 </body>
 </html>
