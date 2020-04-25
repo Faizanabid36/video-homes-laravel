@@ -36,7 +36,8 @@ class VideoController extends Controller {
                     $angle = RotateFilter::ROTATE_90;
                     break;
             }
-            $media->filters()->rotate( $angle )->synchronize();
+            Log::info("nahi mil raha hai ",[$angle]);
+            $media = $media->filters()->rotate( $angle );
         }
 
         $dimension     = $media->getStreams()->videos()->first()->getDimensions();
