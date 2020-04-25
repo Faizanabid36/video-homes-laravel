@@ -72,3 +72,17 @@ if ( ! function_exists( 'generateThumbnailsFromVideo' ) ) {
     }
 
 }
+function getVideoRotation($videostream){
+    if (! $videostream instanceof FFMpeg\FFProbe\DataMapping\Stream) {
+        throw new \Exception('No stream given');
+    }
+    if (!$videostream->has('tags')) {
+        return false;
+    }
+    $tags = $videostream->get('tags');
+    if (! isset($tags['rotate']) && $tags['rotate'] == 0) {
+        return false;
+    }
+// do the rotation correction
+    return $tags;
+}

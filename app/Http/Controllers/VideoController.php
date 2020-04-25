@@ -21,25 +21,23 @@ class VideoController extends Controller {
         $path        = 'uploads/' . $file;
         $media       = \FFMpeg::open( $path );
         $videostream = $media->getStreams()->videos()->first();
-
-        switch ( $videostream->getRotation() ) {
-            case 270:
-            case -270:
-                $angle = RotateFilter::ROTATE_270;
-                break;
-            case 180:
-            case -180:
-                $angle = RotateFilter::ROTATE_180;
-                break;
-            case 90:
-            case -90:
-                $angle = RotateFilter::ROTATE_90;
-                break;
-        }
-        if($videostream->getRotation() !== 0){
+        if(!getVideoRotation($videostream)){
+            switch ( getVideoRotation($videostream) ) {
+                case 270:
+                case -270:
+                    $angle = RotateFilter::ROTATE_270;
+                    break;
+                case 180:
+                case -180:
+                    $angle = RotateFilter::ROTATE_180;
+                    break;
+                case 90:
+                case -90:
+                    $angle = RotateFilter::ROTATE_90;
+                    break;
+            }
             $media->filters()->rotate( $angle )->synchronize();
         }
-
 
         $dimension     = $media->getStreams()->videos()->first()->getDimensions();
         $newThumbnails = generateThumbnailsFromVideo( $media, $path, 3 );
