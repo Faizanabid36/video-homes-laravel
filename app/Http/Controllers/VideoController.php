@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVideoRequest;
 use App\Jobs\ConvertVideoForStreaming;
-use FFMpeg\Filters\Video\ExtractMultipleFramesFilter;
 use Illuminate\Support\Facades\Log;
 use Image;
 use App\Video;
-use App\User;
 use Carbon\Carbon;
 use FFMpeg\Filters\Video\RotateFilter;
 
