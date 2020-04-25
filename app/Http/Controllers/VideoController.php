@@ -22,7 +22,7 @@ class VideoController extends Controller {
         $media       = \FFMpeg::open( $path );
         $videostream = $media->getStreams()->videos()->first();
         if ($videostream->has( 'tags' ) ) {
-            $tags = $tags = $videostream->get('tags');
+            $tags = $videostream->get('tags');
             if ( isset( $tags['rotate'] ) && $tags['rotate'] != 0 ) {
                 switch ( $tags['rotate'] ) {
                     case 270:
@@ -35,11 +35,10 @@ class VideoController extends Controller {
                         $angle = RotateFilter::ROTATE_90;
                         break;
                 }
-                dd([$tags,$angle]);
                 $media->filters()->rotate( $angle );
             }
         }
-        $dimension     = $videostream->getDimensions();
+        $dimension     = $media->getStreams()->videos()->first()->getDimensions();
         $newThumbnails = generateThumbnailsFromVideo( $media, $path, 3 );
 
         $video = Video::create( [
