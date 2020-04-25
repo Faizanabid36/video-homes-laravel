@@ -97,11 +97,13 @@
                                                         <polygon points="10 8 16 12 10 16 10 8"></polygon>
                                                     </svg>
                                                 </div>
-                                                <div class="video-duration">{{str_replace(".",":",$related_video / 60)}}</div>
+                                                <div class="video-duration">{{str_replace(".",":",$related_video->duration / 60)}}</div>
                                             </a>
                                         </div>
                                         <div class="video-title">
-                                            <a href="#">{{$related_video->title}}</a>
+                                            <a href="#">
+                                                {{$related_video->title}}
+                                            </a>
                                         </div>
                                         <div class="vid_pub_info">
                                             <a href="#"><span class="video-publisher">
@@ -127,7 +129,8 @@
                             <div class="video-title pt_video_info">
                                 <input type="hidden" value="1" id="video-id">
                                 <div class="video-big-title">
-                                    <h1 itemprop="title">{{$video->title}}
+                                    <h1 itemprop="title">
+                                        {{$video->title}}
                                     </h1>
                                 </div>
                                 <div>
