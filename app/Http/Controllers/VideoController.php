@@ -37,8 +37,6 @@ class VideoController extends Controller {
                 }
 
                 $media->filters()->rotate( $angle ) ;
-                Log::info("yahan tak agia hai",[$media,$angle]);
-                die;
             }
         }
         $dimension     = $media->getStreams()->videos()->first()->getDimensions();
