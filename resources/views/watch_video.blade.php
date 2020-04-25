@@ -79,39 +79,41 @@
                                 <div class="clear"></div>
                             </div>
                             <div class="videos-list pt_mn_wtch_rlts_prnt pt_mn_wtch_upnxt_prnt" id="next-video">
-                                <div class="video-wrapper top-video-wrapper pt_video_side_vids pt_pt_mn_wtch_rltvids"
-                                     data-sidebar-video="2">
-                                    <div class="video-thumb">
-                                        <a href="{{url()->current().'?v='.$related_video->video_id}}">
-                                            <img
-                                                src="{{asset('storage/'.$related_video->thumbnail)}}"
-                                                alt="Products">
-                                            <div class="play_hover_btn" onmouseenter="show_gif(this,'')"
-                                                 onmouseleave="hide_gif(this)">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                     class="feather feather-play-circle">
-                                                    <circle cx="12" cy="12" r="10"></circle>
-                                                    <polygon points="10 8 16 12 10 16 10 8"></polygon>
-                                                </svg>
-                                            </div>
-                                            <div class="video-duration">2:16</div>
-                                        </a>
-                                    </div>
-                                    <div class="video-title">
-                                        <a href="#">{{$related_video->title}}</a>
-                                    </div>
-                                    <div class="vid_pub_info">
-                                        <a href="#"><span class="video-publisher">
+                                @foreach($related_videos as $related_video)
+                                    <div class="video-wrapper top-video-wrapper pt_video_side_vids pt_pt_mn_wtch_rltvids"
+                                         data-sidebar-video="2">
+                                        <div class="video-thumb">
+                                            <a href="{{url()->current().'?v='.$related_video->video_id}}">
+                                                <img
+                                                    src="{{asset('storage/'.$related_video->thumbnail)}}"
+                                                    alt="Products">
+                                                <div class="play_hover_btn" onmouseenter="show_gif(this,'')"
+                                                     onmouseleave="hide_gif(this)">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                         class="feather feather-play-circle">
+                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                        <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                                                    </svg>
+                                                </div>
+                                                <div class="video-duration">{{str_replace(".",":",$related_video / 60}}</div>
+                                            </a>
+                                        </div>
+                                        <div class="video-title">
+                                            <a href="#">{{$related_video->title}}</a>
+                                        </div>
+                                        <div class="vid_pub_info">
+                                            <a href="#"><span class="video-publisher">
                                                 <img class="header-image" src="{{asset('upload/photos/d-avatar.jpg')}}">
                                                 {{$related_video->user->username}}
                                             </span></a>
-                                        <span class="bold">|</span>
-                                        <span class="video-views">2 Views</span>
+                                            <span class="bold">|</span>
+                                            <span class="video-views">2 Views</span>
+                                        </div>
+                                        <div class="clear"></div>
                                     </div>
-                                    <div class="clear"></div>
-                                </div>
+                                    @endforeach
                             </div>
                             <div class="load-related-videos">
                                 <button class="btn btn-default" id="load-related-videos">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVideoRequest;
 use App\Jobs\ConvertVideoForStreaming;
+use FFMpeg\Filters\Video\ExtractMultipleFramesFilter;
 use Illuminate\Support\Facades\Log;
 use Image;
 use App\Video;
@@ -23,24 +24,24 @@ class VideoController extends Controller {
         $videostream = $media->getStreams()->videos()->first();
         $angle = false;
         if ( $rotation = getVideoRotation( $videostream ) ) {
-            switch ( $rotation['rotate'] ) {
+            switch ( $rotation ) {
                 case 270:
                 case '-270':
                     $angle = RotateFilter::ROTATE_270;
                     Log::info( "ESsa: 270", [ "tes" => $angle ] );
-//                    $media->filters()->rotate( $angle );
+                    $media->filters()->rotate( $angle );
                     break;
                 case 180:
                 case '-180':
                     $angle = RotateFilter::ROTATE_180;
                     Log::info( "ESsa: 180" ,[ "tes" => $angle ] );
-//                    $media->filters()->rotate( $angle );
+                    $media->filters()->rotate( $angle );
                     break;
                 case 90:
                 case '-90':
                     $angle = RotateFilter::ROTATE_90;
                     Log::info( "ESsa: 90", [ "tes" => $angle ] );
-//                    $media->filters()->rotate( $angle );
+                    $media->filters()->rotate( $angle );
                     break;
             }
 
@@ -48,7 +49,6 @@ class VideoController extends Controller {
 
         $dimension     = $media->getStreams()->videos()->first()->getDimensions();
         $newThumbnails = generateThumbnailsFromVideo( $media, $path, 3,$angle );
-
         $video = Video::create( [
             'thumbnail'     => $newThumbnails[1],
             'original_name' => request()->video->getClientOriginalName(),
@@ -93,14 +93,14 @@ class VideoController extends Controller {
     }
 
     public function watch_video( $username ) {
-        $user  = User::whereUsername( $username )->first();
+        $user  = User::whereUsername( $username )->firstOrFail();
         $video = Video::where( 'video_id', request( 'v' ) )->where( 'user_id', $user->id )->with( 'user' )->first();
         abort_if( ! $video->processed, 201, 'Video Encoding is in process, Please wait a while' );
-        $related_video = Video::whereUserId( $user->id )->where( 'video_id', '!=', request( 'v' ) )
-                              ->with( 'user' )->latest()->first();
+        $related_videos = Video::whereUserId( $user->id )->where( 'video_id', '!=', request( 'v' ) )
+                              ->with( 'user' )->latest()->take(3);
 
 //        return compact('video', 'related_video');
-        return view( 'watch_video', compact( 'video', 'related_video' ) );
+        return view( 'watch_video', compact( 'video', 'related_videos' ) );
 
     }
 

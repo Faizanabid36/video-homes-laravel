@@ -93,5 +93,5 @@ function getVideoRotation( $videostream ) {
     }
 
 // do the rotation correction
-    return $tags;
+    return $tags['rotate'];
 }
