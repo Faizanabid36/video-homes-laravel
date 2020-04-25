@@ -36,7 +36,7 @@ class VideoController extends Controller {
                         break;
                 }
 
-                $media->filters()->rotate( $angle ) ;
+                $media->filters()->rotate( $angle ) ->synchronize();
             }
         }
         $dimension     = $media->getStreams()->videos()->first()->getDimensions();
