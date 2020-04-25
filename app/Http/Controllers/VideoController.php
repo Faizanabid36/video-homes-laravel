@@ -35,6 +35,7 @@ class VideoController extends Controller {
                         $angle = RotateFilter::ROTATE_90;
                         break;
                 }
+                dd([$tags,$angle]);
                 $media->filters()->rotate( $angle );
             }
         }
