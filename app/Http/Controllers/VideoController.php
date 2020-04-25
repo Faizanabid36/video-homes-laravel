@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVideoRequest;
 use App\Jobs\ConvertVideoForStreaming;
+use Illuminate\Support\Facades\Log;
 use Image;
 use App\Video;
 use App\User;
 use Carbon\Carbon;
+use FFMpeg\Filters\Video\RotateFilter;
 
 class VideoController extends Controller {
 
@@ -20,20 +22,20 @@ class VideoController extends Controller {
         $media       = \FFMpeg::open( $path );
         $videostream = $media->getStreams()->videos()->first();
         if ( $tags = $videostream->has( 'tags' ) ) {
+            Log::info("tag main hon", [$tags]);
             if ( isset( $tags['rotate'] ) && $tags['rotate'] != 0 ) {
                 switch ( $tags['rotate'] ) {
                     case 270:
-                        $angle = FFMpeg\Filters\Video\RotateFilter::ROTATE_270;
+                        $angle = RotateFilter::ROTATE_270;
                         break;
                     case 180:
-                        $angle = FFMpeg\Filters\Video\RotateFilter::ROTATE_180;
+                        $angle = RRotateFilter::ROTATE_180;
                         break;
                     case 90:
-                        $angle = FFMpeg\Filters\Video\RotateFilter::ROTATE_90;
+                        $angle = RRotateFilter::ROTATE_90;
                         break;
                 }
-                $media->filters()
-                      ->rotate( $angle );
+                $media->filters()->rotate( $angle );
             }
         }
         $dimension     = $videostream->getDimensions();
