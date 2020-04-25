@@ -20,10 +20,10 @@ class VideoController extends Controller {
         request()->video->storeAs( 'public/uploads/', $file );
         $path        = 'uploads/' . $file;
         $media       = \FFMpeg::open( $path );
-        $videostream = \FFMpeg::getFFProbe()
-                                             ->streams($path)
-                                             ->videos()
-                                             ->first();
+//        $videostream = \FFMpeg::getFFProbe()
+//                                             ->streams($path)
+//                                             ->videos()
+//                                             ->first();
         $media->filters()->rotate(RotateFilter::ROTATE_90);
 //        if ( $rotation = getVideoRotation( $videostream ) ) {
 //            switch ( $rotation ) {
