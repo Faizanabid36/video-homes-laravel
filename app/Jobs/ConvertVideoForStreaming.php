@@ -45,7 +45,7 @@ class ConvertVideoForStreaming implements ShouldQueue {
                } )
                ->export()
                ->inFormat( $lowBitrateFormat )
-               ->save( $this->video->stream_path . "_{$this->height}p_converted.mp4" );
+               ->save( getCleanFileName($this->video->video_path, "_{$this->height}p_converted.mp4")  );
 
         // update the database so we know the convertion is done!
         Log::info('This is some useful information.',["file_path"=>$this->video->stream_path . "_{$this->height}p_converted.mp4","update"=>$this->update]);

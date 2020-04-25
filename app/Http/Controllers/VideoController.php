@@ -47,7 +47,7 @@ class VideoController extends Controller {
             ConvertVideoForStreaming::dispatch( $video, 1920, 1080, [ '1080p' => 1 ], 1000 );
         }
         if ( $video->width >= 2560 ) {
-            ConvertVideoForStreaming::dispatch( $video, 2560, 1440, [ '2048p' => 1 ], 1000 );
+            ConvertVideoForStreaming::dispatch( $video, 2560, 1440, [ '1440p' => 1 ], 1000 );
         }
         if ( $video->width >= 3840 ) {
             ConvertVideoForStreaming::dispatch( $video, 3840, 2160, [ '4k' => 1 ], 1000 );
