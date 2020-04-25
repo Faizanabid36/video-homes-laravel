@@ -16,10 +16,26 @@ class VideoController extends Controller {
 
         $file = \Str::random( 16 ) . '.' . request()->video->getClientOriginalExtension();
         request()->video->storeAs( 'public/uploads/', $file );
-        $path          = 'uploads/' . $file;
-        $media         = \FFMpeg::open( $path );
-        $videostream   = $media->getStreams()->videos()->first();
-        dd($videostream->has('tags'));
+        $path        = 'uploads/' . $file;
+        $media       = \FFMpeg::open( $path );
+        $videostream = $media->getStreams()->videos()->first();
+        if ( $tags = $videostream->has( 'tags' ) ) {
+            if ( isset( $tags['rotate'] ) && $tags['rotate'] != 0 ) {
+                switch ( $tags['rotate'] ) {
+                    case 270:
+                        $angle = FFMpeg\Filters\Video\RotateFilter::ROTATE_270;
+                        break;
+                    case 180:
+                        $angle = FFMpeg\Filters\Video\RotateFilter::ROTATE_180;
+                        break;
+                    case 90:
+                        $angle = FFMpeg\Filters\Video\RotateFilter::ROTATE_90;
+                        break;
+                }
+                $media->filters()
+                      ->rotate( $angle );
+            }
+        }
         $dimension     = $videostream->getDimensions();
         $newThumbnails = generateThumbnailsFromVideo( $media, $path, 3 );
 
