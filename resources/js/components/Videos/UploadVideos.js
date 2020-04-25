@@ -1,7 +1,6 @@
-
-import React, { useCallback, useState, useEffect } from 'react';
-import { useDropzone } from 'react-dropzone'
-import {Carousel,Form,Row,Col,Container,ProgressBar,Button} from 'react-bootstrap';
+import React, {useCallback, useState, useEffect} from 'react';
+import {useDropzone} from 'react-dropzone'
+import {Carousel, Form, Row, Col, Container, ProgressBar, Button} from 'react-bootstrap';
 
 
 function MyDropzone() {
@@ -16,7 +15,7 @@ function MyDropzone() {
         console.log(thumbnails[selectedIndex + 1]);
         state.thumbnail = thumbnails[selectedIndex + 1];
         setState(state);
-    },[state,thumbnails]);
+    }, [state, thumbnails]);
     const onDrop = useCallback(files => {
         // Do something with the files
         const formData = new FormData();
@@ -129,22 +128,22 @@ function MyDropzone() {
                     </div>
                 </Col>}
             </Row>
-            {uploading && <Row><Col><ProgressBar animated now={uploadProgress} />{`${uploadProgress}% uploaded`}</Col></Row>}
+            {uploading &&
+            <Row><Col><ProgressBar animated now={uploadProgress}/>{`${uploadProgress}% uploaded`}</Col></Row>}
             {state && <Row>
                 <Col xs={8} className="mx-auto">
                     <Carousel activeIndex={index} onSelect={handleSelect}>
-                        {thumbnails && Object.values(thumbnails).map(v=>{
-                            console.log(thumbnails)
-                            console.log(v);
-                            return <Carousel.Item>
-                                <img
-                                    className="d-block w-100"
-                                    src={window.VIDEO_APP.base_url + "/storage/" + v}
-                                />
+                        {console.log('t', thumbnails)}
+                        {thumbnails && Object.values(thumbnails).map(v => {
+                                console.log(v);
+                                return <Carousel.Item>
+                                    <img
+                                        className="d-block w-100"
+                                        src={window.VIDEO_APP.base_url + "/storage/" + v}
+                                    />
 
-                            </Carousel.Item>
+                                </Carousel.Item>
                             }
-
                         )}
                     </Carousel>
                     <Form.Group controlId="title">
@@ -152,14 +151,14 @@ function MyDropzone() {
                         <Form.Control placeholder="Title" defaultValue={state.title} onChange={e => {
                             state.title = e.target.value;
                             setState(state);
-                        }} />
+                        }}/>
                     </Form.Group>
                     <Form.Group controlId="description">
                         <Form.Label>Description</Form.Label>
                         <Form.Control placeholder="Description" defaultValue={state.description} onChange={e => {
                             state.description = e.target.value;
                             setState(state);
-                        }} />
+                        }}/>
                     </Form.Group>
                     <Button variant="primary" onClick={onUpdate}>
                         Update and Preview Video

@@ -88,10 +88,10 @@ function getVideoRotation( $videostream ) {
         return false;
     }
     $tags = $videostream->get( 'tags' );
-    if ( ! isset( $tags['rotate'] ) && $tags['rotate'] == 0 ) {
-        return false;
-    }
+//    if ( ! isset( $tags['rotate'] ) && $tags['rotate'] == 0 ) {
+//        return false;
+//    }
 
 // do the rotation correction
-    return $tags['rotate'];
+//    return $tags['rotate'];
 }
