@@ -13,7 +13,6 @@ function MyDropzone() {
 
     const handleSelect = useCallback((selectedIndex, e) => {
         setIndex(selectedIndex);
-        console.log(thumbnails[selectedIndex + 1]);
         state.thumbnail = thumbnails[selectedIndex + 1];
         setState(state);
     },[state,thumbnails]);
