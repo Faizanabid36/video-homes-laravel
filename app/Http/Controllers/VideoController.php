@@ -21,23 +21,28 @@ class VideoController extends Controller {
         $path        = 'uploads/' . $file;
         $media       = \FFMpeg::open( $path );
         $videostream = $media->getStreams()->videos()->first();
-        if($rotation = getVideoRotation($videostream)){
+        if ( $rotation = getVideoRotation( $videostream ) ) {
             switch ( $rotation ) {
                 case 270:
-                case -270:
+                case - 270:
                     $angle = RotateFilter::ROTATE_270;
+                    Log::info( "nahi mil raha hai ", [ "tes" => $angle ] );
+                    $media = $media->filters()->rotate( $angle );
                     break;
                 case 180:
-                case -180:
+                case - 180:
                     $angle = RotateFilter::ROTATE_180;
+                    Log::info( "nahi mil raha hai ", [ "tes" => $angle ] );
+                    $media = $media->filters()->rotate( $angle );
                     break;
                 case 90:
-                case -90:
+                case - 90:
                     $angle = RotateFilter::ROTATE_90;
+                    Log::info( "nahi mil raha hai ", [ "tes" => $angle ] );
+                    $media = $media->filters()->rotate( $angle );
                     break;
             }
-            Log::info("nahi mil raha hai ",[$angle]);
-            $media = $media->filters()->rotate( $angle );
+
         }
 
         $dimension     = $media->getStreams()->videos()->first()->getDimensions();
