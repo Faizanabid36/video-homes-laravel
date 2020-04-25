@@ -97,7 +97,7 @@
                                                         <polygon points="10 8 16 12 10 16 10 8"></polygon>
                                                     </svg>
                                                 </div>
-                                                <div class="video-duration">{{str_replace(".",":",$related_video / 60}}</div>
+                                                <div class="video-duration">{{str_replace(".",":",$related_video / 60)}}</div>
                                             </a>
                                         </div>
                                         <div class="video-title">
