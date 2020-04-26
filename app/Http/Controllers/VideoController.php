@@ -20,27 +20,7 @@ class VideoController extends Controller {
         $path        = 'uploads/' . $file;
         $media       = \FFMpeg::open( $path );
         $videostream = $media->getStreams()->videos()->first();
-        $angle       = false;
-        if ( $rotation = getVideoRotation( $videostream ) ) {
-            switch ( $rotation ) {
-                case 270:
-                    $angle = RotateFilter::ROTATE_270;
-                    Log::info( "ESsa: 270", [ "tes" => $angle ] );
-                    $media->filters()->rotate( $angle );
-                    break;
-                case 180:
-                    $angle = RotateFilter::ROTATE_180;
-                    Log::info( "ESsa: 180", [ "tes" => $angle ] );
-                    $media->filters()->rotate( $angle );
-                    break;
-                case 90:
-                    $angle = RotateFilter::ROTATE_90;
-                    Log::info( "ESsa: 90", [ "tes" => $angle ] );
-                    $media->filters()->rotate( $angle );
-                    break;
-            }
-
-        }
+        $angle = getVideoRotation( $videostream );
 
         $dimension     = $videostream->getDimensions();
         $newThumbnails = generateThumbnailsFromVideo( $media, $path, $angle );
