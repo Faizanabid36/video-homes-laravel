@@ -11,6 +11,7 @@ class Video extends Model
     protected $dates = [ 'converted_for_streaming_at', ];
     protected $hidden = [];
     protected $with = ['user'];
+    protected $casts = ['processed'=>'boolean'];
 
 
     protected static function boot() {

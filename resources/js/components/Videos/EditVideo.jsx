@@ -21,7 +21,7 @@ export default function EditVideo(props){
     useEffect(() => {
         axios.get(`edit_video/${props.match.params.id}`).then(({data})=>{
             setState({...data.video});
-            setThumbnails(data.newThumbnails);
+            setThumbnails(data.thumbnails);
         })
     }, []);
 

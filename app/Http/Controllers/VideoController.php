@@ -91,15 +91,7 @@ class VideoController extends Controller
         $video = Video::whereHas('user', function ($query) use ($username) {
             $query->whereUsername($username);
         })->whereVideoId(request('v'))->firstOrFail();
-        if (!$video->processed) {
-            $isProcessed=false;
-            return compact('video','isProcessed');
-        }
-        else
-        {
-            $isProcessed=true;
-            return compact('isProcessed');
-        }
+        return ['isProcessed'=>$video->processed];
     }
 
     public function list_of_videos()
