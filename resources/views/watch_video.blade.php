@@ -13,7 +13,8 @@
                                    style="width: 100%; height: 451.872px; position: relative;"
                                    poster="{{asset("storage/$video->thumbnail")}}"
                                    preload="none"
-                                   src="{{asset("storage/$video->stream_path")}}">
+{{--                                   src="{{asset("storage/$video->stream_path")}}"--}}
+                            >
                                 <source src="{{asset("storage/$video->stream_path")}}" type="video/mp4"
                                         data-quality="240p" title="240p" label="240p" res="240">
                                 @if($video->{'360p'})
