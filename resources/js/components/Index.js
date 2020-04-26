@@ -18,7 +18,7 @@ export default class Index extends React.Component{
             <Switch>
                 <Route path='/' exact component={Dashboard} />
                 <Route path="/upload_video" exact  component={UploadVideos} />
-                <Route path="/edit_video" exact  component={EditVideo} />
+                <Route path="/edit_video"  component={EditVideo} />
                 <Route path="/customize_player" exact  component={Customize} />
                 <Route path="/playlist" exact  component={PlayList} />
                 <Route path="/profile" exact  component={Profile} />
