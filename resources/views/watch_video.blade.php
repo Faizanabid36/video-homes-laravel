@@ -1240,7 +1240,20 @@
     {{--    </script>--}}
     {{--    --}}
     <script type="text/javascript">
+        var myTimeout;
 
+        function show_gif(self,gif) {
+            if (gif && gif != '') {
+                myTimeout = setTimeout(function() {
+                    $(self).append('<img src="'+gif+'">');
+                }, 1000);
+            }
+        }
+
+        function hide_gif(self) {
+            $(self).find('img').remove();
+            clearTimeout(myTimeout);
+        }
 
         function PT_OpenStripe(pkg, self, video_id = 0, price = 0, user_id = 0) {
 
