@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Video;
 use FFMpeg\Coordinate\Dimension;
+use FFMpeg\Filters\Video\ExtractMultipleFramesFilter;
 use FFMpeg\Filters\Video\RotateFilter;
 use FFMpeg\Format\Video\X264;
 use Illuminate\Bus\Queueable;
@@ -15,20 +16,21 @@ use Illuminate\Support\Facades\Log;
 
 class ConvertVideoForStreaming implements ShouldQueue {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-    public $video, $width, $height, $bitrate, $update;
+    public $video, $width, $height, $bitrate, $update,$angle;
 
     /**
      * Create a new job instance.
      *
      * @param Video $video
      */
-    public function __construct( Video $video, $width, $height, $update = [], $bitrate = '500' ) {
+    public function __construct( Video $video, $width, $height, $update = [],$angle = false, $bitrate = '500' ) {
         //
         $this->video   = $video;
         $this->width   = $width;
         $this->height  = $height;
         $this->bitrate = $bitrate;
         $this->update  = $update;
+        $this->angle = $angle;
     }
 
     /**
@@ -42,12 +44,18 @@ class ConvertVideoForStreaming implements ShouldQueue {
 //        $angle = RotateFilter::ROTATE_180;
 //        Log::info( "ESsa: 180", [ "tes" => $angle ] );
 //        $media->filters()->rotate( $angle );
-        \FFMpeg::open( $this->video->video_path )
-               ->addFilter( function ( $filters ) {
-//                   $filters->rotate(RotateFilter::ROTATE_180);
-                   $filters->resize( new Dimension( $this->width, $this->height ) );
-               } )
-               ->export()
+
+        $video = \FFMpeg::open( $this->video->video_path );
+//               ->addFilter( function ( $filters ) {
+////                   $filters->rotate(RotateFilter::ROTATE_180);
+//                   $filters->resize( new Dimension( $this->width, $this->height ) );
+//               } )
+        if($this->angle){
+            $video->filters()->rotate($this->angle);
+        }
+        $video->filters()->pad(new Dimension( $this->width, $this->height ));
+
+        $video->export()
                ->inFormat( $lowBitrateFormat )
                ->save( getCleanFileName($this->video->video_path, "_{$this->height}p_converted.mp4")  );
 
