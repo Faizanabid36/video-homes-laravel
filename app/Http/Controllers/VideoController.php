@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Http\Requests\StoreVideoRequest;
 use App\Jobs\ConvertVideoForStreaming;
 use Image;
@@ -104,12 +105,13 @@ class VideoController extends Controller
     }
     public function edit_video($video_id){
         $video = Video::whereVideoId($video_id)->firstOrFail();
+        $categories = Category::all();
         $thumbnails = [];
         for ($i=1;$i<=3;$i++){
             $thumbnails[$i] = str_replace('1.png',"$i.png",$video->thumbnail);
         }
         $video->username = auth()->user()->username;
-        return compact('video','thumbnails');
+        return compact('video','thumbnails','categories');
     }
 
 }

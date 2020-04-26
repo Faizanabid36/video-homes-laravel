@@ -1,8 +1,8 @@
-import { Button, Carousel, Col,Row, Container, Form } from "react-bootstrap";
-import React, { useCallback, useState,useEffect } from "react";
+import { Button, Carousel, Col, Row, Container, Form } from "react-bootstrap";
+import React, { useCallback, useState, useEffect } from "react";
 
 
-export default function EditVideo(props){
+export default function EditVideo(props) {
     const [state, setState] = useState(false);
     const [categories, setCategories] = useState(false);
     const [manualupload, setManualupload] = useState(false);
@@ -10,18 +10,17 @@ export default function EditVideo(props){
     const [index, setIndex] = useState(0);
     const handleSelect = useCallback((selectedIndex, e) => {
         setIndex(selectedIndex);
-        console.log(thumbnails[selectedIndex + 1]);
         state.thumbnail = thumbnails[selectedIndex + 1];
         setState(state);
     }, [state, thumbnails]);
     const onUpdate = useCallback(e => {
         axios.put('update-video/' + state.id, {...state}).then(({data}) => {
-            window.location.href = window.VIDEO_APP.base_url+"/"+state.username + "/watch_video?v=" + state.video_id;
+            window.location.href = window.VIDEO_APP.base_url + "/" + state.username + "/watch_video?v=" + state.video_id;
         })
     }, [state, thumbnails]);
 
     useEffect(() => {
-        axios.get(`edit_video/${props.match.params.id}`).then(({data})=>{
+        axios.get(`edit_video/${props.match.params.id}`).then(({data}) => {
             setState({...data.video});
             setThumbnails(data.thumbnails);
             setCategories(data.categories)
@@ -36,7 +35,7 @@ export default function EditVideo(props){
                         type="switch"
                         id="upload-switch"
                         label="Upload Thumbnail"
-                        onChange={e=>setManualupload(!manualupload)}
+                        onChange={e => setManualupload(!manualupload)}
                     />
                     {!manualupload ? <Carousel interval={null} activeIndex={index} onSelect={handleSelect}>
                             {thumbnails && Object.values(thumbnails).map(v => {
@@ -52,7 +51,7 @@ export default function EditVideo(props){
                             )}
                         </Carousel> :
                         <Form.File id="upload-thumbnail" custom>
-                            <Form.File.Input onChange={e=>console.log(e)} />
+                            <Form.File.Input onChange={e => console.log(e)}/>
                             <Form.File.Label data-browse="Upload Thumbnail Image">
                                 Upload Thumbnail Image
                             </Form.File.Label>
@@ -80,12 +79,15 @@ export default function EditVideo(props){
                         setState(state);
                     }}/>
                 </Form.Group>
-                <Form.Group controlId="description">
-                    <Form.Label>Description</Form.Label>
-                    <Form.Control placeholder="Description" defaultValue={state.description} onChange={e => {
-                        state.description = e.target.value;
+                <Form.Group controlId="category">
+                    <Form.Label>Category</Form.Label>
+                    <Form.Control as="select" custom defaultValue={state.category_id} onChange={e => {
+                        state.category_id = e.target.value;
                         setState(state);
-                    }}/>
+                    }}>
+                        {categories.map((v, k) => <option value={v.id}>{v.name}</option>)}
+                    </Form.Control>
+
                 </Form.Group>
                 <Button variant="primary" onClick={onUpdate}>
                     Update and Preview Video
