@@ -21,7 +21,7 @@ class Video extends Model
             $video->setAttribute('user_id', auth()->id());
             $video->setAttribute('video_id', \Str::random( 16 ));
             $video->setAttribute('disk', "public");
-            $video->setAttribute('playlist',$playlist);
+            $video->setAttribute('playlist_id',$playlist);
         });
     }
     public function user()
