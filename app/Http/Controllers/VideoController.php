@@ -42,7 +42,7 @@ class VideoController extends Controller {
 
         }
 
-        $dimension     = $media->getStreams()->videos()->first()->getDimensions();
+        $dimension     = $videostream->getDimensions();
         $newThumbnails = generateThumbnailsFromVideo( $media, $path, 3, $angle );
         $video         = Video::create( [
             'thumbnail'     => $newThumbnails[1],
@@ -58,53 +58,28 @@ class VideoController extends Controller {
         ] );
         ConvertVideoForStreaming::dispatch( $video, 320, 240, [
             'converted_for_streaming_at' => Carbon::now(),
-<<<<<<< HEAD
             'processed'                  => true
         ] );
         if ( $video->width >= 640 ) {
-            ConvertVideoForStreaming::dispatch( $video, 640, 360, [ '360p' => 1 ] );
+            ConvertVideoForStreaming::dispatch( $video, 640, 360, [ '360p' => 1 ], $angle );
         }
         if ( $video->width >= 854 ) {
-            ConvertVideoForStreaming::dispatch( $video, 854, 480, [ '480p' => 1 ], 1000 );
+            ConvertVideoForStreaming::dispatch( $video, 854, 480, [ '480p' => 1 ], $angle, 1000 );
         }
         if ( $video->width >= 1280 ) {
-            ConvertVideoForStreaming::dispatch( $video, 1280, 720, [ '720p' => 1 ], 1000 );
+            ConvertVideoForStreaming::dispatch( $video, 1280, 720, [ '720p' => 1 ], $angle, 1000 );
         }
         if ( $video->width >= 1920 ) {
-            ConvertVideoForStreaming::dispatch( $video, 1920, 1080, [ '1080p' => 1 ], 1000 );
+            ConvertVideoForStreaming::dispatch( $video, 1920, 1080, [ '1080p' => 1 ], $angle, 1000 );
         }
         if ( $video->width >= 2560 ) {
-            ConvertVideoForStreaming::dispatch( $video, 2560, 1440, [ '1440p' => 1 ], 1000 );
+            ConvertVideoForStreaming::dispatch( $video, 2560, 1440, [ '1440p' => 1 ], $angle, 1000 );
         }
         if ( $video->width >= 3840 ) {
-            ConvertVideoForStreaming::dispatch( $video, 3840, 2160, [ '4k' => 1 ], 1000 );
+            ConvertVideoForStreaming::dispatch( $video, 3840, 2160, [ '4k' => 1 ], $angle, 1000 );
         }
         if ( $video->width >= 7680 ) {
-            ConvertVideoForStreaming::dispatch( $video, 7680, 4320, [ '8k' => 1 ] );
-=======
-            'processed' => true
-        ]);
-        if ($video->width >= 640) {
-            ConvertVideoForStreaming::dispatch($video, 640, 360, ['360p' => 1],$angle);
-        }
-        if ($video->width >= 854) {
-            ConvertVideoForStreaming::dispatch($video, 854, 480, ['480p' => 1],$angle, 1000);
-        }
-        if ($video->width >= 1280) {
-            ConvertVideoForStreaming::dispatch($video, 1280, 720, ['720p' => 1],$angle, 1000);
-        }
-        if ($video->width >= 1920) {
-            ConvertVideoForStreaming::dispatch($video, 1920, 1080, ['1080p' => 1],$angle, 1000);
-        }
-        if ($video->width >= 2560) {
-            ConvertVideoForStreaming::dispatch($video, 2560, 1440, ['1440p' => 1],$angle, 1000);
-        }
-        if ($video->width >= 3840) {
-            ConvertVideoForStreaming::dispatch($video, 3840, 2160, ['4k' => 1],$angle, 1000);
-        }
-        if ($video->width >= 7680) {
-            ConvertVideoForStreaming::dispatch($video, 7680, 4320, ['8k' => 1],$angle,2000);
->>>>>>> 261803da5d2bbf13860e68c1be90f43d563641d1
+            ConvertVideoForStreaming::dispatch( $video, 7680, 4320, [ '8k' => 1 ], $angle, 2000 );
         }
 
         $message = "Video is uploading... in backgroud";
@@ -113,10 +88,12 @@ class VideoController extends Controller {
     }
 
     public function watch_video( $username ) {
-        $video          = Video::whereHas( 'user',function ( $query ) use ( $username ) {
+        $video          = Video::whereHas( 'user', function ( $query ) use ( $username ) {
             $query->whereUsername( $username );
         } )->whereVideoId( request( 'v' ) )->whereProcessed( 1 )->firstOrFail();
-        $related_videos = Video::whereUserId( $video->user->id )->whereProcessed(1)->where( 'video_id', '!=', request( 'v' ) )->with( 'user' )->latest()->take( 3 );
+        $related_videos = Video::whereUserId( $video->user->id )
+                               ->whereProcessed( 1 )->where( 'video_id', '!=', request( 'v' ) )->with( 'user' )
+                               ->latest()->take( 3 )->get();
 
         return view( 'watch_video', compact( 'video', 'related_videos' ) );
 
