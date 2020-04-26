@@ -24,8 +24,6 @@
                             <h2 class="mt-3">{{$video->title}}</h2>
                             <p></p></div>
                     </div>
-                    <input accept="video/*" multiple="" type="file" autocomplete="off" tabindex="-1" name="video"
-                           style="display: none;"></div>
                 <div class="clear"></div>
             </div>
             <br>
@@ -43,7 +41,7 @@
             });
             setInterval(function () {
                 $.ajax({
-                    type: 'GET', //THIS NEEDS TO BE GET
+                    type: 'GET',
                     url: '{{url()->current().'/is_watchable?v='.$video->video_id}}',
                     dataType: 'json',
                     success: function (data) {
