@@ -111,6 +111,7 @@ class VideoController extends Controller
         for ($i=1;$i<=3;$i++){
             $thumbnails[$i] = str_replace('1.png',"$i.png",$video->thumbnail);
         }
+        $video->username = auth()->user()->username;
         return compact('video','thumbnails');
     }
 
