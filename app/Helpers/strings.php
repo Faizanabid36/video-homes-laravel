@@ -67,7 +67,7 @@ if ( ! function_exists( 'generateThumbnailsFromVideo' ) ) {
             $newThumbnail[ $i ] = str_replace( "." . request()->video->getClientOriginalExtension(), "-$i.png", $path );
             $media->getFrameFromSeconds( $seconds )->export()->save( $newThumbnail[ $i ] );
             if($angle){
-                imagepng(imagerotate(imagecreatefrompng($newThumbnail[ $i ]), $angle, 0),$newThumbnail[ $i ]);
+                imagepng(imagerotate(imagecreatefrompng(storage_path("app/public/${newThumbnail[ $i ]}")), $angle, 0),$newThumbnail[ $i ]);
             }
 
             $seconds += $divide_result;
