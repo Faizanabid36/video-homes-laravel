@@ -39,7 +39,7 @@ class VideoController extends Controller {
         ConvertVideoForStreaming::dispatch( $video, 320, 240, [
             'converted_for_streaming_at' => Carbon::now(),
             'processed'                  => true
-        ] );
+        ] ,$angle);
         if ( $video->width >= 640 ) {
             ConvertVideoForStreaming::dispatch( $video, 640, 360, [ '360p' => 1 ], $angle );
         }
