@@ -128,11 +128,10 @@ function MyDropzone() {
                     </div>
                 </Col>}
             </Row>
-            {uploading &&
-            <Row><Col><ProgressBar animated now={uploadProgress}/>{`${uploadProgress}% uploaded`}</Col></Row>}
+            {uploading && <Row><Col xs={8} className={'mx-auto'}><ProgressBar animated now={uploadProgress}/>{`${uploadProgress}% uploaded`}</Col></Row>}
             {state && <Row>
                 <Col xs={8} className="mx-auto">
-                    <Carousel activeIndex={index} onSelect={handleSelect}>
+                    <Carousel interval={null} activeIndex={index} onSelect={handleSelect}>
                         {console.log('t', thumbnails)}
                         {thumbnails && Object.values(thumbnails).map(v => {
                                 console.log(v);

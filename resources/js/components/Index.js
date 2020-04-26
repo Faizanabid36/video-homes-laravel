@@ -2,27 +2,30 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter as BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import Dashboard from "./Dashboard";
-import WatchVideo from "./Videos/WatchVideo";
+// import WatchVideo from "./Videos/WatchVideo";
+// import Videos from "./Videos/Videos";
 import UploadVideos from "./Videos/UploadVideos";
-import Videos from "./Videos/Videos";
+import EditVideo from "./Videos/EditVideo.jsx";
+import PlayList from "./Playlist.jsx";
+import Profile from "./Profile.jsx";
+import Settings from "./Settings.jsx";
 
-class Index extends React.Component{
+
+export default class Index extends React.Component{
     render() {
-        return <main>
+        return <BrowserRouter><main>
             <Switch>
                 <Route path='/' exact component={Dashboard} />
                 <Route path="/upload_video" exact  component={UploadVideos} />
+                <Route path="/edit_video" exact  component={EditVideo} />
+                <Route path="/playlist" exact  component={PlayList} />
+                <Route path="/profile" exact  component={Profile} />
+                <Route path="/settings" exact  component={Settings} />
             </Switch>
-        </main>
+        </main></BrowserRouter>
     }
 }
 
-export default Index;
-
 if (document.getElementById('container')) {
-    ReactDOM.render(
-        <BrowserRouter>
-            <Index />
-        </BrowserRouter>
-        , document.getElementById('container'));
+    ReactDOM.render(<Index />, document.getElementById('container'));
 }
