@@ -1,6 +1,6 @@
 import React, {useCallback, useState, useEffect} from 'react';
 import {useDropzone} from 'react-dropzone'
-import {Carousel, Form, Row, Col, Container, Dropdown, ProgressBar, Button} from 'react-bootstrap';
+import {Carousel, Form, Row, Col, Container, ProgressBar, Button} from 'react-bootstrap';
 
 
 function MyDropzone(props) {
@@ -9,10 +9,11 @@ function MyDropzone(props) {
     const [state, setState] = useState(false);
     const [thumbnails, setThumbnails] = useState(false);
     const [index, setIndex] = useState(0);
-    const [categories, setCategories] = useState([]);
+    const [categories, setCategories] = useState('');
 
     const handleSelect = useCallback((selectedIndex, e) => {
         setIndex(selectedIndex);
+        console.log(thumbnails[selectedIndex + 1]);
         state.thumbnail = thumbnails[selectedIndex + 1];
         setState(state);
     }, [state, thumbnails]);
@@ -32,15 +33,12 @@ function MyDropzone(props) {
             },
         })
             .then(({data}) => {
+                axios.get(window.VIDEO_APP.base_url + '/categories').then((res) => {
+                    console.log(res.data);
+                    setCategories(res.data.categories)
+                });
                 setUploading(false);
                 props.history.push(`edit_video/${data.video.video_id}`)
-                axios.get(window.VIDEO_APP.base_url + '/categories')
-                    .then((res) => {
-                        setCategories(res.data.categories)
-                    }).catch((err) => {
-                    console.log(err)
-                })
-
             })
             .catch((err) => {
                 setUploading(false);
@@ -97,7 +95,7 @@ function MyDropzone(props) {
                 </div>
             </div>
             <Row>
-                {state && <Col xs={8} {...getRootProps()} className="mx-auto pt_page_margin">
+                {!state && <Col xs={8} {...getRootProps()} className="mx-auto pt_page_margin">
                     <div className="content pt_shadow">
                         <Col className="pt_upload_vdo">
                             <div className="upload upload-video" data-block="video-drop-zone">
@@ -164,17 +162,17 @@ function MyDropzone(props) {
                             setState(state);
                         }}/>
                     </Form.Group>
-                    {/*<Form.Group controlId="exampleForm.ControlSelect1">*/}
-                    {/*    <Form.Label>Video Category</Form.Label>*/}
-                    {/*    <Form.Control as="select" onChange={(e) => {*/}
-                    {/*        state.video_type = e.target.value;*/}
-                    {/*        setState(state);*/}
-                    {/*    }}>*/}
-                    {/*        {categories.map((i, index) => {*/}
-                    {/*            return <option value={i.id} key={index}>{i.name}</option>*/}
-                    {/*        })}*/}
-                    {/*    </Form.Control>*/}
-                    {/*</Form.Group>*/}
+                    <Form.Group controlId="exampleForm.ControlSelect1">
+                        <Form.Label>Video Category</Form.Label>
+                        <Form.Control as="select" onChange={(e) => {
+                            state.video_type = e.target.value;
+                            setState(state);
+                        }}>
+                            {categories && categories.map((i, index) => {
+                                return <option value={i.id} key={index}>{i.name}</option>
+                            })}
+                        </Form.Control>
+                    </Form.Group>
                     <Button variant="primary" onClick={onUpdate}>
                         Update and Preview Video
                     </Button>
