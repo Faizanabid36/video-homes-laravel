@@ -71,7 +71,10 @@ class VideoController extends Controller {
     public function watch_video( $username ) {
         $video          = Video::whereHas( 'user', function ( $query ) use ( $username ) {
             $query->whereUsername( $username );
-        } )->whereVideoId( request( 'v' ) )->whereProcessed( 1 )->firstOrFail();
+        } )->whereVideoId( request( 'v' ) )->firstOrFail();
+        if(!$video->processed){
+            return view('errors.processing')->with($video);
+        }
         $related_videos = Video::whereUserId( $video->user->id )
                                ->whereProcessed( 1 )->where( 'video_id', '!=', request( 'v' ) )->with( 'user' )
                                ->latest()->take( 3 )->get();
