@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVideoRequest;
 use App\Jobs\ConvertVideoForStreaming;
-use Illuminate\Support\Facades\Log;
 use Image;
 use App\Video;
 use Carbon\Carbon;
-use FFMpeg\Filters\Video\RotateFilter;
 
 class VideoController extends Controller
 {
@@ -33,7 +31,7 @@ class VideoController extends Controller
             'title' => request()->video->getClientOriginalName(),
             'duration' => $media->getDurationInSeconds(),
             'size' => request()->video->getSize(),
-            'video_motion' => 'Animation',
+            'video_motion' => 1,
             'video_type' => 'Public',
             'width' => $dimension->getWidth(),
             'stream_path' => getCleanFileName($path, '_240p_converted.mp4')
@@ -63,11 +61,10 @@ class VideoController extends Controller
         if ($video->width >= 7680) {
             ConvertVideoForStreaming::dispatch($video, 7680, 4320, ['8k' => 1], $angle, 2000);
         }
-        $video->username = auth()->user()->username;
 
         $message = "Video is uploading... in backgroud";
 
-        return compact('message', 'video', 'newThumbnails');
+        return compact('message', 'video');
     }
 
     public function watch_video($username)
