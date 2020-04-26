@@ -31,6 +31,7 @@ class ConvertVideoForStreaming implements ShouldQueue {
         $this->bitrate = $bitrate;
         $this->update  = $update;
         $this->angle   = $this->getAngle( $angle );
+        dd($this->angle);
     }
 
     /**
