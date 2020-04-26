@@ -80,8 +80,9 @@
                             </div>
                             <div class="videos-list pt_mn_wtch_rlts_prnt pt_mn_wtch_upnxt_prnt" id="next-video">
                                 @foreach($related_videos as $related_video)
-                                    <div class="video-wrapper top-video-wrapper pt_video_side_vids pt_pt_mn_wtch_rltvids"
-                                         data-sidebar-video="2">
+                                    <div
+                                        class="video-wrapper top-video-wrapper pt_video_side_vids pt_pt_mn_wtch_rltvids"
+                                        data-sidebar-video="2">
                                         <div class="video-thumb">
                                             <a href="{{url()->current().'?v='.$related_video->video_id}}">
                                                 <img
@@ -97,7 +98,8 @@
                                                         <polygon points="10 8 16 12 10 16 10 8"></polygon>
                                                     </svg>
                                                 </div>
-                                                <div class="video-duration">{{str_replace(".",":",$related_video->duration / 60)}}</div>
+                                                <div
+                                                    class="video-duration">{{str_replace(".",":",$related_video->duration / 60)}}</div>
                                             </a>
                                         </div>
                                         <div class="video-title">
@@ -113,7 +115,7 @@
                                         </div>
                                         <div class="clear"></div>
                                     </div>
-                                    @endforeach
+                                @endforeach
                             </div>
                             <div class="load-related-videos">
                                 <button class="btn btn-default" id="load-related-videos">
@@ -179,21 +181,25 @@
                                         </svg>
                                         Embed
                                     </button>
-                                    <a class="btn btn-share" href="#">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                             viewBox="0 0 24 24">
-                                            <path fill="currentColor"
-                                                  d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"></path>
-                                        </svg>
-                                        Edit video</a>
-                                    <a href="#"
-                                       class="btn-share">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                             viewBox="0 0 24 24">
-                                            <path fill="currentColor"
-                                                  d="M3,14L3.5,14.07L8.07,9.5C7.89,8.85 8.06,8.11 8.59,7.59C9.37,6.8 10.63,6.8 11.41,7.59C11.94,8.11 12.11,8.85 11.93,9.5L14.5,12.07L15,12C15.18,12 15.35,12 15.5,12.07L19.07,8.5C19,8.35 19,8.18 19,8A2,2 0 0,1 21,6A2,2 0 0,1 23,8A2,2 0 0,1 21,10C20.82,10 20.65,10 20.5,9.93L16.93,13.5C17,13.65 17,13.82 17,14A2,2 0 0,1 15,16A2,2 0 0,1 13,14L13.07,13.5L10.5,10.93C10.18,11 9.82,11 9.5,10.93L4.93,15.5L5,16A2,2 0 0,1 3,18A2,2 0 0,1 1,16A2,2 0 0,1 3,14Z"></path>
-                                        </svg>
-                                        Analytics</a>
+                                    @if(!auth()->guest())
+                                        <a class="btn btn-share" href="#">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                 viewBox="0 0 24 24">
+                                                <path fill="currentColor"
+                                                      d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"></path>
+                                            </svg>
+                                            Edit video
+                                        </a>
+                                        <a href="#"
+                                           class="btn-share">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                 viewBox="0 0 24 24">
+                                                <path fill="currentColor"
+                                                      d="M3,14L3.5,14.07L8.07,9.5C7.89,8.85 8.06,8.11 8.59,7.59C9.37,6.8 10.63,6.8 11.41,7.59C11.94,8.11 12.11,8.85 11.93,9.5L14.5,12.07L15,12C15.18,12 15.35,12 15.5,12.07L19.07,8.5C19,8.35 19,8.18 19,8A2,2 0 0,1 21,6A2,2 0 0,1 23,8A2,2 0 0,1 21,10C20.82,10 20.65,10 20.5,9.93L16.93,13.5C17,13.65 17,13.82 17,14A2,2 0 0,1 15,16A2,2 0 0,1 13,14L13.07,13.5L10.5,10.93C10.18,11 9.82,11 9.5,10.93L4.93,15.5L5,16A2,2 0 0,1 3,18A2,2 0 0,1 1,16A2,2 0 0,1 3,14Z"></path>
+                                            </svg>
+                                            Analytics
+                                        </a>
+                                    @endif
                                     <button class="btn-share btn-report pull-right" onclick=""
                                             data-rep="1">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -241,19 +247,23 @@
                                     <div class="publisher-name">
                                         <a href="#">{{$video->user->username}}</a>
                                     </div>
-                                    <div class="publisher-subscribe-button"><a
-                                            href="http://localhost:9002//video_studio" class="btn-subscribed pointer"
-                                            data-load="?link1=video_studio">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                                 stroke-linecap="round" stroke-linejoin="round"
-                                                 class="feather feather-video">
-                                                <polygon points="23 7 16 12 23 17 23 7"></polygon>
-                                                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
-                                            </svg>
-                                            Manage
-                                        </a>
-                                        <span class="subs-amount">0</span></div>
+                                    @if(!auth()->guest())
+                                        <div class="publisher-subscribe-button"><a
+                                                href="http://localhost:9002//video_studio"
+                                                class="btn-subscribed pointer"
+                                                data-load="?link1=video_studio">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                     stroke-width="2"
+                                                     stroke-linecap="round" stroke-linejoin="round"
+                                                     class="feather feather-video">
+                                                    <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                                                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                                                </svg>
+                                                Manage
+                                            </a>
+                                            <span class="subs-amount">0</span></div>
+                                    @endif
                                     <div class="clear"></div>
                                 </div>
                                 <div class="clear"></div>
@@ -1254,11 +1264,13 @@
         // var downloadSize = 4995374;
         var imageAddr = site_url + "/upload/photos/speed.jpg";
         var downloadSize = 1082828;
+
         function getCookie(name) {
             var value = "; " + document.cookie;
             var parts = value.split("; " + name + "=");
             if (parts.length == 2) return parts.pop().split(";").shift();
         }
+
         function getQuality() {
             MeasureConnectionSpeed();
 
@@ -1353,8 +1365,8 @@
             features: ['playpause', 'current', 'progress', 'duration', 'speed', 'skipback', 'jumpforward', 'tracks', 'markers', 'volume', 'chromecast', 'contextmenu', 'flash', 'fullscreen'],
             vastAdTagUrl: '',
             vastAdsType: '',
-            setDimensions:true,
-            enableAutosize:true,
+            setDimensions: true,
+            enableAutosize: true,
             jumpForwardInterval: 20,
             adsPrerollMediaUrl: [''],
             adsPrerollAdUrl: [''],
