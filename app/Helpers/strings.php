@@ -58,7 +58,7 @@ if ( ! function_exists( 'getCleanFileName' ) ) {
     }
 }
 if ( ! function_exists( 'generateThumbnailsFromVideo' ) ) {
-    function generateThumbnailsFromVideo( $media, $path, $thumbnail_shots = 3, $angle ) {
+    function generateThumbnailsFromVideo( $media, $path, $angle, $thumbnail_shots = 3 ) {
         $thumbnail_shots = $media->getDurationInSeconds() >= $thumbnail_shots ? $thumbnail_shots : 1;
         $divide_result   = (int) floor( $media->getDurationInSeconds() / $thumbnail_shots );
         $seconds         = $divide_result;

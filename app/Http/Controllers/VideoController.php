@@ -43,7 +43,7 @@ class VideoController extends Controller {
         }
 
         $dimension     = $videostream->getDimensions();
-        $newThumbnails = generateThumbnailsFromVideo( $media, $path, 3, $angle );
+        $newThumbnails = generateThumbnailsFromVideo( $media, $path, $angle );
         $video         = Video::create( [
             'thumbnail'     => $newThumbnails[1],
             'original_name' => request()->video->getClientOriginalName(),
