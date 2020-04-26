@@ -10,83 +10,89 @@ use App\Video;
 use Carbon\Carbon;
 use FFMpeg\Filters\Video\RotateFilter;
 
-class VideoController extends Controller {
+class VideoController extends Controller
+{
 
 
-    public function upload_video( StoreVideoRequest $request ) {
+    public function upload_video(StoreVideoRequest $request)
+    {
 
-        $file = \Str::random( 16 ) . '.' . request()->video->getClientOriginalExtension();
-        request()->video->storeAs( 'public/uploads/', $file );
-        $path        = 'uploads/' . $file;
-        $media       = \FFMpeg::open( $path );
+        $file = \Str::random(16) . '.' . request()->video->getClientOriginalExtension();
+        request()->video->storeAs('public/uploads/', $file);
+        $path = 'uploads/' . $file;
+        $media = \FFMpeg::open($path);
         $videostream = $media->getStreams()->videos()->first();
-        $angle = getVideoRotation( $videostream );
+        $angle = getVideoRotation($videostream);
 
-        $dimension     = $videostream->getDimensions();
-        $newThumbnails = generateThumbnailsFromVideo( $media, $path, $angle );
-        $video         = Video::create( [
-            'thumbnail'     => $newThumbnails[1],
+        $dimension = $videostream->getDimensions();
+        $newThumbnails = generateThumbnailsFromVideo($media, $path, $angle);
+        $video = Video::create([
+            'thumbnail' => $newThumbnails[1],
             'original_name' => request()->video->getClientOriginalName(),
-            'video_path'    => $path,
-            'title'         => request()->video->getClientOriginalName(),
-            'duration'      => $media->getDurationInSeconds(),
-            'size'          => request()->video->getSize(),
-            'video_motion'  => 'Animation',
-            'video_type'    => 'Public',
-            'width'         => $dimension->getWidth(),
-            'stream_path'   => getCleanFileName( $path, '_240p_converted.mp4' )
-        ] );
-        ConvertVideoForStreaming::dispatch( $video, 320, 240, [
+            'video_path' => $path,
+            'title' => request()->video->getClientOriginalName(),
+            'duration' => $media->getDurationInSeconds(),
+            'size' => request()->video->getSize(),
+            'video_motion' => 'Animation',
+            'video_type' => 'Public',
+            'width' => $dimension->getWidth(),
+            'stream_path' => getCleanFileName($path, '_240p_converted.mp4')
+        ]);
+        ConvertVideoForStreaming::dispatch($video, 320, 240, [
             'converted_for_streaming_at' => Carbon::now(),
-            'processed'                  => true
-        ] ,$angle);
-        if ( $video->width >= 640 ) {
-            ConvertVideoForStreaming::dispatch( $video, 640, 360, [ '360p' => 1 ], $angle );
+            'processed' => true
+        ], $angle);
+        if ($video->width >= 640) {
+            ConvertVideoForStreaming::dispatch($video, 640, 360, ['360p' => 1], $angle);
         }
-        if ( $video->width >= 854 ) {
-            ConvertVideoForStreaming::dispatch( $video, 854, 480, [ '480p' => 1 ], $angle, 1000 );
+        if ($video->width >= 854) {
+            ConvertVideoForStreaming::dispatch($video, 854, 480, ['480p' => 1], $angle, 1000);
         }
-        if ( $video->width >= 1280 ) {
-            ConvertVideoForStreaming::dispatch( $video, 1280, 720, [ '720p' => 1 ], $angle, 1000 );
+        if ($video->width >= 1280) {
+            ConvertVideoForStreaming::dispatch($video, 1280, 720, ['720p' => 1], $angle, 1000);
         }
-        if ( $video->width >= 1920 ) {
-            ConvertVideoForStreaming::dispatch( $video, 1920, 1080, [ '1080p' => 1 ], $angle, 1000 );
+        if ($video->width >= 1920) {
+            ConvertVideoForStreaming::dispatch($video, 1920, 1080, ['1080p' => 1], $angle, 1000);
         }
-        if ( $video->width >= 2560 ) {
-            ConvertVideoForStreaming::dispatch( $video, 2560, 1440, [ '1440p' => 1 ], $angle, 1000 );
+        if ($video->width >= 2560) {
+            ConvertVideoForStreaming::dispatch($video, 2560, 1440, ['1440p' => 1], $angle, 1000);
         }
-        if ( $video->width >= 3840 ) {
-            ConvertVideoForStreaming::dispatch( $video, 3840, 2160, [ '4k' => 1 ], $angle, 1000 );
+        if ($video->width >= 3840) {
+            ConvertVideoForStreaming::dispatch($video, 3840, 2160, ['4k' => 1], $angle, 1000);
         }
-        if ( $video->width >= 7680 ) {
-            ConvertVideoForStreaming::dispatch( $video, 7680, 4320, [ '8k' => 1 ], $angle, 2000 );
+        if ($video->width >= 7680) {
+            ConvertVideoForStreaming::dispatch($video, 7680, 4320, ['8k' => 1], $angle, 2000);
         }
         $video->username = auth()->user()->username;
 
         $message = "Video is uploading... in backgroud";
 
-        return compact( 'message', 'video', 'newThumbnails' );
+        return compact('message', 'video', 'newThumbnails');
     }
 
-    public function watch_video( $username ) {
-        $video          = Video::whereHas( 'user', function ( $query ) use ( $username ) {
-            $query->whereUsername( $username );
-        } )->whereVideoId( request( 'v' ) )->whereProcessed( 1 )->firstOrFail();
-        $related_videos = Video::whereUserId( $video->user->id )
-                               ->whereProcessed( 1 )->where( 'video_id', '!=', request( 'v' ) )->with( 'user' )
-                               ->latest()->take( 3 )->get();
+    public function watch_video($username)
+    {
+        
+        $video = Video::whereHas('user', function ($query) use ($username) {
+            $query->whereUsername($username);
+        })->whereVideoId(request('v'))->whereProcessed(1)->firstOrFail();
+        $related_videos = Video::whereUserId($video->user->id)
+            ->whereProcessed(1)->where('video_id', '!=', request('v'))->with('user')
+            ->latest()->take(3)->get();
 
-        return view( 'watch_video', compact( 'video', 'related_videos' ) );
+        return view('watch_video', compact('video', 'related_videos'));
 
     }
 
-    public function list_of_videos() {
-        $videos = Video::latest()->with( 'user' )->get();
+    public function list_of_videos()
+    {
+        $videos = Video::latest()->with('user')->get();
 
-        return compact( 'videos' );
+        return compact('videos');
     }
 
-    public function update_video( Video $video ) {
-        return [ 'status' => $video->update( request( [ 'description', 'title', 'thumbnail' ] ) ) ];
+    public function update_video(Video $video)
+    {
+        return ['status' => $video->update(request(['description', 'title', 'thumbnail']))];
     }
 }

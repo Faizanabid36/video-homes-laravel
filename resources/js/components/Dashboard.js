@@ -15,7 +15,6 @@ class Dashboard extends React.Component {
         this.renderTemplate = this.renderTemplate.bind(this);
     }
     componentDidMount() {
-        // if()
     }
     renderTemplate(){
         switch(this.state.tab){
@@ -49,7 +48,6 @@ class Dashboard extends React.Component {
                                             <a href='#' onClick={e=>{e.preventDefault();this.setState({tab:'dashboard'})}}>Dashboard</a>
                                         </li>
                                         <li className={this.state.tab === 'videos' && 'selected'}>
-                                            {/*<a href="#">Videos</a>*/}
                                             <a href='#' onClick={e=>{e.preventDefault();this.setState({tab:'videos'})}}>Videos</a>
                                         </li>
                                         <li className={this.state.tab === 'comments' && 'selected'}>
