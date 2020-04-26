@@ -96,4 +96,13 @@ class VideoController extends Controller
     {
         return ['status' => $video->update(request(['description', 'title', 'thumbnail']))];
     }
+    public function edit_video($video_id){
+        $video = Video::whereVideoId($video_id)->firstOrFail();
+        $thumbnails = [];
+        for ($i=1;$i<=3;$i++){
+            $thumbnails[$i] = str_replace('1',$i,$video->thumbnail);
+        }
+        return compact('video','thumbnails');
+    }
+
 }

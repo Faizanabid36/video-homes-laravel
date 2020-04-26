@@ -3,7 +3,7 @@ import {useDropzone} from 'react-dropzone'
 import {Carousel, Form, Row, Col, Container, ProgressBar, Button} from 'react-bootstrap';
 
 
-function MyDropzone() {
+function MyDropzone(props) {
     const [uploadProgress, updateUploadProgress] = useState(0);
     const [uploading, setUploading] = useState(false);
     const [state, setState] = useState(false);
@@ -33,16 +33,17 @@ function MyDropzone() {
         })
             .then(({data}) => {
                 setUploading(false);
+                props.history.push(`edit_video/${data.video.video_id}`)
                 // console.log(data.video);
-                setState({...data.video});
-                setThumbnails(data.newThumbnails);
+                // setState({...data.video});
+                // setThumbnails(data.newThumbnails);
                 // window.location.href = window.location.toString().replace("upload-video",'watch')+"?v="+data.video.video_id;
 
             })
             .catch((err) => {
                 setUploading(false);
             });
-    }, []);
+    }, [props]);
     const onUpdate = useCallback(e => {
         axios.put('update-video/' + state.id, {...state}).then(({data}) => {
             window.location.href = window.VIDEO_APP.base_url+"/"+state.username + "/watch_video?v=" + state.video_id;

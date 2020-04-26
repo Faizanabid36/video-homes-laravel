@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/upload-video', 'VideoController@upload_video');
     Route::put('/update-video/{video}', 'VideoController@update_video');
     Route::get('/all_videos', 'VideoController@list_of_videos');
-
+    Route::get('edit_video/{video_id}','VideoController@edit_video');
 
     Route::get('testvideo', function (){
         $filename = storage_path("app/public/uploads/essatesting.png");
