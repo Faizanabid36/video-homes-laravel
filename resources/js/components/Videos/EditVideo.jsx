@@ -26,7 +26,7 @@ export default function EditVideo(props) {
             console.log(index);
             if(index && index[1]){
                 console.log(index[1]);
-                setIndex(index[1]);
+                setIndex(index[1] -1);
             }
             setThumbnails(data.thumbnails);
             setCategories(data.categories)
