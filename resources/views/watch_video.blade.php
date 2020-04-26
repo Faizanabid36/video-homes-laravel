@@ -249,7 +249,7 @@
                                     </div>
                                     @if(!auth()->guest())
                                         <div class="publisher-subscribe-button"><a
-                                                href="http://localhost:9002//video_studio"
+                                                href="{{route('dashboard')}}"
                                                 class="btn-subscribed pointer"
                                                 data-load="?link1=video_studio">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
