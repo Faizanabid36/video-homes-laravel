@@ -78,7 +78,7 @@ class VideoController extends Controller
         }
         $related_videos = Video::whereUserId($video->user->id)
             ->whereProcessed(1)->where('video_id', '!=', request('v'))->with('user')
-            ->latest()->take(3)->get();
+            ->latest()->take(1)->get();
 
         return view('watch_video', compact('video', 'related_videos'));
 
