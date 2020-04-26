@@ -50,13 +50,13 @@ class VideoController extends Controller
             ConvertVideoForStreaming::dispatch($video, 1280, 720, ['720p' => 1], $angle, 1000);
         }
         if ($video->width >= 1920) {
-            ConvertVideoForStreaming::dispatch($video, 1920, 1080, ['1080p' => 1], $angle, 1000);
+            ConvertVideoForStreaming::dispatch($video, 1920, 1080, ['1080p' => 1], $angle, 2000);
         }
         if ($video->width >= 2560) {
-            ConvertVideoForStreaming::dispatch($video, 2560, 1440, ['1440p' => 1], $angle, 1000);
+            ConvertVideoForStreaming::dispatch($video, 2560, 1440, ['1440p' => 1], $angle, 2000);
         }
         if ($video->width >= 3840) {
-            ConvertVideoForStreaming::dispatch($video, 3840, 2160, ['4k' => 1], $angle, 1000);
+            ConvertVideoForStreaming::dispatch($video, 3840, 2160, ['4k' => 1], $angle, 2000);
         }
         if ($video->width >= 7680) {
             ConvertVideoForStreaming::dispatch($video, 7680, 4320, ['8k' => 1], $angle, 2000);
