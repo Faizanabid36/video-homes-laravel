@@ -85,7 +85,7 @@ function getVideoRotation( $videostream ) {
         return false;
     }
     $tags = $videostream->get( 'tags' );
-    if ( ! isset( $tags['rotate'] ) && $tags['rotate'] == 0 ) {
+    if ( ! isset( $tags['rotate'] ) || $tags['rotate'] == 0 ) {
         return false;
     }
 
