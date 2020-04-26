@@ -39,7 +39,7 @@ export default function EditVideo(props) {
                     />
                     {!manualupload ? <Carousel interval={null} activeIndex={index} onSelect={handleSelect}>
                             {thumbnails && Object.values(thumbnails).map(v => {
-                                    console.log(v);
+
                                     return <Carousel.Item>
                                         <img
                                             className="d-block w-100"
@@ -79,7 +79,7 @@ export default function EditVideo(props) {
                         setState(state);
                     }}/>
                 </Form.Group>
-                <Form.Group controlId="category">
+                {categories && <Form.Group controlId="category">
                     <Form.Label>Category</Form.Label>
                     <Form.Control as="select" custom defaultValue={state.category_id} onChange={e => {
                         state.category_id = e.target.value;
@@ -87,8 +87,7 @@ export default function EditVideo(props) {
                     }}>
                         {categories.map((v, k) => <option value={v.id}>{v.name}</option>)}
                     </Form.Control>
-
-                </Form.Group>
+                </Form.Group>}
                 <Button variant="primary" onClick={onUpdate}>
                     Update and Preview Video
                 </Button>
