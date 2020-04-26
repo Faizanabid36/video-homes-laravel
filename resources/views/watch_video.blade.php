@@ -100,7 +100,7 @@
                                                     </svg>
                                                 </div>
                                                 <div
-                                                    class="video-duration">{{str_replace(".",":",$related_video->duration)}}</div>
+                                                    class="video-duration">{{str_replace(".",":",round($related_video->duration,2))}}</div>
                                             </a>
                                         </div>
                                         <div class="video-title">
