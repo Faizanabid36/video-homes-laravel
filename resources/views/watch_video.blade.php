@@ -1,8 +1,7 @@
 @extends('layouts.app')
 @section('container')
     <div id="main-container" class="main-content  container  watch-container    " data-logged="true">
-        <div id="container_content"><input type="hidden" id="json-data"
-                                           value="{&quot;title&quot;:&quot;14 March, 2020 - Loom Recording&quot;,&quot;description&quot;:&quot;sdfas&quot;,&quot;keyword&quot;:&quot;as&quot;,&quot;page&quot;:&quot;watch&quot;,&quot;url&quot;:&quot;http:\/\/localhost:9002\/\/watch\/14-march-2020-loom-recording_MVVIbINPjrRSP69.html&quot;,&quot;is_movie&quot;:false}">
+        <div id="container_content">
             <div class="top-video video-player-page">
                 <div class="row">
                     <div id="background" class="hidden"></div>
@@ -183,7 +182,7 @@
                                         Embed
                                     </button>
                                     @if(!auth()->guest())
-                                        <a class="btn btn-share" href="#">
+                                        <a class="btn btn-share" href="{{route('dashboard')}}#/edit_video/{{request(v)}}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                  viewBox="0 0 24 24">
                                                 <path fill="currentColor"
@@ -191,7 +190,7 @@
                                             </svg>
                                             Edit video
                                         </a>
-                                        <a href="#"
+                                        <a href="{{route('dashboard')}}"
                                            class="btn-share">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                  viewBox="0 0 24 24">
@@ -215,27 +214,27 @@
                                     <div class="share-video hidden">
                                         <div class="row share-input">
                                             <div class="col-md-4">
-                                                <input type="text" value="{{\request()->fullUrl()}}"
+                                                <input type="text" value="{{request()->fullUrl()}}"
                                                        class="form-control input-md" readonly=""
                                                        onclick="this.select();">
                                             </div>
                                         </div>
                                         <a href="#" class="fa fa-facebook"
-                                           onclick="OpenShareWindow('https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A9002%2F%2Fwatch%2F14-march-2020-loom-recording_MVVIbINPjrRSP69.html')"></a>
+                                           onclick="OpenShareWindow('https://www.facebook.com/sharer/sharer.php?u={{request()->fullUrl()}}')"></a>
                                         <a href="#" class="fa fa-twitter"
-                                           onclick="OpenShareWindow('https://twitter.com/intent/tweet?url=http%3A%2F%2Flocalhost%3A9002%2F%2Fwatch%2F14-march-2020-loom-recording_MVVIbINPjrRSP69.html')"></a>
+                                           onclick="OpenShareWindow('https://twitter.com/intent/tweet?url={{request()->fullUrl()}}')"></a>
                                         <a href="#" class="fa fa-google"
-                                           onclick="OpenShareWindow('https://plus.google.com/share?url=http%3A%2F%2Flocalhost%3A9002%2F%2Fwatch%2F14-march-2020-loom-recording_MVVIbINPjrRSP69.html')"></a>
+                                           onclick="OpenShareWindow('https://plus.google.com/share?url={{request()->fullUrl()}}')"></a>
                                         <a href="#" class="fa fa-linkedin"
-                                           onclick="OpenShareWindow('https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Flocalhost%3A9002%2F%2Fwatch%2F14-march-2020-loom-recording_MVVIbINPjrRSP69.html&amp;title=14 March, 2020 - Loom Recording')"></a>
-                                        <a href="#" class="fa fa-pinterest"
-                                           onclick="OpenShareWindow('https://pinterest.com/pin/create/button/?url=http%3A%2F%2Flocalhost%3A9002%2F%2Fwatch%2F14-march-2020-loom-recording_MVVIbINPjrRSP69.html&amp;media=http://localhost:9002//upload/photos/2020/04/r9iNPbQj4MfaoXFI8ezc_04_1a2e85073c867251df9bc76c985fc37e_image.jpg')"></a>
-                                        <a href="#" class="fa fa-tumblr"
-                                           onclick="OpenShareWindow('http://www.tumblr.com/share/link?url=http%3A%2F%2Flocalhost%3A9002%2F%2Fwatch%2F14-march-2020-loom-recording_MVVIbINPjrRSP69.html')"></a>
-                                        <a href="#" class="fa fa-reddit"
-                                           onclick="OpenShareWindow('http://www.reddit.com/submit?url=http%3A%2F%2Flocalhost%3A9002%2F%2Fwatch%2F14-march-2020-loom-recording_MVVIbINPjrRSP69.html')"></a>
+                                           onclick="OpenShareWindow('https://www.linkedin.com/shareArticle?mini=true&amp;url={{request()->fullUrl()}}&amp;title={{$video->title}}')"></a>
+{{--                                        <a href="#" class="fa fa-pinterest"--}}
+{{--                                           onclick="OpenShareWindow('https://pinterest.com/pin/create/button/?url=http%3A%2F%2Flocalhost%3A9002%2F%2Fwatch%2F14-march-2020-loom-recording_MVVIbINPjrRSP69.html&amp;media=http://localhost:9002//upload/photos/2020/04/r9iNPbQj4MfaoXFI8ezc_04_1a2e85073c867251df9bc76c985fc37e_image.jpg')"></a>--}}
+{{--                                        <a href="#" class="fa fa-tumblr"--}}
+{{--                                           onclick="OpenShareWindow('http://www.tumblr.com/share/link?url=http%3A%2F%2Flocalhost%3A9002%2F%2Fwatch%2F14-march-2020-loom-recording_MVVIbINPjrRSP69.html')"></a>--}}
+{{--                                        <a href="#" class="fa fa-reddit"--}}
+{{--                                           onclick="OpenShareWindow('http://www.reddit.com/submit?url=http%3A%2F%2Flocalhost%3A9002%2F%2Fwatch%2F14-march-2020-loom-recording_MVVIbINPjrRSP69.html')"></a>--}}
                                         <a href="#" onclick="copyToClipboard(this)" class="fa fa-link"
-                                           link="http://localhost:9002//v/mjBvaU"></a>
+                                           link="{{request()->fullUrl()}}"></a>
                                     </div>
                                 </div>
                                 <div class="publisher-element pull-left pt_mn_wtch_pub">
