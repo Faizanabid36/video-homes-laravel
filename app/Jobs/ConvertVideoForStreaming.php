@@ -31,7 +31,6 @@ class ConvertVideoForStreaming implements ShouldQueue {
         $this->bitrate = $bitrate;
         $this->update  = $update;
         $this->angle   = $this->getAngle( $angle );
-        dd([$this->angle,$angle,$this->getAngle($angle)]);
     }
 
     /**
@@ -41,6 +40,7 @@ class ConvertVideoForStreaming implements ShouldQueue {
      */
     public function handle() {
         // create a video format...
+        dd($this->angle);
         $lowBitrateFormat = ( new X264( 'libmp3lame', 'libx264' ) )->setKiloBitrate( $this->bitrate );
 
         $video = \FFMpeg::open( $this->video->video_path );
