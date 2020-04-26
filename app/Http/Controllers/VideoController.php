@@ -31,7 +31,7 @@ class VideoController extends Controller
             'title' => request()->video->getClientOriginalName(),
             'duration' => $media->getDurationInSeconds(),
             'size' => request()->video->getSize(),
-            'video_motion' => 1,
+            'category_id' => 1,
             'video_type' => 'Public',
             'width' => $dimension->getWidth(),
             'stream_path' => getCleanFileName($path, '_240p_converted.mp4')

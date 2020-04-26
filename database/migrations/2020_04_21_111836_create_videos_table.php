@@ -18,7 +18,7 @@ class CreateVideosTable extends Migration
             $table->string('title');
             $table->string('video_id');
             $table->text('description')->nullable();
-            $table->string('video_motion');
+            $table->string('video_motion')->nullable();
             $table->integer('is_proof_video')->nullable();
             $table->text('tags')->nullable();
             $table->string('video_custom_id')->nullable();
