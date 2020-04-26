@@ -109,7 +109,7 @@ class VideoController extends Controller
         $video = Video::whereVideoId($video_id)->firstOrFail();
         $thumbnails = [];
         for ($i=1;$i<=3;$i++){
-            $thumbnails[$i] = str_replace('1',$i,$video->thumbnail);
+            $thumbnails[$i] = str_replace('1.png',"$i.png",$video->thumbnail);
         }
         return compact('video','thumbnails');
     }
