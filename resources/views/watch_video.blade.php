@@ -1261,10 +1261,10 @@
             sources[i] = parseFloat($($('video').find('source')[i]).attr('res'));
         }
 
-        // var imageAddr = "http://www.kenrockwell.com/contax/images/g2/examples/31120037-5mb.jpg";
-        // var downloadSize = 4995374;
-        var imageAddr = site_url + "/upload/photos/speed.jpg";
-        var downloadSize = 1082828;
+        var imageAddr = "http://www.kenrockwell.com/contax/images/g2/examples/31120037-5mb.jpg";
+        var downloadSize = 4995374;
+        // var imageAddr = site_url + "/upload/photos/speed.jpg";
+        // var downloadSize = 1082828;
 
         function getCookie(name) {
             var value = "; " + document.cookie;
@@ -1387,9 +1387,9 @@
                 }, false);
 
                 media.addEventListener('playing', function (e) {
-                    if (pt_elexists('.ads-overlay-info')) {
-                        $('.ads-overlay-info').remove();
-                    }
+                    // if (pt_elexists('.ads-overlay-info')) {
+                    //     $('.ads-overlay-info').remove();
+                    // }
 
                     $('.ads-test').remove();
 
@@ -1694,7 +1694,18 @@
     </script>
     <script type="text/javascript">
 
+        function show_gif(self,gif) {
+            if (gif && gif != '') {
+                myTimeout = setTimeout(function() {
+                    $(self).append('<img src="'+gif+'">');
+                }, 1000);
+            }
+        }
 
+        function hide_gif(self) {
+            $(self).find('img').remove();
+            clearTimeout(myTimeout);
+        }
         $(document).on('change', '#thumbnail', function (event) {
             let imgPath = $(this)[0].files[0].name;
             if (typeof (FileReader) != "undefined") {
