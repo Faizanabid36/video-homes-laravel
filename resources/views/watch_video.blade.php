@@ -182,7 +182,7 @@
                                         Embed
                                     </button>
                                     @if(!auth()->guest())
-                                        <a class="btn btn-share" href="{{route('dashboard')}}#/edit_video/{{request(v)}}">
+                                        <a class="btn btn-share" href="{{route('dashboard')}}#/edit_video/{{request('v')}}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                  viewBox="0 0 24 24">
                                                 <path fill="currentColor"
