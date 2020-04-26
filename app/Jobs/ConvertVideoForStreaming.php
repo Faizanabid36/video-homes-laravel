@@ -31,6 +31,7 @@ class ConvertVideoForStreaming implements ShouldQueue {
         $this->bitrate = $bitrate;
         $this->update  = $update;
         $this->angle   = $this->getAngle( $angle );
+        dd([$this->angle,$angle,$this->getAngle]);
     }
 
     /**
@@ -44,13 +45,12 @@ class ConvertVideoForStreaming implements ShouldQueue {
 
         $video = \FFMpeg::open( $this->video->video_path );
         if ( $this->angle ) {
+            dd($this->angle);
             $video->filters()->rotate( $this->angle );
         }
         $video->filters()->pad( new Dimension( $this->width, $this->height ) );
 
-        $video->export()
-              ->inFormat( $lowBitrateFormat )
-              ->save( getCleanFileName( $this->video->video_path, "_{$this->height}p_converted.mp4" ) );
+        $video->export()->inFormat( $lowBitrateFormat )->save( getCleanFileName( $this->video->video_path, "_{$this->height}p_converted.mp4" ) );
 
         // update the database so we know the convertion is done!
         Log::info( 'This is some useful information.', [
