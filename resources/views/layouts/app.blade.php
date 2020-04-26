@@ -92,7 +92,7 @@
                             <li>
                                 <a href="{{route('dashboard')}}#/profile">
                                     <img width="20"
-                                         src="{{asset('upload/photos/d-avatar.jpg')}}">{{auth()->user()->name}}/>
+                                         src="{{asset('upload/photos/d-avatar.jpg')}}"/>{{auth()->user()->name}}
                                 </a>
                             </li>
                             <li>
