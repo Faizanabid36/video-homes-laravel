@@ -23,6 +23,7 @@ export default function EditVideo(props) {
         axios.get(`edit_video/${props.match.params.id}`).then(({data}) => {
             setState({...data.video});
             let index = data.video.thumbnail.match(/-(\d+).png/);
+            console.log(index);
             if(index){
                 setIndex(index[1]);
             }
