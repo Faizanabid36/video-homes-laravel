@@ -35,12 +35,12 @@ export default function EditVideo(props) {
         <div id="container_content">
             <Row><Col xs={8} className="mx-auto">
                 <Form.Group controlId="manual_upload">
-                    <Form.Check
-                        type="switch"
-                        id="upload-switch"
-                        label="Upload Thumbnail"
-                        onChange={e => setManualupload(!manualupload)}
-                    />
+                    {/*<Form.Check*/}
+                    {/*    type="switch"*/}
+                    {/*    id="upload-switch"*/}
+                    {/*    label="Upload Thumbnail"*/}
+                    {/*    onChange={e => setManualupload(!manualupload)}*/}
+                    {/*/>*/}
                     {!manualupload ? <Carousel interval={null} activeIndex={index} onSelect={handleSelect}>
                             {thumbnails && Object.values(thumbnails).map(v => {
 
@@ -85,11 +85,11 @@ export default function EditVideo(props) {
                 </Form.Group>
                 {categories && <Form.Group controlId="category">
                     <Form.Label>Category</Form.Label>
-                    <Form.Control as="select" custom defaultValue={state.category_id} onChange={e => {
+                    <Form.Control as="select" size={'md'} custom defaultValue={state.category_id} onChange={e => {
                         state.category_id = e.target.value;
                         setState(state);
                     }}>
-                        {categories.map((v, k) => <option value={v.id}>{v.name}</option>)}
+                        {categories.map((v, k) => <option key={k} value={v.id}>{v.name}</option>)}
                     </Form.Control>
                 </Form.Group>}
                 <Button variant="primary" onClick={onUpdate}>
