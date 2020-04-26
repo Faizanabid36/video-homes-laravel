@@ -28,10 +28,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/all_videos', 'VideoController@list_of_videos');
     Route::get('edit_video/{video_id}','VideoController@edit_video');
 
-    Route::get('testvideo', function (){
-        $filename = storage_path("app/public/uploads/essatesting.png");
-        imagepng(imagerotate(imagecreatefrompng($filename), 180, 0),$filename."test.png");
-    });
+    Route::resource('playlist','PlaylistController');
+//    Route::resource('playlist','PlaylistController');
+
 });
 Route::get('{username}/watch_video', 'VideoController@watch_video');
 Route::get('{username}/watch_video/is_watchable', 'VideoController@watchable_video');
