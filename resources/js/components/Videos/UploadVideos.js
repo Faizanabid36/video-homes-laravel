@@ -9,6 +9,7 @@ function MyDropzone(props) {
     const [state, setState] = useState(false);
     const [thumbnails, setThumbnails] = useState(false);
     const [index, setIndex] = useState(0);
+    const [categories, setCategories] = useState('');
 
     const handleSelect = useCallback((selectedIndex, e) => {
         setIndex(selectedIndex);
@@ -32,13 +33,12 @@ function MyDropzone(props) {
             },
         })
             .then(({data}) => {
+                axios.get(window.VIDEO_APP.base_url + '/categories').then((res) => {
+                    console.log(res.data);
+                    setCategories(res.data.categories)
+                });
                 setUploading(false);
                 props.history.push(`edit_video/${data.video.video_id}`)
-                // console.log(data.video);
-                // setState({...data.video});
-                // setThumbnails(data.newThumbnails);
-                // window.location.href = window.location.toString().replace("upload-video",'watch')+"?v="+data.video.video_id;
-
             })
             .catch((err) => {
                 setUploading(false);
@@ -46,7 +46,7 @@ function MyDropzone(props) {
     }, [props]);
     const onUpdate = useCallback(e => {
         axios.put('update-video/' + state.id, {...state}).then(({data}) => {
-            window.location.href = window.VIDEO_APP.base_url+"/"+state.username + "/watch_video?v=" + state.video_id;
+            window.location.href = window.VIDEO_APP.base_url + "/" + state.username + "/watch_video?v=" + state.video_id;
         })
     }, [state, thumbnails]);
 
@@ -129,7 +129,9 @@ function MyDropzone(props) {
                     </div>
                 </Col>}
             </Row>
-            {uploading && <Row><Col xs={8} className={'mx-auto'}><ProgressBar animated now={uploadProgress}/>{`${uploadProgress}% uploaded`}</Col></Row>}
+            {uploading && <Row><Col xs={8} className={'mx-auto'}><ProgressBar animated
+                                                                              now={uploadProgress}/>{`${uploadProgress}% uploaded`}
+            </Col></Row>}
             {state && <Row>
                 <Col xs={8} className="mx-auto">
                     <Carousel interval={null} activeIndex={index} onSelect={handleSelect}>
@@ -159,6 +161,17 @@ function MyDropzone(props) {
                             state.description = e.target.value;
                             setState(state);
                         }}/>
+                    </Form.Group>
+                    <Form.Group controlId="exampleForm.ControlSelect1">
+                        <Form.Label>Video Category</Form.Label>
+                        <Form.Control as="select" onChange={(e) => {
+                            state.video_type = e.target.value;
+                            setState(state);
+                        }}>
+                            {categories && categories.map((i, index) => {
+                                return <option value={i.id} key={index}>{i.name}</option>
+                            })}
+                        </Form.Control>
                     </Form.Group>
                     <Button variant="primary" onClick={onUpdate}>
                         Update and Preview Video
