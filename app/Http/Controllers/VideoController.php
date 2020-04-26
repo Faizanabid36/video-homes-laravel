@@ -70,19 +70,36 @@ class VideoController extends Controller
         return compact('message', 'video', 'newThumbnails');
     }
 
-    public function watch_video( $username ) {
-        $video          = Video::whereHas( 'user', function ( $query ) use ( $username ) {
-            $query->whereUsername( $username );
-        } )->whereVideoId( request( 'v' ) )->firstOrFail();
-        if(!$video->processed){
-            return view('errors.processing')->with($video);
+    public function watch_video($username)
+    {
+        $video = Video::whereHas('user', function ($query) use ($username) {
+            $query->whereUsername($username);
+        })->whereVideoId(request('v'))->firstOrFail();
+        if (!$video->processed) {
+            return view('errors.processing')->with('video', $video);
         }
-        $related_videos = Video::whereUserId( $video->user->id )
-                               ->whereProcessed( 1 )->where( 'video_id', '!=', request( 'v' ) )->with( 'user' )
-                               ->latest()->take( 3 )->get();
+        $related_videos = Video::whereUserId($video->user->id)
+            ->whereProcessed(1)->where('video_id', '!=', request('v'))->with('user')
+            ->latest()->take(3)->get();
 
         return view('watch_video', compact('video', 'related_videos'));
 
+    }
+
+    public function watchable_video($username)
+    {
+        $video = Video::whereHas('user', function ($query) use ($username) {
+            $query->whereUsername($username);
+        })->whereVideoId(request('v'))->firstOrFail();
+        if (!$video->processed) {
+            $isProcessed=false;
+            return compact('video','isProcessed');
+        }
+        else
+        {
+            $isProcessed=true;
+            return compact('isProcessed');
+        }
     }
 
     public function list_of_videos()
