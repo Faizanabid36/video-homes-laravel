@@ -164,17 +164,17 @@ function MyDropzone(props) {
                             setState(state);
                         }}/>
                     </Form.Group>
-                    <Form.Group controlId="exampleForm.ControlSelect1">
-                        <Form.Label>Video Category</Form.Label>
-                        <Form.Control as="select" onChange={(e) => {
-                            state.video_type = e.target.value;
-                            setState(state);
-                        }}>
-                            {categories.map((i, index) => {
-                                return <option value={i.id} key={index}>{i.name}</option>
-                            })}
-                        </Form.Control>
-                    </Form.Group>
+                    {/*<Form.Group controlId="exampleForm.ControlSelect1">*/}
+                    {/*    <Form.Label>Video Category</Form.Label>*/}
+                    {/*    <Form.Control as="select" onChange={(e) => {*/}
+                    {/*        state.video_type = e.target.value;*/}
+                    {/*        setState(state);*/}
+                    {/*    }}>*/}
+                    {/*        {categories.map((i, index) => {*/}
+                    {/*            return <option value={i.id} key={index}>{i.name}</option>*/}
+                    {/*        })}*/}
+                    {/*    </Form.Control>*/}
+                    {/*</Form.Group>*/}
                     <Button variant="primary" onClick={onUpdate}>
                         Update and Preview Video
                     </Button>
