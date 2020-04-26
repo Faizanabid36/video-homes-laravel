@@ -1,6 +1,6 @@
 import React, {useCallback, useState, useEffect} from 'react';
 import {useDropzone} from 'react-dropzone'
-import {Carousel, Form, Row, Col, Container, ProgressBar, Button} from 'react-bootstrap';
+import {Carousel, Form, Row, Col, Container, Dropdown, ProgressBar, Button} from 'react-bootstrap';
 
 
 function MyDropzone(props) {
@@ -9,10 +9,10 @@ function MyDropzone(props) {
     const [state, setState] = useState(false);
     const [thumbnails, setThumbnails] = useState(false);
     const [index, setIndex] = useState(0);
+    const [categories, setCategories] = useState([]);
 
     const handleSelect = useCallback((selectedIndex, e) => {
         setIndex(selectedIndex);
-        console.log(thumbnails[selectedIndex + 1]);
         state.thumbnail = thumbnails[selectedIndex + 1];
         setState(state);
     }, [state, thumbnails]);
@@ -34,10 +34,12 @@ function MyDropzone(props) {
             .then(({data}) => {
                 setUploading(false);
                 props.history.push(`edit_video/${data.video.video_id}`)
-                // console.log(data.video);
-                // setState({...data.video});
-                // setThumbnails(data.newThumbnails);
-                // window.location.href = window.location.toString().replace("upload-video",'watch')+"?v="+data.video.video_id;
+                axios.get(window.VIDEO_APP.base_url + '/categories')
+                    .then((res) => {
+                        setCategories(res.data.categories)
+                    }).catch((err) => {
+                    console.log(err)
+                })
 
             })
             .catch((err) => {
@@ -46,7 +48,7 @@ function MyDropzone(props) {
     }, [props]);
     const onUpdate = useCallback(e => {
         axios.put('update-video/' + state.id, {...state}).then(({data}) => {
-            window.location.href = window.VIDEO_APP.base_url+"/"+state.username + "/watch_video?v=" + state.video_id;
+            window.location.href = window.VIDEO_APP.base_url + "/" + state.username + "/watch_video?v=" + state.video_id;
         })
     }, [state, thumbnails]);
 
@@ -95,7 +97,7 @@ function MyDropzone(props) {
                 </div>
             </div>
             <Row>
-                {!state && <Col xs={8} {...getRootProps()} className="mx-auto pt_page_margin">
+                {state && <Col xs={8} {...getRootProps()} className="mx-auto pt_page_margin">
                     <div className="content pt_shadow">
                         <Col className="pt_upload_vdo">
                             <div className="upload upload-video" data-block="video-drop-zone">
@@ -129,7 +131,9 @@ function MyDropzone(props) {
                     </div>
                 </Col>}
             </Row>
-            {uploading && <Row><Col xs={8} className={'mx-auto'}><ProgressBar animated now={uploadProgress}/>{`${uploadProgress}% uploaded`}</Col></Row>}
+            {uploading && <Row><Col xs={8} className={'mx-auto'}><ProgressBar animated
+                                                                              now={uploadProgress}/>{`${uploadProgress}% uploaded`}
+            </Col></Row>}
             {state && <Row>
                 <Col xs={8} className="mx-auto">
                     <Carousel interval={null} activeIndex={index} onSelect={handleSelect}>
@@ -159,6 +163,17 @@ function MyDropzone(props) {
                             state.description = e.target.value;
                             setState(state);
                         }}/>
+                    </Form.Group>
+                    <Form.Group controlId="exampleForm.ControlSelect1">
+                        <Form.Label>Video Category</Form.Label>
+                        <Form.Control as="select" onChange={(e) => {
+                            state.video_type = e.target.value;
+                            setState(state);
+                        }}>
+                            {categories.map((i, index) => {
+                                return <option value={i.id} key={index}>{i.name}</option>
+                            })}
+                        </Form.Control>
                     </Form.Group>
                     <Button variant="primary" onClick={onUpdate}>
                         Update and Preview Video

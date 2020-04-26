@@ -35,3 +35,4 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('{username}/watch_video', 'VideoController@watch_video');
 Route::get('{username}/watch_video/is_watchable', 'VideoController@watchable_video');
 Route::post('{username}/', 'VideoController@watch_video');
+Route::get('/categories','CategoryController@index');

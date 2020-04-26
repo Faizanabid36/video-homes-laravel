@@ -100,7 +100,7 @@ class VideoController extends Controller
 
     public function update_video(Video $video)
     {
-        return ['status' => $video->update(request(['description', 'title', 'thumbnail']))];
+        return ['status' => $video->update(request(['description', 'title', 'thumbnail','video_type']))];
     }
     public function edit_video($video_id){
         $video = Video::whereVideoId($video_id)->firstOrFail();
