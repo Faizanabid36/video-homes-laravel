@@ -18,7 +18,7 @@ export default function EditVideo(props){
         })
     }, [state, thumbnails]);
 
-    useEffect(() => console.log(props), []);
+    useEffect(() => console.log(props.match.id), []);
 
     return <Container className="container main-content" id="main-container">
         <div id="container_content">
