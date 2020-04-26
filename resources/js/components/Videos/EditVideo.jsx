@@ -24,7 +24,8 @@ export default function EditVideo(props) {
             setState({...data.video});
             let index = data.video.thumbnail.match(/-(\d+).png/);
             console.log(index);
-            if(index){
+            if(index && index[1]){
+                console.log(index[1]);
                 setIndex(index[1]);
             }
             setThumbnails(data.thumbnails);
