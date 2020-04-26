@@ -37,7 +37,7 @@
 <header>
     <nav class="navbar navbar-findcond navbar-fixed-top header-layout">
         <div class="navbar-header" style="position: fixed;float: left">
-            <a class="navbar-brand logo-img" href="#">
+            <a class="navbar-brand logo-img" href="{{route('dashboard')}}">
                 <h4>Video Homes</h4>
             </a>
         </div>
