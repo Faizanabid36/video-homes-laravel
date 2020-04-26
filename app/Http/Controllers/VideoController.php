@@ -108,7 +108,7 @@ class VideoController extends Controller
         $categories = Category::all();
         $thumbnails = [];
         for ($i=1;$i<=3;$i++){
-            $thumbnails[$i] = preg_replace('/(-)\d(\.png)/',"$1$i$2",$video->thumbnail, 1);
+            $thumbnails[$i] = preg_replace('/(-)\d(\.png)/',"-$i$2",$video->thumbnail, 1);
         }
         $video->username = auth()->user()->username;
         return compact('video','thumbnails','categories');
