@@ -1363,7 +1363,7 @@
             pluginPath: 'https://cdnjs.com/libraries/mediaelement-plugins/',
             shimScriptAccess: 'always',
             autoplay: true,
-            features: ['playpause', 'current', 'progress', 'duration', 'speed', 'skipback', 'jumpforward', 'tracks', 'markers', 'volume', 'chromecast', 'contextmenu', 'flash', 'fullscreen'],
+            features: ['playpause', 'current', 'progress', 'duration', 'speed', 'skipback', 'jumpforward', 'tracks', 'markers', 'volume', 'chromecast', 'contextmenu', 'flash', 'fullscreen','sourcechooser'],
             vastAdTagUrl: '',
             vastAdsType: '',
             setDimensions: true,
