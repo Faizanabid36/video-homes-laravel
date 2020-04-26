@@ -100,7 +100,7 @@
                                                     </svg>
                                                 </div>
                                                 <div
-                                                    class="video-duration">{{gmdate($related_video->duration}}</div>
+                                                    class="video-duration">{{gmdate($related_video->duration)}}</div>
                                             </a>
                                         </div>
                                         <div class="video-title">
