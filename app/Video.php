@@ -8,9 +8,7 @@ class Video extends Model
 {
     //
     protected $guarded = [];
-    protected $dates = [
-        'converted_for_streaming_at',
-    ];
+    protected $dates = [ 'converted_for_streaming_at', ];
     protected $hidden = [];
     protected $with = ['user'];
 
@@ -26,6 +24,5 @@ class Video extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
-
     }
 }
