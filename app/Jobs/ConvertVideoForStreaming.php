@@ -44,8 +44,9 @@ class ConvertVideoForStreaming implements ShouldQueue {
         $lowBitrateFormat = ( new X264( 'libmp3lame', 'libx264' ) )->setKiloBitrate( $this->bitrate );
 
         $video = \FFMpeg::open( $this->video->video_path );
+        Log::info("Essa Outside Angle",[$this->angle]);
         if ( $this->angle ) {
-            dd($this->angle);
+            Log::info("Essa Inside Angle",[$this->angle]);
             $video->filters()->rotate( $this->angle );
         }
         $video->filters()->pad( new Dimension( $this->width, $this->height ) );
