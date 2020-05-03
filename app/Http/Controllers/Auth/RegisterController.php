@@ -72,6 +72,7 @@ class RegisterController extends Controller
         $user_data['name'] = $data['name'];
         $user_data['username'] = $data['username'];
         $user_data['email'] = $data['email'];
+        $user_data['role']=$data['role'];
         return User::create($user_data);
     }
 }

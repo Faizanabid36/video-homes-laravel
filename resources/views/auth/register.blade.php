@@ -36,6 +36,12 @@
                             <option value="female">Female</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <select name="role" id="gender" required="">
+                            <option value="3">Video Provider</option>
+                            <option value="2">Realtor</option>
+                        </select>
+                    </div>
 
                     <div class="terms" style="color: #fff">
                         <label for="accept_terms" style="font-size: 12px; cursor: pointer;"><input type="checkbox"

@@ -30,7 +30,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('playlist','PlaylistController');
 //    Route::resource('playlist','PlaylistController');
-
+    Route::get('get_logged_user','HomeController@logged_user');
+    Route::post('edit_user_profile','HomeController@edit_user_profile');
 });
 Route::get('{username}/watch_video', 'VideoController@watch_video');
 Route::get('{username}/watch_video/is_watchable', 'VideoController@watchable_video');
