@@ -7,7 +7,8 @@ class General extends React.Component {
         super(props);
         this.state = {
             user: {},
-            result: '',
+            result: 0,
+            message: null,
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChangeInput = this.handleChangeInput.bind(this);
@@ -18,7 +19,7 @@ class General extends React.Component {
         let tab = 'general';
         axios.post('/edit_user_profile', {user, tab})
             .then((res) => {
-                this.setState({result:res.data.result})
+                this.setState({result: res.data.result, message: res.data.message})
             })
             .catch((err) => {
                 console.log(err)
@@ -46,9 +47,11 @@ class General extends React.Component {
             <div className="form-horizontal user-setting-panel pt_forms pt_shadow"
                  id="general-settings" method="POST">
                 <div className="setting-general-alert">
-
+                    {
+                        this.state.message ?
+                            <div className='alert alert-info'>{this.state.message}</div> : ''
+                    }
                 </div>
-                {this.state.result == 1 ? <div className='alert alert-success'>Profile Updated</div> : ''}
                 <Row>
                     <div className="form-group col-lg-6">
                         <label className="col-md-12" htmlFor="name">Name</label>

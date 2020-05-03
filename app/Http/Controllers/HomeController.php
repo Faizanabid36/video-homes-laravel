@@ -37,9 +37,18 @@ class HomeController extends Controller
     {
         $tab = \request('tab');
         $user = \request('user');
-        $result = User::whereId($user['id'])->update(
-            ['email' => $user['email'], 'gender' => $user['gender'], 'name' => $user['name'], 'username' => $user['username'], 'role' => $user['role']]
-        );
-        return compact('tab', 'result');
+        if ($tab == 'general') {
+            $result = User::whereId($user['id'])->update(
+                ['email' => $user['email'], 'gender' => $user['gender'], 'name' => $user['name'], 'username' => $user['username'], 'role' => $user['role']]
+            );
+            $message = $result == 1 ? 'Profile Updated' : 'Could Not Update Profile';
+        } elseif ($tab == 'delete-account') {
+            $password = \request('password');
+            $result = User::whereId((int)$user['id'])->delete();
+            $message = $result == 1 ? 'Account Deleted' : 'Could Not Delete Account';
+        } elseif ($tab == 'change-password') {
+
+        }
+        return compact('tab', 'result', 'message');
     }
 }
