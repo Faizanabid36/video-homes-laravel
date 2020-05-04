@@ -48,8 +48,7 @@ class ChangePassword extends React.Component {
     render() {
 
         return <div className="col-md-7 pt_sett_mani_page">
-            <div className="form-horizontal user-setting-panel pt_forms pt_shadow" id="password-settings"
-                 method="POST">
+            <div className="form-horizontal user-setting-panel pt_forms pt_shadow" id="password-settings">
                 <div className="setting-password-alert">
                     {
                         this.state.message ?

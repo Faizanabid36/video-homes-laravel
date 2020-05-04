@@ -48,7 +48,8 @@ class Profile extends React.Component {
                         <div className="col-md-3">
                             <div className="settings-sidebar">
                                 <ul className="list-group">
-                                    <li className="list-group-item active">
+                                    <li className="list-group-item"
+                                        className={this.state.tab == 'general' ? 'list-group-item active' : 'list-group-item'}>
                                         <a onClick={(e) => {
                                             e.preventDefault();
                                             this.setState({tab: 'general'})
@@ -60,7 +61,7 @@ class Profile extends React.Component {
                                             </svg>
                                             General</a>
                                     </li>
-                                    <li className="list-group-item ">
+                                    <li className={this.state.tab == 'change-password' ? 'list-group-item active' : 'list-group-item'}>
                                         <a onClick={(e) => {
                                             e.preventDefault();
                                             this.setState({tab: 'change-password'})
@@ -73,7 +74,7 @@ class Profile extends React.Component {
                                             Change Password</a>
                                     </li>
 
-                                    <li className="list-group-item ">
+                                    <li className={this.state.tab == 'delete-account' ? 'list-group-item active' : 'list-group-item'}>
                                         <a onClick={(e) => {
                                             e.preventDefault();
                                             this.setState({tab: 'delete-account'})

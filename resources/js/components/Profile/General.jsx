@@ -44,7 +44,7 @@ class General extends React.Component {
     render() {
         return <div className="col-md-7 pt_sett_mani_page">
             <div className="form-horizontal user-setting-panel pt_forms pt_shadow"
-                 id="general-settings" method="POST">
+                 id="general-settings">
                 <div className="setting-general-alert">
                     {
                         this.state.message ?

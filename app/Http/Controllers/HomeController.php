@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\UserExtra;
 use App\User;
+use App\BlockedUser;
 use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
@@ -63,5 +65,62 @@ class HomeController extends Controller
             $message = 'Incorrect Password Entered';
             return compact('tab', 'message');
         }
+    }
+
+    public function block_user()
+    {
+        if (\request('tab') == 'block-user') {
+            $user = User::where('username', \request('selectedValue'))->with('blockedbyusers')->first();
+            $alreadyblocked = false;
+            if (!is_null($user->blockedby)) {
+                foreach ($user->blockedby as $blockedby) {
+                    if ($blockedby['blocked_user_id'] == $user['id'] && $blockedby['user_id'] == auth()->user()->id)
+                        $alreadyblocked = true;
+                }
+            }
+            $blocked = null;
+            if (!$alreadyblocked) {
+                $blocked = BlockedUser::create([
+                    'user_id' => auth()->user()->id,
+                    'blocked_user_id' => $user['id'],
+                ]);
+            }
+            $message = !$alreadyblocked && !is_null($blocked) ? 'User Blocked Successfully' : 'Could Not Block User';
+            return compact('message', 'user');
+        } elseif (\request('tab') == 'privacy-settings') {
+            if (!is_null(\request('whoWatches'))) {
+                UserExtra::updateOrCreate(['user_id' => auth()->user()->id], ['who_watches' => \request('whoWatches')]);
+            }
+            if (!is_null(\request('whoComments'))) {
+                UserExtra::updateOrCreate(['user_id' => auth()->user()->id], ['who_comments' => \request('whoComments')]);
+            }
+            if (!is_null(\request('whoShares'))) {
+                UserExtra::updateOrCreate(['user_id' => auth()->user()->id], ['who_shares' => \request('whoShares')]);
+            }
+            $message='Settings Updated';
+            return compact('message');
+        }
+    }
+
+    public function search_to_block_user()
+    {
+        $q = \request('searchField');
+        $users = User::where('username', 'LIKE', $q . "%")
+            ->where('id', '!=', auth()->user()->id)
+            ->get();
+        $userOptions = collect($users)->map(function ($user) use ($users) {
+            $blocked = BlockedUser::where('user_id', auth()->user()->id)->where('blocked_user_id', $user->id)->first();
+            if (is_null($blocked)) {
+                return (object)[
+                    'key' => $user->id,
+                    'text' => $user->username,
+                    'value' => $user->username
+                ];
+            } else {
+                return (object)[];
+            }
+        });
+
+        return compact('userOptions');
     }
 }

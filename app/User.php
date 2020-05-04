@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'gender', 'username','role'
+        'name', 'email', 'password', 'gender', 'username', 'role'
     ];
 
     /**
@@ -46,5 +46,15 @@ class User extends Authenticatable
             $playlist->user_id = $user->id;
             $playlist->save();
         });
+    }
+
+    public function blockedusers()
+    {
+        return $this->hasMany(BlockedUser::class, 'user_id', 'id');
+    }
+
+    public function blockedbyusers()
+    {
+        return $this->hasMany(BlockedUser::class, 'blocked_user_id', 'id');
     }
 }

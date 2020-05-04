@@ -26,14 +26,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/upload-video', 'VideoController@upload_video');
     Route::put('/update-video/{video}', 'VideoController@update_video');
     Route::get('/all_videos', 'VideoController@list_of_videos');
-    Route::get('edit_video/{video_id}','VideoController@edit_video');
+    Route::get('edit_video/{video_id}', 'VideoController@edit_video');
 
-    Route::resource('playlist','PlaylistController');
+    Route::resource('playlist', 'PlaylistController');
 //    Route::resource('playlist','PlaylistController');
-    Route::get('get_logged_user','HomeController@logged_user');
-    Route::post('edit_user_profile','HomeController@edit_user_profile');
+    Route::get('get_logged_user', 'HomeController@logged_user');
+    Route::post('edit_user_profile', 'HomeController@edit_user_profile');
+    Route::post('search_to_block_user', 'HomeController@search_to_block_user');
+    Route::post('user_settings', 'HomeController@block_user');
 });
 Route::get('{username}/watch_video', 'VideoController@watch_video');
 Route::get('{username}/watch_video/is_watchable', 'VideoController@watchable_video');
 Route::post('{username}/', 'VideoController@watch_video');
-Route::get('/categories','CategoryController@index');
+Route::get('/categories', 'CategoryController@index');
