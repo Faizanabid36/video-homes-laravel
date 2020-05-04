@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\BlockedUser;
 use App\Http\Requests\StoreVideoRequest;
 use App\Jobs\ConvertVideoForStreaming;
+use App\User;
 use Image;
 use App\Video;
 use Carbon\Carbon;
@@ -70,6 +72,16 @@ class VideoController extends Controller
 
     public function watch_video($username)
     {
+        $user = User::whereUsername($username)->first();
+        $BlockedUser = BlockedUser::where('blocked_user_id', auth()->user()->id)
+            ->where('user_id', $user->id)->first();
+        if(!is_null($BlockedUser))
+        {
+            return view('errors.restricted');
+        }
+//        if(){
+//            BlockedUser::watch_video('')
+//        }
         $video = Video::whereHas('user', function ($query) use ($username) {
             $query->whereUsername($username);
         })->whereVideoId(request('v'))->firstOrFail();
@@ -89,7 +101,7 @@ class VideoController extends Controller
         $video = Video::whereHas('user', function ($query) use ($username) {
             $query->whereUsername($username);
         })->whereVideoId(request('v'))->firstOrFail();
-        return ['isProcessed'=>$video->processed];
+        return ['isProcessed' => $video->processed];
     }
 
     public function list_of_videos()
@@ -101,17 +113,19 @@ class VideoController extends Controller
 
     public function update_video(Video $video)
     {
-        return ['status' => $video->update(request(['description', 'title', 'thumbnail','video_type']))];
+        return ['status' => $video->update(request(['description', 'title', 'thumbnail', 'video_type']))];
     }
-    public function edit_video($video_id){
+
+    public function edit_video($video_id)
+    {
         $video = Video::whereVideoId($video_id)->firstOrFail();
         $categories = Category::all();
         $thumbnails = [];
-        for ($i=1;$i<=3;$i++){
-            $thumbnails[$i] = preg_replace('/(-)\d(\.png)/',"-$i$2",$video->thumbnail, 1);
+        for ($i = 1; $i <= 3; $i++) {
+            $thumbnails[$i] = preg_replace('/(-)\d(\.png)/', "-$i$2", $video->thumbnail, 1);
         }
         $video->username = auth()->user()->username;
-        return compact('video','thumbnails','categories');
+        return compact('video', 'thumbnails', 'categories');
     }
 
 }
