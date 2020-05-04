@@ -6,7 +6,6 @@ class DeleteAccount extends React.Component {
         super(props);
         this.state = {
             user: {},
-            result: '',
             password: '',
             message: null,
         }
@@ -19,7 +18,8 @@ class DeleteAccount extends React.Component {
         let tab = 'delete-account';
         axios.post('/edit_user_profile', {user, tab, password})
             .then((res) => {
-                this.setState({result: res.data.result})
+                this.setState({message: res.data.message})
+                console.log(this.state)
             })
             .catch((err) => {
                 console.log(err)
@@ -53,6 +53,7 @@ class DeleteAccount extends React.Component {
                     <label className="col-md-12" htmlFor="current_password">Current Password</label>
                     <div className="col-md-12">
                         <input onChange={this.handleChangeInput} id="password" name="password" type="password"
+                               required
                                placeholder=""
                                className="form-control input-md"/>
                     </div>

@@ -6,8 +6,9 @@ class ChangePassword extends React.Component {
         super(props);
         this.state = {
             user: {},
-            result: '',
             password: '',
+            new_password: '',
+            confirm_new_password: '',
             message: null,
         }
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -15,15 +16,19 @@ class ChangePassword extends React.Component {
     }
 
     handleSubmit() {
-        let {user, password} = this.state;
+        let {user, password, new_password, confirm_new_password} = this.state;
         let tab = 'change-password';
-        axios.post('/edit_user_profile', {user, tab, password})
-            .then((res) => {
-                this.setState({result: res.data.result})
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+        if (new_password == confirm_new_password) {
+            axios.post('/edit_user_profile', {user, tab, password, new_password, confirm_new_password})
+                .then((res) => {
+                    this.setState({message: res.data.message})
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        } else {
+            this.setState({message: 'Passwords Does Not Match'})
+        }
     }
 
     componentDidMount() {
@@ -52,28 +57,31 @@ class ChangePassword extends React.Component {
                     }
                 </div>
                 <div className="form-group">
-                    <label className="col-md-12" htmlFor="current_password">Current Passowrd</label>
+                    <label className="col-md-12" htmlFor="password">Current Passowrd</label>
                     <div className="col-md-12">
-                        <input id="current_password" name="current_password" type="password" placeholder=""
+                        <input required id="password" onChange={this.handleChangeInput} name="password" type="password"
+                               placeholder=""
                                className="form-control input-md"/>
                     </div>
                 </div>
                 <div className="form-group">
                     <label className="col-md-12" htmlFor="new_password">New Passowrd</label>
                     <div className="col-md-12">
-                        <input id="new_password" name="new_password" type="password" placeholder=""
+                        <input id="new_password" onChange={this.handleChangeInput} name="new_password" type="password"
+                               placeholder=""
                                className="form-control input-md"/>
                     </div>
                 </div>
                 <div className="form-group">
                     <label className="col-md-12" htmlFor="confirm_new_password">Confirm new password</label>
                     <div className="col-md-12">
-                        <input id="confirm_new_password" name="confirm_new_password" type="password" placeholder=""
+                        <input id="confirm_new_password" onChange={this.handleChangeInput} name="confirm_new_password"
+                               type="password" placeholder=""
                                className="form-control input-md"/>
                     </div>
                 </div>
                 <div className="last-sett-btn modal-footer" style={{margin: '0px -30px -10px -30px'}}>
-                    <button id="submit" name="submit" className="btn btn-main setting-panel-mdbtn">
+                    <button id="submit" onClick={this.handleSubmit} className="btn btn-main setting-panel-mdbtn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                              fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
                              strokeLinejoin="round" className="feather feather-check-circle">

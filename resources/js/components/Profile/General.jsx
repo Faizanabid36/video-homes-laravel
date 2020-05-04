@@ -7,7 +7,6 @@ class General extends React.Component {
         super(props);
         this.state = {
             user: {},
-            result: 0,
             message: null,
         }
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,7 +18,7 @@ class General extends React.Component {
         let tab = 'general';
         axios.post('/edit_user_profile', {user, tab})
             .then((res) => {
-                this.setState({result: res.data.result, message: res.data.message})
+                this.setState({message: res.data.message})
             })
             .catch((err) => {
                 console.log(err)

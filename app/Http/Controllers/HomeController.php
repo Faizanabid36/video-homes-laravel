@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
 {
@@ -42,13 +43,25 @@ class HomeController extends Controller
                 ['email' => $user['email'], 'gender' => $user['gender'], 'name' => $user['name'], 'username' => $user['username'], 'role' => $user['role']]
             );
             $message = $result == 1 ? 'Profile Updated' : 'Could Not Update Profile';
+            return compact('tab', 'message');
         } elseif ($tab == 'delete-account') {
             $password = \request('password');
-            $result = User::whereId((int)$user['id'])->delete();
-            $message = $result == 1 ? 'Account Deleted' : 'Could Not Delete Account';
+            $User = User::whereId($user['id'])->first();
+            if (Hash::check($password, $User['password'])) {
+                $message = User::whereId($user['id'])->delete() == 1 ? 'Account Deleted' : 'Could Not Delete Account';
+                return compact('tab', 'message');
+            }
+            $message = 'Incorrect Password Entered';
+            return compact('tab', 'message');
         } elseif ($tab == 'change-password') {
-
+            $User = User::whereId($user['id'])->first();
+            $password = \request('password');
+            if (Hash::check($password, $User['password'])) {
+                $message = User::whereId($user['id'])->update(['password' => Hash::make(\request('new_password'))]) ? 'Password Successfully Changed' : 'Could Not Change Password';
+                return compact('tab', 'message');
+            }
+            $message = 'Incorrect Password Entered';
+            return compact('tab', 'message');
         }
-        return compact('tab', 'result', 'message');
     }
 }
