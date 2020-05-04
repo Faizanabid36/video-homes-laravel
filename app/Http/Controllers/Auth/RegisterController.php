@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\AccountType;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
@@ -72,7 +73,15 @@ class RegisterController extends Controller
         $user_data['name'] = $data['name'];
         $user_data['username'] = $data['username'];
         $user_data['email'] = $data['email'];
-        $user_data['role']=$data['role'];
-        return User::create($user_data);
+        $user_data['role'] = $data['role'];
+        $user = User::create($user_data);
+        $account_type = new AccountType();
+        $account_type->user_id = $user->id;
+        if ($user_data['role'] == 3)
+            $account_type->account_type = $data['account_type'];
+        else
+            $account_type->account_type = null;
+        $account_type->save();
+        return $user;
     }
 }

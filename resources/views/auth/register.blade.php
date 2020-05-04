@@ -36,10 +36,18 @@
                             <option value="female">Female</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <select name="role" id="gender" required="">
+                    <div onchange="changeVisibility()" class="form-group">
+                        <select name="role" id="role" required="">
                             <option value="3">Video Provider</option>
                             <option value="2">Realtor</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select name="account_type" id="account_type" required="">
+                            <option value="designer">Designer</option>
+                            <option value="photographer">Photographer</option>
+                            <option value="instructor">Instructor</option>
+                            <option value="trainer">Trainer</option>
                         </select>
                     </div>
 
@@ -126,3 +134,16 @@
         </style>
     </div>
 @endsection
+
+@section('footer_script')
+    <script type="text/javascript">
+        function changeVisibility() {
+            let role = document.getElementById('role');
+            if(role.value!=3)
+                document.getElementById('account_type').style.visibility='hidden';
+            else
+                document.getElementById('account_type').style.visibility='visible';
+        }
+    </script>
+@endsection
+
