@@ -34,6 +34,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('edit_user_profile', 'HomeController@edit_user_profile');
     Route::post('search_to_block_user', 'HomeController@search_to_block_user');
     Route::post('user_settings', 'HomeController@block_user');
+
+    Route::get('all_playlists', 'HomeController@get_playlist');
+    Route::post('delete_playlist', 'HomeController@delete_playlist');
+    Route::post('update_playlist','HomeController@update_playlist');
+
 });
 Route::get('{username}/watch_video', 'VideoController@watch_video');
 Route::get('{username}/watch_video/is_watchable', 'VideoController@watchable_video');

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\UserExtra;
 use App\User;
 use App\BlockedUser;
+use App\Playlist;
 use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
@@ -97,7 +98,7 @@ class HomeController extends Controller
             if (!is_null(\request('whoShares'))) {
                 UserExtra::updateOrCreate(['user_id' => auth()->user()->id], ['who_shares' => \request('whoShares')]);
             }
-            $message='Settings Updated';
+            $message = 'Settings Updated';
             return compact('message');
         }
     }
@@ -122,5 +123,40 @@ class HomeController extends Controller
         });
 
         return compact('userOptions');
+    }
+
+    public function get_playlist()
+    {
+        $playlists = Playlist::whereUserId(auth()->user()->id)->get();
+        return compact('playlists');
+    }
+
+    public function delete_playlist()
+    {
+        $id = \request('id');
+        $deleted = Playlist::whereUserId(auth()->user()->id)->whereId($id)->delete();
+        return compact('deleted');
+    }
+
+    public function update_playlist()
+    {
+        if (\request('purpose') == 'add') {
+            $created = Playlist::create([
+                'name' => \request('name'),
+                'description' => \request('description'),
+                'user_id' => auth()->user()->id
+            ]);
+            $added = !is_null($created) ? 1 : 0;
+            return compact('added');
+        }
+        elseif(\request('purpose') == 'edit')
+        {
+            $updated=Playlist::whereId(\request('id'))
+                ->update(['name' => \request('name'),
+                    'description' => \request('description')
+                ]);
+            $added = !is_null($updated) ? 1 : 0;
+            return compact('added');
+        }
     }
 }
