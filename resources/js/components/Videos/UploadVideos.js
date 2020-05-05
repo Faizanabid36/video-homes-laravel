@@ -100,7 +100,7 @@ function MyDropzone(props) {
                 </div>
             </div>
             <Row>
-                {!state && <Col xs={8} {...getRootProps()} className="mx-auto pt_page_margin">
+                {state && <Col xs={8} {...getRootProps()} className="mx-auto pt_page_margin">
                     <div className="content pt_shadow">
                         <Col className="pt_upload_vdo">
                             <div className="upload upload-video" data-block="video-drop-zone">
