@@ -50,7 +50,7 @@ function MyDropzone(props) {
     const onUpdate = useCallback(e => {
         state.tags = tags.toString()
         setState(state);
-        axios.put('update-video/' + 1, {...state}).then(({data}) => {
+        axios.put('update-video/' + state.id, {...state}).then(({data}) => {
             window.location.href = window.VIDEO_APP.base_url + "/" + state.username + "/watch_video?v=" + state.video_id;
         })
     }, [state, thumbnails]);
