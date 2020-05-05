@@ -100,7 +100,7 @@ function MyDropzone(props) {
                 </div>
             </div>
             <Row>
-                {state && <Col xs={8} {...getRootProps()} className="mx-auto pt_page_margin">
+                {!state && <Col xs={8} {...getRootProps()} className="mx-auto pt_page_margin">
                     <div className="content pt_shadow">
                         <Col className="pt_upload_vdo">
                             <div className="upload upload-video" data-block="video-drop-zone">
@@ -137,7 +137,7 @@ function MyDropzone(props) {
             {uploading && <Row><Col xs={8} className={'mx-auto'}><ProgressBar animated
                                                                               now={uploadProgress}/>{`${uploadProgress}% uploaded`}
             </Col></Row>}
-            {!state && <Row>
+            {state && <Row>
                 <Col xs={8} className="mx-auto">
                     <Carousel interval={null} activeIndex={index} onSelect={handleSelect}>
                         {console.log('t', thumbnails)}
