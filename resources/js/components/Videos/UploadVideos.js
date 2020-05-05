@@ -1,4 +1,6 @@
 import React, {useCallback, useState, useEffect} from 'react';
+import TagsInput from 'react-tagsinput'
+import 'react-tagsinput/react-tagsinput.css'
 import {useDropzone} from 'react-dropzone'
 import {Carousel, Form, Row, Col, Container, ProgressBar, Button} from 'react-bootstrap';
 
@@ -10,6 +12,7 @@ function MyDropzone(props) {
     const [thumbnails, setThumbnails] = useState(false);
     const [index, setIndex] = useState(0);
     const [categories, setCategories] = useState('');
+    const [tags, setTags] = useState([]);
 
     const handleSelect = useCallback((selectedIndex, e) => {
         setIndex(selectedIndex);
@@ -45,7 +48,9 @@ function MyDropzone(props) {
             });
     }, [props]);
     const onUpdate = useCallback(e => {
-        axios.put('update-video/' + state.id, {...state}).then(({data}) => {
+        state.tags = tags.toString()
+        setState(state);
+        axios.put('update-video/' + 1, {...state}).then(({data}) => {
             window.location.href = window.VIDEO_APP.base_url + "/" + state.username + "/watch_video?v=" + state.video_id;
         })
     }, [state, thumbnails]);
@@ -132,7 +137,7 @@ function MyDropzone(props) {
             {uploading && <Row><Col xs={8} className={'mx-auto'}><ProgressBar animated
                                                                               now={uploadProgress}/>{`${uploadProgress}% uploaded`}
             </Col></Row>}
-            {state && <Row>
+            {!state && <Row>
                 <Col xs={8} className="mx-auto">
                     <Carousel interval={null} activeIndex={index} onSelect={handleSelect}>
                         {console.log('t', thumbnails)}
@@ -160,6 +165,12 @@ function MyDropzone(props) {
                         <Form.Control placeholder="Description" defaultValue={state.description} onChange={e => {
                             state.description = e.target.value;
                             setState(state);
+                        }}/>
+                    </Form.Group>
+                    <Form.Group controlId="tags">
+                        <Form.Label>Tags</Form.Label>
+                        <TagsInput placeholder="Tags" value={tags} onChange={e => {
+                            setTags(e);
                         }}/>
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlSelect1">
