@@ -1,7 +1,7 @@
 import {Button, Carousel, Col, Row, Container, Form} from "react-bootstrap";
 import React from "react";
 import BlockUser from "./Settings/BlockUser";
-import PrivacySettings from "./Settings/PrivacySettings";
+// import PrivacySettings from "./Settings/PrivacySettings";
 
 class Settings extends React.Component {
     constructor() {
@@ -17,7 +17,7 @@ class Settings extends React.Component {
             case 'block-user':
                 return <BlockUser/>;
             default:
-                return <PrivacySettings/>
+                return <BlockUser/>
         }
     }
 
@@ -41,18 +41,18 @@ class Settings extends React.Component {
                         <div className="col-md-3">
                             <div className="settings-sidebar">
                                 <ul className="list-group">
-                                    <li className={this.state.tab == 'privacy-settings' ? 'list-group-item active' : 'list-group-item'}>
-                                        <a onClick={(e) => {
-                                            e.preventDefault();
-                                            this.setState({tab: 'privacy-settings'})
-                                        }}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                 viewBox="0 0 24 24">
-                                                <path fill="#ca4b8e"
-                                                      d="M12,12H19C18.47,16.11 15.72,19.78 12,20.92V12H5V6.3L12,3.19M12,1L3,5V11C3,16.55 6.84,21.73 12,23C17.16,21.73 21,16.55 21,11V5L12,1Z"></path>
-                                            </svg>
-                                            Privacy Settings</a>
-                                    </li>
+                                    {/*<li className={this.state.tab == 'privacy-settings' ? 'list-group-item active' : 'list-group-item'}>*/}
+                                    {/*    <a onClick={(e) => {*/}
+                                    {/*        e.preventDefault();*/}
+                                    {/*        this.setState({tab: 'privacy-settings'})*/}
+                                    {/*    }}>*/}
+                                    {/*        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"*/}
+                                    {/*             viewBox="0 0 24 24">*/}
+                                    {/*            <path fill="#ca4b8e"*/}
+                                    {/*                  d="M12,12H19C18.47,16.11 15.72,19.78 12,20.92V12H5V6.3L12,3.19M12,1L3,5V11C3,16.55 6.84,21.73 12,23C17.16,21.73 21,16.55 21,11V5L12,1Z"></path>*/}
+                                    {/*        </svg>*/}
+                                    {/*        Privacy Settings</a>*/}
+                                    {/*</li>*/}
 
                                     <li className={this.state.tab == 'block-user' ? 'list-group-item active' : 'list-group-item'}>
                                         <a onClick={(e) => {
