@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Video;
+use App\VideoLikesDislikes;
 use Illuminate\Http\Request;
 use App\UserExtra;
 use App\User;
@@ -148,15 +150,26 @@ class HomeController extends Controller
             ]);
             $added = !is_null($created) ? 1 : 0;
             return compact('added');
-        }
-        elseif(\request('purpose') == 'edit')
-        {
-            $updated=Playlist::whereId(\request('id'))
+        } elseif (\request('purpose') == 'edit') {
+            $updated = Playlist::whereId(\request('id'))
                 ->update(['name' => \request('name'),
                     'description' => \request('description')
                 ]);
             $added = !is_null($updated) ? 1 : 0;
             return compact('added');
         }
+    }
+
+    public function update_likes()
+    {
+        $video = Video::whereVideoId(request('v'))->first();
+        return ['likes' => VideoLikesDislikes::where('video_id',$video->id)->get('likes')];
+
+    }
+
+    public function update_dislikes()
+    {
+        $video = Video::whereVideoId(request('v'))->first();
+        return ['likes' => VideoLikesDislikes::where('video_id',$video->id)->get('likes')];
     }
 }

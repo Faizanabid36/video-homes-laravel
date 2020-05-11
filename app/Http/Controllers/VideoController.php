@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
-use App\BlockedUser;
-use App\Http\Requests\StoreVideoRequest;
-use App\Jobs\ConvertVideoForStreaming;
-use App\User;
 use Image;
+use App\User;
 use App\Video;
+use App\Category;
+use App\VideoView;
 use Carbon\Carbon;
+use App\BlockedUser;
+use App\VideoLikesDislikes;
+use App\Jobs\ConvertVideoForStreaming;
+use App\Http\Requests\StoreVideoRequest;
 
 class VideoController extends Controller
 {
@@ -39,6 +41,9 @@ class VideoController extends Controller
             'width' => $dimension->getWidth(),
             'stream_path' => getCleanFileName($path, '_240p_converted.mp4')
         ]);
+        VideoLikesDislikes::create([
+            'video_id' => $video->id,
+        ]);
         ConvertVideoForStreaming::dispatch($video, 320, 240, [
             'converted_for_streaming_at' => Carbon::now(),
             'processed' => true
@@ -64,7 +69,6 @@ class VideoController extends Controller
         if ($video->width >= 7680) {
             ConvertVideoForStreaming::dispatch($video, 7680, 4320, ['8k' => 1], $angle, 2000);
         }
-
         $message = "Video is uploading... in backgroud";
 
         return compact('message', 'video');
@@ -75,13 +79,9 @@ class VideoController extends Controller
         $user = User::whereUsername($username)->first();
         $BlockedUser = BlockedUser::where('blocked_user_id', auth()->user()->id)
             ->where('user_id', $user->id)->first();
-        if(!is_null($BlockedUser))
-        {
+        if (!is_null($BlockedUser)) {
             return view('errors.restricted');
         }
-//        if(){
-//            BlockedUser::watch_video('')
-//        }
         $video = Video::whereHas('user', function ($query) use ($username) {
             $query->whereUsername($username);
         })->whereVideoId(request('v'))->firstOrFail();
@@ -91,8 +91,9 @@ class VideoController extends Controller
         $related_videos = Video::whereUserId($video->user->id)
             ->whereProcessed(1)->where('video_id', '!=', request('v'))->with('user')
             ->latest()->take(1)->get();
-
-        return view('watch_video', compact('video', 'related_videos'));
+        VideoView::createViewLog($video);
+        $totalViews = VideoView::getTotalVideoViews($video);
+        return view('watch_video', compact('video', 'related_videos', 'totalViews'));
 
     }
 
@@ -113,7 +114,7 @@ class VideoController extends Controller
 
     public function update_video(Video $video)
     {
-        return ['status' => $video->update(request(['description', 'title', 'thumbnail', 'video_type','tags']))];
+        return ['status' => $video->update(request(['description', 'title', 'thumbnail', 'video_type', 'tags']))];
     }
 
     public function edit_video($video_id)
@@ -126,6 +127,12 @@ class VideoController extends Controller
         }
         $video->username = auth()->user()->username;
         return compact('video', 'thumbnails', 'categories');
+    }
+
+    public function get_embedded_video($video_id)
+    {
+        $video = Video::whereVideoId($video_id)->whereProcessed(1)->firstOrFail();
+        return view('embed_video', compact('video'));
     }
 
 }

@@ -162,7 +162,7 @@
                                     </div>
                                 </div>
                                 <div class="video-views">
-                                    <span id="video-views-count">1</span> Views
+                                    <span id="video-views-count">{{$totalViews}}</span> {{$totalViews>1?'Views':'View'}}
                                 </div>
                                 <div class="video-options pt_mn_wtch_opts">
                                     <button class="btn-share" id="share-video">
@@ -182,7 +182,8 @@
                                         Embed
                                     </button>
                                     @if(!auth()->guest())
-                                        <a class="btn btn-share" href="{{route('dashboard')}}#/edit_video/{{request('v')}}">
+                                        <a class="btn btn-share"
+                                           href="{{route('dashboard')}}#/edit_video/{{request('v')}}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                  viewBox="0 0 24 24">
                                                 <path fill="currentColor"
@@ -209,7 +210,7 @@
                                         </svg>
                                         <span>Report</span></button>
                                     <div class="embed-placement hidden">
-                                        <textarea name="embed" id="embed" cols="30" rows="3" class="form-control">&lt;iframe src="http://localhost:9002//embed/MVVIbINPjrRSP69" frameborder="0" width="700" height="400" allowfullscreen&gt;&lt;/iframe&gt;</textarea>
+                                        <textarea name="embed" id="embed" cols="30" rows="3" class="form-control">&lt;iframe src="{{route('embed_video',$video->video_id)}}" frameborder="0" width="700" height="400" allowfullscreen&gt;&lt;/iframe&gt;</textarea>
                                     </div>
                                     <div class="share-video hidden">
                                         <div class="row share-input">
@@ -227,12 +228,12 @@
                                            onclick="OpenShareWindow('https://plus.google.com/share?url={{request()->fullUrl()}}')"></a>
                                         <a href="#" class="fa fa-linkedin"
                                            onclick="OpenShareWindow('https://www.linkedin.com/shareArticle?mini=true&amp;url={{request()->fullUrl()}}&amp;title={{$video->title}}')"></a>
-{{--                                        <a href="#" class="fa fa-pinterest"--}}
-{{--                                           onclick="OpenShareWindow('https://pinterest.com/pin/create/button/?url=http%3A%2F%2Flocalhost%3A9002%2F%2Fwatch%2F14-march-2020-loom-recording_MVVIbINPjrRSP69.html&amp;media=http://localhost:9002//upload/photos/2020/04/r9iNPbQj4MfaoXFI8ezc_04_1a2e85073c867251df9bc76c985fc37e_image.jpg')"></a>--}}
-{{--                                        <a href="#" class="fa fa-tumblr"--}}
-{{--                                           onclick="OpenShareWindow('http://www.tumblr.com/share/link?url=http%3A%2F%2Flocalhost%3A9002%2F%2Fwatch%2F14-march-2020-loom-recording_MVVIbINPjrRSP69.html')"></a>--}}
-{{--                                        <a href="#" class="fa fa-reddit"--}}
-{{--                                           onclick="OpenShareWindow('http://www.reddit.com/submit?url=http%3A%2F%2Flocalhost%3A9002%2F%2Fwatch%2F14-march-2020-loom-recording_MVVIbINPjrRSP69.html')"></a>--}}
+                                        {{--                                        <a href="#" class="fa fa-pinterest"--}}
+                                        {{--                                           onclick="OpenShareWindow('https://pinterest.com/pin/create/button/?url=http%3A%2F%2Flocalhost%3A9002%2F%2Fwatch%2F14-march-2020-loom-recording_MVVIbINPjrRSP69.html&amp;media=http://localhost:9002//upload/photos/2020/04/r9iNPbQj4MfaoXFI8ezc_04_1a2e85073c867251df9bc76c985fc37e_image.jpg')"></a>--}}
+                                        {{--                                        <a href="#" class="fa fa-tumblr"--}}
+                                        {{--                                           onclick="OpenShareWindow('http://www.tumblr.com/share/link?url=http%3A%2F%2Flocalhost%3A9002%2F%2Fwatch%2F14-march-2020-loom-recording_MVVIbINPjrRSP69.html')"></a>--}}
+                                        {{--                                        <a href="#" class="fa fa-reddit"--}}
+                                        {{--                                           onclick="OpenShareWindow('http://www.reddit.com/submit?url=http%3A%2F%2Flocalhost%3A9002%2F%2Fwatch%2F14-march-2020-loom-recording_MVVIbINPjrRSP69.html')"></a>--}}
                                         <a href="#" onclick="copyToClipboard(this)" class="fa fa-link"
                                            link="{{request()->fullUrl()}}"></a>
                                     </div>
@@ -370,125 +371,7 @@
 
                 </div>
             </div>
-
-            <div class="modal fade matdialog" id="stripe_modal" role="dialog" data-keyboard="false"
-                 style="overflow-y: auto;">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round" class="feather feather-x"><line
-                                            x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18"
-                                                                                       y2="18"></line></svg></span>
-                            </button>
-                            <h4 class="modal-title">Credit Card</h4>
-                        </div>
-                        <form class="form form-horizontal" method="post" id="stripe_form" action="#">
-                            <div class="modal-body twocheckout_modal">
-                                <div id="stripe_alert"></div>
-                                <div class="clear"></div>
-                                <div class="sun_input col-md-6">
-                                    <input class="form-control shop_input" type="text" placeholder="" value="admin"
-                                           id="stripe_name">
-                                </div>
-                                <div class="sun_input col-md-6">
-                                    <input class="form-control shop_input" type="email" placeholder=""
-                                           value="mamdani.info@gmail.com" id="stripe_email">
-                                </div>
-                                <div class="clear"></div>
-                                <hr>
-                                <div class="row two_check_card">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                        <path fill="currentColor"
-                                              d="M20,8H4V6H20M20,18H4V12H20M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"></path>
-                                    </svg>
-                                    <div class="sun_input col-xs-12">
-                                        <input id="stripe_number" class="form-control shop_input" type="text"
-                                               placeholder="Card Number">
-                                    </div>
-                                    <div class="sun_input col-xs-4">
-                                        <select id="stripe_month" type="text" class="form-control shop_input"
-                                                autocomplete="off" placeholder=" (01)">
-                                            <option value="01">01</option>
-                                            <option value="02">02</option>
-                                            <option value="03">03</option>
-                                            <option value="04">04</option>
-                                            <option value="05">05</option>
-                                            <option value="06">06</option>
-                                            <option value="07">07</option>
-                                            <option value="08">08</option>
-                                            <option value="09">09</option>
-                                            <option value="10">10</option>
-                                            <option value="11">11</option>
-                                            <option value="12">12</option>
-                                        </select>
-                                    </div>
-                                    <div class="sun_input col-xs-4 no-padding-both">
-                                        <select id="stripe_year" type="text" class="form-control shop_input"
-                                                autocomplete="off" placeholder=" (2019)">
-                                            <option value="2020">2020</option>
-                                            <option value="2021">2021</option>
-                                            <option value="2022">2022</option>
-                                            <option value="2023">2023</option>
-                                            <option value="2024">2024</option>
-                                            <option value="2025">2025</option>
-                                            <option value="2026">2026</option>
-                                            <option value="2027">2027</option>
-                                            <option value="2028">2028</option>
-                                            <option value="2029">2029</option>
-                                            <option value="2030">2030</option>
-                                            <option value="2031">2031</option>
-                                            <option value="2032">2032</option>
-                                            <option value="2033">2033</option>
-                                            <option value="2034">2034</option>
-                                            <option value="2035">2035</option>
-                                        </select>
-                                    </div>
-                                    <div class="sun_input col-xs-4">
-                                        <input id="stripe_cvc" type="text" class="form-control shop_input"
-                                               autocomplete="off" placeholder="CVC" maxlength="3"
-                                               oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                                    </div>
-                                </div>
-                                <div class="clear"></div>
-                            </div>
-                            <div class="clear"></div>
-                            <div class="modal-footer">
-                                <div class="ball-pulse">
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                </div>
-                                <button type="button" class="btn btn-main" onclick="SH_StripeCardRequest()"
-                                        id="stripe_btn">Purchase
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-
             <style>
-                /*.mejs__fullscreen .mejs__container {
-                  max-height: 100% !important;
-                }
-                .mejs__container {
-                  max-height: 555px !important;
-                }
-                .mejs__fullscreen video {
-                   max-height: 100% !important;
-                }
-                .vjs-fullscreen video {
-                   max-height: 100% !important;
-                }
-                .fluid_video_wrapper.fluid_player_layout_default:-webkit-full-screen video{max-height: 100% !important;}
-                video {
-                  max-height: 555px !important;
-                }*/
                 .mejs__offscreen {
                     clip: initial !important;
                     clip-path: inherit !important;
@@ -497,760 +380,65 @@
                 }
             </style>
 
-
-            <div class="modal fade matdialog" id="2checkout_modal" role="dialog" data-keyboard="false"
-                 style="overflow-y: auto;">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round" class="feather feather-x"><line
-                                            x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18"
-                                                                                       y2="18"></line></svg></span>
-                            </button>
-                            <h4 class="modal-title">2Checkout</h4>
-                        </div>
-                        <form class="form form-horizontal" method="post" id="2checkout_form" action="#">
-                            <div class="modal-body twocheckout_modal">
-                                <div id="2checkout_alert"></div>
-                                <div class="clear"></div>
-                                <div class="sun_input col-md-6">
-                                    <input id="card_name" type="text" class="form-control input-md" autocomplete="off"
-                                           placeholder="Name" value="admin">
-                                </div>
-                                <div class="sun_input col-md-6">
-                                    <input id="card_address" type="text" class="form-control input-md"
-                                           autocomplete="off" placeholder="Address" value="">
-                                </div>
-                                <div class="sun_input col-md-6">
-                                    <input id="card_city" type="text" class="form-control input-md" autocomplete="off"
-                                           placeholder="City" value="">
-                                </div>
-                                <div class="sun_input col-md-6">
-                                    <input id="card_state" type="text" class="form-control input-md" autocomplete="off"
-                                           placeholder="State" value="">
-                                </div>
-                                <div class="sun_input col-md-6">
-                                    <input id="card_zip" type="text" class="form-control input-md" autocomplete="off"
-                                           placeholder="Zip" value="0">
-                                </div>
-                                <div class="sun_input col-md-6">
-                                    <select id="card_country" name="card_country" class="form-control">
-                                        <option value="0" selected="">Select Country</option>
-                                        <option value="1">United States</option>
-                                        <option value="2">Canada</option>
-                                        <option value="3">Afghanistan</option>
-                                        <option value="4">Albania</option>
-                                        <option value="5">Algeria</option>
-                                        <option value="6">American Samoa</option>
-                                        <option value="7">Andorra</option>
-                                        <option value="8">Angola</option>
-                                        <option value="9">Anguilla</option>
-                                        <option value="10">Antarctica</option>
-                                        <option value="11">Antigua and/or Barbuda</option>
-                                        <option value="12">Argentina</option>
-                                        <option value="13">Armenia</option>
-                                        <option value="14">Aruba</option>
-                                        <option value="15">Australia</option>
-                                        <option value="16">Austria</option>
-                                        <option value="17">Azerbaijan</option>
-                                        <option value="18">Bahamas</option>
-                                        <option value="19">Bahrain</option>
-                                        <option value="20">Bangladesh</option>
-                                        <option value="21">Barbados</option>
-                                        <option value="22">Belarus</option>
-                                        <option value="23">Belgium</option>
-                                        <option value="24">Belize</option>
-                                        <option value="25">Benin</option>
-                                        <option value="26">Bermuda</option>
-                                        <option value="27">Bhutan</option>
-                                        <option value="28">Bolivia</option>
-                                        <option value="29">Bosnia and Herzegovina</option>
-                                        <option value="30">Botswana</option>
-                                        <option value="31">Bouvet Island</option>
-                                        <option value="32">Brazil</option>
-                                        <option value="34">Brunei Darussalam</option>
-                                        <option value="35">Bulgaria</option>
-                                        <option value="36">Burkina Faso</option>
-                                        <option value="37">Burundi</option>
-                                        <option value="38">Cambodia</option>
-                                        <option value="39">Cameroon</option>
-                                        <option value="40">Cape Verde</option>
-                                        <option value="41">Cayman Islands</option>
-                                        <option value="42">Central African Republic</option>
-                                        <option value="43">Chad</option>
-                                        <option value="44">Chile</option>
-                                        <option value="45">China</option>
-                                        <option value="46">Christmas Island</option>
-                                        <option value="47">Cocos (Keeling) Islands</option>
-                                        <option value="48">Colombia</option>
-                                        <option value="49">Comoros</option>
-                                        <option value="50">Congo</option>
-                                        <option value="51">Cook Islands</option>
-                                        <option value="52">Costa Rica</option>
-                                        <option value="53">Croatia (Hrvatska)</option>
-                                        <option value="54">Cuba</option>
-                                        <option value="55">Cyprus</option>
-                                        <option value="56">Czech Republic</option>
-                                        <option value="57">Denmark</option>
-                                        <option value="58">Djibouti</option>
-                                        <option value="59">Dominica</option>
-                                        <option value="60">Dominican Republic</option>
-                                        <option value="61">East Timor</option>
-                                        <option value="62">Ecuador</option>
-                                        <option value="63">Egypt</option>
-                                        <option value="64">El Salvador</option>
-                                        <option value="65">Equatorial Guinea</option>
-                                        <option value="66">Eritrea</option>
-                                        <option value="67">Estonia</option>
-                                        <option value="68">Ethiopia</option>
-                                        <option value="69">Falkland Islands (Malvinas)</option>
-                                        <option value="70">Faroe Islands</option>
-                                        <option value="71">Fiji</option>
-                                        <option value="72">Finland</option>
-                                        <option value="73">France</option>
-                                        <option value="74">France, Metropolitan</option>
-                                        <option value="75">French Guiana</option>
-                                        <option value="76">French Polynesia</option>
-                                        <option value="77">French Southern Territories</option>
-                                        <option value="78">Gabon</option>
-                                        <option value="79">Gambia</option>
-                                        <option value="80">Georgia</option>
-                                        <option value="81">Germany</option>
-                                        <option value="82">Ghana</option>
-                                        <option value="83">Gibraltar</option>
-                                        <option value="84">Greece</option>
-                                        <option value="85">Greenland</option>
-                                        <option value="86">Grenada</option>
-                                        <option value="87">Guadeloupe</option>
-                                        <option value="88">Guam</option>
-                                        <option value="89">Guatemala</option>
-                                        <option value="90">Guinea</option>
-                                        <option value="91">Guinea-Bissau</option>
-                                        <option value="92">Guyana</option>
-                                        <option value="93">Haiti</option>
-                                        <option value="94">Heard and Mc Donald Islands</option>
-                                        <option value="95">Honduras</option>
-                                        <option value="96">Hong Kong</option>
-                                        <option value="97">Hungary</option>
-                                        <option value="98">Iceland</option>
-                                        <option value="99">India</option>
-                                        <option value="100">Indonesia</option>
-                                        <option value="101">Iran (Islamic Republic of)</option>
-                                        <option value="102">Iraq</option>
-                                        <option value="103">Ireland</option>
-                                        <option value="104">Israel</option>
-                                        <option value="105">Italy</option>
-                                        <option value="106">Ivory Coast</option>
-                                        <option value="107">Jamaica</option>
-                                        <option value="108">Japan</option>
-                                        <option value="109">Jordan</option>
-                                        <option value="110">Kazakhstan</option>
-                                        <option value="111">Kenya</option>
-                                        <option value="112">Kiribati</option>
-                                        <option value="113">Korea, Democratic People's Republic of</option>
-                                        <option value="114">Korea, Republic of</option>
-                                        <option value="115">Kosovo</option>
-                                        <option value="116">Kuwait</option>
-                                        <option value="117">Kyrgyzstan</option>
-                                        <option value="118">Lao People's Democratic Republic</option>
-                                        <option value="119">Latvia</option>
-                                        <option value="120">Lebanon</option>
-                                        <option value="121">Lesotho</option>
-                                        <option value="122">Liberia</option>
-                                        <option value="123">Libyan Arab Jamahiriya</option>
-                                        <option value="124">Liechtenstein</option>
-                                        <option value="125">Lithuania</option>
-                                        <option value="126">Luxembourg</option>
-                                        <option value="127">Macau</option>
-                                        <option value="128">Macedonia</option>
-                                        <option value="129">Madagascar</option>
-                                        <option value="130">Malawi</option>
-                                        <option value="131">Malaysia</option>
-                                        <option value="132">Maldives</option>
-                                        <option value="133">Mali</option>
-                                        <option value="134">Malta</option>
-                                        <option value="135">Marshall Islands</option>
-                                        <option value="136">Martinique</option>
-                                        <option value="137">Mauritania</option>
-                                        <option value="138">Mauritius</option>
-                                        <option value="139">Mayotte</option>
-                                        <option value="140">Mexico</option>
-                                        <option value="141">Micronesia, Federated States of</option>
-                                        <option value="142">Moldova, Republic of</option>
-                                        <option value="143">Monaco</option>
-                                        <option value="144">Mongolia</option>
-                                        <option value="145">Montenegro</option>
-                                        <option value="146">Montserrat</option>
-                                        <option value="147">Morocco</option>
-                                        <option value="148">Mozambique</option>
-                                        <option value="149">Myanmar</option>
-                                        <option value="150">Namibia</option>
-                                        <option value="151">Nauru</option>
-                                        <option value="152">Nepal</option>
-                                        <option value="153">Netherlands</option>
-                                        <option value="154">Netherlands Antilles</option>
-                                        <option value="155">New Caledonia</option>
-                                        <option value="156">New Zealand</option>
-                                        <option value="157">Nicaragua</option>
-                                        <option value="158">Niger</option>
-                                        <option value="159">Nigeria</option>
-                                        <option value="160">Niue</option>
-                                        <option value="161">Norfork Island</option>
-                                        <option value="162">Northern Mariana Islands</option>
-                                        <option value="163">Norway</option>
-                                        <option value="164">Oman</option>
-                                        <option value="165">Pakistan</option>
-                                        <option value="166">Palau</option>
-                                        <option value="167">Panama</option>
-                                        <option value="168">Papua New Guinea</option>
-                                        <option value="169">Paraguay</option>
-                                        <option value="170">Peru</option>
-                                        <option value="171">Philippines</option>
-                                        <option value="172">Pitcairn</option>
-                                        <option value="173">Poland</option>
-                                        <option value="174">Portugal</option>
-                                        <option value="175">Puerto Rico</option>
-                                        <option value="176">Qatar</option>
-                                        <option value="177">Reunion</option>
-                                        <option value="178">Romania</option>
-                                        <option value="179">Russian Federation</option>
-                                        <option value="180">Rwanda</option>
-                                        <option value="181">Saint Kitts and Nevis</option>
-                                        <option value="182">Saint Lucia</option>
-                                        <option value="183">Saint Vincent and the Grenadines</option>
-                                        <option value="184">Samoa</option>
-                                        <option value="185">San Marino</option>
-                                        <option value="186">Sao Tome and Principe</option>
-                                        <option value="187">Saudi Arabia</option>
-                                        <option value="188">Senegal</option>
-                                        <option value="189">Serbia</option>
-                                        <option value="190">Seychelles</option>
-                                        <option value="191">Sierra Leone</option>
-                                        <option value="192">Singapore</option>
-                                        <option value="193">Slovakia</option>
-                                        <option value="194">Slovenia</option>
-                                        <option value="195">Solomon Islands</option>
-                                        <option value="196">Somalia</option>
-                                        <option value="197">South Africa</option>
-                                        <option value="198">South Georgia South Sandwich Islands</option>
-                                        <option value="199">Spain</option>
-                                        <option value="200">Sri Lanka</option>
-                                        <option value="201">St. Helena</option>
-                                        <option value="202">St. Pierre and Miquelon</option>
-                                        <option value="203">Sudan</option>
-                                        <option value="204">Suriname</option>
-                                        <option value="205">Svalbarn and Jan Mayen Islands</option>
-                                        <option value="206">Swaziland</option>
-                                        <option value="207">Sweden</option>
-                                        <option value="208">Switzerland</option>
-                                        <option value="209">Syrian Arab Republic</option>
-                                        <option value="210">Taiwan</option>
-                                        <option value="211">Tajikistan</option>
-                                        <option value="212">Tanzania, United Republic of</option>
-                                        <option value="213">Thailand</option>
-                                        <option value="214">Togo</option>
-                                        <option value="215">Tokelau</option>
-                                        <option value="216">Tonga</option>
-                                        <option value="217">Trinidad and Tobago</option>
-                                        <option value="218">Tunisia</option>
-                                        <option value="219">Turkey</option>
-                                        <option value="220">Turkmenistan</option>
-                                        <option value="221">Turks and Caicos Islands</option>
-                                        <option value="222">Tuvalu</option>
-                                        <option value="223">Uganda</option>
-                                        <option value="224">Ukraine</option>
-                                        <option value="225">United Arab Emirates</option>
-                                        <option value="226">United Kingdom</option>
-                                        <option value="227">United States minor outlying islands</option>
-                                        <option value="228">Uruguay</option>
-                                        <option value="229">Uzbekistan</option>
-                                        <option value="230">Vanuatu</option>
-                                        <option value="231">Vatican City State</option>
-                                        <option value="232">Venezuela</option>
-                                        <option value="233">Vietnam</option>
-                                        <option value="238">Yemen</option>
-                                        <option value="239">Yugoslavia</option>
-                                        <option value="240">Zaire</option>
-                                        <option value="241">Zambia</option>
-                                        <option value="242">Zimbabwe</option>
-                                    </select>
-                                </div>
-                                <div class="sun_input col-md-6">
-                                    <input id="card_email" type="text" class="form-control input-md" autocomplete="off"
-                                           placeholder="E-mail" value="mamdani.info@gmail.com">
-                                </div>
-                                <div class="sun_input col-md-6">
-                                    <input id="card_phone" type="text" class="form-control input-md" autocomplete="off"
-                                           placeholder="Phone" value="">
-                                </div>
-                                <div class="clear"></div>
-                                <hr>
-                                <div class="row two_check_card">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                        <path fill="currentColor"
-                                              d="M20,8H4V6H20M20,18H4V12H20M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"></path>
-                                    </svg>
-                                    <div class="sun_input col-xs-12">
-                                        <input id="_number_" type="text" class="form-control input-md"
-                                               autocomplete="off" placeholder="Card Number">
-                                        <input id="card_number" name="card_number" type="hidden"
-                                               class="form-control input-md" autocomplete="off">
-                                    </div>
-                                    <div class="sun_input col-xs-4">
-                                        <select id="card_month" name="card_month" type="text"
-                                                class="form-control input-md" autocomplete="off"
-                                                placeholder="month (01)">
-                                            <option value="01">01</option>
-                                            <option value="02">02</option>
-                                            <option value="03">03</option>
-                                            <option value="04">04</option>
-                                            <option value="05">05</option>
-                                            <option value="06">06</option>
-                                            <option value="07">07</option>
-                                            <option value="08">08</option>
-                                            <option value="09">09</option>
-                                            <option value="10">10</option>
-                                            <option value="11">11</option>
-                                            <option value="12">12</option>
-                                        </select>
-                                    </div>
-                                    <div class="sun_input col-xs-4 no-padding-both">
-                                        <select id="card_year" name="card_year" type="text"
-                                                class="form-control input-md" autocomplete="off"
-                                                placeholder="year (2019)">
-                                            <option value="2020">2020</option>
-                                            <option value="2021">2021</option>
-                                            <option value="2022">2022</option>
-                                            <option value="2023">2023</option>
-                                            <option value="2024">2024</option>
-                                            <option value="2025">2025</option>
-                                            <option value="2026">2026</option>
-                                            <option value="2027">2027</option>
-                                            <option value="2028">2028</option>
-                                            <option value="2029">2029</option>
-                                            <option value="2030">2030</option>
-                                            <option value="2031">2031</option>
-                                            <option value="2032">2032</option>
-                                            <option value="2033">2033</option>
-                                            <option value="2034">2034</option>
-                                            <option value="2035">2035</option>
-                                        </select>
-                                    </div>
-                                    <div class="sun_input col-xs-4">
-                                        <input id="card_cvc" name="card_cvc" type="text" class="form-control input-md"
-                                               autocomplete="off" placeholder="CVC" maxlength="3"
-                                               oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                                    </div>
-                                </div>
-                                <div class="clear"></div>
-                                <input type="text" id="2checkout_type" class="hidden" name="type">
-                                <input id="card_token" name="token" type="hidden" value="">
-                                <input id="checkout_video_1" name="video_id" type="hidden" value="">
-                                <input id="checkout_price_1" name="price" type="hidden" value="">
-                                <input id="checkout_user_id" name="user_id" type="hidden" value="">
-                                <input class="checkout_pay_type" name="pay_type" type="hidden" value="">
-                            </div>
-                            <div class="clear"></div>
-                            <div class="modal-footer">
-                                <div class="ball-pulse">
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                </div>
-                                <button type="button" class="btn btn-main" onclick="tokenRequest()" id="2checkout_btn">
-                                    Purchase
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="modal fade matdialog" id="bank_transfer_modal_2" role="dialog" data-keyboard="false"
-                 style="overflow-y: auto;">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round" class="feather feather-x"><line
-                                            x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18"
-                                                                                       y2="18"></line></svg></span>
-                            </button>
-                            <h4 class="modal-title">Bank transfer</h4>
-                        </div>
-                        <form class="form form-horizontal" method="post" id="bank_transfer_form_2" action="#">
-                            <div class="modal-body dt_bank_trans_modal">
-                                <div id="blog-alert-2"></div>
-
-                                <div class="bank_info">
-                                    <div class="dt_settings_header bg_gradient">
-                                        <div class="dt_settings_circle-1"></div>
-                                        <div class="dt_settings_circle-2"></div>
-                                        <div class="bank_info_innr">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                                <path fill="currentColor"
-                                                      d="M11.5,1L2,6V8H21V6M16,10V17H19V10M2,22H21V19H2M10,10V17H13V10M4,10V17H7V10H4Z"></path>
-                                            </svg>
-                                            <h4 class="bank_name">Garanti Bank</h4>
-                                            <div class="row">
-                                                <div class="col col-md-12">
-                                                    <div class="bank_account"><p>4796824372433055</p><span
-                                                            class="help-block">Account number / IBAN</span></div>
-                                                </div>
-                                                <div class="col col-md-12">
-                                                    <div class="bank_account_holder"><p>Antoian Kordiyal</p><span
-                                                            class="help-block">Account name</span></div>
-                                                </div>
-                                                <div class="col col-md-6">
-                                                    <div class="bank_account_code"><p>TGBATRISXXX</p><span
-                                                            class="help-block">Routing code</span></div>
-                                                </div>
-                                                <div class="col col-md-6">
-                                                    <div class="bank_account_country"><p>United States</p><span
-                                                            class="help-block">Country</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="dt_user_profile hide_alert_info_bank_trans">
-                     <span class="valign-wrapper">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path
-                                fill="currentColor"
-                                d="M13,13H11V7H13M13,17H11V15H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path></svg> Note:
-                     </span>
-                                    <ul class="dt_prof_vrfy">
-                                        <li>In order to confirm the bank transfer, you will need to upload a receipt or
-                                            take a screenshot of your transfer within 1 day from your payment date. If a
-                                            bank transfer is made but no receipt is uploaded within this period, your
-                                            order will be cancelled. We will verify and confirm your receipt within 3
-                                            working days from the date you upload it.
-                                        </li>
-                                    </ul>
-                                </div>
-                                <p class="dt_bank_trans_upl_rec"><a href="javascript:void(0);"
-                                                                    onclick="$('#bank_transfer_modal_2').addClass('up_rec_active'); return false">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                             viewBox="0 0 24 24">
-                                            <path fill="currentColor"
-                                                  d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M13.5,16V19H10.5V16H8L12,12L16,16H13.5M13,9V3.5L18.5,9H13Z"></path>
-                                        </svg>
-                                        Upload</a></p>
-                                <div class="upload_bank_receipts">
-                                    <div onclick="document.getElementById('thumbnail_2').click(); return false">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                             viewBox="0 0 24 24">
-                                            <path fill="currentColor"
-                                                  d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M13.5,16V19H10.5V16H8L12,12L16,16H13.5M13,9V3.5L18.5,9H13Z"></path>
-                                        </svg>
-                                        <p>Browse To Upload</p>
-                                        <img class="bank_image_2" src="">
-                                    </div>
-                                </div>
-                                <input type="file" class="hidden" id="thumbnail_2" name="thumbnail" accept="image/*">
-                                <input name="image" type="file" id="upload" class="hidden">
-                                <input name="type" type="hidden" id="bank_transfer_type_2" class="hidden" value="bank">
-                                <input name="description" type="hidden" id="bank_transfer_des_2" class="hidden">
-                                <input name="user_id" type="hidden" id="bank_transfer_user" class="hidden">
-                                <input type="reset" id="configreset_2" value="Reset" class="hidden">
-                            </div>
-                            <div class="modal-footer">
-                                <div class="ball-pulse">
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                </div>
-                                <button type="submit" class="btn btn-main">Publish</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="modal fade matdialog" id="bank_transfer_modal" role="dialog" data-keyboard="false"
-                 style="overflow-y: auto;">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round" class="feather feather-x"><line
-                                            x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18"
-                                                                                       y2="18"></line></svg></span>
-                            </button>
-                            <h4 class="modal-title">Bank transfer</h4>
-                        </div>
-                        <form class="form form-horizontal" method="post" id="bank_transfer_form" action="#">
-                            <div class="modal-body dt_bank_trans_modal">
-                                <div id="blog-alert"></div>
-
-                                <div class="bank_info">
-                                    <div class="dt_settings_header bg_gradient">
-                                        <div class="dt_settings_circle-1"></div>
-                                        <div class="dt_settings_circle-2"></div>
-                                        <div class="bank_info_innr">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                                <path fill="currentColor"
-                                                      d="M11.5,1L2,6V8H21V6M16,10V17H19V10M2,22H21V19H2M10,10V17H13V10M4,10V17H7V10H4Z"></path>
-                                            </svg>
-                                            <h4 class="bank_name">Garanti Bank</h4>
-                                            <div class="row">
-                                                <div class="col col-md-12">
-                                                    <div class="bank_account"><p>4796824372433055</p><span
-                                                            class="help-block">Account number / IBAN</span></div>
-                                                </div>
-                                                <div class="col col-md-12">
-                                                    <div class="bank_account_holder"><p>Antoian Kordiyal</p><span
-                                                            class="help-block">Account name</span></div>
-                                                </div>
-                                                <div class="col col-md-6">
-                                                    <div class="bank_account_code"><p>TGBATRISXXX</p><span
-                                                            class="help-block">Routing code</span></div>
-                                                </div>
-                                                <div class="col col-md-6">
-                                                    <div class="bank_account_country"><p>United States</p><span
-                                                            class="help-block">Country</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="dt_user_profile hide_alert_info_bank_trans">
-                     <span class="valign-wrapper">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path
-                                fill="currentColor"
-                                d="M13,13H11V7H13M13,17H11V15H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path></svg> Note:
-                     </span>
-                                    <ul class="dt_prof_vrfy">
-                                        <li>In order to confirm the bank transfer, you will need to upload a receipt or
-                                            take a screenshot of your transfer within 1 day from your payment date. If a
-                                            bank transfer is made but no receipt is uploaded within this period, your
-                                            order will be cancelled. We will verify and confirm your receipt within 3
-                                            working days from the date you upload it.
-                                        </li>
-                                    </ul>
-                                </div>
-                                <p class="dt_bank_trans_upl_rec"><a href="javascript:void(0);"
-                                                                    onclick="$('#bank_transfer_modal').addClass('up_rec_active'); return false">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                             viewBox="0 0 24 24">
-                                            <path fill="currentColor"
-                                                  d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M13.5,16V19H10.5V16H8L12,12L16,16H13.5M13,9V3.5L18.5,9H13Z"></path>
-                                        </svg>
-                                        Upload</a></p>
-                                <div class="upload_bank_receipts">
-                                    <div onclick="document.getElementById('thumbnail').click(); return false">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                             viewBox="0 0 24 24">
-                                            <path fill="currentColor"
-                                                  d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M13.5,16V19H10.5V16H8L12,12L16,16H13.5M13,9V3.5L18.5,9H13Z"></path>
-                                        </svg>
-                                        <p>Browse To Upload</p>
-                                        <img id="receipt_img_preview" src="">
-                                    </div>
-                                </div>
-                                <input type="file" class="hidden" id="thumbnail" name="thumbnail" accept="image/*">
-                                <input name="image" type="file" id="upload" class="hidden">
-                                <input name="type" type="hidden" id="bank_transfer_type" class="hidden">
-                                <input name="description" type="hidden" id="bank_transfer_des" class="hidden">
-                                <input name="video_id" type="hidden" id="bank_transfer_video" class="hidden">
-                                <input name="pay_type" type="hidden" class="bank_pay_type">
-                                <input type="reset" id="configreset" value="Reset" class="hidden">
-                            </div>
-                            <div class="modal-footer">
-                                <div class="ball-pulse">
-                                    <div></div>
-                                    <div></div>
-                                    <div></div>
-                                </div>
-                                <button type="submit" class="btn btn-main">Publish</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 @endsection
 @section('footer_script')
-    {{--    --}}
-    {{--    <script>--}}
-    {{--        jQuery(document).ready(function ($) {--}}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
-    {{--            var sort_comments_by = 2;--}}
+            function like() {
+                $.ajax({
+                    type: 'GET',
+                    url: '{{url()->current().'/videos_likes?v='.$video->video_id}}',
+                    dataType: 'json',
+                    success: function (data) {
+                        likes = data.likes
+                        dislikes = data.dislikes
+                    }, error: function (data) {
+                        console.log(data);
+                    }
+                })
+            }
 
-    {{--            $("li.sort-comments").click(function (event) {--}}
-    {{--                sort_comments_by = $(this).attr('id');--}}
-    {{--                var video_id = $('#video-id').val();--}}
-    {{--                var data_obj = {--}}
-    {{--                    video_id: video_id,--}}
-    {{--                    sort_by: sort_comments_by--}}
-    {{--                };--}}
+            function dislike() {
+                $.ajax({
+                    type: 'GET',
+                    url: '{{url()->current().'/videos_dislikes?v='.$video->video_id}}',
+                    dataType: 'json',
+                    success: function (data) {
+                        likes = data.likes
+                        dislikes = data.dislikes
+                    }, error: function (data) {
+                        console.log(data);
+                    }
+                })
+            }
+        })
 
-    {{--                $('#video-user-comments').empty();--}}
-    {{--                $(".comments-loading").removeClass('hidden');--}}
+        function player_button() {
 
-    {{--                $.post('http://localhost:9002//aj/sort-comments', data_obj, function (data, textStatus, xhr) {--}}
-    {{--                    if (data.status == 200) {--}}
-    {{--                        PT_Delay(function () {--}}
-    {{--                            $(".comments-loading").addClass('hidden');--}}
-    {{--                            $('#video-user-comments').html(data.comments);--}}
-    {{--                        }, 200);--}}
-    {{--                    } else {--}}
-    {{--                        PT_Delay(function () {--}}
-    {{--                            $(".comments-loading").addClass('hidden');--}}
-    {{--                        }, 200);--}}
-    {{--                    }--}}
-    {{--                });--}}
-
-    {{--            });--}}
-
-    {{--            $.fn.scrollTo = function (speed) {--}}
-    {{--                if (typeof (speed) === 'undefined')--}}
-    {{--                    speed = 500;--}}
-
-    {{--                $('html, body').animate({--}}
-    {{--                    scrollTop: ($(this).offset().top - 100)--}}
-    {{--                }, speed);--}}
-
-    {{--                return $(this);--}}
-    {{--            };--}}
-
-
-    {{--            $('#comment-textarea').on('click', function (event) {--}}
-    {{--                event.preventDefault();--}}
-    {{--                var logged = $('#main-container').attr('data-logged');--}}
-    {{--                if (!logged) {--}}
-
-    {{--                    window.location.href = "http://localhost:9002//login?to=http://localhost:9002//watch/14-march-2020-loom-recording_MVVIbINPjrRSP69.html";--}}
-    {{--                    return false;--}}
-    {{--                }--}}
-    {{--                $(this).css('border', '1px solid #888');--}}
-    {{--            });--}}
-
-    {{--            $('.comments-load').on('click', function (event) {--}}
-    {{--                event.preventDefault();--}}
-    {{--                var last_id = $('.main-comment:last').attr('data-id');--}}
-    {{--                var video_id = $('#video-id').val();--}}
-    {{--                var data_obj = {--}}
-    {{--                    last_id: last_id,--}}
-    {{--                    video_id: video_id,--}}
-    {{--                    sort_by: sort_comments_by--}}
-    {{--                };--}}
-
-    {{--                if (sort_comments_by == 1) {--}}
-    {{--                    var comment_ids = [];--}}
-    {{--                    $('.main-comment').each(function (index, el) {--}}
-    {{--                        comment_ids.push($(el).attr('data-id'));--}}
-    {{--                    });--}}
-
-    {{--                    data_obj['comments'] = comment_ids.join()--}}
-    {{--                }--}}
-
-    {{--                $.post('http://localhost:9002//aj/load-more-comments', data_obj, function (data, textStatus, xhr) {--}}
-    {{--                    if (data.status == 200) {--}}
-    {{--                        $('#video-user-comments').append(data.comments);--}}
-    {{--                    } else {--}}
-    {{--                        $('.comments-load').text(data.message);--}}
-    {{--                    }--}}
-    {{--                });--}}
-    {{--            });--}}
-    {{--        });--}}
-
-
-    {{--        function PT_PostComment(button) {--}}
-    {{--            var text = $('#comment-textarea').val();--}}
-    {{--            if (!text) {--}}
-    {{--                $('#comment-textarea').css('border', '1px solid red');--}}
-    {{--                return false;--}}
-    {{--            }--}}
-    {{--            var video_id = $('#video-id').val();--}}
-    {{--            if (!video_id) {--}}
-    {{--                return false;--}}
-    {{--            }--}}
-    {{--            $(button).attr('disabled', true);--}}
-    {{--            $.post('http://localhost:9002//aj/add-comment', {--}}
-    {{--                video_id: video_id,--}}
-    {{--                text: text--}}
-    {{--            }, function (data, textStatus, xhr) {--}}
-    {{--                if (data.status == 200) {--}}
-    {{--                    if ($('.no-comments-found').length > 0) {--}}
-    {{--                        $('.no-comments-found').remove();--}}
-    {{--                    }--}}
-    {{--                    $('#comment-textarea').val('');--}}
-    {{--                    $('#video-user-comments').prepend(data.comment);--}}
-    {{--                }--}}
-    {{--                $(button).attr('disabled', false);--}}
-    {{--            });--}}
-    {{--        }--}}
-
-
-    {{--        function PT_DeleteComment(id) {--}}
-    {{--            if (!id) {--}}
-    {{--                return false;--}}
-    {{--            }--}}
-    {{--            if (!confirm('Are you sure you want to delete your comment?')) {--}}
-    {{--                return false;--}}
-    {{--            }--}}
-    {{--            $('#comment-' + id).slideUp('fast');--}}
-    {{--            $.post('http://localhost:9002//aj/delete-comment', {id: id});--}}
-    {{--        }--}}
-
-    {{--        function PT_PinComment(id, pin) {--}}
-    {{--            if (!id) {--}}
-    {{--                return false;--}}
-    {{--            }--}}
-    {{--            let pinned_comments = $('#pinned-comment');--}}
-
-    {{--            if (pin) {--}}
-    {{--                $("#comment-" + id).slideUp(200, function () {--}}
-    {{--                    Snackbar.show({text: 'Comment pinned to top'});--}}
-    {{--                })--}}
-    {{--            } else {--}}
-    {{--                pinned_comments.empty();--}}
-    {{--                Snackbar.show({text: 'Comment unpinned'});--}}
-    {{--            }--}}
-
-    {{--            $.post('http://localhost:9002//aj/pin-comment', {id: id}, function (data) {--}}
-    {{--                if (data.status == 200) {--}}
-
-    {{--                    $("#comment-" + id).slideUp(100, function () {--}}
-    {{--                        $(this).remove();--}}
-    {{--                        pinned_comments.scrollTo();--}}
-    {{--                    });--}}
-
-    {{--                    pinned_comments.html(data.html);--}}
-    {{--                } else if (data.status == 304) {--}}
-    {{--                    $("#video-user-comments").append(data.html);--}}
-    {{--                }--}}
-    {{--            });--}}
-    {{--        }--}}
-    {{--    </script>--}}
-    {{--    --}}
+        }
+    </script>
     <script type="text/javascript">
         function setCookie(cname, cvalue, exdays) {
             var d = new Date();
             d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-            var expires = "expires="+d.toUTCString();
+            var expires = "expires=" + d.toUTCString();
             document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
         }
+
         var myTimeout;
 
-        function show_gif(self,gif) {
+        function show_gif(self, gif) {
             if (gif && gif != '') {
-                myTimeout = setTimeout(function() {
-                    $(self).append('<img src="'+gif+'">');
+                myTimeout = setTimeout(function () {
+                    $(self).append('<img src="' + gif + '">');
                 }, 1000);
             }
         }
@@ -1381,7 +569,7 @@
             pluginPath: 'https://cdnjs.com/libraries/mediaelement-plugins/',
             shimScriptAccess: 'always',
             autoplay: true,
-            features: ['playpause', 'current', 'progress', 'duration', 'speed', 'skipback', 'jumpforward', 'tracks', 'markers', 'volume', 'chromecast', 'contextmenu', 'flash', 'fullscreen','sourcechooser'],
+            features: ['playpause', 'current', 'progress', 'duration', 'speed', 'skipback', 'jumpforward', 'tracks', 'markers', 'volume', 'chromecast', 'contextmenu', 'flash', 'fullscreen', 'sourcechooser'],
             vastAdTagUrl: '',
             vastAdsType: '',
             setDimensions: true,
@@ -1432,7 +620,6 @@
 
     <script>
 
-
         jQuery(window).ready(function ($) {
             var width = $('.video-player').width().toString();
             var width = width.substring(0, width.lastIndexOf("."))
@@ -1446,21 +633,6 @@
 
                 $("#load-related-videos").find('i.spin').removeClass('hidden');
 
-                // $.ajax({
-                //     url: 'http://localhost:9002//aj/load-related-videos',
-                //     type: 'GET',
-                //     dataType: 'json',
-                //     data: {id: id, video_id: '1'},
-                // })
-                //     .done(function (data) {
-                //         if (data.status == 200) {
-                //             $(".related-videos").append(data.html);
-                //         } else {
-                //             $("#load-related-videos").find('span').text('No more videos found');
-                //         }
-                //         $("#load-related-videos").find('i.spin').addClass('hidden');
-                //
-                //     });
             });
         });
 
@@ -1709,120 +881,5 @@
             $('.icons').addClass('hidden');
         });
 
-    </script>
-    <script type="text/javascript">
-
-        function show_gif(self,gif) {
-            if (gif && gif != '') {
-                myTimeout = setTimeout(function() {
-                    $(self).append('<img src="'+gif+'">');
-                }, 1000);
-            }
-        }
-
-        function hide_gif(self) {
-            $(self).find('img').remove();
-            clearTimeout(myTimeout);
-        }
-        $(document).on('change', '#thumbnail', function (event) {
-            let imgPath = $(this)[0].files[0].name;
-            if (typeof (FileReader) != "undefined") {
-                let reader = new FileReader();
-                reader.onload = function (e) {
-                    $('#receipt_img_preview').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(this.files[0]);
-            }
-            $('#bank_transfer_modal').addClass('up_rec_img_ready');
-        });
-
-
-        $(document).on('change', '#thumbnail_2', function (event) {
-            let imgPath = $(this)[0].files[0].name;
-            if (typeof (FileReader) != "undefined") {
-                let reader = new FileReader();
-                reader.onload = function (e) {
-                    $('.bank_image_2').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(this.files[0]);
-            }
-            $('#bank_transfer_modal_2').addClass('up_rec_img_ready');
-        });
-
-        jQuery(document).ready(function ($) {
-            $('#bank_transfer_form').ajaxForm({
-                url: 'http://localhost:9002//aj/go_pro/bank_pay_to_see',
-                beforeSend: function () {
-                    $('#bank_transfer_form').find('.ball-pulse').fadeIn(100);
-                },
-                success: function (data) {
-                    if (data['status'] == 200) {
-                        $("#blog-alert").html('<div class="alert alert-success">' + data['message'] + '</div>');
-                        setTimeout(function () {
-                            window.location = "http://localhost:9002/";
-                            $(".prv-img").html('<div class="thumbnail-rendderer"><div><div class="error-text-renderer"></div><div><p>http://localhost:9002//browse_to_upload</p></div></div> </div>');
-                            $("#blog-alert").html('');
-                            $('#configreset').click();
-
-                        }, 3000)
-                    } else if (data['message']) {
-                        $("#blog-alert").html('<div class="alert alert-danger">' + data['message'] + '</div>');
-                    }
-                    $('#bank_transfer_form').find('.ball-pulse').fadeOut(100);
-                }
-            });
-
-            $('#bank_transfer_form_2').ajaxForm({
-                url: 'http://localhost:9002//aj/go_pro/subscribe',
-                beforeSend: function () {
-                    $('#bank_transfer_form_2').find('.ball-pulse').fadeIn(100);
-                },
-                success: function (data) {
-                    if (data['status'] == 200) {
-                        $("#blog-alert-2").html('<div class="alert alert-success">' + data['message'] + '</div>');
-                        setTimeout(function () {
-                            window.location = "http://localhost:9002/";
-                            $(".prv-img").html('<div class="thumbnail-rendderer"><div><div class="error-text-renderer"></div><div><p>http://localhost:9002//browse_to_upload</p></div></div> </div>');
-                            $("#blog-alert-2").html('');
-                            $('#configreset_2').click();
-
-                        }, 3000)
-                    } else if (data['message']) {
-                        $("#blog-alert-2").html('<div class="alert alert-danger">' + data['message'] + '</div>');
-                    }
-                    $('#bank_transfer_form_2').find('.ball-pulse').fadeOut(100);
-                }
-            });
-
-
-        });
-
-        function PT_OpenBank(pkg, self, video_id = 0, price = 0, user_id) {
-            if (!pkg || !self) {
-                return false;
-            }
-            $(self).text("Please wait..").attr('disabled', 'true');
-            $('#pay-go-pro').modal('hide');
-            if (user_id > 0) {
-                $('#bank_transfer_user').val(user_id)
-                $('#configreset_2').click();
-                $("#blog-alert-2").html('');
-                $('#bank_transfer_modal_2').modal({
-                    show: true
-                });
-
-            } else {
-                video = '1';
-                $('#bank_transfer_video').val(video)
-                $('#configreset').click();
-                $("#blog-alert").html('');
-                $('.bank_pay_type').val(pkg);
-                $('#bank_transfer_modal').modal({
-                    show: true
-                });
-            }
-
-
-        }
     </script>
 @stop

@@ -38,8 +38,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('all_playlists', 'HomeController@get_playlist');
     Route::post('delete_playlist', 'HomeController@delete_playlist');
     Route::post('update_playlist','HomeController@update_playlist');
+    Route::get('videos_likes','HomeController@update_likes');
+    Route::get('videos_dislikes','HomeController@update_dislikes');
 
 });
+Route::get('/embed/{video_id}','VideoController@get_embedded_video')->name('embed_video');
 Route::get('{username}/watch_video', 'VideoController@watch_video');
 Route::get('{username}/watch_video/is_watchable', 'VideoController@watchable_video');
 Route::post('{username}/', 'VideoController@watch_video');

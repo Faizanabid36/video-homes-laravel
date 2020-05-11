@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Video;
+use Carbon\Carbon;
+use App\VideoView;
 use Illuminate\Http\Request;
+use function foo\func;
 
 class DashboardController extends Controller
 {
@@ -15,32 +19,24 @@ class DashboardController extends Controller
 
     public function dashboard_type($type)
     {
-        $category = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-        $Data = [];
+        $videos = Video::whereUserId(auth()->user()->id)->get();
+        $videosWithViews = [];
         if (isset($type)) {
-            if ($type == 'today') {
-                $labels = [0,1,2,3,4,5,6,7,8,9,10,11];
-                $data = [0, 4, 12, 4, 1, 5, 9,1,4,9,0,2];
-                $Data = dashboardChart($labels, 'Today', $data);
-            }
-            if ($type == 'this_week') {
-                $labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-                $data = [0, 4, 12, 4, 1, 5, 9];
-                $Data = dashboardChart($labels, 'This Week', $data);
-            }
-            if ($type == 'this_month') {
-                for ($i = 1; $i <= \Carbon\Carbon::now()->daysInMonth; $i++) {
-                    $labels[$i] = $i;
-                    $data[$i] = rand(3, 50);
-                }
-                $Data = dashboardChart(array_values($labels), 'This Month', array_values($data));
-            }
-            if ($type == 'this_year') {
-                $labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                $data = [1, 3, 2, 4, 7, 6, 5, 9, 7, 8, 1, 2];
-                $Data = dashboardChart($labels, 'This Year', $data);
-            }
+            $dt = Carbon::now();
+            if ($type == 'today')
+                $time = $dt->subDay();
+            if ($type == 'this_week')
+                $time = $dt->subWeek();
+            if ($type == 'this_month')
+                $time = $dt->subMonth();
+            if ($type == 'this_year')
+                $time = $dt->subYear();
+            $videosWithViews = collect($videos)->map(function ($video) use ($time) {
+                $v = VideoView::getViewsByDays($video, $time);
+                $views = !is_null($v) ? $v->toArray() : 0;
+                return collect($video)->merge(['views' => $views['views']]);
+            });
         }
-        return compact('type', 'Data');
+        return compact('videosWithViews');
     }
 }
