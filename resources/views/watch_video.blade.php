@@ -287,20 +287,7 @@
                                     <path
                                         d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
                                 </svg>
-                                0 Comments
-                                <span class="dropdown sort-comments-dropdown pull-right">
-				<span class="dropdown-toggle pointer" type="button" data-toggle="dropdown">
-					<i class="material-icons">sort</i> Sort By
-				</span>
-				<ul class="dropdown-menu">
-					<li class="sort-comments" id="1">
-						<a href="javascript:void(0);">Top Comments</a>
-					</li>
-					<li class="sort-comments" id="2">
-						<a href="javascript:void(0);">Latest comments</a>
-					</li>
-				</ul>
-            </span>
+                                <span id="comments_count">{{$comments['comments_count']}}</span> Comments
                             </div>
                             <div class="w100 pt_blogcomm_combo">
                                 <img class="header-image"
@@ -308,9 +295,10 @@
                                 <textarea name="comment" class="form-control" id="comment-textarea"
                                           placeholder="Write your comment.."></textarea>
 
-                                <button class="btn pull-right btn-main" onclick="PT_PostComment(this)"
+                                <button class="btn pull-right btn-main" onclick="postComment()"
                                         data-toggle="tooltip" title="Publish">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                         viewBox="0 0 24 24"
                                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                          stroke-linejoin="round" class="feather feather-arrow-right">
                                         <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -329,9 +317,50 @@
                             <div class="comments-loading hidden">
                                 <i class="fa fa-circle-o-notch spin"></i>
                             </div>
-                            <div class="user-comments" id="video-user-comments">
-
-                            </div>
+                            @if(count($comments['comments'])>0)
+                                @foreach($comments['comments'] as $comment)
+                                    <div class="user-comments" id="video-user-comments">
+                                        <div class="main-comment" data-id="2" id="comment-{{$comment->id}}">
+                                            <div class="main-comment-data-sp">
+                                                <div class="user-avatar pull-left">
+                                                    <img
+                                                        src="http://localhost/video-homes(old)/beta//upload/photos/d-avatar.jpg">
+                                                </div>
+                                                <div class="pull-right delete-comment"
+                                                     onclick="deleteComment({{$comment->id}});">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                         stroke-width="2"
+                                                         stroke-linecap="round" stroke-linejoin="round"
+                                                         class="feather feather-trash">
+                                                        <polyline points="3 6 5 6 21 6"></polyline>
+                                                        <path
+                                                            d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                        <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                    </svg>
+                                                </div>
+                                                <div class="user-name">
+			                                <span class="pin">
+							                </span>
+                                                    <a>
+                                                        {{$comment->user->username}}
+                                                    </a>
+                                                    <small>x time ago</small>
+                                                </div>
+                                                <div class="user-comment">
+                                                    <p class="comment-text">{{$comment->comment_text}}</p>
+                                                </div>
+                                                <div class="clear"></div>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @else
+                                <p>No Comment Found</p>
+                            @endif
+{{--                            <div class="watch-video-show-more comments-load">Show More Comments</div>--}}
 
                         </div>
                         <input type="hidden" id="video-id" value="1">
@@ -385,6 +414,12 @@
 @endsection
 @section('footer_script')
     <script type="text/javascript">
+        window.onload = function () {
+            // alert('asd'
+            //    asdasd
+            //    asd
+
+        };
         $(document).ready(function () {
             $.ajaxSetup({
                 headers: {
@@ -421,8 +456,46 @@
             }
         })
 
-        function player_button() {
+        function postComment(data) {
+            let comment_text = document.getElementById('comment-textarea');
+            if (!comment_text.value) {
+                $('#comment-textarea').css('border', '1px solid red');
+                return false;
+            } else {
+                $.ajax({
+                    type: 'POST',
+                    url: '{{route('post_comment')}}',
+                    dataType: 'json',
+                    data: {comment_text: comment_text.value, video_id:{{$video->id}}, user_id:{{auth()->user()->id}}},
+                    success: function (data) {
+                        $('#comment-textarea').val('');
+                        $('#main-comment').prepend(data.success.comment_text);
+                    }, error: function (data) {
+                        alert(data.responseJSON.message)
+                        console.log(data);
+                    }
+                })
+            }
+        }
 
+        function deleteComment(commentId) {
+            $.ajax({
+                type: 'POST',
+                url: '{{route('delete_comment')}}',
+                dataType: 'json',
+                data: {id: commentId, video_id:{{$video->id}}},
+                success: function (data) {
+                    if (data.status) {
+                        $('#comment-' + commentId).slideUp('fast');
+                        x = document.getElementById('comments_count')
+                        let comments = parseInt(x.innerText) - 1
+                        x.innerText = comments
+                    }
+                }, error: function (data) {
+                    alert(data.responseJSON.message)
+                    console.log(data);
+                }
+            })
         }
     </script>
     <script type="text/javascript">
@@ -748,60 +821,6 @@
                 $.post('http://localhost:9002//aj/set-cookies', {name: 'resize', value: resize});
                 PT_Resize();
             });
-
-            // $('video').mediaelementplayer({
-            //   pluginPath: 'https://cdnjs.com/libraries/mediaelement-plugins/',
-            //   shimScriptAccess: 'always',
-            //   autoplay: true,
-            //   features: ['playpause', 'current', 'progress', 'duration', 'speed', 'skipback', 'jumpforward', 'tracks', 'markers', 'volume', 'chromecast', 'contextmenu', 'flash'   , 'fullscreen'],
-            //   vastAdTagUrl: '',
-            //   vastAdsType: '',
-            //   jumpForwardInterval: 20,
-            //   adsPrerollMediaUrl: [''],
-            //   adsPrerollAdUrl: [''],
-            //   adsPrerollAdEnableSkip: false,
-            //   adsPrerollAdSkipSeconds: 0,
-            //   success: function (media) {
-            //       media.addEventListener('ended', function (e) {
-
-            //         if ($('#autoplay').is(":checked")) {
-            //            var url = $('#next-video').find('.video-title').find('a').attr('href');
-            //            if (url) {
-            //               window.location.href = url;
-            //            }
-            //         }
-            //         else{
-            //           /* pass */
-            //         }
-            //       }, false);
-
-            //       media.addEventListener('playing', function (e) {
-            //         if (pt_elexists('.ads-overlay-info')) {
-            //           $('.ads-overlay-info').remove();
-            //         }
-
-            //         $('.ads-test').remove();
-
-            //         if ($('body').attr('resized') == 'true') {
-            //             PT_Resize(true);
-            //         }
-            //         $('.mejs__container').css('height', ($('.mejs__container').width() / 1.77176216) + 'px');
-            //         $('video, iframe').css('height', '100%');
-            //       });
-            //   },
-            // });
-
-            // $('.expend-player').on('click', function(event) {
-            //  event.preventDefault();
-            //  var resize = 0;
-            //  if ($('.player-video').hasClass('col-md-12')) {
-            //    resize = 0;
-            //  } else {
-            //    resize = 1;
-            //  }
-            //  $.post('http://localhost:9002//aj/set-cookies', {name: 'resize', value:resize});
-            //  PT_Resize();
-            // });
             $(window).resize(function (event) {
                 if ($('body').attr('resized') == 'true') {
                     PT_Resize(true);

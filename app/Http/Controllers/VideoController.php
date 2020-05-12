@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use Image;
 use App\User;
 use App\Video;
@@ -73,6 +74,10 @@ class VideoController extends Controller
 
         return compact('message', 'video');
     }
+    public function getComments($video_id)
+    {
+        return ['comments'=>Comment::whereVideoId($video_id)->latest()->get(),'comments_count'=>Comment::whereVideoId($video_id)->count()];
+    }
 
     public function watch_video($username)
     {
@@ -93,7 +98,8 @@ class VideoController extends Controller
             ->latest()->take(1)->get();
         VideoView::createViewLog($video);
         $totalViews = VideoView::getTotalVideoViews($video);
-        return view('watch_video', compact('video', 'related_videos', 'totalViews'));
+        $comments=$this->getComments($video->id);
+        return view('watch_video', compact('video', 'related_videos', 'totalViews','comments'));
 
     }
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Comment;
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Format\Video\X264;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('update_playlist','HomeController@update_playlist');
     Route::get('videos_likes','HomeController@update_likes');
     Route::get('videos_dislikes','HomeController@update_dislikes');
+    Route::post('post_comment','CommentsController@store')->name('post_comment');
+    Route::post('delete_comment','CommentsController@destroy')->name('delete_comment');
 
 });
 Route::get('/embed/{video_id}','VideoController@get_embedded_video')->name('embed_video');
