@@ -52,12 +52,12 @@ class Videos extends React.Component {
                                 </div>
                             </div>
                             <div className="video-title">
-                                <Link to={link}><h4
+                                <Link><h4
                                     title={item.title}>{item.title}</h4></Link>
                             </div>
                             <div className="video-info">
                                 <div>
-                                    <Link to={link}>{item.user.username}</Link><br/>
+                                    <Link>{item.user.username}</Link><br/>
                                     <span>{item.views} Views</span> <span className="bold">~</span>
                                     <span>{item.daysAgo}</span>
                                 </div>
