@@ -11,7 +11,9 @@ class CommentsController extends Controller
     public function countTotalComments()
     {
         $data = Video::whereUserId(auth()->user()->id)->get();
-        $totalComments = count($data[0]->comments);
+        foreach ($data as $d) {
+            $totalComments = count($d->comments);
+        }
         return ['totalComments' => $totalComments];
     }
 
