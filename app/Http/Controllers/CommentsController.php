@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Video;
 use Illuminate\Http\Request;
 
 class CommentsController extends Controller
 {
     public function countTotalComments()
     {
-        return ['totalComments' => Comment::all()->count()];
+        $data = Video::whereUserId(auth()->user()->id)->get();
+        $totalComments = count($data[0]->comments);
+        return ['totalComments' => $totalComments];
     }
 
     /**
