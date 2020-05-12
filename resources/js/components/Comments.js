@@ -1,8 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter, Link, Route, Switch} from 'react-router-dom';
+import axios from "axios";
 
 class Comments extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            totalComments: this.props.totalComments
+        }
+    }
+
+    componentDidMount() {
+        axios.get('get_total_comments')
+            .then((res) => {
+                this.setState({totalComments: res.data.totalComments})
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
     render() {
         return <div>
             <div>
@@ -16,7 +33,7 @@ class Comments extends React.Component {
                                 </svg>
                                 Comments Today
                             </h2>
-                            <p>0</p>
+                            <p>{this.state.totalComments}</p>
                         </div>
                     </div>
                     <div className="col-md-4">

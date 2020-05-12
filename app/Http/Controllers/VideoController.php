@@ -74,9 +74,10 @@ class VideoController extends Controller
 
         return compact('message', 'video');
     }
+
     public function getComments($video_id)
     {
-        return ['comments'=>Comment::whereVideoId($video_id)->latest()->get(),'comments_count'=>Comment::whereVideoId($video_id)->count()];
+        return ['comments' => Comment::whereVideoId($video_id)->latest()->get(), 'comments_count' => Comment::whereVideoId($video_id)->count()];
     }
 
     public function watch_video($username)
@@ -89,7 +90,7 @@ class VideoController extends Controller
         }
         $video = Video::whereHas('user', function ($query) use ($username) {
             $query->whereUsername($username);
-        })->whereVideoId(request('v'))->firstOrFail();
+        })->whereVideoId(request('v'))->where('is_video_approved', 1)->firstOrFail();
         if (!$video->processed) {
             return view('errors.processing')->with('video', $video);
         }
@@ -98,8 +99,8 @@ class VideoController extends Controller
             ->latest()->take(1)->get();
         VideoView::createViewLog($video);
         $totalViews = VideoView::getTotalVideoViews($video);
-        $comments=$this->getComments($video->id);
-        return view('watch_video', compact('video', 'related_videos', 'totalViews','comments'));
+        $comments = $this->getComments($video->id);
+        return view('watch_video', compact('video', 'related_videos', 'totalViews', 'comments'));
 
     }
 
@@ -113,7 +114,12 @@ class VideoController extends Controller
 
     public function list_of_videos()
     {
-        $videos = Video::latest()->with('user')->get();
+        $Videos = Video::latest()->with('user')->get();
+        $videos = collect($Videos)->map(function ($video) {
+            $v = VideoView::getTotalVideoViews($video);
+            $views = !is_null($v) ? $v : 0;
+            return collect($video)->merge(['views' => $views,'daysAgo'=>$video->created_at->diffForHumans()]);
+        });
 
         return compact('videos');
     }

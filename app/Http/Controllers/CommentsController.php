@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class CommentsController extends Controller
 {
+    public function countTotalComments()
+    {
+        return ['totalComments' => Comment::all()->count()];
+    }
+
     /**
      * Display a listing of the resource.
      *

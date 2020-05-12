@@ -10,20 +10,18 @@ class Dashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            tab:"dashboard"
+            tab:"dashboard",
         }
         this.renderTemplate = this.renderTemplate.bind(this);
-    }
-    componentDidMount() {
     }
     renderTemplate(){
         switch(this.state.tab){
             case 'videos':
                 return <Videos/>;
             case 'comments':
-                return <Comments/>;
+                return <Comments totalComments={this.state.totalComments}/>;
             default:
-                return <DashboardComponents/>
+                return <DashboardComponents totalComments={this.state.totalComments}/>
         }
     }
 

@@ -34,7 +34,7 @@ class DashboardController extends Controller
             $videosWithViews = collect($videos)->map(function ($video) use ($time) {
                 $v = VideoView::getViewsByDays($video, $time);
                 $views = !is_null($v) ? $v->toArray() : 0;
-                return collect($video)->merge(['views' => $views['views']]);
+                return collect($video)->merge(['views' => $views['views'], 'commentsCount' => count($video->comments)]);
             });
         }
         return compact('videosWithViews');

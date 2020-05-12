@@ -27,7 +27,7 @@ class Videos extends React.Component {
             <div className="videos-latest-list row">
 
                 {this.state.videos.map((item, index) => {
-                    let link = window.VIDEO_APP.base_url+'/'+item.user.username + '/watch_video?v=' + item.video_id;
+                    let link = window.VIDEO_APP.base_url + '/' + item.user.username + '/watch_video?v=' + item.video_id;
                     return <div key={index}
                                 className="col-md-3 col-sm-6 no-padding-right-at-all no-padding-mobile-left">
                         <div className="video-latest-list video-wrapper">
@@ -57,9 +57,9 @@ class Videos extends React.Component {
                             </div>
                             <div className="video-info">
                                 <div>
-                                    <Link to={link}>User</Link><br/>
-                                    <span>x Views</span> <span className="bold">·</span>
-                                    <span>xx hours ago</span>
+                                    <Link to={link}>{item.user.username}</Link><br/>
+                                    <span>{item.views} Views</span> <span className="bold">~</span>
+                                    <span>{item.daysAgo}</span>
                                 </div>
                             </div>
                         </div>

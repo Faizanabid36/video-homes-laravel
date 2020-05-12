@@ -6,9 +6,15 @@ import LastMonthComparison from "./LastMonthComparison";
 import Subscribers from "./Subscribers";
 
 class DashboardComponents extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state={
+            totalComments:this.props.totalComments
+        }
+    }
     render() {
         return <div>
-            <ChannelAnalytics/>
+            <ChannelAnalytics totalComments={this.state.totalComments} />
             <hr/>
             <LastMonthComparison/>
             <hr/>

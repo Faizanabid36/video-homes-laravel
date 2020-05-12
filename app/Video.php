@@ -10,7 +10,7 @@ class Video extends Model
     protected $guarded = [];
     protected $dates = [ 'converted_for_streaming_at', ];
     protected $hidden = [];
-    protected $with = ['user'];
+    protected $with = ['user','comments'];
     protected $casts = ['processed'=>'boolean'];
 
 
@@ -27,5 +27,9 @@ class Video extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class,'video_id','id');
     }
 }

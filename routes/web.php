@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('videos_dislikes','HomeController@update_dislikes');
     Route::post('post_comment','CommentsController@store')->name('post_comment');
     Route::post('delete_comment','CommentsController@destroy')->name('delete_comment');
+    Route::get('get_total_comments','CommentsController@countTotalComments');
 
 });
 Route::get('/embed/{video_id}','VideoController@get_embedded_video')->name('embed_video');
