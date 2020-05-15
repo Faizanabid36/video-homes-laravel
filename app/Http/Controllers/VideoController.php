@@ -97,8 +97,9 @@ class VideoController extends Controller
             return view('errors.processing')->with('video', $video);
         }
         $related_videos = Video::whereUserId($video->user->id)
-            ->whereProcessed(1)->where('video_id', '!=', request('v'))->with('user')
-            ->latest()->take(1)->get();
+            ->whereProcessed(1)->where('video_id', '!=', request('v'))
+            ->where('is_video_approved', 1)
+            ->with('user')->latest()->take(1)->get();
         VideoView::createViewLog($video);
         $totalViews = VideoView::getTotalVideoViews($video);
         $comments = $this->getComments($video->id);
@@ -116,7 +117,7 @@ class VideoController extends Controller
 
     public function list_of_videos()
     {
-        $Videos = Video::latest()->with('user')->get();
+        $Videos = Video::where('is_video_approved', 1)->latest()->with('user')->get();
         $videos = collect($Videos)->map(function ($video) {
             $v = VideoView::getTotalVideoViews($video);
             $views = !is_null($v) ? $v : 0;

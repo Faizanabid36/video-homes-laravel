@@ -12,16 +12,9 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app1.js') }}" defer></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
-
-    <link rel="shortcut icon" href="img/logo1.ico"/>
-
-    <!--global styles-->
     <link type="text/css" href="{{ asset('css/components.css') }}" rel="stylesheet"/>
     <link type="text/css" href="{{ asset('css/custom.css') }}" rel="stylesheet"/>
     <!-- end of global styles-->
@@ -30,12 +23,11 @@
           href="vendors/circliful/css/jquery.circliful.css">
     <link type="text/css" href="{{ asset('css/components.css') }}" rel="stylesheet" href="css/pages/index.css">
     <link type="text/css" href="{{ asset('css/pages/tables.css') }}" rel="stylesheet"/>
-
-    <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    @yield('stylesheets')
 </head>
 <body>
 <div id="app">
@@ -57,6 +49,7 @@
         <script src="{{ asset('js/custom.js') }}"></script>
         <!--end of global scripts-->
         <!--  plugin scripts -->
+        @yield('scripts')
         <script src="{{ asset('vendors/countUp.js/js/countUp.min.js') }}"></script>
         <script src="{{ asset('vendors/flip/js/jquery.flip.min.js') }}"></script>
         <script src="{{ asset('js/pluginjs/jquery.sparkline.js') }}"></script>

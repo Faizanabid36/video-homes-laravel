@@ -1,5 +1,5 @@
 import React from 'react';
-import {Row, Col,Button} from "react-bootstrap";
+import {Row, Col, Button} from "react-bootstrap";
 import ReactDOM from 'react-dom';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -115,6 +115,12 @@ class Subscribers extends React.Component {
                                         </div>
                                         <div className="video-desc">
                                             Uploaded By: {item.user.username}
+                                        </div>
+                                        <div className="video-desc">
+                                            Video Status:
+                                            <span className={item.is_video_approved?'text-success':'text-danger'}>
+                                                {item.is_video_approved?' Approved':' Not Approved'}
+                                            </span>
                                         </div>
                                     </div>
 

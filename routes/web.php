@@ -21,8 +21,16 @@ Route::get('/', function () {
 });
 Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('admin_panel','AdminController@index')->name('admin_panel');
-    Route::get('videos_for_approval','AdminController@videos_for_approval')->name('videos_for_approval');
+    Route::get('admin_panel', 'AdminController@index')->name('admin_panel');
+    Route::get('videos_for_approval', 'AdminController@videos_for_approval')->name('videos_for_approval');
+    Route::get('approve_video/{id}', 'AdminController@approve_video')->name('approve_video');
+    Route::get('category', 'AdminController@category')->name('category');
+    Route::get('delete_category/{id}', 'AdminController@delete_category');
+    Route::get('edit_category/{id}', 'AdminController@edit_category');
+    Route::post('update_category', 'AdminController@update_category');
+    Route::get('add_category', function (){return view('admin.add_category');})->name('add_category');
+    Route::post('store_category', 'AdminController@store_category');
+
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard');
     Route::post('/dashboard_statistics', 'DashboardController@dashboard_type')->name('dashboard_type');

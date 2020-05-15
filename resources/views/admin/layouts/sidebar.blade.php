@@ -34,7 +34,7 @@
                 </li>
 
                 <li class="">
-                    <a href="/category">
+                    <a href="{{route('category')}}">
                         <i class="fa fa-tachometer"></i>
                         <span class="link-title menu_hide">&nbsp;Categories
 

@@ -12,6 +12,12 @@
             </div>
         </div>
     </header>
+    @if(Session::has('error'))
+        <div class="alert alert-warning">{{(Session::get('error'))}}</div>
+    @endif()
+    @if(Session::has('success'))
+        <div class="alert alert-success">{{(Session::get('success'))}}</div>
+    @endif()
     <div class="outer">
         <div class="inner bg-light lter bg-container">
             <div class="row">
@@ -37,16 +43,19 @@
                                     <tbody>
                                     @foreach ($videos as $video)
                                         <tr>
-                                            <td><img width="100" height="75" src="{{asset('/storage/'.$video->thumbnail)}}" alt=""></td>
+                                            <td><img width="100" height="75"
+                                                     src="{{asset('/storage/'.$video->thumbnail)}}" alt=""></td>
                                             <td>{{$video->title}}</td>
                                             <td>{{$video->description}}</td>
                                             <td>{{$video->video_type}}</td>
-                                            <td>{{$video->duration}}</td>
-                                            <td>{{$video->size}}</td>
+                                            <td>{{gmdate("i:s", $video->duration)}}</td>
+                                            <td>{{round((($video->size)/1024)/1024,2)}} MB</td>
                                             <td>
-                                                <button onclick='approve({{$video->id}})' class="btn  btn-primary">
-                                                    Approve
-                                                </button>
+                                                <a href="{{action('AdminController@approve_video',$video->id)}}">
+                                                    <button class="btn  btn-success">
+                                                        Approve
+                                                    </button>
+                                                </a>
                                             </td>
 
                                         </tr>
