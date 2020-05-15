@@ -10,16 +10,22 @@ class VideoView extends Model
     //
     protected $table = 'video_views';
 
+    protected $guarded = [];
+
     public static function createViewLog($video)
     {
-        $postsViews = new VideoView();
-        $postsViews->video_id = $video->id;
-        $postsViews->video_slug = $video->video_id;
-        $postsViews->url = \Request::fullUrl();
-        $postsViews->session_id = \Request::getSession()->getId();
-        $postsViews->ip = \Request::getClientIp();
-        $postsViews->agent = \Request::header('User-Agent');
-        $postsViews->save();
+        $postsViews = [
+            'video_id' => $video->id,
+            'video_slug' => $video->video_id,
+            'url' => \Request::fullUrl(),
+            'session_id' => \Request::getSession()->getId(),
+            'ip' => \Request::getClientIp(),
+            'agent' => \Request::header('User-Agent'),
+        ];
+        VideoView::updateOrCreate([
+            'video_id' => $video->id,
+            'ip' => \Request::getClientIp()
+        ], $postsViews);
     }
 
     public static function getTotalViews()
@@ -43,7 +49,8 @@ class VideoView extends Model
     {
         return VideoView::select(array('video_views.video_id', \DB::raw('COUNT(video_id) as views')))
             ->where('video_id', $video->id)
-            ->where('created_at', '>=', $time)
+            ->where('created_at', '>=', \Carbon\Carbon::parse($time[0]))
+            ->where('created_at', '<=', \Carbon\Carbon::parse($time[1]))
             ->orderBy(\DB::raw('COUNT(video_id)'), 'desc')
             ->groupBy('video_id')->first();
     }

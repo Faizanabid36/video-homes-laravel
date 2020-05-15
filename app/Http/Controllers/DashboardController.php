@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Video;
 use Carbon\Carbon;
 use App\VideoView;
@@ -17,26 +18,19 @@ class DashboardController extends Controller
         return view('container');
     }
 
-    public function dashboard_type($type)
+    public function dashboard_type(Request $request)
     {
+        $endDate = \request('endDate');
+        $startDate = \request('startDate');
+        $time = [$startDate, $endDate];
         $videos = Video::whereUserId(auth()->user()->id)->get();
-        $videosWithViews = [];
-        if (isset($type)) {
-            $dt = Carbon::now();
-            if ($type == 'today')
-                $time = $dt->subDay();
-            if ($type == 'this_week')
-                $time = $dt->subWeek();
-            if ($type == 'this_month')
-                $time = $dt->subMonth();
-            if ($type == 'this_year')
-                $time = $dt->subYear();
-            $videosWithViews = collect($videos)->map(function ($video) use ($time) {
-                $v = VideoView::getViewsByDays($video, $time);
-                $views = !is_null($v) ? $v->toArray() : 0;
-                return collect($video)->merge(['views' => $views['views'], 'commentsCount' => count($video->comments)]);
-            });
-        }
+        $videosWithViews = collect($videos)->map(function ($video) use ($time) {
+            $comments = Comment::where('video_id', $video->id)->where('created_at', '>=', \Carbon\Carbon::parse($time[0]))
+                ->where('created_at', '<=', \Carbon\Carbon::parse($time[1]))->get()->count();
+            $v = VideoView::getViewsByDays($video, $time);
+            $views = !is_null($v) ? $v->views : 0;
+            return collect($video)->merge(['views' => $views, 'comments' => $comments, 'commentsCount' => count($video->comments)]);
+        });
         return compact('videosWithViews');
     }
 }

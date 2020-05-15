@@ -15,7 +15,7 @@ class AddIsVideoApprovedToVideos extends Migration
     {
         Schema::table('videos', function (Blueprint $table) {
             //
-            $table->tinyInteger('is_video_approved')->default(1);
+            $table->tinyInteger('is_video_approved')->default(0);
         });
     }
 

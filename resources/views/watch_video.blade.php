@@ -326,20 +326,22 @@
                                                     <img
                                                         src="http://localhost/video-homes(old)/beta//upload/photos/d-avatar.jpg">
                                                 </div>
-                                                <div class="pull-right delete-comment"
-                                                     onclick="deleteComment({{$comment->id}});">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                         stroke-width="2"
-                                                         stroke-linecap="round" stroke-linejoin="round"
-                                                         class="feather feather-trash">
-                                                        <polyline points="3 6 5 6 21 6"></polyline>
-                                                        <path
-                                                            d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                                        <line x1="10" y1="11" x2="10" y2="17"></line>
-                                                        <line x1="14" y1="11" x2="14" y2="17"></line>
-                                                    </svg>
-                                                </div>
+                                                @if(isset(auth()->user()->id)&& $comment->user_id==auth()->user()->id)
+                                                    <div class="pull-right delete-comment"
+                                                         onclick="deleteComment({{$comment->id}});">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                             stroke-width="2"
+                                                             stroke-linecap="round" stroke-linejoin="round"
+                                                             class="feather feather-trash">
+                                                            <polyline points="3 6 5 6 21 6"></polyline>
+                                                            <path
+                                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                        </svg>
+                                                    </div>
+                                                @endif
                                                 <div class="user-name">
 			                                <span class="pin">
 							                </span>
@@ -360,7 +362,7 @@
                             @else
                                 <p>No Comment Found</p>
                             @endif
-{{--                            <div class="watch-video-show-more comments-load">Show More Comments</div>--}}
+                            {{--                            <div class="watch-video-show-more comments-load">Show More Comments</div>--}}
 
                         </div>
                         <input type="hidden" id="video-id" value="1">
@@ -462,11 +464,17 @@
                 $('#comment-textarea').css('border', '1px solid red');
                 return false;
             } else {
+                @if(!isset(auth()->user()->id))
+                alert('You are not Logged in')
+                @else
                 $.ajax({
                     type: 'POST',
                     url: '{{route('post_comment')}}',
                     dataType: 'json',
-                    data: {comment_text: comment_text.value, video_id:{{$video->id}}, user_id:{{auth()->user()->id}}},
+                    data: {
+                        comment_text: comment_text.value,
+                        video_id:{{$video->id}},
+                        user_id:{{auth()->user()->id}}},
                     success: function (data) {
                         $('#comment-textarea').val('');
                         $('#main-comment').prepend(data.success.comment_text);
@@ -475,6 +483,7 @@
                         console.log(data);
                     }
                 })
+                @endif
             }
         }
 

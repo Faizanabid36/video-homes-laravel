@@ -83,10 +83,12 @@ class VideoController extends Controller
     public function watch_video($username)
     {
         $user = User::whereUsername($username)->first();
-        $BlockedUser = BlockedUser::where('blocked_user_id', auth()->user()->id)
-            ->where('user_id', $user->id)->first();
-        if (!is_null($BlockedUser)) {
-            return view('errors.restricted');
+        if (isset(auth()->user()->id)) {
+            $BlockedUser = BlockedUser::where('blocked_user_id', auth()->user()->id)
+                ->where('user_id', $user->id)->first();
+            if (!is_null($BlockedUser)) {
+                return view('errors.restricted');
+            }
         }
         $video = Video::whereHas('user', function ($query) use ($username) {
             $query->whereUsername($username);
@@ -118,7 +120,7 @@ class VideoController extends Controller
         $videos = collect($Videos)->map(function ($video) {
             $v = VideoView::getTotalVideoViews($video);
             $views = !is_null($v) ? $v : 0;
-            return collect($video)->merge(['views' => $views,'daysAgo'=>$video->created_at->diffForHumans()]);
+            return collect($video)->merge(['views' => $views, 'daysAgo' => $video->created_at->diffForHumans()]);
         });
 
         return compact('videos');

@@ -1,22 +1,28 @@
 import React from 'react';
-import {Row, Col} from "react-bootstrap";
+import {Row, Col,Button} from "react-bootstrap";
 import ReactDOM from 'react-dom';
-import {Bar} from 'react-chartjs-2';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 class Subscribers extends React.Component {
     constructor(props) {
         super(props);
+        let startDate = new Date()
+        startDate.setDate(startDate.getDate() - 1)
         this.state = {
             type: 'today',
             category: [],
-            videosWithViews: []
+            videosWithViews: [],
+            endDate: new Date(),
+            startDate: startDate
         }
         this.getChartData = this.getChartData.bind(this)
         this.handleChangeInput = this.handleChangeInput.bind(this)
     }
 
     getChartData() {
-        axios.get("/dashboard/" + this.state.type)
+        let {startDate, endDate} = this.state
+        axios.post("/dashboard_statistics", {startDate, endDate})
             .then((res) => {
                 this.setState({...res.data})
             })
@@ -43,29 +49,37 @@ class Subscribers extends React.Component {
                 <div className="row">
                     <div className="col-md-8"></div>
                     <div className="col-md-3">
-                        <select id="type" name="type" onChange={this.handleChangeInput}
-                                className="form-control pull-right">
-                            <option value="today">Today</option>
-                            <option value="this_week">This week</option>
-                            <option value="this_month">This month</option>
-                            <option value="this_year">This year</option>
-                        </select>
+                        <Button onClick={this.handleChangeInput}>
+                            Search
+                        </Button>
+                    </div>
+                    <div className="col-md-3">
+                        <span className='mr-2'>From Date:</span>
+                        <DatePicker
+                            selected={this.state.startDate}
+                            onChange={date => this.setState({startDate: date})}
+                            maxDate={new Date()}
+                            placeholderText="Select a date before 5 days in the future"
+                        />
+                    </div>
+                    <div className="col-md-3">
+                        <span className='mr-2'>To Date:</span>
+                        <DatePicker
+                            selected={this.state.endDate}
+                            onChange={date => this.setState({endDate: date})}
+                            maxDate={new Date()}
+                            placeholderText="Select a date before 5 days in the future"
+                        />
                     </div>
                 </div>
                 <br/>
-
-                {/*<Bar*/}
-                {/*    data={this.state.Data}*/}
-                {/*    height={30}*/}
-                {/*    options={{maintainAspectRatio: false}}*/}
-                {/*/>*/}
 
             </div>
             <div className="subscriptions-list">
                 <div className="author-list">
                     <div className="video-wrapper" data-id="6" id="video-6">
-                        {this.state.videosWithViews.map((item) => {
-                            return <Row className="mb-2">
+                        {this.state.videosWithViews.map((item, id) => {
+                            return <Row className="mb-2" key={id}>
                                 <Col md="12">
                                     <div className="video-thumb col-md-3">
                                         <a>
@@ -91,12 +105,12 @@ class Subscribers extends React.Component {
                                             <svg className="feather feather-message"
                                                  xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                  viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                 strokeWwidth="2" strokeLinecap="round" strokeLinejoin="round"
+                                                 strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
                                                  aria-hidden="true">
                                                 <path
                                                     d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
                                             </svg>
-                                                {item.commentsCount} Comments &nbsp;&nbsp;&nbsp;
+                                                {item.comments} Comments &nbsp;&nbsp;&nbsp;
                                         </span>
                                         </div>
                                         <div className="video-desc">
