@@ -56,28 +56,30 @@ class AdminController extends Controller
         $category = Category::whereId($id)->first();
         return view('admin.edit_category', compact('category'));
     }
+
     public function update_category(Request $request)
     {
-        $this->validate($request,[
-            'name'=>'required',
+        $this->validate($request, [
+            'name' => 'required',
         ]);
-        $c=Category::whereId($request->input('id'))->update(['name'=>$request->input('name'),'description'=>$request->input('description')]);
+        $c = Category::whereId($request->input('id'))->update(['name' => $request->input('name'), 'description' => $request->input('description')]);
         if ($c) {
-            return back()->with('success', 'New Category Create');
-        } else {
-            return back()->with('error', 'Could Not Add Category');
-        }
-    }
-    public function store_category(Request $request)
-    {
-        $this->validate($request,[
-            'name'=>'required',
-        ]);
-        $c=Category::create($request->only('name','description'));
-        if (!is_null($c)) {
             return back()->with('success', 'Category Updated');
         } else {
             return back()->with('error', 'Could Not Update Category');
+        }
+    }
+
+    public function store_category(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+        $c = Category::create($request->only('name', 'description'));
+        if (!is_null($c)) {
+            return back()->with('success', 'Add New Category');
+        } else {
+            return back()->with('error', 'Could Not Add Category');
         }
     }
 }
