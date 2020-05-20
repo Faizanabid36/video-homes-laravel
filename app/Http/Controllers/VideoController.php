@@ -10,9 +10,12 @@ use App\Category;
 use App\VideoView;
 use Carbon\Carbon;
 use App\BlockedUser;
+use App\VideoAction;
 use App\VideoLikesDislikes;
+use Illuminate\Http\Request;
 use App\Jobs\ConvertVideoForStreaming;
 use App\Http\Requests\StoreVideoRequest;
+use phpDocumentor\Reflection\Types\Compound;
 
 class VideoController extends Controller
 {
@@ -103,7 +106,8 @@ class VideoController extends Controller
         VideoView::createViewLog($video);
         $totalViews = VideoView::getTotalVideoViews($video);
         $comments = $this->getComments($video->id);
-        return view('watch_video', compact('video', 'related_videos', 'totalViews', 'comments'));
+        $video_actions = VideoAction::where('user_id', auth()->user()->id)->where('video_id', $video->id)->get();
+        return view('watch_video', compact('video', 'related_videos', 'totalViews', 'comments', 'video_actions'));
 
     }
 
@@ -148,6 +152,42 @@ class VideoController extends Controller
     {
         $video = Video::whereVideoId($video_id)->whereProcessed(1)->firstOrFail();
         return view('embed_video', compact('video'));
+    }
+
+    public function createVideoAction(Request $request)
+    {
+        $this->validate($request,[
+            'start_minute'=>'required|min:0',
+            'start_second'=>'required|min:0|max:59',
+            'end_minute'=>'required|min:0',
+            'end_second'=>'required|min:0|max:59',
+            'title'=>'required',
+            'url'=>'required',
+        ]);
+        $start_time = 0;
+        $end_time = 0;
+        $s_minute = $request->input('start_minute');
+        $s_second = $request->input('start_second');
+        $e_minute = $request->input('end_minute');
+        $e_second = $request->input('end_second');
+        if (!is_null($s_minute) || $s_minute != 0)
+            $start_time = $s_minute * 60;
+        $start_time += !is_null($s_second) ? $s_second : 0;
+
+        if (!is_null($e_minute) || $e_minute != 0)
+            $end_time = $e_minute * 60;
+        $end_time += !is_null($e_second) ? $e_second : 0;
+        if ($end_time <= $start_time)
+            return back()->with('error', 'Start Time must be less than Ending Time');
+        VideoAction::create([
+            'video_id' => $request->input('video_id'),
+            'user_id' => auth()->user()->id,
+            'start_time' => $start_time,
+            'end_time' => $end_time,
+            'title'=>$request->input('title'),
+            'url'=>$request->input('url')
+        ]);
+        return back()->with('success', 'Action Created');
     }
 
 }

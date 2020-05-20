@@ -28,7 +28,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('delete_category/{id}', 'AdminController@delete_category');
     Route::get('edit_category/{id}', 'AdminController@edit_category');
     Route::post('update_category', 'AdminController@update_category');
-    Route::get('add_category', function (){return view('admin.add_category');})->name('add_category');
+    Route::get('add_category', function () {
+        return view('admin.add_category');
+    })->name('add_category');
     Route::post('store_category', 'AdminController@store_category');
 
     Route::get('/home', 'HomeController@index')->name('home');
@@ -54,6 +56,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('post_comment', 'CommentsController@store')->name('post_comment');
     Route::post('delete_comment', 'CommentsController@destroy')->name('delete_comment');
     Route::get('get_total_comments', 'CommentsController@countTotalComments');
+
+    Route::post('createVideoAction', 'VideoController@createVideoAction')->name('createVideoAction');
 
 });
 Route::get('/embed/{video_id}', 'VideoController@get_embedded_video')->name('embed_video');

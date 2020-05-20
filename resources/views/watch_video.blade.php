@@ -3,15 +3,27 @@
     <div id="main-container" class="main-content  container  watch-container    " data-logged="true">
         <div id="container_content">
             <div class="top-video video-player-page">
+                @if(Session::has('error'))
+                    <div class="alert alert-danger">
+                        {{Session::get('error')}}
+                    </div>
+                @endif
+                @if(Session::has('success'))
+                    <div class="alert alert-danger">
+                        {{Session::get('success')}}
+                    </div>
+                @endif
                 <div class="row">
                     <div id="background" class="hidden"></div>
                     <div class="col-md-8 player-video" style="margin-top: 0 !important">
-                        <div class="video-player pt_video_player ">
+                        <div class="video-player pt_video_player " id="pt_video_player">
                             <span class="mejs__offscreen">Video Player</span>
                             <video id="my-video_html5"
                                    style="width: 100%; height: 451.872px; position: relative;"
                                    poster="{{asset("storage/$video->thumbnail")}}"
                                    preload="none"
+                                   ontimeupdate="video_player_tracker({{$video_actions}})"
+                                   onplay="create_links({{$video_actions}})"
                             >
                                 @if($video->{'8k'})
                                     <source src="{{asset("storage/".str_replace('240p','4320p',$video->stream_path))}}"
@@ -164,6 +176,30 @@
                                 <div class="video-views">
                                     <span id="video-views-count">{{$totalViews}}</span> {{$totalViews>1?'Views':'View'}}
                                 </div>
+                                @if(!auth()->guest())
+                                    <div class="form-group">
+                                        <form action="{{route('createVideoAction')}}" method="POST"><br>
+                                            @csrf
+                                            Start Time:
+                                            <input type="hidden" name="video_id" value="{{$video->id}}"></input>
+                                            <input type="number" value="0" name="start_minute" min="0" max="100"
+                                                   placeholder="00">:
+                                            <input type="number" value="00" name="start_second" min="0" max="60"
+                                                   placeholder="00">
+                                            Title:
+                                            <input required type="text" name="title" placeholder="title">
+                                            <br><br>
+                                            Final Time:
+                                            <input type="number" value="0" name="end_minute" min="0" max="100"
+                                                   placeholder="00">:
+                                            <input type="number" value="00" name="end_second" min="0" max="60"
+                                                   placeholder="00">
+                                            Link:
+                                            <input required type="text" name="url" placeholder="URL"><br>
+                                            <input type="submit" value="Save Action">
+                                        </form>
+                                    </div>
+                                @endif
                                 <div class="video-options pt_mn_wtch_opts">
                                     <button class="btn-share" id="share-video">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -416,12 +452,43 @@
 @endsection
 @section('footer_script')
     <script type="text/javascript">
-        window.onload = function () {
-            // alert('asd'
-            //    asdasd
-            //    asd
+        function create_links(actions) {
+            let parent = document.getElementById('pt_video_player');
+            let a = [];
+            let position = 75;
+            for (let i = 0; i < actions.length; i++) {
+                let temp = i;
+                temp = temp * 7.5
+                a[i] = document.createElement('a');
+                a[i].appendChild(document.createTextNode(`${actions[i].title}`));
+                a[i].setAttribute('id', `link-${actions[i].id}`)
+                a[i].title = `${actions[i].title}`;
+                a[i].href = `${actions[i].url}`;
+                a[i].style.zIndex = 99999;
+                a[i].style.top = position - temp + '%';
+                a[i].style.position = 'absolute';
+                a[i].style.marginLeft = '5px';
+                a[i].style.visibility = 'hidden';
+                parent.appendChild(a[i]);
+            }
+        }
 
-        };
+        function video_player_tracker(actions) {
+            let myPlayerTime = document.getElementById('my-video_html5');
+            let a=[];
+            for (let i = 0; i < actions.length; i++) {
+                if (myPlayerTime.currentTime >= actions[i].start_time && myPlayerTime.currentTime <= actions[i].end_time) {
+                    a[i] = document.getElementById(`link-${actions[i].id}`);
+                    a[i].style.visibility = 'visible';
+                }
+                if (myPlayerTime.currentTime > actions[i].end_time) {
+                    let x = document.getElementById(`link-${actions[i].id}`);
+                    if (x != null)
+                        x.remove()
+                }
+            }
+        }
+
         $(document).ready(function () {
             $.ajaxSetup({
                 headers: {
