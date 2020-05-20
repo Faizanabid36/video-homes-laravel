@@ -176,7 +176,7 @@
                                 <div class="video-views">
                                     <span id="video-views-count">{{$totalViews}}</span> {{$totalViews>1?'Views':'View'}}
                                 </div>
-                                @if(!auth()->guest())
+                                @if(!auth()->guest() && ($video->user_id==auth()->user()->id))
                                     <div class="form-group">
                                         <form action="{{route('createVideoAction')}}" method="POST"><br>
                                             @csrf
