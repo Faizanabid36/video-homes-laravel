@@ -106,7 +106,11 @@ class VideoController extends Controller
         VideoView::createViewLog($video);
         $totalViews = VideoView::getTotalVideoViews($video);
         $comments = $this->getComments($video->id);
-        $video_actions = VideoAction::where('user_id', auth()->user()->id)->where('video_id', $video->id)->get();
+        $video_actions='';
+        if(isset(auth()->user()->id))
+        {
+            $video_actions = VideoAction::where('user_id', auth()->user()->id)->where('video_id', $video->id)->get();
+        }
         return view('watch_video', compact('video', 'related_videos', 'totalViews', 'comments', 'video_actions'));
 
     }
