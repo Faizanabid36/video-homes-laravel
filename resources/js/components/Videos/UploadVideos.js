@@ -98,7 +98,7 @@ function MyDropzone(props) {
                     <div className="clear"/>
                 </Col>}
             </Row>
-            {uploading && <Row><Col xs={8} className={'mx-auto'}><ProgressBar animated
+            {uploading && <Row><Col xs={8} className={'mx-auto'}><ProgressBar animated id="progress"
                                                                               now={uploadProgress}/>{`${uploadProgress}% uploaded`}
             </Col></Row>}
             {state && <Row>

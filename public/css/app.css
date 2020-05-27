@@ -562,6 +562,28 @@
   box-shadow: 0px -10px 20px rgba(0, 0, 0, 0.5);
 }
 
+.Card3_container {
+  margin: 30px 0px;
+}
+
+.Card3_container .card {
+  width: 220px !important;
+  height: 250px !important;
+}
+
+.barChart {
+  height: 300px;
+  width: 100%;
+}
+
+.Analytics_Card_Container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 /*!
  * Bootstrap v4.5.0 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors

@@ -1,9 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {BrowserRouter, Link, Route, Switch} from 'react-router-dom';
-import DashboardComponents from "./DashboardComponents/DashboardComponents";
-import Comments from "./Comments";
 import Videos from "./Videos/Videos";
+import Analytics from "./Analytics"
 
 
 class Dashboard extends React.Component {
@@ -18,10 +15,8 @@ class Dashboard extends React.Component {
         switch(this.state.tab){
             case 'videos':
                 return <Videos/>;
-            case 'comments':
-                return <Comments totalComments={this.state.totalComments}/>;
             default:
-                return <DashboardComponents totalComments={this.state.totalComments}/>
+                return <Analytics />
         }
     }
 
@@ -47,10 +42,6 @@ class Dashboard extends React.Component {
                                         </li>
                                         <li className={this.state.tab === 'videos' && 'selected'}>
                                             <a href='#' onClick={e=>{e.preventDefault();this.setState({tab:'videos'})}}>Videos</a>
-                                        </li>
-                                        <li className={this.state.tab === 'comments' && 'selected'}>
-                                            {/*<Link to="/comments">Comments</Link>*/}
-                                            <a href='#' onClick={e=>{e.preventDefault();this.setState({tab:'comments'})}}>Comments</a>
                                         </li>
                                     </ul>
                                 </div>

@@ -10,6 +10,7 @@ import PlayList from "./Playlist.jsx";
 import Profile from "./Profile.jsx";
 import Settings from "./Settings.jsx";
 import Customize from "./Customize.jsx";
+import Analytics from "./Analytics";
 
 
 export default class Index extends React.Component{
@@ -24,6 +25,7 @@ export default class Index extends React.Component{
                 <Route path="/profile" exact  component={Profile} />
                 <Route path="/settings" exact  component={Settings} />
                 <Route path="/videos" exact  component={Videos} />
+                <Route path="/analytics" exact  component={Analytics} />
             </Switch>
         </main></BrowserRouter>
     }

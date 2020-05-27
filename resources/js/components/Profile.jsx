@@ -3,10 +3,8 @@ import React from "react";
 import axios from "axios";
 import General from "./Profile/General";
 import Videos from "./Videos/Videos";
-import Comments from "./Comments";
 import DeleteAccount from "./Profile/DeleteAccount";
 import ChangePassword from "./Profile/ChangePassword";
-import DashboardComponents from "./DashboardComponents/DashboardComponents";
 
 class Profile extends React.Component {
     constructor() {

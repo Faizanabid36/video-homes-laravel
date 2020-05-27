@@ -721,3 +721,33 @@ $background : linear-gradient(95.26deg, #04F5D5 7.67%, #037CED 119.78%);
     box-shadow: 0px -10px 20px rgba(0, 0, 0, 0.5);
 
 }
+
+.Card3_container{
+    margin: 30px 0px;
+
+
+    .card{
+        width: 220px !important;
+        height: 250px !important;
+    }
+}
+
+.card3{
+    // height: 300px;
+
+
+
+}
+.barChart{
+    height: 300px;
+    width: 100%;
+}
+
+.Analytics_Card_Container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+}

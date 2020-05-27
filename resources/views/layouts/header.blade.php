@@ -22,7 +22,7 @@
                                 <a class="nav-link" href="#"><h4 class="links2"> Customization </h4></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><h4 class="links2"> Analytic </h4></a>
+                                <a class="nav-link" href="{{route('dashboard')}}/#/analytics"><h4 class="links2"> Analytics </h4></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#"><h4 class="links2"> Downgrade/Upgrade </h4></a>
