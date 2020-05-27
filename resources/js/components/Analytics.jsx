@@ -7,6 +7,7 @@ import {
     faComment
 } from "@fortawesome/free-solid-svg-icons";
 import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 class Analytics extends React.Component {
     constructor(props) {
