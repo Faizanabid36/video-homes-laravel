@@ -101,7 +101,7 @@ function MyDropzone(props) {
             {uploading && <Row><Col xs={8} className={'mx-auto'}><ProgressBar animated
                                                                               now={uploadProgress}/>{`${uploadProgress}% uploaded`}
             </Col></Row>}
-            {!state && <Row>
+            {state && <Row>
                 <Col xs={8} className="mx-auto">
                     <Carousel interval={null} activeIndex={index} onSelect={handleSelect}>
                         {thumbnails && Object.values(thumbnails).map(v => {
