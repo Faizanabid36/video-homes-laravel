@@ -92,16 +92,9 @@
 }
 
 #align-box {
-  height: 100%;
-  background-image: radial-gradient(324.85% 141.93% at 106.4% 100%, #03FFD2 0%, #021BFF 100%);
-  background-color: black;
-  position: fixed;
-  width: 10%;
-  z-index: 5;
-  text-align: center;
   padding-top: 30px;
-  font-size: 30px;
-  font-weight: bold;
+  font-size: 35px;
+  color: black;
 }
 
 #cross {
@@ -124,18 +117,19 @@
   margin-left: -100%;
 }
 
-.card {
+.card2 {
   width: 285px;
   box-shadow: 0px -10px 30px rgba(0, 0, 0, 0.5);
+  height: 370px;
   transition: transform .2s;
 }
 
-.card:hover {
+.card2:hover {
   transform: scale(1.1);
 }
 
 @media (max-width: 1000.98px) {
-  .card {
+  .card2 {
     margin-bottom: 50px;
   }
 }
@@ -217,6 +211,27 @@
 
 .card {
   border: none !important;
+  margin-bottom: 15px;
+}
+
+.ClosedsideBar {
+  height: 100%;
+  background-image: radial-gradient(324.85% 141.93% at 106.4% 100%, #03FFD2 0%, #021BFF 100%);
+  position: fixed;
+  width: 10%;
+  z-index: 4;
+  text-align: center;
+}
+
+.ClosedsideBar div {
+  height: 44px;
+  margin-bottom: 35px;
+}
+
+.ClosedsideBar a {
+  font-size: 30px;
+  font-weight: bold;
+  color: black;
 }
 
 .bell {
@@ -239,12 +254,19 @@
 }
 
 .headbar-blade {
-  border-radius: 10%;
   z-index: 1;
 }
 
+.headbar-blade .navLinks {
+  padding: 0px 20px;
+}
+
+.headbar-blade .navLinks .items {
+  margin-left: 20px;
+}
+
 .headbar-blade .header-child3 {
-  width: 300px;
+  width: 200px;
   margin-left: 160px;
 }
 
@@ -258,21 +280,27 @@
   z-index: 2 !important;
   border-radius: 0px 0px 33px 33px;
   background: #FFFFFF;
-  min-height: 88px;
+  min-height: 78px;
   width: 154%;
 }
 
 .links2 {
-  color: #181717;
-  font-size: 19px;
-  letter-spacing: 0.05em;
-  font-weight: 500;
-  padding-left: 17px;
+  padding: auto;
+  color: #181717 !important;
+  font-size: 19px !important;
+  letter-spacing: 0.05em !important;
+  font-weight: 530 !important;
 }
 
 .links2:hover {
-  color: #41a6ee;
-  border-bottom: 5px solid #41a6ee;
+  color: #41a6ee !important;
+}
+
+.links2:hover .borderBottom {
+  width: 16px;
+  background-color: #41a6ee;
+  display: block;
+  height: 3px;
 }
 
 .dropdowncontainer .dropdown {

@@ -30,6 +30,7 @@ class Analytics extends React.Component {
         axios.post("/dashboard_statistics", {startDate, endDate})
             .then((res) => {
                 this.setState({...res.data})
+                console.log(res.data)
             })
             .catch((err) => {
                 console.log(err)
@@ -90,7 +91,7 @@ class Analytics extends React.Component {
                                 <Card style={{width: '18rem'}} className="card3">
                                     <Card.Img variant="top" src={window.VIDEO_APP.base_url+'/storage/'+item.thumbnail}/>
                                     <Card.Body>
-                                        <Card.Title>Provide Factory Details.mp4</Card.Title>
+                                        <Card.Title>{item.title}</Card.Title>
                                         <Card.Text>
                                             <FontAwesomeIcon
                                                 icon={faEye}

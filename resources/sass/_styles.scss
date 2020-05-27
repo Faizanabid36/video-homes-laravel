@@ -122,19 +122,14 @@ $background : linear-gradient(95.26deg, #04F5D5 7.67%, #037CED 119.78%);
 }
 
 #align-box{
-    height: 100%;
-    background-image: $background-image ;
-    background-color: black;
-    position: fixed;
-    width: 10%;
-    z-index:5;
-    text-align: center ;
+  
     padding-top: 30px;
-    font-size: 30px;
-    font-weight: bold ;
-
-
-}
+    font-size: 35px;
+    
+    color: black;
+  
+  
+  }
 
 
 #cross{
@@ -169,25 +164,25 @@ $background : linear-gradient(95.26deg, #04F5D5 7.67%, #037CED 119.78%);
 
 
 
-.card{
+.card2{
 
     width: $width ;
     box-shadow: 0px -10px 30px rgba(0, 0, 0, 0.5);
-
-
+    height: 370px;
+  
     transition: transform .2s;
-
+  
     &:hover {
-
-        transform: scale(1.1);
+  
+      transform: scale(1.1);
     }
-
-    @media (max-width: 1000.98px) {
-
+  
+      @media (max-width: 1000.98px) {
+  
         margin-bottom:  50px   ;
-    }
-
-}
+        }
+  
+  }
 
 
 
@@ -207,52 +202,52 @@ $background : linear-gradient(95.26deg, #04F5D5 7.67%, #037CED 119.78%);
     position: relative;
     height: 200px ;
     width: $width  ;
-
-    background-image:  linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5) ) , url("https://c0.wallpaperflare.com/preview/27/313/180/man-singing-on-stage.jpg");
-    background-repeat: no-repeat ;
-    background-size: cover;
-    transition: all 0.5s ease;
+  
+   background-image:  linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5) ) , url("https://c0.wallpaperflare.com/preview/27/313/180/man-singing-on-stage.jpg");
+   background-repeat: no-repeat ;
+  background-size: cover;
+   transition: all 0.5s ease;
     display: flex;
     color: white ;
     font-size: 13px;
-
+  
     font-weight: normal;
     line-height: 28px;
-
-
+  
+  
     & .one{
-        position: absolute;
-        left: 0;
-        top: 34%;
-        width: 100%;
-        text-align: center;
-
+      position: absolute;
+      left: 0;
+      top: 34%;
+      width: 100%;
+      text-align: center;
+  
+   }
+   & .two{
+    position: absolute;
+    top: 8px;
+    right: 16px;
+  
+  
+  }
+  & .three{
+    position: absolute;
+   bottom: 8px;
+    left: 16px;
+  
+    & span {
+  
+  letter-spacing: 0.03em;
+  padding-left: 3px;
+  
     }
-    & .two{
-        position: absolute;
-        top: 8px;
-        right: 16px;
-
-
-    }
-    & .three{
-        position: absolute;
-        bottom: 8px;
-        left: 16px;
-
-        & span {
-
-            letter-spacing: 0.03em;
-            padding-left: 3px;
-
-        }
-    }
-    & .four{
-        position: absolute;
-        bottom: 8px;
-        right: 16px;
-    }
-}
+  }
+  & .four{
+    position: absolute;
+   bottom: 8px;
+   right: 16px;
+  }
+  }
 
 
 
@@ -281,11 +276,35 @@ $background : linear-gradient(95.26deg, #04F5D5 7.67%, #037CED 119.78%);
 
 .card{
     border :none !important ;
-
+    margin-bottom: 15px;
 }
 
 
-
+.ClosedsideBar{
+    height: 100%;
+    background-image: $background-image ;
+    
+    position: fixed;
+    width: 10%;
+    z-index:4;
+    text-align: center ;
+  
+    & div{
+      height: 44px;
+      margin-bottom: 35px;
+  
+     
+    }
+  
+    & a{
+      
+      font-size: 30px;
+      font-weight: bold ;
+      color: black;
+   
+    }
+  
+  }
 
 
 
@@ -320,53 +339,93 @@ $background : linear-gradient(95.26deg, #04F5D5 7.67%, #037CED 119.78%);
 }
 .headbar-blade{
 
-    border-radius: 10% ;
-
-    z-index: 1;
-
+    // border-radius: 10% ;
+    
+   
+  
+     z-index: 1;
+  
+     & .navLinks{
+       padding: 0px 20px ;
+  
+       & .items{
+         margin-left: 20px;
+        //  border: 1px solid red;
+       }
+     }
+    
     & .header-child3{
-        width: 300px;
-
-        margin-left: 160px;
-
-        @media (max-width: 895.98px) { margin-left: 0;  }
-
+      width: 200px;
+      
+      margin-left: 160px;
+      
+      @media (max-width: 895.98px) { margin-left: 0;  }
+    
     }
-
+  
     &  .navbar {
-        z-index: 2 !important;
-        border-radius: 0px 0px 33px 33px;
-        background: #FFFFFF;
-        min-height: 88px;
-        //  min-height: 100px;
-        width: 154%;
+     z-index: 2 !important;
+     border-radius: 0px 0px 33px 33px;
+     background: #FFFFFF;
+     min-height: 78px;
+    //  min-height: 100px;
+     width: 154%;
+  
+     
+  
+    
+  
+    
+  
+   }
+  }
 
-
+  .links2 {
+  
+    padding: auto;
+   
+  
+   
+      color:rgb(24, 23, 23) !important;
+     
+      font-size: 19px !important;
+      letter-spacing: 0.05em !important;
+      font-weight: 530 !important;
+      
+       
+      &:hover {
+        color: $color !important;
+  
+       
+      
+      }
+  
+    &:hover .borderBottom{
+  
+    
+  
+        width:  16px;
+    
+        background-color: $color;
+        display: block;
+        height: 3px;
+      
+    
     }
-}
+  
+   
+  
+    
+  }
 
-.links2 {
-    color:rgb(24, 23, 23) ;
-    font-size: 19px;
-    letter-spacing: 0.05em;
-    font-weight: 500;
-    padding-left: 17px;
-
-
-    &:hover{
-        color: $color ;
-        border-bottom: 5px solid $color ;
-    }
-}
-
-.dropdowncontainer  .dropdown{
+  .dropdowncontainer  .dropdown{
 
     height: 50px;
     width: 50px;
 
     &:focus{
-        border: none;
-        outline: none;
+      border: none;
+      outline: none;
     }
 }
 .btn-primary:focus, .btn-primary.focus {
