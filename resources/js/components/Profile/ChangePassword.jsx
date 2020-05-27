@@ -48,7 +48,8 @@ class ChangePassword extends React.Component {
     render() {
 
         return <div className="col-md-7 pt_sett_mani_page">
-            <div className="form-horizontal user-setting-panel pt_forms pt_shadow" id="password-settings">
+            <div className="custom-vh-form form-horizontal user-setting-panel pt_shadow display-shadow-box"
+                 id="password-settings">
                 <div className="setting-password-alert">
                     {
                         this.state.message ?
@@ -60,7 +61,7 @@ class ChangePassword extends React.Component {
                     <div className="col-md-12">
                         <input required id="password" onChange={this.handleChangeInput} name="password" type="password"
                                placeholder=""
-                               className="form-control input-md"/>
+                               className="form-control custom-vh-form-input input-md"/>
                     </div>
                 </div>
                 <div className="form-group">
@@ -68,7 +69,7 @@ class ChangePassword extends React.Component {
                     <div className="col-md-12">
                         <input id="new_password" onChange={this.handleChangeInput} name="new_password" type="password"
                                placeholder=""
-                               className="form-control input-md"/>
+                               className="form-control custom-vh-form-input input-md"/>
                     </div>
                 </div>
                 <div className="form-group">
@@ -76,11 +77,11 @@ class ChangePassword extends React.Component {
                     <div className="col-md-12">
                         <input id="confirm_new_password" onChange={this.handleChangeInput} name="confirm_new_password"
                                type="password" placeholder=""
-                               className="form-control input-md"/>
+                               className="form-control custom-vh-form-input input-md"/>
                     </div>
                 </div>
                 <div className="last-sett-btn modal-footer" style={{margin: '0px -30px -10px -30px'}}>
-                    <button id="submit" onClick={this.handleSubmit} className="btn btn-main setting-panel-mdbtn">
+                    <button id="submit" onClick={this.handleSubmit} className="btn btn-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                              fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
                              strokeLinejoin="round" className="feather feather-check-circle">

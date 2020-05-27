@@ -43,7 +43,7 @@ class General extends React.Component {
 
     render() {
         return <div className="col-md-7 pt_sett_mani_page">
-            <div className="form-horizontal user-setting-panel pt_forms pt_shadow"
+            <div className="form-horizontal user-setting-panel pt_shadow display-shadow-box"
                  id="general-settings">
                 <div className="setting-general-alert">
                     {
@@ -51,45 +51,45 @@ class General extends React.Component {
                             <div className='alert alert-info'>{this.state.message}</div> : ''
                     }
                 </div>
-                <Row>
-                    <div className="form-group col-lg-6">
+                <Row className="custom-vh-form">
+                    <div className="form-group input-form-group col-lg-6">
                         <label className="col-md-12" htmlFor="name">Name</label>
                         <div className="col-md-12">
                             <input onChange={this.handleChangeInput} id="name" name="name" type="text" placeholder=""
-                                   className="form-control input-md" defaultValue={this.state.user.name}/>
+                                   className="form-control custom-vh-form-input" defaultValue={this.state.user.name}/>
                         </div>
                     </div>
-                    <div className="form-group col-lg-6">
+                    <div className="form-group input-form-group col-lg-6">
                         <label className="col-md-12" htmlFor="username">Username</label>
                         <div className="col-md-12">
                             <input onChange={this.handleChangeInput} id="username" name="username" type="text"
                                    placeholder=""
-                                   className="form-control input-md" defaultValue={this.state.user.username}/>
+                                   className="form-control custom-vh-form-input" defaultValue={this.state.user.username}/>
                         </div>
                     </div>
-                    <div className="form-group col-lg-6">
+                    <div className="form-group input-form-group col-lg-6">
                         <label className="col-md-12" htmlFor="email">E-mail address</label>
                         <div className="col-md-12">
                             <input onChange={this.handleChangeInput} id="email" name="email" type="text" placeholder=""
-                                   className="form-control input-md" defaultValue={this.state.user.email}/>
+                                   className="form-control custom-vh-form-input" defaultValue={this.state.user.email}/>
                         </div>
                     </div>
-                    <div className="form-group col-lg-6">
+                    <div className="form-group input-form-group col-lg-6">
                         <label className="col-md-12" htmlFor="gender">Gender</label>
                         <div className="col-md-12">
                             <select onChange={this.handleChangeInput} id="gender" defaultValue={this.state.user.gender}
                                     name="gender"
-                                    className="form-control">
+                                    className="form-control custom-vh-form-input">
                                 <option defaultValue="male">Male</option>
                                 <option defaultValue="female">Female</option>
                             </select>
                         </div>
                     </div>
-                    <div className="form-group col-lg-6">
+                    <div className="form-group input-form-group col-lg-6">
                         <label className="col-md-12" htmlFor="gender">Role</label>
                         <div className="col-md-12">
                             <select onChange={this.handleChangeInput} id="role" name="role"
-                                    defaultValue={this.state.user.role} className="form-control">
+                                    defaultValue={this.state.user.role} className="form-control custom-vh-form-input">
                                 <option defaultValue="2">Realtor</option>
                                 <option defaultValue="3">Video Provider</option>
                             </select>
@@ -101,7 +101,7 @@ class General extends React.Component {
                 <div className="last-sett-btn modal-footer"
                      style={{margin: '0px -30px -10px -30px'}}>
                     <button id="submit" onClick={this.handleSubmit}
-                            className="btn btn-main setting-panel-mdbtn">
+                            className="btn btn-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                              viewBox="0 0 24 24" fill="none" stroke="currentColor"
                              strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"

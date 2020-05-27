@@ -42,7 +42,7 @@ class DeleteAccount extends React.Component {
 
     render() {
         return <div className="col-md-7 pt_sett_mani_page">
-            <div className="form-horizontal user-setting-panel pt_forms pt_shadow" id="delete-settings">
+            <div className="form-horizontal user-setting-panel display-shadow-box pt_shadow" id="delete-settings">
                 <div className="setting-delete-alert">
                     {
                         this.state.message ?
@@ -55,11 +55,11 @@ class DeleteAccount extends React.Component {
                         <input onChange={this.handleChangeInput} id="password" name="password" type="password"
                                required
                                placeholder=""
-                               className="form-control input-md"/>
+                               className="form-control custom-vh-form-input input-md"/>
                     </div>
                 </div>
                 <div className="last-sett-btn modal-footer" style={{margin: '0px -30px -10px -30px'}}>
-                    <button id="submit" onClick={this.handleSubmit} className="btn btn-main setting-panel-mdbtn">
+                    <button id="submit" onClick={this.handleSubmit} className="btn btn-danger">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                              fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
                              strokeLinejoin="round" className="feather feather-check-circle">

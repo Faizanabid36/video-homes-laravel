@@ -58,11 +58,11 @@
                                 <div class="dowpdown-box">
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         @if(auth()->user())
+                                            <a class="dropdown-item" href="{{route('dashboard')}}/#/profile"><i class="fa fa-user icons"></i></a>
                                             <a class="dropdown-item" href="{{route('dashboard')}}/#/upload-video"><i
                                                     class="fa fa-cloud-upload icons"></i></a>
-                                            <a class="dropdown-item" href="#"><i class="fa fa-wifi icons"></i></a>
-                                            <a class="dropdown-item" href="#"><i class="fa fa-cloud icons"></i></a>
-                                            <a class="dropdown-item" href="#"><i
+                                            <a class="dropdown-item" href="{{route('dashboard')}}/#/settings"><i class="fa fa-cog icons"></i></a>
+                                            <a class="dropdown-item" ><i
                                                     class="fa fa-times-circle icons"></i></a>
                                         @else
                                             <br>

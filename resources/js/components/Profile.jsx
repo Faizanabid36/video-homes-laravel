@@ -31,22 +31,11 @@ class Profile extends React.Component {
     render() {
         return <Container className="main-content  container">
             <div id="container_content">
-                <div className="wo_about_wrapper_parent">
-                    <div className="wo_about_wrapper">
-                        <div className="hero hero-overlay">
-                            <div className="container">
-                                <h1 className="text-center">
-                                    General Settings
-                                </h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="pt_page_margin">
+                <div className="">
                     <Row>
                         <div className="col-md-1"></div>
                         <div className="col-md-3">
-                            <div className="settings-sidebar">
+                            <div className="settings-sidebar display-shadow-box">
                                 <ul className="list-group">
                                     <li className="list-group-item"
                                         className={this.state.tab == 'general' ? 'list-group-item active' : 'list-group-item'}>
