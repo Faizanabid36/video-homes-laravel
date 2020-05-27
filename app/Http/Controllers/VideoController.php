@@ -86,13 +86,13 @@ class VideoController extends Controller
     public function watch_video($username)
     {
         $user = User::whereUsername($username)->first();
-        if (isset(auth()->user()->id)) {
-            $BlockedUser = BlockedUser::where('blocked_user_id', auth()->user()->id)
-                ->where('user_id', $user->id)->first();
-            if (!is_null($BlockedUser)) {
-                return view('errors.restricted');
-            }
-        }
+//        if (isset(auth()->user()->id)) {
+//            $BlockedUser = BlockedUser::where('blocked_user_id', auth()->user()->id)
+//                ->where('user_id', $user->id)->first();
+//            if (!is_null($BlockedUser)) {
+//                return view('errors.restricted');
+//            }
+//        }
         $video = Video::whereHas('user', function ($query) use ($username) {
             $query->whereUsername($username);
         })->whereVideoId(request('v'))->where('is_video_approved', 1)->firstOrFail();
@@ -125,7 +125,7 @@ class VideoController extends Controller
 
     public function list_of_videos()
     {
-        $Videos = Video::where('is_video_approved', 1)->latest()->with('user')->get();
+        $Videos = Video::where('is_video_approved', 1)->latest()->with('user')->with('category')->get();
         $videos = collect($Videos)->map(function ($video) {
             $v = VideoView::getTotalVideoViews($video);
             $views = !is_null($v) ? $v : 0;

@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('container')
-    <div id="container_content">
-        l
+    <div id="container_content" style="background-color: #41a6ee">
         <div class="container login-page">
             <div class="login-form">
                 <h4>Let's get started!</h4>

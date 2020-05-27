@@ -40,4 +40,8 @@ class Video extends Model
     {
         return $this->hasMany(VideoAction::class, 'video_id', 'id');
     }
+    public function category()
+    {
+        return $this->belongsTo(Category::class,'category_id');
+    }
 }
