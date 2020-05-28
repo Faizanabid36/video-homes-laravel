@@ -426,7 +426,7 @@ body {
 
 .activate:hover {
   border-bottom: 5px solid #52b7ff;
-  width: 20px;
+  width: 100px;
 }
 
 #dropdown-basic-button {

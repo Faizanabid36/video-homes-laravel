@@ -122,16 +122,14 @@ class Videos extends React.Component {
                                         <h5 className="cardtitle"> {item.title} </h5>
                                     </Card.Title>
                                 </a>
-                                <Card.Text>
+                                {/* <Card.Text>
                                     {" "}
                                     <p className="cardtitle2">
                                         {item.description}{" "}
                                     </p>
-                                </Card.Text>
+                                </Card.Text> */}
                                 <div className="footer">
-                                    <span>
                                         Upload By: {item.user.username}
-                                    </span>
                                     <span className="ml-5">
                                 <FontAwesomeIcon icon={faCommentDots} className="icon2"/> {item.comments.length}
                               </span>
@@ -218,16 +216,8 @@ class Videos extends React.Component {
                                         <h5 className="cardtitle"> {item.title} </h5>
                                     </Card.Title>
                                 </a>
-                                <Card.Text>
-                                    {" "}
-                                    <p className="cardtitle2">
-                                        {item.description}{" "}
-                                    </p>
-                                </Card.Text>
                                 <div className="footer">
-                                    <span>
                                         Upload By: {item.user.username}
-                                    </span>
                                     <span className="ml-5">
                                 <FontAwesomeIcon icon={faCommentDots} className="icon2"/> {item.comments.length}
                               </span>
