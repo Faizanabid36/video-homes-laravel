@@ -95,7 +95,7 @@ class VideoController extends Controller
 //        }
         $video = Video::whereHas('user', function ($query) use ($username) {
             $query->whereUsername($username);
-        })->whereVideoId(request('v'))->where('is_video_approved', 1)->firstOrFail();
+        })->whereVideoId(request('v'))->firstOrFail();
         if (!$video->processed) {
             return view('errors.processing')->with('video', $video);
         }
