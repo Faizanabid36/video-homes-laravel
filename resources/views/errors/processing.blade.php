@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.oldApp')
 @section('container')
 
-    <div id="main-container" class="container main-content" data-logged="true">
+    <div id="main-container" style="margin-top:100px" class="container main-content" data-logged="true">
         <div id="container_content">
             <h4 class="text-center alert alert-info">
                 <p id="video_status">Video is in processing, Please wait a while.</p> <br>

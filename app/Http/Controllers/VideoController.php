@@ -125,14 +125,46 @@ class VideoController extends Controller
 
     public function list_of_videos()
     {
-        $Videos = Video::where('is_video_approved', 1)->latest()->with('user')->with('category')->get();
-        $videos = collect($Videos)->map(function ($video) {
+        $Videos = Video::where('user_id', auth()->user()->id)->where('processed',1)->latest()->with('user')->with('category')->get();
+        $videos=$Videos->groupBy('is_video_approved');
+        $pendingVideos = collect($videos[0])->map(function ($video) {
+                $v = VideoView::getTotalVideoViews($video);
+                $views = !is_null($v) ? $v : 0;
+                return collect($video)->merge(['views' => $views, 'daysAgo' => $video->created_at->diffForHumans()]);
+        });
+        $approvedVideos = collect($videos[1])->map(function ($video) {
             $v = VideoView::getTotalVideoViews($video);
             $views = !is_null($v) ? $v : 0;
             return collect($video)->merge(['views' => $views, 'daysAgo' => $video->created_at->diffForHumans()]);
         });
+        return compact('approvedVideos','pendingVideos');
+    }
 
-        return compact('videos');
+
+    public function list_of_videos_by_order($order)
+    {
+        $Videos = Video::where('user_id', auth()->user()->id)->where('processed',1)->latest()->with('user')->with('category')->get();
+        $videos=$Videos->groupBy('is_video_approved');
+        switch($order)
+        {
+            case 'oldest':
+                $pendingVideos= sortVideosInOrder('created_at',$videos[0]);
+                $approvedVideos = sortVideosInOrder('created_at',$videos[1]);
+            break;
+            case 'popular':
+                $pendingVideos = sortVideosInOrder('views',$videos[0]);
+                $approvedVideos = sortVideosInOrder('views',$videos[1]);
+            break;
+            case 'alphabetical':
+                $pendingVideos = sortVideosInOrder('title',$videos[0]);
+                $approvedVideos = sortVideosInOrder('title',$videos[1]);
+            break;
+            default:
+            $pendingVideos = sortVideosInOrder('newest',$videos[0]);
+            $approvedVideos = sortVideosInOrder('newest',$videos[1]);
+            break;
+        }
+        return compact('approvedVideos','pendingVideos');
     }
 
     public function update_video(Video $video)

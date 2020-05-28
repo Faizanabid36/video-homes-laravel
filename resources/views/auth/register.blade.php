@@ -1,7 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.oldApp')
 
 @section('container')
-    <div id="container_content" style="background-color: #41a6ee">
+    <div id="container_content">
+        l
         <div class="container login-page">
             <div class="login-form">
                 <h4>Let's get started!</h4>
@@ -100,33 +101,26 @@
                 background: -webkit-linear-gradient(top left, #2ec0bc 0%, #8ef9f6 100%);
                 background: linear-gradient(to bottom right, #2ec0bc 0%, #8ef9f6 100%);
             }
-
             .login-page {
                 margin-top: 150px;
             }
-
             .login-form input[type=submit] {
                 color: #2ec0bc !important;
             }
-
             ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
                 color: #fff;
             }
-
             :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
                 color: #fff;
                 opacity: 1;
             }
-
             ::-moz-placeholder { /* Mozilla Firefox 19+ */
                 color: #fff;
                 opacity: 1;
             }
-
             :-ms-input-placeholder { /* Internet Explorer 10-11 */
                 color: #fff;
             }
-
             ::-ms-input-placeholder { /* Microsoft Edge */
                 color: #fff;
             }
