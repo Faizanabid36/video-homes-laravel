@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Lato:300,400");
-@import "https://fonts.googleapis.com/css?family=Roboto";
+
 .login-page .login-form input[type=text], .login-page .login-form input[type=password] { padding: 10px; background-color: rgba(255, 255, 255, 0.25); border-radius: 3px; width: 100%; border: 1px solid transparent; color: #fff; }
 
 .login-page .login-form select, .login-page .login-form input[type=submit] { padding: 10px; background-color: rgba(255, 255, 255, 0.25); border-radius: 3px; width: 100%; border: 1px solid transparent; color: #fff; }

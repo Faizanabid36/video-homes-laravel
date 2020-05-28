@@ -22,11 +22,10 @@
         <div class="inner bg-light lter bg-container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-header bg-white">
+                        <div class="bg-white">
                             Videos
                         </div>
-                        <div class="card-block">
+                        <div class="">
                             <div class="table-responsive m-t-35">
                                 <table class="table">
                                     <thead>
@@ -64,7 +63,6 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>

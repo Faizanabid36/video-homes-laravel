@@ -1,5 +1,5 @@
 <?php
-
+// href="{{route('dashboard')}}#/upload-video"
 namespace App\Http\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;

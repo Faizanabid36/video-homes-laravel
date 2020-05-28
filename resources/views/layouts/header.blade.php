@@ -9,73 +9,76 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                 @endif
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse navLinks" id="navbarSupportedContent">
                     @if(!auth()->guest())
-                        <ul class="navbar-nav mr-auto">
+                        <ul class="navbar-nav mr-auto items">
                             <li class="nav-item ">
-                                <a class="nav-link" href="{{route('dashboard')}}/#/videos"><h4 class="links2"> Videos </h4></a>
+                                <a class="nav-link links2" href="{{route('dashboard')}}/#/videos">Videos  <div class="borderBottom"> </div></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><h4 class="links2"> Playlist </h4></a>
+                                <a class="nav-link links2" href="#">Playlist  <div class="borderBottom"> </div></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><h4 class="links2"> Customization </h4></a>
+                                <a class="nav-link links2" href="#">Customization  <div class="borderBottom"> </div></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('dashboard')}}/#/analytics"><h4 class="links2"> Analytics </h4></a>
+                                <a class="nav-link links2" href="{{route('dashboard')}}/#/analytics">Analytics  <div class="borderBottom"> </div></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"><h4 class="links2"> Downgrade/Upgrade </h4></a>
+                                <a class="nav-link links2" href="#">Upgrade/Downgrade <div class="borderBottom"> </div></a>
                             </li>
                         </ul>
                     @endif
 
 
-                    <div class=" d-flex w-25   justify-content-around align-items-center">
-                        @if(!auth()->guest())
-                            <div>
-                                <a href="#" class="notification">
+                    <ul class="navbar-nav ml-auto"> 
+                        <li>
+                            <span class="d-flex justify-content-around align-items-start  header-child3">
+                                @if(!auth()->guest())
+                                    <span>
+                                        <a href="#" class="notification">
+                                            <i class="fa fa-bell"> </i>
 
-                                    <i class="fa fa-bell"> </i>
-
-                                    <span class="badge"> 3 </span>
-                                </a>
-                            </div>
-                            <div>
-                                <i class="fa fa-search"> </i>
-                            </div>
-                        @endif
-                        <div class="dropdown nav-item dropdown">
-                            <button class="btn dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                @if(auth()->user())
-                                    <div class="image2"></div>
-                                @else
-                                    <h1 class="fa fa-user"></h1>
+                                            <span class="badge"> 3 </span>
+                                        </a>
+                                    </span>
+                                    <span>
+                                        <i class="fa fa-search"> </i>
+                                    </span>
                                 @endif
-                            </button>
-                            <span class="dropdowncontainer ">
-                                <div class="dowpdown-box">
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <div class="dropdown nav-item dropdown">
+                                    <button class="btn dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
                                         @if(auth()->user())
-                                            <a class="dropdown-item" href="{{route('dashboard')}}/#/profile"><i class="fa fa-user icons"></i></a>
-                                            <a class="dropdown-item" href="{{route('dashboard')}}/#/upload-video"><i
-                                                    class="fa fa-cloud-upload icons"></i></a>
-                                            <a class="dropdown-item" href="{{route('dashboard')}}/#/settings"><i class="fa fa-cog icons"></i></a>
-                                            <a class="dropdown-item" ><i
-                                                    class="fa fa-times-circle icons"></i></a>
+                                            <div class="image2"></div>
                                         @else
-                                            <br>
-                                            <a class="dropdown-item" href="{{route('login')}}"><i
-                                                    class="fa fa-sign-in icons"></i></a>
-                                            <a class="dropdown-item" href="{{route('register')}}"><i
-                                                    class="fa fa-plus-square icons"></i></a>
+                                            <h1 class="fa fa-user"></h1>
                                         @endif
-                                    </div>
+                                    </button>
+                                    <span class="dropdowncontainer ">
+                                        <div class="dowpdown-box">
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                @if(auth()->user())
+                                                    <a class="dropdown-item" href="{{route('dashboard')}}/#/profile"><i class="fa fa-user icons"></i></a>
+                                                    <a class="dropdown-item" href="{{route('dashboard')}}/#/upload-video"><i
+                                                            class="fa fa-cloud-upload icons"></i></a>
+                                                    <a class="dropdown-item" href="{{route('dashboard')}}/#/settings"><i class="fa fa-cog icons"></i></a>
+                                                    <a class="dropdown-item" ><i
+                                                            class="fa fa-times-circle icons"></i></a>
+                                                @else
+                                                    <br>
+                                                    <a class="dropdown-item" href="{{route('login')}}"><i
+                                                            class="fa fa-sign-in icons"></i></a>
+                                                    <a class="dropdown-item" href="{{route('register')}}"><i
+                                                            class="fa fa-plus-square icons"></i></a>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </span>
                                 </div>
                             </span>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
                 </div>
             </nav>
         </div>
