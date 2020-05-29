@@ -89,19 +89,19 @@
 </div>
 
   <div class="card" style="width: 18rem;">
-  <img class="card-img-top images"  src="http://videohomes.com/wp-content/uploads/2019/07/video-image-141px.jpeg" alt="Card image cap">
+  <img class="card-img-top images"  src="http://videohomes.com/wp-content/uploads/2019/07/Index-Card-jpeg.jpg" alt="Card image cap">
   <div class="card-body">
-    <h5 class="card-title">Videographers</h5>
-    <p class="card-text">A Platform for your business.</p>
-    <a href="#" class="btn btn-primary">LEARN MORE</a>
+    <h5 class="card-title">Local Business Owners</h5>
+    <p class="card-text">You have a story..let our Marketing Pros tell it!</p>
+    <a href="#" class="btn btn-success">LEARN MORE</a>
   </div>
 </div>
   
 <div class="card" style="width: 18rem;">
-  <img class="card-img-top images"  src="http://videohomes.com/wp-content/uploads/2019/07/video-image-141px.jpeg" alt="Card image cap">
+  <img class="card-img-top images"  src="http://videohomes.com/wp-content/uploads/2019/07/House-Icon-Jpeg.jpg" alt="Card image cap">
   <div class="card-body">
-    <h5 class="card-title">Videographers</h5>
-    <p class="card-text">A Platform for your business.</p>
+    <h5 class="card-title">Real Estate Agents</h5>
+    <p class="card-text">Finally a fully integrated solution for production and distribution that puts you in control.</p>
     <a href="#" class="btn btn-primary">LEARN MORE</a>
   </div>
 </div>
