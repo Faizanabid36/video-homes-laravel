@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="container-fluid">
-<div class="row  m-0 p-0">
+<div class="row sticky m-0 p-0">
   <div class="col ">    
    <!-- Nav       -->
    <div class="">
