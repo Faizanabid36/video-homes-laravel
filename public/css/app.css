@@ -1,5 +1,12 @@
 body {
-  font-family: "Montserrat", sans-serif !important;
+  margin: 0;
+  font-family: "Nunito", sans-serif !important;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #212529;
+  text-align: left;
+  background-color: #f8fafc;
 }
 
 .Nav {
@@ -16,7 +23,7 @@ body {
 .links {
   color: black;
   font-size: 18px;
-  font-weight: 560;
+  font-weight: 510;
   letter-spacing: 0.05em;
   margin-left: 15px;
 }
@@ -45,8 +52,9 @@ body {
 
 .btn1 {
   font-size: 20px;
-  height: 20px;
+  height: 25px;
   margin-top: 20px;
+  font-weight: 500;
 }
 
 .btn1 i {
@@ -112,10 +120,10 @@ body {
   margin-bottom: 35px;
 }
 
-.ClosedsideBar a {
+.ClosedsideBar .btn1 i {
   font-size: 30px;
-  font-weight: bold;
-  color: black;
+  padding-top: 5px;
+  color: black !important;
 }
 
 #align-box {
@@ -257,7 +265,7 @@ body {
 
 .ClosedsideBar a {
   font-size: 30px;
-  font-weight: bold;
+  font-weight: 500;
   color: black;
 }
 
@@ -265,19 +273,6 @@ body {
   color: #41a6ee;
   width: 20px;
   font-size: 20px;
-}
-
-.headbar {
-  min-height: 88px;
-  border-radius: 10%;
-  z-index: 1;
-}
-
-.headbar .navbar {
-  z-index: 2 !important;
-  border-radius: 0px 0px 33px 33px;
-  background: #FFFFFF;
-  width: 1235px;
 }
 
 .headbar-blade {
@@ -310,7 +305,7 @@ body {
   color: #181717 !important;
   font-size: 19px !important;
   letter-spacing: 0.05em !important;
-  font-weight: 530 !important;
+  font-weight: 503 !important;
 }
 
 .links2:hover {
@@ -419,14 +414,9 @@ body {
 }
 
 .head {
-  height: 70px;
+  height: 100px;
   position: relative;
   top: 30px;
-}
-
-.activate:hover {
-  border-bottom: 5px solid #52b7ff;
-  width: 20px;
 }
 
 #dropdown-basic-button {
@@ -441,7 +431,7 @@ body {
 }
 
 .dropItems {
-  height: 200px;
+  height: 290px;
   width: 294px;
   padding: 0 !important;
   position: relative;
@@ -464,9 +454,6 @@ body {
   padding: 0.35rem 0rem !important;
   font-weight: 630;
   text-align: inherit;
-  white-space: nowrap;
-  background-color: transparent;
-  border: 0;
   width: 80% !important;
   border-radius: 0px 20px 20px 0px !important;
 }
@@ -475,10 +462,15 @@ body {
   position: relative;
   left: 20px;
   top: 10px;
+  color: black;
+  font-size: 15px;
+  line-height: 24px;
+  height: 40px;
 }
 
 .dropItems > .dropdown-item:hover {
   background: #f0f1f3 !important;
+  color: black;
 }
 
 * {
@@ -486,9 +478,8 @@ body {
 }
 
 .App {
-  font-family: 'comic sans ms';
   text-align: center;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .parentcontainer {
@@ -632,6 +623,113 @@ body {
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.home-nav {
+  height: 170px;
+}
+
+.home-nav .links-home {
+  padding: 0px 40px;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.home-nav .logo {
+  height: 140px;
+  width: 350px;
+  margin: 50px;
+}
+
+.header-wrapper {
+  width: 1349px;
+  height: 440px;
+  z-index: 10;
+}
+
+.dullbg {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)) !important;
+}
+
+.header-wrapper {
+  background: transparent;
+}
+
+#wp-custom-header.cp-video-bg {
+  background: url("https://www.videohomes.com/wp-content/themes/one-page-express/assets/images/Mock-up.jpg") rgba(0, 0, 0, 0.25);
+  background-color: #000000;
+  background-position: center top;
+  background-size: cover;
+  position: absolute;
+  z-index: -2;
+  height: 100%;
+  width: 100%;
+  margin-top: 0;
+  top: 0px;
+  -webkit-transform: translate3d(0, 0, -2px);
+}
+
+.header-homepage.cp-video-bg,
+.header.cp-video-bg {
+  background-color: transparent !important;
+  overflow: hidden;
+}
+
+#wp-custom-header.cp-video-bg #wp-custom-header-video {
+  -o-object-fit: cover;
+     object-fit: cover;
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  transition: opacity 0.4s cubic-bezier(0.44, 0.94, 0.25, 0.34);
+}
+
+#wp-custom-header.cp-video-bg button#wp-custom-header-video-button {
+  display: none;
+}
+
+.header-content {
+  position: absolute;
+  top: 20%;
+  left: 40%;
+  color: white;
+}
+
+.header-content .header-button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header-content .header-button > button {
+  padding: 15px;
+  font-weight: 300;
+  margin-left: 10px;
+}
+
+.icons-boxes {
+  background-color: white;
+  border: 1px solid gray;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.icons-boxes .card {
+  border: 1px solid black;
+  border: 1px solid #9b9b9b !important;
+  text-align: center;
+}
+
+.icons-boxes .card img {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.icons-boxes img {
+  width: 131px;
+  height: 139px;
 }
 
 /*!

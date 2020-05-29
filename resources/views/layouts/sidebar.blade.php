@@ -15,9 +15,11 @@
                     <div class="btn1">
                        
                            
-                             <a href="{{route('dashboard')}}#/upload-video" class=" ">   <i class="fa fa-cloud-upload" color="white"></i>  </a>
+                             <a href="{{route('dashboard')}}#/upload-video" class="icons2 ">   <i class="fa fa-cloud-upload" ></i>  </a>
                         
                     </div>
+
+                   
 
                     <div class="btn1">
                        

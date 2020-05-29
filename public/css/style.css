@@ -62,7 +62,7 @@
 
 .share-video .fa, .share-video a { display: inline-block; padding: 10px; font-size: 20px; width: 50px; height: 50px; line-height: 1.5; border-radius: 3px; text-align: center; text-decoration: none; margin: 5px 2px; }
 
-.login-page { margin-top: 250px; width: 20%; padding-top: 0; }
+.login-page { margin-top: 20px; width: 20%; padding: 15px; }
 .login-page .login-form input[type=text] option { color: #333; }
 .login-page .login-form input[type=text]:focus { border: 1px solid #fcfcfc; outline: none; }
 .login-page .login-form input[type=password] option { color: #333; }

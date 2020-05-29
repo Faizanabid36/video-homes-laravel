@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import HeadAllVideos from '../HeadAllVideos'
 // import VideoThumbnail from 'react-video-thumbnail';
 import {BrowserRouter, Route, Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -35,48 +36,18 @@ class Videos extends React.Component {
 
     render() {
         return <Container>
-            <Row>
-                <Col>
-                    <Row className="head ">
-                        <Col>
-                            <p className="h4 activate">All Videos</p>
-                        </Col>
-                        <Col className="  d-flex  justify-content-end">
-                            <DropdownButton
-                                className="dropdownbtn"
-                                id="dropdown-basic-button"
-                                title="filter"
-                            >
-                                <div className="dropItems">
-                                    <div>
-                                        {" "}
-                                        <Button className="cross btn ">
-                                            {" "}
-                                            <FontAwesomeIcon icon={faTimes}/>{" "}
-                                        </Button>{" "}
-                                    </div>
+           
+           <Row>
+                  <Col>
+                         <HeadAllVideos state={'All Videos'} />
+                 </Col>
+            </Row>    
+                           
 
-                                    <Dropdown.Item href="#">
-                                        {" "}
-                                        <p className="items"> New to Oldest </p>{" "}
-                                    </Dropdown.Item>
-                                    <Dropdown.Item href="#">
-                                        <p className="items"> Oldest to Newest </p>{" "}
-                                    </Dropdown.Item>
-                                    <Dropdown.Item href="#">
-                                        {" "}
-                                        <p className="items"> Most Popular </p>{" "}
-                                    </Dropdown.Item>
-                                    <Dropdown.Item href="#">
-                                        {" "}
-                                        <p className="items"> Alphabetical </p>{" "}
-                                    </Dropdown.Item>
-                                </div>
-                            </DropdownButton>
-                        </Col>
-                    </Row>
-                </Col>
-            </Row>
+                       
+
+                       
+           
             <Row className=" Cards-container">
                 {this.state.videos.map((item, index) => {
                     let link = window.VIDEO_APP.base_url + '/' + item.user.username + '/watch_video?v=' + item.video_id;

@@ -30,7 +30,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return redirect('dashboard');
+        return view( 'home');
+        // return 'sss' ;
     }
 
     public function logged_user()

@@ -1,6 +1,6 @@
 $width : 285px;
 
-$font-family: 'Montserrat', sans-serif;
+$font-family: 'Montserrat', sans-serif !important;
 $background-image:radial-gradient(324.85% 141.93% at 106.4% 100%, #03FFD2 0%, #021BFF 100%);
 $color:  rgb(65, 166, 238);
 $background : linear-gradient(95.26deg, #04F5D5 7.67%, #037CED 119.78%);
@@ -10,9 +10,17 @@ $background : linear-gradient(95.26deg, #04F5D5 7.67%, #037CED 119.78%);
 //sIDEABR
 
 
-body{
-    font-family: $font-family!important;
+body {
+  margin: 0;
+  font-family: "Nunito", sans-serif !important;
+  font-size: 0.9rem;
+  font-weight: 400 ;
+  line-height: 1.6;
+  color: #212529;
+  text-align: left;
+  background-color: #f8fafc;
 }
+
 
 .Nav {
 
@@ -30,7 +38,7 @@ body{
   .links {
     color: rgb(0, 0, 0);
     font-size: 18px;
-    font-weight: 560 ;
+    font-weight: 510 ;
     letter-spacing: 0.05em;
     
     margin-left: 15px;
@@ -61,8 +69,11 @@ body{
   .btn1 {
 
     font-size: 20px;
-    height: 20px;
+    height: 25px;
     margin-top: 20px;
+    font-weight: 500;
+
+    
   
     & i{
       color: black;
@@ -146,11 +157,12 @@ body{
      
     }
   
-    & a{
+    & .btn1  i{
       
       font-size: 30px;
-      font-weight: bold ;
-      color: black;
+      
+      padding-top: 5px;
+      color: rgb(0, 0, 0) !important;
    
     }
   
@@ -333,7 +345,7 @@ body{
     & a{
       
       font-size: 30px;
-      font-weight: bold ;
+      font-weight: 500;
       color: black;
    
     }
@@ -355,29 +367,24 @@ body{
   
   
   
-  .headbar{
-    min-height: 88px;
-   border-radius: 10% ;
+  // .headbar{
+  //   min-height: 88px;
+  //  border-radius: 10% ;
    
-    z-index: 1;
-  //  background: rgb(255, 255, 255);
+  //   z-index: 1;
   
   
   
-   &  .navbar {
-    z-index: 2 !important;
-    border-radius: 0px 0px 33px 33px;
-    background: #FFFFFF;
-    width: 1235px;
+  //  &  .navbar {
+  //   z-index: 2 !important;
+  //   border-radius: 0px 0px 33px 33px;
+  //   background: #FFFFFF;
+  //   width: 1235px;
   
-  }
-  }
+  // }
+  // }
   
   .headbar-blade{
-  
-    // border-radius: 10% ;
-    
-   
   
      z-index: 1;
   
@@ -386,16 +393,14 @@ body{
   
        & .items{
          margin-left: 11px;
-        //  border: 1px solid red;
+      
        }
      }
     
     & .header-child3{
       width: 200px;
       margin:  15px 10px ;
-      // margin-left: 160px;
-      
-      // @media (max-width: 895.98px) { margin-left: 0;  }
+     
     
     }
   
@@ -416,14 +421,10 @@ body{
   .links2 {
     
     padding: auto;
-   
-  
-   
-      color:rgb(24, 23, 23) !important;
-     
-      font-size: 19px !important;
-      letter-spacing: 0.05em !important;
-      font-weight: 530 !important;
+    color: #181717 !important;
+    font-size: 19px !important;
+    letter-spacing: 0.05em !important;
+    font-weight: 503 !important;
       
        
       &:hover {
@@ -569,17 +570,12 @@ body{
 
 .head{
 
-    height: 70px;
+    height: 100px;
     position: relative;
     top: 30px;
 }
 
-.activate{
 
-    &:hover{
-        border-bottom: 5px solid rgb(82, 183, 255);
-        width: 20px
-    }}
 
 #dropdown-basic-button{
 
@@ -597,8 +593,8 @@ body{
 }
 
 .dropItems{
-    height: 200px;
-    width: 294px;
+  height: 290px;
+  width: 294px;
 
 
     padding:0 !important  ;
@@ -619,34 +615,38 @@ body{
 
 
 .dropItems >  .dropdown-item {
-    display: block;
-    line-height: 30px;
-    /* identical to box height */
-
-    letter-spacing: 0.06em;
-    padding: 0.35rem 0rem !important;
-
-    font-weight: 630;
-
-    text-align: inherit;
-    white-space: nowrap;
-    background-color: transparent;
-    border: 0;
-    width: 80% !important;
-    border-radius: 0px 20px 20px 0px !important;
-    &  .items {
-        position: relative;
-        left: 20px;
-        top: 10px;
-
-    }
+  display: block;
+  line-height: 30px;
+/* identical to box height */
 
 
-    &:hover{
+  letter-spacing: 0.06em;
+  padding: 0.35rem 0rem !important;
 
-        background: rgb(240, 241, 243) !important;
+  font-weight: 630;
 
-    }
+  text-align: inherit;
+
+  width: 80% !important;
+  border-radius: 0px 20px 20px 0px !important;
+  &  .items {
+    position: relative;
+    left: 20px;
+    top: 10px;
+    color: black;
+    font-size: 15px;
+line-height: 24px;
+height: 40px;
+
+  }
+
+
+  &:hover{
+
+    background: rgb(240, 241, 243) !important;
+    color: black;
+
+  }
 }
 
 
@@ -661,9 +661,9 @@ body{
     margin: 0;
 }
 .App {
-    font-family: 'comic sans ms';
+  $font-family: 'Montserrat', sans-serif;
     text-align: center;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 
@@ -840,3 +840,129 @@ body{
     flex-wrap: wrap;
   
   }
+
+
+// Home page at blade template
+
+.home-nav{
+  height: 170px;
+  & .links-home{
+  
+    padding: 0px 40px;
+    font-size: 17px;
+    font-weight: 500;
+  
+  }
+
+  &  .logo{
+          height: 140px;
+          width: 350px;
+          margin: 50px;
+  }
+
+ 
+  
+}
+
+.header-wrapper{
+  width: 1349px;
+  height: 440px;
+  z-index: 10;
+  
+}
+
+.dullbg{
+  background-image : linear-gradient(to right , rgba(255 , 255 , 255 , 0.5) , rgba(255 , 255 , 255 , 0.5) ) !important ;
+}
+
+
+
+.header-wrapper {
+  background: transparent;
+}
+
+#wp-custom-header.cp-video-bg {
+  background: url('https://www.videohomes.com/wp-content/themes/one-page-express/assets/images/Mock-up.jpg') rgba(0, 0, 0, 0.25);
+  background-color: #000000;
+  background-position: center top;
+  background-size: cover;
+  position: absolute;
+  z-index: -2;
+  height: 100%;
+  width: 100%;
+  margin-top: 0;
+  top: 0px;
+  -webkit-transform: translate3d(0, 0, -2px);
+}
+
+.header-homepage.cp-video-bg,
+.header.cp-video-bg {
+  background-color: transparent !important;
+  overflow: hidden;
+}
+
+#wp-custom-header.cp-video-bg #wp-custom-header-video {
+  object-fit: cover;
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  transition: opacity 0.4s cubic-bezier(0.44, 0.94, 0.25, 0.34);
+}
+
+#wp-custom-header.cp-video-bg button#wp-custom-header-video-button {
+  display: none;
+}
+
+.header-content{
+  position: absolute;
+  top: 20%;
+  left: 40%;
+  color: white;
+  
+
+  & .header-button{
+   display: flex;
+   justify-content: flex-end;
+   & > button{
+      padding: 15px;
+      font-weight: 300;
+      margin-left: 10px;
+   }
+  }
+}
+
+.icons-boxes{
+  background-color: rgb(255, 255, 255);
+  border: 1px solid gray;
+  
+  // width: 1200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  // margin: 0px 10px;
+  
+
+  
+
+  & .card{
+    border: 1px solid black;
+    // width: 200px;
+    border: 1px solid rgb(155, 155, 155) !important;
+    text-align: center;
+
+    & img{
+      margin-left: auto;
+      margin-right: auto;
+    }
+   
+   
+   
+  }
+
+  & img{
+    width: 131px;
+    height: 139px;
+  }
+}
