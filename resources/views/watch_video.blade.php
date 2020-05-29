@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.oldApp')
 @section('container')
-    <div id="main-container" class="main-content  container" data-logged="true">
+    <div id="main-container" style="margin-top:100px" class="main-content  container" data-logged="true">
         <div id="container_content">
             <div class="top-video video-player-page">
                 @if(Session::has('error'))

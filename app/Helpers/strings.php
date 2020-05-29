@@ -3,6 +3,7 @@
 
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Format\Video\X264;
+use App\VideoView;
 
 if ( ! function_exists( 'dashboardChart' ) ) {
     function dashboardChart( $labels, $label, $data ) {
@@ -92,4 +93,39 @@ function getVideoRotation( $videostream ) {
 
 // do the rotation correction
     return $tags['rotate'];
+}
+
+
+function sortVideosInOrder($order,$videos)
+{
+    switch($order){
+        case 'created_at':
+            return collect($videos)->map(function ($video) {
+                $v = VideoView::getTotalVideoViews($video);
+                $views = !is_null($v) ? $v : 0;
+                return collect($video)->merge(['views' => $views, 'daysAgo' => $video->created_at->diffForHumans()]);
+            })->sortBy('created_at')->values();
+        break;
+        case 'views':
+            return collect($videos)->map(function ($video) {
+                $v = VideoView::getTotalVideoViews($video);
+                $views = !is_null($v) ? $v : 0;
+                return collect($video)->merge(['views' => $views, 'daysAgo' => $video->created_at->diffForHumans()]);
+            })->sortByDesc('views')->values();
+        break;
+        case 'title':
+            return collect($videos)->map(function ($video) {
+                $v = VideoView::getTotalVideoViews($video);
+                $views = !is_null($v) ? $v : 0;
+                return collect($video)->merge(['views' => $views, 'daysAgo' => $video->created_at->diffForHumans()]);
+            })->sortBy('title')->values();
+        break;
+        default:
+            return collect($videos)->map(function ($video) {
+                $v = VideoView::getTotalVideoViews($video);
+                $views = !is_null($v) ? $v : 0;
+                return collect($video)->merge(['views' => $views, 'daysAgo' => $video->created_at->diffForHumans()]);
+            });
+        break;
+    }
 }

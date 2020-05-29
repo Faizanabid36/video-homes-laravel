@@ -39,6 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/upload-video', 'VideoController@upload_video');
     Route::put('/update-video/{video}', 'VideoController@update_video');
     Route::get('/all_videos', 'VideoController@list_of_videos');
+    Route::get('/all_videos/{order}', 'VideoController@list_of_videos_by_order');
     Route::get('edit_video/{video_id}', 'VideoController@edit_video');
 
     Route::resource('playlist', 'PlaylistController');

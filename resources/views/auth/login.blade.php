@@ -1,6 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.oldApp')
 @section('container')
-    <div id="container_content" style="background-color: #41a6ee">
+    <div id="main-container" class="welcome-page main-content">
+        <div id="container_content">
             <div class="container login-page">
                 <form action="{{route('login')}}" method="POST">
                     @csrf
@@ -32,6 +33,22 @@
                     </div>
                 </form>
             </div>
+            <ul class="bg-bubbles">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+
+        </div>
     </div>
     <style>
         .bg-bubbles {
