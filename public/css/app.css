@@ -625,8 +625,16 @@ body {
   flex-wrap: wrap;
 }
 
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 10000 !important;
+}
+
 .home-nav {
-  height: 170px;
+  min-height: 150px;
+  top: 0;
 }
 
 .home-nav .links-home {
@@ -635,20 +643,15 @@ body {
   font-weight: 500;
 }
 
+.home-nav .links-home li a {
+  color: black !important;
+  margin-right: 15px;
+}
+
 .home-nav .logo {
   height: 140px;
   width: 350px;
   margin: 50px;
-}
-
-.header-wrapper {
-  width: 1349px;
-  height: 440px;
-  z-index: 10;
-}
-
-.dullbg {
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)) !important;
 }
 
 .header-wrapper {
@@ -673,6 +676,7 @@ body {
 .header.cp-video-bg {
   background-color: transparent !important;
   overflow: hidden;
+  z-index: -1;
 }
 
 #wp-custom-header.cp-video-bg #wp-custom-header-video {
@@ -707,19 +711,22 @@ body {
 }
 
 .icons-boxes {
-  background-color: white;
-  border: 1px solid gray;
+  background-color: none;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   flex-wrap: wrap;
+  margin-top: 20px;
+  position: absolute;
+  top: 588px;
 }
 
 .icons-boxes .card {
   border: 1px solid black;
-  border: 1px solid #9b9b9b !important;
+  border: 1px solid #e9d9d9 !important;
   text-align: center;
+  padding-top: 20px;
 }
 
 .icons-boxes .card img {
@@ -730,6 +737,70 @@ body {
 .icons-boxes img {
   width: 131px;
   height: 139px;
+}
+
+.joinUs {
+  width: 1353px;
+  height: 200px;
+  background: #2186C4;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.joinUs span {
+  width: 409px;
+  color: white;
+  font-size: 32px;
+  text-align: justify;
+}
+
+.joinUs span button {
+  padding: 10px;
+  color: white;
+  background: #FBC02D;
+  margin-left: 80px;
+}
+
+.joinUs span button:hover {
+  color: white !important;
+  background-color: yellow;
+}
+
+.sayHello {
+  background: #7e7a7a;
+  width: 1350px;
+}
+
+.form-home {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  padding-top: 30px;
+  color: white;
+}
+
+.myform {
+  background: white;
+  padding: 25px 35px;
+  color: gray;
+}
+
+.footer-top {
+  background: #1b64ec;
+  height: 5px;
+  margin-top: 30px;
+}
+
+.footer {
+  background-color: black;
+  height: 140px;
+  text-align: center !important;
+  width: 1350px;
+  display: block !important;
+  color: white;
+  padding-top: 30px;
 }
 
 /*!
