@@ -47,18 +47,48 @@ class Videos extends React.Component {
 
     render() {
         return <Container>
-           
-           <Row>
-                  <Col>
-                         <HeadAllVideos state={'All Videos'} />
-                 </Col>
-            </Row>    
-                           
+            <Row>
+                <Col>
+                    <Row className="head ">
+                        <Col>
+                            <p className="h4 activate">My Videos</p>
+                        </Col>
+                        <Col className="  d-flex  justify-content-end">
+                            <DropdownButton
+                                className="dropdownbtn"
+                                id="dropdown-basic-button"
+                                title="Filter"
+                            >
+                                <div className="dropItems">
+                                    <div>
+                                        {" "}
+                                        <Button className="cross btn ">
+                                            {" "}
+                                            <FontAwesomeIcon icon={faTimes}/>{" "}
+                                        </Button>{" "}
+                                    </div>
 
-                       
-
-                       
-           
+                                    <Dropdown.Item onClick={(e)=>{e.preventDefault();this.changeFilter('newest')}}>
+                                        {" "}
+                                        <p className="items"> New to Oldest </p>{" "}
+                                    </Dropdown.Item>
+                                    <Dropdown.Item onClick={(e)=>{e.preventDefault();this.changeFilter('oldest')}}>
+                                        <p className="items"> Oldest to Newest </p>{" "}
+                                    </Dropdown.Item>
+                                    <Dropdown.Item onClick={(e)=>{e.preventDefault();this.changeFilter('popular')}}>
+                                        {" "}
+                                        <p className="items"> Most Popular </p>{" "}
+                                    </Dropdown.Item>
+                                    <Dropdown.Item onClick={(e)=>{e.preventDefault();this.changeFilter('alphabetical')}}>
+                                        {" "}
+                                        <p className="items"> Alphabetical </p>{" "}
+                                    </Dropdown.Item>
+                                </div>
+                            </DropdownButton>
+                        </Col>
+                    </Row>
+                </Col>
+            </Row>
             <Row className=" Cards-container">
                 {this.state.approvedVideos.map((item, index) => {
                     let link = window.VIDEO_APP.base_url + '/' + item.user.username + '/watch_video?v=' + item.video_id;
