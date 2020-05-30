@@ -419,6 +419,13 @@ body {
   top: 30px;
 }
 
+.head .h4:hover .borderBottom {
+  width: 17px;
+  background-color: #41a6ee;
+  display: block;
+  height: 5px;
+}
+
 #dropdown-basic-button {
   border-radius: 20px 20px 20px 20px;
   width: 100px;
@@ -431,11 +438,10 @@ body {
 }
 
 .dropItems {
-  height: 290px;
+  height: 242px;
   width: 294px;
-  padding: 0 !important;
   position: relative;
-  top: 50px;
+  top: 26px;
   color: black;
 }
 
@@ -632,11 +638,6 @@ body {
   z-index: 10000 !important;
 }
 
-.home-nav {
-  min-height: 150px;
-  top: 0;
-}
-
 .home-nav .links-home {
   padding: 0px 40px;
   font-size: 17px;
@@ -649,47 +650,23 @@ body {
 }
 
 .home-nav .logo {
-  height: 140px;
-  width: 350px;
-  margin: 50px;
+  height: 134px;
+  width: 342px;
+  margin: 5px 20px;
 }
 
 .header-wrapper {
-  background: transparent;
+  background: rgba(0, 0, 0, 0.25);
 }
 
-#wp-custom-header.cp-video-bg {
-  background: url("https://www.videohomes.com/wp-content/themes/one-page-express/assets/images/Mock-up.jpg") rgba(0, 0, 0, 0.25);
-  background-color: #000000;
-  background-position: center top;
-  background-size: cover;
+.iframe {
+  background: #000;
+  width: 1350px;
+  height: 440px;
+  opacity: 0.5;
   position: absolute;
-  z-index: -2;
-  height: 100%;
-  width: 100%;
-  margin-top: 0;
-  top: 0px;
-  -webkit-transform: translate3d(0, 0, -2px);
-}
-
-.header-homepage.cp-video-bg,
-.header.cp-video-bg {
-  background-color: transparent !important;
-  overflow: hidden;
-  z-index: -1;
-}
-
-#wp-custom-header.cp-video-bg #wp-custom-header-video {
-  -o-object-fit: cover;
-     object-fit: cover;
-  position: absolute;
-  opacity: 0;
-  width: 100%;
-  transition: opacity 0.4s cubic-bezier(0.44, 0.94, 0.25, 0.34);
-}
-
-#wp-custom-header.cp-video-bg button#wp-custom-header-video-button {
-  display: none;
+  top: 0;
+  left: 0;
 }
 
 .header-content {
@@ -717,9 +694,8 @@ body {
   justify-content: center;
   align-items: stretch;
   flex-wrap: wrap;
-  margin-top: 20px;
   position: absolute;
-  top: 588px;
+  top: 479px;
 }
 
 .icons-boxes .card {
@@ -785,6 +761,10 @@ body {
   background: white;
   padding: 25px 35px;
   color: gray;
+  width: 500px;
+  height: 625;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .footer-top {

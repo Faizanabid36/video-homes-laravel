@@ -1,8 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import HeadAllVideos from '../HeadAllVideos'
-// import VideoThumbnail from 'react-video-thumbnail';
-import {BrowserRouter, Route, Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Card, Col, Row, Container, DropdownButton, Button, Dropdown} from "react-bootstrap";
 import {
@@ -51,7 +48,7 @@ class Videos extends React.Component {
                 <Col>
                     <Row className="head ">
                         <Col>
-                            <p className="h4 activate">My Videos</p>
+                            <p className="h4 activate">My Videos <div className="borderBottom"> </div> </p>
                         </Col>
                         <Col className="  d-flex  justify-content-end">
                             <DropdownButton

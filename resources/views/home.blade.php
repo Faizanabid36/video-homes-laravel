@@ -52,16 +52,17 @@
 </div>
   
 </div>
-<div class="row">
+<div class="row video-frame">
   <div class="col-12 m-0 p-0 "  >
 
     <div class="header-wrapper" > 
-    <iframe width="1349" height="440"
+    <iframe width="1349" height="440"   
     
-    frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" 
-    src="https://www.youtube.com/embed/3iXYciBTQ0c?autoplay=1&amp;controls=0&amp;disablekb=1&amp;fs=0&amp;iv_load_policy=3&amp;loop=1&amp;modestbranding=1&amp;playsinline=1&amp;rel=0&amp;showinfo=0&amp;enablejsapi=1&amp;origin=https%3A%2F%2Fwww.videohomes.com&amp;widgetid=1">
+    frameborder="0" allowfullscreen="1" allow="autoplay; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" 
+    src="https://www.youtube.com/embed/3iXYciBTQ0c?autoplay=4&amp;controls=0&amp;disablekb=1&amp;fs=0&amp;iv_load_policy=3&amp;loop=1&amp;modestbranding=1&amp;playsinline=1&amp;rel=0&amp;showinfo=0&amp;enablejsapi=1&amp;origin=https%3A%2F%2Fwww.videohomes.com" allowfullscreen>
 </iframe>
 
+    <div class="iframe">     </div>
 <div class="header-content">
 
     <h4>  Connecting Small Bussiness Owners with Local Marketing Pros  </h4>

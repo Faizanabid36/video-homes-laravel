@@ -451,6 +451,8 @@ body {
   
     
   }
+
+ 
   
   .dropdowncontainer  .dropdown{
   
@@ -573,6 +575,19 @@ body {
     height: 100px;
     position: relative;
     top: 30px;
+
+    &  .h4:hover  .borderBottom{ 
+  
+    
+  
+      width:  17px;
+  
+      background-color: $color;
+      display: block;
+      height: 5px;
+    
+  
+  }
 }
 
 
@@ -593,14 +608,14 @@ body {
 }
 
 .dropItems{
-  height: 290px;
-  width: 294px;
-
-
-    padding:0 !important  ;
+  
+    height: 242px;
+    width: 294px;
+   
     position: relative;
-    top: 50px;
+    top: 26px;
     color: black;
+
     & .cross{
         position: fixed;
         right:  10%;
@@ -852,9 +867,10 @@ height: 40px;
 }
 
 .home-nav{
-  min-height: 150px;
+  
+  // min-height: 150px;
 
-  top: 0;
+  // top: 0;
 
   & .links-home{
   
@@ -872,9 +888,9 @@ height: 40px;
   }
 
   &  .logo{
-          height: 140px;
-          width: 350px;
-          margin: 50px;
+    height: 134px;
+    width: 342px;
+    margin: 5px 20px;
   }
 
   
@@ -889,47 +905,26 @@ height: 40px;
 // }
 
 
-
+.video-frame{
+  // margin-top: 100px;
+}
 
 
 .header-wrapper {
-  background: transparent;
+  background:rgba(0, 0, 0, 0.25); ;
   
- 
+  
 }
-
-#wp-custom-header.cp-video-bg {
-  background: url('https://www.videohomes.com/wp-content/themes/one-page-express/assets/images/Mock-up.jpg') rgba(0, 0, 0, 0.25);
-  background-color: #000000;
-  background-position: center top;
-  background-size: cover;
+.iframe{
+  background: #000;
+  width: 1350px;
+  height: 440px;
+  opacity: 0.5;
   position: absolute;
-  z-index: -2;
-  height: 100%;
-  width: 100%;
-  margin-top: 0;
-  top: 0px;
-  -webkit-transform: translate3d(0, 0, -2px);
+  top: 0;
+  left: 0;
 }
 
-.header-homepage.cp-video-bg,
-.header.cp-video-bg {
-  background-color: transparent !important;
-  overflow: hidden;
-  z-index: -1;
-}
-
-#wp-custom-header.cp-video-bg #wp-custom-header-video {
-  object-fit: cover;
-  position: absolute;
-  opacity: 0;
-  width: 100%;
-  transition: opacity 0.4s cubic-bezier(0.44, 0.94, 0.25, 0.34);
-}
-
-#wp-custom-header.cp-video-bg button#wp-custom-header-video-button {
-  display: none;
-}
 
 .header-content{
   position: absolute;
@@ -959,9 +954,9 @@ height: 40px;
   justify-content: center;
   align-items: stretch;
   flex-wrap: wrap;
-  margin-top: 20px;
+  // margin-top: 20px;
   position: absolute;
-  top: 588px;
+  top:479px;
  
   
 
@@ -1040,6 +1035,11 @@ height: 40px;
   background: rgb(255, 255, 255);
   padding:25px 35px;
   color: gray;
+  width: 500px;
+  height: 625;
+  margin-left: auto;
+  margin-right: auto; 
+
 }
 
 .footer-top{
