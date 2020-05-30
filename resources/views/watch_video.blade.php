@@ -453,6 +453,16 @@
 @section('footer_script')
     <script type="text/javascript">
         function create_links(actions) {
+            $.ajax({
+                type: 'GET',
+                url: '{{route('video_is_played',$view_id)}}',
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data)
+                }, error: function (data) {
+                    console.log(data);
+                }
+            })
             let parent = document.getElementById('pt_video_player');
             let a = [];
             let position = 75;

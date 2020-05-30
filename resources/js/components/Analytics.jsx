@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import ViewsChart from "./Analytics/ViewsChart";
 
 class Analytics extends React.Component {
     constructor(props) {
@@ -51,9 +52,7 @@ class Analytics extends React.Component {
             <h1> Analytics </h1>
             <Tabs defaultActiveKey="Indiviual-Videos" id="uncontrolled-tab-example">
                 <Tab eventKey="Overall-Videos" title="Overall Statistics">
-                    <h1> Video Views </h1>
-                    <p> Number of times videos have been viewed </p>
-                    {/*<ViewsChart/>*/}
+                    <ViewsChart/>
                 </Tab>
                 <Tab eventKey="Indiviual-Videos" title="Individual Videos">
                     <hr/>

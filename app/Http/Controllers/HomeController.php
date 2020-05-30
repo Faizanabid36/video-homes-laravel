@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Video;
+use App\VideoView;
 use App\VideoLikesDislikes;
 use Illuminate\Http\Request;
 use App\UserExtra;
@@ -172,5 +173,9 @@ class HomeController extends Controller
     {
         $video = Video::whereVideoId(request('v'))->first();
         return ['likes' => VideoLikesDislikes::where('video_id',$video->id)->get('likes')];
+    }
+    public function video_is_played($id)
+    {
+        return [VideoView::whereId($id)->update(['is_played'=>1])];
     }
 }

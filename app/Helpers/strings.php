@@ -1,17 +1,29 @@
 <?php
 
 
+use App\VideoView;
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Format\Video\X264;
-use App\VideoView;
 
 if ( ! function_exists( 'dashboardChart' ) ) {
-    function dashboardChart( $labels, $label, $data ) {
-        $Data              = [];
-        $Data['labels']    = $labels;
-        $datasets['data']  = $data;
+    function dashboardChart($labels, $label, $data, $showBorder)
+    {
+        $Data = [];
+        $Data['labels'] = $labels;
+        $datasets['data'] = $data;
         $datasets['label'] = $label;
-        $Data['datasets']  = [ $datasets ];
+        if ($showBorder) {
+            $datasets['backgroundColor'] = [
+                'rgb(255, 102, 102)',
+                'rgb(209, 71, 163)'
+            ];
+            $datasets['borderColor'] = [
+                'rgb(255, 102, 102)',
+                'rgb(209, 71, 163)'
+            ];
+            $datasets['borderWidth'] = 2;
+        }
+        $Data['datasets'] = [$datasets];
 
         return $Data;
     }

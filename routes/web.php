@@ -36,6 +36,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard');
     Route::post('/dashboard_statistics', 'DashboardController@dashboard_type')->name('dashboard_type');
+    Route::post('/get_all_statistics','DashboardController@get_all_statistics');
+    Route::get('video_is_played/{id}','HomeController@video_is_played')->name('video_is_played');
     Route::post('/upload-video', 'VideoController@upload_video');
     Route::put('/update-video/{video}', 'VideoController@update_video');
     Route::get('/all_videos', 'VideoController@list_of_videos');

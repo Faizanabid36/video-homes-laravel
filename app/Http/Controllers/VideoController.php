@@ -103,7 +103,7 @@ class VideoController extends Controller
             ->whereProcessed(1)->where('video_id', '!=', request('v'))
             ->where('is_video_approved', 1)
             ->with('user')->latest()->take(1)->get();
-        VideoView::createViewLog($video);
+        $view_id=VideoView::createViewLog($video);
         $totalViews = VideoView::getTotalVideoViews($video);
         $comments = $this->getComments($video->id);
         $video_actions='';
@@ -111,7 +111,7 @@ class VideoController extends Controller
         {
             $video_actions = VideoAction::where('user_id', auth()->user()->id)->where('video_id', $video->id)->get();
         }
-        return view('watch_video', compact('video', 'related_videos', 'totalViews', 'comments', 'video_actions'));
+        return view('watch_video', compact('video', 'related_videos', 'totalViews', 'comments', 'video_actions','view_id'));
 
     }
 
@@ -204,6 +204,8 @@ class VideoController extends Controller
     public function get_embedded_video($video_id)
     {
         $video = Video::whereVideoId($video_id)->whereProcessed(1)->firstOrFail();
+        $view_id=VideoView::createViewLog($video);
+        VideoView::whereId($view_id)->update(['from_website'=>0]);
         return view('embed_video', compact('video'));
     }
 

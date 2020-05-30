@@ -21,11 +21,13 @@ class VideoView extends Model
             'session_id' => \Request::getSession()->getId(),
             'ip' => \Request::getClientIp(),
             'agent' => \Request::header('User-Agent'),
+            'video_user'=>$video->user_id,
         ];
-        VideoView::updateOrCreate([
+        $view = VideoView::updateOrCreate([
             'video_id' => $video->id,
             'ip' => \Request::getClientIp()
         ], $postsViews);
+        return $view->id;
     }
 
     public static function getTotalViews()
