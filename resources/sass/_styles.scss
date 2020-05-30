@@ -284,7 +284,7 @@ body {
     & span {
   
   letter-spacing: 0.03em;
-  padding-left: 3px;
+  // padding-left: 3px;
   
     }
   }
@@ -311,11 +311,11 @@ body {
 
     width: 100%;
 
-    display: flex;
+    // display: flex;
 
 
     & span{
-        padding-left: 10px;
+        // padding-left: 10px;
     }
 }
 
@@ -451,6 +451,8 @@ body {
   
     
   }
+
+ 
   
   .dropdowncontainer  .dropdown{
   
@@ -573,6 +575,19 @@ body {
     height: 100px;
     position: relative;
     top: 30px;
+
+    &  .h4:hover  .borderBottom{ 
+  
+    
+  
+      width:  17px;
+  
+      background-color: $color;
+      display: block;
+      height: 5px;
+    
+  
+  }
 }
 
 
@@ -593,14 +608,14 @@ body {
 }
 
 .dropItems{
-  height: 290px;
-  width: 294px;
-
-
-    padding:0 !important  ;
+  
+    height: 242px;
+    width: 294px;
+   
     position: relative;
-    top: 50px;
+    top: 26px;
     color: black;
+
     & .cross{
         position: fixed;
         right:  10%;
@@ -680,7 +695,8 @@ height: 40px;
 
 .Cards-container{
     min-height: 400px;
-    padding: 25px 12px;
+    padding: 25px 0px;
+  
 
 
 }
@@ -823,8 +839,19 @@ height: 40px;
     
     
     width: 210px !important;
-    height: 250px !important;
+    height: 210px !important;
     margin-left:10px ;
+    box-shadow: 0px -10px 30px rgba(0, 0, 0, 0.5);
+  
+  
+    transition: transform .2s;
+  
+    &:hover {
+  
+      transform: scale(1.1);
+    }
+
+   
   
   }
   .barChart{
@@ -844,74 +871,72 @@ height: 40px;
 
 // Home page at blade template
 
+.sticky{
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 10000 !important;
+}
+
 .home-nav{
-  height: 170px;
+  
+  // min-height: 150px;
+
+  // top: 0;
+
   & .links-home{
   
     padding: 0px 40px;
     font-size: 17px;
     font-weight: 500;
+
+    & li a{
+      color: black !important; 
+      margin-right: 15px;
+    }
+   
+    
   
   }
 
   &  .logo{
-          height: 140px;
-          width: 350px;
-          margin: 50px;
+    height: 134px;
+    width: 342px;
+    margin: 5px 20px;
   }
 
- 
+  
   
 }
 
-.header-wrapper{
-  width: 1349px;
-  height: 440px;
-  z-index: 10;
+// .header-wrapper{
+//   width: 1349px;
+//   height: 440px;
+//   z-index: 1;
   
-}
+// }
 
-.dullbg{
-  background-image : linear-gradient(to right , rgba(255 , 255 , 255 , 0.5) , rgba(255 , 255 , 255 , 0.5) ) !important ;
-}
 
+.video-frame{
+  // margin-top: 100px;
+}
 
 
 .header-wrapper {
-  background: transparent;
+  background:rgba(0, 0, 0, 0.25); ;
+  
+  
 }
-
-#wp-custom-header.cp-video-bg {
-  background: url('https://www.videohomes.com/wp-content/themes/one-page-express/assets/images/Mock-up.jpg') rgba(0, 0, 0, 0.25);
-  background-color: #000000;
-  background-position: center top;
-  background-size: cover;
+.iframe{
+  background: #000;
+  width: 1350px;
+  height: 440px;
+  opacity: 0.5;
   position: absolute;
-  z-index: -2;
-  height: 100%;
-  width: 100%;
-  margin-top: 0;
-  top: 0px;
-  -webkit-transform: translate3d(0, 0, -2px);
+  top: 0;
+  left: 0;
 }
 
-.header-homepage.cp-video-bg,
-.header.cp-video-bg {
-  background-color: transparent !important;
-  overflow: hidden;
-}
-
-#wp-custom-header.cp-video-bg #wp-custom-header-video {
-  object-fit: cover;
-  position: absolute;
-  opacity: 0;
-  width: 100%;
-  transition: opacity 0.4s cubic-bezier(0.44, 0.94, 0.25, 0.34);
-}
-
-#wp-custom-header.cp-video-bg button#wp-custom-header-video-button {
-  display: none;
-}
 
 .header-content{
   position: absolute;
@@ -932,16 +957,19 @@ height: 40px;
 }
 
 .icons-boxes{
-  background-color: rgb(255, 255, 255);
-  border: 1px solid gray;
+  background-color: none;
+  
   
   // width: 1200px;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   flex-wrap: wrap;
-  // margin: 0px 10px;
+  // margin-top: 20px;
+  position: absolute;
+  top:479px;
+ 
   
 
   
@@ -949,8 +977,9 @@ height: 40px;
   & .card{
     border: 1px solid black;
     // width: 200px;
-    border: 1px solid rgb(155, 155, 155) !important;
+    border: 1px solid rgb(233, 217, 217) !important;
     text-align: center;
+    padding-top: 20px;
 
     & img{
       margin-left: auto;
@@ -965,4 +994,79 @@ height: 40px;
     width: 131px;
     height: 139px;
   }
+}
+
+.joinUs{
+  width: 1353px;
+  height: 200px;
+  background: #2186C4;
+  display: flex;
+  align-items: center;
+
+  justify-content: space-around;
+  & span{
+      width: 409px;
+    
+      color: white;
+      font-size: 32px;
+      text-align: justify;
+      & button{
+        padding:10px;
+        color: white;
+        background: #FBC02D;
+        margin-left: 80px;
+        
+
+        &:hover{
+          color: white !important;
+          background-color: yellow;
+        }
+      }
+     
+  }
+}
+
+
+.sayHello{
+  background: rgb(126, 122, 122);
+  width: 1350px;
+}
+
+
+.form-home{
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  padding-top: 30px;
+  color: white;
+  
+}
+
+.myform{
+  background: rgb(255, 255, 255);
+  padding:25px 35px;
+  color: gray;
+  width: 500px;
+  height: 625;
+  margin-left: auto;
+  margin-right: auto; 
+
+}
+
+.footer-top{
+  background: rgb(27, 100, 236);
+  height: 5px;
+  margin-top: 30px;
+}
+.footer1{
+  background-color: black;
+  height: 140px;
+  text-align: center !important;
+    width: 1350px;
+    display: block !important;
+    color: white;
+    padding-top: 30px;
+ 
+
 }

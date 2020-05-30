@@ -1,8 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import HeadAllVideos from '../HeadAllVideos'
-// import VideoThumbnail from 'react-video-thumbnail';
-import {BrowserRouter, Route, Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Card, Col, Row, Container, DropdownButton, Button, Dropdown} from "react-bootstrap";
 import {
@@ -48,10 +45,10 @@ class Videos extends React.Component {
     render() {
         return <Container>
             <Row>
-                <Col>
-                    <Row className="head ">
-                        <Col>
-                            <p className="h4 activate">My Videos</p>
+                <Col className=" m-0 p-0 ">
+                    <Row className="head m-0 p-0 ">
+                        <Col className="m-0 p-0">
+                            <p className="h4 activate">My Videos <p className="borderBottom"> </p> </p>
                         </Col>
                         <Col className="  d-flex  justify-content-end">
                             <DropdownButton
@@ -92,10 +89,11 @@ class Videos extends React.Component {
             <Row className=" Cards-container">
                 {this.state.approvedVideos.map((item, index) => {
                     let link = window.VIDEO_APP.base_url + '/' + item.user.username + '/watch_video?v=' + item.video_id;
-                    return <Col key={index} sm={12} md={6} lg={4}>
-                        <Card className="">
-                            <div className="overlay"
-                                 style={{backgroundImage: `url(${window.VIDEO_APP.base_url}/storage/${item.thumbnail})`}}>
+                    return <Col key={index} sm={12} md={6} lg={4} className="m-0 p-0">
+                        <Card className="card2">
+                            <div className="overlay" 
+                                 style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5) ) , url(${window.VIDEO_APP.base_url}/storage/${item.thumbnail})`}}>
+                                   
                             <span className="one">
                                 <FontAwesomeIcon
                                     icon={faPlayCircle}
@@ -111,10 +109,11 @@ class Videos extends React.Component {
                                 <span className="three">
                               <span> {item.views} Views </span>
                             </span>
+                           
                                 <span
                                     className="four"> {Math.floor(item.duration / 60)}:{item.duration - Math.floor(item.duration / 60) * 60} </span>
-                            </div>
-
+                            
+                            </div>  
 
                             <Card.Body className="card-body">
                                 <a href={link}>
@@ -123,17 +122,19 @@ class Videos extends React.Component {
                                         <h5 className="cardtitle"> {item.title} </h5>
                                     </Card.Title>
                                 </a>
-                                {/* <Card.Text>
+                                <Card.Text>
                                     {" "}
                                     <p className="cardtitle2">
                                         {item.description}{" "}
-                                    </p>
-                                </Card.Text> */}
-                                <div className="footer">
                                         Upload By: {item.user.username}
-                                    <span className="ml-5">
+                                    </p>
+                                </Card.Text>
+                                <div className="footer">
+                                        
+                                        
+                                <span className="">
                                 <FontAwesomeIcon icon={faCommentDots} className="icon2"/> {item.comments.length}
-                              </span>
+                                </span>
                                 </div>
                             </Card.Body>
 
@@ -142,54 +143,22 @@ class Videos extends React.Component {
                 })}
             </Row>
             <Row>
-                <Col>
-                    <Row className="head ">
-                        <Col>
-                            <p className="h4 activate">Pending for Approval</p>
+                <Col className=" m-0 p-0 ">
+                    <Row className="head m-0 p-0 ">
+                        <Col className=" m-0 p-0 " >
+                            <p className="h4 activate">Pending for Approval <p className="borderBottom"> </p> </p>
                         </Col>
-                        {/* <Col className="  d-flex  justify-content-end">
-                            <DropdownButton
-                                className="dropdownbtn"
-                                id="dropdown-basic-button"
-                                title="filter"
-                            >
-                                <div className="dropItems">
-                                    <div>
-                                        {" "}
-                                        <Button className="cross btn ">
-                                            {" "}
-                                            <FontAwesomeIcon icon={faTimes}/>{" "}
-                                        </Button>{" "}
-                                    </div>
-
-                                    <Dropdown.Item onClick={(e)=>{e.preventDefault();this.changeFilter('newest')}}>
-                                        {" "}
-                                        <p className="items"> New to Oldest </p>{" "}
-                                    </Dropdown.Item>
-                                    <Dropdown.Item onClick={(e)=>{e.preventDefault();this.changeFilter('oldest')}}>
-                                        <p className="items"> Oldest to Newest </p>{" "}
-                                    </Dropdown.Item>
-                                    <Dropdown.Item onClick={(e)=>{e.preventDefault();this.changeFilter('popular')}}>
-                                        {" "}
-                                        <p className="items"> Most Popular </p>{" "}
-                                    </Dropdown.Item>
-                                    <Dropdown.Item onClick={(e)=>{e.preventDefault();this.changeFilter('alphabetical')}}>
-                                        {" "}
-                                        <p className="items"> Alphabetical </p>{" "}
-                                    </Dropdown.Item>
-                                </div>
-                            </DropdownButton>
-                        </Col> */}
+                        
                     </Row>
                 </Col>
             </Row>
             <Row className=" Cards-container">
                 {this.state.pendingVideos.map((item, index) => {
                     let link = window.VIDEO_APP.base_url + '/' + item.user.username + '/watch_video?v=' + item.video_id;
-                    return <Col key={index} sm={12} md={6} lg={4}>
-                        <Card className="">
+                    return <Col key={index} sm={12} md={6} lg={4} className="m-0 p-0">
+                        <Card className="card2">
                             <div className="overlay"
-                                 style={{backgroundImage: `url(${window.VIDEO_APP.base_url}/storage/${item.thumbnail})`}}>
+                                 style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5) ) , url(${window.VIDEO_APP.base_url}/storage/${item.thumbnail})`}}>
                             <span className="one">
                                 <FontAwesomeIcon
                                     icon={faPlayCircle}
@@ -214,12 +183,19 @@ class Videos extends React.Component {
                                 <a href={link}>
                                     <Card.Title>
                                         {" "}
-                                        <h5 className="cardtitle"> {item.title} </h5>
+                                        <p className="cardtitle"> {item.title} </p>
                                     </Card.Title>
                                 </a>
-                                <div className="footer">
+                                <Card.Text>
+                                    {" "}
+                                    <p className="cardtitle2">
+                                        {item.description}{" "}
                                         Upload By: {item.user.username}
-                                    <span className="ml-5">
+                                    </p>
+                                </Card.Text>
+                                <div className="footer">
+                                        
+                                    <span className="">
                                 <FontAwesomeIcon icon={faCommentDots} className="icon2"/> {item.comments.length}
                               </span>
                                 </div>
