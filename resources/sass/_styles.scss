@@ -947,7 +947,7 @@ height: 40px;
 .header-content{
   position: absolute;
   top: 7%;
-  left: 30%;
+  left: 20%;
   color: white;
   
 
@@ -960,6 +960,26 @@ height: 40px;
       margin-left: 10px;
    }
   }
+}
+
+.btnCustom1{
+  background: #03a9f4;
+    color: white;
+    padding: 18px 36px !important;
+    font-size: 13px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.btnCustom2{
+  background: #4caf50;
+  color: white;
+  padding: 18px 36px !important;
+  font-size: 13px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 450;
 }
 
 .iconBoxParent{
@@ -1013,7 +1033,7 @@ height: 40px;
   background: #2186C4;
   display: flex;
   align-items: center;
-  margin-top: 100px;
+  padding: 0px 10px;
 
   justify-content: space-around;
   & span{

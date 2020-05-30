@@ -69,12 +69,13 @@
                                 src="https://www.youtube.com/embed/3iXYciBTQ0c?autoplay=4&amp;controls=0&amp;disablekb=1&amp;fs=0&amp;iv_load_policy=3&amp;loop=1&amp;modestbranding=1&amp;playsinline=1&amp;rel=0&amp;showinfo=0&amp;enablejsapi=1&amp;origin=https%3A%2F%2Fwww.videohomes.com" allowfullscreen>
                                 </iframe>
 
-                                <div class="iframe">  asdsdsadsa   </div>
+                                <div class="iframe">   </div>
                             <div class="header-content">
 
                                 <h4>  Connecting Small Bussiness Owners with Local Marketing Pros  </h4>
-                                    <div class="header-button">  <button class="btn btn-primary"> VIDEOGRAPHERS </button> <button class="btn btn-success"> BUSSINESS OWNERS</button>   </div> 
-                                </div>
+                                    <div class="header-button">  <button class="  btnCustom1"> VIDEOGRAPHERS </button> <button class=" btnCustom2"> BUSSINESS OWNERS</button>   </div> 
+                           
+                                  </div>
 
 
                                 <div class=" iconBoxParent">
