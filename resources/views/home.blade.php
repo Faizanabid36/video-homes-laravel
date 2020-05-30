@@ -166,7 +166,7 @@
         <div class="row sayHello m-0 p-0 ">
             <div class="col-12 m-0 p-0 "  >
                 <div class="footer-top">     </div>
-                <div class="footer">  <h3> © VideoHomes.com LLC 2020  </h3>    </div>
+                <div class="footer1">  <h3> © VideoHomes.com LLC 2020  </h3>    </div>
             </div>
         </div>   
 

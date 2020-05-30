@@ -218,7 +218,6 @@ body {
 
 .overlay .three span {
   letter-spacing: 0.03em;
-  padding-left: 3px;
 }
 
 .overlay .four {
@@ -237,11 +236,6 @@ body {
 
 .footer {
   width: 100%;
-  display: flex;
-}
-
-.footer span {
-  padding-left: 10px;
 }
 
 .card {
@@ -498,7 +492,7 @@ body {
 
 .Cards-container {
   min-height: 400px;
-  padding: 25px 12px;
+  padding: 25px 0px;
 }
 
 .row-right p {
@@ -773,7 +767,7 @@ body {
   margin-top: 30px;
 }
 
-.footer {
+.footer1 {
   background-color: black;
   height: 140px;
   text-align: center !important;
