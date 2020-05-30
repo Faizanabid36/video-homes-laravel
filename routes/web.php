@@ -34,6 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('store_category', 'AdminController@store_category');
 
     Route::get('/home', 'HomeController@index')->name('home');
+    
     Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard');
     Route::post('/dashboard_statistics', 'DashboardController@dashboard_type')->name('dashboard_type');
     Route::post('/get_all_statistics','DashboardController@get_all_statistics');
