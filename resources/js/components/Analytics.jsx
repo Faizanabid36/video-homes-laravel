@@ -89,9 +89,9 @@ class Analytics extends React.Component {
                         {this.state.videosWithViews.map((item,id)=>{
                             return <div className="Card3_container" key={id}>
                                 <Card style={{width: '18rem'}} className="card3">
-                                    <Card.Img variant="top" src={window.VIDEO_APP.base_url+'/storage/'+item.thumbnail}/>
-                                    <Card.Body>
-                                        <Card.Title>{item.title}</Card.Title>
+                                    <Card.Img variant="top"  src={window.VIDEO_APP.base_url+'/storage/'+item.thumbnail}/>
+                                    <Card.Body className="card-body">
+                                        <Card.Title><h3> {item.title} </h3></Card.Title>
                                         <Card.Text>
                                             <FontAwesomeIcon
                                                 icon={faEye}
