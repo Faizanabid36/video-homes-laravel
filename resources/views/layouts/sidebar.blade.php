@@ -26,7 +26,7 @@
                            
                        <a href="#" class=" ">   <i class="fa fa-camera" color="white"></i>  </a>
                   
-              </div>
+                    </div>
 
               <div class="btn1">
                        

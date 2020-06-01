@@ -1,3 +1,23 @@
+.alert-primary {
+  color: #ffffff !important;
+  background-color: #41a6ee !important;
+  border-radius: 50px !important;
+}
+
+.alert-danger {
+  background: #9A1F40 !important;
+  border: 1px solid #9A1F40 !important;
+  border-radius: 50px !important;
+  color: #ffffff !important;
+}
+
+.alert-warning {
+  background: #FFC603 !important;
+  border: 1px solid #FFC603 !important;
+  border-radius: 50px !important;
+  color: #ffffff !important;
+}
+
 body {
   margin: 0;
   font-family: "Nunito", sans-serif !important;
@@ -373,7 +393,7 @@ body {
   padding: 0rem 0rem !important;
   min-width: 65px !important;
   width: 65px;
-  height: 230px;
+  height: 250px;
   position: absolute;
   top: 66% !important;
   left: -15px !important;
@@ -819,6 +839,10 @@ body {
   display: block !important;
   color: white;
   padding-top: 30px;
+}
+
+.Novideos {
+  color: #41a6ee;
 }
 
 /*!

@@ -6,6 +6,26 @@ $color:  rgb(65, 166, 238);
 $background : linear-gradient(95.26deg, #04F5D5 7.67%, #037CED 119.78%);
 
 
+.alert-primary {
+  color: #ffffff !important;
+  background-color: $color !important;
+  border-radius: 50px !important;  
+}
+
+.alert-danger {
+  
+  background: #9A1F40 !important;
+border: 1px solid #9A1F40 !important;
+border-radius: 50px !important;
+color: #ffffff !important;
+}
+
+.alert-warning {
+  background: #FFC603 !important;
+  border: 1px solid #FFC603 !important;
+  border-radius: 50px !important;
+  color: #ffffff !important;
+}
 
 //sIDEABR
 
@@ -526,7 +546,7 @@ body {
       padding: 0rem 0rem !important;
         min-width: 65px !important ;
       width: 65px;
-      height: 230px;;
+       height: 250px;
   
         position: absolute;
         top: 66% !important;
@@ -1108,4 +1128,10 @@ height: 40px;
     padding-top: 30px;
  
 
+}
+
+//Videos
+
+.Novideos{
+  color: $color;
 }

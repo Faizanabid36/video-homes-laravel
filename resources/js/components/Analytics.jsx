@@ -85,10 +85,10 @@ class Analytics extends React.Component {
                     </div>
                     <hr/>
                     <div className="Analytics_Card_Container">
-                        {this.state.videosWithViews.map((item,id)=>{
+                        {this.state.videosWithViews.length  ?      this.state.videosWithViews.map((item,id)=>{
                             return <div className="Card3_container" key={id}>
                                 <Card style={{width: '18rem'}} className="card3">
-                                    <Card.Img variant="top"  src={window.VIDEO_APP.base_url+'/storage/'+item.thumbnail}/>
+                                    <Card.Img variant="top" height="95"  src={window.VIDEO_APP.base_url+'/storage/'+item.thumbnail}/>
                                     <Card.Body className="card-body">
                                         <Card.Title><h3> {item.title} </h3></Card.Title>
                                         <Card.Text>
@@ -110,7 +110,7 @@ class Analytics extends React.Component {
                                     </Card.Body>
                                 </Card>
                             </div>
-                        })}
+                        }) :  <h2 className="Novideos"> No Videos Found  </h2> };  
                     </div>
                 </Tab>
 

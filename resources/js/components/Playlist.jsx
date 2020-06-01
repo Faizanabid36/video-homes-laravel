@@ -1,8 +1,10 @@
-import {Modal, Button, Col, Row, Container, Form} from "react-bootstrap";
 import React from "react";
+import {Modal, Button, Col, Row, Container, Alert} from "react-bootstrap";
 import axios from "axios";
-
+import Alerts from './Alerts';
 export default class Playlist extends React.Component {
+
+
     constructor(props) {
         super(props);
         this.state = {
@@ -17,6 +19,9 @@ export default class Playlist extends React.Component {
             id: -1,
             added: 0,
             purpose: '',
+            showAlert : false ,
+            AlertMessage:'',
+            Alertvariant: '' ,
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChangeInput = this.handleChangeInput.bind(this);
@@ -37,7 +42,10 @@ export default class Playlist extends React.Component {
     handleDelete(id, e) {
         let {playlists} = this.state;
         if (playlists.length <= 1) {
-            alert('You should have atleast one playlist');
+            // alert('You should have atleast one playlist');
+            this.setState({showAlert:true , variant:'warning' , AlertMessage:'You should have atleast one playlist'}) ;
+
+            
             return;
         } else {
             axios.post('/delete_playlist', {id})
@@ -45,7 +53,8 @@ export default class Playlist extends React.Component {
                     this.setState({deleted: res.data.deleted})
                     this.getPlaylist()
                     if (this.state.deleted)
-                        alert('Playlist Deleted')
+                        // alert()
+                        this.setState({showAlert:true , variant:'danger', AlertMessage:'Playlist Deleted'}) ;
                 })
                 .catch((err) => {
                     console.log(err)
@@ -56,17 +65,23 @@ export default class Playlist extends React.Component {
     handleSubmit(e) {
         let {name, description, purpose, id} = this.state;
         if (name.length <= 0) {
-            alert('Name Cannot Be Null');
+            // alert('Name Cannot Be Null');
+            this.setState({showAlert:true, variant:'warning' , AlertMessage:'Name Cannot Be Null'}) ;
+
             return;
         }
         axios.post('update_playlist', {name, description, purpose, id})
             .then((res) => {
                 this.setState({added: res.data.added, mainPage: true, addPlaylist: false, editPlaylist: false,})
                 this.getPlaylist()
-                if (this.state.added)
-                    alert('Settings Saved')
+                if (this.state.added){
+
+                    this.setState({showAlert:true, variant:'primary' , AlertMessage:'Setting Saved'}) ;
+                 
+                }
                 else
-                    alert('Some Error Occured')
+                    // alert('Some Error Occured')
+                    this.setState({showAlert:true , variant:'danger', AlertMessage:'Some Error Occured'}) ;
 
             })
             .catch((err) => {
@@ -94,6 +109,8 @@ export default class Playlist extends React.Component {
                             </svg>
                             Playlist
                         </h4>
+                        
+                       <Alerts data={{ show: this.state.showAlert , variant : this.state.variant , message: this.state.AlertMessage   }} />
                         <div className="clear"></div>
                         <hr/>
                     </div>

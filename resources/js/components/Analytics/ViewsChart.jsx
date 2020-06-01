@@ -63,6 +63,7 @@ export default class ViewsChart extends React.Component {
     render() {
         return (
             <div>
+                    <hr/>
                 <div className="row">
                     <div className="col-md-4">
                         <span className='mr-2'>From Date:</span>

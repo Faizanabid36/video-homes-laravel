@@ -87,7 +87,7 @@ class Videos extends React.Component {
                 </Col>
             </Row>
             <Row className=" Cards-container">
-                {this.state.approvedVideos.map((item, index) => {
+                { this.state.approvedVideos.length  ?  this.state.approvedVideos.map((item, index) => {
                     let link = window.VIDEO_APP.base_url + '/' + item.user.username + '/watch_video?v=' + item.video_id;
                     return <Col key={index} sm={12} md={6} lg={4} className="m-0 p-0">
                         <Card className="card2">
@@ -140,8 +140,10 @@ class Videos extends React.Component {
 
                         </Card>
                     </Col>
-                })}
-            </Row>
+                }):  <h2 className="Novideos"> No Videos Found  </h2> };
+            </Row> 
+            
+            
             <Row>
                 <Col className=" m-0 p-0 ">
                     <Row className="head m-0 p-0 ">
@@ -153,7 +155,7 @@ class Videos extends React.Component {
                 </Col>
             </Row>
             <Row className=" Cards-container">
-                {this.state.pendingVideos.map((item, index) => {
+                { this.state.pendingVideos.length  ?   this.state.pendingVideos.map((item, index) => {
                     let link = window.VIDEO_APP.base_url + '/' + item.user.username + '/watch_video?v=' + item.video_id;
                     return <Col key={index} sm={12} md={6} lg={4} className="m-0 p-0">
                         <Card className="card2">
@@ -203,7 +205,7 @@ class Videos extends React.Component {
 
                         </Card>
                     </Col>
-                })}
+                }) :  <h2 className="Novideos"> No Videos Found  </h2> };
             </Row>
         </Container>;
     }
