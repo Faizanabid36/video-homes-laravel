@@ -161,6 +161,10 @@ class VideoController extends Controller
         $approvedVideos=[];
         if(count($videos)>0)
         {
+            if(!isset($videos[0]))
+                $videos[0]=[];
+            if(!isset($videos[1]))
+                $videos[1]=[];
             switch($order)
             {
                 case 'oldest':
