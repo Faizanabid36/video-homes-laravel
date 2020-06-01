@@ -1,21 +1,38 @@
-.alert-primary {
+.playlistContainer .alert-primary {
   color: #ffffff !important;
   background-color: #41a6ee !important;
   border-radius: 50px !important;
 }
 
-.alert-danger {
+.playlistContainer .alert-danger {
   background: #9A1F40 !important;
   border: 1px solid #9A1F40 !important;
   border-radius: 50px !important;
   color: #ffffff !important;
 }
 
-.alert-warning {
+.playlistContainer .alert-warning {
   background: #FFC603 !important;
   border: 1px solid #FFC603 !important;
   border-radius: 50px !important;
   color: #ffffff !important;
+}
+
+.playlistContainer .alert-heading {
+  margin: 0 !important;
+}
+
+.playlistContainer .user-setting-panel input[type='text'],
+.playlistContainer .user-setting-panel input[type='password'] {
+  height: 30px !important;
+  color: #41a6ee !important;
+  font-size: 14px;
+  box-shadow: 0 1px 0 0 #f2f2f2, 0 0 0 1px #f2f2f2;
+  border: none;
+  border-radius: 0;
+  border: 1px solid;
+  border-radius: 50px;
+  width: 281px;
 }
 
 body {

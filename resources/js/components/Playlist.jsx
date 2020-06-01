@@ -98,7 +98,7 @@ export default class Playlist extends React.Component {
     }
 
     render() {
-        return <div className='container     main-content' id='main-container'>
+        return <div className='container  playlistContainer   main-content' id='main-container'>
             <div className="user-setting-panel pt_shadow">
                 <div className="">
                     <div className="upload-head">
@@ -109,8 +109,9 @@ export default class Playlist extends React.Component {
                             </svg>
                             Playlist
                         </h4>
-                        
+                       
                        <Alerts data={{ show: this.state.showAlert , variant : this.state.variant , message: this.state.AlertMessage   }} />
+                       
                         <div className="clear"></div>
                         <hr/>
                     </div>
@@ -221,6 +222,7 @@ export default class Playlist extends React.Component {
                                             <div className="col-md-4">
                                                 <input onChange={(e) => {
                                                     this.setState({name: e.target.value})
+                                                    this.setState({ showAlert: false })
                                                 }} name="name" type="text" placeholder="Enter Name"
                                                        defaultValue={this.state.name}
                                                        className="form-control input-md"/>
@@ -275,6 +277,7 @@ export default class Playlist extends React.Component {
                                             <div className="col-md-4">
                                                 <input onChange={(e) => {
                                                     this.setState({name: e.target.value})
+                                                    this.setState({ showAlert: false })
                                                 }} name="name" type="text" placeholder="Enter Name"
                                                        defaultValue={this.state.name}
                                                        className="form-control input-md"/>
@@ -282,6 +285,7 @@ export default class Playlist extends React.Component {
                                             <div className="col-md-8">
                                                 <input onChange={(e) => {
                                                     this.setState({description: e.target.value})
+                                                    this.setState({ showAlert: false })
                                                 }} name="description" type="text" placeholder="Description"
                                                        defaultValue={this.state.description}
                                                        className="form-control input-md"/>
