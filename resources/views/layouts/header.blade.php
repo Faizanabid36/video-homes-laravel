@@ -16,7 +16,7 @@
                                 <a class="nav-link links2" href="{{route('dashboard')}}/#/videos">Videos  <div class="borderBottom"> </div></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link links2" href="#">Playlist  <div class="borderBottom"> </div></a>
+                                <a class="nav-link links2" href="{{route('dashboard')}}/#/playlist">Playlist  <div class="borderBottom"> </div></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link links2" href="#">Customization  <div class="borderBottom"> </div></a>
@@ -62,9 +62,17 @@
                                                     <a class="dropdown-item" href="{{route('dashboard')}}/#/profile"><i class="fa fa-user icons"></i></a>
                                                     <a class="dropdown-item" href="{{route('dashboard')}}/#/upload-video"><i
                                                             class="fa fa-cloud-upload icons"></i></a>
-                                                    <a class="dropdown-item" href="{{route('dashboard')}}/#/settings"><i class="fa fa-cog icons"></i></a>
+                                                    <a class="dropdown-item" href="{{route('dashboard')}}/#/settings">
+                                                        <i class="fa fa-cog icons"></i>
+                                                    </a>
                                                     <a class="dropdown-item" ><i
                                                             class="fa fa-times-circle icons"></i></a>
+                                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                    <i class="fa fa-sign-out icons"></i>
+                                                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                                        {{ csrf_field() }}
+                                                    </form>
+                                                    </a>
                                                 @else
                                                     <br>
                                                     <a class="dropdown-item" href="{{route('login')}}"><i

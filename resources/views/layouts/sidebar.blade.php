@@ -79,7 +79,7 @@
                     <div class="btn1">
                         <div>
                             <i class="fa fa-cloud-upload" color="black"></i>
-                             <a href="#" class="links ">   Upload Video   </a>
+                             <a href="{{route('dashboard')}}/#/upload-video" class="links ">   Upload Video   </a>
                         </div>
                     </div>
 
@@ -93,7 +93,7 @@
                     <div class="btn1 ">
                         <div>
                             <i class="fa fa-cog" color="black"></i>
-                            <a href=""class="links ">    Settings   </a>
+                            <a href="{{route('dashboard')}}/#/profile"class="links ">    Settings   </a>
                            
                         </div>
                     </div>
