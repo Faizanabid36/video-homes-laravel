@@ -656,12 +656,17 @@ body {
 }
 
 .header-wrapper {
-  background: rgba(0, 0, 0, 0.25);
+  width: auto;
+}
+
+.videoClass {
+  width: 98%;
+  height: 440px;
 }
 
 .iframe {
   background: #000;
-  width: 1350px;
+  width: 98%;
   height: 440px;
   opacity: 0.5;
   position: absolute;
@@ -671,8 +676,8 @@ body {
 
 .header-content {
   position: absolute;
-  top: 20%;
-  left: 40%;
+  top: 7%;
+  left: 20%;
   color: white;
 }
 
@@ -687,15 +692,43 @@ body {
   margin-left: 10px;
 }
 
+.btnCustom1 {
+  background: #03a9f4;
+  color: white;
+  padding: 18px 36px !important;
+  font-size: 13px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.btnCustom2 {
+  background: #4caf50;
+  color: white;
+  padding: 18px 36px !important;
+  font-size: 13px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 450;
+}
+
+.iconBoxParent {
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  top: -131px;
+  left: -100px;
+}
+
 .icons-boxes {
   background-color: none;
+  width: 106%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: stretch;
   flex-wrap: wrap;
-  position: absolute;
-  top: 479px;
+  position: relative;
 }
 
 .icons-boxes .card {
@@ -716,11 +749,11 @@ body {
 }
 
 .joinUs {
-  width: 1353px;
   height: 200px;
   background: #2186C4;
   display: flex;
   align-items: center;
+  padding: 0px 10px;
   justify-content: space-around;
 }
 
@@ -743,16 +776,21 @@ body {
   background-color: yellow;
 }
 
+.joinUsDiv {
+  width: 100%;
+  display: block;
+  position: relative;
+}
+
 .sayHello {
   background: #7e7a7a;
-  width: 1350px;
 }
 
 .form-home {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  min-width: 50%;
   padding-top: 30px;
   color: white;
 }
@@ -761,7 +799,7 @@ body {
   background: white;
   padding: 25px 35px;
   color: gray;
-  width: 500px;
+  width: 50%;
   height: 625;
   margin-left: auto;
   margin-right: auto;
@@ -777,7 +815,7 @@ body {
   background-color: black;
   height: 140px;
   text-align: center !important;
-  width: 1350px;
+  width: 100%;
   display: block !important;
   color: white;
   padding-top: 30px;
