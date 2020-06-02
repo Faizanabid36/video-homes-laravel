@@ -98,16 +98,16 @@ export default class Playlist extends React.Component {
     }
 
     render() {
-        return <div className='container  playlistContainer   main-content' id='main-container'>
+        return <div className='container-fluid m-0 p-0  playlistContainer   main-content' id='main-container'>
             <div className="user-setting-panel pt_shadow">
                 <div className="">
                     <div className="upload-head">
                         <h4 className="pt_mn_page_hd">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                <path fill="currentColor"
+                            {/* <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24">
+                                <path fill="currentColor" className="svg1"
                                       d="M19,9H2V11H19V9M19,5H2V7H19V5M2,15H15V13H2V15M17,13V19L22,16L17,13Z"></path>
-                            </svg>
-                            Playlist
+                            </svg> */}
+                           <h1 className="">  PLAYLIST </h1>
                         </h4>
                        
                        <Alerts data={{ show: this.state.showAlert , variant : this.state.variant , message: this.state.AlertMessage   }} />
@@ -117,7 +117,7 @@ export default class Playlist extends React.Component {
                     </div>
 
                     <div className="upload-head">
-                        <h4>Manage My Playlist</h4>
+                        <h2>Manage My Playlist <div className="borderBottom"  /> </h2>
                         <hr/>
                         <div className="clear"></div>
                     </div>
@@ -135,7 +135,7 @@ export default class Playlist extends React.Component {
                                                 editPlaylist: false
                                             })
                                         }} title="Add playlist">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36"  className="addplaylistIcon"
                                                  viewBox="0 0 24 24">
                                                 <path fill="currentColor"
                                                       d="M19,9H2V11H19V9M19,5H2V7H19V5M2,15H15V13H2V15M17,13V19L22,16L17,13Z"></path>
@@ -151,11 +151,12 @@ export default class Playlist extends React.Component {
                                                 name: item.name,
                                                 description: item.description,
                                                 id: item.id,
+                                                showAlert:false
                                             })
                                         }}
                                            title="Edit playlist">
-                                            <svg className="feather" xmlns="http://www.w3.org/2000/svg" width="24"
-                                                 height="24"
+                                            <svg className="feather-Edit" xmlns="http://www.w3.org/2000/svg" width="36"
+                                                 height="36"
                                                  viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
                                                  strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                                                 <polygon points="14 2 18 6 7 17 3 17 3 13 14 2"></polygon>
@@ -165,9 +166,10 @@ export default class Playlist extends React.Component {
                                         <a onClick={(e) => {
                                             e.preventDefault();
                                             this.handleDelete(item.id, e)
+                                            this.setState({showAlert:false})
                                         }} title="Delete video">
-                                            <svg className="feather" xmlns="http://www.w3.org/2000/svg" width="24"
-                                                 height="24"
+                                            <svg className="feather-Delete" xmlns="http://www.w3.org/2000/svg" width="36"
+                                                 height="36"
                                                  viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
                                                  strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                                                 <polyline points="3 6 5 6 21 6"></polyline>
@@ -180,7 +182,7 @@ export default class Playlist extends React.Component {
                                     </div>
                                     <Row>
                                         <div className="video-thumb col-md-3">
-                                            <h2>{item.name}</h2>
+                                            <h3>{item.name}</h3>
                                         </div>
                                         <div className="video-info col-md-5 no-padding-left">
                                             <div className="video-desc"></div>
@@ -196,7 +198,8 @@ export default class Playlist extends React.Component {
                             <div className="video-wrapper" data-id="6" id="video-6">
                                 <div className="video-actions vid_stud_acts">
                                     <a onClick={this.handleSubmit} title="Add ">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36"
+                                        className="addplaylistIcon"
                                              viewBox="0 0 24 24">
                                             <path fill="currentColor"
                                                   d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"></path>
@@ -204,9 +207,9 @@ export default class Playlist extends React.Component {
                                     </a>
                                     <a onClick={(e) => {
                                         e.preventDefault();
-                                        this.setState({mainPage: true, addPlaylist: false, purpose: ''})
+                                        this.setState({mainPage: true, addPlaylist: false,showAlert:false  ,  purpose: ''})
                                     }} title='Cancel'>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36"
                                              viewBox="0 0 24 24">
                                             <path fill="#e91e63"
                                                   d="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path>
@@ -245,7 +248,8 @@ export default class Playlist extends React.Component {
                             <div className="video-wrapper" data-id="6" id="video-6">
                                 <div className="video-actions vid_stud_acts">
                                     <a onClick={this.handleSubmit} title="Update">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        <svg xmlns="http://www.w3.org/2000/svg" 
+                                        className="addplaylistIcon"
                                              viewBox="0 0 24 24">
                                             <path fill="currentColor"
                                                   d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z"></path>
@@ -261,7 +265,7 @@ export default class Playlist extends React.Component {
                                             id: -1
                                         })
                                     }} title='Cancel'>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36"
                                              viewBox="0 0 24 24">
                                             <path fill="#e91e63"
                                                   d="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"></path>
