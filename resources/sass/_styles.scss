@@ -9,7 +9,7 @@ $background : linear-gradient(95.26deg, #04F5D5 7.67%, #037CED 119.78%);
 //PlayList
 
 .playlistContainer{
-
+  box-shadow: 0px -10px 30px rgba(0, 0, 0, 0.5);
 
   & .alert-primary {
     color: #ffffff !important;
@@ -47,9 +47,74 @@ $background : linear-gradient(95.26deg, #04F5D5 7.67%, #037CED 119.78%);
     border: 1px solid;
     border-radius: 50px;
     width: 281px;
-  }                                     
+  }                  
+  & .pt_mn_page_hd svg {
+    vertical-align: middle;
+    background: white;
+    border-radius: 50%;
+    padding: 6px;
+    width: 49px;
+    height: 48px;
+    border: 2px solid $color;
+    
+}
+             
+
+  & .heading{
+        color: $color;
+        text-shadow: 2px 2px rgb(4, 50, 150);
+        font-size: 40px;
+        display: inline;
+        vertical-align: middle;
+        
+  }
+  & .borderBottom{
+  
+    
+  
+    width:  40px;
+
+    background-color: $color;
+    display: block;
+    height: 3px;
+  
 
 }
+
+& .addplaylistIcon {
+  overflow: hidden;
+  vertical-align: middle;
+  color: #3a86f8 !important;
+  border-radius: 63% ;
+  height: 37px !important;
+  width: 37px !important;
+  margin-right: 50px ;
+}
+
+& .feather-Edit{
+  overflow: hidden;
+  vertical-align: middle;
+  color: rgb(179, 255, 58) !important;
+  border-radius: 63% ;
+  height: 37px !important;
+  width: 37px !important;
+  margin-right: 50px ;
+}
+
+& .feather-Delete{
+  overflow: hidden;
+  vertical-align: middle;
+  color: rgb(122, 23, 23) !important;
+  border-radius: 63% ;
+  margin-right: 50px ;
+  height: 37px !important;
+  width: 37px !important;
+}
+
+
+}
+
+
 
 //sIDEABR
 
