@@ -151,6 +151,7 @@ export default class Playlist extends React.Component {
                                                 name: item.name,
                                                 description: item.description,
                                                 id: item.id,
+                                                showAlert:false
                                             })
                                         }}
                                            title="Edit playlist">
@@ -165,6 +166,7 @@ export default class Playlist extends React.Component {
                                         <a onClick={(e) => {
                                             e.preventDefault();
                                             this.handleDelete(item.id, e)
+                                            this.setState({showAlert:false})
                                         }} title="Delete video">
                                             <svg className="feather-Delete" xmlns="http://www.w3.org/2000/svg" width="36"
                                                  height="36"
@@ -205,7 +207,7 @@ export default class Playlist extends React.Component {
                                     </a>
                                     <a onClick={(e) => {
                                         e.preventDefault();
-                                        this.setState({mainPage: true, addPlaylist: false, purpose: ''})
+                                        this.setState({mainPage: true, addPlaylist: false,showAlert:false  ,  purpose: ''})
                                     }} title='Cancel'>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36"
                                              viewBox="0 0 24 24">
