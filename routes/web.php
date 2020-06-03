@@ -63,7 +63,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('post_comment', 'CommentsController@store')->name('post_comment');
     Route::post('delete_comment', 'CommentsController@destroy')->name('delete_comment');
     Route::get('get_total_comments', 'CommentsController@countTotalComments');
-
     Route::post('createVideoAction', 'VideoController@createVideoAction')->name('createVideoAction');
 
 });

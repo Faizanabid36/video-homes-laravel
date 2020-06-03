@@ -45,7 +45,6 @@ class LoginController extends Controller
         if ($user->role == 1) {// do your magic here
             return redirect()->route('admin_panel');
         }
-
         return redirect('/dashboard');
     }
 }
