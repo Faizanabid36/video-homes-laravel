@@ -16,10 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect('login');
-});
+
+//Public Pages
+Route::get('/', 'MainController@index')->name('home');
+Route::get('/embed/{video_id}', 'VideoController@get_embedded_video')->name('embed_video');
+Route::get('{username}/watch_video', 'VideoController@watch_video');
+Route::get('{username}/watch_video/is_watchable', 'VideoController@watchable_video');
+Route::post('{username}/', 'VideoController@watch_video');
+Route::get('/categories', 'CategoryController@index');
 Auth::routes();
+
+//Auth User
 Route::group(['middleware' => 'auth'], function () {
     Route::get('admin_panel', 'AdminController@index')->name('admin_panel');
     Route::get('videos_for_approval', 'AdminController@videos_for_approval')->name('videos_for_approval');
@@ -32,9 +39,6 @@ Route::group(['middleware' => 'auth'], function () {
         return view('admin.add_category');
     })->name('add_category');
     Route::post('store_category', 'AdminController@store_category');
-
-    Route::get('/home', 'HomeController@index')->name('home');
-    
     Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard');
     Route::post('/dashboard_statistics', 'DashboardController@dashboard_type')->name('dashboard_type');
     Route::post('/get_all_statistics','DashboardController@get_all_statistics');
@@ -46,7 +50,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('edit_video/{video_id}', 'VideoController@edit_video');
 
     Route::resource('playlist', 'PlaylistController');
-//    Route::resource('playlist','PlaylistController');
     Route::get('get_logged_user', 'HomeController@logged_user');
     Route::post('edit_user_profile', 'HomeController@edit_user_profile');
     Route::post('search_to_block_user', 'HomeController@search_to_block_user');
@@ -64,8 +67,4 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('createVideoAction', 'VideoController@createVideoAction')->name('createVideoAction');
 
 });
-Route::get('/embed/{video_id}', 'VideoController@get_embedded_video')->name('embed_video');
-Route::get('{username}/watch_video', 'VideoController@watch_video');
-Route::get('{username}/watch_video/is_watchable', 'VideoController@watchable_video');
-Route::post('{username}/', 'VideoController@watch_video');
-Route::get('/categories', 'CategoryController@index');
+
