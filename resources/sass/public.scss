@@ -1,70 +1,79 @@
 @import 'variables';
 
 
-
-.sticky{
+.sticky {
     position: -webkit-sticky;
     position: sticky;
     top: 0;
     z-index: 10000 !important;
-  }
-  
-  .home-nav{
-    
+}
+
+.home-nav {
+
     // min-height: 150px;
-  
+
     // top: 0;
-  
-    & .links-home{
-    
-      padding: 0px 40px;
-      font-size: 17px;
-      font-weight: 500;
-  
-      & li a{
-        color: black !important; 
-        margin-right: 15px;
-      }
-     
-      
-    
+
+    & .links-home {
+
+        padding: 0px 40px;
+        font-size: 17px;
+        font-weight: 500;
+
+        & li a {
+            color: black !important;
+            margin-right: 15px;
+        }
+
+
     }
-  
-    &  .logo{
-      height: 134px;
-      width: 342px;
-      margin: 5px 20px;
+
+    & .logo {
+        height: 134px;
+        width: 342px;
+        margin: 5px 20px;
     }
-  
-    
-    
-  }
-  
-  // .header-wrapper{
-  //   width: 1349px;
-  //   height: 440px;
-  //   z-index: 1;
-    
-  // }
-  
-  .video-frame{
-   
-    
-  }
-  
-  
-  
-  .header-wrapper{
+
+
+}
+
+// .header-wrapper{
+//   width: 1349px;
+//   height: 440px;
+//   z-index: 1;
+
+// }
+
+.video-frame {
+    position: absolute;
+    z-index: -99;
+    top: -50px;
+    width: 150%;
+    height: 150%;
+    left: calc(-150% / 6);
+    background:white;
+}
+.header-separator {
+    position:absolute;
+    top:50%;
+    width:100%;
+    svg{
+        fill:white;
+    }
+}
+
+
+.header-wrapper {
     width: auto;
-  }
-  
-  .videoClass{
+}
+
+.videoClass {
     width: 98%;
     height: 440px;
-  }
-  
-  
-  .iframe{
+}
+
+
+iframe {
     background: #000;
     width: 98%;
     height: 440px;
@@ -72,173 +81,169 @@
     position: absolute;
     top: 0;
     left: 0;
-  }
-  
-  
-  .header-content{
-    position: absolute;
-    top: 7%;
-    left: 20%;
+}
+
+
+.header-content {
+    text-align: center;
     color: white;
-    
-  
-    & .header-button{
-     display: flex;
-     justify-content: flex-end;
-     & > button{
-        padding: 15px;
-        font-weight: 300;
-        margin-left: 10px;
-     }
+    padding-top: 5%;
+
+
+    & .header-button {
+        display: flex;
+        justify-content: center;
+
+        & > button {
+            padding: 15px;
+            font-weight: 300;
+            margin-left: 10px;
+        }
     }
-  }
-  
-  .btnCustom1{
+}
+
+.btnCustom1 {
     background: #03a9f4;
-      color: white;
-      padding: 18px 36px !important;
-      font-size: 13px;
-      border: none;
-      border-radius: 10px;
-      font-weight: 600;
-  }
-  
-  .btnCustom2{
+    color: white;
+    padding: 18px 36px !important;
+    font-size: 13px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.btnCustom2 {
     background: #4caf50;
     color: white;
     padding: 18px 36px !important;
     font-size: 13px;
     border: none;
     border-radius: 10px;
-    font-weight: 450;
-  }
-  
-  .iconBoxParent{
-    margin-left: auto;
-    margin-right:auto ;
-    position: relative;
-    top: -131px;
-    left: -100px;
-    
-    
-  }
-  
-  .icons-boxes{
-    background-color: none;
-    
-    
-    width: 106%;
+    font-weight: 400;
+}
+
+.iconBoxParent {
+    margin-top: 50px;
+
+
+}
+
+.icons-boxes {
+
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: stretch;
     flex-wrap: wrap;
     position: relative;
-    
-  
-    & .card{
-      border: 1px solid black;
-      // width: 200px;
-      border: 1px solid rgb(233, 217, 217) !important;
-      text-align: center;
-      padding-top: 20px;
-  
-      & img{
-        margin-left: auto;
-        margin-right: auto;
-      }
-     
-     
-     
+
+
+    & .card {
+        border: 1px solid black;
+        // width: 200px;
+        border: 1px solid rgb(233, 217, 217) !important;
+        text-align: center;
+        padding-top: 20px;
+
+        & img {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+
     }
-  
-    & img{
-      width: 131px;
-      height: 139px;
+
+    & img {
+        width: 131px;
+        height: 139px;
     }
-  }
-  
-  .joinUs{
-  
+}
+
+.joinUs {
+
     height: 200px;
     background: #2186C4;
     display: flex;
     align-items: center;
     padding: 0px 10px;
-  
+
     justify-content: space-around;
-    & span{
-        width: 409px;
-      
+
+    & span {
+
         color: white;
         font-size: 32px;
         text-align: justify;
-        & button{
-          padding:10px;
-          color: white;
-          background: #FBC02D;
-          margin-left: 80px;
-          
-  
-          &:hover{
-            color: white !important;
-            background-color: yellow;
-          }
+
+        & button {
+            padding: 10px;
+            color: white;
+            background: #FBC02D;
+            margin-left: 80px;
+
+
+            &:hover {
+                color: white !important;
+                background-color: yellow;
+            }
         }
-       
+
     }
-  }
-  .joinUsDiv{
+}
+
+.joinUsDiv {
     // position: relative;
     // margin-top: 300px;
     width: 100%;
     display: block;
     position: relative;
-  }
-  
-  
-  .sayHello{
+}
+
+
+.sayHello {
     background: rgb(126, 122, 122);
     // width: 116% ;
-  }
-  
-  
-  .form-home{
+}
+
+
+.form-home {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
     min-width: 50%;
     padding-top: 30px;
     color: white;
-    
-  }
-  
-  .myform{
+
+}
+
+.myform {
     background: rgb(255, 255, 255);
-    padding:25px 35px;
+    padding: 25px 35px;
     color: gray;
     width: 50%;
     height: 625;
     margin-left: auto;
-    margin-right: auto; 
-  
-  }
-  
-  .footer-top{
+    margin-right: auto;
+
+}
+
+.footer-top {
     background: rgb(27, 100, 236);
     height: 5px;
     margin-top: 30px;
-  }
-  .footer1{
+}
+
+.footer1 {
     background-color: black;
     height: 140px;
     text-align: center !important;
-      width: 100%;
-      display: block !important;
-      color: white;
-      padding-top: 30px;
-   
-  
-  }
-  // Bootstrap
+    width: 100%;
+    display: block !important;
+    color: white;
+    padding-top: 30px;
+
+
+}
+
+// Bootstrap
 @import '~bootstrap/scss/bootstrap';
