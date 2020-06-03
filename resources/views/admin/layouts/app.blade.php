@@ -23,7 +23,7 @@
           href="vendors/circliful/css/jquery.circliful.css">
     <link type="text/css" href="{{ asset('css/components.css') }}" rel="stylesheet" href="css/pages/index.css">
     <link type="text/css" href="{{ asset('css/pages/tables.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+   
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 

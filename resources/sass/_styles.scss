@@ -1062,10 +1062,16 @@ height: 40px;
       background: white;
     }
     & > .red{
-      background: white;
+      background: rgb(255, 1, 1);
     }
-    & > .white{
-      background: white;
+    & > .blue{
+      background: rgb(9, 196, 253);
+    }
+    & > .green{
+      background: rgb(66, 219, 5);
+    }
+    & > .gray{
+      background: rgb(182, 178, 178);
     }
 
 }

@@ -802,11 +802,19 @@ body {
 }
 
 .customization-icon > .red {
-  background: white;
+  background: #ff0101;
 }
 
-.customization-icon > .white {
-  background: white;
+.customization-icon > .blue {
+  background: #09c4fd;
+}
+
+.customization-icon > .green {
+  background: #42db05;
+}
+
+.customization-icon > .gray {
+  background: #b6b2b2;
 }
 
 .inline-radio .form-check-inline {

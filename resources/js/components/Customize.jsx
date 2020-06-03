@@ -44,30 +44,30 @@ export default function Customize(props){
 <div className="inline-radio">
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-  <label class="form-check-label" for="inlineRadio1"> <div className='customization-icon'> <FontAwesomeIcon icon={faPlay} color="white" /> <div className="foot">  </div>  </div> </label>
+  <label class="form-check-label" for="inlineRadio1"> <div className='customization-icon '> <FontAwesomeIcon icon={faPlay} color="white" /> <div className="foot white">  </div>  </div> </label>
 </div>
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-  <label class="form-check-label" for="inlineRadio2"><div className='customization-icon'> <FontAwesomeIcon icon={faPlay} color="white" /> <div className="foot">  </div>  </div></label>
+  <label class="form-check-label" for="inlineRadio2"><div className='customization-icon'> <FontAwesomeIcon icon={faPlay} color="white" /> <div className="foot red">  </div>  </div></label>
 </div>
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-  <label class="form-check-label" for="inlineRadio2"><div className='customization-icon'> <FontAwesomeIcon icon={faPlay} color="white" /> <div className="foot">  </div>  </div></label>
+  <label class="form-check-label" for="inlineRadio2"><div className='customization-icon'> <FontAwesomeIcon icon={faPlay} color="white" /> <div className="foot red">  </div>  </div></label>
 </div>
 
 </div>
 <div className="inline-radio">
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-  <label class="form-check-label" for="inlineRadio1"><div className='customization-icon'> <FontAwesomeIcon icon={faPlay} color="white" /> <div className="foot">  </div>  </div></label>
+  <label class="form-check-label" for="inlineRadio1"><div className='customization-icon'> <FontAwesomeIcon icon={faPlay} color="white" /> <div className="foot gray">  </div>  </div></label>
 </div>
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-  <label class="form-check-label" for="inlineRadio2"><div className='customization-icon'> <FontAwesomeIcon icon={faPlay} color="white" /> <div className="foot">  </div>  </div></label>
+  <label class="form-check-label" for="inlineRadio2"><div className='customization-icon'> <FontAwesomeIcon icon={faPlay} color="lightBlue" /> <div className="foot blue">  </div>  </div></label>
 </div>
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
-  <label class="form-check-label" for="inlineRadio2"><div className='customization-icon'> <FontAwesomeIcon icon={faPlay} color="white" /> <div className="foot">  </div>  </div></label>
+  <label class="form-check-label" for="inlineRadio2"><div className='customization-icon'> <FontAwesomeIcon icon={faPlay} color="white" /> <div className="foot green">  </div>  </div></label>
 </div>
 
 </div>
