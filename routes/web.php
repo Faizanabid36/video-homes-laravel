@@ -18,13 +18,14 @@ use Illuminate\Support\Facades\Route;
 
 
 //Public Pages
+Auth::routes();
 Route::get('/', 'MainController@index')->name('home');
 Route::get('/embed/{video_id}', 'VideoController@get_embedded_video')->name('embed_video');
 Route::get('{username}/watch_video', 'VideoController@watch_video');
 Route::get('{username}/watch_video/is_watchable', 'VideoController@watchable_video');
 Route::post('{username}/', 'VideoController@watch_video');
 Route::get('/categories', 'CategoryController@index');
-Auth::routes();
+
 
 //Auth User
 Route::group(['middleware' => 'auth'], function () {
