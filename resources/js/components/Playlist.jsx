@@ -27,6 +27,7 @@ export default class Playlist extends React.Component {
         this.handleChangeInput = this.handleChangeInput.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
         this.getPlaylist = this.getPlaylist.bind(this);
+        this.showAlert = this.showAlert.bind(this);
     }
 
     getPlaylist() {
@@ -97,20 +98,21 @@ export default class Playlist extends React.Component {
         this.getPlaylist()
     }
 
+      showAlert  ( ) {
+          this.setState({showAlert:false }) ;
+    }
+
     render() {
         return <div className='container-fluid m-0 p-0  playlistContainer   main-content' id='main-container'>
             <div className="user-setting-panel pt_shadow">
                 <div className="">
                     <div className="upload-head">
                         <h4 className="pt_mn_page_hd">
-                            {/* <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24">
-                                <path fill="currentColor" className="svg1"
-                                      d="M19,9H2V11H19V9M19,5H2V7H19V5M2,15H15V13H2V15M17,13V19L22,16L17,13Z"></path>
-                            </svg> */}
+                           
                            <h1 className="">  PLAYLIST </h1>
                         </h4>
                        
-                       <Alerts data={{ show: this.state.showAlert , variant : this.state.variant , message: this.state.AlertMessage   }} />
+                       <Alerts data={{ show: this.state.showAlert , variant : this.state.variant , message: this.state.AlertMessage  , setAlertShow:this.showAlert  }} />
                        
                         <div className="clear"></div>
                         <hr/>
@@ -151,7 +153,7 @@ export default class Playlist extends React.Component {
                                                 name: item.name,
                                                 description: item.description,
                                                 id: item.id,
-                                                showAlert:false
+                                              
                                             })
                                         }}
                                            title="Edit playlist">
@@ -166,7 +168,7 @@ export default class Playlist extends React.Component {
                                         <a onClick={(e) => {
                                             e.preventDefault();
                                             this.handleDelete(item.id, e)
-                                            this.setState({showAlert:false})
+                                            
                                         }} title="Delete video">
                                             <svg className="feather-Delete" xmlns="http://www.w3.org/2000/svg" width="36"
                                                  height="36"
@@ -207,7 +209,7 @@ export default class Playlist extends React.Component {
                                     </a>
                                     <a onClick={(e) => {
                                         e.preventDefault();
-                                        this.setState({mainPage: true, addPlaylist: false,showAlert:false  ,  purpose: ''})
+                                        this.setState({mainPage: true, addPlaylist: false ,  purpose: ''})
                                     }} title='Cancel'>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36"
                                              viewBox="0 0 24 24">
@@ -225,7 +227,7 @@ export default class Playlist extends React.Component {
                                             <div className="col-md-4">
                                                 <input onChange={(e) => {
                                                     this.setState({name: e.target.value})
-                                                    this.setState({ showAlert: false })
+                                                    
                                                 }} name="name" type="text" placeholder="Enter Name"
                                                        defaultValue={this.state.name}
                                                        className="form-control input-md"/>
@@ -281,7 +283,7 @@ export default class Playlist extends React.Component {
                                             <div className="col-md-4">
                                                 <input onChange={(e) => {
                                                     this.setState({name: e.target.value})
-                                                    this.setState({ showAlert: false })
+                                                   
                                                 }} name="name" type="text" placeholder="Enter Name"
                                                        defaultValue={this.state.name}
                                                        className="form-control input-md"/>
@@ -289,7 +291,7 @@ export default class Playlist extends React.Component {
                                             <div className="col-md-8">
                                                 <input onChange={(e) => {
                                                     this.setState({description: e.target.value})
-                                                    this.setState({ showAlert: false })
+                                                   
                                                 }} name="description" type="text" placeholder="Description"
                                                        defaultValue={this.state.description}
                                                        className="form-control input-md"/>
