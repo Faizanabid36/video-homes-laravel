@@ -19,7 +19,7 @@
                                 <a class="nav-link links2" href="{{route('dashboard')}}/#/playlist">Playlist  <div class="borderBottom"> </div></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link links2" href="#">Customization  <div class="borderBottom"> </div></a>
+                                <a class="nav-link links2" href="{{route('dashboard')}}/#/customize_player">Customization  <div class="borderBottom"> </div></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link links2" href="{{route('dashboard')}}/#/analytics">Analytics  <div class="borderBottom"> </div></a>
