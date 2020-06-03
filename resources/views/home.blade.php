@@ -1,53 +1,6 @@
 @extends('layouts.public.app')
 @section('content')
-    <div class="container-fluid m-0 p-0">
 
-        <div class="row  m-0 p-0">
-            <div class="col m-0 p-0 ">
-                <!-- Nav       -->
-
-                <nav class="navbar navbar-expand-lg navbar-light bg-light home-nav ">
-                    <a class="navbar-brand" href="#">
-
-                        <img src="https://www.videohomes.com/wp-content/uploads/2020/04/cropped-VideoHomes-3.png"
-                             class="logo" alt="video Homes Logo"/>
-
-
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ml-auto links-home">
-                            <li class="nav-item ">
-                                <a class="nav-link" href="#">DIRECTORY <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">MEDIA PROS</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">BUSSINESS</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">BLOG</a>
-                            </li>
-
-
-                        </ul>
-
-                    </div>
-                </nav>
-
-                <!-- Nav-end -->
-
-
-            </div>
-
-
-        </div>
 
         <div class="row">
 
@@ -58,7 +11,7 @@
 
                     <div class="video-frame">
                         <iframe frameborder="0"
-                                src="https://www.youtube.com/embed/3iXYciBTQ0c?autoplay=1&controls=0&disablekb=1&fs=0&iv_load_policy=3&loop=1&modestbranding=1&playsinline=1&rel=0&showinfo=0&enablejsapi=1&origin=http%3A%2F%2Fwww.videohomes.com&widgetid=1">
+                                src="https://www.youtube.com/embed/3iXYciBTQ0c?autoplay=1&controls=0&disablekb=1&fs=0&iv_load_policy=3&loop=1&modestbranding=1&playsinline=1&rel=0&showinfo=0&enablejsapi=1&widgetid=1">
                         </iframe>
                     </div>
                     <div class="header-separator header-separator-bottom "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
@@ -179,14 +132,6 @@
             </div>
         </div>
 
-        <div class="row sayHello m-0 p-0 ">
-            <div class="col-12 m-0 p-0 ">
-                <div class="footer-top"></div>
-                <div class="footer1"><h3> © VideoHomes.com LLC 2020 </h3></div>
-            </div>
-        </div>
 
-
-    </div>
 
     @endsection;
