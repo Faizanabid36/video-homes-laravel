@@ -10,7 +10,7 @@ class Video extends Model
     protected $guarded = [];
     protected $dates = ['converted_for_streaming_at',];
     protected $hidden = [];
-    protected $with = ['user', 'comments'];
+//    protected $with = ['user', 'comments'];
     protected $casts = ['processed' => 'boolean'];
 
 
