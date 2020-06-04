@@ -15,16 +15,13 @@ export default function Customize(props){
     let [color1 , setColor1] = useState();
     let [color2 , setColor2] = useState();
     let [color3 , setColor3] = useState();
+    let [grobalColorVar , setGlbColor ] = useState();
     const inputS = document.querySelectorAll('input ');
     
      function handleChange(){
-        // console.log('hndleChange' ,  this.value);
-        // document.getElementById('inlineRadio7').checked =true ;
-            console.log(this);
-
+       
            document.documentElement.style.setProperty( `--${this.name}` , this.value  )
        
-        console.log(document.documentElement.style)
     }
 
     function handleFoot() {
@@ -74,7 +71,8 @@ export default function Customize(props){
         }
     }
     function handleMinimal(){
-        
+        console.log(   document.documentElement.style.getPropertyValue('--load-video'))
+        setGlbColor(document.documentElement.style.getPropertyValue('--load-video'));
         document.getElementById('level').style.setProperty( 'padding' , '10px 0px' ) ;
         document.getElementById('bottom-image-customization').style.setProperty( 'background' , 'none' ) ;
         document.getElementById('level').style.setProperty( 'background' , 'none' ) ;
@@ -87,10 +85,10 @@ export default function Customize(props){
     function handleStandard(){
         // console.log( 'bht' , document.getElementById('bottom-image-customization') );
         document.getElementById('level').style.setProperty( 'padding' , '0' ) ;
-        document.getElementById('bottom-image-customization').style.setProperty( 'background' , 'black' ) ;
+        document.getElementById('bottom-image-customization').style.setProperty( 'background' , `${grobalColorVar}` ) ;
         document.getElementById('level').style.setProperty( 'background' , 'inherit' ) ;
          let y = document.getElementById('bottom-image-customization').childNodes;
-         console.log('y0 ', y) ;
+        //  console.log('y0 ', y) ;
         for (let i = 0; i < y.length; i++) {
             y[i].style.setProperty( 'border' , '1px solid gray' ) ; 
           }
