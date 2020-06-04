@@ -9,7 +9,7 @@ $background : linear-gradient(95.26deg, #04F5D5 7.67%, #037CED 119.78%);
 //PlayList
 
 .playlistContainer{
-  box-shadow: 0px -10px 30px rgba(0, 0, 0, 0.5);
+  // box-shadow: 0px -10px 30px rgba(0, 0, 0, 0.5);
 
   & .alert-primary {
     color: #ffffff !important;
@@ -983,6 +983,12 @@ height: 40px;
 
 //Videos
 
+:root{
+  --level-background : rgb(160, 160, 160) ;
+  --Control-buttons : gray ;
+  --load-video: black ;
+}
+
 .Novideos{
   color: $color;
 }
@@ -1006,7 +1012,8 @@ height: 40px;
     position: relative;
     top: 237px;
     height: 25px;
-   background: #000;
+   background: var(--load-video);
+
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -1023,12 +1030,23 @@ height: 40px;
 
 
     & .loadVideo{
-      // width: 60%;
+      
       flex: 12;
       justify-content: flex-start;
+        
+      background-color: var(--load-video) ;
+
+      
 
        & > .level{
-        background: rgb(177, 174, 174);
+        background: var(--level-background );
+        width: 50% !important;
+        height: 100% ;
+        display: inline-block;
+      }
+
+      & > .remainingLevel{
+        background-color: var(--load-video);
         width: 50% !important;
         height: 100% ;
         display: inline-block;
@@ -1037,10 +1055,14 @@ height: 40px;
     }
 }
 
+.control-buttons{
+  color: var(--Control-buttons);
+}
+
 .customization-icon{
   width: 45px;
   height: 30px;
-  background: #000;
+  // background: #000;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1076,6 +1098,33 @@ height: 40px;
 
 }
 
+.bg-black{
+  background: #000;
+}
+.bg-gray{
+  background: gray;
+}
+.bg-white{
+  background: white;
+}
+
+.color-picker-parent{
+  text-align: center;
+ 
+
+  & > .Color-Picker{
+    width: 100px;
+    height: 100px;
+    padding: 0px ;
+    margin-right: 10px;
+    border: none;
+  }
+  
+}
+
+//Radio Select Theme
+
+
 
 .inline-radio{
   & .form-check-inline {
@@ -1083,3 +1132,15 @@ height: 40px;
     padding-right: 10px;
   }
 }
+
+
+#exampleRadios1:checked ~ .level{
+  height: 15% !important;
+  
+}
+
+
+
+
+
+
