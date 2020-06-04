@@ -32,21 +32,15 @@ class DashboardController extends Controller
         });
         return compact('videosWithViews');
     }
-    public function test()
-    {
-        return ['result'=>'success'];
-    }
 
     public function get_all_statistics()
     {
-        $auth=auth()->user()->id;
-        return compact('auth');
-//        $endDate = \request('endDate');
-//        $startDate = \request('startDate');
+        $endDate = \request('endDate');
+        $startDate = \request('startDate');
         $videoswithDate = VideoView::select('video_user', 'video_id', 'created_at')
             ->where('video_user', auth()->user()->id)
-//            ->where('created_at', '>=', \Carbon\Carbon::parse($startDate))
-//            ->where('created_at', '<=', \Carbon\Carbon::parse($endDate))
+            ->where('created_at', '>=', \Carbon\Carbon::parse($startDate))
+            ->where('created_at', '<=', \Carbon\Carbon::parse($endDate))
             ->get()
             ->groupBy(function ($date) {
                 return Carbon::parse($date->created_at)->format('Y-m-d');

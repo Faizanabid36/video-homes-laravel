@@ -2,12 +2,10 @@
 
 namespace App;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class VideoView extends Model
 {
-    //
     protected $table = 'video_views';
 
     protected $guarded = [];
@@ -51,8 +49,8 @@ class VideoView extends Model
     {
         return VideoView::select(array('video_views.video_id', \DB::raw('COUNT(video_id) as views')))
             ->where('video_id', $video->id)
-            ->where('created_at', '>=', \Carbon\Carbon::parse($time[0]))
             ->where('created_at', '<=', \Carbon\Carbon::parse($time[1]))
+            ->where('created_at', '>=', \Carbon\Carbon::parse($time[0]))
             ->orderBy(\DB::raw('COUNT(video_id)'), 'desc')
             ->groupBy('video_id')->first();
     }

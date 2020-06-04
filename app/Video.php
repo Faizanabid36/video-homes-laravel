@@ -10,7 +10,7 @@ class Video extends Model
     protected $guarded = [];
     protected $dates = ['converted_for_streaming_at',];
     protected $hidden = [];
-//    protected $with = ['user', 'comments'];
+    protected $with = ['user', 'comments'];
     protected $casts = ['processed' => 'boolean'];
 
 
@@ -31,11 +31,6 @@ class Video extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function comments()
-    {
-        return $this->hasMany(Comment::class, 'video_id', 'id');
-    }
-
     public function video_actions()
     {
         return $this->hasMany(VideoAction::class, 'video_id', 'id');
@@ -44,4 +39,10 @@ class Video extends Model
     {
         return $this->belongsTo(Category::class,'category_id');
     }
+    
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'video_id', 'id');
+    }
+
 }
