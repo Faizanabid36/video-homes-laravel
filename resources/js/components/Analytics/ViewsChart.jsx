@@ -66,7 +66,7 @@ export default class ViewsChart extends React.Component {
                     <hr/>
                 <div className="row">
                     <div className="col-md-4">
-                        <span className='mr-2'>From Date:</span>
+                        <label className='mr-2'>From Date:</label>
                         <DatePicker
                             className="form-control"
                             selected={this.state.startDate}
@@ -76,7 +76,7 @@ export default class ViewsChart extends React.Component {
                         />
                     </div>
                     <div className="col-md-4">
-                        <span className='mr-2'>To Date:</span>
+                        <label className='mr-2'>To Date:</label>
                         <DatePicker
                             className="form-control"
                             selected={this.state.endDate}
