@@ -25,14 +25,17 @@
 .playlistContainer .user-setting-panel input[type='text'],
 .playlistContainer .user-setting-panel input[type='password'] {
   height: 30px !important;
-  color: #41a6ee !important;
   font-size: 14px;
   box-shadow: 0 1px 0 0 #f2f2f2, 0 0 0 1px #f2f2f2;
   border: none;
-  border-radius: 0;
   border: 1px solid;
   border-radius: 50px;
   width: 281px;
+}
+
+.playlistContainer .user-setting-panel input[type='text']:focus,
+.playlistContainer .user-setting-panel input[type='password']:focus {
+  color: #41a6ee !important;
 }
 
 .playlistContainer .pt_mn_page_hd svg {
@@ -741,6 +744,13 @@ body {
   margin-bottom: 20px;
 }
 
+.borderBottom2 {
+  width: 40px;
+  background-color: #41a6ee;
+  display: block;
+  height: 3px;
+}
+
 .imageCustomize {
   background: url("https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832__340.jpg");
   width: 474px;
@@ -852,6 +862,16 @@ body {
   padding: 0px;
   margin-right: 10px;
   border: none;
+}
+
+input[type=text] {
+  border-radius: 50px;
+  width: 281px;
+}
+
+input[type=text]:focus {
+  color: #41a6ee !important;
+  border: 1px solid #41a6ee;
 }
 
 .inline-radio .form-check-inline {

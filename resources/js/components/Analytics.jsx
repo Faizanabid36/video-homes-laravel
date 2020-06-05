@@ -49,8 +49,8 @@ class Analytics extends React.Component {
 
     render() {
         return <div>
-            <h1> Analytics </h1>
-            <Tabs defaultActiveKey="Indiviual-Videos" id="uncontrolled-tab-example">
+            <h1> Analytics <div className="borderBottom2"> </div> </h1>
+            <Tabs defaultActiveKey="Indiviual-Videos" className="border" id="uncontrolled-tab-example">
                 <Tab eventKey="Overall-Videos" title="Overall Statistics">
                     <ViewsChart/>
                 </Tab>

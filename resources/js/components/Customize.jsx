@@ -71,7 +71,7 @@ export default function Customize(props){
         }
     }
     function handleMinimal(){
-        console.log(   document.documentElement.style.getPropertyValue('--load-video'))
+        // console.log(   document.documentElement.style.getPropertyValue('--load-video'))
         setGlbColor(document.documentElement.style.getPropertyValue('--load-video'));
         document.getElementById('level').style.setProperty( 'padding' , '10px 0px' ) ;
         document.getElementById('bottom-image-customization').style.setProperty( 'background' , 'none' ) ;
@@ -85,8 +85,10 @@ export default function Customize(props){
     function handleStandard(){
         // console.log( 'bht' , document.getElementById('bottom-image-customization') );
         document.getElementById('level').style.setProperty( 'padding' , '0' ) ;
-        document.getElementById('bottom-image-customization').style.setProperty( 'background' , `${grobalColorVar}` ) ;
-        document.getElementById('level').style.setProperty( 'background' , 'inherit' ) ;
+        // document.getElementById('bottom-image-customization').style.setProperty( 'background' , `${grobalColorVar}` ) ;
+        // document.getElementById('level').style.setProperty( 'background' , 'inherit' ) ;
+        document.documentElement.style.setProperty( '--load-video' , `${grobalColorVar}`  )
+
          let y = document.getElementById('bottom-image-customization').childNodes;
         //  console.log('y0 ', y) ;
         for (let i = 0; i < y.length; i++) {
@@ -103,7 +105,7 @@ export default function Customize(props){
       <Col lg={12}>
    <div className="Customization-head"> 
 
-       <p> Customize your video player below. Choose from one of six themes or customize your own.  </p>
+       <p> Customize your video player below. Choose from one of six themes or customize your own.  <div className="borderBottom2"> </div> </p>
    </div>
    </Col>
   </Row>

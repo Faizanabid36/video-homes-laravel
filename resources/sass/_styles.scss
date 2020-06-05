@@ -39,14 +39,17 @@ $background : linear-gradient(95.26deg, #04F5D5 7.67%, #037CED 119.78%);
   
   & .user-setting-panel input[type='text'], .user-setting-panel input[type='password'] {
     height: 30px !important;
-    color: $color!important;
+    
     font-size: 14px;
     box-shadow: 0 1px 0 0 #f2f2f2, 0 0 0 1px #f2f2f2;
     border: none;
-    border-radius: 0;
+    
     border: 1px solid;
     border-radius: 50px;
     width: 281px;
+    &:focus{
+      color: $color!important;
+    }
   }                  
   & .pt_mn_page_hd svg {
     vertical-align: middle;
@@ -1003,6 +1006,21 @@ height: 40px;
   margin-bottom: 20px;
 }
 
+
+.borderBottom2{
+  
+    
+  
+  width:  40px;
+
+  background-color: $color;
+  display: block;
+  height: 3px;
+
+
+}
+
+
 .imageCustomize{
   background: url('https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832__340.jpg')  ;
   width:474px ;
@@ -1120,6 +1138,19 @@ height: 40px;
     border: none;
   }
   
+}
+
+input[type=text] {
+  // height: 30px !important;
+  
+ 
+  border-radius: 50px;
+  width: 281px;
+
+  &:focus{
+    color: $color!important;
+    border: 1px solid $color;
+  }
 }
 
 //Radio Select Theme
