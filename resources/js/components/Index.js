@@ -27,7 +27,7 @@ export default class Index extends React.Component{
                 <Route path="/settings" exact  component={Settings} />
                 <Route path="/videos" exact  component={Videos} />
                 <Route path="/analytics" exact  component={Analytics} />
-                <Route path="/Xample" exact  component={Xample} />
+                {/* <Route path="/Xample" exact  component={Xample} /> */}
             </Switch>
         </main></BrowserRouter>
     }

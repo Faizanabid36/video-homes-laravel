@@ -1,5 +1,5 @@
 
-        <div class="col-md-8 col-xs-6">
+        <div class=" col-7 col-lg-8 ">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -36,30 +36,18 @@
             </nav>
         </div>
 
-        <div class="col-md-4 col-xs-6 my-auto ">
+        <span class="col-5 col-lg-4 my-3   ">
                <a href="{{route('dashboard')}}/#/upload-video" class="links  "> <i class="fa fa-cloud-upload btn btn-primary" color="black">Upload Video  </i>  </a>
-                               
-               <!-- <a href="#" class="notification d-none">
-                   <i class="fa fa-bell"> </i>
-
-                                           <span class="badge"> 3 </span>
-                                       </a>
-                                   
-                                  
-                                       <i class="fa fa-search d-none"> </i> -->
-                                  
-                              
-                               <span class="dropdown nav-item dropdown-Custom  ">
+                 
+               <span class="dropdown nav-item dropdown-Custom  ">
                                    <button class="btn dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
-                                           aria-haspopup="true" aria-expanded="false">
+                                         aria-haspopup="true" aria-expanded="false">
+                                    <div class="image2"></div>
                                       
-                                           <div class="image2"></div>
-                                      
-                                       
                                    </button>
                                    <span class="dropdowncontainer ">
                                        <div class="dowpdown-box">
-                                           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                               
                                                    <a class="dropdown-item" href="{{route('dashboard')}}/#/profile"><i class="fa fa-user icons"></i></a>
                                                    <a class="dropdown-item" href="{{route('dashboard')}}/#/upload-video"><i
@@ -75,18 +63,27 @@
                                                        {{ csrf_field() }}
                                                    </form>
                                                    </a>
-                                              
-                                                   <!-- <br>
+                                             </div>
+                                       </div>
+                                   </span>
+                </span>
+        </span>
+
+
+
+
+   <!-- <a href="#" class="notification d-none">
+                   <i class="fa fa-bell"> </i>
+
+                                           <span class="badge"> 3 </span>
+                                       </a>
+                                   
+                                  
+                                       <i class="fa fa-search d-none"> </i> -->
+
+
+     <!-- <br>
                                                    <a class="dropdown-item" href="{{route('login')}}"><i
                                                            class="fa fa-sign-in icons"></i></a>
                                                    <a class="dropdown-item" href="{{route('register')}}"><i
                                                            class="fa fa-plus-square icons"></i></a> -->
-                                               
-                                           </div>
-                                       </div>
-                                   </span>
-                                </span>
-                           </span>
-
-                        
-        </div>
