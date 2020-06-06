@@ -225,6 +225,7 @@ export default class Playlist extends React.Component {
                                     <div className="video-info col-md-5 no-padding-left">
                                         <div className='video-title'>
                                             <div className="col-md-4">
+                                                <label> Name  </label>
                                                 <input onChange={(e) => {
                                                     this.setState({name: e.target.value})
                                                     
@@ -232,8 +233,11 @@ export default class Playlist extends React.Component {
                                                        defaultValue={this.state.name}
                                                        className="form-control input-md"/>
                                             </div>
+                                            <br />
                                             <div className="col-md-8">
-                                                <input onChange={(e) => {
+                                            <label> Description  </label>
+
+                                             <input onChange={(e) => {
                                                     this.setState({description: e.target.value})
                                                 }} name="description" type="text" placeholder="Description"
                                                        defaultValue={this.state.description}

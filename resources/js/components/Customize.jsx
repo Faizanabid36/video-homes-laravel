@@ -15,7 +15,7 @@ export default function Customize(props){
     let [color1 , setColor1] = useState();
     let [color2 , setColor2] = useState();
     let [color3 , setColor3] = useState();
-    let [grobalColorVar , setGlbColor ] = useState();
+    let [grobalColorVar , setGlbColor ] = useState('black');
     const inputS = document.querySelectorAll('input ');
     
      function handleChange(){
@@ -26,7 +26,7 @@ export default function Customize(props){
 
     function handleFoot() {
         
-        // console.log( document.getElementById('inlineRadioBlue').checked )
+        
 
         if(document.getElementById('BlackWhiteFooter').checked ){
             document.documentElement.style.setProperty( '--level-background' , 'white'  )
@@ -71,26 +71,41 @@ export default function Customize(props){
         }
     }
     function handleMinimal(){
-        console.log(   document.documentElement.style.getPropertyValue('--load-video'))
+        console.log(   document.documentElement.style.getPropertyValue('--load-video'));
         setGlbColor(document.documentElement.style.getPropertyValue('--load-video'));
         document.getElementById('level').style.setProperty( 'padding' , '10px 0px' ) ;
         document.getElementById('bottom-image-customization').style.setProperty( 'background' , 'none' ) ;
-        document.getElementById('level').style.setProperty( 'background' , 'none' ) ;
-         let y = document.getElementsByTagName('span');
+        // document.documentElement.style.setProperty( '--load-video' , 'transparent'  )
+
+       
+        
+
+        let y = document.getElementById('bottom-image-customization').childNodes;
+         console.log('asd' , y );
         for (let i = 0; i < y.length; i++) {
+
             y[i].style.setProperty( 'border' , 'none' ) ; 
+            
           }
         
     }
     function handleStandard(){
-        // console.log( 'bht' , document.getElementById('bottom-image-customization') );
+        
+        document.getElementById('bottom-image-customization').style.removeProperty( 'background'  ) ;
+
         document.getElementById('level').style.setProperty( 'padding' , '0' ) ;
-        document.getElementById('bottom-image-customization').style.setProperty( 'background' , `${grobalColorVar}` ) ;
-        document.getElementById('level').style.setProperty( 'background' , 'inherit' ) ;
+        
+        document.documentElement.style.setProperty( '--load-video' , `${grobalColorVar}`  )
+
          let y = document.getElementById('bottom-image-customization').childNodes;
-        //  console.log('y0 ', y) ;
+       
         for (let i = 0; i < y.length; i++) {
             y[i].style.setProperty( 'border' , '1px solid gray' ) ; 
+            
+            
+            
+            
+
           }
     }
 
@@ -103,7 +118,7 @@ export default function Customize(props){
       <Col lg={12}>
    <div className="Customization-head"> 
 
-       <p> Customize your video player below. Choose from one of six themes or customize your own.  </p>
+       <h2> Customize your video player below. Choose from one of six themes or customize your own.  <div className="borderBottom2"> </div> </h2>
    </div>
    </Col>
   </Row>
@@ -130,30 +145,30 @@ export default function Customize(props){
 <div className="inline-radio">
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="inlineRadioOptions" onChange={handleFoot} id="BlackWhiteFooter" value="option1" />
-  <label class="form-check-label" for="inlineRadio1"> <div className='customization-icon bg-black '> <FontAwesomeIcon icon={faPlay} color="white" /> <div id="levelFoot" className="foot white ">  </div>  </div> </label>
+  <label class="form-check-label" for="BlackWhiteFooter"> <div className='customization-icon bg-black '> <FontAwesomeIcon icon={faPlay} color="white" /> <div id="levelFoot" className="foot white ">  </div>  </div> </label>
 </div>
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="inlineRadioOptions" onChange={handleFoot} id="GrayRedFooter" value="option2" />
-  <label class="form-check-label" for="inlineRadio2"><div className='customization-icon bg-gray'> <FontAwesomeIcon icon={faPlay} color="white" /> <div className="foot red">  </div>  </div></label>
+  <label class="form-check-label" for="GrayRedFooter"><div className='customization-icon bg-gray'> <FontAwesomeIcon icon={faPlay} color="white" /> <div className="foot red">  </div>  </div></label>
 </div>
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="inlineRadioOptions" onChange={handleFoot} id="RedWhiteFooter" value="option2" />
-  <label class="form-check-label" for="inlineRadio2"><div className='customization-icon bg-white'> <FontAwesomeIcon icon={faPlay} color="black" /> <div className="foot red">  </div>  </div></label>
+  <label class="form-check-label" for="RedWhiteFooter"><div className='customization-icon bg-white'> <FontAwesomeIcon icon={faPlay} color="black" /> <div className="foot red">  </div>  </div></label>
 </div>
 
 </div>
 <div className="inline-radio">
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="inlineRadioOptions" onChange={handleFoot} id="WhiteGrayFooter" value="option1" />
-  <label class="form-check-label" for="inlineRadio1"><div className='customization-icon bg-gray '> <FontAwesomeIcon icon={faPlay} color="white" /> <div className="foot gray">  </div>  </div></label>
+  <label class="form-check-label" for="WhiteGrayFooter"><div className='customization-icon bg-gray '> <FontAwesomeIcon icon={faPlay} color="white" /> <div className="foot gray">  </div>  </div></label>
 </div>
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="inlineRadioOptions" onChange={handleFoot} id="BlueBlackFooter" value="option2" />
-  <label class="form-check-label" for="inlineRadioBlue"><div className='customization-icon bg-black'> <FontAwesomeIcon icon={faPlay} color="#09c4fd" /> <div className="foot blue">  </div>  </div></label>
+  <label class="form-check-label" for="BlueBlackFooter"><div className='customization-icon bg-black'> <FontAwesomeIcon icon={faPlay} color="#09c4fd" /> <div className="foot blue">  </div>  </div></label>
 </div>
 <div class="form-check form-check-inline">
   <input class="form-check-input" type="radio" name="inlineRadioOptions" onChange={handleFoot} id="GreenGrayFooter" value="option2" />
-  <label class="form-check-label" for="inlineRadio2"><div className='customization-icon bg-gray'> <FontAwesomeIcon icon={faPlay} color="white" /> <div className="foot green">  </div>  </div></label>
+  <label class="form-check-label" for="GreenGrayFooter"><div className='customization-icon bg-gray'> <FontAwesomeIcon icon={faPlay} color="white" /> <div className="foot green">  </div>  </div></label>
 </div>
 
 </div>
@@ -193,13 +208,13 @@ export default function Customize(props){
    
   </Row>
   <hr />
-  <br />
+  
    <hr />
 
   <Row>
     <Col xs={6}>
-        <a href="" > Cancel </a>
-        <button className=""> Save Changes </button>
+        <button href="" className="btn btn-danger" > Cancel </button>
+        <button className="btn btn-primary"> Save Changes </button>
 
     </Col>
    

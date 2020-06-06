@@ -6,6 +6,36 @@ $color:  rgb(65, 166, 238);
 $background : linear-gradient(95.26deg, #04F5D5 7.67%, #037CED 119.78%);
 
 
+
+$theme-colors: (
+  "primary": $color,
+  "danger":  #9A1F40,
+);
+
+.btn{
+  border-radius: 50px !important;
+}
+
+label{
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+}
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+  color: #ffffff !important;
+  background-color: $color !important;
+  border-color: #1162b3 #198cff #0079f3 !important;
+}
+
+input[type=radio]{
+  background: #FFFFFF !important;
+mix-blend-mode: normal;
+opacity: 0.6 !important;
+box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.1) !important;
+width: 14px;
+height: 14px;
+}
 //PlayList
 
 .playlistContainer{
@@ -39,18 +69,22 @@ $background : linear-gradient(95.26deg, #04F5D5 7.67%, #037CED 119.78%);
   
   & .user-setting-panel input[type='text'], .user-setting-panel input[type='password'] {
     height: 30px !important;
-    color: $color!important;
+    
     font-size: 14px;
-    box-shadow: 0 1px 0 0 #f2f2f2, 0 0 0 1px #f2f2f2;
+    // box-shadow: 0 1px 0 0 #f2f2f2, 0 0 0 1px #f2f2f2;
     border: none;
-    border-radius: 0;
-    border: 1px solid;
+    background: white;
+    // border: 1px solid;
     border-radius: 50px;
     width: 281px;
+    &:focus{
+      color: $color!important;
+      border: 1px solid $color;
+    }
   }                  
   & .pt_mn_page_hd svg {
     vertical-align: middle;
-    background: white;
+    background: none;
     border-radius: 50%;
     padding: 6px;
     width: 49px;
@@ -66,6 +100,7 @@ $background : linear-gradient(95.26deg, #04F5D5 7.67%, #037CED 119.78%);
         font-size: 40px;
         display: inline;
         vertical-align: middle;
+        
         
   }
   & .borderBottom{
@@ -112,6 +147,14 @@ $background : linear-gradient(95.26deg, #04F5D5 7.67%, #037CED 119.78%);
 }
 
 
+}
+
+.user-setting-panel {
+  background: none !important;
+}
+
+.pt_shadow {
+ box-shadow: none;
 }
 
 
@@ -827,10 +870,7 @@ height: 40px;
 
 //Drag drop
 
-// $theme-colors: (
-//   "primary": $color,
-//   "danger": #ff4136
-// );
+
 
 .display-shadow-box{
     margin-top: 20px;
@@ -996,12 +1036,27 @@ height: 40px;
 //Custimization
 
 .Customization-head{
-  background: rgb(211, 206, 206);
+  // background: rgb(211, 206, 206);
   color: black;
-  font-size: 17px;
-  padding: 10px 20px;
+  font-size: 16px;
+  padding: 10px 0px;
   margin-bottom: 20px;
 }
+
+
+.borderBottom2{
+  
+    
+  
+  width:  40px;
+
+  background-color: $color;
+  display: block;
+  height: 3px;
+
+
+}
+
 
 .imageCustomize{
   background: url('https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832__340.jpg')  ;
@@ -1013,6 +1068,7 @@ height: 40px;
     top: 237px;
     height: 25px;
    background: var(--load-video);
+  //  background-color: red;
 
     display: flex;
     flex-direction: row;
@@ -1020,6 +1076,7 @@ height: 40px;
     align-items: stretch;
     & span{
       border: 1px solid rgb(143, 143, 143);
+      
       flex: 1;
       color: white;
       display: flex;
@@ -1034,7 +1091,8 @@ height: 40px;
       flex: 12;
       justify-content: flex-start;
         
-      background-color: var(--load-video) ;
+      // background-color: var(--load-video) ;
+      // background-color: red ;
 
       
 
@@ -1120,6 +1178,19 @@ height: 40px;
     border: none;
   }
   
+}
+
+input[type=text] {
+  // height: 30px !important;
+  background: white;
+ border: none;
+  border-radius: 50px;
+  width: 221px;
+
+  &:focus{
+    color: $color!important;
+    border: 1px solid $color;
+  }
 }
 
 //Radio Select Theme

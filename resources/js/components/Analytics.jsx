@@ -49,8 +49,8 @@ class Analytics extends React.Component {
 
     render() {
         return <div>
-            <h1> Analytics </h1>
-            <Tabs defaultActiveKey="Indiviual-Videos" id="uncontrolled-tab-example">
+            <h1> Analytics <div className="borderBottom2"> </div> </h1>
+            <Tabs defaultActiveKey="Indiviual-Videos" className="border" id="uncontrolled-tab-example">
                 <Tab eventKey="Overall-Videos" title="Overall Statistics">
                     <ViewsChart/>
                 </Tab>
@@ -58,7 +58,7 @@ class Analytics extends React.Component {
                     <hr/>
                     <div className="row">
                         <div className="col-md-4">
-                            <span className='mr-2'>From Date:</span>
+                            <label className='mr-2'>From Date:</label>
                             <DatePicker
                                 className="form-control"
                                 selected={this.state.startDate}
@@ -68,7 +68,7 @@ class Analytics extends React.Component {
                             />
                         </div>
                         <div className="col-md-4">
-                            <span className='mr-2'>To Date:</span>
+                            <label className='mr-2'>To Date:</label>
                             <DatePicker
                                 className="form-control"
                                 selected={this.state.endDate}
@@ -78,7 +78,7 @@ class Analytics extends React.Component {
                             />
                         </div>
                         <div className="col-md-4">
-                            <Button className="btn btn-primarys" onClick={this.handleChangeInput}>
+                            <Button className="btn btn-primary" onClick={this.handleChangeInput}>
                                 Get Statistics
                             </Button>
                         </div>
