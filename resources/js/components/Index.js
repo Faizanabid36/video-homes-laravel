@@ -7,6 +7,7 @@ import Videos from "./Videos/Videos";
 import UploadVideos from "./Videos/UploadVideos";
 import EditVideo from "./Videos/EditVideo.jsx";
 import PlayList from "./Playlist.jsx";
+import Xample from "./Xample";
 import Profile from "./Profile.jsx";
 import Settings from "./Settings.jsx";
 import Customize from "./Customize.jsx";
@@ -26,6 +27,7 @@ export default class Index extends React.Component{
                 <Route path="/settings" exact  component={Settings} />
                 <Route path="/videos" exact  component={Videos} />
                 <Route path="/analytics" exact  component={Analytics} />
+                <Route path="/Xample" exact  component={Xample} />
             </Switch>
         </main></BrowserRouter>
     }

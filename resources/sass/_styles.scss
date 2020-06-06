@@ -158,6 +158,11 @@ height: 14px;
 }
 
 
+.borderBottom2{
+  border-bottom: 3px solid $color ;
+  width: 5px;
+}
+
 
 //sIDEABR
 
@@ -602,11 +607,12 @@ body {
   }
 
  
-  
-  .dropdowncontainer  .dropdown{
+   .dropdown-Custom{
   
       height: 50px;
       width: 50px;
+      margin-left:20px ;
+    
   
       &:focus{
         border: none;
@@ -647,8 +653,8 @@ body {
         height: 50px;
         z-index: 16;
         position: absolute;
-        top: -12px;
-        right:  -6px;
+        top: -18px;        
+        // right:  -6px;
   
     }
   
@@ -657,6 +663,7 @@ body {
       background: rgb(255, 255, 255);
       padding:0;
       z-index: 1;
+  
   
       & a{
         margin: 27px 0px;
@@ -678,14 +685,12 @@ body {
        height: 250px;
   
         position: absolute;
-        top: 66% !important;
-        
+        // top: 151% !important;
         z-index: 4 !important;
         width: 71px;
         height: 257px;
         position: absolute;
-       
-        left: -8px !important;
+        left: -13px !important;
   
         min-width: 10rem;
   
@@ -994,10 +999,8 @@ height: 40px;
   
   .card3{
     
-    
-    width: 210px !important;
-    height: 210px !important;
-    margin-left:10px ;
+    width:100% ;
+    // max-width: $width;
     box-shadow: 0px -10px 30px rgba(0, 0, 0, 0.5);
   
   

@@ -1,5 +1,5 @@
 
-        <div class="col-md-8 col-sm-6">
+        <div class="col-md-8 col-xs-6">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -34,10 +34,10 @@
                      
                 </div>
             </nav>
-            </div>
+        </div>
 
-            <div class="col-md-4 col-sm-6 border">
-               <a href="{{route('dashboard')}}/#/upload-video" class="links "> <i class="fa fa-cloud-upload btn btn-primary" color="black">Upload Video  </i>  </a>
+        <div class="col-md-4 col-xs-6 my-auto ">
+               <a href="{{route('dashboard')}}/#/upload-video" class="links  "> <i class="fa fa-cloud-upload btn btn-primary" color="black">Upload Video  </i>  </a>
                                
                <!-- <a href="#" class="notification d-none">
                    <i class="fa fa-bell"> </i>
@@ -49,13 +49,12 @@
                                        <i class="fa fa-search d-none"> </i> -->
                                   
                               
-                               <span class="dropdown nav-item dropdown ">
+                               <span class="dropdown nav-item dropdown-Custom  ">
                                    <button class="btn dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
                                            aria-haspopup="true" aria-expanded="false">
                                       
                                            <div class="image2"></div>
                                       
-                                           <h1 class="fa fa-user"></h1>
                                        
                                    </button>
                                    <span class="dropdowncontainer ">
