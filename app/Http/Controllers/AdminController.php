@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\UserTags;
 use App\Video;
 use Illuminate\Http\Request;
 
@@ -81,5 +82,40 @@ class AdminController extends Controller
         } else {
             return back()->with('error', 'Could Not Add Category');
         }
+    }
+
+    public function list_user_tags()
+    {
+        $tags = UserTags::paginate(5);
+        return view('admin.user_tags',compact('tags'));
+    }
+    public function edit_tag($id)
+    {
+        $tag=UserTags::whereId($id)->first();
+        return view('admin.edit_tag',compact('tag'));
+    }
+    public function delete_tag($id)
+    {
+//        dd($id);
+        UserTags::whereId($id)->delete();
+        return back()->with('success','Tag Deleted');
+    }
+    public function store_tag(Request $request)
+    {
+        $this->validate($request,[
+            'tag_name'=>'required',
+        ]);
+        $ut=new UserTags();
+        $ut->tag_name=$request->get('tag_name');
+        $ut->save();
+        return back()->with('success','Tag Added Successfully');
+    }
+    public function update_tag(Request $request, $id)
+    {
+        $this->validate($request,[
+            'tag_name'=>'required',
+        ]);
+        UserTags::whereId($id)->update(['tag_name'=>$request->get('tag_name')]);
+        return back()->with('success','Tag Updated Successfully');
     }
 }
