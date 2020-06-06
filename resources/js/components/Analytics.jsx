@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Card} from 'react-bootstrap';
-import {Tabs, Tab} from 'react-bootstrap' ;
+import {Tabs, Tab , Row} from 'react-bootstrap' ;
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
     faEye,
@@ -48,11 +48,15 @@ class Analytics extends React.Component {
     }
 
     render() {
-        return <div>
+        return (
+            
+                <div className="container">
             <h1> Analytics <div className="borderBottom2"> </div> </h1>
             <Tabs defaultActiveKey="Indiviual-Videos" className="border" id="uncontrolled-tab-example">
                 <Tab eventKey="Overall-Videos" title="Overall Statistics">
                     <ViewsChart/>
+                    <hr/>
+
                 </Tab>
                 <Tab eventKey="Indiviual-Videos" title="Individual Videos">
                     <hr/>
@@ -84,13 +88,14 @@ class Analytics extends React.Component {
                         </div>
                     </div>
                     <hr/>
+                    
                     <div className="Analytics_Card_Container">
                         {this.state.videosWithViews.length  ?      this.state.videosWithViews.map((item,id)=>{
                             return <div className="Card3_container" key={id}>
                                 <Card style={{width: '18rem'}} className="card3">
                                     <Card.Img variant="top" height="95"  src={window.VIDEO_APP.base_url+'/storage/'+item.thumbnail}/>
                                     <Card.Body className="card-body">
-                                        <Card.Title><h3> {item.title} </h3></Card.Title>
+                                        <Card.Title>{item.title}</Card.Title>
                                         <Card.Text>
                                             <FontAwesomeIcon
                                                 icon={faEye}
@@ -118,6 +123,8 @@ class Analytics extends React.Component {
 
 
         </div>
+        
+        )
     }
 
 }

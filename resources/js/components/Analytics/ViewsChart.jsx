@@ -12,8 +12,8 @@ import {Button, Tab} from "react-bootstrap";
 export default class ViewsChart extends React.Component {
 
     componentDidMount() {
-        this.getChartData()
-    }
+        this.getChartData();
+     }
 
     constructor() {
         super();
@@ -50,7 +50,10 @@ export default class ViewsChart extends React.Component {
         axios.post('get_all_statistics',{startDate,endDate})
             .then((res) => {
                 this.setState({...res.data})
-                console.log(this.state)
+                this.setState({chartData:[...this.state.chartData ]
+            }
+                )
+                console.log( 'post state' ,this.state)
             })
             .catch((err) => {
                 console.log(err)
@@ -61,6 +64,7 @@ export default class ViewsChart extends React.Component {
     }
 
     render() {
+        console.log( 'render' , this.state)
         return (
             <div>
                     <hr/>
@@ -92,6 +96,8 @@ export default class ViewsChart extends React.Component {
                     </div>
                     <hr/>
                 </div>
+                <hr/>
+
                 <h1> Video Views </h1>
                 <p> Number of times videos have been viewed </p>
                 <div className="barChart">
