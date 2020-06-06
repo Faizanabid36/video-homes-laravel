@@ -2,7 +2,7 @@
 
         <div class="col-1 m-0 sidebar p-0">
             <input type="checkbox" id="check"/>
-            <div class="ClosedsideBar">
+            <!-- <div class="ClosedsideBar">
             <label id="align-box" for="check">
                 <div>
                     <i class="fa fa-align-justify" color="black"></i>
@@ -41,7 +41,7 @@
                        <a href="#" class=" ">   <i class="fa fa-user" color="black"></i>  </a>
                   
               </div>
-                </div>
+                </div> -->
 </div>
 
             <div class="Nav">

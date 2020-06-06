@@ -138,17 +138,6 @@ body {
   background-color: #f8fafc;
 }
 
-.Nav {
-  z-index: 5;
-  background-image: radial-gradient(324.85% 141.93% at 106.4% 100%, #03FFD2 0%, #021BFF 100%);
-  width: 17.8%;
-  min-width: 220px;
-  height: 100%;
-  position: fixed;
-  transition: all .5s ease;
-  margin-left: -100%;
-}
-
 .links {
   color: black;
   font-size: 18px;
@@ -282,9 +271,8 @@ body {
 }
 
 .card2 {
-  width: 285px;
   box-shadow: 0px -10px 30px rgba(0, 0, 0, 0.5);
-  height: 370px;
+  min-height: 370px;
   transition: transform .2s;
 }
 
@@ -313,7 +301,6 @@ body {
 .overlay {
   position: relative;
   height: 200px;
-  width: 285px;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://c0.wallpaperflare.com/preview/27/313/180/man-singing-on-stage.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -411,16 +398,12 @@ body {
 }
 
 .headbar-blade .header-child3 {
-  width: 200px;
+  width: 280px;
   margin: 15px 10px;
 }
 
 .headbar-blade .navbar {
-  z-index: 2 !important;
   border-radius: 0px 0px 33px 33px;
-  background: #FFFFFF;
-  min-height: 78px;
-  width: 154%;
 }
 
 .links2 {
@@ -501,12 +484,14 @@ body {
 .dropdowncontainer .dropdown-menu {
   padding: 0rem 0rem !important;
   min-width: 65px !important;
-  width: 65px;
   height: 250px;
   position: absolute;
   top: 66% !important;
-  left: -15px !important;
   z-index: 4 !important;
+  width: 71px;
+  height: 257px;
+  position: absolute;
+  left: -8px !important;
   min-width: 10rem;
   border-radius: 8.25rem !important;
 }
@@ -534,6 +519,12 @@ body {
 
 .dropdowncontainer .icons:hover {
   color: #41a6ee;
+}
+
+.dropdowncontainer .icons:focus {
+  border: none !important;
+  width: 20px;
+  background: none;
 }
 
 .head {
