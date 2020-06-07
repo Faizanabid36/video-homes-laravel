@@ -45,10 +45,9 @@
                     </div>
                     <div class="form-group">
                         <select class="form-control" name="account_type" id="account_type" required="">
-                            <option value="designer">Designer</option>
-                            <option value="photographer">Photographer</option>
-                            <option value="instructor">Instructor</option>
-                            <option value="trainer">Trainer</option>
+                            @foreach($user_tags as $user_tag)
+                                <option value="{{$user_tag->tag_name}}">{{$user_tag->tag_name}}</option>
+                            @endforeach
                         </select>
                     </div>
 

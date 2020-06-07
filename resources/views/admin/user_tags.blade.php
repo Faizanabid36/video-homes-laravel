@@ -14,14 +14,14 @@
                 <div class="col-lg-6 col-md-4 col-sm-4">
                     <h4 class="nav_top_align skin_txt">
                         <i class="fa fa-th"></i>
-                        Playlist Categories
+                        User Tags List
                     </h4>
                 </div>
                 <div class="col-sm-7 col-lg-6">
                     <ol class="breadcrumb float-right nav_breadcrumb_top_align">
                         <li class="breadcrumb-item">
-                            <a href="{{route('add_category')}}">
-                                <i class="fa fa-plus" data-pack="default" data-tags=""></i> Add New Category
+                            <a href="{{route('add_tag')}}">
+                                <i class="fa fa-plus" data-pack="default" data-tags=""></i> Add New Tag
                             </a>
                         </li>
                     </ol>
@@ -41,26 +41,24 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header bg-white">
-                            Videos
+                            Tags
                         </div>
                         <div class="card-block">
                             <div class="table-responsive m-t-10">
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th>Title</th>
-                                        <th>Description</th>
+                                        <th>Tag Name</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($categories as $category)
+                                    @foreach ($tags as $tag)
                                         <tr>
-                                            <td>{{$category->name}}</td>
-                                            <td>{{$category->description}}</td>
+                                            <td>{{$tag->tag_name}}</td>
                                             <td>
-                                                <a href="{{action('AdminController@edit_category',$category->id)}}">
+                                                <a href="{{action('AdminController@edit_tag',$tag->id)}}">
                                                     <button type="button" class="btn btn-labeled btn-warning">
                                                         <span class="btn-label">
                                                             <i class="fa fa-edit"></i>
@@ -70,7 +68,7 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="{{action('AdminController@delete_category',$category->id)}}">
+                                                <a href="{{action('AdminController@delete_tag',$tag->id)}}">
                                                     <button type="button" class="btn btn-labeled btn-danger">
                                                         <span class="btn-label">
                                                             <i class="fa fa-trash"></i>
@@ -83,7 +81,7 @@
                                     @endforeach
                                     </tbody>
                                 </table>
-                                {{$categories->links()}}
+                                {{$tags->links()}}
                             </div>
                         </div>
                     </div>

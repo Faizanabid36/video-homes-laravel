@@ -38,10 +38,17 @@
                         <i class="fa fa-tachometer"></i>
                         <span class="link-title menu_hide">&nbsp;Categories
 
-                            </span>
+                        </span>
                     </a>
                 </li>
 
+                <li class="">
+                    <a href="{{route('user_tags')}}">
+                        <i class="fa fa-tachometer"></i>
+                        <span class="link-title menu_hide">&nbsp;User Tags
+                        </span>
+                    </a>
+                </li>
 
             </ul>
             <!-- /#menu -->

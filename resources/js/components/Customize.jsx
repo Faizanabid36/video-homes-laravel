@@ -115,11 +115,11 @@ export default function Customize(props){
     return (
       <Container>
   <Row >
-      <Col lg={12}>
-   <div className="Customization-head"> 
+      <Col xs={12} className="my-5">
+  
 
        <h2> Customize your video player below. Choose from one of six themes or customize your own.  <div className="borderBottom2"> </div> </h2>
-   </div>
+   
    </Col>
   </Row>
 

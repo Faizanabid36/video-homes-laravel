@@ -10,8 +10,9 @@
 
 
                     <div class="video-frame">
-                        <iframe frameborder="0"
-                                src="https://www.youtube.com/embed/3iXYciBTQ0c?autoplay=1&controls=0&disablekb=1&fs=0&iv_load_policy=3&loop=1&modestbranding=1&playsinline=1&rel=0&showinfo=0&enablejsapi=1&widgetid=1">
+                    <iframe id="ytplayer" type="text/html" style="width:100%;height:100vh;"
+                        src="https://www.youtube.com/embed/3iXYciBTQ0c?autoplay=1&cc_load_policy=1&enablejsapi=1&loop=1&color=white&controls=0&iv_load_policy=3&modestbranding=1&playsinline=1&rel=0"
+                        frameborder="0" allowfullscreen>
                         </iframe>
                     </div>
                     <div class="header-separator header-separator-bottom "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">

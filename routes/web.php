@@ -60,6 +60,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('delete_comment', 'CommentsController@destroy')->name('delete_comment');
     Route::get('get_total_comments', 'CommentsController@countTotalComments');
     Route::post('createVideoAction', 'VideoController@createVideoAction')->name('createVideoAction');
+    Route::get('user_tags','AdminController@list_user_tags')->name('user_tags');
+    Route::get('edit_user_tag/{id}','AdminController@edit_tag')->name('edit_tag');
+    Route::post('update_user_tag/{id}','AdminController@update_tag')->name('update_tag');
+    Route::get('delete_user_tag/{id}','AdminController@delete_tag')->name('delete_tag');
+    Route::get('add_tag',function (){return view('admin.add_tag');})->name('add_tag');
+    Route::post('store_tag','AdminController@store_tag')->name('store_tag');
 
 });
 Route::get('/embed/{video_id}', 'VideoController@get_embedded_video')->name('embed_video');

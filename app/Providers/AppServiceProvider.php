@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\UserTags;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,5 +28,9 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Schema::defaultStringLength(191);
+        $user_tags=UserTags::all();
+        View::share(
+            'user_tags', $user_tags
+        );
     }
 }

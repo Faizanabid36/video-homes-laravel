@@ -1,5 +1,5 @@
 import React from "react";
-import {Modal, Button, Col, Row, Container, Alert} from "react-bootstrap";
+import {Modal, Button, Col, Row, Container, Table ,Alert} from "react-bootstrap";
 import axios from "axios";
 import Alerts from './Alerts';
 export default class Playlist extends React.Component {
@@ -81,7 +81,7 @@ export default class Playlist extends React.Component {
                  
                 }
                 else
-                    // alert('Some Error Occured')
+                    
                     this.setState({showAlert:true , variant:'danger', AlertMessage:'Some Error Occured'}) ;
 
             })
@@ -103,103 +103,122 @@ export default class Playlist extends React.Component {
     }
 
     render() {
-        return <div className='container   playlistContainer   main-content' id='main-container'>
+
+
+        let PlaylistArray =   this.state.playlists.map((item, id) => {
+            return  (<tr key={id} id={`playlist${id}`}>
+                   <td>{item.name}</td>
+                   <td>   <a onClick={(e) => {
+                 e.preventDefault();
+                 this.setState({
+                     mainPage: false,
+                     addPlaylist: true,
+                     purpose: 'add',
+                     editPlaylist: false
+                 })
+             }} title="Add playlist">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36"  className="addplaylistIcon"
+                      viewBox="0 0 24 24">
+                     <path fill="currentColor"
+                           d="M19,9H2V11H19V9M19,5H2V7H19V5M2,15H15V13H2V15M17,13V19L22,16L17,13Z"></path>
+                 </svg>
+             </a>
+                             </td>
+                   <td>
+            
+             <a onClick={(e) => {
+                e.preventDefault();
+                this.setState({
+                    mainPage: false,
+                    addPlaylist: false,
+                    purpose: 'edit',
+                    editPlaylist: true,
+                    name: item.name,
+                    description: item.description,
+                    id: item.id,
+                  
+                })
+            }}
+               title="Edit playlist">
+                <svg className="feather-Edit" xmlns="http://www.w3.org/2000/svg" width="36"
+                     height="36"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+                     strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <polygon points="14 2 18 6 7 17 3 17 3 13 14 2"></polygon>
+                    <line x1="3" y1="22" x2="21" y2="22"></line>
+                </svg>
+            </a>
+            
+            
+            </td> 
+                  <td>
+            
+            <a onClick={(e) => {
+                e.preventDefault();
+                this.handleDelete(item.id, e)
+                
+            }} title="Delete video">
+                <svg className="feather-Delete" xmlns="http://www.w3.org/2000/svg" width="36"
+                     height="36"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+                     strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path
+                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                </svg>
+            </a>
+            
+            
+            </td> 
+        </tr>)})
+
+        return <Container>
 
             <Row>
             <Col xs={12} className=" my-5 ">
-                   <h1 className="float-left">PlayList <p className="borderBottom2"> </p> </h1>
+                   <h2 className="float-left">PlayList <p className="borderBottom2"> </p> </h2>
                         
                </Col> 
+
+             <Col xs={12} className=" ">  
+             <Alerts data={{ show: this.state.showAlert , variant : this.state.variant , message: this.state.AlertMessage  , setAlertShow:this.showAlert  }} />
+             </Col>  
             </Row>
-            
+
             <div className=" ">
                 <div className="">
-                    <div className="upload-head">
-                     <Alerts data={{ show: this.state.showAlert , variant : this.state.variant , message: this.state.AlertMessage  , setAlertShow:this.showAlert  }} />
+                   
+
+                    <Col xs={12} className="my-4">
+                        <h4>Manage My Playlist  </h4>
+                    </Col>
                        
-                        <div className="clear"></div>
-                        <hr/>
-                    </div>
+                    
+                    {this.state.mainPage &&
+                    
+                    <Table   hover>
+                    <thead>
+                      <tr >
+                        <th>Title</th>
+                        <th>Add</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+          
+                      </tr>
+                    </thead>
+                    <tbody>
+     
+                     { PlaylistArray }
 
-                    <div className="upload-head">
-                        <h3>Manage My Playlist  </h3>
-                        <hr/>
-                        <div className="clear"></div>
-                    </div>
-                    {this.state.mainPage && this.state.playlists.map((item, id) => {
-                        return <div key={id} id={`playlist${id}`} className="subscriptions-list">
-                            <div className="author-list">
-                                <div className="video-wrapper" data-id="6" id="video-6">
-                                    <div className="video-actions vid_stud_acts">
-                                        <a onClick={(e) => {
-                                            e.preventDefault();
-                                            this.setState({
-                                                mainPage: false,
-                                                addPlaylist: true,
-                                                purpose: 'add',
-                                                editPlaylist: false
-                                            })
-                                        }} title="Add playlist">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36"  className="addplaylistIcon"
-                                                 viewBox="0 0 24 24">
-                                                <path fill="currentColor"
-                                                      d="M19,9H2V11H19V9M19,5H2V7H19V5M2,15H15V13H2V15M17,13V19L22,16L17,13Z"></path>
-                                            </svg>
-                                        </a>
-                                        <a onClick={(e) => {
-                                            e.preventDefault();
-                                            this.setState({
-                                                mainPage: false,
-                                                addPlaylist: false,
-                                                purpose: 'edit',
-                                                editPlaylist: true,
-                                                name: item.name,
-                                                description: item.description,
-                                                id: item.id,
-                                              
-                                            })
-                                        }}
-                                           title="Edit playlist">
-                                            <svg className="feather-Edit" xmlns="http://www.w3.org/2000/svg" width="36"
-                                                 height="36"
-                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-                                                 strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                                                <polygon points="14 2 18 6 7 17 3 17 3 13 14 2"></polygon>
-                                                <line x1="3" y1="22" x2="21" y2="22"></line>
-                                            </svg>
-                                        </a>
-                                        <a onClick={(e) => {
-                                            e.preventDefault();
-                                            this.handleDelete(item.id, e)
-                                            
-                                        }} title="Delete video">
-                                            <svg className="feather-Delete" xmlns="http://www.w3.org/2000/svg" width="36"
-                                                 height="36"
-                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-                                                 strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                                                <polyline points="3 6 5 6 21 6"></polyline>
-                                                <path
-                                                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                                <line x1="10" y1="11" x2="10" y2="17"></line>
-                                                <line x1="14" y1="11" x2="14" y2="17"></line>
-                                            </svg>
-                                        </a>
-                                    </div>
-                                    <Row>
-                                        <div className="video-thumb col-md-3">
-                                            <h3>{item.name}</h3>
-                                        </div>
-                                        <div className="video-info col-md-5 no-padding-left">
-                                            <div className="video-desc"></div>
-                                        </div>
-                                    </Row>
-
-                                   
-                                </div>
-                            </div>
-                            <hr />
-                        </div>
-                    })}
+                     </tbody>
+                     </Table> 
+                    
+                    
+                    
+                    }
+                    
                     {this.state.addPlaylist ? <div>
                         <div className='author-list'>
                             <div className="video-wrapper" data-id="6" id="video-6">
@@ -290,7 +309,6 @@ export default class Playlist extends React.Component {
                                     <div className="video-info col-md-5 no-padding-left">
                                         <div className='video-title'>
                                             <div className="col-md-4">
-                                            <label> Name  </label>
                                                 <input onChange={(e) => {
                                                     this.setState({name: e.target.value})
                                                    
@@ -298,9 +316,7 @@ export default class Playlist extends React.Component {
                                                        defaultValue={this.state.name}
                                                        className="form-control input-md"/>
                                             </div>
-                                            <br />
                                             <div className="col-md-8">
-                                            <label> Description  </label>
                                                 <input onChange={(e) => {
                                                     this.setState({description: e.target.value})
                                                    
@@ -318,7 +334,8 @@ export default class Playlist extends React.Component {
                 </div>
                 <div className="clear"></div>
             </div>
-        </div>
+        
+        </Container>
     }
 
 }
