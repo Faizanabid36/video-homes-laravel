@@ -48,7 +48,7 @@ class Videos extends React.Component {
                
                   
                         <Col xs={12} className=" my-5 ">
-                            <h2 className="float-left">My Videos <p className="borderBottom"> </p> </h2>
+                            <h1 className="float-left">My Videos <p className="borderBottom2"> </p> </h1>
                             <DropdownButton
                                 className="dropdownbtn float-right"
                                 id="dropdown-basic-button"
@@ -145,19 +145,15 @@ class Videos extends React.Component {
             
             
             <Row>
-                <Col className="  ">
-                    <Row className="head  ">
-                        <Col className="  " >
-                            <p className="h4 activate">Pending for Approval <p className="borderBottom"> </p> </p>
-                        </Col>
-                        
-                    </Row>
-                </Col>
-            </Row>
-            <Row className=" Cards-container">
+           
+            
+            <Col xs={12} className=" my-5 ">
+                      
+                <h1 >Pending for Approval <p className="borderBottom2"> </p> </h1>
+             </Col>
                 { this.state.pendingVideos.length  ?   this.state.pendingVideos.map((item, index) => {
                     let link = window.VIDEO_APP.base_url + '/' + item.user.username + '/watch_video?v=' + item.video_id;
-                    return <Col key={index} sm={12} md={6} lg={4} className="">
+                    return <Col key={index} xs={6} sm={6} md={4} lg={3} className="">
                         <Card className="card2">
                             <div className="overlay"
                                  style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5) ) , url(${window.VIDEO_APP.base_url}/storage/${item.thumbnail})`}}>

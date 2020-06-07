@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Card} from 'react-bootstrap';
-import {Tabs, Tab , Row} from 'react-bootstrap' ;
+import {Tabs, Tab , Col ,Container ,Row} from 'react-bootstrap' ;
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
     faEye,
@@ -48,10 +48,12 @@ class Analytics extends React.Component {
     }
 
     render() {
-        return (
-            
-                <div className="container">
-            <h1> Analytics <div className="borderBottom2"> </div> </h1>
+        return (<Container>
+                    <Row>
+                    <Col xs={12} className="my-5">
+                     <h1> Analytics <div className="borderBottom2"> </div> </h1>
+                    </Col>
+                    <Col xs={12} className="my-2" >
             <Tabs defaultActiveKey="Indiviual-Videos" className="border" id="uncontrolled-tab-example">
                 <Tab eventKey="Overall-Videos" title="Overall Statistics">
                     <ViewsChart/>
@@ -89,10 +91,10 @@ class Analytics extends React.Component {
                     </div>
                     <hr/>
                     
-                    <div className="Analytics_Card_Container">
+                    <Row>
                         {this.state.videosWithViews.length  ?      this.state.videosWithViews.map((item,id)=>{
-                            return <div className="Card3_container" key={id}>
-                                <Card style={{width: '18rem'}} className="card3">
+                            return <Col md={3 } lg={2} sm={6} xs={12}>
+                                <Card className="card3">
                                     <Card.Img variant="top" height="95"  src={window.VIDEO_APP.base_url+'/storage/'+item.thumbnail}/>
                                     <Card.Body className="card-body">
                                         <Card.Title>{item.title}</Card.Title>
@@ -114,15 +116,17 @@ class Analytics extends React.Component {
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
-                            </div>
+                                </Col>
                         }) :  <h2 className="Novideos"> No Videos Found  </h2> };  
-                    </div>
+                       
+                   </Row>
                 </Tab>
 
             </Tabs>
+            </Col>
 
-
-        </div>
+            </Row>
+        </Container>
         
         )
     }

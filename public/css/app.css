@@ -127,6 +127,11 @@ input[type=radio] {
   box-shadow: none;
 }
 
+.borderBottom2 {
+  border-bottom: 3px solid #41a6ee;
+  width: 5px;
+}
+
 body {
   margin: 0;
   font-family: "Nunito", sans-serif !important;
@@ -425,12 +430,12 @@ body {
   height: 3px;
 }
 
-.dropdowncontainer .dropdown {
+.dropdown-Custom {
   height: 50px;
   width: 50px;
 }
 
-.dropdowncontainer .dropdown:focus {
+.dropdown-Custom:focus {
   border: none;
   outline: none;
 }
@@ -463,8 +468,7 @@ body {
   height: 50px;
   z-index: 16;
   position: absolute;
-  top: -12px;
-  right: -6px;
+  top: -18px;
 }
 
 .dowpdown-box {
@@ -486,12 +490,11 @@ body {
   min-width: 65px !important;
   height: 250px;
   position: absolute;
-  top: 66% !important;
   z-index: 4 !important;
   width: 71px;
   height: 257px;
   position: absolute;
-  left: -8px !important;
+  left: -13px !important;
   min-width: 10rem;
   border-radius: 8.25rem !important;
 }
@@ -727,9 +730,7 @@ body {
 }
 
 .card3 {
-  width: 210px !important;
-  height: 210px !important;
-  margin-left: 10px;
+  width: 100%;
   box-shadow: 0px -10px 30px rgba(0, 0, 0, 0.5);
   transition: transform .2s;
 }
