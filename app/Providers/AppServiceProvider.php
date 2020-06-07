@@ -28,9 +28,9 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Schema::defaultStringLength(191);
-        $user_tags=UserTags::all();
-        View::share(
-            'user_tags', $user_tags
-        );
+//        $user_tags=UserTags::all();
+//        View::share(
+//            'user_tags', $user_tags
+//        );
     }
 }
