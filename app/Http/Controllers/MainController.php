@@ -22,4 +22,8 @@ class MainController extends Controller {
         return view( 'home' );
 // return 'sss' ;
     }
+    public function directory() {
+        return view( 'directory' );
+// return 'sss' ;
+    }
 }

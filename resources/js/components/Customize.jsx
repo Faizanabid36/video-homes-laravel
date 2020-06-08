@@ -124,7 +124,7 @@ export default function Customize(props){
   </Row>
 
   <Row>
-    <Col lg={5}>
+    <Col >
     <div>
         <h3>  Choose a Style </h3>
      <div classNameName="form-check">
@@ -191,7 +191,7 @@ export default function Customize(props){
 </div>
     
     </Col>
-    <Col lg={7}>
+    <Col className="border">
       <h3>  Preview Your Player: </h3>
       <div className="imageCustomize">
       

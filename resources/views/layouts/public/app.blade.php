@@ -6,6 +6,8 @@
     <title>{{env('APP_NAME')}}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="{{asset('css/public.css')}}" rel="stylesheet">
+    <!-- <link href="{{asset('css/app.css')}}" rel="stylesheet"> -->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     @yield('style')
     <script>
         window.VIDEO_APP = {
@@ -40,13 +42,13 @@
                             <a class="nav-link" href="/login">LOGIN </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="#">DIRECTORY <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/directory">DIRECTORY <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">MEDIA PROS</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">BUSSINESS</a>
+                            <a class="nav-link" href="#">BUSINESS</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">BLOG</a>
@@ -76,6 +78,6 @@
 
 </div>
 @yield('script')
-{{--<script src="{{ asset('js/app.js') }}"></script>--}}
+<script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
