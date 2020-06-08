@@ -24,10 +24,14 @@ label{
 
 .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
   color: #ffffff !important;
+  
   background-color: $color !important;
   border-color: #1162b3 #198cff #0079f3 !important;
 }
 
+.nav-tabs .nav-link {
+  border: 2px solid $color !important;
+}
 input[type=radio]{
   background: #FFFFFF !important;
 mix-blend-mode: normal;
@@ -36,6 +40,8 @@ box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.1) !important;
 width: 14px;
 height: 14px;
 }
+
+
 //PlayList
 
 .playlistContainer{
@@ -1000,7 +1006,9 @@ height: 40px;
   .card3{
     
     width:100% ;
-    // max-width: $width;
+    // min-width: $width;
+    min-height: 300px;
+  
     box-shadow: 0px -10px 30px rgba(0, 0, 0, 0.5);
   
   

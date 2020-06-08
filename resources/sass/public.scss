@@ -245,5 +245,56 @@
 
 }
 
+//Directory
+.bigContainer{
+    margin: 0px 108px;
+}
+
+.Search-boxes{
+    background-color: rgb(12, 102, 124);
+    width: 100%;
+    height: 220px;
+    color: white;
+    padding: 10px;
+    
+}
+
+.Category-Boxes{
+    // border: 1px solid red;
+
+    & > div{
+        // border-bottom: solid rgb(18, 18, 160) 1px;
+        margin:20px 0px;
+      
+    }
+}
+
+
+
+ .Custom-nav2 .nav-link{
+    border: 1px solid rgb(16, 156, 250) ;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+}
+  .active .icon{
+    color: white;
+    
+
+   
+}
+
+.tab-pane {
+    width: 100%;
+    height: 100%;
+    border: 1px solid blue;
+}
+
+
+.card-img-top{
+    height: 300px;
+}
+
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';

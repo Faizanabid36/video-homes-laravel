@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 //Public Pages
 Route::get('/', 'MainController@index')->name('home');
+Route::get('/directory', 'MainController@directory')->name('home');
 Auth::routes();
 
 

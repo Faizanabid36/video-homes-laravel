@@ -6,9 +6,13 @@ import {
     faEye,
     faComment
 } from "@fortawesome/free-solid-svg-icons";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+// import DatePicker from "react-datepicker";
+// import "react-datepicker/dist/react-datepicker.css";
 import ViewsChart from "./Analytics/ViewsChart";
+
+import 'bootstrap-daterangepicker/daterangepicker.css';
+
+import DateRangePicker from 'react-bootstrap-daterangepicker';
 
 class Analytics extends React.Component {
     constructor(props) {
@@ -54,7 +58,7 @@ class Analytics extends React.Component {
                      <h1> Analytics <div className="borderBottom2"> </div> </h1>
                     </Col>
                     <Col xs={12} className="my-2" >
-            <Tabs defaultActiveKey="Indiviual-Videos" className="border" id="uncontrolled-tab-example">
+            <Tabs defaultActiveKey="Indiviual-Videos" className="navtabs-custom" id="uncontrolled-tab-example">
                 <Tab eventKey="Overall-Videos" title="Overall Statistics">
                     <ViewsChart/>
                     <hr/>
@@ -62,9 +66,9 @@ class Analytics extends React.Component {
                 </Tab>
                 <Tab eventKey="Indiviual-Videos" title="Individual Videos">
                     <hr/>
-                    <div className="row">
-                        <div className="col-md-4">
-                            <label className='mr-2'>From Date:</label>
+                    <div className="row ">
+                        {/* <div className="col-md-3">
+                            
                             <DatePicker
                                 className="form-control"
                                 selected={this.state.startDate}
@@ -72,9 +76,9 @@ class Analytics extends React.Component {
                                 maxDate={new Date()}
                                 placeholderText="Select a date before 5 days in the future"
                             />
-                        </div>
-                        <div className="col-md-4">
-                            <label className='mr-2'>To Date:</label>
+                        </div> */}
+                        {/* <div className="col-md-3">
+                           
                             <DatePicker
                                 className="form-control"
                                 selected={this.state.endDate}
@@ -83,19 +87,24 @@ class Analytics extends React.Component {
                                 placeholderText="Select a date before 5 days in the future"
                             />
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-md-3">
                             <Button className="btn btn-primary" onClick={this.handleChangeInput}>
                                 Get Statistics
                             </Button>
-                        </div>
+                        </div> */}
+                        <div className="col-12">
+ <DateRangePicker className="customDatePicker" startDate={this.state.startDate} onApply={this.handleChangeInput} endDate={this.state.endDate}>
+        <button className="btn btn-primary">Select Range</button>
+      </DateRangePicker>
+      </div>
                     </div>
                     <hr/>
                     
                     <Row>
                         {this.state.videosWithViews.length  ?      this.state.videosWithViews.map((item,id)=>{
-                            return <Col md={3 } lg={2} sm={6} xs={12}>
-                                <Card className="card3">
-                                    <Card.Img variant="top" height="95"  src={window.VIDEO_APP.base_url+'/storage/'+item.thumbnail}/>
+                            return <Col md={3 } lg={3} sm={6} xs={12}>
+                                <Card className="card3 ">
+                                    <Card.Img variant="top" height="160px"  src={window.VIDEO_APP.base_url+'/storage/'+item.thumbnail}/>
                                     <Card.Body className="card-body">
                                         <Card.Title>{item.title}</Card.Title>
                                         <Card.Text>
