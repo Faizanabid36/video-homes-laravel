@@ -42,7 +42,7 @@
                             <a class="nav-link" href="/login">LOGIN </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="/directory">DIRECTORY <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{route('directory')}}">DIRECTORY <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">MEDIA PROS</a>
