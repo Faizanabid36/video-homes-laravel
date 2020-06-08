@@ -36,6 +36,9 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto links-home">
+                    <li class="nav-item ">
+                            <a class="nav-link" href="/login">LOGIN </a>
+                        </li>
                         <li class="nav-item ">
                             <a class="nav-link" href="#">DIRECTORY <span class="sr-only">(current)</span></a>
                         </li>
