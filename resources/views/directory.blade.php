@@ -6,9 +6,9 @@
     
         <div class="row">  
            <div class="col-12 my-3"> 
-               <button class="btn btn-primary"> Submittin new List   </button>
+               <button class="btn btn-primary"> <i class="far fa-plus icon"></i> Submit new List   </button>
            
-                <button class="btn btn-primary"> My bookmarks   </button>
+                <button class="btn btn-primary"> <i class="fas fa-star icon "></i> My bookmarks   </button>
            </div>
 
         </div>
@@ -19,13 +19,18 @@
                             <form>
                                             <div class="form-row ">
                                             <div class="col my-4">
-                                            <input type="text" class="form-control" placeholder="Select Cateogy">
+                                            <input type="text" class="form-control text" placeholder="Select Cateogy" />
+                                            <i class="fal fa-search icon search-icon"></i>
+                                            
                                             <br />
                                             <p> Try to search: <b> videographers, local marketing </b> </p>
                                         
                                             </div>
                                             <div class="col my-4">
-                                            <input type="text" class="form-control" placeholder="Select Location">
+                                            <input type="text" class="form-control text" placeholder="Select Location" />
+                                            <i class="fal fa-map-marker icon search-icon"></i>
+                                           
+
                                             </div>
                                         </div>
                                     
@@ -107,7 +112,16 @@
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h2 class="card-title">Joe French Realtor</h2>
+        <h2 class="card-title " > Joe French Realtor
+         <span id="rating-head">   
+        <span onclick='onRating(1)' class="fa fa-star  "></span>
+        <span onclick='onRating(2)'  class="fa fa-star "></span>
+        <span onclick='onRating(3)' class="fa fa-star "></span>
+        <span onclick='onRating(4)' class="fa fa-star"></span>
+        <span onclick='onRating(5)' class="fa fa-star"></span>
+        </span>
+
+        </h2>
         <br />
         <br />
         <p class="card-text">Serving Sellers and Buyers of real estate in central Maryland</p>
@@ -171,13 +185,24 @@
 
 
 </span>
+
   <span class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
 
   <div class="card-group">
   <div class="card">
     <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/6/61/Rainbow_Rose_%283366550029%29.jpg"  alt="Card image cap">
     <div class="card-body">
-    <h2 class="card-title">Joe French Realtor</h2>
+    <h2 class="card-title">Joe French Realtor
+    <!-- <span id="rating-head">   
+        <span onclick='onRating(1)' class="fa fa-star  "></span>
+        <span onclick='onRating(3)'  class="fa fa-star "></span>
+        <span onclick='onRating(5)' class="fa fa-star "></span>
+        <span onclick='onRating(7)' class="fa fa-star"></span>
+        <span onclick='onRating(9)' class="fa fa-star"></span>
+        </span> -->
+
+
+    </h2>
         <br />
       
         <p class="card-text">Serving Sellers and Buyers of real estate in central Maryland</p>
@@ -252,6 +277,27 @@
     
  </div>
 
+ <script>
+     const onRating = (id) =>{
+         console.log(document.documentElement.style);
+         console.log(document.getElementById('rating-head').children);
+         let ratingComponent = document.getElementById('rating-head').children ;
+        
+         for( let i=0 ; i< id ; i++){
+           ratingComponent[i].style.setProperty( 'color' , 'orange' ) ; 
+           }
+
+         for( let i=id ; i<=ratingComponent.length-1  ; i++){
+          
+          ratingComponent[i].style.setProperty( 'color' , 'black' ) ; 
+         
+   }
+
+        
+     
+     }
+
+</script>
 
 
 @endsection;
