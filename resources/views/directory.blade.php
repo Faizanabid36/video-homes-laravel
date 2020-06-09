@@ -69,13 +69,13 @@
 
 <div class="col-12 my-2">
 <div class="float-left">
-<p> Found 8 listing </p>
+<h6> Found 8 listing </h6>
 <div class="dropdown">
   <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
    Sort By:
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">date</a>
+    <a class="dropdown-item" href="#">Date</a>
     <a class="dropdown-item" href="#"> New to Old</a>
     <a class="dropdown-item" href="#">Alpahabet</a>
   </div>
@@ -112,24 +112,24 @@
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h2 class="card-title " > Joe French Realtor
-         <span id="rating-head">   
+        <h2 class="card-title "  > <a href="/joe" style="font-weight:900"> Joe French Realtor </a>
+         <!-- <span id="rating-head">   
         <span onclick='onRating(1)' class="fa fa-star  "></span>
         <span onclick='onRating(2)'  class="fa fa-star "></span>
         <span onclick='onRating(3)' class="fa fa-star "></span>
         <span onclick='onRating(4)' class="fa fa-star"></span>
         <span onclick='onRating(5)' class="fa fa-star"></span>
-        </span>
+        </span> -->
 
         </h2>
         <br />
         <br />
         <p class="card-text">Serving Sellers and Buyers of real estate in central Maryland</p>
-        <p class="card-text my-2">Address: 6020 Meadowridge Center Drive, STE#M, Elkridge, Maryland, USA 21075</p>
-        <button class="btn-primary"> Brokers and Agents </button>
-        <button class="btn-primary"> Real Estate </button>
+        <p class="card-text my-2"> <i  class="fa icon-blue fa-map-marker"></i>   Address: 6020 Meadowridge Center Drive, STE#M, Elkridge, Maryland, USA 21075</p>
+        <button class=" btn btn-primary"> Brokers and Agents   <span  class="fa  fa-tag"></span> </button>
+        <button class=" btn btn-primary"> Real Estate   <span  class="fa  fa-tag"></span> </button>
         
-        <p class="card-text m-3"> Phone: 240-517-1653</p>
+        <p class="card-text my-3">  <i  class="fa icon-blue fa-phone"></i>   Phone: 240-517-1653</p>
 
       </div>
     </div>
@@ -148,8 +148,8 @@
         <br />
         <p class="card-text">Serving Sellers and Buyers of real estate in central Maryland</p>
         <p class="card-text">Address: 6020 Meadowridge Center Drive, STE#M, Elkridge, Maryland, USA 21075</p>
-        <button class="btn-primary"> Brokers and Agents </button>
-        <button class="btn-primary"> Real Estate </button>
+        <button class=" btn btn-primary"> Brokers and Agents </button>
+        <button class=" btn btn-primary"> Real Estate </button>
         
         <p class="card-text my-3"> Phone: 240-517-1653</p>
       </div>
@@ -170,8 +170,8 @@
         <br />
         <p class="card-text">Serving Sellers and Buyers of real estate in central Maryland</p>
         <p class="card-text">Address: 6020 Meadowridge Center Drive, STE#M, Elkridge, Maryland, USA 21075</p>
-        <button class="btn-primary"> Brokers and Agents </button>
-        <button class="btn-primary"> Real Estate </button>
+        <button class=" btn btn-primary"> Brokers and Agents </button>
+        <button class=" btn btn-primary"> Real Estate </button>
         
         <p class="card-text my-3"> Phone: 240-517-1653</p>
       </div>
@@ -207,8 +207,8 @@
       
         <p class="card-text">Serving Sellers and Buyers of real estate in central Maryland</p>
         <p class="card-text my-2">Address: 6020 Meadowridge Center Drive, STE#M, Elkridge, Maryland, USA 21075</p>
-        <button class="btn-primary"> Brokers and Agents </button>
-        <button class="btn-primary"> Real Estate </button>
+        <button class=" btn btn-primary"> Brokers and Agents </button>
+        <button class=" btn btn-primary"> Real Estate </button>
         
         <p class="card-text m-1"> Phone: 240-517-1653</p>
     </div>
@@ -221,8 +221,8 @@
       
         <p class="card-text">Serving Sellers and Buyers of real estate in central Maryland</p>
         <p class="card-text my-2">Address: 6020 Meadowridge Center Drive, STE#M, Elkridge, Maryland, USA 21075</p>
-        <button class="btn-primary"> Brokers and Agents </button>
-        <button class="btn-primary"> Real Estate </button>
+        <button class=" btn btn-primary"> Brokers and Agents </button>
+        <button class=" btn btn-primary"> Real Estate </button>
         
         <p class="card-text m-1"> Phone: 240-517-1653</p>
     </div>
@@ -242,8 +242,8 @@
       
         <p class="card-text">Serving Sellers and Buyers of real estate in central Maryland</p>
         <p class="card-text my-2">Address: 6020 Meadowridge Center Drive, STE#M, Elkridge, Maryland, USA 21075</p>
-        <button class="btn-primary"> Brokers and Agents </button>
-        <button class="btn-primary"> Real Estate </button>
+        <button class=" btn btn-primary"> Brokers and Agents </button>
+        <button class=" btn btn-primary"> Real Estate </button>
         
         <p class="card-text m-1"> Phone: 240-517-1653</p>
     </div>
@@ -256,8 +256,8 @@
       
         <p class="card-text">Serving Sellers and Buyers of real estate in central Maryland</p>
         <p class="card-text my-2">Address: 6020 Meadowridge Center Drive, STE#M, Elkridge, Maryland, USA 21075</p>
-        <button class="btn-primary"> Brokers and Agents </button>
-        <button class="btn-primary"> Real Estate </button>
+        <button class=" btn btn-primary"> Brokers and Agents </button>
+        <button class=" btn btn-primary"> Real Estate </button>
         
         <p class="card-text m-1"> Phone: 240-517-1653</p>
     </div>
