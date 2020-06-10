@@ -188,10 +188,10 @@ Joe French
 
 <div class="row">
     <div class="col-12">
-    <h2>  CONTACT INFORMATION </h2>
-    <hr />
+    <h3 class="font-weight-bold">  CONTACT INFORMATION <div class="borderBottomBold my-3" > </div> </h3 class="font-weight-bold">
+    
     </div>
-    <div class="col-12 contactWidgets ">
+    <div class="col-12 contactWidgets my-2 ">
     <div class="d-flex">  <div> <i class='fas icon fa-phone'></i>  Phone  </div>  <div>  00000  </div>       </div>
     <hr />
     <div class="d-flex">  <div> <i class='fas icon fa-globe'></i>  Website  </div>  <div> <a href=""> view our site </a> </div>       </div>
@@ -224,7 +224,7 @@ Joe French
 
   <iframe width="100%" height="450" src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street%2C%20Dublin%2C%20Ireland+(My%20Business%20Name)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a href="https://www.maps.ie/draw-radius-circle-map/">Create radius map</a></iframe><br />
 
-    <h4>  Get directions from: </h4>
+    <h4 class="my-3">  Get directions from: </h4>
     <div class="input-group mb-3">
   <input type="text" class="form-control" placeholder="Enter address or zip code" aria-label="Recipient's username" aria-describedby="button-addon2">
   <div class="input-group-append">
@@ -237,11 +237,11 @@ Joe French
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
     <button class="btn btn-primary my-3"> Add Review  </button>
     <div class="row">
-<div class="col-4">
+<div class="col-4 rating-star-field">
    <div class="d-flex align-items-center my-2"> 
         <span> 5 Stars  </span> 
         <span> 
-        <div class="progress">
+        <div class="progress custom-progress">
             <div class="progress-bar custom-progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
             </div>  
         </span> 
@@ -251,8 +251,8 @@ Joe French
     <div class="d-flex align-items-center my-2"> 
         <span> 4 Stars  </span> 
         <span> 
-        <div class="progress">
-            <div class="progress-bar custom-progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"></div>
+        <div class="progress custom-progress">
+            <div class="progress-bar custom-progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
             </div>  
         </span> 
         <span> -0 0%   </span>  
@@ -262,10 +262,9 @@ Joe French
     <div class="d-flex align-items-center my-2"> 
         <span> 3 Stars  </span> 
         <span> 
-        <div class="progress">
-            <div class="progress-bar custom-progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="1"></div>
-           
-        </div>  
+        <div class="progress custom-progress">
+            <div class="progress-bar custom-progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>  
         </span> 
         <span> -0 0%   </span>  
     </div>
@@ -273,9 +272,9 @@ Joe French
     <div class="d-flex align-items-center my-2"> 
         <span> 2 Stars  </span> 
         <span> 
-        <div class="progress">
-            <div class="progress-bar custom-progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>  
+        <div class="progress custom-progress">
+            <div class="progress-bar custom-progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>   
         </span> 
         <span> -0 0%   </span>  
     </div>
@@ -294,7 +293,7 @@ Joe French
   <!-- reviews end -->
   <!-- Contact -->
   <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-    <h1 class="my-2"> Send message to listing owner  </h1>
+    <h1 class="my-3 font-weight-bold"> Send message to listing owner  </h1>
   <form>
   <div class="form-group">
     <label for="exampleFormControlInput1">Contact Name</label>
@@ -316,7 +315,7 @@ Joe French
   <div class="tab-pane fade" id="report" role="tabpanel" aria-labelledby="report-tab">
       <!-- .report. -->
 
-      <h1 class="my-2"> Send message to moderator  </h1>
+      <h1 class="my-3 font-weight-bold"> Send message to moderator  </h1>
   <form>
   <div class="form-group">
     <label for="exampleFormControlInput1">Contact Name</label>

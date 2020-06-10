@@ -71,8 +71,8 @@
 <div class="float-left">
 <h6> Found 8 listing </h6>
 <div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-   Sort By:
+  <button class="btn btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   Sort By
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
     <a class="dropdown-item" href="#">Date</a>
@@ -81,7 +81,7 @@
   </div>
 </div>
  </div>
-<div class="float-right">
+<div class="float-right" style="position: relative;top: 28px;">
 
 <ul class="nav Custom-nav2 nav-pills mb-3" id="pills-tab" role="tablist">
   <li class="nav-item">
@@ -142,16 +142,17 @@
       <img  src="https://onlinejpgtools.com/images/examples-onlinejpgtools/cloud-ice-cream.jpg" class="card-img" alt="...">
     </div>
     <div class="col-md-8">
-      <div class="card-body">
-      <h2 class="card-title">Joe French Realtor</h2>
+    <div class="card-body">
+        <h2 class="card-title "  > <a href="/joe" style="font-weight:900"> Joe French Realtor </a>
+        </h2>
         <br />
         <br />
         <p class="card-text">Serving Sellers and Buyers of real estate in central Maryland</p>
-        <p class="card-text">Address: 6020 Meadowridge Center Drive, STE#M, Elkridge, Maryland, USA 21075</p>
-        <button class=" btn btn-primary"> Brokers and Agents </button>
-        <button class=" btn btn-primary"> Real Estate </button>
+        <p class="card-text my-2"> <i  class="fa icon-blue fa-map-marker"></i>   Address: 6020 Meadowridge Center Drive, STE#M, Elkridge, Maryland, USA 21075</p>
+        <button class=" btn btn-primary"> Brokers and Agents   <span  class="fa  fa-tag"></span> </button>
+        <button class=" btn btn-primary"> Real Estate   <span  class="fa  fa-tag"></span> </button>
         
-        <p class="card-text my-3"> Phone: 240-517-1653</p>
+        <p class="card-text my-3">  <i  class="fa icon-blue fa-phone"></i>   Phone: 240-517-1653</p>
       </div>
     </div>
   </div>
@@ -164,16 +165,17 @@
       <img  src="https://upload.wikimedia.org/wikipedia/commons/4/47/Snowboarder_in_flight_%28Tannheim%2C_Austria%29.jpg" class="card-img" alt="...">
     </div>
     <div class="col-md-8">
-      <div class="card-body">
-      <h2 class="card-title">Joe French Realtor</h2>
+    <div class="card-body">
+        <h2 class="card-title "  > <a href="/joe" style="font-weight:900"> Joe French Realtor </a>
+        </h2>
         <br />
         <br />
         <p class="card-text">Serving Sellers and Buyers of real estate in central Maryland</p>
-        <p class="card-text">Address: 6020 Meadowridge Center Drive, STE#M, Elkridge, Maryland, USA 21075</p>
-        <button class=" btn btn-primary"> Brokers and Agents </button>
-        <button class=" btn btn-primary"> Real Estate </button>
+        <p class="card-text my-2"> <i  class="fa icon-blue fa-map-marker"></i>   Address: 6020 Meadowridge Center Drive, STE#M, Elkridge, Maryland, USA 21075</p>
+        <button class=" btn btn-primary"> Brokers and Agents   <span  class="fa  fa-tag"></span> </button>
+        <button class=" btn btn-primary"> Real Estate   <span  class="fa  fa-tag"></span> </button>
         
-        <p class="card-text my-3"> Phone: 240-517-1653</p>
+        <p class="card-text my-3">  <i  class="fa icon-blue fa-phone"></i>   Phone: 240-517-1653</p>
       </div>
     </div>
   </div>
