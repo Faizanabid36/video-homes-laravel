@@ -48,8 +48,8 @@ Joe French Realtor
 
 
 <div class="row">
-    <div class="col-3">
-    <h2 style="text-align:center">Slideshow Gallery</h2>
+    <div class="col-3 my-2">
+    
 
             <div class="container">
             <div class="mySlides">
@@ -162,9 +162,9 @@ Joe French Realtor
 
 <div class="row">
 <div class="col-5">
-<button class="btn btn-primary"> Brokers and agents  <i class='fas icon fa-tag'></i> </button>
-<button class="btn btn-primary"> Real Estate <i class='fas icon fa-tag'></i> </button>
-<button class="btn btn-primary"> Realtor <i class='fas icon fa-tag'></i> </button>
+<button class="btn-tags"> Brokers and agents  <i class='fas icon fa-tag'></i> </button>
+<button class="btn-tags"> Real Estate <i class='fas icon fa-tag'></i> </button>
+<button class="btn-tags"> Realtor <i class='fas icon fa-tag'></i> </button>
 
 </div>
 <div class="col-7">
@@ -188,15 +188,15 @@ Joe French
 
 <div class="row">
     <div class="col-12">
-    <h3 class="font-weight-bold">  CONTACT INFORMATION <div class="borderBottomBold my-3" > </div> </h3 class="font-weight-bold">
+    <h4 class="font-weight-bold " style="color:gray">  CONTACT INFORMATION <div class="borderBottomBold my-3" > </div> </h4 >
     
     </div>
     <div class="col-12 contactWidgets my-2 ">
-    <div class="d-flex">  <div> <i class='fas icon fa-phone'></i>  Phone  </div>  <div>  00000  </div>       </div>
+    <div class="d-flex">  <div class="font-weight-bold "> <i class='fas icon fa-phone'></i>  Phone  </div>  <div>  00000  </div>       </div>
     <hr />
-    <div class="d-flex">  <div> <i class='fas icon fa-globe'></i>  Website  </div>  <div> <a href=""> view our site </a> </div>       </div>
+    <div class="d-flex">  <div class="font-weight-bold "> <i class='fas icon fa-globe'></i>  Website  </div>  <div> <a href=""> view our site </a> </div>       </div>
     <hr />
-    <div class="d-flex">  <div> <i class='fas icon fa-envelope'></i>  Email  </div>  <div>  <a href="mailto: joe.french@exitresults.com" >  joe.french@exitresults.com  </a>  </div>       </div>
+    <div class="d-flex">  <div class="font-weight-bold "> <i class='fas icon fa-envelope'></i>  Email  </div>  <div>  <a href="mailto: joe.french@exitresults.com" >  joe.french@exitresults.com  </a>  </div>       </div>
     <hr />
     </div>
    
