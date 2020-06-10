@@ -28,4 +28,8 @@ class MainController extends Controller
 //        return $account_types;
         return view('directory', compact('account_types','tags'));
     }
+    public function joe() {
+        return view( 'JoeFrenchRealtor' );
+
+    }
 }

@@ -6,9 +6,9 @@
     
         <div class="row">  
            <div class="col-12 my-3"> 
-               <button class="btn btn-primary"> Submittin new List   </button>
+               <button class="btn btn-primary"> <i class="far fa-plus icon"></i> Submit new List   </button>
            
-                <button class="btn btn-primary"> My bookmarks   </button>
+                <button class="btn btn-primary"> <i class="fas fa-star icon "></i> My bookmarks   </button>
            </div>
 
         </div>
@@ -19,13 +19,18 @@
                             <form>
                                             <div class="form-row ">
                                             <div class="col my-4">
-                                            <input type="text" class="form-control" placeholder="Select Cateogy">
+                                            <input type="text" class="form-control text" placeholder="Select Cateogy" />
+                                            <i class="fal fa-search icon search-icon"></i>
+                                            
                                             <br />
                                             <p> Try to search: <b> videographers, local marketing </b> </p>
                                         
                                             </div>
                                             <div class="col my-4">
-                                            <input type="text" class="form-control" placeholder="Select Location">
+                                            <input type="text" class="form-control text" placeholder="Select Location" />
+                                            <i class="fal fa-map-marker icon search-icon"></i>
+                                           
+
                                             </div>
                                         </div>
                                     
@@ -64,19 +69,19 @@
 
 <div class="col-12 my-2">
 <div class="float-left">
-<p> Found 8 listing </p>
+<h6> Found 8 listing </h6>
 <div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-   Sort By:
+  <button class="btn btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   Sort By
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">date</a>
+    <a class="dropdown-item" href="#">Date</a>
     <a class="dropdown-item" href="#"> New to Old</a>
     <a class="dropdown-item" href="#">Alpahabet</a>
   </div>
 </div>
  </div>
-<div class="float-right">
+<div class="float-right" style="position: relative;top: 28px;">
 
 <ul class="nav Custom-nav2 nav-pills mb-3" id="pills-tab" role="tablist">
   <li class="nav-item">
@@ -107,15 +112,24 @@
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h2 class="card-title">Joe French Realtor</h2>
+        <h2 class="card-title "  > <a href="/joe" style="font-weight:900"> Joe French Realtor </a>
+         <!-- <span id="rating-head">   
+        <span onclick='onRating(1)' class="fa fa-star  "></span>
+        <span onclick='onRating(2)'  class="fa fa-star "></span>
+        <span onclick='onRating(3)' class="fa fa-star "></span>
+        <span onclick='onRating(4)' class="fa fa-star"></span>
+        <span onclick='onRating(5)' class="fa fa-star"></span>
+        </span> -->
+
+        </h2>
         <br />
         <br />
         <p class="card-text">Serving Sellers and Buyers of real estate in central Maryland</p>
-        <p class="card-text my-2">Address: 6020 Meadowridge Center Drive, STE#M, Elkridge, Maryland, USA 21075</p>
-        <button class="btn-primary"> Brokers and Agents </button>
-        <button class="btn-primary"> Real Estate </button>
+        <p class="card-text my-2"> <i  class="fa icon-blue fa-map-marker"></i>   Address: 6020 Meadowridge Center Drive, STE#M, Elkridge, Maryland, USA 21075</p>
+        <button class=" btn btn-primary"> Brokers and Agents   <span  class="fa  fa-tag"></span> </button>
+        <button class=" btn btn-primary"> Real Estate   <span  class="fa  fa-tag"></span> </button>
         
-        <p class="card-text m-3"> Phone: 240-517-1653</p>
+        <p class="card-text my-3">  <i  class="fa icon-blue fa-phone"></i>   Phone: 240-517-1653</p>
 
       </div>
     </div>
@@ -128,16 +142,17 @@
       <img  src="https://onlinejpgtools.com/images/examples-onlinejpgtools/cloud-ice-cream.jpg" class="card-img" alt="...">
     </div>
     <div class="col-md-8">
-      <div class="card-body">
-      <h2 class="card-title">Joe French Realtor</h2>
+    <div class="card-body">
+        <h2 class="card-title "  > <a href="/joe" style="font-weight:900"> Joe French Realtor </a>
+        </h2>
         <br />
         <br />
         <p class="card-text">Serving Sellers and Buyers of real estate in central Maryland</p>
-        <p class="card-text">Address: 6020 Meadowridge Center Drive, STE#M, Elkridge, Maryland, USA 21075</p>
-        <button class="btn-primary"> Brokers and Agents </button>
-        <button class="btn-primary"> Real Estate </button>
+        <p class="card-text my-2"> <i  class="fa icon-blue fa-map-marker"></i>   Address: 6020 Meadowridge Center Drive, STE#M, Elkridge, Maryland, USA 21075</p>
+        <button class=" btn btn-primary"> Brokers and Agents   <span  class="fa  fa-tag"></span> </button>
+        <button class=" btn btn-primary"> Real Estate   <span  class="fa  fa-tag"></span> </button>
         
-        <p class="card-text my-3"> Phone: 240-517-1653</p>
+        <p class="card-text my-3">  <i  class="fa icon-blue fa-phone"></i>   Phone: 240-517-1653</p>
       </div>
     </div>
   </div>
@@ -150,16 +165,17 @@
       <img  src="https://upload.wikimedia.org/wikipedia/commons/4/47/Snowboarder_in_flight_%28Tannheim%2C_Austria%29.jpg" class="card-img" alt="...">
     </div>
     <div class="col-md-8">
-      <div class="card-body">
-      <h2 class="card-title">Joe French Realtor</h2>
+    <div class="card-body">
+        <h2 class="card-title "  > <a href="/joe" style="font-weight:900"> Joe French Realtor </a>
+        </h2>
         <br />
         <br />
         <p class="card-text">Serving Sellers and Buyers of real estate in central Maryland</p>
-        <p class="card-text">Address: 6020 Meadowridge Center Drive, STE#M, Elkridge, Maryland, USA 21075</p>
-        <button class="btn-primary"> Brokers and Agents </button>
-        <button class="btn-primary"> Real Estate </button>
+        <p class="card-text my-2"> <i  class="fa icon-blue fa-map-marker"></i>   Address: 6020 Meadowridge Center Drive, STE#M, Elkridge, Maryland, USA 21075</p>
+        <button class=" btn btn-primary"> Brokers and Agents   <span  class="fa  fa-tag"></span> </button>
+        <button class=" btn btn-primary"> Real Estate   <span  class="fa  fa-tag"></span> </button>
         
-        <p class="card-text my-3"> Phone: 240-517-1653</p>
+        <p class="card-text my-3">  <i  class="fa icon-blue fa-phone"></i>   Phone: 240-517-1653</p>
       </div>
     </div>
   </div>
@@ -171,19 +187,30 @@
 
 
 </span>
+
   <span class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
 
   <div class="card-group">
   <div class="card">
     <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/6/61/Rainbow_Rose_%283366550029%29.jpg"  alt="Card image cap">
     <div class="card-body">
-    <h2 class="card-title">Joe French Realtor</h2>
+    <h2 class="card-title">Joe French Realtor
+    <!-- <span id="rating-head">   
+        <span onclick='onRating(1)' class="fa fa-star  "></span>
+        <span onclick='onRating(3)'  class="fa fa-star "></span>
+        <span onclick='onRating(5)' class="fa fa-star "></span>
+        <span onclick='onRating(7)' class="fa fa-star"></span>
+        <span onclick='onRating(9)' class="fa fa-star"></span>
+        </span> -->
+
+
+    </h2>
         <br />
       
         <p class="card-text">Serving Sellers and Buyers of real estate in central Maryland</p>
         <p class="card-text my-2">Address: 6020 Meadowridge Center Drive, STE#M, Elkridge, Maryland, USA 21075</p>
-        <button class="btn-primary"> Brokers and Agents </button>
-        <button class="btn-primary"> Real Estate </button>
+        <button class=" btn btn-primary"> Brokers and Agents </button>
+        <button class=" btn btn-primary"> Real Estate </button>
         
         <p class="card-text m-1"> Phone: 240-517-1653</p>
     </div>
@@ -196,8 +223,8 @@
       
         <p class="card-text">Serving Sellers and Buyers of real estate in central Maryland</p>
         <p class="card-text my-2">Address: 6020 Meadowridge Center Drive, STE#M, Elkridge, Maryland, USA 21075</p>
-        <button class="btn-primary"> Brokers and Agents </button>
-        <button class="btn-primary"> Real Estate </button>
+        <button class=" btn btn-primary"> Brokers and Agents </button>
+        <button class=" btn btn-primary"> Real Estate </button>
         
         <p class="card-text m-1"> Phone: 240-517-1653</p>
     </div>
@@ -217,8 +244,8 @@
       
         <p class="card-text">Serving Sellers and Buyers of real estate in central Maryland</p>
         <p class="card-text my-2">Address: 6020 Meadowridge Center Drive, STE#M, Elkridge, Maryland, USA 21075</p>
-        <button class="btn-primary"> Brokers and Agents </button>
-        <button class="btn-primary"> Real Estate </button>
+        <button class=" btn btn-primary"> Brokers and Agents </button>
+        <button class=" btn btn-primary"> Real Estate </button>
         
         <p class="card-text m-1"> Phone: 240-517-1653</p>
     </div>
@@ -231,8 +258,8 @@
       
         <p class="card-text">Serving Sellers and Buyers of real estate in central Maryland</p>
         <p class="card-text my-2">Address: 6020 Meadowridge Center Drive, STE#M, Elkridge, Maryland, USA 21075</p>
-        <button class="btn-primary"> Brokers and Agents </button>
-        <button class="btn-primary"> Real Estate </button>
+        <button class=" btn btn-primary"> Brokers and Agents </button>
+        <button class=" btn btn-primary"> Real Estate </button>
         
         <p class="card-text m-1"> Phone: 240-517-1653</p>
     </div>
@@ -252,6 +279,27 @@
     
  </div>
 
+ <script>
+     const onRating = (id) =>{
+         console.log(document.documentElement.style);
+         console.log(document.getElementById('rating-head').children);
+         let ratingComponent = document.getElementById('rating-head').children ;
+        
+         for( let i=0 ; i< id ; i++){
+           ratingComponent[i].style.setProperty( 'color' , 'orange' ) ; 
+           }
+
+         for( let i=id ; i<=ratingComponent.length-1  ; i++){
+          
+          ratingComponent[i].style.setProperty( 'color' , 'black' ) ; 
+         
+   }
+
+        
+     
+     }
+
+</script>
 
 
 @endsection;

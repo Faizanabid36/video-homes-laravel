@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 //Public Pages
 Route::get('/', 'MainController@index')->name('home');
 Route::get('/directory', 'MainController@directory')->name('directory');
+Route::get('/joe', 'MainController@joe')->name('joe');
 Auth::routes();
 
 
