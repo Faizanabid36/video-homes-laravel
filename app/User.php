@@ -61,8 +61,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserRole::class,'id','role');
     }
-    public function account_type()
+    public function account_types()
     {
-        return $this->hasOne(AccountType::class,'user_id');
+        return $this->hasMany(AccountType::class,'user_id');
     }
 }
