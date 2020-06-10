@@ -247,13 +247,48 @@
 
 //Directory
 
+$theme-colors: (
+  "primary": #2393ba,
+  "danger": #ff4136
+);
+
 .btn-primary{
-    height: 52px;
-    background: rgb(12, 102, 124);
-    font-size: 17px !important;
+    height: 44px;
+    
+    font-size: 14px !important;
+    border-color: #0f7fa6 !important;
+
+    border-radius: 0 !important;
+}
+
+a{
+    text-decoration: none !important;
+}
+.btn-tags{
+    background-color: #faf8f8;
+    border: 1px solid #0f7fa6;
+    border-radius: 0px;
+    color: #0f7fa6;
+    height: 34px;
+
+    &:focus{
+        background-color: #dfdada  !important;
+        border: 1px solid #0f7fa6 !important;
+        border-radius: 0px !important;
+        outline: none !important;
+    }
+
+
+}
+input.text {
+    min-width: 100px;
+    border-radius: 0px;
+    height: 44px;
+    font-size: 16px;
+    font-weight: lighter;
 }
 .bigContainer{
-    margin: 0px 108px;
+    margin: 0px 118px;
 }
 
 .Search-boxes{
@@ -262,7 +297,19 @@
     height: 260px;
     color: white;
     padding: 10px;
+    font-size: 12px;
     
+}
+
+.InsideSearchbox-link{
+    & > a{
+        color: white;
+        border-bottom: 1px dashed white;
+        &:hover{
+            color: white;
+            text-decoration: none;
+        }
+    }
 }
 
 .Category-Boxes{
@@ -273,8 +320,25 @@
         margin:20px 0px;
       
     }
+
+    & a{
+        color: rgb(71, 71, 71);
+        font-size: 12px;
+        
+        &:hover{
+            text-decoration: none;
+        }
+    }
 }
 
+.h-8{
+    background: #22a3e1;
+    padding: 3px 6px;
+    border-radius: 50%;
+    text-align: center;
+    color: white;
+    margin: 2px;
+}
 
 
  .Custom-nav2 .nav-link{
@@ -284,14 +348,18 @@
     align-items: center;
     width: 42px;
     
+    
     height: 50px;
     border-radius: 0px !important;
 
     & i{
         height: 22px ;
     }
+
+    
    
 }
+
   .active .icon{
     color: white;
   
@@ -299,10 +367,14 @@
    
 }
 
+.nav-pills .nav-link.active{
+    background-color: #2393ba !important;
+}
+
 .search-icon , .location-icon{
    
         position: absolute;
-        top: 0;
+        top: 8px;      
         right: 0;
         color: #726d6d;
       
