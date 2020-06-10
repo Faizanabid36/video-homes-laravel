@@ -56,4 +56,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(BlockedUser::class, 'blocked_user_id', 'id');
     }
+
+    public function user_role()
+    {
+        return $this->hasOne(UserRole::class,'id','role');
+    }
+    public function account_type()
+    {
+        return $this->hasOne(AccountType::class,'user_id');
+    }
 }
