@@ -205,7 +205,7 @@ a {
 
 .btn-tags {
   background-color: #faf8f8;
-  border: 1px solid #0f7fa6;
+  border: 2px solid #0f7fa6;
   border-radius: 0px;
   color: #0f7fa6;
   height: 34px;
@@ -228,6 +228,7 @@ input.text {
 
 .bigContainer {
   margin: 0px 118px;
+  color: gray;
 }
 
 .Search-boxes {
@@ -322,9 +323,9 @@ span.checked {
 }
 
 .custom-tooltip button {
-  font-size: 20px;
-  padding-bottom: 20px;
+  font-size: 22px;
   margin-left: 10px;
+  padding-bottom: 12px;
 }
 
 .rating-circle {
@@ -436,15 +437,16 @@ img {
 
 .contactWidgets {
   width: 200px;
-  font-size: 16px;
+  font-size: 14px;
+  color: gray;
 }
 
 .contactWidgets i.icon {
   color: #03a9f4;
 }
 
-.contactWidgets div {
-  width: 400px;
+.contactWidgets div div {
+  min-width: 150px;
 }
 
 .custom-progress {

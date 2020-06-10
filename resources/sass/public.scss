@@ -266,7 +266,7 @@ a{
 }
 .btn-tags{
     background-color: #faf8f8;
-    border: 1px solid #0f7fa6;
+    border: 2px solid #0f7fa6;
     border-radius: 0px;
     color: #0f7fa6;
     height: 34px;
@@ -289,6 +289,7 @@ input.text {
 }
 .bigContainer{
     margin: 0px 118px;
+    color: gray;
 }
 
 .Search-boxes{
@@ -405,9 +406,10 @@ span.checked{
 }
 
 .custom-tooltip button{
-    font-size: 20px;
-    padding-bottom: 20px;
+    font-size: 22px;
+ 
     margin-left: 10px;
+    padding-bottom: 12px;
 }
 
 .rating-circle{
@@ -513,7 +515,9 @@ img {
     // margin-right: 30px ;
     width: 200px;
     // border: 1px solid red;
-    font-size: 16px;
+    font-size: 14px;
+    
+    color: gray;
     &  i.icon{
         color: #03a9f4;
        
@@ -521,10 +525,12 @@ img {
         
     }
 
-    & div {
-        width: 400px;
+    & div div {
+        min-width: 150px;
         // border: green 1px solid;
     }
+
+    
   }
 .custom-progress{
     background: #000;
