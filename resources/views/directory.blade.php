@@ -49,7 +49,7 @@
     <!-- 3rd row -->
     <div class="row Category-Boxes ">
         @foreach($tags as $tag)
-            <div class="col-6"><span> <a href=""> {{$tag->tag_name}}</a></span> <span
+            <div class="col-6"><span> <a href="{{route('directory_by_category',$tag->id)}}"> {{$tag->tag_name}}</a></span> <span
                     class="float-right">{{$tag->account_types_count}}</span>
                 <hr/>
             </div>
