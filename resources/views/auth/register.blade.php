@@ -45,7 +45,7 @@
                     </div>
                     <div class="form-group">
                         <select class="form-control" name="account_type" id="account_type" required="">
-                            @foreach($user_tags as $user_tag)
+                            @foreach($user_tags ?? '' as $user_tag)
                                 <option value="{{$user_tag->id}}">{{$user_tag->tag_name}}</option>
                             @endforeach
                         </select>
