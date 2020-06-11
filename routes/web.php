@@ -55,6 +55,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('edit_user_profile', 'HomeController@edit_user_profile');
     Route::post('search_to_block_user', 'HomeController@search_to_block_user');
     Route::post('user_settings', 'HomeController@block_user');
+    //User Images 
+    Route::get('image-upload', 'ImageUploadController@imageUpload')->name('image.upload');
+    Route::post('image-upload', 'ImageUploadController@imageUploadPost');
 
     Route::get('all_playlists', 'HomeController@get_playlist');
     Route::post('delete_playlist', 'HomeController@delete_playlist');

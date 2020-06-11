@@ -43,10 +43,11 @@
                             <option value="2">Realtor</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <select class="form-control" name="account_type" id="account_type" required="">
+                    <div id="tags" class="form-group">
+                        <label for="account_type"> Select Tags  </label>
+                        <select  name="account_type[]" id="account_type" class="  form-control custom-select selectpicker " multiple   >
                             @foreach($user_tags ?? '' as $user_tag)
-                                <option value="{{$user_tag->id}}">{{$user_tag->tag_name}}</option>
+                                <option  value="{{$user_tag->id}}">{{$user_tag->tag_name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -74,15 +75,22 @@
     </div>
 @endsection
 
-@section('script')
     <script type="text/javascript">
         function changeVisibility() {
             let role = document.getElementById('role');
-            if(role.value!=3)
-                document.getElementById('account_type').style.visibility='hidden';
-            else
-                document.getElementById('account_type').style.visibility='visible';
+            console.log(role.value)
+            if(role.value === '3'){
+           
+                console.log('display');
+                document.getElementById('tags').style.removeProperty('display');
+            }
+            else{
+                console.log('hide' ,document.getElementById('tags'))
+                document.getElementById('tags').style.setProperty('display' , 'none');
+            }
         }
+
+        // $('select').selectpicker();
     </script>
-@endsection
+
 

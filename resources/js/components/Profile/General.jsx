@@ -8,9 +8,13 @@ class General extends React.Component {
         this.state = {
             user: {},
             message: null,
+            image: ''
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChangeInput = this.handleChangeInput.bind(this);
+        this.onFormSubmit = this.onFormSubmit.bind(this)
+        this.onChange = this.onChange.bind(this)
+        this.fileUpload = this.fileUpload.bind(this)
     }
 
     handleSubmit() {
@@ -24,6 +28,41 @@ class General extends React.Component {
                 console.log(err)
             })
     }
+    onFormSubmit(e){
+        e.preventDefault() 
+        console.log( 'image' ,this.state.image);
+        const fd = new FormData() ;
+        fd.append( 'image' , this.state.image );
+        axios.post('/image-upload', fd)
+            .then((res) => {
+              console.log('res' , res)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        // this.fileUpload(this.state.image);
+      }
+      onChange(e) {
+        let files = e.target.files || e.dataTransfer.files;
+        if (!files.length)
+              return;
+        this.createImage(files[0]);
+      }
+      createImage(file) {
+        let reader = new FileReader();
+        reader.onload = (e) => {
+          this.setState({
+            image: e.target.result
+          })
+        };
+        reader.readAsDataURL(file);
+      }
+      fileUpload(image){
+        const url = '/image-upload';
+        const formData = {file: this.state.image}
+        return  post(url, formData)
+                .then(response => console.log(response))
+      }
 
     componentDidMount() {
         axios.get('get_logged_user')
@@ -95,8 +134,19 @@ class General extends React.Component {
                             </select>
                         </div>
                     </div>
+                    <div className="form-group input-form-group col-lg-6">
+                        <label className="col-md-12" htmlFor="gender">Tags</label>
+                        <div className="col-md-12">
+                            <select onChange={this.handleChangeInput} id="tags" name="tags"
+                                     className="form-control custom-vh-form-input">
+                                <option defaultValue="tag1">Real Estate</option>
+                                
+                            </select>
+                        </div>
+                    </div>
                     <div className="clear"></div>
                     <hr/>
+                     
                 </Row>
                 <div className="last-sett-btn modal-footer"
                      style={{margin: '0px -30px -10px -30px'}}>
@@ -111,8 +161,29 @@ class General extends React.Component {
                         </svg>
                         Save
                     </button>
+                    
                 </div>
+                <hr />
+                <h3> Image Add/Update</h3> 
+                <form   onSubmit={this.onFormSubmit} >
+            
+                        <div class="row">
+            
+                            <div class="col-md-6">
+                                <input type="file"  onChange={this.onChange} />
+                            </div>
+            
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-primary">Upload</button>
+                            </div>
+            
+                        </div>
+                </form>
+
+                
             </div>
+
+            
         </div>
     }
 }

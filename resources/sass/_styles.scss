@@ -167,6 +167,8 @@ height: 14px;
 .borderBottom2{
   border-bottom: 3px solid $color ;
   width: 5px;
+  margin-top: 5px;
+ 
 }
 
 
@@ -378,13 +380,13 @@ body {
     // width: $width ;
     // width: 100% ;
     box-shadow: 0px -10px 30px rgba(0, 0, 0, 0.5);
-    min-height: 370px;
+    min-height: 355px;
   
     transition: transform .2s;
   
     &:hover {
   
-      transform: scale(1.1);
+      transform: scale(1.03);
     }
   
       @media (max-width: 1000.98px) {
@@ -593,12 +595,18 @@ body {
        
       
       }
+
+       & .borderBottom{
+        transition: all 2s ease;
+  
+    
+          width:  0px;
+      }
   
     &:hover .borderBottom{
   
-    
   
-        width:  16px;
+        width:  26px;
     
         background-color: $color;
         display: block;
@@ -655,8 +663,8 @@ body {
         background-size: cover;
   
         border-radius: 100% ;
-        width: 50px;
-        height: 50px;
+        width: 45px;
+        height: 43px;
         z-index: 16;
         position: absolute;
         top: -18px;        
@@ -761,20 +769,23 @@ body {
   }
 }
 
-
+a{
+  text-decoration: none !important;
+}
 
 #dropdown-basic-button{
 
     border-radius: 20px 20px 20px 20px;
     width:100px;
     background: $background;
+    border: none !important;
 
 
 }
 
 .dropdownbtn > div{
 
-    border-radius: 20px 20px  ;
+  border-radius: 12px 12px;
     box-shadow: 0px -10px 80px rgba(0, 0, 0, 0.25);
 }
 
@@ -787,12 +798,17 @@ body {
     top: 26px;
     color: black;
 
-    & .cross{
+    & .cross2{
         position: fixed;
         right:  10%;
         top: 5%;
         // width: 40px;
         border: none;
+
+        color: black;
+        &:hover{
+          color: $color !important;
+        }
 
 
     }
@@ -1016,7 +1032,7 @@ height: 40px;
   
     &:hover {
   
-      transform: scale(1.1);
+      transform: scale(1.03);
     }
 
    

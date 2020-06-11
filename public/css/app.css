@@ -136,6 +136,7 @@ input[type=radio] {
 .borderBottom2 {
   border-bottom: 3px solid #41a6ee;
   width: 5px;
+  margin-top: 5px;
 }
 
 body {
@@ -283,12 +284,12 @@ body {
 
 .card2 {
   box-shadow: 0px -10px 30px rgba(0, 0, 0, 0.5);
-  min-height: 370px;
+  min-height: 355px;
   transition: transform 0.2s;
 }
 
 .card2:hover {
-  transform: scale(1.1);
+  transform: scale(1.03);
 }
 
 @media (max-width: 1000.98px) {
@@ -429,8 +430,13 @@ body {
   color: #41a6ee !important;
 }
 
+.links2 .borderBottom {
+  transition: all 2s ease;
+  width: 0px;
+}
+
 .links2:hover .borderBottom {
-  width: 16px;
+  width: 26px;
   background-color: #41a6ee;
   display: block;
   height: 3px;
@@ -470,8 +476,8 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 100%;
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 43px;
   z-index: 16;
   position: absolute;
   top: -18px;
@@ -549,14 +555,19 @@ body {
   height: 5px;
 }
 
+a {
+  text-decoration: none !important;
+}
+
 #dropdown-basic-button {
   border-radius: 20px 20px 20px 20px;
   width: 100px;
   background: linear-gradient(95.26deg, #04F5D5 7.67%, #037CED 119.78%);
+  border: none !important;
 }
 
 .dropdownbtn > div {
-  border-radius: 20px 20px;
+  border-radius: 12px 12px;
   box-shadow: 0px -10px 80px rgba(0, 0, 0, 0.25);
 }
 
@@ -568,11 +579,16 @@ body {
   color: black;
 }
 
-.dropItems .cross {
+.dropItems .cross2 {
   position: fixed;
   right: 10%;
   top: 5%;
   border: none;
+  color: black;
+}
+
+.dropItems .cross2:hover {
+  color: #41a6ee !important;
 }
 
 .dropItems > .dropdown-item {
@@ -743,7 +759,7 @@ body {
 }
 
 .card3:hover {
-  transform: scale(1.1);
+  transform: scale(1.03);
 }
 
 .barChart {
