@@ -6,9 +6,12 @@
     <title>{{env('APP_NAME')}}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="{{asset('css/public.css')}}" rel="stylesheet">
-    <!-- <link href="{{asset('css/app.css')}}" rel="stylesheet"> -->
+<!-- <link href="{{asset('css/app.css')}}" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{asset('css/mediaelementplayer.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/jquery-ui.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/jquery.tagit.css')}}">
+    <link rel="stylesheet" href="{{asset('css/font-awesome-4.7.0/css/font-awesome.min.css')}}">
     @yield('style')
     <script>
         window.VIDEO_APP = {
@@ -78,7 +81,10 @@
 
 
 </div>
-@yield('script')
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{asset('js/jquery-3.min.js')}}"></script>
+<script src="{{asset('js/jquery-ui.min.js')}}"></script>
+<script src="{{asset('js/mediaelement-and-player.min.js')}}"></script>
+@yield('script')
 </body>
 </html>

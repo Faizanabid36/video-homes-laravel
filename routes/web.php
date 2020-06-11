@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'MainController@index')->name('home');
 Route::get('/directory', 'MainController@directory')->name('directory');
 Route::get('/directory/category/{id}','MainController@directory_by_category')->name('directory_by_category');
+Route::get('/directory/{username}','MainController@directory_by_username')->name('directory_by_username');
+Route::get('/directory/{username}/{video_id}','MainController@directory_by_user_video')->name('directory_by_user_video');
 Route::get('/joe', 'MainController@joe')->name('joe');
 Auth::routes();
 

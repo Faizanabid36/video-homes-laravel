@@ -116,11 +116,11 @@
                                 </div>
                                 <div class="col-md-8">
                                   <div class="card-body">
-                                    <h2 class="card-title "> <a href="#"
+                                    <h2 class="card-title "> <a href="{{route('directory_by_username',$account_user->username)}}"
                                                                 style="font-weight:900"> {{$account_user->name}} </a>
                                     </h2>
                                     <br/>
-                                   
+
                                     <p class="card-text my-2">{{$account_user->bio}}</p>
                                     <p class="card-text my-2"> <i class="fa icon-blue fa-map-marker mr-2"></i>  <b> Address: </b>{{$account_user->address}}</p>
                                     @foreach($account_user->account_types as $account_type)
@@ -135,52 +135,51 @@
                               </div>
                             </div>
                     @endforeach
-                  
+
                 </span>
 
-                         <span class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-          
-                <div class="row  ">
-                  @foreach($account_types as $account_user)
-               <div class="col-md-6 col-sm-12 mb-3 ">
-                        <div class="card " style="min-height:560px ; min-width:515px">
-                              <div class="row no-gutters">
-                               
-                                  <img
-                                      src="https://upload.wikimedia.org/wikipedia/commons/6/61/Rainbow_Rose_%283366550029%29.jpg"
-                                      class="card-img-top"
-                                      alt="...">
-                               
-                                
-                                  <div class="card-body">
-                                    <h2 class="card-title my-3"> <a href="#"
-                                                                style="font-weight:900"> {{$account_user->name}} </a>
-                                    </h2>
-                                  
-                                   
-                                    <p class="card-text my-3">{{$account_user->bio}}</p>
-                                    <p class="card-text my-3"> <i class="fa icon-blue fa-map-marker mr-2"></i>  <b> Address: </b>{{$account_user->address}}</p>
-                                    @foreach($account_user->account_types as $account_type)
-                                          @if(!is_null($account_type->user_tag))
-                                              <button class="btn-tags "> {{$account_type->user_tag->tag_name}}
-                                              <span class="fa  fa-tag"></span> </button>
-                                          @endif
-                                      @endforeach
-                                    <p class="card-text my-3">  <i class="fa icon-blue mr-2 fa-phone"></i>   <b>Phone:</b> {{$account_user->phone}}</p>
-                                  </div>
-                                </div>
-                            
-                            </div>
-                            
-                            
-                          </div>
-                          @endforeach
+{{--                <span class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">--}}
+{{--                    <div class="row  ">--}}
+{{--                  @foreach($account_types as $account_user)--}}
+{{--                            <div class="col-md-6 col-sm-12 mb-3 ">--}}
+{{--                        <div class="card " style="min-height:560px ; min-width:515px">--}}
+{{--                              <div class="row no-gutters">--}}
 
-</div>
+{{--                                  <img--}}
+{{--                                  --}}{{--                                      src="https://upload.wikimedia.org/wikipedia/commons/6/61/Rainbow_Rose_%283366550029%29.jpg"--}}
+{{--                                  --}}{{--                                      class="card-img-top"--}}
+{{--                                  --}}{{--                                      alt="...">--}}
 
 
+{{--                                  <div class="card-body">--}}
+{{--                                    <h2 class="card-title my-3"> <a--}}
+{{--                                            href="{{route('directory_by_username',$account_user->username)}}"--}}
+{{--                                            style="font-weight:900"> "{{$account_user->name}}" </a>--}}
+{{--                                    </h2>--}}
+{{--                                    <p class="card-text my-3">{{$account_user->bio}}</p>--}}
+{{--                                    <p class="card-text my-3"> <i class="fa icon-blue fa-map-marker mr-2"></i>  <b> Address: </b>{{$account_user->address}}</p>--}}
+{{--                                    @foreach($account_user->account_types as $account_type)--}}
+{{--                                          @if(!is_null($account_type->user_tag))--}}
+{{--                                              <button class="btn-tags "> {{$account_type->user_tag->tag_name}}--}}
+{{--                                              <span class="fa  fa-tag"></span> </button>--}}
+{{--                                          @endif--}}
+{{--                                      @endforeach--}}
+{{--                                    <p class="card-text my-3">  <i--}}
+{{--                                            class="fa icon-blue mr-2 fa-phone"></i>   <b>Phone:</b> {{$account_user->phone}}</p>--}}
+{{--                                  </div>--}}
+{{--                                </div>--}}
 
-                 </span>
+{{--                            </div>--}}
+
+
+{{--                          </div>--}}
+{{--                        @endforeach--}}
+
+{{--</div>--}}
+
+
+
+{{--                 </span>--}}
 
             </div>
         </div>
