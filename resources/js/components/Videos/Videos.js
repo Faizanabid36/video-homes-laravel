@@ -48,7 +48,7 @@ class Videos extends React.Component {
                
                   
                         <Col xs={12} className=" my-5 ">
-                            <h1 className="float-left">My Videos <p className="borderBottom2"> </p> </h1>
+                            <h1 className="float-left">My Videos <div className="borderBottom2"> </div> </h1>
                             <DropdownButton
                                 className="dropdownbtn float-right"
                                 id="dropdown-basic-button"
@@ -57,10 +57,10 @@ class Videos extends React.Component {
                                 <div className="dropItems">
                                     <div>
                                         {" "}
-                                        <Button className="cross btn ">
+                                        <a className="cross2  ">
                                             {" "}
                                             <FontAwesomeIcon icon={faTimes}/>{" "}
-                                        </Button>{" "}
+                                        </a>{" "}
                                     </div>
 
                                     <Dropdown.Item onClick={(e)=>{e.preventDefault();this.changeFilter('newest')}}>
@@ -149,7 +149,7 @@ class Videos extends React.Component {
             
             <Col xs={12} className=" my-5 ">
                       
-                <h1 >Pending for Approval <p className="borderBottom2"> </p> </h1>
+                <h1 >Pending for Approval <div className="borderBottom2"> </div> </h1>
              </Col>
                 { this.state.pendingVideos.length  ?   this.state.pendingVideos.map((item, index) => {
                     let link = window.VIDEO_APP.base_url + '/' + item.user.username + '/watch_video?v=' + item.video_id;

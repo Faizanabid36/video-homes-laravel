@@ -107,7 +107,7 @@ export default class Playlist extends React.Component {
 
             <Row>
             <Col xs={12} className=" my-5 ">
-                   <h1 className="float-left">PlayList <p className="borderBottom2"> </p> </h1>
+                   <h1 className="float-left">PlayList <div className="borderBottom2"> </div> </h1>
                         
                </Col> 
             </Row>

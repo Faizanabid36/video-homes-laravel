@@ -75,13 +75,28 @@ class RegisterController extends Controller
         $user_data['email'] = $data['email'];
         $user_data['role'] = $data['role'];
         $user = User::create($user_data);
-        $account_type = new AccountType();
+        
+        if ($user_data['role'] == 3){
+                // $account_type->account_type = json_encode($data['account_type']);
+
+            for( $i=0 ; $i<count($data['account_type']) ; $i++ ){
+                
+                $account_type = new AccountType();
         $account_type->user_id = $user->id;
-        if ($user_data['role'] == 3)
-            $account_type->account_type = $data['account_type'];
-        else
+                $account_type->account_type = $data['account_type'][$i];
+            //    echo $data['account_type'][$i];
+            $account_type->save();
+
+            }
+        }else{
+
             $account_type->account_type = null;
-        $account_type->save();
+            $account_type->save();
+        }
+        
         return $user;
+        // dd ($data['account_type']);
+        
+    // dd($data);
     }
 }
