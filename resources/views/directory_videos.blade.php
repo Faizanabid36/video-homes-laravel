@@ -153,7 +153,7 @@
                             <div class="clear"></div>
                         </div>
                         <div class="col-md-4 no-padding-left pull-right deskto  p">
-                            <div class="content pt_shadow">
+                            <div class="content video-list pt_shadow">
                                 <div class="ads-placment"></div>
                                 @if(!is_null($video))
                                     <div class="next-video">

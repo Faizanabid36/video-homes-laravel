@@ -487,6 +487,11 @@ label {
   height: 3px;
 }
 
+.video-list {
+  overflow: scroll;
+  height: 500px;
+}
+
 /*!
  * Bootstrap v4.5.0 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
