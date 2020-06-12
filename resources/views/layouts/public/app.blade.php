@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{env('APP_NAME')}}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link href="{{asset('css/public.css')}}" rel="stylesheet">
 <!-- <link href="{{asset('css/app.css')}}" rel="stylesheet"> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <link rel="stylesheet" href="{{asset('css/mediaelementplayer.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/jquery-ui.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/jquery.tagit.css')}}">
-{{--    <link rel="stylesheet" href="{{asset('css/font-awesome-4.7.0/css/font-awesome.min.css')}}">--}}
-{{--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">--}}
-{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/css/bootstrap-select.css">--}}
+    <link rel="stylesheet" href="{{asset('css/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/css/bootstrap-select.css">
     @yield('style')
     <script>
         window.VIDEO_APP = {
@@ -83,13 +83,13 @@
 
 
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/js/bootstrap-select.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="{{ asset('js/app.js') }}"></script>
-<script src="{{asset('js/jquery-3.min.js')}}"></script>
-<script src="{{asset('js/jquery-ui.min.js')}}"></script>
+<!-- <script src="{{asset('js/jquery-3.min.js')}}"></script>
+<script src="{{asset('js/jquery-ui.min.js')}}"></script> -->
 <script src="{{asset('js/mediaelement-and-player.min.js')}}"></script>
-{{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>--}}
-{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/js/bootstrap-select.js"></script>--}}
-{{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>--}}
 @yield('script')
 </body>
 </html>
