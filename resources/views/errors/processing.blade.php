@@ -4,7 +4,7 @@
     <div id="main-container" style="margin-top:100px" class="container main-content" data-logged="true">
         <div id="container_content">
             <h4 class="text-center alert alert-info">
-                <p id="video_status">Video is in processing, Please wait a while.</p> <br>
+                <p id="video_status">Video encoding is in process, Please wait a while.</p> <br>
                 The page automatically reloads when the video would be encoded.
             </h4>
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"

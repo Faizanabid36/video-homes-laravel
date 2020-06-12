@@ -99,6 +99,9 @@ class VideoController extends Controller
         if (!$video->processed) {
             return view('errors.processing')->with('video', $video);
         }
+        if (!$video->is_video_approved) {
+            return view('errors.pending_approval')->with('video', $video);
+        }
         $related_videos = Video::whereUserId($video->user->id)
             ->whereProcessed(1)->where('video_id', '!=', request('v'))
             ->where('is_video_approved', 1)
