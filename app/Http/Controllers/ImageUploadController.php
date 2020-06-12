@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class ImageUploadController extends Controller
@@ -34,29 +35,14 @@ class ImageUploadController extends Controller
      */
     public function imageUploadPost(Request $request)
     {
-        // $request->validate([
-        //     'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        // ]);
-  
-        // $data = time().'.'.$request->image->extension();  
-        // $imageName = 'image.jpg';  
+        $data = $request->get('image');
+        list($type, $data) = explode(';', $data);
+        list(, $data) = explode(',', $data);
+        $data = base64_decode($data);
+        file_put_contents(public_path('images/' . $request->filename), $data);
+        User::whereId(auth()->user()->id)->update(['avatar' => asset('images/' . $request->filename)]);
+        return ['message' => 'Picture Updated'];
 
-        $data=$request->get('image');
-        // $request->image->storeAs(public_path('images'), $imageName);
-        // // $request->get('file')->move(public_path('images') , $imageName);
-        
-//         list($type, $data) = explode(';', $data);
-// list(, $data)      = explode(',', $data);
-// $data = base64_decode($data);
-//    file_put_contents(public_path('images/image1.jpg') , $data);
-        // return back()
-        //     ->with('success','You have successfully upload image.')
-        //     ->with('image',$imageName);
-
-        return $data;
-
-       
-        
 
     }
 

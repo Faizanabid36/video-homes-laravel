@@ -109,10 +109,17 @@
                         <div class="card mx-auto" style="max-width: 1240px;">
                               <div class="row no-gutters">
                                 <div class="col-md-4">
-                                  <img
-                                      src="https://upload.wikimedia.org/wikipedia/commons/6/61/Rainbow_Rose_%283366550029%29.jpg"
-                                      class="card-img"
-                                      alt="...">
+                                    @if(!is_null($account_user->avatar))
+                                        <img
+                                            src="{{$account_user->avatar}}"
+                                            class="card-img"
+                                            alt="...">
+                                    @else
+                                        <img
+                                            src="{{asset('images/blank.png')}}"
+                                            class="card-img"
+                                            alt="...">
+                                    @endif
                                 </div>
                                 <div class="col-md-8">
                                   <div class="card-body">

@@ -87,58 +87,65 @@
                         <div class="col-md-8 player-video" style="margin-top: 0 !important">
                             <div class="video-player pt_video_player " id="pt_video_player">
                                 <span class="mejs__offscreen">Video Player</span>
-                                <video id="my-video_html5"
-                                       style="width: 100%; height: 451.872px; position: relative;"
-                                       poster="{{asset("storage/$video->thumbnail")}}"
-                                       preload="none"
-                                >
-                                    @if($video->{'8k'})
-                                        <source
-                                            src="{{asset("storage/".str_replace('240p','4320p',$video->stream_path))}}"
-                                            type="video/mp4"
-                                            data-quality="4320p" title="4320p" label="4320p" res="4320">
-                                    @endif
-                                    @if($video->{'4K'})
-                                        <source
-                                            src="{{asset("storage/".str_replace('240p','2160p',$video->stream_path))}}"
-                                            type="video/mp4"
-                                            data-quality="2160p" title="2160p" label="2160p" res="2160">
-                                    @endif
-                                    @if($video->{'1440p'})
-                                        <source
-                                            src="{{asset("storage/".str_replace('240p','1440p',$video->stream_path))}}"
-                                            type="video/mp4"
-                                            data-quality="1440p" title="1440p" label="1440p" res="1440">
-                                    @endif
-                                    @if($video->{'1080p'})
-                                        <source
-                                            src="{{asset("storage/".str_replace('240p','1080p',$video->stream_path))}}"
-                                            type="video/mp4"
-                                            data-quality="1080p" title="1080p" label="1080p" res="1080">
-                                    @endif
-                                    @if($video->{'720p'})
-                                        <source
-                                            src="{{asset("storage/".str_replace('240p','720p',$video->stream_path))}}"
-                                            type="video/mp4"
-                                            data-quality="720p" title="720p" label="720p" res="720">
-                                    @endif
-                                    @if($video->{'480p'})
-                                        <source
-                                            src="{{asset("storage/".str_replace('240p','480p',$video->stream_path))}}"
-                                            type="video/mp4"
-                                            data-quality="480p" title="480p" label="480p" res="480">
-                                    @endif
+                                @if(!is_null($video))
+                                    <video id="my-video_html5"
+                                           style="width: 100%; height: 451.872px; position: relative;"
+                                           poster="{{asset("storage/$video->thumbnail")}}"
+                                           preload="none"
+                                    >
+                                        @if($video->{'8k'})
+                                            <source
+                                                src="{{asset("storage/".str_replace('240p','4320p',$video->stream_path))}}"
+                                                type="video/mp4"
+                                                data-quality="4320p" title="4320p" label="4320p" res="4320">
+                                        @endif
+                                        @if($video->{'4K'})
+                                            <source
+                                                src="{{asset("storage/".str_replace('240p','2160p',$video->stream_path))}}"
+                                                type="video/mp4"
+                                                data-quality="2160p" title="2160p" label="2160p" res="2160">
+                                        @endif
+                                        @if($video->{'1440p'})
+                                            <source
+                                                src="{{asset("storage/".str_replace('240p','1440p',$video->stream_path))}}"
+                                                type="video/mp4"
+                                                data-quality="1440p" title="1440p" label="1440p" res="1440">
+                                        @endif
+                                        @if($video->{'1080p'})
+                                            <source
+                                                src="{{asset("storage/".str_replace('240p','1080p',$video->stream_path))}}"
+                                                type="video/mp4"
+                                                data-quality="1080p" title="1080p" label="1080p" res="1080">
+                                        @endif
+                                        @if($video->{'720p'})
+                                            <source
+                                                src="{{asset("storage/".str_replace('240p','720p',$video->stream_path))}}"
+                                                type="video/mp4"
+                                                data-quality="720p" title="720p" label="720p" res="720">
+                                        @endif
+                                        @if($video->{'480p'})
+                                            <source
+                                                src="{{asset("storage/".str_replace('240p','480p',$video->stream_path))}}"
+                                                type="video/mp4"
+                                                data-quality="480p" title="480p" label="480p" res="480">
+                                        @endif
 
-                                    @if($video->{'360p'})
-                                        <source
-                                            src="{{asset("storage/".str_replace('240p','360p',$video->stream_path))}}"
-                                            type="video/mp4"
-                                            data-quality="360p" title="360p" label="360p" res="360">
-                                    @endif
-                                    <source src="{{asset("storage/$video->stream_path")}}" type="video/mp4"
-                                            data-quality="240p" title="240p" label="240p" res="240">
-                                    Your browser does not support HTML5 video.
-                                </video>
+                                        @if($video->{'360p'})
+                                            <source
+                                                src="{{asset("storage/".str_replace('240p','360p',$video->stream_path))}}"
+                                                type="video/mp4"
+                                                data-quality="360p" title="360p" label="360p" res="360">
+                                        @endif
+                                        <source src="{{asset("storage/$video->stream_path")}}" type="video/mp4"
+                                                data-quality="240p" title="240p" label="240p" res="240">
+                                        Your browser does not support HTML5 video.
+                                    </video>
+
+                                @else
+                                    <div>
+                                        <h1 class="alert alert-info">No Video Uploaded By this User</h1>
+                                    </div>
+                                @endif
                                 <div class="icons hidden">
                                     <span class="expend-player"><i class="fa fa-expand fa-fw"></i></span>
                                 </div>
@@ -148,48 +155,47 @@
                         <div class="col-md-4 no-padding-left pull-right deskto  p">
                             <div class="content pt_shadow">
                                 <div class="ads-placment"></div>
-                                <div class="next-video">
-                                    <div class="next-text pull-left pt_mn_wtch_nxttxt">
-                                        <h4>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                 viewBox="0 0 24 24">
-                                                <path fill="currentColor"
-                                                      d="M16,18H18V6H16M6,18L14.5,12L6,6V18Z"></path>
-                                            </svg>
-                                            <x></x>
-                                            Up Next
-                                        </h4>
-                                    </div>
-                                    <div class="pt_mn_wtch_switch pull-right">
-                                        <input id="autoplay" type="checkbox" class="tgl autoplay-video">
-                                        <label class="tgl-btn" for="autoplay">Autoplay</label>
-                                    </div>
-                                    <div class="clear"></div>
-                                    @foreach($related_videos as $related_video)
-                                        <div class="video-thumb">
-                                            <a href="{{route('directory_by_user_video',[$user->username,$related_video->video_id])}}">
-                                                <img width="200px" height="200px"
-                                                     src="{{asset('storage/'.$related_video->thumbnail)}}"
-                                                     alt="Products">
-                                                <div class="play_hover_btn" onmouseenter="show_gif(this,'')"
-                                                     onmouseleave="hide_gif(this)">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                         class="feather feather-play-circle">
-                                                        <circle cx="12" cy="12" r="10"></circle>
-                                                        <polygon points="10 8 16 12 10 16 10 8"></polygon>
-                                                    </svg>
-                                                </div>
-                                                <div class="video-duration">00:00</div>
-                                            </a>
+                                @if(!is_null($video))
+                                    <div class="next-video">
+                                        <div class="next-text pull-left pt_mn_wtch_nxttxt">
+                                            <h4>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     viewBox="0 0 24 24">
+                                                    <path fill="currentColor"
+                                                          d="M16,18H18V6H16M6,18L14.5,12L6,6V18Z"></path>
+                                                </svg>
+                                                <x></x>
+                                                Up Next
+                                            </h4>
                                         </div>
-                                    @endforeach
-                                    <div>
+                                        <div class="pt_mn_wtch_switch pull-right">
+                                            <input id="autoplay" type="checkbox" class="tgl autoplay-video">
+                                            <label class="tgl-btn" for="autoplay">Autoplay</label>
+                                        </div>
+                                        <div class="clear"></div>
+                                        @foreach($related_videos as $related_video)
+                                            <div class="video-thumb">
+                                                <a href="{{route('directory_by_user_video',[$user->username,$related_video->video_id])}}">
+                                                    <img width="200px" height="200px"
+                                                         src="{{asset('storage/'.$related_video->thumbnail)}}"
+                                                         alt="Products">
+                                                    <div class="play_hover_btn" onmouseenter="show_gif(this,'')"
+                                                         onmouseleave="hide_gif(this)">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                             class="feather feather-play-circle">
+                                                            <circle cx="12" cy="12" r="10"></circle>
+                                                            <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="video-duration">00:00</div>
+                                                </a>
+                                            </div>
+                                        @endforeach
+                                        <div></div>
                                     </div>
-
-
-                                </div>
+                                @endif
                             </div>
                         </div>
                     </div>

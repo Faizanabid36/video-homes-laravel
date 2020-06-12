@@ -8,13 +8,14 @@ class General extends React.Component {
         this.state = {
             user: {},
             message: null,
-            image: ''
+            image: '',
+            account_types: [],
+            filename: '',
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChangeInput = this.handleChangeInput.bind(this);
         this.onFormSubmit = this.onFormSubmit.bind(this)
         this.onChange = this.onChange.bind(this)
-        this.fileUpload = this.fileUpload.bind(this)
     }
 
     handleSubmit() {
@@ -28,25 +29,25 @@ class General extends React.Component {
                 console.log(err)
             })
     }
-    onFormSubmit(e){
-        e.preventDefault() 
-        console.log( 'image' ,this.state.image);
-        const fd = new FormData() ;
-        fd.append( 'image' , this.state.image );
+    onFormSubmit(e) {
+        e.preventDefault()
+        const fd = new FormData();
+        fd.append('image', this.state.image);
+        fd.append('filename', this.state.filename);
         axios.post('/image-upload', fd)
             .then((res) => {
-              console.log('res' , res)
+                console.log('res', res)
             })
             .catch((err) => {
                 console.log(err)
             })
-        // this.fileUpload(this.state.image);
-      }
+    }
       onChange(e) {
         let files = e.target.files || e.dataTransfer.files;
         if (!files.length)
               return;
-        this.createImage(files[0]);
+          this.setState({filename: files[0].name})
+          this.createImage(files[0]);
       }
       createImage(file) {
         let reader = new FileReader();
@@ -57,17 +58,18 @@ class General extends React.Component {
         };
         reader.readAsDataURL(file);
       }
-      fileUpload(image){
-        const url = '/image-upload';
-        const formData = {file: this.state.image}
-        return  post(url, formData)
-                .then(response => console.log(response))
-      }
 
     componentDidMount() {
         axios.get('get_logged_user')
             .then((res) => {
                 this.setState({user: res.data.user})
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        axios.get('account_types')
+            .then((res) => {
+                this.setState({account_types: res.data.account_types})
             })
             .catch((err) => {
                 console.log(err)
@@ -129,24 +131,27 @@ class General extends React.Component {
                         <div className="col-md-12">
                             <select onChange={this.handleChangeInput} id="role" name="role"
                                     defaultValue={this.state.user.role} className="form-control custom-vh-form-input">
-                                <option defaultValue="2">Realtor</option>
-                                <option defaultValue="3">Video Provider</option>
+                                <option value="2">Realtor</option>
+                                <option value="3">Video Provider</option>
                             </select>
                         </div>
                     </div>
-                    <div className="form-group input-form-group col-lg-6">
-                        <label className="col-md-12" htmlFor="gender">Tags</label>
-                        <div className="col-md-12">
-                            <select onChange={this.handleChangeInput} id="tags" name="tags"
-                                     className="form-control custom-vh-form-input">
-                                <option defaultValue="tag1">Real Estate</option>
-                                
-                            </select>
-                        </div>
-                    </div>
+                    {this.state.user.role == 3 ? <div className="form-group input-form-group col-lg-6">
+                            <label className="col-md-12" htmlFor="gender">Account Type</label>
+                            <div className="col-md-12">
+                                <select onChange={this.handleChangeInput} id="tags" name="tags"
+                                        className="form-control custom-vh-form-input">
+                                    {this.state.account_types.map((item) => {
+                                        return <option value={item.id}>{item.tag_name}</option>
+                                    })}
+
+                                </select>
+                            </div>
+                        </div> :
+                        <div></div>}
                     <div className="clear"></div>
                     <hr/>
-                     
+
                 </Row>
                 <div className="last-sett-btn modal-footer"
                      style={{margin: '0px -30px -10px -30px'}}>
@@ -161,29 +166,29 @@ class General extends React.Component {
                         </svg>
                         Save
                     </button>
-                    
+
                 </div>
-                <hr />
-                <h3> Image Add/Update</h3> 
-                <form   onSubmit={this.onFormSubmit} >
-            
-                        <div class="row">
-            
-                            <div class="col-md-6">
-                                <input type="file"  onChange={this.onChange} />
-                            </div>
-            
-                            <div class="col-md-6">
-                                <button type="submit" class="btn btn-primary">Upload</button>
-                            </div>
-            
+                <hr/>
+                <h3> Upload Profile Picture</h3>
+                <form onSubmit={this.onFormSubmit}>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <input type="file" onChange={this.onChange}/>
                         </div>
+
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-primary">Save picture</button>
+                        </div>
+
+                    </div>
                 </form>
 
-                
+
             </div>
 
-            
+
         </div>
     }
 }

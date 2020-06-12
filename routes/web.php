@@ -24,6 +24,7 @@ Route::get('/directory/category/{id}','MainController@directory_by_category')->n
 Route::get('/directory/{username}','MainController@directory_by_username')->name('directory_by_username');
 Route::get('/directory/{username}/{video_id}','MainController@directory_by_user_video')->name('directory_by_user_video');
 Route::get('/joe', 'MainController@joe')->name('joe');
+Route::get('account_types','MainController@account_types')->name('account_types');
 Auth::routes();
 
 
@@ -55,7 +56,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('edit_user_profile', 'HomeController@edit_user_profile');
     Route::post('search_to_block_user', 'HomeController@search_to_block_user');
     Route::post('user_settings', 'HomeController@block_user');
-    //User Images 
+    //User Images
     Route::get('image-upload', 'ImageUploadController@imageUpload')->name('image.upload');
     Route::post('image-upload', 'ImageUploadController@imageUploadPost');
 
