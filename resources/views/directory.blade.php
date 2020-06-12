@@ -152,16 +152,23 @@
                         <div class="card " style="min-height:560px ; min-width:515px">
                               <div class="row no-gutters">
 
-                                  <img
-                                                                        src="https://upload.wikimedia.org/wikipedia/commons/6/61/Rainbow_Rose_%283366550029%29.jpg"
-                                                                        class="card-img-top"
-                                                                        alt="...">
+                              @if(!is_null($account_user->avatar))
+                                        <img
+                                            src="{{$account_user->avatar}}"
+                                            class="card-img"
+                                            alt="...">
+                                    @else
+                                        <img
+                                            src="{{asset('images/blank.png')}}"
+                                            class="card-img"
+                                            alt="...">
+                                    @endif
 
 
                                   <div class="card-body">
                                     <h2 class="card-title my-3"> <a
                                             href="{{route('directory_by_username',$account_user->username)}}"
-                                            style="font-weight:900"> "{{$account_user->name}}" </a>
+                                            style="font-weight:900"> {{$account_user->name}} </a>
                                     </h2>
                                     <p class="card-text my-3">{{$account_user->bio}}</p>
                                     <p class="card-text my-3"> <i class="fa icon-blue fa-map-marker mr-2"></i>  <b> Address: </b>{{$account_user->address}}</p>
