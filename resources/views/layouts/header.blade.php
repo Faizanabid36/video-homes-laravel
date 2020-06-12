@@ -1,15 +1,15 @@
 
         <div class=" col-7 col-lg-8 ">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                
+
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-               
+
                 <div class="collapse navbar-collapse navLinks" id="navbarSupportedContent">
-                    
+
                         <ul class="navbar-nav mr-auto items">
                             <li class="nav-item ">
                                 <a class="nav-link links2" href="{{route('dashboard')}}/#/videos">Videos  <div class="borderBottom"> </div></a>
@@ -27,11 +27,11 @@
                                 <a class="nav-link links2" href="#">Upgrade/Downgrade <div class="borderBottom"> </div></a>
                             </li>
                         </ul>
-                   
 
 
-                        
-                     
+
+
+
                 </div>
             </nav>
         </div>
@@ -42,13 +42,27 @@
                <span class="dropdown nav-item dropdown-Custom  ">
                                    <button class="btn dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
                                          aria-haspopup="true" aria-expanded="false">
-                                    <div class="image2"></div>
-                                      
+                                        @if(is_null(auth()->user()->avatar))
+                                           <div class="image2"></div>
+                                        @else
+                                            <div>
+                                                <img style="background-repeat: no-repeat;
+                                                              background-size: cover;
+                                                              border-radius: 100%;
+                                                              width: 45px;
+                                                              height: 43px;
+                                                              z-index: 16;
+                                                              position: absolute;
+                                                              top: -18px;"
+                                                     src="{{auth()->user()->avatar}}"/>
+                                            </div>
+                                        @endif
+
                                    </button>
                                    <span class="dropdowncontainer ">
                                        <div class="dowpdown-box">
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                              
+
                                                    <a class="dropdown-item" href="{{route('dashboard')}}/#/profile"><i class="fa fa-user icons"></i></a>
                                                    <a class="dropdown-item" href="{{route('dashboard')}}/#/upload-video"><i
                                                            class="fa fa-cloud-upload icons ">  </i></a>
@@ -77,8 +91,8 @@
 
                                            <span class="badge"> 3 </span>
                                        </a>
-                                   
-                                  
+
+
                                        <i class="fa fa-search d-none"> </i> -->
 
 

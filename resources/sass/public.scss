@@ -246,17 +246,71 @@
 }
 
 //Directory
+
+$theme-colors: (
+  "primary": #2393ba,
+  "danger": #ff4136
+);
+
+.btn-primary{
+    height: 44px;
+    
+    font-size: 14px !important;
+    border-color: #0f7fa6 !important;
+
+    border-radius: 0 !important;
+}
+
+a{
+    text-decoration: none !important;
+}
+.btn-tags{
+    background-color: #faf8f8;
+    border: 2px solid #0f7fa6;
+    border-radius: 0px;
+    color: #0f7fa6;
+    height: 34px;
+
+    &:focus{
+        background-color: #dfdada  !important;
+        border: 1px solid #0f7fa6 !important;
+        border-radius: 0px !important;
+        outline: none !important;
+    }
+
+
+}
+input.text {
+    min-width: 100px;
+    border-radius: 0px;
+    height: 44px;
+    font-size: 16px;
+    font-weight: lighter;
+}
 .bigContainer{
-    margin: 0px 108px;
+    margin: 0px 118px;
+    color: gray;
 }
 
 .Search-boxes{
     background-color: rgb(12, 102, 124);
     width: 100%;
-    height: 220px;
+    height: 260px;
     color: white;
     padding: 10px;
+    font-size: 12px;
     
+}
+
+.InsideSearchbox-link{
+    & > a{
+        color: white;
+        border-bottom: 1px dashed white;
+        &:hover{
+            color: white;
+            text-decoration: none;
+        }
+    }
 }
 
 .Category-Boxes{
@@ -267,27 +321,79 @@
         margin:20px 0px;
       
     }
+
+    & a{
+        color: rgb(71, 71, 71);
+        font-size: 12px;
+        
+        &:hover{
+            text-decoration: none;
+        }
+    }
 }
 
+.h-8{
+    background: #22a3e1;
+    padding: 3px 6px;
+    border-radius: 50%;
+    text-align: center;
+    color: white;
+    margin: 2px;
+}
 
 
  .Custom-nav2 .nav-link{
-    border: 1px solid rgb(16, 156, 250) ;
-    font-size: 20px;
+    border: 1px solid rgb(178, 180, 182) ;
+    font-size: 16px;
     display: flex;
     align-items: center;
+    width: 42px;
+    
+    
+    height: 50px;
+    border-radius: 0px !important;
+
+    & i{
+        height: 22px ;
+    }
+
+    
+   
 }
+
   .active .icon{
     color: white;
-    
+  
 
    
 }
 
+.nav-pills .nav-link.active{
+    background-color: #2393ba !important;
+}
+
+.search-icon , .location-icon{
+   
+        position: absolute;
+        top: 8px;      
+        right: 0;
+        color: #726d6d;
+      
+    
+    
+    height: 50% !important;
+    min-width: 50px !important;
+    font-size: 18px !important;
+    
+}
+
+input.text{
+    min-width: 100px;
+}
 .tab-pane {
     width: 100%;
     height: 100%;
-    border: 1px solid blue;
+    
 }
 
 
@@ -295,6 +401,174 @@
     height: 300px;
 }
 
+span.checked{
+    color: orange;
+}
 
+.custom-tooltip button{
+    font-size: 22px;
+ 
+    margin-left: 10px;
+    padding-bottom: 12px;
+}
+
+.rating-circle{
+    border-radius: 50%;
+    background-color: rgb(41, 144, 240);
+    color: white;
+    padding: 5px;
+    font-size: 12px;
+}
+
+
+
+// jOE
+
+img {
+    vertical-align: middle;
+  }
+  
+  /* Position the image container (needed to position the left and right arrows) */
+  .container {
+    position: relative;
+  }
+  
+  /* Hide the images by default */
+  .mySlides {
+    display: none;
+  }
+  
+  /* Add a pointer when hovering over the thumbnail images */
+  .cursor {
+    cursor: pointer;
+  }
+  
+  /* Next & previous buttons */
+  .prev,
+  .next {
+    cursor: pointer;
+    position: absolute;
+    top: 40%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  
+  /* Position the "next button" to the right */
+  .next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+  }
+  
+  /* On hover, add a black background color with a little bit see-through */
+  .prev:hover,
+  .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  /* Number text (1/3 etc) */
+  .numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+  }
+  
+  /* Container for image text */
+  .caption-container {
+    text-align: center;
+    background-color: #222;
+    padding: 2px 16px;
+    color: white;
+  }
+  
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Six columns side by side */
+  .column {
+    float: left;
+    width: 16.66%;
+  }
+  
+  /* Add a transparency effect for thumnbail images */
+  .demo {
+    opacity: 0.6;
+  }
+  
+  .active,
+  .demo:hover {
+    opacity: 1;
+  }
+
+  .contactWidgets{
+    // margin-right: 30px ;
+    width: 200px;
+    // border: 1px solid red;
+    font-size: 14px;
+    
+    color: gray;
+    &  i.icon{
+        color: #03a9f4;
+       
+        
+        
+    }
+
+    & div div {
+        min-width: 150px;
+        // border: green 1px solid;
+    }
+
+    
+  }
+.custom-progress{
+    background: #000;
+}
+.tab-pane div.progress-bar{
+      width: 20%;
+      background-color: gray !important;
+  }
+
+  #circleProgress1{
+    width: 134px;
+    height: 180px;
+  }
+
+  i.icon-blue{
+      color: #03a9f4;
+      font-size: 16px !important;
+  }
+
+  label{
+      font-size: 15px;
+      font-weight: 500;
+  }
+
+  .custom-progress{
+      width: 60px;
+  }
+
+ 
+
+  .rating-star-field > div{
+    margin: 0px 13px ;
+  }
+
+  .borderBottomBold{
+    background: gray;
+    width: 100%;
+    height: 3px;
+  }
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
