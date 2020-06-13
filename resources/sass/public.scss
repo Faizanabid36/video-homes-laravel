@@ -290,6 +290,8 @@ input.text {
 .bigContainer{
     margin: 0px 118px;
     color: gray;
+
+    @media (max-width: 695.98px) { margin: 0% 10%; }
 }
 
 .Search-boxes{
@@ -569,6 +571,11 @@ img {
     background: gray;
     width: 100%;
     height: 3px;
+  }
+
+  .video-list{
+      overflow: scroll;
+      height: 500px;
   }
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';

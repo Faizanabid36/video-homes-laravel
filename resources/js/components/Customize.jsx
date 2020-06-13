@@ -118,13 +118,13 @@ export default function Customize(props){
       <Col xs={12} className="my-5">
   
 
-       <h2> Customize your video player below. Choose from one of six themes or customize your own.  <div className="borderBottom2"> </div> </h2>
+       <h2 className="heading"> Customize your video player below. Choose from one of six themes or customize your own.  <div className="borderBottom2"> </div> </h2>
    
    </Col>
   </Row>
 
   <Row>
-    <Col >
+    <Col sm={12} md={6} >
     <div>
         <h3>  Choose a Style </h3>
      <div classNameName="form-check">

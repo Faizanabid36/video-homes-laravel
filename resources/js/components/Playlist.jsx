@@ -106,8 +106,8 @@ export default class Playlist extends React.Component {
         return <div className='container   playlistContainer   main-content' id='main-container'>
 
             <Row>
-            <Col xs={12} className=" my-5 ">
-                   <h1 className="float-left">PlayList <div className="borderBottom2"> </div> </h1>
+            <Col xs={12} className=" my-4 ">
+                   <h1 className="float-left heading">PlayList <div className="borderBottom2"> </div> </h1>
                         
                </Col> 
             </Row>

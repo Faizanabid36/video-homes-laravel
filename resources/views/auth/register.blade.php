@@ -43,9 +43,10 @@
                             <option value="2">Realtor</option>
                         </select>
                     </div>
+                    <!-- selectpicker -->
                     <div id="tags" class="form-group">
                         <label for="account_type"> Select Tags  </label>
-                        <select  name="account_type[]" id="account_type" class="  form-control custom-select selectpicker " multiple   >
+                        <select  name="account_type[]" id="account_type" class="  form-control custom-select  " multiple   >
                             @foreach($user_tags ?? '' as $user_tag)
                                 <option  value="{{$user_tag->id}}">{{$user_tag->tag_name}}</option>
                             @endforeach

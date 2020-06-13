@@ -1,13 +1,11 @@
 @extends('layouts.public.app')
 @section('content')
-
-
     <div class="bigContainer">
         <div class="row">
 
             <div class="col-md-7 col-sm-12">
                 <h2>
-                    Joe French Realtor
+                {{$user->name}}
 
 
                 </h2>
@@ -57,21 +55,17 @@
 
                     <div class="container">
                         <div class="mySlides">
-                            <div class="numbertext">1 / 2</div>
+                           
                             <img
-                                src="https://upload.wikimedia.org/wikipedia/commons/6/61/Rainbow_Rose_%283366550029%29.jpg"
+                                src={{ $user->avatar }}
                                 style="width:100%">
                         </div>
 
-                        <div class="mySlides">
-                            <div class="numbertext">2 / 2</div>
-                            <img src="https://onlinejpgtools.com/images/examples-onlinejpgtools/cloud-ice-cream.jpg"
-                                 style="width:100%">
-                        </div>
+                      
 
 
-                        <a class="prev" onclick="plusSlides(-1)">❮</a>
-                        <a class="next" onclick="plusSlides(1)">❯</a>
+                        <!-- <a class="prev" onclick="plusSlides(-1)">❮</a>
+                        <a class="next" onclick="plusSlides(1)">❯</a> -->
 
                         <div class="caption-container">
                             <p id="caption"></p>
@@ -153,7 +147,7 @@
                             <div class="clear"></div>
                         </div>
                         <div class="col-md-4 no-padding-left pull-right deskto  p">
-                            <div class="content pt_shadow">
+                            <div class="content video-list pt_shadow">
                                 <div class="ads-placment"></div>
                                 @if(!is_null($video))
                                     <div class="next-video">
@@ -259,7 +253,7 @@
         </div>
 
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 pr-0">
 
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">

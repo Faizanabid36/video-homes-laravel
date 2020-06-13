@@ -54,8 +54,8 @@ class Analytics extends React.Component {
     render() {
         return (<Container>
                     <Row>
-                    <Col xs={12} className="my-5">
-                     <h1> Analytics <div className="borderBottom2"> </div> </h1>
+                    <Col xs={12} className="my-4">
+                     <h1  className="heading"> Analytics <div className="borderBottom2"> </div> </h1>
                     </Col>
                     <Col xs={12} className="my-2" >
             <Tabs defaultActiveKey="Indiviual-Videos" className="navtabs-custom" id="uncontrolled-tab-example">
