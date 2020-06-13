@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\UserCategory;
 use App\UserTags;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
@@ -28,9 +29,17 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Schema::defaultStringLength(191);
-        $user_tags=UserTags::all();
+        $user_parent_category=UserCategory::whereNull('parent_id')->get();
+        $user_child_category=UserCategory::whereNotNull('parent_id')->get()->groupBy('parent_id');
+
+//      /**/  dd($user_child_category);
+
+//        $user_tags=UserTags::all();
         View::share(
-            'user_tags', $user_tags
+            'user_parent_category', $user_parent_category
+        );
+        View::share(
+            'user_child_category', $user_child_category
         );
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\User;
+use App\UserCategory;
 use App\UserTags;
 use App\Video;
 use Illuminate\Http\Request;
@@ -108,14 +110,65 @@ class AdminController extends Controller
         $ut=new UserTags();
         $ut->tag_name=$request->get('tag_name');
         $ut->save();
-        return back()->with('success','Tag Added Successfully');
+        return back()->with('success', 'Tag Added Successfully');
     }
+
     public function update_tag(Request $request, $id)
     {
-        $this->validate($request,[
-            'tag_name'=>'required',
+        $this->validate($request, [
+            'tag_name' => 'required',
         ]);
-        UserTags::whereId($id)->update(['tag_name'=>$request->get('tag_name')]);
-        return back()->with('success','Tag Updated Successfully');
+        UserTags::whereId($id)->update(['tag_name' => $request->get('tag_name')]);
+        return back()->with('success', 'Tag Updated Successfully');
+    }
+
+    public function create_user_categories()
+    {
+        $user_cactegories = UserCategory::all();
+        return view('admin.create_user_category', compact('user_cactegories'));
+    }
+
+    public function add_user_category(Request $reqeust)
+    {
+        $this->validate($reqeust, [
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+        UserCategory::create(\request()->except('_token'));
+        return back()->with('success', 'Category Created Successfully');
+    }
+
+    public function all_user_categories()
+    {
+        $categories = UserCategory::with('children')->with('parent')->get();
+        return view('admin.view_user_categories', compact('categories'));
+
+    }
+
+    public function delete_user_category($id)
+    {
+        $x = UserCategory::find($id);
+        $x->delete();
+        return back()->with('success', 'Category Deleted');
+
+    }
+
+    public function update_user_category()
+    {
+        UserCategory::whereId(\request('id'))->update(\request()->except('_token', 'id'));
+        return back()->with('success', 'Updated Successfully');
+    }
+
+    public function edit_user_category($id)
+    {
+        $cat = UserCategory::whereId($id)->with('children')->with('parent')->first();
+        $categories = UserCategory::where('id', '!=', $id)->with('children')->with('parent')->get();
+        return view('admin.edit_user_category', compact('cat', 'categories'));
+    }
+
+    public function users_list()
+    {
+        $users = User::where('id', '!=', auth()->user()->id)->paginate(10);
+        return view('admin.users_list', compact('users'));
     }
 }
