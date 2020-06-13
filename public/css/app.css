@@ -441,15 +441,14 @@ body {
 }
 
 .links2 .borderBottom {
-  transition: all 2s ease;
+  transition: all 0.8s linear;
+  background-color: #41a6ee;
+  height: 3px;
   width: 0px;
 }
 
 .links2:hover .borderBottom {
-  width: 26px;
-  background-color: #41a6ee;
-  display: block;
-  height: 3px;
+  width: 50%;
 }
 
 .dropdown-Custom {

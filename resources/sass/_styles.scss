@@ -596,6 +596,8 @@ height: 21px;
     font-weight: normal !important;
    
     margin-left: 33px;
+
+    
        
       &:hover {
         color: $color !important;
@@ -605,21 +607,14 @@ height: 21px;
       }
 
        & .borderBottom{
-        transition: all 2s ease;
-  
-    
-          width:  0px;
+        transition: all 0.8s linear;
+        background-color: $color;
+        height: 3px;
+         width:  0px;
       }
   
     &:hover .borderBottom{
-  
-  
-        width:  26px;
-    
-        background-color: $color;
-        display: block;
-        height: 3px;
-      
+    width:  50%;
     
     }
   
@@ -628,7 +623,24 @@ height: 21px;
     
   }
 
+
+  // .links2:before{
+  //   content: '';
+  //   border-bottom: 2px solid red;
+  //   height: 3px;
+  //   width: 0px;
+  //   transition:all  1s linear ;
+  //   position: absolute;
+  //   // top: 110%;
+
+    
+  // }
  
+  // .links2:hover:before{
+  
+
+  //   width: 40px;
+  // }
    .dropdown-Custom{
   
       height: 50px;
