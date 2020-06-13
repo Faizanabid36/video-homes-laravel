@@ -1,10 +1,14 @@
 @extends('layouts.public.app')
 @section('content')
+
     <div class="bigContainer">
         <div class="row">
 
-            <div class="col-md-7 col-sm-12">
-                <h2>
+
+       
+
+            <div class="col-md-7 my-3 float-left col-sm-12">
+                <h2 style="text-transform:uppercase">
                 {{$user->name}}
 
 
@@ -23,7 +27,9 @@
 
 
             </div>
-            <div class="col-md-5 col-sm-12 ">
+            <hr />
+
+            <div class="col-md-5 col-sm-12 my-3  float-right ">
                 <div class="text-right custom-tooltip">
                     <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
                             title="submit new listing">
@@ -47,36 +53,54 @@
                     </button>
                 </div>
             </div>
-
-
+           
+            </div>
+    <br />
+    <hr />
             <div class="row">
-                <div class="col-3 my-2">
-
+                <div class=" col-sm-12 col-xs-12 col-lg-2 my-3">
 
                     <div class="container">
                         <div class="mySlides">
                            
                             <img
-                                src={{ $user->avatar }}
-                                style="width:100%">
+
+                                @if( $user->avatar )
+                                src= '{{ $user->avatar }}'
+                                @else
+                                src= 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMgrxYAqZF6-kdFuLQesPwdAyonhn93LsxvKXax0vzbCCGd_wQ&usqp=CAU'
+                                @endif
+                                alt=" No image found"
+                                style="width:100% ; ">
                         </div>
 
-                      
-
+                
 
                         <!-- <a class="prev" onclick="plusSlides(-1)">❮</a>
                         <a class="next" onclick="plusSlides(1)">❯</a> -->
 
                         <div class="caption-container">
-                            <p id="caption"></p>
+                            <p id="caption">Profile Image</p>
                         </div>
 
 
                     </div>
+                    <hr />
                 </div>
-
-                <div class="col-9">
+                  
+                    
+        
+                <div class="col-sm-12 col-xs-12 col-lg-10 ">
+               
+            
+                <h3>  Address: </h3>
+                  <br />
+                  <p>6020 Meadowridge Center Drive, STE#M, Elkridge, Maryland, USA 21075<p>
+                   <br />   
+                  <h3> Description: </h3>
+                  <br />
                     <div class="row">
+                 
                         <div id="background" class="hidden"></div>
                         <div class="col-md-8 player-video" style="margin-top: 0 !important">
                             <div class="video-player pt_video_player " id="pt_video_player">
@@ -195,7 +219,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        
 
 
         <!-- 2nd row -->
