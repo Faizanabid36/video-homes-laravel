@@ -27,27 +27,27 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        
+
         Schema::defaultStringLength(191);
-//        $roles = UserRole::where('role', '!=', 'admin')->get();
-//        $roles_assoc = UserCategory::whereNull('parent_id')->get()->groupBy('role_id');
-//        $user_parent_category = UserCategory::whereNull('parent_id')->get();
-//        $user_child_category = UserCategory::whereNotNull('parent_id')->get()->groupBy('parent_id');
+        $roles = UserRole::where('role', '!=', 'admin')->get();
+        $roles_assoc = UserCategory::whereNull('parent_id')->get()->groupBy('role_id');
+        $user_parent_category = UserCategory::whereNull('parent_id')->get();
+        $user_child_category = UserCategory::whereNotNull('parent_id')->get()->groupBy('parent_id');
 
-//      /**/  dd($user_child_category);
+      /**/  dd($user_child_category);
 
-//        $user_tags=UserTags::all();
-//        View::share(
-//            'user_parent_category', $user_parent_category
-//        );
-//        View::share(
-//            'user_child_category', $user_child_category
-//        );
-//        View::share(
-//            'roles', $roles
-//        );
-//        View::share(
-//            'roles_assoc', $roles_assoc
-//        );
+        $user_tags=UserTags::all();
+        View::share(
+            'user_parent_category', $user_parent_category
+        );
+        View::share(
+            'user_child_category', $user_child_category
+        );
+        View::share(
+            'roles', $roles
+        );
+        View::share(
+            'roles_assoc', $roles_assoc
+        );
     }
 }
