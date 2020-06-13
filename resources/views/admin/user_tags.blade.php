@@ -14,14 +14,14 @@
                 <div class="col-lg-6 col-md-4 col-sm-4">
                     <h4 class="nav_top_align skin_txt">
                         <i class="fa fa-th"></i>
-                        User Tags List
+                        User Roles List
                     </h4>
                 </div>
                 <div class="col-sm-7 col-lg-6">
                     <ol class="breadcrumb float-right nav_breadcrumb_top_align">
                         <li class="breadcrumb-item">
                             <a href="{{route('add_tag')}}">
-                                <i class="fa fa-plus" data-pack="default" data-tags=""></i> Add New Tag
+                                <i class="fa fa-plus" data-pack="default" data-tags=""></i> Add New Role
                             </a>
                         </li>
                     </ol>
@@ -41,14 +41,14 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header bg-white">
-                            Tags
+                            User Roles
                         </div>
                         <div class="card-block">
                             <div class="table-responsive m-t-10">
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th>Tag Name</th>
+                                        <th>Role Name</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
@@ -56,7 +56,7 @@
                                     <tbody>
                                     @foreach ($tags as $tag)
                                         <tr>
-                                            <td>{{$tag->tag_name}}</td>
+                                            <td>{{$tag->role}}</td>
                                             <td>
                                                 <a href="{{action('AdminController@edit_tag',$tag->id)}}">
                                                     <button type="button" class="btn btn-labeled btn-warning">

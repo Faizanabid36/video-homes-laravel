@@ -41,21 +41,38 @@
                                 <input type="hidden" value="{{$cat->id}}" name="id">
                                 <!-- Name input-->
                                 <div class="form-group row form_inline_inputs_bot">
-                                    <div class="col-lg-1"></div>
-                                    <div class="col-lg-4">
+{{--                                    <div class="col-lg-1"></div>--}}
+                                    <div class="col-lg-3">
+                                        <div class="input-group m-t-35">
+                                            <select class="form-control" name="parent_role">
+                                                @foreach($roles as $role)
+                                                    <option
+                                                        <?php
+                                                        if($role->id==$cat->role_id){
+                                                        ?>
+                                                        selected
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                        value="{{$role->id}}">{{$role->role}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
                                         <div class="input-group m-t-35">
                                             <input type="text" value="{{$cat->name}}" class="form-control"
                                                    name="name" placeholder="Category Name">
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-3">
                                         <div class="input-group m-t-35">
                                             <input type="description" value="{{$cat->description}}"
                                                    class="form-control" name="description"
                                                    placeholder=" Category Description">
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-3">
                                         <div class="input-group m-t-35">
                                             <select name="parent_id" class="form-control">
                                                 @if(!is_null($cat->parent_id))
