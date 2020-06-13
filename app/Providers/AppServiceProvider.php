@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        
         Schema::defaultStringLength(191);
 //        $roles = UserRole::where('role', '!=', 'admin')->get();
 //        $roles_assoc = UserCategory::whereNull('parent_id')->get()->groupBy('role_id');

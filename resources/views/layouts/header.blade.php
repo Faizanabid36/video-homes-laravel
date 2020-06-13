@@ -1,5 +1,5 @@
 
-        <div class=" col-7 col-lg-8 ">
+        <div class=" col-6 my-auto col-lg-10 ">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -36,7 +36,7 @@
             </nav>
         </div>
 
-        <div class="col-5 col-lg-2 my-3 ml-auto ">
+        <div class="col-6 col-lg-2 p-0 my-3 ">
               <span > <a href="{{route('dashboard')}}/#/upload-video" class="btn  cloud-upload  btn-primary" > <i style="font-size:17px; "   class="fa   fa-cloud-upload  " color="black"> </i> Upload Video  </a>
               </span>
                <span class="dropdown nav-item dropdown-Custom  ">
@@ -53,7 +53,7 @@
                                                               height: 43px;
                                                               z-index: 16;
                                                               position: absolute;
-                                                              top: -18px;"
+                                                              top: -14px; "
                                                      src="{{auth()->user()->avatar}}"/>
                                             </div>
                                         @endif

@@ -93,7 +93,7 @@
                         <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
                            aria-controls="pills-home" aria-selected="true"><i class="fas fa-list icon"></i></a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" >
                         <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
                            aria-controls="pills-profile" aria-selected="false"><i class="fas fa-th-large icon"></i></a>
                     </li>
@@ -106,7 +106,7 @@
                 <span class="tab-pane fade show active  " id="pills-home" role="tabpanel"
                       aria-labelledby="pills-home-tab">
                     @foreach($account_types as $account_user)
-                        <div class="card mx-auto" style="max-width: 1240px;">
+                        <div class="card mx-auto" style="max-width: 1040px;">
                               <div class="row no-gutters">
                                 <div class="col-md-4">
                                     @if(!is_null($account_user->avatar))
@@ -149,7 +149,7 @@
                     <div class="row  ">
                   @foreach($account_types as $account_user)
                             <div class="col-md-6 col-sm-12 mb-3 ">
-                        <div class="card " style="min-height:560px ; min-width:515px">
+                        <div class="card " style="min-height:560px ; min-width:515px ; ">
                               <div class="row no-gutters">
 
                               @if(!is_null($account_user->avatar))
