@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        
         Schema::defaultStringLength(191);
         $user_parent_category=UserCategory::whereNull('parent_id')->get();
         $user_child_category=UserCategory::whereNotNull('parent_id')->get()->groupBy('parent_id');

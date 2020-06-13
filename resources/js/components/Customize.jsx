@@ -115,17 +115,19 @@ export default function Customize(props){
     return (
       <Container>
   <Row >
-      <Col xs={12} className="my-5">
+      <Col xs={12} className="my-4">
   
 
-       <h2 className="heading"> Customize your video player below. Choose from one of six themes or customize your own.  <div className="borderBottom2"> </div> </h2>
+       <h2 className="heading "> Customization <div className="borderBottom2"> </div> </h2>
    
    </Col>
   </Row>
+  <br />
 
   <Row>
-    <Col sm={12} md={6} >
+    <Col sm={12} md={6}  >
     <div>
+      <p> Customize your video player below. Choose from one of six themes or customize your own.  </p>
         <h3>  Choose a Style </h3>
      <div classNameName="form-check">
   <input classNameName="form-check-input" type="radio" name="exampleRadios" onChange={handleStandard} id="exampleRadios1" value="option1"  />
@@ -212,7 +214,7 @@ export default function Customize(props){
    <hr />
 
   <Row>
-    <Col xs={6}>
+    <Col xs={12} className="my-3">
         <button href="" className="btn btn-danger" > Cancel </button>
         <button className="btn btn-primary"> Save Changes </button>
 

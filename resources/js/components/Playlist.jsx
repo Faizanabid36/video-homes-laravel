@@ -127,9 +127,20 @@ export default class Playlist extends React.Component {
                         <div className="clear"></div>
                     </div>
                     {this.state.mainPage && this.state.playlists.map((item, id) => {
-                        return <div key={id} id={`playlist${id}`} className="subscriptions-list">
+                        return <> <Row>
+                             <Col xs={6} className="my-auto" md={2} lg={3}>
+                              <div className="video-thumb d-flex align-items-end ">
+                                            <h3 style={{textTransform:"uppercase " , fontWeight:'bold' }}>{item.name}</h3>
+                                        </div>
+                                        <div className="video-info  no-padding-left">
+                                            <div className="video-desc"></div>
+                                        </div>
+                            </Col>
+                            
+                            <Col xs={6} md={10} lg={9}>
+                             <div key={id} id={`playlist${id}`} className="subscriptions-list">
                             <div className="author-list">
-                                <div className="video-wrapper" data-id="6" id="video-6">
+                                <div className="video-wrapper m-0" data-id="6" id="video-6">
                                     <div className="video-actions vid_stud_acts">
                                         <a onClick={(e) => {
                                             e.preventDefault();
@@ -139,8 +150,8 @@ export default class Playlist extends React.Component {
                                                 purpose: 'add',
                                                 editPlaylist: false
                                             })
-                                        }} title="Add playlist">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36"  className="addplaylistIcon"
+                                        }} title="Add playlist" >
+                                            <svg xmlns="http://www.w3.org/2000/svg"  width="36" height="36"  className=" m-0 addplaylistIcon"
                                                  viewBox="0 0 24 24">
                                                 <path fill="currentColor"
                                                       d="M19,9H2V11H19V9M19,5H2V7H19V5M2,15H15V13H2V15M17,13V19L22,16L17,13Z"></path>
@@ -159,8 +170,8 @@ export default class Playlist extends React.Component {
                                               
                                             })
                                         }}
-                                           title="Edit playlist">
-                                            <svg className="feather-Edit" xmlns="http://www.w3.org/2000/svg" width="36"
+                                           title="Edit playlist" style={{width: '48px'}}>
+                                            <svg className="feather-Edit m-0" xmlns="http://www.w3.org/2000/svg" width="36"
                                                  height="36"
                                                  viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
                                                  strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -173,7 +184,7 @@ export default class Playlist extends React.Component {
                                             this.handleDelete(item.id, e)
                                             
                                         }} title="Delete video">
-                                            <svg className="feather-Delete" xmlns="http://www.w3.org/2000/svg" width="36"
+                                            <svg className="feather-Delete m-0" xmlns="http://www.w3.org/2000/svg" width="36"
                                                  height="36"
                                                  viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
                                                  strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -185,20 +196,21 @@ export default class Playlist extends React.Component {
                                             </svg>
                                         </a>
                                     </div>
-                                    <Row>
-                                        <div className="video-thumb col-md-3">
-                                            <h3>{item.name}</h3>
-                                        </div>
-                                        <div className="video-info col-md-5 no-padding-left">
-                                            <div className="video-desc"></div>
-                                        </div>
-                                    </Row>
+                                   
+                                      
+                                   
 
                                    
                                 </div>
                             </div>
-                            <hr />
+                           
                         </div>
+                        
+                        </Col>
+                        </Row>
+                        <hr /> 
+                        </>
+                         
                     })}
                     {this.state.addPlaylist ? <div>
                         <div className='author-list'>
