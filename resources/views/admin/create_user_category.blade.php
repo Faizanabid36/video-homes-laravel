@@ -43,6 +43,14 @@
                                     <div class="col-lg-1"></div>
                                     <div class="col-lg-4">
                                         <div class="input-group m-t-35">
+                                            <select class="form-control" name="parent_role">
+                                                <option selected disabled>Select Role</option>
+                                                @foreach($roles as $role)
+                                                    <option value="{{$role->id}}">{{$role->role}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="input-group m-t-35">
                                             <input type="text" class="form-control" name="name"
                                                    placeholder="Category Name">
                                         </div>

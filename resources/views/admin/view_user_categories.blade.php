@@ -14,14 +14,14 @@
                 <div class="col-lg-6 col-md-4 col-sm-4">
                     <h4 class="nav_top_align skin_txt">
                         <i class="fa fa-th"></i>
-                        Playlist Categories
+                        Role Categories
                     </h4>
                 </div>
                 <div class="col-sm-7 col-lg-6">
                     <ol class="breadcrumb float-right nav_breadcrumb_top_align">
                         <li class="breadcrumb-item">
                             <a href="{{route('create_user_categories')}}">
-                                <i class="fa fa-plus" data-pack="default" data-tags=""></i> Create User Category
+                                <i class="fa fa-plus" data-pack="default" data-tags=""></i> Create Role Category
                             </a>
                         </li>
                     </ol>
@@ -50,7 +50,7 @@
                                     <tr>
                                         <th>Title</th>
                                         <th>Description</th>
-                                        <th>Parent</th>
+                                        <th>Belongs To</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>

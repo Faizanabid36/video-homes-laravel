@@ -14,7 +14,7 @@
                 <div class="col-lg-6 col-md-4 col-sm-4">
                     <h4 class="nav_top_align skin_txt">
                         <i class="fa fa-th"></i>
-                        Add New Tag
+                        Add New Role
                     </h4>
                 </div>
             </div>
@@ -32,7 +32,7 @@
 
                 <div class="card inline_section_align media_max_1199">
                     <div class="card-header bg-white">
-                        Add New Tag
+                        Add New Role
                     </div>
                     <div class="card-block">
                         <form action="{{action('AdminController@store_tag')}}" method="POST">
@@ -43,11 +43,11 @@
                                     <div class="col-lg-1"></div>
                                     <div class="col-lg-4">
                                         <div class="input-group m-t-35">
-                                            <input type="text" class="form-control" name="tag_name" placeholder="Add Tag Name">
+                                            <input type="text" class="form-control" name="tag_name" placeholder="Add Role">
                                         </div>
                                     </div>
                                     <div class="col-lg-3 m-t-35">
-                                        <button class="btn btn-primary layout_btn_prevent btn-responsive form_inline_btn_margin-top">Save Tag</button>
+                                        <button class="btn btn-primary layout_btn_prevent btn-responsive form_inline_btn_margin-top">Save Role</button>
                                     </div>
                                 </div>
                             </fieldset>

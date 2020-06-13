@@ -14,7 +14,7 @@
                 <div class="col-lg-6 col-md-4 col-sm-4">
                     <h4 class="nav_top_align skin_txt">
                         <i class="fa fa-th"></i>
-                        Edit Tag
+                        Edit Role
                     </h4>
                 </div>
             </div>
@@ -32,7 +32,7 @@
 
                 <div class="card inline_section_align media_max_1199">
                     <div class="card-header bg-white">
-                        Edit Tag
+                        Edit Role
                     </div>
                     <div class="card-block">
                         <form action="{{action('AdminController@update_tag',$tag->id)}}" method="POST">
@@ -44,7 +44,7 @@
                                     <div class="col-lg-1"></div>
                                     <div class="col-lg-4">
                                         <div class="input-group m-t-35">
-                                            <input type="text" value="{{$tag->tag_name}}" class="form-control" name="tag_name" placeholder="Tag Name">
+                                            <input type="text" value="{{$tag->role}}" class="form-control" name="tag_name" placeholder="Tag Name">
                                         </div>
                                     </div>
                                     <div class="col-lg-3 m-t-35">

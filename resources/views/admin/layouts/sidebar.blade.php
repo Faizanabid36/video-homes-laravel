@@ -36,7 +36,7 @@
                 <li class="">
                     <a href="{{route('category')}}">
                         <i class="fa fa-tachometer"></i>
-                        <span class="link-title menu_hide">&nbsp;Categories
+                        <span class="link-title menu_hide">Video&nbsp;Categories
 
                         </span>
                     </a>
@@ -45,14 +45,14 @@
                 <li class="">
                     <a href="{{route('user_tags')}}">
                         <i class="fa fa-tachometer"></i>
-                        <span class="link-title menu_hide">&nbsp;User Tags
+                        <span class="link-title menu_hide">&nbsp;Define User Roles
                         </span>
                     </a>
                 </li>
                 <li class="">
                     <a href="{{route('all_user_categories')}}">
                         <i class="fa fa-tachometer"></i>
-                        <span class="link-title menu_hide">&nbsp;User Categories
+                        <span class="link-title menu_hide">&nbsp;Roles Categories
                         </span>
                     </a>
                 </li>

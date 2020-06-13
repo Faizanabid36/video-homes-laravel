@@ -14,7 +14,7 @@
                 <div class="col-lg-6 col-md-4 col-sm-4">
                     <h4 class="nav_top_align skin_txt">
                         <i class="fa fa-th"></i>
-                        Playlist Categories
+                        Users List
                     </h4>
                 </div>
 {{--                <div class="col-sm-7 col-lg-6">--}}
