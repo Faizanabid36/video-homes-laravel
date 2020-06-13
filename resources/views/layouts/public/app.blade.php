@@ -73,7 +73,9 @@
 
 
     </div>
+    <div style="min-height:100vh;">
     @yield('content')
+    </div>
     <div class="row sayHello m-0 p-0 ">
         <div class="col-12 m-0 p-0 ">
             <div class="footer-top"></div>

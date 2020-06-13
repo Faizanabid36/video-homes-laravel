@@ -100,15 +100,7 @@ height: 14px;
 }
              
 
-  & .heading{
-        color: $color;
-        text-shadow: 2px 2px rgb(4, 50, 150);
-        font-size: 40px;
-        display: inline;
-        vertical-align: middle;
-        
-        
-  }
+  
   & .borderBottom{
   
     
@@ -579,15 +571,34 @@ body {
   
    }
   }
+
+  .cloud-upload{
+    margin-right: 15px;
+    font-size: 10px ;
+
+    @media (max-width: 895.98px) { margin-right: 0;  }
+  }
   
+  .heading{
+
+    
+font-style: normal;
+font-weight: 800;
+font-size: 19px;
+
+height: 21px;
+  }
   .links2 {
     
     padding: auto;
     color: #181717 !important;
-    font-size: 19px !important;
+    font-size: 18px !important;
     letter-spacing: 0.05em !important;
-    font-weight: 503 !important;
-      
+    font-weight: normal !important;
+   
+    margin-left: 33px;
+
+    
        
       &:hover {
         color: $color !important;
@@ -597,21 +608,14 @@ body {
       }
 
        & .borderBottom{
-        transition: all 2s ease;
-  
-    
-          width:  0px;
+        transition: all 0.8s linear;
+        background-color: $color;
+        height: 3px;
+         width:  0px;
       }
   
     &:hover .borderBottom{
-  
-  
-        width:  26px;
-    
-        background-color: $color;
-        display: block;
-        height: 3px;
-      
+    width:  50%;
     
     }
   
@@ -620,7 +624,24 @@ body {
     
   }
 
+
+  // .links2:before{
+  //   content: '';
+  //   border-bottom: 2px solid red;
+  //   height: 3px;
+  //   width: 0px;
+  //   transition:all  1s linear ;
+  //   position: absolute;
+  //   // top: 110%;
+
+    
+  // }
  
+  // .links2:hover:before{
+  
+
+  //   width: 40px;
+  // }
    .dropdown-Custom{
   
       height: 50px;
@@ -775,12 +796,25 @@ a{
 
 #dropdown-basic-button{
 
-    border-radius: 20px 20px 20px 20px;
-    width:100px;
+    border-radius: 44px;
+    width: 104px;
+    height: 38px;
     background: $background;
     border: none !important;
+    font-size: 15px;
+
+    &::after{
+      margin-left: 21px;
+      font-size: 18px;
+      vertical-align: middle;
+    }
 
 
+}
+
+.btn:focus {
+   outline: 0 !important; 
+   box-shadow: none !important; 
 }
 
 .dropdownbtn > div{
@@ -1094,8 +1128,10 @@ height: 40px;
 
 
 .imageCustomize{
-  background: url('https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832__340.jpg')  ;
-  width:474px ;
+  background-image:     url('https://eu.vibram.com/on/demandware.static/-/Sites-VibramEU-Library/default/dwda073688/video-placeholder.png')     ;
+    min-width:100% ;
+  background-repeat: no-repeat;
+  background-size: cover;
   height:262px ;
 
   &  .bottom-image-customization{
