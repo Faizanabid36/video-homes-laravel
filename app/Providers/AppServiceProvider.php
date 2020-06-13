@@ -36,7 +36,6 @@ class AppServiceProvider extends ServiceProvider
 
 //      /**/  dd($user_child_category);
 
-        $user_tags=UserTags::all();
         View::share(
             'user_parent_category', $user_parent_category
         );
