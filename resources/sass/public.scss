@@ -291,13 +291,13 @@ input.text {
     margin: 0px 118px;
     color: gray;
 
-    @media (max-width: 695.98px) { margin: 0% 10%; }
+    @media (max-width: 695.98px) { margin: 0% 5%; }
 }
 
 .Search-boxes{
     background-color: rgb(12, 102, 124);
     width: 100%;
-    height: 260px;
+    height: 275px;
     color: white;
     padding: 10px;
     font-size: 12px;
@@ -354,6 +354,7 @@ input.text {
     
     height: 50px;
     border-radius: 0px !important;
+    @media (max-width: 695.98px) { display:none }  
 
     & i{
         height: 22px ;
@@ -575,7 +576,7 @@ img {
 
   .video-list{
       overflow: scroll;
-      height: 500px;
+      max-height: 500px;
   }
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';

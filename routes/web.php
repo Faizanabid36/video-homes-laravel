@@ -1,8 +1,5 @@
 <?php
 
-use App\Comment;
-use FFMpeg\Coordinate\Dimension;
-use FFMpeg\Format\Video\X264;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +27,17 @@ Auth::routes();
 
 //Auth User
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('create_user_categories', 'AdminController@create_user_categories')->name('create_user_categories');
+    Route::post('add_user_category', 'AdminController@add_user_category')->name('add_user_category');
+    Route::get('all_user_categories','AdminController@all_user_categories')->name('all_user_categories');
+    Route::get('edit_user_category/{id}','AdminController@edit_user_category')->name('edit_user_category');
+    Route::post('update_user_category','AdminController@update_user_category')->name('update_user_category');
+    Route::get('delete_user_category/{id}','AdminController@delete_user_category')->name('delete_user_category');
+
+    Route::get('users_list','AdminController@users_list')->name('users_list');
+
+
+
     Route::get('admin_panel', 'AdminController@index')->name('admin_panel');
     Route::get('videos_for_approval', 'AdminController@videos_for_approval')->name('videos_for_approval');
     Route::get('approve_video/{id}', 'AdminController@approve_video')->name('approve_video');

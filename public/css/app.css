@@ -117,6 +117,12 @@ input[type=radio] {
   width: 37px !important;
 }
 
+.video-actions {
+  display: flex !important;
+  justify-content: space-evenly !important;
+  width: 50%;
+}
+
 .user-setting-panel {
   background: none !important;
 }
@@ -418,6 +424,7 @@ body {
 @media (max-width: 895.98px) {
   .cloud-upload {
     margin-right: 0;
+    width: 73px;
   }
 }
 
@@ -516,7 +523,6 @@ body {
   width: 71px;
   height: 257px;
   position: absolute;
-  left: -13px !important;
   min-width: 10rem;
   border-radius: 8.25rem !important;
 }
@@ -823,11 +829,11 @@ a {
 }
 
 .imageCustomize {
-  background-image: url("https://eu.vibram.com/on/demandware.static/-/Sites-VibramEU-Library/default/dwda073688/video-placeholder.png");
+  background: url("https://images.unsplash.com/photo-1484950763426-56b5bf172dbb?ixlib=rb-1.2.1&w=1000&q=80");
   min-width: 100%;
   background-repeat: no-repeat;
-  background-size: cover;
-  height: 262px;
+  background-size: auto;
+  min-height: 262px;
 }
 
 .imageCustomize .bottom-image-customization {

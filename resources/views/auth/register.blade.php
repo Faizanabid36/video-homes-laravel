@@ -43,14 +43,24 @@
                             <option value="2">Realtor</option>
                         </select>
                     </div>
-                    <!-- selectpicker -->
+                    {{--                    <div id="tags" class="form-group">--}}
+                    {{--                        <select  name="account_type[]" id="account_type" class="  form-control custom-select selectpicker " multiple   >--}}
+                    {{--                            @foreach($user_parent_category ?? '' as $user_tag)--}}
+                    {{--                                <option  value="{{$user_tag->id}}">{{$user_tag->name}}</option>--}}
+                    {{--                            @endforeach--}}
+                    {{--                        </select>--}}
+                    {{--                    </div>--}}
                     <div id="tags" class="form-group">
-                        <label for="account_type"> Select Tags  </label>
-                        <select  name="account_type[]" id="account_type" class="  form-control custom-select  " multiple   >
-                            @foreach($user_tags ?? '' as $user_tag)
-                                <option  value="{{$user_tag->id}}">{{$user_tag->tag_name}}</option>
+                        <select onchange="change_category_type(this)" name="account_type[]" id="account_type"
+                                class="  form-control ">
+                            <option value="" selected disabled>Select</option>
+                            @foreach($user_parent_category ?? '' as $user_tag)
+                                <option value="{{$user_tag->id}}">{{$user_tag->name}}</option>
                             @endforeach
                         </select>
+                    </div>
+                    <div id="child">
+
                     </div>
 
                     <div class="terms">
@@ -76,22 +86,46 @@
     </div>
 @endsection
 
-    <script type="text/javascript">
-        function changeVisibility() {
-            let role = document.getElementById('role');
-            console.log(role.value)
-            if(role.value === '3'){
-           
-                console.log('display');
-                document.getElementById('tags').style.removeProperty('display');
-            }
-            else{
-                console.log('hide' ,document.getElementById('tags'))
-                document.getElementById('tags').style.setProperty('display' , 'none');
-            }
-        }
+<script type="text/javascript">
+    function change_category_type(e) {
+        //
+        var select = document.createElement("select");
+        select.name = "child_category_type";
+        select.class = 'form-control'
+        let selector=document.getElementById('child')
+        selector.innerHTML=''
+        var values = [];
+        @foreach($user_child_category as $key=>$val)
+        if (e.value == {{$key}}) {
+            @foreach($val as $v)
+            values.push('{{$v->name}}')
+            @endforeach
+        }@endforeach
 
-        // $('select').selectpicker();
-    </script>
+        for (const val of values) {
+            var option = document.createElement("option");
+            option.value = val;
+            option.text = val.charAt(0).toUpperCase() + val.slice(1);
+            select.appendChild(option);
+        }
+        document.getElementById("child").appendChild(select);
+        console.log(e.value)
+    }
+
+    function changeVisibility() {
+        let role = document.getElementById('role');
+        console.log(role.value)
+        if (role.value === '3') {
+
+            console.log('display');
+            document.getElementById('tags').style.removeProperty('display');
+        } else {
+            console.log('hide', document.getElementById('tags'))
+            document.getElementById('tags').style.setProperty('display', 'none');
+        }
+    }
+
+    // $('select').selectpicker();
+</script>
 
 
