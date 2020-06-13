@@ -1,7 +1,5 @@
 @extends('layouts.public.app')
 @section('content')
-
-
     <div class="bigContainer">
         <div class="row">
 
@@ -57,21 +55,17 @@
 
                     <div class="container">
                         <div class="mySlides">
-                            <div class="numbertext">1 / 2</div>
+                           
                             <img
-                                src="https://upload.wikimedia.org/wikipedia/commons/6/61/Rainbow_Rose_%283366550029%29.jpg"
+                                src={{ $user->avatar }}
                                 style="width:100%">
                         </div>
 
-                        <div class="mySlides">
-                            <div class="numbertext">2 / 2</div>
-                            <img src="https://onlinejpgtools.com/images/examples-onlinejpgtools/cloud-ice-cream.jpg"
-                                 style="width:100%">
-                        </div>
+                      
 
 
-                        <a class="prev" onclick="plusSlides(-1)">❮</a>
-                        <a class="next" onclick="plusSlides(1)">❯</a>
+                        <!-- <a class="prev" onclick="plusSlides(-1)">❮</a>
+                        <a class="next" onclick="plusSlides(1)">❯</a> -->
 
                         <div class="caption-container">
                             <p id="caption"></p>

@@ -37,6 +37,7 @@ class General extends React.Component {
         axios.post('/image-upload', fd)
             .then((res) => {
                 console.log('res', res)
+                window.location.reload();
             })
             .catch((err) => {
                 console.log(err)
@@ -60,7 +61,7 @@ class General extends React.Component {
       }
 
     componentDidMount() {
-        axios.get('get_logged_user')
+        axios.get('get_logged_user') 
             .then((res) => {
                 this.setState({user: res.data.user})
             })
