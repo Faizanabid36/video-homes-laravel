@@ -290,6 +290,8 @@ input.text {
 .bigContainer{
     margin: 0px 118px;
     color: gray;
+
+    @media (max-width: 695.98px) { margin: 0% 10%; }
 }
 
 .Search-boxes{

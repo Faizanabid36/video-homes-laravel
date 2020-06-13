@@ -124,7 +124,7 @@ export default function Customize(props){
   </Row>
 
   <Row>
-    <Col >
+    <Col sm={12} md={6} >
     <div>
         <h3>  Choose a Style </h3>
      <div classNameName="form-check">

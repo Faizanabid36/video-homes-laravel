@@ -412,6 +412,7 @@ body {
 
 .cloud-upload {
   margin-right: 15px;
+  font-size: 10px;
 }
 
 @media (max-width: 895.98px) {
@@ -822,8 +823,10 @@ a {
 }
 
 .imageCustomize {
-  background: url("https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832__340.jpg");
-  width: 474px;
+  background-image: url("https://eu.vibram.com/on/demandware.static/-/Sites-VibramEU-Library/default/dwda073688/video-placeholder.png");
+  min-width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
   height: 262px;
 }
 
