@@ -25,10 +25,12 @@
                                value="{{old('email')}}">
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="password" name="password" id="password" placeholder="Password" required="">
+                        <input class="form-control" type="password" name="password" id="password" placeholder="Password"
+                               required="">
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="password" name="password_confirmation" id="" placeholder="Confirm Password"
+                        <input class="form-control" type="password" name="password_confirmation" id=""
+                               placeholder="Confirm Password"
                                required="">
                     </div>
                     <div class="form-group">
@@ -37,30 +39,28 @@
                             <option value="female">Female</option>
                         </select>
                     </div>
-                    <div onchange="changeVisibility()" class="form-group">
-                        <select class="form-control" name="role" id="role" required="">
-                            <option value="3">Video Provider</option>
-                            <option value="2">Realtor</option>
-                        </select>
-                    </div>
-                    {{--                    <div id="tags" class="form-group">--}}
-                    {{--                        <select  name="account_type[]" id="account_type" class="  form-control custom-select selectpicker " multiple   >--}}
-                    {{--                            @foreach($user_parent_category ?? '' as $user_tag)--}}
-                    {{--                                <option  value="{{$user_tag->id}}">{{$user_tag->name}}</option>--}}
-                    {{--                            @endforeach--}}
-                    {{--                        </select>--}}
-                    {{--                    </div>--}}
-                    <div id="tags" class="form-group">
-                        <select onchange="change_category_type(this)" name="account_type[]" id="account_type"
-                                class="  form-control ">
-                            <option value="" selected disabled>Select</option>
-                            @foreach($user_parent_category ?? '' as $user_tag)
-                                <option value="{{$user_tag->id}}">{{$user_tag->name}}</option>
+                    <div class="form-group">
+                        <select onchange="changeVisibility(this)" class="form-control" name="role" id="role"
+                                required="">
+                            <option selected disabled>Selected Role</option>
+                            @foreach($roles as $role)
+                                <option value="{{$role->id}}">{{$role->role}}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div id="child">
+                    <div id="tags" class="form-group">
+                        {{--                        <select onchange="change_category_type(this)" name="account_type" id="account_type"--}}
+                        {{--                                class="  form-control ">--}}
+                        {{--                            <option value="" selected disabled>Select Role Category</option>--}}
+                        {{--                            @foreach($user_parent_category ?? '' as $user_tag)--}}
+                        {{--                                <option value="{{$user_tag->id}}">{{$user_tag->name}}</option>--}}
+                        {{--                            @endforeach--}}
+                        {{--                        </select>--}}
+                    </div>
+                    <div id="parent" class="form-group">
+                    </div>
 
+                    <div id="child" class="form-group">
                     </div>
 
                     <div class="terms">
@@ -88,44 +88,70 @@
 
 <script type="text/javascript">
     function change_category_type(e) {
-        //
         var select = document.createElement("select");
         select.name = "child_category_type";
-        select.class = 'form-control'
-        let selector=document.getElementById('child')
-        selector.innerHTML=''
-        var values = [];
+        select.classList.add('form-control')
+        let selector = document.getElementById('child')
+        selector.innerHTML = ''
+        let values = [];
+        let valu = [];
         @foreach($user_child_category as $key=>$val)
         if (e.value == {{$key}}) {
             @foreach($val as $v)
-            values.push('{{$v->name}}')
+                values.push('{{$v->name}}')
+                valu.push('{{$v->id}}')
             @endforeach
         }@endforeach
 
-        for (const val of values) {
-            var option = document.createElement("option");
-            option.value = val;
-            option.text = val.charAt(0).toUpperCase() + val.slice(1);
-            select.appendChild(option);
-        }
+            for (const val of values) {
+                var option = document.createElement("option");
+                option.value = valu;
+                option.text = val.charAt(0).toUpperCase() + val.slice(1);
+                select.appendChild(option);
+            }
         document.getElementById("child").appendChild(select);
-        console.log(e.value)
     }
 
-    function changeVisibility() {
-        let role = document.getElementById('role');
-        console.log(role.value)
-        if (role.value === '3') {
-
-            console.log('display');
-            document.getElementById('tags').style.removeProperty('display');
-        } else {
-            console.log('hide', document.getElementById('tags'))
-            document.getElementById('tags').style.setProperty('display', 'none');
+    function changeVisibility(e) {
+        var select = document.createElement("select");
+        select.name = "account_type";
+        select.id = 'parent_selector';
+        select.classList.add('form-control')
+        let selector = document.getElementById('parent')
+        selector.innerHTML = ''
+        let values = [];
+        @foreach($roles_assoc as $key=>$val)
+        if (e.value == {{$key}}) {
+            @foreach($val as $v)
+                values.push('{{($v->name)}}')
+            @endforeach
         }
+        @endforeach
+        console.log(values)
+            for (const val of values) {
+                var option = document.createElement("option");
+                option.value = val.id;
+                option.text = val.name.charAt(0).toUpperCase() + val.name.slice(1);
+                select.appendChild(option);
+            }
+        document.getElementById("parent").appendChild(select);
+        // let role = document.getElementById('role');
+        // console.log(role.value)
+        // if (role.value === '3') {
+        //
+        //     console.log('display');
+        //     document.getElementById('tags').style.removeProperty('display');
+        // } else {
+        //     console.log('hide', document.getElementById('tags'))
+        //     document.getElementById('tags').style.setProperty('display', 'none');
+        // }
     }
-
-    // $('select').selectpicker();
 </script>
-
+@section('script')
+    <script type="text/javascript">
+        $(document).on('change', '#parent_selector', function () {
+            console.log(document.getElementById('parent_selector').value)
+        });
+    </script>
+@endsection
 

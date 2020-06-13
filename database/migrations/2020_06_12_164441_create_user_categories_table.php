@@ -18,6 +18,7 @@ class CreateUserCategoriesTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('parent_id')->nullable();
+            $table->string('role_id');
             $table->timestamps();
         });
     }

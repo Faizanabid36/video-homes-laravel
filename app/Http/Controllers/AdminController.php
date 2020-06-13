@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\User;
 use App\UserCategory;
-use App\UserTags;
+use App\UserRole;
 use App\Video;
 use Illuminate\Http\Request;
 
@@ -88,27 +88,27 @@ class AdminController extends Controller
 
     public function list_user_tags()
     {
-        $tags = UserTags::paginate(5);
+        $tags = UserRole::paginate(5);
         return view('admin.user_tags',compact('tags'));
     }
     public function edit_tag($id)
     {
-        $tag=UserTags::whereId($id)->first();
+        $tag = UserRole::whereId($id)->first();
         return view('admin.edit_tag',compact('tag'));
     }
     public function delete_tag($id)
     {
 //        dd($id);
-        UserTags::whereId($id)->delete();
-        return back()->with('success','Tag Deleted');
+        UserRole::whereId($id)->delete();
+        return back()->with('success', 'Role Deleted');
     }
     public function store_tag(Request $request)
     {
-        $this->validate($request,[
-            'tag_name'=>'required',
+        $this->validate($request, [
+            'tag_name' => 'required',
         ]);
-        $ut=new UserTags();
-        $ut->tag_name=$request->get('tag_name');
+        $ut = new UserRole();
+        $ut->role = $request->get('tag_name');
         $ut->save();
         return back()->with('success', 'Tag Added Successfully');
     }
@@ -118,14 +118,15 @@ class AdminController extends Controller
         $this->validate($request, [
             'tag_name' => 'required',
         ]);
-        UserTags::whereId($id)->update(['tag_name' => $request->get('tag_name')]);
+        UserRole::whereId($id)->update(['role' => $request->get('tag_name')]);
         return back()->with('success', 'Tag Updated Successfully');
     }
 
     public function create_user_categories()
     {
-        $user_cactegories = UserCategory::all();
-        return view('admin.create_user_category', compact('user_cactegories'));
+        $user_cactegories = UserCategory::whereNull('parent_id')->get();
+        $roles=UserRole::where('role','!=','admin')->get();
+        return view('admin.create_user_category', compact('user_cactegories', 'roles'));
     }
 
     public function add_user_category(Request $reqeust)
@@ -133,8 +134,16 @@ class AdminController extends Controller
         $this->validate($reqeust, [
             'name' => 'required',
             'description' => 'required',
+            'parent_role' => 'required'
         ]);
-        UserCategory::create(\request()->except('_token'));
+        if(!is_null(\request('parent_id')))
+        {
+            $role_id=UserCategory::whereId(\request('parent_id'))->first();
+            \request()->merge(['role_id' => $role_id->role_id]);
+        }
+        else
+            \request()->merge(['role_id' => \request('parent_role')]);
+        UserCategory::create(\request()->except('_token', 'parent_role'));
         return back()->with('success', 'Category Created Successfully');
     }
 
@@ -155,15 +164,23 @@ class AdminController extends Controller
 
     public function update_user_category()
     {
-        UserCategory::whereId(\request('id'))->update(\request()->except('_token', 'id'));
+        if(!is_null(\request('parent_id')))
+        {
+            $role_id=UserCategory::whereId(\request('parent_id'))->first();
+            \request()->merge(['role_id' => $role_id->role_id]);
+        }
+        else
+            \request()->merge(['role_id' => \request('parent_role')]);
+        UserCategory::whereId(\request('id'))->update(\request()->except('_token', 'id','parent_role'));
         return back()->with('success', 'Updated Successfully');
     }
 
     public function edit_user_category($id)
     {
         $cat = UserCategory::whereId($id)->with('children')->with('parent')->first();
-        $categories = UserCategory::where('id', '!=', $id)->with('children')->with('parent')->get();
-        return view('admin.edit_user_category', compact('cat', 'categories'));
+        $categories = UserCategory::where('id', '!=', $id)->whereNull('parent_id')->with('children')->with('parent')->get();
+        $roles=UserRole::where('role','!=','admin')->get();
+        return view('admin.edit_user_category', compact('cat', 'categories','roles'));
     }
 
     public function users_list()
