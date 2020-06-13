@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
         $user_parent_category = UserCategory::whereNull('parent_id')->get();
         $user_child_category = UserCategory::whereNotNull('parent_id')->get()->groupBy('parent_id');
 
-      /**/  dd($user_child_category);
+//      /**/  dd($user_child_category);
 
         $user_tags=UserTags::all();
         View::share(
