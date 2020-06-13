@@ -47,8 +47,8 @@ class Videos extends React.Component {
             <Row>
                
                   
-                        <Col xs={12} className=" my-5 ">
-                            <h1 className="float-left">My Videos <div className="borderBottom2"> </div> </h1>
+                        <Col xs={12} className=" my-4 ">
+                            <h3 className="float-left heading">My Videos <div className="borderBottom2"> </div> </h3>
                             <DropdownButton
                                 className="dropdownbtn float-right"
                                 id="dropdown-basic-button"
@@ -147,9 +147,9 @@ class Videos extends React.Component {
             <Row>
            
             
-            <Col xs={12} className=" my-5 ">
+            <Col xs={12} className=" my-4 ">
                       
-                <h1 >Pending for Approval <div className="borderBottom2"> </div> </h1>
+                <h1 className="heading" >Pending for Approval <div className="borderBottom2"> </div> </h1>
              </Col>
                 { this.state.pendingVideos.length  ?   this.state.pendingVideos.map((item, index) => {
                     let link = window.VIDEO_APP.base_url + '/' + item.user.username + '/watch_video?v=' + item.video_id;

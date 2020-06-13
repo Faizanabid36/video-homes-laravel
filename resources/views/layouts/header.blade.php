@@ -37,7 +37,7 @@
         </div>
 
         <div class="col-5 col-lg-2 my-3 ml-auto ">
-              <span> <a href="{{route('dashboard')}}/#/upload-video" class="links  "> <i class="fa fa-cloud-upload btn btn-primary" color="black">Upload Video  </i>  </a>
+              <span class=""> <a href="{{route('dashboard')}}/#/upload-video" class="  "> <i   class="fa fa-cloud-upload cloud-upload btn  btn-primary" color="black">Upload Video  </i>  </a>
               </span>
                <span class="dropdown nav-item dropdown-Custom  ">
                                    <button class="btn dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"

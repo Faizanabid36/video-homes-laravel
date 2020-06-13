@@ -100,15 +100,7 @@ height: 14px;
 }
              
 
-  & .heading{
-        color: $color;
-        text-shadow: 2px 2px rgb(4, 50, 150);
-        font-size: 40px;
-        display: inline;
-        vertical-align: middle;
-        
-        
-  }
+  
   & .borderBottom{
   
     
@@ -579,15 +571,31 @@ body {
   
    }
   }
+
+  .cloud-upload{
+    margin-right: 15px;
+
+    @media (max-width: 895.98px) { margin-right: 0;  }
+  }
   
+  .heading{
+
+    
+font-style: normal;
+font-weight: 800;
+font-size: 19px;
+
+height: 21px;
+  }
   .links2 {
     
     padding: auto;
     color: #181717 !important;
-    font-size: 19px !important;
+    font-size: 18px !important;
     letter-spacing: 0.05em !important;
-    font-weight: 503 !important;
-      
+    font-weight: normal !important;
+   
+    margin-left: 33px;
        
       &:hover {
         color: $color !important;
@@ -775,10 +783,18 @@ a{
 
 #dropdown-basic-button{
 
-    border-radius: 20px 20px 20px 20px;
-    width:100px;
+    border-radius: 44px;
+    width: 104px;
+    height: 38px;
     background: $background;
     border: none !important;
+    font-size: 15px;
+
+    &::after{
+      margin-left: 21px;
+      font-size: 18px;
+      vertical-align: middle;
+    }
 
 
 }

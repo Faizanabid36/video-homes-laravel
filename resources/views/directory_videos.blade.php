@@ -7,7 +7,7 @@
 
             <div class="col-md-7 col-sm-12">
                 <h2>
-                    Joe French Realtor
+                {{$user->name}}
 
 
                 </h2>
@@ -259,7 +259,7 @@
         </div>
 
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 pr-0">
 
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
