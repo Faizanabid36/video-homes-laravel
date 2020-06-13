@@ -799,6 +799,11 @@ a{
 
 }
 
+.btn:focus {
+   outline: 0 !important; 
+   box-shadow: none !important; 
+}
+
 .dropdownbtn > div{
 
   border-radius: 12px 12px;

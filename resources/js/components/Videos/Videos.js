@@ -138,7 +138,7 @@ class Videos extends React.Component {
 
                         </Card>
                     </Col>
-                }):  <h2 className="Novideos"> No Videos Found  </h2> };
+                }):  <h2 className="Novideos"> No Videos Found  </h2> }
                
             </Row>
            
@@ -201,7 +201,7 @@ class Videos extends React.Component {
 
                         </Card>
                     </Col>
-                }) :  <h2 className="Novideos"> No Videos Found  </h2> };
+                }) :  <h2 className="Novideos"> No Videos Found  </h2> }
             </Row>
         </Container>;
     }
