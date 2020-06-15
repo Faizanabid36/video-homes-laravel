@@ -49,7 +49,7 @@
     <!-- 3rd row -->
     <div class="row Category-Boxes ">
         @foreach($tags as $tag)
-            <div class="col-6"><span> <a href="{{route('directory_by_category',$tag->id)}}"> {{$tag->tag_name}}</a></span> <span
+            <div class="col-6"><span> <a href="{{route('ex_directory_by_category',Str::slug($tag->role))}}"> {{ucfirst($tag->role)}}</a></span> <span
                     class="float-right">{{$tag->account_types_count}}</span>
                 <hr/>
             </div>
@@ -123,19 +123,17 @@
                                 </div>
                                 <div class="col-md-8">
                                   <div class="card-body">
-                                    <h2 class="card-title "> <a href="{{route('directory_by_username',$account_user->username)}}"
+                                    <h2 class="card-title "> <a href="{{route('directory_by_user',$account_user->username)}}"
                                                                 style="font-weight:900"> {{$account_user->name}} </a>
                                     </h2>
                                     <br/>
 
                                     <p class="card-text my-2">{{$account_user->bio}}</p>
                                     <p class="card-text my-2"> <i class="fa icon-blue fa-map-marker mr-2"></i>  <b> Address: </b>{{$account_user->address}}</p>
-                                    @foreach($account_user->account_types as $account_type)
-                                          @if(!is_null($account_type->user_tag))
-                                              <button class="btn-tags"> {{$account_type->user_tag->tag_name}}
+                                          @if(!is_null($account_user->user_role))
+                                              <button class="btn-tags"> {{$account_user->user_role->role}}
                                               <span class="fa  fa-tag"></span> </button>
                                           @endif
-                                      @endforeach
                                     <p class="card-text my-3">  <i class="fa icon-blue mr-2 fa-phone"></i>   <b>Phone:</b> {{$account_user->phone}}</p>
                                   </div>
                                 </div>
@@ -172,12 +170,10 @@
                                     </h2>
                                     <p class="card-text my-3">{{$account_user->bio}}</p>
                                     <p class="card-text my-3"> <i class="fa icon-blue fa-map-marker mr-2"></i>  <b> Address: </b>{{$account_user->address}}</p>
-                                    @foreach($account_user->account_types as $account_type)
-                                          @if(!is_null($account_type->user_tag))
-                                              <button class="btn-tags "> {{$account_type->user_tag->tag_name}}
+                                          @if(!is_null($account_user->user_role))
+                                              <button class="btn-tags "> {{$account_user->user_role->role}}
                                               <span class="fa  fa-tag"></span> </button>
                                           @endif
-                                      @endforeach
                                     <p class="card-text my-3">  <i
                                             class="fa icon-blue mr-2 fa-phone"></i>   <b>Phone:</b> {{$account_user->phone}}</p>
                                   </div>

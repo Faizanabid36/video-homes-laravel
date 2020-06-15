@@ -65,12 +65,12 @@
                            
                             <img
 
-                                @if( $user->avatar )
+                                @if( !is_null($user->avatar) )
                                 src= '{{ $user->avatar }}'
                                 @else
                                 src= 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMgrxYAqZF6-kdFuLQesPwdAyonhn93LsxvKXax0vzbCCGd_wQ&usqp=CAU'
                                 @endif
-                                alt=" No image found"
+
                                 style="width:100% ; ">
                         </div>
 
@@ -226,12 +226,7 @@
 
         <div class="row">
             <div class="col-sm-12 my-3 col-md-5">
-                @for($i=0;$i<count($user->account_types);$i++)
-                    @if(isset($user->account_types[$i]->user_tag))
-                        <button class="btn-tags"> {{$user->account_types[$i]->user_tag->tag_name}} <i
-                                class='fas icon fa-tag'></i></button>
-                    @endif
-                @endfor
+                
 
               
             </div>

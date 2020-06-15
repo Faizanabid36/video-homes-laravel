@@ -34,12 +34,6 @@
                                required="">
                     </div>
                     <div class="form-group">
-                        <select class="form-control" name="gender" id="gender" required="">
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <select onchange="changeVisibility(this)" class="form-control" name="role" id="role"
                                 required="">
                             <option selected disabled>Selected Role</option>
@@ -82,7 +76,7 @@
 <script type="text/javascript">
     function changeVisibility(e) {
         var select = document.createElement("select");
-        select.name = "account_type";
+        select.name = "sub_role";
         select.id = 'parent_selector';
         select.classList.add('form-control')
         let selector = document.getElementById('parent')
@@ -99,6 +93,11 @@
             @endforeach
         }
             @endforeach
+        var option = document.createElement("option");
+        option.text = "Select An Option";
+        option.disabled=true;
+        option.selected=true;
+        select.appendChild(option);
         for (let i = 0; i < values.length; i++) {
             var option = document.createElement("option");
             option.value = valu[i];
@@ -114,7 +113,7 @@
         $(document).on('click', '#parent_selector', function () {
             let e = document.getElementById('parent_selector')
             var select = document.createElement("select");
-            select.name = "child_category_type";
+            select.name = "sub_role_category";
             select.classList.add('form-control')
             let selector = document.getElementById('child')
             selector.innerHTML = ''
@@ -127,6 +126,11 @@
                 valu.push('{{$v->id}}')
                 @endforeach
             }@endforeach
+            var option = document.createElement("option");
+            option.text = "Select An Option";
+            option.disabled=true;
+            option.selected=true;
+            select.appendChild(option);
             for (let i = 0; i < values.length; i++) {
                 var option = document.createElement("option");
                 option.value = valu[i];

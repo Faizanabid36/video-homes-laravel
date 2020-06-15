@@ -32,4 +32,18 @@ class UserCategory extends Model
             });
         });
     }
+
+    public function user_role()
+    {
+        return $this->belongsTo(UserRole::class,'role_id','id');
+    }
+
+    public function sub_roles()
+    {
+        return $this->hasMany(AccountType::class,'sub_role','id');
+    }
+    public function sub_roles_category()
+    {
+        return $this->hasMany(AccountType::class,'sub_role_category','id');
+    }
 }

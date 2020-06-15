@@ -2,10 +2,10 @@
 
 namespace App;
 
+use App\AccountType;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\AccountType;
 
 class User extends Authenticatable
 {
@@ -56,13 +56,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(BlockedUser::class, 'blocked_user_id', 'id');
     }
-
+    public function account_types()
+    {
+        return $this->hasOne(AccountType::class,'user_id');
+    }
     public function user_role()
     {
         return $this->hasOne(UserRole::class,'id','role');
     }
-    public function account_types()
-    {
-        return $this->hasMany(AccountType::class,'user_id');
-    }
+//    public function
 }
