@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class AccountType extends Model
 {
     //
-    protected $with = 'user_tag';
+//    protected $with = 'user_tag';
 
     protected $table = 'account_types';
 
@@ -21,6 +21,16 @@ class AccountType extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id','id');
+    }
+
+    public function user_category()
+    {
+        return $this->hasMany(UserCategory::class,'role_id','role');
+    }
+
+    public function user_sub_cat()
+    {
+        return $this->hasMany(UserCategory::class,'id','sub_role');
     }
 
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\AccountType;
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -56,7 +55,6 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'username' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'gender' => ['required']
         ]);
     }
 
@@ -69,34 +67,20 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $user_data['password'] = Hash::make($data['password']);
-        $user_data['gender'] = $data['gender'];
         $user_data['name'] = $data['name'];
         $user_data['username'] = $data['username'];
         $user_data['email'] = $data['email'];
         $user_data['role'] = $data['role'];
         $user = User::create($user_data);
-        
-        if ($user_data['role'] == 3){
-                // $account_type->account_type = json_encode($data['account_type']);
-
-            for( $i=0 ; $i<count($data['account_type']) ; $i++ ){
-                
-                $account_type = new AccountType();
-        $account_type->user_id = $user->id;
-                $account_type->account_type = $data['account_type'][$i];
-            //    echo $data['account_type'][$i];
-            $account_type->save();
-
-            }
-        }else{
-
-            $account_type->account_type = null;
-            $account_type->save();
-        }
-        
+        $account_type = new AccountType();
+        $account_type->sub_role_category = isset($data['sub_role_category'])?$data['sub_role_category']:"";
+        $account_type->sub_role = isset($data['sub_role'])?$data['sub_role']:"";
+        $account_type->user_id =$user->id;
+        $account_type->role = isset($data['role'])?$data['role']:"";
+        $account_type->save();
         return $user;
         // dd ($data['account_type']);
-        
-    // dd($data);
+
+        // dd($data);
     }
 }
