@@ -49,13 +49,7 @@
                         </select>
                     </div>
                     <div id="tags" class="form-group">
-                        {{--                        <select onchange="change_category_type(this)" name="account_type" id="account_type"--}}
-                        {{--                                class="  form-control ">--}}
-                        {{--                            <option value="" selected disabled>Select Role Category</option>--}}
-                        {{--                            @foreach($user_parent_category ?? '' as $user_tag)--}}
-                        {{--                                <option value="{{$user_tag->id}}">{{$user_tag->name}}</option>--}}
-                        {{--                            @endforeach--}}
-                        {{--                        </select>--}}
+
                     </div>
                     <div id="parent" class="form-group">
                     </div>
@@ -85,33 +79,7 @@
         </div>
     </div>
 @endsection
-
 <script type="text/javascript">
-    function change_category_type(e) {
-        var select = document.createElement("select");
-        select.name = "child_category_type";
-        select.classList.add('form-control')
-        let selector = document.getElementById('child')
-        selector.innerHTML = ''
-        let values = [];
-        let valu = [];
-        @foreach($user_child_category as $key=>$val)
-        if (e.value == {{$key}}) {
-            @foreach($val as $v)
-                values.push('{{$v->name}}')
-                valu.push('{{$v->id}}')
-            @endforeach
-        }@endforeach
-
-            for (const val of values) {
-                var option = document.createElement("option");
-                option.value = valu;
-                option.text = val.charAt(0).toUpperCase() + val.slice(1);
-                select.appendChild(option);
-            }
-        document.getElementById("child").appendChild(select);
-    }
-
     function changeVisibility(e) {
         var select = document.createElement("select");
         select.name = "account_type";
@@ -119,38 +87,53 @@
         select.classList.add('form-control')
         let selector = document.getElementById('parent')
         selector.innerHTML = ''
+        let el = document.getElementById('child')
+        el.innerHTML = ''
         let values = [];
+        let valu = [];
         @foreach($roles_assoc as $key=>$val)
         if (e.value == {{$key}}) {
             @foreach($val as $v)
-                values.push('{{($v->name)}}')
+            values.push('{{$v->name}}')
+            valu.push('{{$v->id}}')
             @endforeach
         }
-        @endforeach
-        console.log(values)
-            for (const val of values) {
-                var option = document.createElement("option");
-                option.value = val.id;
-                option.text = val.name.charAt(0).toUpperCase() + val.name.slice(1);
-                select.appendChild(option);
-            }
+            @endforeach
+        for (let i = 0; i < values.length; i++) {
+            var option = document.createElement("option");
+            option.value = valu[i];
+            option.text = values[i].charAt(0).toUpperCase() + values[i].slice(1);
+            select.appendChild(option);
+        }
         document.getElementById("parent").appendChild(select);
-        // let role = document.getElementById('role');
-        // console.log(role.value)
-        // if (role.value === '3') {
-        //
-        //     console.log('display');
-        //     document.getElementById('tags').style.removeProperty('display');
-        // } else {
-        //     console.log('hide', document.getElementById('tags'))
-        //     document.getElementById('tags').style.setProperty('display', 'none');
-        // }
     }
 </script>
+
 @section('script')
     <script type="text/javascript">
-        $(document).on('change', '#parent_selector', function () {
-            console.log(document.getElementById('parent_selector').value)
+        $(document).on('click', '#parent_selector', function () {
+            let e = document.getElementById('parent_selector')
+            var select = document.createElement("select");
+            select.name = "child_category_type";
+            select.classList.add('form-control')
+            let selector = document.getElementById('child')
+            selector.innerHTML = ''
+            let values = [];
+            let valu = [];
+            @foreach($user_child_category as $key=>$val)
+            if (e.value == {{$key}}) {
+                @foreach($val as $v)
+                values.push('{{$v->name}}')
+                valu.push('{{$v->id}}')
+                @endforeach
+            }@endforeach
+            for (let i = 0; i < values.length; i++) {
+                var option = document.createElement("option");
+                option.value = valu[i];
+                option.text = values[i].charAt(0).toUpperCase() + values[i].slice(1);
+                select.appendChild(option);
+            }
+            document.getElementById("child").appendChild(select);
         });
     </script>
 @endsection

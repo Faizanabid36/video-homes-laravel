@@ -225,15 +225,17 @@
         <!-- 2nd row -->
 
         <div class="row">
-            <div class="col-5">
+            <div class="col-sm-12 my-3 col-md-5">
                 @for($i=0;$i<count($user->account_types);$i++)
                     @if(isset($user->account_types[$i]->user_tag))
                         <button class="btn-tags"> {{$user->account_types[$i]->user_tag->tag_name}} <i
                                 class='fas icon fa-tag'></i></button>
                     @endif
                 @endfor
+
+              
             </div>
-            <div class="col-7">
+            <div class="col-sm-12 my-3 col-md-7">
                 <p>
                     {{$user->name}}
                 </p>
@@ -245,6 +247,7 @@
 
             </div>
         </div>
+        <hr />
 
 
         <!-- 3rd row -->
