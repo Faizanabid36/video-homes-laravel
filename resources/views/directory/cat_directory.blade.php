@@ -127,7 +127,7 @@
                                 <div class="col-md-8">
                                   <div class="card-body">
                                     <h2 class="card-title "> <a
-                                            href="{{route('directory_by_username',$account_user['username'])}}"
+                                            href="{{route('directory_by_user',$account_user['username'])}}"
                                             style="font-weight:900"> {{$account_user['name']}} </a>
                                     </h2>
                                     <br/>
