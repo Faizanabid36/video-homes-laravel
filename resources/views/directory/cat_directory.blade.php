@@ -146,7 +146,7 @@
                                             alt="...">
                                     @endif
                                 </div>
-                                  {{dd($account_user['username'])}}
+                                  {{dd($account_user)}}
                                 <div class="col-md-8">
                                   <div class="card-body">
                                     <h2 class="card-title "> <a
