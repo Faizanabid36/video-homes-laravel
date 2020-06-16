@@ -49,7 +49,7 @@
     <!-- 3rd row -->
     <div class="row Category-Boxes ">
         @foreach($tags as $tag)
-            <div class="col-6"><span> <a href="{{route('ex_directory_by_category',preg_replace('/\W|\_+/m', -'-', $tag->role))}}"> {{ucfirst($tag->role)}}</a></span> <span
+            <div class="col-6"><span> <a href="{{route('ex_directory_by_category',Str::slug($tag->role))}}"> {{ucfirst($tag->role)}}</a></span> <span
                     class="float-right">{{$tag->account_types_count}}</span>
                 <hr/>
             </div>
