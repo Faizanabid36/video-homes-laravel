@@ -93,11 +93,7 @@
             @endforeach
         }
             @endforeach
-        var option = document.createElement("option");
-        option.text = "Select An Option";
-        option.disabled=true;
-        option.selected=true;
-        select.appendChild(option);
+
         for (let i = 0; i < values.length; i++) {
             var option = document.createElement("option");
             option.value = valu[i];
@@ -110,7 +106,7 @@
 
 @section('script')
     <script type="text/javascript">
-        $(document).on('click', '#parent_selector', function () {
+        $(document).on('select', '#parent_selector', function () {
             let e = document.getElementById('parent_selector')
             var select = document.createElement("select");
             select.name = "sub_role_category";
@@ -126,11 +122,7 @@
                 valu.push('{{$v->id}}')
                 @endforeach
             }@endforeach
-            var option = document.createElement("option");
-            option.text = "Select An Option";
-            option.disabled=true;
-            option.selected=true;
-            select.appendChild(option);
+
             for (let i = 0; i < values.length; i++) {
                 var option = document.createElement("option");
                 option.value = valu[i];
