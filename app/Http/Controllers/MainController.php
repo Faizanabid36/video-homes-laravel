@@ -101,8 +101,7 @@ class MainController extends Controller
     {
         $video = Video::whereHas('user', function ($query) use ($username) {
             $query->whereUsername($username);
-        })->latest()->firstorFail();
-        dd($video);
+        })->latest()->first();
         $related_videos = [];
         if (!is_null($video)) {
             $related_videos = Video::whereHas('user', function ($query) use ($username) {
@@ -116,21 +115,6 @@ class MainController extends Controller
     public function joe()
     {
         return view('JoeFrenchRealtor');
-    }
-
-    public function directory_by_user_video($username, $video_id)
-    {
-        $user = User::whereUsername($username)->with('account_types')->first();
-        $video = Video::whereHas('user', function ($query) use ($username) {
-            $query->whereUsername($username);
-        })->where('video_id', $video_id)->first();
-        if(!is_null($video))
-        {
-            $related_videos = Video::whereHas('user', function ($query) use ($username) {
-                $query->whereUsername($username);
-            })->where('id', '!=', $video->id)->latest()->get();
-        }
-        return view('directory_videos', compact('user', 'video', 'related_videos'));
     }
     public function account_types()
     {
