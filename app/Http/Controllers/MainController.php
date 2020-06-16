@@ -29,21 +29,6 @@ class MainController extends Controller
         return view('directory.directory', compact('account_types', 'tags'));
     }
 
-    public function directory_by_category($id)
-    {
-        $tags=UserCategory::withCount('sub_roles')->whereRoleId($id)->whereNull('parent_id')->get();
-        $users = User::with('account_types','user_role')->where('role', $id)->get();
-        $users = collect($users)->map(function ($user){
-            $type=AccountType::where('user_id',$user->id)->first();
-            $x=UserCategory::whereId($type->sub_role)->first();
-            return collect($user)->merge(['category_tag'=>$x->name]);
-        });
-//        return $users;
-//        $account_types = \App\User::whereHas('account_types', function ($query) use ($id) {
-//            return $query->where('account_type', $id);
-//        })->with('account_types')->get();
-        return view('directory.cat_directory', compact('users', 'tags'));
-    }
     public function ex_directory_by_category($role)
     {
         $role_slug = $role;
@@ -55,7 +40,8 @@ class MainController extends Controller
         $users = collect($users)->map(function ($user) {
             $type = AccountType::where('user_id', $user->id)->first();
             $x = UserCategory::whereId($type->sub_role)->first();
-            return collect($user)->merge(['category_tag' => $x->name]);
+            if(!is_null($x))
+                return collect($user)->merge(['category_tag' => $x->name]);
         });
         return view('directory.cat_directory', compact('users', 'tags', 'role_slug'));
     }
