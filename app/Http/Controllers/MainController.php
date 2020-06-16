@@ -42,8 +42,9 @@ class MainController extends Controller
             $x = UserCategory::whereId($type->sub_role)->first();
             if(!is_null($x))
                 return collect($user)->merge(['category_tag' => $x->name]);
+            else
+                return collect($user)->merge(['category_tag' => '']);
         });
-        dd($users);
         return view('directory.cat_directory', compact('users', 'tags', 'role_slug'));
     }
 
