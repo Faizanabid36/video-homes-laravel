@@ -43,6 +43,7 @@ class MainController extends Controller
             if(!is_null($x))
                 return collect($user)->merge(['category_tag' => $x->name]);
         });
+        dd($users);
         return view('directory.cat_directory', compact('users', 'tags', 'role_slug'));
     }
 
