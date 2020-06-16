@@ -52,7 +52,7 @@
                 @if(!isset($role_cat))
                     <div class="col-6">
                         <span>
-                            <a href="{{route('directory_by_sub_category',[$role_slug,Str::slug($tag->name)])}}"> {{ucfirst($tag->name)}}
+                            <a href="{{route('directory_by_sub_category',[$role_slug,preg_replace('/\W|\_+/m', -'-', $tag->name)])}}"> {{ucfirst($tag->name)}}
                             </a>
                         </span>
                         <span
@@ -63,10 +63,10 @@
                     <div class="col-6">
                         <span>
                             @if(!isset($role_cat))
-                                <a href="{{route('directory_by_sub_category',[$role_slug,Str::slug($tag['name'])])}}"> {{ucfirst($tag['name'])}}
+                                <a href="{{route('directory_by_sub_category',[$role_slug,preg_replace('/\W|\_+/m', -'-', $tag['name'])])}}"> {{ucfirst($tag['name'])}}
                                 </a>
                             @else
-                                <a href="{{route('directory_by_sub_category_role',[$role_slug,$sub_role_slug,Str::slug($tag['name'])])}}"> {{ucfirst($tag['name'])}}
+                                <a href="{{route('directory_by_sub_category_role',[$role_slug,$sub_role_slug,preg_replace('/\W|\_+/m', -'-', $tag['name'])])}}"> {{ucfirst($tag['name'])}}
                                 </a>
                             @endif
                         </span>
