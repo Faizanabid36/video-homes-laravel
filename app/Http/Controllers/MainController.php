@@ -102,6 +102,7 @@ class MainController extends Controller
         $video = Video::whereHas('user', function ($query) use ($username) {
             $query->whereUsername($username);
         })->latest()->firstorFail();
+        dd($video);
         $related_videos = [];
         if (!is_null($video)) {
             $related_videos = Video::whereHas('user', function ($query) use ($username) {
