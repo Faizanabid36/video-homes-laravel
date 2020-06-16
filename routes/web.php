@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 //Public Pages
 Route::get('/', 'MainController@index')->name('home');
 Route::get('/directory', 'MainController@directory')->name('directory');
-Route::get('/directory/category/{id}','MainController@directory_by_category')->name('directory_by_category');
 Route::get('/directory/{role}','MainController@ex_directory_by_category')->name('ex_directory_by_category');
 Route::get('/directory/{role}/{subrole}','MainController@directory_by_sub_category')->name('directory_by_sub_category');
 Route::get('/directory/{role}/{subrole}/{sub_cat}','MainController@directory_by_sub_category_role')->name('directory_by_sub_category_role');
