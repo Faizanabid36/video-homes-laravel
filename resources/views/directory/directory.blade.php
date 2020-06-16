@@ -73,7 +73,7 @@
 
         <div class="col-12 my-4 p-0">
             <div class="float-left">
-                <h6 class="my-3"> Found<span class="h-8"> 8 </span>listings </h6>
+                <h6 class="my-3"> Found<span class="h-8"> {{count($account_types)}} </span>listings </h6>
                 <div class="dropdown">
                     <button class="btn btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
@@ -123,7 +123,7 @@
                                 </div>
                                 <div class="col-md-8">
                                   <div class="card-body">
-                                    <h2 class="card-title "> <a href="{{route('directory_by_user',$account_user->username)}}"
+                                    <h2 class="card-title "> <a href="{{route('directory_by_username',$account_user->username)}}"
                                                                 style="font-weight:900"> {{$account_user->name}} </a>
                                     </h2>
                                     <br/>

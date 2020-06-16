@@ -49,12 +49,34 @@
         <!-- 3rd row -->
         <div class="row Category-Boxes ">
             @foreach($tags as $tag)
-                <div class="col-6"><span> <a
-                            href="{{route('directory_by_category',$tag->id)}}"> {{ucfirst($tag->name)}}</a></span> <span
-                        class="float-right">{{$tag->sub_roles_count}}</span>
-                    <hr/>
-                </div>
+                @if(!isset($role_cat))
+                    <div class="col-6">
+                        <span>
+                            <a href="{{route('directory_by_sub_category',[$role_slug,Str::slug($tag->name)])}}"> {{ucfirst($tag->name)}}
+                            </a>
+                        </span>
+                        <span
+                            class="float-right">{{$tag->sub_roles_count}}</span>
+                        <hr/>
+                    </div>
+                @else
+                    <div class="col-6">
+                        <span>
+                            @if(!isset($role_cat))
+                                <a href="{{route('directory_by_sub_category',[$role_slug,Str::slug($tag['name'])])}}"> {{ucfirst($tag['name'])}}
+                                </a>
+                            @else
+                                <a href="{{route('directory_by_sub_category_role',[$role_slug,$sub_role_slug,Str::slug($tag['name'])])}}"> {{ucfirst($tag['name'])}}
+                                </a>
+                            @endif
+                        </span>
+                        <span
+                            class="float-right">{{$tag['sub_roles_count']}}</span>
+                        <hr/>
+                    </div>
+                @endif
             @endforeach
+
 
         </div>
 
@@ -74,7 +96,7 @@
 
             <div class="col-12 my-4 p-0">
                 <div class="float-left">
-                    <h6 class="my-3"> Found<span class="h-8"> 8 </span>listings </h6>
+                    <h6 class="my-3"> Found<span class="h-8"> {{count($users)}} </span>listings </h6>
                     <div class="dropdown">
                         <button class="btn btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
@@ -127,17 +149,30 @@
                                 <div class="col-md-8">
                                   <div class="card-body">
                                     <h2 class="card-title "> <a
-                                            href="{{route('directory_by_user',$account_user['username'])}}"
-                                            style="font-weight:900"> {{$account_user['name']}} </a>
+                                            href="{{route('directory_by_username',$account_user['username'])}}"
+                                            style="font-weight:900"> {{ucfirst($account_user['name'])}} </a>
                                     </h2>
                                     <br/>
-                                    <p class="card-text my-2">{{$account_user['bio']}}</p>
-                                    <p class="card-text my-2"> <i class="fa icon-blue fa-map-marker mr-2"></i>  <b> Address: </b>{{$account_user['address']}}</p>
-                                          @if(!is_null($account_user['user_role']))
-                                          <button class="btn-tags"> {{$account_user['user_role']['role']}}
-                                                  <span class="fa  fa-tag"></span> </button>
-                                          <button class="btn-tags"> {{$account_user['category_tag']}}
-                                                  <span class="fa  fa-tag"></span> </button>
+                                    <p class="card-text my-2">{{ucfirst($account_user['bio'])}}</p>
+                                    <p class="card-text my-2">
+                                        <i class="fa icon-blue fa-map-marker mr-2"></i>
+                                        <b> Address: </b>{{ucfirst($account_user['address'])}}
+                                    </p>
+                                      @if(isset($account_user['user_role']) && !is_null($account_user['user_role']))
+
+                                          <button class="btn-tags"> {{ucfirst(str_replace('-',' ',$role_slug))}}
+                                                  <span class="fa  fa-tag"></span>
+                                          </button>
+                                          @if(isset($role_cat))
+                                              <button class="btn-tags"> {{ucfirst(str_replace('-',' ',$sub_role_slug))}}
+                                                  <span class="fa  fa-tag"></span>
+                                              </button>
+                                          @endif
+                                          @if(isset($sub_role_cat)&&isset($role_cat))
+                                              <button class="btn-tags"> {{ucfirst(str_replace('-',' ',$sub_cat_slug))}}
+                                                  <span class="fa  fa-tag"></span>
+                                              </button>
+                                          @endif
                                       @endif
                                     <p class="card-text my-3">  <i
                                             class="fa icon-blue mr-2 fa-phone"></i>   <b>Phone:</b> {{$account_user['phone']}}</p>

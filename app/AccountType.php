@@ -32,5 +32,9 @@ class AccountType extends Model
     {
         return $this->hasMany(UserCategory::class,'id','sub_role');
     }
+    public function user_sub_role_cat()
+    {
+        return $this->hasMany(UserCategory::class,'id','sub_role_category');
+    }
 
 }
