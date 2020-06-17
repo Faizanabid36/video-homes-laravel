@@ -71,6 +71,7 @@ Route::group(['middleware' => 'auth'], function () {
     //User Images
     Route::get('image-upload', 'ImageUploadController@imageUpload')->name('image.upload');
     Route::post('image-upload', 'ImageUploadController@imageUploadPost');
+    Route::post('update_company_logo','ImageUploadController@update_company_logo');
 
     Route::get('all_playlists', 'HomeController@get_playlist');
     Route::post('delete_playlist', 'HomeController@delete_playlist');

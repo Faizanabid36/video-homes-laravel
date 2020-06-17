@@ -13,4 +13,8 @@ class UserRole extends Model
     {
         return $this->hasMany(AccountType::class,'role','id');
     }
+    public function categories()
+    {
+        return $this->hasMany(UserCategory::class,'role_id','id');
+    }
 }

@@ -9,19 +9,29 @@ class General extends React.Component {
             user: {},
             message: null,
             image: '',
-            account_types: [],
+            company_logo:'',
+            roles: [],
             filename: '',
+            company_logo_filename: '',
+            role: [],
+            role_cat: [],
+            sub_role: 0,
+            sub_role_cat: 0
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChangeInput = this.handleChangeInput.bind(this);
+        this.handleChangeRole = this.handleChangeRole.bind(this);
+        this.handleChangeSubRole = this.handleChangeSubRole.bind(this)
         this.onFormSubmit = this.onFormSubmit.bind(this)
+        this.onCompanyFormSubmit = this.onCompanyFormSubmit.bind(this)
         this.onChange = this.onChange.bind(this)
+        this.onLogoChange = this.onLogoChange.bind(this)
     }
 
     handleSubmit() {
-        let {user} = this.state;
+        let {user, sub_role_cat, sub_role} = this.state;
         let tab = 'general';
-        axios.post('/edit_user_profile', {user, tab})
+        axios.post('/edit_user_profile', {user, tab, sub_role_cat, sub_role})
             .then((res) => {
                 this.setState({message: res.data.message})
             })
@@ -43,6 +53,21 @@ class General extends React.Component {
                 console.log(err)
             })
     }
+    onCompanyFormSubmit(e)
+    {
+        e.preventDefault()
+        const fd = new FormData();
+        fd.append('image', this.state.company_logo);
+        fd.append('filename', this.state.company_logo_filename);
+        axios.post('/update_company_logo', fd)
+            .then((res) => {
+                console.log('res', res)
+                // window.location.reload();
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
       onChange(e) {
         let files = e.target.files || e.dataTransfer.files;
         if (!files.length)
@@ -50,6 +75,22 @@ class General extends React.Component {
           this.setState({filename: files[0].name})
           this.createImage(files[0]);
       }
+      onLogoChange(e) {
+        let files = e.target.files || e.dataTransfer.files;
+        if (!files.length)
+            return;
+        this.setState({company_logo_filename: files[0].name})
+        this.createLogoImage(files[0]);
+        }
+        createLogoImage(file) {
+        let reader = new FileReader();
+        reader.onload = (e) => {
+            this.setState({
+                company_logo: e.target.result
+            })
+        };
+        reader.readAsDataURL(file);
+    }
       createImage(file) {
         let reader = new FileReader();
         reader.onload = (e) => {
@@ -61,16 +102,35 @@ class General extends React.Component {
       }
 
     componentDidMount() {
-        axios.get('get_logged_user') 
+        axios.get('get_logged_user')
             .then((res) => {
-                this.setState({user: res.data.user})
+                this.setState({user: res.data.user}, () => {
+                    this.setState({
+                        sub_role_cat: this.state.user.account_types.sub_role_category,
+                        sub_role: this.state.user.account_types.sub_role
+                    })
+                })
             })
             .catch((err) => {
                 console.log(err)
             })
         axios.get('account_types')
             .then((res) => {
-                this.setState({account_types: res.data.account_types})
+                this.setState({roles: res.data.roles}, () => {
+                    this.state.roles.map((item) => {
+                        if (item.id == this.state.user.account_types.sub_role)
+                            this.setState({role: item.sub_roles}, () => {
+                                this.state.role.map((i) => {
+                                    if (i.children) {
+                                        i.children.map(async (x) => {
+                                            if (x.id == this.state.user.account_types.sub_role_category)
+                                                await this.setState({role_cat: [x]})
+                                        })
+                                    }
+                                });
+                            })
+                    })
+                })
             })
             .catch((err) => {
                 console.log(err)
@@ -81,6 +141,29 @@ class General extends React.Component {
         let {user} = this.state;
         user[e.target.name] = e.target.value;
         this.setState({...user});
+    }
+
+    handleChangeRole(e) {
+        let {user, roles} = this.state;
+        user[e.target.name] = e.target.value;
+        this.setState({...user});
+        roles.map(async (item) => {
+            if (item.id == user.role)
+                await this.setState({role: item.sub_roles, role_cat: []})
+        })
+        this.setState({sub_role: e.target.value})
+    }
+
+    async handleChangeSubRole(e) {
+        let {role, sub_role} = this.state
+        let children = [];
+        await this.setState({sub_role_cat: e.target.value})
+        this.state.role.map(async (item) => {
+            console.log('item', item)
+            if (item.id == this.state.sub_role_cat) {
+                await this.setState({role_cat: item.children})
+            }
+        });
     }
 
     render() {
@@ -117,39 +200,76 @@ class General extends React.Component {
                         </div>
                     </div>
                     <div className="form-group input-form-group col-lg-6">
-                        <label className="col-md-12" htmlFor="gender">Gender</label>
+                        <label className="col-md-12" htmlFor="address">Address</label>
                         <div className="col-md-12">
-                            <select onChange={this.handleChangeInput} id="gender" defaultValue={this.state.user.gender}
-                                    name="gender"
-                                    className="form-control custom-vh-form-input">
-                                <option defaultValue="male">Male</option>
-                                <option defaultValue="female">Female</option>
-                            </select>
+                            <input onChange={this.handleChangeInput} id="address" name="address" type="text"
+                                   placeholder=""
+                                   className="form-control custom-vh-form-input"
+                                   defaultValue={this.state.user.address}/>
+                        </div>
+                    </div>
+                    <div className="form-group input-form-group col-lg-6">
+                        <label className="col-md-12" htmlFor="phone">Direct Phone</label>
+                        <div className="col-md-12">
+                            <input onChange={this.handleChangeInput} id="phone" name="phone" type="text" placeholder=""
+                                   className="form-control custom-vh-form-input" defaultValue={this.state.user.phone}/>
+                        </div>
+                    </div>
+                    <div className="form-group input-form-group col-lg-6">
+                        <label className="col-md-12" htmlFor="phone2">Office Phone</label>
+                        <div className="col-md-12">
+                            <input onChange={this.handleChangeInput} id="phone2" name="phone2" type="text"
+                                   placeholder=""
+                                   className="form-control custom-vh-form-input" defaultValue={this.state.user.phone2}/>
                         </div>
                     </div>
                     <div className="form-group input-form-group col-lg-6">
                         <label className="col-md-12" htmlFor="gender">Role</label>
                         <div className="col-md-12">
-                            <select onChange={this.handleChangeInput} id="role" name="role"
-                                    defaultValue={this.state.user.role} className="form-control custom-vh-form-input">
-                                <option value="2">Realtor</option>
-                                <option value="3">Video Provider</option>
+                            <select onChange={this.handleChangeRole} id="role" name="role"
+                                    className="form-control custom-vh-form-input">
+                                <option value="" selected>Select An Option</option>
+                                {this.state.roles.map((item) => {
+                                    return <option
+                                        key={"cat"+item}
+                                        selected={this.state.user.role == item.id ? "selected" : ""}
+                                        value={item.id}>{item.role}</option>
+                                })}
                             </select>
                         </div>
                     </div>
-                    {this.state.user.role == 3 ? <div className="form-group input-form-group col-lg-6">
-                            <label className="col-md-12" htmlFor="gender">Account Type</label>
-                            <div className="col-md-12">
-                                <select onChange={this.handleChangeInput} id="tags" name="tags"
-                                        className="form-control custom-vh-form-input">
-                                    {this.state.account_types.map((item) => {
-                                        return <option value={item.id}>{item.tag_name}</option>
-                                    })}
-
-                                </select>
-                            </div>
-                        </div> :
-                        <div></div>}
+                    <div className="form-group input-form-group col-lg-6">
+                        <label className="col-md-12" htmlFor="gender">Role Type</label>
+                        <div className="col-md-12">
+                            <select onChange={this.handleChangeSubRole} id="tags" name="sub_role"
+                                    className="form-control custom-vh-form-input">
+                                <option value="" selected>Select An Option</option>
+                                {this.state.role.length > 0 && this.state.role.map((item) => {
+                                    return <option
+                                        key={"role"+item}
+                                        selected={this.state.user.account_types.sub_role == item.id ? "selected" : ""}
+                                        value={item.id}>{item.name}</option>
+                                })}
+                            </select>
+                        </div>
+                    </div>
+                    <div className="form-group input-form-group col-lg-6">
+                        <label className="col-md-12" htmlFor="gender">Role Category</label>
+                        <div className="col-md-12">
+                            <select onChange={(e) => {
+                                this.setState({sub_role_cat:e.target.value})
+                            }} id="role_cat" name="role_cat"
+                                    className="form-control custom-vh-form-input">
+                                <option value="" selected>Select An Option</option>
+                                {this.state.role_cat.map((item) => {
+                                    return <option
+                                        key={"sub"+item}
+                                        selected={this.state.user.account_types.sub_role_category == item.id ? "selected" : ""}
+                                        value={item.id}>{item.name}</option>
+                                })}
+                            </select>
+                        </div>
+                    </div>
                     <div className="clear"></div>
                     <hr/>
 
@@ -173,23 +293,37 @@ class General extends React.Component {
                 <h3> Upload Profile Picture</h3>
                 <form onSubmit={this.onFormSubmit}>
 
-                    <div class="row">
+                    <div className="row">
 
-                        <div class="col-md-6">
+                        <div className="col-md-6">
                             <input type="file" onChange={this.onChange}/>
                         </div>
 
-                        <div class="col-md-6">
-                            <button type="submit" class="btn btn-primary">Save picture</button>
+                        <div className="col-md-6">
+                            <button type="submit" className="btn btn-primary">Save picture</button>
                         </div>
 
                     </div>
                 </form>
+                <br/>
+                <br/>
+                <hr/>
+                <h3> Upload Company Logo</h3>
+                <form onSubmit={this.onCompanyFormSubmit}>
 
+                    <div className="row">
 
+                        <div className="col-md-6">
+                            <input type="file" onChange={this.onLogoChange}/>
+                        </div>
+
+                        <div className="col-md-6">
+                            <button type="submit" className="btn btn-primary">Save picture</button>
+                        </div>
+
+                    </div>
+                </form>
             </div>
-
-
         </div>
     }
 }
