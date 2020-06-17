@@ -4,11 +4,6 @@
     <div class="bigContainer">
 
         <div class="row ">
-            <div class="col-12 my-3 p-0 ">
-                <button class="btn btn-primary"><i class="far fa-plus icon"></i> Submit new List</button>
-
-                <button class="btn btn-primary"><i class="fas fa-star icon "></i> My bookmarks</button>
-            </div>
 
         </div>
         <!-- 2nd row -->
