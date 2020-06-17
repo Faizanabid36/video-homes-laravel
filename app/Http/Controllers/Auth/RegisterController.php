@@ -74,6 +74,7 @@ class RegisterController extends Controller
         $user_data['address'] = $data['address'];
         $user_data['phone'] = $data['phone'];
         $user_data['phone2'] = $data['phone2'];
+        $user_data['liscense'] = $data['liscense'];
         $user = User::create($user_data);
         $account_type = new AccountType();
         $account_type->sub_role_category = isset($data['sub_role_category'])?$data['sub_role_category']:"";

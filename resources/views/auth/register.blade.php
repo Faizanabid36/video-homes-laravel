@@ -38,6 +38,10 @@
                                required="">
                     </div>
                     <div class="form-group">
+                        <input class="form-control" type="text" name="liscense" id="password" placeholder="Liscense"
+                               required="">
+                    </div>
+                    <div class="form-group">
                         <input class="form-control" type="text" name="phone" id="password" placeholder="Direct Phone"
                                required="">
                     </div>
