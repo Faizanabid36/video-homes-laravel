@@ -109,9 +109,9 @@
                         <div class="card mx-auto" style="max-width: 1040px;">
                               <div class="row no-gutters">
                                 <div class="col-md-4">
-                                    @if(!is_null($account_user->avatar))
+                                    @if(!is_null($account_user->company_logo))
                                         <img
-                                            src="{{$account_user->avatar}}"
+                                            src="{{$account_user->company_logo}}"
                                             class="card-img"
                                             alt="...">
                                     @else
@@ -150,9 +150,9 @@
                         <div class="card " style="min-height:560px ; min-width:515px ; ">
                               <div class="row no-gutters">
 
-                              @if(!is_null($account_user->avatar))
+                              @if(!is_null($account_user->company_logo))
                                         <img
-                                            src="{{$account_user->avatar}}"
+                                            src="{{$account_user->company_logo}}"
                                             class="card-img"
                                             alt="...">
                                     @else

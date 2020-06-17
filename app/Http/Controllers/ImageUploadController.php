@@ -90,4 +90,14 @@ class ImageUploadController extends Controller
     {
         //
     }
+    public function update_company_logo(Request $request)
+    {
+        $data = $request->get('image');
+        list($type, $data) = explode(';', $data);
+        list(, $data) = explode(',', $data);
+        $data = base64_decode($data);
+        file_put_contents(public_path('images/' . $request->filename), $data);
+        User::whereId(auth()->user()->id)->update(['company_logo' => asset('images/' . $request->filename)]);
+        return ['message' => 'Picture Updated'];
+    }
 }

@@ -117,6 +117,10 @@ class MainController extends Controller
     }
     public function account_types()
     {
-        return ['account_types'=>UserTags::all()];
+        $roles= UserRole::where('role','!=','admin')->get();
+        $roles=collect($roles)->map(function ($role){
+            return collect($role)->merge(['sub_roles'=>UserCategory::whereRoleId($role->id)->whereNull('parent_id')->with('children')->get()]);
+        });
+        return compact('roles');
     }
 }

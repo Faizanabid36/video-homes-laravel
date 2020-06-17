@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AccountType;
 use App\Video;
 use App\VideoView;
 use App\VideoLikesDislikes;
@@ -28,7 +29,7 @@ class HomeController extends Controller
 
     public function logged_user()
     {
-        $user = auth()->user();
+        $user = User::whereId(auth()->user()->id)->with('account_types')->first();
         return compact('user');
     }
 
@@ -38,8 +39,17 @@ class HomeController extends Controller
         $user = \request('user');
         if ($tab == 'general') {
             $result = User::whereId($user['id'])->update(
-                ['email' => $user['email'], 'gender' => $user['gender'], 'name' => $user['name'], 'username' => $user['username'], 'role' => $user['role']]
+                [
+                    'email' => $user['email'],
+                    'name' => $user['name'],
+                    'username' => $user['username'],
+                    'role' => $user['role'],
+                    'address'=>$user['address'],
+                    'phone'=>$user['phone'],
+                    'phone2'=>$user['phone2'],
+                ]
             );
+            AccountType::whereUserId($user['id'])->update(['role'=>$user['role'],'sub_role_category'=>\request('sub_role_cat'),'sub_role'=>\request('sub_role')]);
             $message = $result == 1 ? 'Profile Updated' : 'Could Not Update Profile';
             return compact('tab', 'message');
         } elseif ($tab == 'delete-account') {

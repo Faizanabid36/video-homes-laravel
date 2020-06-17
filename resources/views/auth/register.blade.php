@@ -34,6 +34,18 @@
                                required="">
                     </div>
                     <div class="form-group">
+                        <input class="form-control" type="text" name="address" id="password" placeholder="Address"
+                               required="">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="phone" id="password" placeholder="Direct Phone"
+                               required="">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="phone2" id="password" placeholder="Office Phone"
+                               required="">
+                    </div>
+                    <div class="form-group">
                         <select onchange="changeVisibility(this)" class="form-control" name="role" id="role"
                                 required="">
                             <option selected disabled>Selected Role</option>
@@ -106,7 +118,7 @@
 
 @section('script')
     <script type="text/javascript">
-        $(document).on('select', '#parent_selector', function () {
+        $(document).on('click', '#parent_selector', function () {
             let e = document.getElementById('parent_selector')
             var select = document.createElement("select");
             select.name = "sub_role_category";
