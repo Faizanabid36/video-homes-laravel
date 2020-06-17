@@ -50,9 +50,9 @@
                                             <td>{{gmdate("i:s", $video->duration)}}</td>
                                             <td>{{round((($video->size)/1024)/1024,2)}} MB</td>
                                             <td>
-                                                <a href="{{action('AdminController@approve_video',$video->id)}}">
-                                                    <button class="btn  btn-success">
-                                                        Approve
+                                                <a href="{{action('AdminController@review_video',$video->id)}}">
+                                                    <button class="btn  btn-info">
+                                                        Review Video
                                                     </button>
                                                 </a>
                                             </td>

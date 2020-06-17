@@ -32,9 +32,18 @@ class AdminController extends Controller
     {
         $v = Video::whereId($id)->update(['is_video_approved' => 1]);
         if ($v) {
-            return back()->with('success', 'Video Approved');
+            return redirect(route('videos_for_approval'))->with('success', 'Video Approved');
         } else {
-            return back()->with('error', 'Could Not Approve Video');
+            return redirect(route('videos_for_approval'))->with('error', 'Could Not Approve Video');
+        }
+    }
+    public function decline_video($id)
+    {
+        $v = Video::whereId($id)->delete();
+        if ($v) {
+            return redirect(route('videos_for_approval'))->with('success', 'Video Declined');
+        } else {
+            return redirect(route('videos_for_approval'))->with('error', 'Could Not Decline Video');
         }
     }
 
@@ -187,5 +196,11 @@ class AdminController extends Controller
     {
         $users = User::where('id', '!=', auth()->user()->id)->paginate(10);
         return view('admin.users_list', compact('users'));
+    }
+
+    public function review_video($id)
+    {
+        $video = Video::where('is_video_approved', 0)->where('id', $id)->firstOrFail();
+        return view('admin.review_video',compact('video'));
     }
 }
