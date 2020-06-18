@@ -118,6 +118,7 @@ class AdminController extends Controller
         ]);
         $ut = new UserRole();
         $ut->role = $request->get('tag_name');
+        $ut->slug = preg_replace('/\W|\_+/m', '-', $ut->role);
         $ut->save();
         return back()->with('success', 'Tag Added Successfully');
     }
@@ -127,7 +128,8 @@ class AdminController extends Controller
         $this->validate($request, [
             'tag_name' => 'required',
         ]);
-        UserRole::whereId($id)->update(['role' => $request->get('tag_name')]);
+        $slug = preg_replace('/\W|\_+/m', '-', $request->get('tag_name'));
+        UserRole::whereId($id)->update(['role' => $request->get('tag_name'), 'slug' => $slug]);
         return back()->with('success', 'Tag Updated Successfully');
     }
 
