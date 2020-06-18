@@ -1,16 +1,83 @@
 @extends('layouts.public.app')
+@section('style')
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+            height: 100%;
+        }
+
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #description {
+            font-family: Roboto;
+            font-size: 15px;
+            font-weight: 300;
+        }
+
+        #infowindow-content .title {
+            font-weight: bold;
+        }
+
+        #infowindow-content {
+            display: none;
+        }
+
+        #map #infowindow-content {
+            display: inline;
+        }
+
+        .pac-card {
+            margin: 10px 10px 0 0;
+            border-radius: 2px 0 0 2px;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            outline: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            background-color: #fff;
+            font-family: Roboto;
+        }
+
+        .pac-controls {
+            display: inline-block;
+            padding: 5px 11px;
+        }
+
+        .pac-controls label {
+            font-family: Roboto;
+            font-size: 13px;
+            font-weight: 300;
+        }
+
+        #pac-input:focus {
+            border-color: #4d90fe;
+        }
+
+        #title {
+            color: #fff;
+            background-color: #4d90fe;
+            font-size: 25px;
+            font-weight: 500;
+            padding: 6px 12px;
+        }
+    </style>
+@endsection
 @section('content')
 
-<div class="bigContainer">
+    <div class="bigContainer">
 
-    <div class="row ">
+        <div class="row ">
 
-    </div>
-    <!-- 2nd row -->
-    <div class="row">
-        <div class="col-12 my-2 p-0 ">
-            <div class="Search-boxes">
-                <form>
+        </div>
+        <!-- 2nd row -->
+        <div class="row">
+            <div class="col-12 my-2 p-0 ">
+                <div class="Search-boxes">
                     <div class="form-row ">
                         <div class="col my-4">
                             <input type="text" class="form-control text" placeholder="Select Cateogy"/>
@@ -21,10 +88,9 @@
 
                         </div>
                         <div class="col my-4">
-                            <input type="text" class="form-control text" placeholder="Select Location"/>
-                            <i class="fal fa-map-marker icon search-icon"></i>
-
-
+                            <input id="pac-input" class="form-control text" type="text"
+                                   placeholder="Enter a location">
+                            <i class="fal fa-search icon search-icon"></i>
                         </div>
                     </div>
 
@@ -35,7 +101,6 @@
 
                         <button class="btn btn-primary float-right my-2"> Search</button>
                     </div>
-                </form>
             </div>
         </div>
 
@@ -44,7 +109,7 @@
     <!-- 3rd row -->
     <div class="row Category-Boxes ">
         @foreach($tags as $tag)
-            <div class="col-6"><span> <a href="{{route('ex_directory_by_category',Str::slug($tag->role))}}"> {{ucfirst($tag->role)}}</a></span> <span
+            <div class="col-6"><span> <a href="{{route('ex_directory_by_category',preg_replace('/\W|\_+/m', '-', $tag->role))}}"> {{ucfirst($tag->role)}}</a></span> <span
                     class="float-right">{{$tag->account_types_count}}</span>
                 <hr/>
             </div>
@@ -52,43 +117,41 @@
 
     </div>
 
-    <div class="row">
         <!--The div element for the map -->
-        <div class="col-12 text-center border p-0 pt-3 ">
-            <iframe width="100%" height="450"
-                    src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street%2C%20Dublin%2C%20Ireland+(My%20Business%20Name)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed"
-                    frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a
-                    href="https://www.maps.ie/draw-radius-circle-map/">Create radius map</a></iframe>
-            <br/>
+        <div id="map"></div>
+        <div id="infowindow-content">
+            <img src="" width="16" height="16" id="place-icon">
+            <span id="place-name" class="title"></span><br>
+            <span id="place-address"></span>
         </div>
-    </div>
 
 
-    <div class="row">
+        <div class="row">
 
-        <div class="col-12 my-4 p-0">
-            <div class="float-left">
-                <h6 class="my-3"> Found<span class="h-8"> {{count($account_types)}} </span>listings </h6>
-                <div class="dropdown">
-                    <button class="btn btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                        Sort By
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Date</a>
-                        <a class="dropdown-item" href="#"> New to Old</a>
-                        <a class="dropdown-item" href="#">Alpahabet</a>
+            <div class="col-12 my-4 p-0">
+                <div class="float-left">
+                    <h6 class="my-3"> Found<span class="h-8"> {{count($account_types)}} </span>listings </h6>
+                    <div class="dropdown">
+                        <button class="btn btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            Sort By
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Date</a>
+                            <a class="dropdown-item" href="#"> New to Old</a>
+                            <a class="dropdown-item" href="#">Alpahabet</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="float-right" style="position: relative;top: 38px;">
+                <div class="float-right" style="position: relative;top: 38px;">
 
-                <ul class="nav Custom-nav2 nav-pills mb-3" id="pills-tab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
-                           aria-controls="pills-home" aria-selected="true"><i class="fas fa-list icon"></i></a>
-                    </li>
-                    <li class="nav-item" >
+                    <ul class="nav Custom-nav2 nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home"
+                               role="tab"
+                               aria-controls="pills-home" aria-selected="true"><i class="fas fa-list icon"></i></a>
+                        </li>
+                        <li class="nav-item">
                         <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
                            aria-controls="pills-profile" aria-selected="false"><i class="fas fa-th-large icon"></i></a>
                     </li>
@@ -190,27 +253,79 @@
         </div>
 
 
+        </div>
+
     </div>
 
-</div>
+    <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: -33.8688, lng: 151.2195},
+                zoom: 13
+            });
+            console.log(document.getElementById('map'))
+            var card = document.getElementById('pac-card');
+            var input = document.getElementById('pac-input');
 
-<script>
-    const onRating = (id) => {
-        console.log(document.documentElement.style);
-        console.log(document.getElementById('rating-head').children);
-        let ratingComponent = document.getElementById('rating-head').children;
+            map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
 
-        for (let i = 0; i < id; i++) {
-            ratingComponent[i].style.setProperty('color', 'orange');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+
+
+            autocomplete.bindTo('bounds', map);
+
+            // Set the data fields to return when the user selects a place.
+            autocomplete.setFields(
+                ['address_components', 'geometry', 'icon', 'name']);
+
+            var infowindow = new google.maps.InfoWindow();
+            var infowindowContent = document.getElementById('infowindow-content');
+            infowindow.setContent(infowindowContent);
+            var marker = new google.maps.Marker({
+                map: map,
+                anchorPoint: new google.maps.Point(0, -29)
+            });
+
+            autocomplete.addListener('place_changed', function () {
+                infowindow.close();
+                marker.setVisible(false);
+                var place = autocomplete.getPlace();
+                if (!place.geometry) {
+                    // User entered the name of a Place that was not suggested and
+                    // pressed the Enter key, or the Place Details request failed.
+                    window.alert("No details available for input: '" + place.name + "'");
+                    return;
+                }
+
+                // If the place has a geometry, then present it on a map.
+                if (place.geometry.viewport) {
+                    map.fitBounds(place.geometry.viewport);
+                } else {
+                    map.setCenter(place.geometry.location);
+                    console.log(place)
+                    map.setZoom(17);  // Why 17? Because it looks good.
+                }
+                marker.setPosition(place.geometry.location);
+                marker.setVisible(true);
+
+                var address = '';
+                if (place.address_components) {
+                    address = [
+                        (place.address_components[0] && place.address_components[0].short_name || ''),
+                        (place.address_components[1] && place.address_components[1].short_name || ''),
+                        (place.address_components[2] && place.address_components[2].short_name || '')
+                    ].join(' ');
+                }
+                infowindowContent.children['place-icon'].src = place.icon;
+                infowindowContent.children['place-name'].textContent = place.name;
+                infowindowContent.children['place-address'].textContent = address;
+                infowindow.open(map, marker);
+            });
         }
-
-        for (let i = id; i <= ratingComponent.length - 1; i++) {
-
-            ratingComponent[i].style.setProperty('color', 'black');
-
-        }
-    }
-</script>
+    </script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAm4Wvmd2nIeaFQCdhAsxbiSXgBsibDolc&libraries=places&callback=initMap"
+        async defer></script>
 
 
 @endsection;

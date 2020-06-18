@@ -33,7 +33,7 @@ class MainController extends Controller
     {
         $role_slug = $role;
         $str = str_replace('-', ' ', $role);
-        $role = UserRole::whereRole($str)->first();
+        $role = UserRole::whereRole($str)->firstOrFail();
         $id = $role->id;
         $tags = UserCategory::withCount('sub_roles')->whereRoleId($id)->whereNull('parent_id')->get();
         $users = User::with('account_types', 'user_role')->where('role', $id)->get();
@@ -52,9 +52,9 @@ class MainController extends Controller
     {
         $role_slug = $role;
         $sub_role_slug = $sub_role;
-        $role = UserRole::whereRole(str_replace('-', ' ', $role))->first();
+        $role = UserRole::whereRole(str_replace('-', ' ', $role))->firstOrFail();
         $sId = $role->id;
-        $sub_role = UserCategory::whereName(str_replace('-', ' ', $sub_role))->first();
+        $sub_role = UserCategory::whereName(str_replace('-', ' ', $sub_role))->firstOrFail();
         $cId = $sub_role->id;
         $users = User::whereIn('id', array_values(AccountType::whereRole($sId)->whereSubRole($cId)->pluck('user_id')->toArray()))->get();
         $category = UserCategory::whereId($sub_role->id)->with('children', 'sub_roles')->firstorFail();
@@ -78,7 +78,7 @@ class MainController extends Controller
         $sub_role_slug = $sub_role;
         $sub_cat_slug=$sub_cat;
         $tags=[];
-        $cat=UserCategory::whereName(str_replace('-', ' ', $sub_cat))->first();
+        $cat=UserCategory::whereName(str_replace('-', ' ', $sub_cat))->firstOrFail();
         $cId = $cat->id;
         $users = User::whereIn('id', array_values(AccountType::whereSubRoleCategory($cId)->pluck('user_id')->toArray()))->get();
         $sub_role_cat=true;
