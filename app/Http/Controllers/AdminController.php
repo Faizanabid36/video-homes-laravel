@@ -154,6 +154,7 @@ class AdminController extends Controller
         }
         else
             \request()->merge(['role_id' => \request('parent_role')]);
+        \request()->merge(['slug'=>preg_replace('/\W|\_+/m', '-', \request('name'))]);
         UserCategory::create(\request()->except('_token', 'parent_role'));
         return back()->with('success', 'Category Created Successfully');
     }
@@ -182,6 +183,7 @@ class AdminController extends Controller
         }
         else
             \request()->merge(['role_id' => \request('parent_role')]);
+        \request()->merge(['slug'=>preg_replace('/\W|\_+/m', '-', \request('name'))]);
         UserCategory::whereId(\request('id'))->update(\request()->except('_token', 'id','parent_role'));
         return back()->with('success', 'Updated Successfully');
     }
