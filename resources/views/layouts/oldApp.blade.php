@@ -24,6 +24,10 @@
     <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('js/emoji/emojionearea/dist/emojionearea.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('css/mediaelementplayer.min.css')}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <script>
         window.VIDEO_APP = {
@@ -85,14 +89,26 @@
                     </li>
                     <li class="dropdown hide-from-mobile pull-left profile-nav">
                         <a href="{{route('dashboard')}}/#/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <img class="header-image"
-                                 src="{{asset('upload/photos/d-avatar.jpg')}}">
+                            @if(!is_null(auth()->user()->avatar))
+                                <img class="header-image"
+                                     src="{{auth()->user()->avatar}}">
+                            @else
+                                <img class="header-image"
+                                     src="{{asset('images/blank.png')}}">
+                            @endif
+
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li>
                                 <a href="{{route('dashboard')}}#/profile">
-                                    <img width="20"
-                                         src="{{asset('upload/photos/d-avatar.jpg')}}"/>{{auth()->user()->name}}
+                                    @if(!is_null(auth()->user()->avatar))
+                                        <img width="20"
+                                             src="{{auth()->user()->avatar}}">
+                                    @else
+                                        <img width="20"
+                                             src="{{asset('images/blank.png')}}">
+                                    @endif
+                                    {{auth()->user()->name}}
                                 </a>
                             </li>
                             <li>

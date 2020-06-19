@@ -18,6 +18,22 @@ export default function EditVideo(props) {
             window.location.href = window.VIDEO_APP.base_url + "/" + state.username + "/watch_video?v=" + state.video_id;
         })
     }, [state, thumbnails]);
+    const deleteVideo = useCallback(e=>{
+        let retVal = confirm("Do you really want to Delete?");
+        if( retVal) {
+            axios.post('delete_video', {...state})
+                .then((res)=>{
+                    if(res.data.success!=0)
+                    {
+                        window.location.href=window.VIDEO_APP.base_url+'/dashboard/#/videos';
+                    }
+                })
+                .catch((err)=>{console.log(err)})
+            return true;
+        } else {
+            return false;
+        }
+    },[state])
 
     useEffect(() => {
         axios.get(`edit_video/${props.match.params.id}`).then(({data}) => {
@@ -94,6 +110,9 @@ export default function EditVideo(props) {
                 </Form.Group>}
                 <Button variant="primary" onClick={onUpdate}>
                     Update and Preview Video
+                </Button>
+                <Button variant="danger" onClick={deleteVideo}>
+                    Delete Video
                 </Button>
             </Col></Row>
         </div>

@@ -53,7 +53,6 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'username' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -68,13 +67,9 @@ class RegisterController extends Controller
     {
         $user_data['password'] = Hash::make($data['password']);
         $user_data['name'] = $data['name'];
-        $user_data['username'] = $data['username'];
+        $user_data['username'] = \Str::random(7);
         $user_data['email'] = $data['email'];
         $user_data['role'] = $data['role'];
-        $user_data['address'] = $data['address'];
-        $user_data['phone'] = $data['phone'];
-        $user_data['phone2'] = $data['phone2'];
-        $user_data['liscense'] = $data['liscense'];
         $user = User::create($user_data);
         $account_type = new AccountType();
         $account_type->sub_role_category = isset($data['sub_role_category'])?$data['sub_role_category']:"";

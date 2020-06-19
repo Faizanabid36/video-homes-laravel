@@ -6,6 +6,7 @@ use App\AccountType;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use phpseclib\System\SSH\Agent\Identity;
 
 class User extends Authenticatable
 {
@@ -44,6 +45,13 @@ class User extends Authenticatable
             $playlist->name = "Unlisted";
             $playlist->user_id = $user->id;
             $playlist->save();
+            $identity=new Identity();
+            $identity->user_id=$user->id;
+            $identity->facebook='';
+            $identity->instagram='';
+            $identity->youtube_channel='';
+            $identity->twitter='';
+            $identity->save();
         });
     }
 
@@ -64,5 +72,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserRole::class,'id','role');
     }
-//    public function
+    public function social_identity()
+    {
+        return $this->hasOne(SocialIdentity::class,'user_id','id');
+    }
 }

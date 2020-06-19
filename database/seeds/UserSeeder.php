@@ -26,5 +26,6 @@ class UserSeeder extends Seeder
         ];
         foreach ($user as $u)
             User::create($u);
+        \App\AccountType::create(['user_id'=>1,'role'=>1]);
     }
 }

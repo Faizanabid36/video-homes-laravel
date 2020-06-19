@@ -31,11 +31,11 @@
                                     <div class="borderBottom"></div>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link links2" href="#">Upgrade/Downgrade
-                                    <div class="borderBottom"></div>
-                                </a>
-                            </li>
+{{--                            <li class="nav-item">--}}
+{{--                                <a class="nav-link links2" href="#">Upgrade/Downgrade--}}
+{{--                                    <div class="borderBottom"></div>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
                         </ul>
 
 
@@ -53,7 +53,7 @@
                        @if(is_null(auth()->user()->avatar))
                            <div>
                                <img
-                                   src="https://upload.wikimedia.org/wikipedia/commons/7/70/User_icon_BLACK-01.png"
+                                   src="{{asset('images/blank.png')}}"
                                    style="background-repeat: no-repeat;
                                                               background-size: cover;
                                                               border-radius: 100%;

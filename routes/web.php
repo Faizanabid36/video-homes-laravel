@@ -26,6 +26,8 @@ Route::get('/joe', 'MainController@joe')->name('joe');
 Route::get('account_types','MainController@account_types')->name('account_types');
 Auth::routes();
 
+Route::resource('report_query','ReportQueryController');
+Route::get('reported_query_videos','ReportQueryController@reported_videos');
 
 //Auth User
 Route::group(['middleware' => 'auth'], function () {
@@ -37,6 +39,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('delete_user_category/{id}','AdminController@delete_user_category')->name('delete_user_category');
 
     Route::get('users_list','AdminController@users_list')->name('users_list');
+
+    Route::post('delete_video','VideoController@delete_video');
 
 
 
