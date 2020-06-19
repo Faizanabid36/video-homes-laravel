@@ -9,61 +9,46 @@
 
             <div class="col-md-7 my-3 float-left col-sm-12">
                 <h2 style="text-transform:uppercase">
-                {{$user->name}}
-
-
+                    {{$user->name}}
                 </h2>
-                <h3>
-<span id="rating-head">
-        <span onclick='onRating(1)' class="fa fa-star  "></span>
-        <span onclick='onRating(2)' class="fa fa-star "></span>
-        <span onclick='onRating(3)' class="fa fa-star "></span>
-        <span onclick='onRating(4)' class="fa fa-star"></span>
-        <span onclick='onRating(5)' class="fa fa-star"></span>
-        </span>
-
-                    <span class="rating-circle"> 0.0 </span>
-                </h3>
-
-
             </div>
-            <hr />
+            <hr/>
 
-            <div class="col-md-5 col-sm-12 my-3  float-right ">
-                <div class="text-right custom-tooltip">
-                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
-                            title="submit new listing">
-                        <i class='fas icon fa-plus'></i>
-                    </button>
-                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
-                            title="My bookmarks">
-                        <i class="far icon fa-star"></i>
-                    </button>
-                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
-                            title="Print listing">
-                        <i class='fas  icon fa-print'></i>
-                    </button>
-                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
-                            title="Add/Remove Bookmarks">
-                        <i class='fas icon fa-heart'></i>
-                    </button>
-                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
-                            title="save listing PDF">
-                        <i class='fas icon fa-download'></i>
-                    </button>
-                </div>
-            </div>
+            {{--            <div class="col-md-5 col-sm-12 my-3  float-right ">--}}
+            {{--                <div class="text-right custom-tooltip">--}}
+            {{--                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"--}}
+            {{--                            title="submit new listing">--}}
+            {{--                        <i class='fas icon fa-plus'></i>--}}
+            {{--                    </button>--}}
+            {{--                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"--}}
+            {{--                            title="My bookmarks">--}}
+            {{--                        <i class="far icon fa-star"></i>--}}
+            {{--                    </button>--}}
+            {{--                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"--}}
+            {{--                            title="Print listing">--}}
+            {{--                        <i class='fas  icon fa-print'></i>--}}
+            {{--                    </button>--}}
+            {{--                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"--}}
+            {{--                            title="Add/Remove Bookmarks">--}}
+            {{--                        <i class='fas icon fa-heart'></i>--}}
+            {{--                    </button>--}}
+            {{--                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"--}}
+            {{--                            title="save listing PDF">--}}
+            {{--                        <i class='fas icon fa-download'></i>--}}
+            {{--                    </button>--}}
+            {{--                </div>--}}
+            {{--            </div>--}}
 
-            </div>
-    <br />
-    <hr />
-            <div class="row">
-                <div class=" col-sm-12 col-xs-12 col-lg-2 my-3">
+        </div>
+        <br/>
+        <hr/>
+        <div class="row">
+            <div class=" col-sm-12 col-xs-12 col-lg-2 my-3">
 
-                    <div class="container">
-                        <div class="mySlides">
+                <div class="container">
+                    <div class="mySlides">
 
-                            <img
+                        <img
 
                                 @if( !is_null($user->avatar) )
                                 src= '{{ $user->avatar }}'
@@ -85,27 +70,26 @@
 
 
                     </div>
-                    <hr />
-                </div>
+                <hr/>
+            </div>
 
 
+            <div class="col-sm-12 col-xs-12 col-lg-10 ">
 
-                <div class="col-sm-12 col-xs-12 col-lg-10 ">
 
+                <h3> Address: </h3>
+                <p>{{ucfirst($user->address)}}<p>
+                    <br/>
+                <h3> Description:</h3>
+                <p>{{ucfirst($user->bio)}}</p>
+                <br>
+                <div class="row">
 
-                <h3>  Address: </h3>
-                  <br />
-                  <p>6020 Meadowridge Center Drive, STE#M, Elkridge, Maryland, USA 21075<p>
-                   <br />
-                  <h3> Description: </h3>
-                  <br />
-                    <div class="row">
-
-                        <div id="background" class="hidden"></div>
-                        <div class="col-md-8 player-video" style="margin-top: 0 !important">
-                            <div class="video-player pt_video_player " id="pt_video_player">
-                                <span class="mejs__offscreen">Video Player</span>
-                                @if(!is_null($video))
+                    <div id="background" class="hidden"></div>
+                    <div class="col-md-8 player-video" style="margin-top: 0 !important">
+                        <div class="video-player pt_video_player " id="pt_video_player">
+                            <span class="mejs__offscreen">Video Player</span>
+                            @if(!is_null($video))
                                     <video id="my-video_html5"
                                            style="width: 100%; height: 451.872px; position: relative;"
                                            poster="{{asset("storage/$video->thumbnail")}}"
@@ -170,27 +154,29 @@
                             </div>
                             <div class="clear"></div>
                         </div>
+                    @if(!is_null($video))
                         <div class="col-md-4 no-padding-left pull-right deskto  p">
                             <div class="content video-list pt_shadow">
                                 <div class="ads-placment"></div>
-                                @if(!is_null($video))
                                     <div class="next-video">
-                                        <div class="next-text pull-left pt_mn_wtch_nxttxt">
-                                            <h4>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                     viewBox="0 0 24 24">
-                                                    <path fill="currentColor"
-                                                          d="M16,18H18V6H16M6,18L14.5,12L6,6V18Z"></path>
-                                                </svg>
-                                                <x></x>
-                                                Up Next
-                                            </h4>
-                                        </div>
-                                        <div class="pt_mn_wtch_switch pull-right">
-                                            <input id="autoplay" type="checkbox" class="tgl autoplay-video">
-                                            <label class="tgl-btn" for="autoplay">Autoplay</label>
-                                        </div>
-                                        <div class="clear"></div>
+                                        @if(count($related_videos)>0)
+                                            <div class="next-text pull-left pt_mn_wtch_nxttxt">
+                                                <h4>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                         viewBox="0 0 24 24">
+                                                        <path fill="currentColor"
+                                                              d="M16,18H18V6H16M6,18L14.5,12L6,6V18Z"></path>
+                                                    </svg>
+                                                    <x></x>
+                                                    Up Next
+                                                </h4>
+                                            </div>
+                                            <div class="pt_mn_wtch_switch pull-right">
+                                                <input id="autoplay" type="checkbox" class="tgl autoplay-video">
+                                                <label class="tgl-btn" for="autoplay">Autoplay</label>
+                                            </div>
+                                            <div class="clear"></div>
+                                        @endif
                                         @foreach($related_videos as $related_video)
                                             <div class="video-thumb">
                                                 <a href="{{route('directory_by_user_video',[$user->username,$related_video->video_id])}}">
@@ -213,13 +199,13 @@
                                         @endforeach
                                         <div></div>
                                     </div>
-                                @endif
                             </div>
                         </div>
-                    </div>
+                    @endif
+
                 </div>
             </div>
-
+        </div>
 
 
         <!-- 2nd row -->
@@ -262,7 +248,7 @@
                 <hr/>
                 <div class="d-flex">
                     <div class="font-weight-bold "><i class='fas icon fa-globe'></i> Website</div>
-                    <div><a href=""> view our site </a></div>
+                    <div><a href="{{$user->website_link}}"> {{$user->website_title}} </a></div>
                 </div>
                 <hr/>
                 <div class="d-flex">
@@ -278,10 +264,12 @@
             <div class="col-12 pr-0">
 
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                           aria-controls="home" aria-selected="true">Map</a>
-                    </li>
+                    @if(isset($user->address))
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                               aria-controls="home" aria-selected="true">Map</a>
+                        </li>
+                    @endif
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                            aria-controls="profile" aria-selected="false">Reviews (0)</a>
@@ -296,27 +284,32 @@
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    @if(isset($user->address))
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
-                        <iframe width="100%" height="450"
-                                src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street%2C%20Dublin%2C%20Ireland+(My%20Business%20Name)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed"
-                                frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a
-                                href="https://www.maps.ie/draw-radius-circle-map/">Create radius map</a></iframe>
-                        <br/>
+                            <iframe width="100%" height="450"
+                                    src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street%2C%20Dublin%2C%20Ireland+(My%20Business%20Name)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed"
+                                    frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a
+                                    href="https://www.maps.ie/draw-radius-circle-map/">Create radius map</a>
+                            </iframe>
+                            <br/>
 
-                        <h4 class="my-3"> Get directions from: </h4>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Enter address or zip code"
-                                   aria-label="Recipient's username" aria-describedby="button-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i
-                                        style="color:gray ; font-size:14px" class='fas icon fa-map-marker'></i></button>
+                            <h4 class="my-3"> Get directions from: </h4>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Enter address or zip code"
+                                       aria-label="Recipient's username" aria-describedby="button-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i
+                                            style="color:gray ; font-size:14px" class='fas icon fa-map-marker'></i>
+                                    </button>
+                                </div>
                             </div>
+                            <p><a href=""> <i style="color:lightBlue ; font-size:14px" class='fas icon fa-circle'></i>
+                                    6020
+                                    Meadowridge Center Drive, STE#M, Elkridge, Maryland, USA 21075 </a></p>
+                            <button class="btn btn-primary"> GET DIRECTION</button>
                         </div>
-                        <p><a href=""> <i style="color:lightBlue ; font-size:14px" class='fas icon fa-circle'></i> 6020
-                                Meadowridge Center Drive, STE#M, Elkridge, Maryland, USA 21075 </a></p>
-                        <button class="btn btn-primary"> GET DIRECTION</button>
-                    </div>
+                    @endif
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <button class="btn btn-primary my-3"> Add Review</button>
                         <div class="row">
@@ -410,20 +403,21 @@
                         <!-- .report. -->
 
                         <h1 class="my-3 font-weight-bold"> Send message to moderator </h1>
-                        <form>
+                        <form method="POST" action="{{action('ReportQueryController@store')}}">
+                            @csrf
                             <div class="form-group">
                                 <label for="exampleFormControlInput1">Contact Name</label>
-                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
+                                <input name="name" type="text" required class="form-control" id="exampleFormControlInput1" placeholder="">
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlInput1">Contact Email</label>
-                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
+                                <input name="email" type="email" required class="form-control" id="exampleFormControlInput1" placeholder="">
                             </div>
-
-
+                            <input type="hidden" name="type" value="message">
+                            <input type="hidden" name="reported_on_user" value="{{$user->username}}">
                             <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Example textarea</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <label for="exampleFormControlTextarea1">Message Text</label>
+                                <textarea name="message_body" required class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                             </div>
                             <button class="btn btn-primary"> Send Message</button>
                         </form>

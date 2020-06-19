@@ -19,15 +19,7 @@ class RolesSeeder extends Seeder
             ['role'=>'realtor'],
             ['role'=>'video provider'],
         ];
-        $user_tags=[
-            ['tag_name'=>'Real Estate Agent'],
-            ['tag_name'=>'Team Leader'],
-            ['tag_name'=>'Commercial Broker'],
-        ];
         foreach ($roles as $role)
             UserRole::create($role);
-        foreach($user_tags as $user_tag)
-            UserTags::create($user_tag);
-
     }
 }

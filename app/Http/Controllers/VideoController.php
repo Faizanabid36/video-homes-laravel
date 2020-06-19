@@ -85,7 +85,6 @@ class VideoController extends Controller
 
     public function watch_video($username)
     {
-        $user = User::whereUsername($username)->first();
 //        if (isset(auth()->user()->id)) {
 //            $BlockedUser = BlockedUser::where('blocked_user_id', auth()->user()->id)
 //                ->where('user_id', $user->id)->first();
@@ -249,6 +248,12 @@ class VideoController extends Controller
             'url'=>$request->input('url')
         ]);
         return back()->with('success', 'Action Created');
+    }
+
+    public function delete_video(Request $request)
+    {
+        Video::whereId($request->get('id'))->delete();
+        return ['success'=>1];
     }
 
 }

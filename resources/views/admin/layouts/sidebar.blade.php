@@ -63,7 +63,20 @@
                         </span>
                     </a>
                 </li>
-
+                <li class="">
+                    <a href="{{action('ReportQueryController@index')}}">
+                        <i class="fa fa-tachometer"></i>
+                        <span class="link-title menu_hide">&nbsp;Reported Messages
+                        </span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="{{action('ReportQueryController@reported_videos')}}">
+                        <i class="fa fa-tachometer"></i>
+                        <span class="link-title menu_hide">&nbsp;Reported Videos
+                        </span>
+                    </a>
+                </li>
             </ul>
             <!-- /#menu -->
         </div>

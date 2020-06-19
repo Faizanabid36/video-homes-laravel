@@ -38,6 +38,13 @@ class HomeController extends Controller
         $tab = \request('tab');
         $user = \request('user');
         if ($tab == 'general') {
+            $exists=User::whereUsername($user['username'])->where('id','!=',auth()->user()->id)->first();
+            if(!is_null($exists))
+            {
+                return ['message'=>'Username already taken'];
+            }
+            if(strlen($user['bio'])>600)
+                return ['message'=>'Bio can consist of only 600 characters'];
             $result = User::whereId($user['id'])->update(
                 [
                     'email' => $user['email'],
@@ -47,6 +54,10 @@ class HomeController extends Controller
                     'address'=>$user['address'],
                     'phone'=>$user['phone'],
                     'phone2'=>$user['phone2'],
+                    'liscense'=>$user['liscense'],
+                    'website_title'=>$user['website_title'],
+                    'website_link'=>$user['website_link'],
+                    'bio'=>$user['bio'],
                 ]
             );
             AccountType::whereUserId($user['id'])->update(['role'=>$user['role'],'sub_role_category'=>\request('sub_role_cat'),'sub_role'=>\request('sub_role')]);

@@ -17,10 +17,6 @@
                         <input class="form-control" type="text" name="name" id="name" placeholder="Name" required value="{{old('name')}}">
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="text" name="username" id="username" placeholder="Username" required
-                               value="{{old('username')}}">
-                    </div>
-                    <div class="form-group">
                         <input class="form-control" type="text" name="email" id="email" placeholder="E-mail address" required
                                value="{{old('email')}}">
                     </div>
@@ -34,25 +30,9 @@
                                required="">
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="text" name="address" id="password" placeholder="Address"
-                               required="">
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" type="text" name="liscense" id="password" placeholder="Liscense"
-                               required="">
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" type="text" name="phone" id="password" placeholder="Direct Phone"
-                               required="">
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" type="text" name="phone2" id="password" placeholder="Office Phone"
-                               required="">
-                    </div>
-                    <div class="form-group">
                         <select onchange="changeVisibility(this)" class="form-control" name="role" id="role"
                                 required="">
-                            <option selected disabled>Selected Role</option>
+                            <option selected disabled>Choose My Industry</option>
                             @foreach($roles as $role)
                                 <option value="{{$role->id}}">{{$role->role}}</option>
                             @endforeach
@@ -109,7 +89,12 @@
             @endforeach
         }
             @endforeach
-
+        var option = document.createElement("option");
+        option.value = "";
+        option.text = "Choose My Expertise"
+        option.selected;
+        option.disabled
+        select.appendChild(option);
         for (let i = 0; i < values.length; i++) {
             var option = document.createElement("option");
             option.value = valu[i];
@@ -138,7 +123,12 @@
                 valu.push('{{$v->id}}')
                 @endforeach
             }@endforeach
-
+            var option = document.createElement("option");
+            option.value = "";
+            option.text = "Choose My Profession"
+            option.selected;
+            option.disabled
+            select.appendChild(option);
             for (let i = 0; i < values.length; i++) {
                 var option = document.createElement("option");
                 option.value = valu[i];

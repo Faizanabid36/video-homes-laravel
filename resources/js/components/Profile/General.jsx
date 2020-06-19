@@ -193,6 +193,27 @@ class General extends React.Component {
                         </div>
                     </div>
                     <div className="form-group input-form-group col-lg-6">
+                        <label className="col-md-12" htmlFor="bio">Bio</label>
+                        <div className="col-md-12">
+                            <input onChange={this.handleChangeInput} id="bio" name="bio" type="text" placeholder=""
+                                   className="form-control custom-vh-form-input" defaultValue={this.state.user.bio}/>
+                        </div>
+                    </div>
+                    <div className="form-group input-form-group col-lg-6">
+                        <label className="col-md-12" htmlFor="website_title">Website Title</label>
+                        <div className="col-md-12">
+                            <input onChange={this.handleChangeInput} id="website_title" name="website_title" type="url" placeholder=""
+                                   className="form-control custom-vh-form-input" defaultValue={this.state.user.website_title}/>
+                        </div>
+                    </div>
+                    <div className="form-group input-form-group col-lg-6">
+                        <label className="col-md-12" htmlFor="website_link">Website Link</label>
+                        <div className="col-md-12">
+                            <input onChange={this.handleChangeInput} id="website_link" name="website_link" type="url" placeholder=""
+                                   className="form-control custom-vh-form-input" defaultValue={this.state.user.website_link}/>
+                        </div>
+                    </div>
+                    <div className="form-group input-form-group col-lg-6">
                         <label className="col-md-12" htmlFor="email">E-mail address</label>
                         <div className="col-md-12">
                             <input onChange={this.handleChangeInput} id="email" name="email" type="text" placeholder=""
@@ -221,6 +242,14 @@ class General extends React.Component {
                             <input onChange={this.handleChangeInput} id="phone2" name="phone2" type="text"
                                    placeholder=""
                                    className="form-control custom-vh-form-input" defaultValue={this.state.user.phone2}/>
+                        </div>
+                    </div>
+                    <div className="form-group input-form-group col-lg-6">
+                        <label className="col-md-12" htmlFor="liscense">License</label>
+                        <div className="col-md-12">
+                            <input onChange={this.handleChangeInput} id="liscense" name="liscense" type="text"
+                                   placeholder=""
+                                   className="form-control custom-vh-form-input" defaultValue={this.state.user.liscense}/>
                         </div>
                     </div>
                     <div className="form-group input-form-group col-lg-6">
