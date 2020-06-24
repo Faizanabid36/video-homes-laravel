@@ -17,7 +17,7 @@ class RolesSeeder extends Seeder
         $roles=[
             ['role'=>'admin','slug'=>'admin'],
             ['role'=>'realtor','slug'=>'realtor'],
-            ['role'=>'video provider','slug'=>'video provider'],
+            ['role'=>'video provider','slug'=>'video-provider'],
         ];
         foreach ($roles as $role)
             UserRole::create($role);
