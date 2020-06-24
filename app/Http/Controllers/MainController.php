@@ -34,7 +34,7 @@ class MainController extends Controller
         $role_slug = $role;
         $str = str_replace('-', ' ', $role);
 //        dd($role_slug);
-        $role = UserRole::whereSlug($role_slug)->first();
+        $role = UserRole::whereSlug($role_slug)->firstOrFail();
         $id = $role->id;
         $tags = UserCategory::withCount('sub_roles')->whereRoleId($id)->whereNull('parent_id')->get();
         $users = User::with('account_types', 'user_role')->where('role', $id)->get();
