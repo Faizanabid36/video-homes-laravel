@@ -88,20 +88,22 @@
             valu.push('{{$v->id}}')
             @endforeach
         }
-            @endforeach
-        var option = document.createElement("option");
-        option.value = "";
-        option.text = "Choose My Expertise"
-        option.selected;
-        option.disabled
-        select.appendChild(option);
-        for (let i = 0; i < values.length; i++) {
+        @endforeach
+        if (values.length != 0) {
             var option = document.createElement("option");
-            option.value = valu[i];
-            option.text = values[i].charAt(0).toUpperCase() + values[i].slice(1);
+            option.value = "";
+            option.text = "Choose My Expertise"
+            option.selected;
+            option.disabled
             select.appendChild(option);
+            for (let i = 0; i < values.length; i++) {
+                var option = document.createElement("option");
+                option.value = valu[i];
+                option.text = values[i].charAt(0).toUpperCase() + values[i].slice(1);
+                select.appendChild(option);
+            }
+            document.getElementById("parent").appendChild(select);
         }
-        document.getElementById("parent").appendChild(select);
     }
 </script>
 
@@ -122,20 +124,23 @@
                 values.push('{{$v->name}}')
                 valu.push('{{$v->id}}')
                 @endforeach
-            }@endforeach
-            var option = document.createElement("option");
-            option.value = "";
-            option.text = "Choose My Profession"
-            option.selected;
-            option.disabled
-            select.appendChild(option);
-            for (let i = 0; i < values.length; i++) {
-                var option = document.createElement("option");
-                option.value = valu[i];
-                option.text = values[i].charAt(0).toUpperCase() + values[i].slice(1);
-                select.appendChild(option);
             }
-            document.getElementById("child").appendChild(select);
+            @endforeach
+            if (values.length != 0) {
+                var option = document.createElement("option");
+                option.value = "";
+                option.text = "Choose My Profession"
+                option.selected;
+                option.disabled
+                select.appendChild(option);
+                for (let i = 0; i < values.length; i++) {
+                    var option = document.createElement("option");
+                    option.value = valu[i];
+                    option.text = values[i].charAt(0).toUpperCase() + values[i].slice(1);
+                    select.appendChild(option);
+                }
+                document.getElementById("child").appendChild(select);
+            }
         });
     </script>
 @endsection

@@ -1,6 +1,8 @@
 import React from "react";
 import {Row} from "react-bootstrap";
 import axios from "axios";
+import Autocomplete from 'react-google-autocomplete';
+
 
 class General extends React.Component {
     constructor(props) {
@@ -170,6 +172,15 @@ class General extends React.Component {
         return <div className="col-md-7 pt_sett_mani_page">
             <div className="form-horizontal user-setting-panel pt_shadow display-shadow-box"
                  id="general-settings">
+                <Autocomplete
+                    apiKey={'AIzaSyAm4Wvmd2nIeaFQCdhAsxbiSXgBsibDolc'}
+                    style={{width: '90%'}}
+                    onPlaceSelected={(place) => {
+                        console.log(place.geometry.location.lat());
+                    }}
+                    types={['(regions)']}
+                    componentRestrictions={{country: "us"}}
+                />
                 <div className="setting-general-alert">
                     {
                         this.state.message ?
