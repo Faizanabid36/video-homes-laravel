@@ -45,7 +45,7 @@ class User extends Authenticatable
             $playlist->name = "Unlisted";
             $playlist->user_id = $user->id;
             $playlist->save();
-            $identity=new Identity();
+            $identity=new SocialIdentity();
             $identity->user_id=$user->id;
             $identity->facebook='';
             $identity->instagram='';
