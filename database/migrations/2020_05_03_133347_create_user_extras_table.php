@@ -19,7 +19,7 @@ class CreateUserExtrasTable extends Migration
 //            $table->string('who_watches')->default('Everyone');
 //            $table->string('who_comments')->default('Everyone');
 //            $table->string('who_shares')->default('Everyone');
-            $table->string('user_category_id');
+            $table->string('user_category_id')->nullable();
             $table->timestamps();
         });
     }

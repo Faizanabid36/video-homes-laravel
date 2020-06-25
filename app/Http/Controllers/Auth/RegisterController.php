@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\AccountType;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\UserExtra;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -77,6 +78,9 @@ class RegisterController extends Controller
         $account_type->user_id =$user->id;
         $account_type->role = isset($data['role'])?$data['role']:"";
         $account_type->save();
+        $usersetting = new UserExtra();
+        $usersetting->user_id = $user->id;
+        $usersetting->save();
         return $user;
         // dd ($data['account_type']);
 

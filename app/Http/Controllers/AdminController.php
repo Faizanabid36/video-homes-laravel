@@ -192,8 +192,8 @@ class AdminController extends Controller
     {
         $cat = UserCategory::whereId($id)->with('children')->with('parent')->first();
         $categories = UserCategory::where('id', '!=', $id)->whereNull('parent_id')->with('children')->with('parent')->get();
-        $roles=UserRole::where('role','!=','admin')->get();
-        return view('admin.edit_user_category', compact('cat', 'categories','roles'));
+        $roles = UserRole::where('role', '!=', 'admin')->get();
+        return view('admin.edit_user_category', compact('cat', 'categories', 'roles'));
     }
 
     public function users_list()
@@ -202,9 +202,21 @@ class AdminController extends Controller
         return view('admin.users_list', compact('users'));
     }
 
+    public function videos_list()
+    {
+        $videos = Video::whereProcessed(1)->whereIsVideoApproved(1)->get();
+        return view('admin.videos.list', compact('videos'));
+    }
+
+    public function delete_video($id)
+    {
+        Video::whereId($id)->delete();
+        return back()->withSuccess('Video Deleted Successfully');
+    }
+
     public function review_video($id)
     {
         $video = Video::where('is_video_approved', 0)->where('id', $id)->firstOrFail();
-        return view('admin.review_video',compact('video'));
+        return view('admin.review_video', compact('video'));
     }
 }

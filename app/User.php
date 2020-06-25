@@ -2,15 +2,14 @@
 
 namespace App;
 
-use App\AccountType;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use phpseclib\System\SSH\Agent\Identity;
 
 class User extends Authenticatable
 {
     use Notifiable;
+
+    protected $with = ['user_extra'];
 
     /**
      * The attributes that are mass assignable.
@@ -45,13 +44,14 @@ class User extends Authenticatable
             $playlist->name = "Unlisted";
             $playlist->user_id = $user->id;
             $playlist->save();
-            $identity=new SocialIdentity();
-            $identity->user_id=$user->id;
-            $identity->facebook='';
-            $identity->instagram='';
-            $identity->youtube_channel='';
-            $identity->twitter='';
-            $identity->save();
+
+//            $identity = new SocialIdentity();
+//            $identity->user_id = $user->id;
+//            $identity->facebook = '';
+//            $identity->instagram = '';
+//            $identity->youtube_channel = '';
+//            $identity->twitter = '';
+//            $identity->save();
         });
     }
 
@@ -66,14 +66,16 @@ class User extends Authenticatable
     }
     public function account_types()
     {
-        return $this->hasOne(AccountType::class,'user_id');
+        return $this->hasOne(AccountType::class, 'user_id');
     }
+
     public function user_role()
     {
-        return $this->hasOne(UserRole::class,'id','role');
+        return $this->hasOne(UserRole::class, 'id', 'role');
     }
-    public function social_identity()
+
+    public function user_extra()
     {
-        return $this->hasOne(SocialIdentity::class,'user_id','id');
+        return $this->hasOne(UserExtra::class, 'user_id', 'id');
     }
 }

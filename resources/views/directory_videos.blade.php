@@ -1,4 +1,13 @@
 @extends('layouts.public.app')
+@section('style')
+    <style>
+        /* Set the size of the div element that contains the map */
+        #map {
+            height: 400px; /* The height is 400 pixels */
+            width: 100%; /* The width is the width of the web page */
+        }
+    </style>
+@endsection
 @section('content')
 
     <div class="bigContainer">
@@ -287,26 +296,21 @@
                     @if(isset($user->address))
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
-                            <iframe width="100%" height="450"
-                                    src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street%2C%20Dublin%2C%20Ireland+(My%20Business%20Name)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed"
-                                    frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a
-                                    href="https://www.maps.ie/draw-radius-circle-map/">Create radius map</a>
-                            </iframe>
+                            <div id="map">
+                            </div>
                             <br/>
 
-                            <h4 class="my-3"> Get directions from: </h4>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Enter address or zip code"
-                                       aria-label="Recipient's username" aria-describedby="button-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i
-                                            style="color:gray ; font-size:14px" class='fas icon fa-map-marker'></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <p><a href=""> <i style="color:lightBlue ; font-size:14px" class='fas icon fa-circle'></i>
-                                    6020
-                                    Meadowridge Center Drive, STE#M, Elkridge, Maryland, USA 21075 </a></p>
+{{--                            <h4 class="my-3"> Get directions from: </h4>--}}
+{{--                            <div class="input-group mb-3">--}}
+{{--                                <input type="text" class="form-control" placeholder="Enter address or zip code"--}}
+{{--                                       aria-label="Recipient's username" aria-describedby="button-addon2">--}}
+{{--                                <div class="input-group-append">--}}
+{{--                                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i--}}
+{{--                                            style="color:gray ; font-size:14px" class='fas icon fa-map-marker'></i>--}}
+{{--                                    </button>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+                            <p><a href=""> <i style="color:lightBlue ; font-size:14px" class='fas icon fa-circle'></i>{{$user->address}}</a></p>
                             <button class="btn btn-primary"> GET DIRECTION</button>
                         </div>
                     @endif
@@ -873,5 +877,29 @@
             $('.icons').addClass('hidden');
         });
 
+    </script>
+    <script>
+        function initMap() {
+            @if(!is_null($user->user_extra->location_latitude)||!is_null($user->user_extra->location_longitude))
+            var uluru = {
+                    lat: {{$user->user_extra->location_latitude}},
+                    lng: {{$user->user_extra->location_longitude}}
+                };
+                @endif
+            var map = new google.maps.Map(
+                document.getElementById('map'), {zoom: 11, center: uluru});
+
+
+            @if(!is_null($user->user_extra->location_latitude)||!is_null($user->user_extra->location_longitude))
+            var uluru = {
+                    lat: {{$user->user_extra->location_latitude}},
+                    lng: {{$user->user_extra->location_longitude}}
+                };
+            new google.maps.Marker({position: uluru, map: map});
+            @endif
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAm4Wvmd2nIeaFQCdhAsxbiSXgBsibDolc&callback=initMap">
     </script>
 @endsection

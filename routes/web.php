@@ -14,20 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-//Public Pages
-Route::get('/', 'MainController@index')->name('home');
-Route::get('/directory', 'MainController@directory')->name('directory');
-Route::get('/directory/{role}','MainController@ex_directory_by_category')->name('ex_directory_by_category');
-Route::get('/directory/{role}/{subrole}','MainController@directory_by_sub_category')->name('directory_by_sub_category');
-Route::get('/directory/{role}/{subrole}/{sub_cat}','MainController@directory_by_sub_category_role')->name('directory_by_sub_category_role');
-Route::get('/directory_list/{username}','MainController@directory_by_username')->name('directory_by_username');
-Route::get('/directory_list/{username}/{video_id}','MainController@directory_by_user_video')->name('directory_by_user_video');
-Route::get('/joe', 'MainController@joe')->name('joe');
-Route::get('account_types','MainController@account_types')->name('account_types');
 Auth::routes();
 
 Route::resource('report_query','ReportQueryController');
 Route::get('reported_query_videos','ReportQueryController@reported_videos');
+
+Route::post('/search_in_directory','MainController@search_in_directory')->name('search_in_directory');
 
 //Auth User
 Route::group(['middleware' => 'auth'], function () {
@@ -37,7 +29,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('edit_user_category/{id}','AdminController@edit_user_category')->name('edit_user_category');
     Route::post('update_user_category','AdminController@update_user_category')->name('update_user_category');
     Route::get('delete_user_category/{id}','AdminController@delete_user_category')->name('delete_user_category');
-
+    Route::get('videos_list','AdminController@videos_list')->name('admin.videos_list');
+    Route::get('admin_delete_video/{id}','AdminController@delete_video')->name('admin.delete_video');
     Route::get('users_list','AdminController@users_list')->name('users_list');
 
     Route::post('delete_video','VideoController@delete_video');

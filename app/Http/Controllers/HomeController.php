@@ -37,6 +37,8 @@ class HomeController extends Controller
     {
         $tab = \request('tab');
         $user = \request('user');
+        $latitude=\request('location_latitude');
+        $longitude=\request('location_longitude');
         if ($tab == 'general') {
             $exists=User::whereUsername($user['username'])->where('id','!=',auth()->user()->id)->first();
             if(!is_null($exists))
@@ -60,6 +62,7 @@ class HomeController extends Controller
                     'bio'=>$user['bio'],
                 ]
             );
+            UserExtra::whereUserId($user['id'])->update(['location_latitude'=>$latitude,'location_longitude'=>$longitude]);
             AccountType::whereUserId($user['id'])->update(['role'=>$user['role'],'sub_role_category'=>\request('sub_role_cat'),'sub_role'=>\request('sub_role')]);
             $message = $result == 1 ? 'Profile Updated' : 'Could Not Update Profile';
             return compact('tab', 'message');

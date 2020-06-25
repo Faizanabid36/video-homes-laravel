@@ -1,24 +1,28 @@
 import React from "react";
 import {Row} from "react-bootstrap";
 import axios from "axios";
-import Autocomplete from 'react-google-autocomplete';
+import GooglePlacesAutocomplete, {geocodeByAddress} from 'react-google-places-autocomplete';
+// If you want to use the provided css
+import 'react-google-places-autocomplete/dist/index.min.css';
 
 
-class General extends React.Component {
+export default class General extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             user: {},
             message: null,
             image: '',
-            company_logo:'',
+            company_logo: '',
             roles: [],
             filename: '',
             company_logo_filename: '',
             role: [],
             role_cat: [],
             sub_role: 0,
-            sub_role_cat: 0
+            sub_role_cat: 0,
+            location_latitude: '',
+            location_longitude: '',
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChangeInput = this.handleChangeInput.bind(this);
@@ -31,9 +35,9 @@ class General extends React.Component {
     }
 
     handleSubmit() {
-        let {user, sub_role_cat, sub_role} = this.state;
+        let {user, sub_role_cat, sub_role, location_latitude, location_longitude} = this.state;
         let tab = 'general';
-        axios.post('/edit_user_profile', {user, tab, sub_role_cat, sub_role})
+        axios.post('/edit_user_profile', {user, tab, sub_role_cat, sub_role, location_latitude, location_longitude})
             .then((res) => {
                 this.setState({message: res.data.message})
             })
@@ -103,6 +107,7 @@ class General extends React.Component {
         reader.readAsDataURL(file);
       }
 
+
     componentDidMount() {
         axios.get('get_logged_user')
             .then((res) => {
@@ -119,10 +124,10 @@ class General extends React.Component {
         axios.get('account_types')
             .then((res) => {
                 this.setState({roles: res.data.roles}, () => {
-                    this.state.roles.map((item) => {
+                    this.state.roles.map( async (item) => {
                         if (item.id == this.state.user.account_types.sub_role)
-                            this.setState({role: item.sub_roles}, () => {
-                                this.state.role.map((i) => {
+                            await this.setState({role: item.sub_roles}, async () => {
+                                await this.state.role.map((i) => {
                                     if (i.children) {
                                         i.children.map(async (x) => {
                                             if (x.id == this.state.user.account_types.sub_role_category)
@@ -167,20 +172,10 @@ class General extends React.Component {
             }
         });
     }
-
     render() {
         return <div className="col-md-7 pt_sett_mani_page">
             <div className="form-horizontal user-setting-panel pt_shadow display-shadow-box"
                  id="general-settings">
-                <Autocomplete
-                    apiKey={'AIzaSyAm4Wvmd2nIeaFQCdhAsxbiSXgBsibDolc'}
-                    style={{width: '90%'}}
-                    onPlaceSelected={(place) => {
-                        console.log(place.geometry.location.lat());
-                    }}
-                    types={['(regions)']}
-                    componentRestrictions={{country: "us"}}
-                />
                 <div className="setting-general-alert">
                     {
                         this.state.message ?
@@ -234,10 +229,27 @@ class General extends React.Component {
                     <div className="form-group input-form-group col-lg-6">
                         <label className="col-md-12" htmlFor="address">Address</label>
                         <div className="col-md-12">
-                            <input onChange={this.handleChangeInput} id="address" name="address" type="text"
-                                   placeholder=""
-                                   className="form-control custom-vh-form-input"
-                                   defaultValue={this.state.user.address}/>
+                            {/*<input onChange={this.handleChangeInput} id="address" name="address" type="text"*/}
+                            {/*       placeholder=""*/}
+                            {/*       className="form-control custom-vh-form-input"*/}
+                            {/*       defaultValue={this.state.user.address}/>*/}
+                            <GooglePlacesAutocomplete
+                                onSelect={({description}) => {
+                                    let {user} = this.state
+                                    user.address = description
+                                    this.setState({user: user})
+                                    geocodeByAddress(description)
+                                        .then((results) => {
+                                            this.setState({
+                                                location_latitude: results[0].geometry.location.lat(),
+                                                location_longitude: results[0].geometry.location.lng(),
+                                            })
+                                            console.log(results)
+                                        })
+                                        .catch(error => console.error(error));
+                                }}
+                                inputClassName="form-control custom-vh-form-input"
+                            />
                         </div>
                     </div>
                     <div className="form-group input-form-group col-lg-6">
@@ -269,9 +281,9 @@ class General extends React.Component {
                             <select onChange={this.handleChangeRole} id="role" name="role"
                                     className="form-control custom-vh-form-input">
                                 <option value="" selected>Select An Option</option>
-                                {this.state.roles.map((item) => {
+                                {this.state.roles.map((item, id) => {
                                     return <option
-                                        key={"cat"+item}
+                                        key={"cat" + id}
                                         selected={this.state.user.role == item.id ? "selected" : ""}
                                         value={item.id}>{item.role}</option>
                                 })}
@@ -367,5 +379,3 @@ class General extends React.Component {
         </div>
     }
 }
-
-export default General;

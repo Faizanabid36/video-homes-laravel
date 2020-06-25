@@ -7,6 +7,7 @@ use App\UserRole;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use function foo\func;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -48,5 +49,9 @@ class AppServiceProvider extends ServiceProvider
         View::share(
             'roles_assoc', $roles_assoc
         );
+        $industries=UserRole::where('role','!=','admin')->get();
+        view::composer('directory.cat_directory',function($view) use($industries){
+            $view->with('industries',$industries);
+        });
     }
 }

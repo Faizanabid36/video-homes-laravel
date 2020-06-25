@@ -57,9 +57,9 @@
                     </a>
                 </li>
                 <li class="">
-                    <a href="{{route('users_list')}}">
+                    <a href="{{route('admin.videos_list')}}">
                         <i class="fa fa-tachometer"></i>
-                        <span class="link-title menu_hide">&nbsp;Users List
+                        <span class="link-title menu_hide">&nbsp;Videos List
                         </span>
                     </a>
                 </li>
