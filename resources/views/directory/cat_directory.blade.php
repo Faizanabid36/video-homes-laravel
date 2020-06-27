@@ -48,7 +48,6 @@
         </div>
 
         <!-- 3rd row -->
-        {{dd($count_users)}}
         @if(isset($count_users)&&$count_users>0)
         <div class="row Category-Boxes ">
             @if(isset($directory) && $directory)
