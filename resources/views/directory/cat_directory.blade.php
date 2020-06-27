@@ -1,13 +1,4 @@
 @extends('layouts.public.app')
-@section('style')
-    <style>
-        /* Set the size of the div element that contains the map */
-        #map {
-            height: 400px; /* The height is 400 pixels */
-            width: 100%; /* The width is the width of the web page */
-        }
-    </style>
-@endsection
 @section('content')
 
     <div class="bigContainer">
@@ -227,16 +218,21 @@
     </script>
     <script>
         function initMap() {
-            @foreach($users as $u)
-            @if(!is_null($u->user_extra->location_latitude)||!is_null($u->user_extra->location_longitude))
-                var uluru = {
-                        lat: {{$u->user_extra->location_latitude}},
-                        lng: {{$u->user_extra->location_longitude}}
-                };
-                @endif
+                @foreach($users as $u)
+                    @if(!is_null($u->user_extra->location_latitude)||!is_null($u->user_extra->location_longitude))
+                        var uluru = {
+                                lat: {{$u->user_extra->location_latitude}},
+                                lng: {{$u->user_extra->location_longitude}}
+                        };
+                    @endif
                 @endforeach
-            var map = new google.maps.Map(
-                document.getElementById('map'), {zoom: 11, center: uluru});
+                    if(uluru){
+                        mapArea=document.getElementById('map');
+                        mapArea.style.width="100%"
+                        mapArea.style.height="400px"
+                        var map = new google.maps.Map(mapArea, {zoom: 11, center: uluru});
+                    }
+
                 @foreach($users as $u)
 
                 @if(!is_null($u->user_extra->location_latitude)||!is_null($u->user_extra->location_longitude))
