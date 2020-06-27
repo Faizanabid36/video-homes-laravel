@@ -136,9 +136,8 @@ class MainController extends Controller
             ->orWhere('address','like',$request->get('query')."%")
             ->get();
         $tags=[];
-        $count_users=count($users);
         $role_slug='';
-        return view('directory.cat_directory', compact('users', 'tags', 'role_slug','count_users'));
+        return view('directory.cat_directory', compact('users', 'tags', 'role_slug'));
         return $users;
     }
 }

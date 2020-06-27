@@ -48,7 +48,7 @@
         </div>
 
         <!-- 3rd row -->
-        @if(isset($count_users)&&$count_users>0)
+        @if(count($users)>0)
         <div class="row Category-Boxes ">
             @if(isset($directory) && $directory)
                 @foreach($tags as $tag)
