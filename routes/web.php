@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::resource('report_query','ReportQueryController');
+Route::resource('public_pages','PageController');
 Route::get('reported_query_videos','ReportQueryController@reported_videos');
 
 Route::post('/search_in_directory','MainController@search_in_directory')->name('search_in_directory');

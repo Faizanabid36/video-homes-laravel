@@ -1,4 +1,4 @@
-<div class="wrapper">
+
     <div id="left">
         <div class="menu_scroll">
             <div class="left_media">
@@ -22,6 +22,14 @@
                     <a href="{{route('dashboard')}}">
                         <i class="fa fa-home"></i>
                         <span class="link-title menu_hide">&nbsp;Dashboard</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="{{route('public_pages.index')}}">
+                        <i class="fa fa-tachometer"></i>
+                        <span class="link-title menu_hide">&nbsp;Public Pages
+
+                            </span>
                     </a>
                 </li>
                 <li class="">
@@ -102,6 +110,3 @@
             </div>
         </form>
     </div>
-
-
-</div>

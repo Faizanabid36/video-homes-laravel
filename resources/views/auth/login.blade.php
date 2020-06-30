@@ -12,7 +12,7 @@
                         </div>
                     @endif
                     <div class="form-group">
-                        <input class="form-control" type="text" name="email" id="username" placeholder="Username" required="" value="">
+                        <input class="form-control" type="text" name="email" id="username" placeholder="Email" required="" value="">
                     </div>
                     <div class="form-group">
                         <input class="form-control" type="password" name="password" id="password" placeholder="Password" required="">
