@@ -53,4 +53,10 @@ class PageController extends Controller
         Page::whereId($page)->delete();
         return back()->withSuccess('Page Deleted Successfully');
     }
+
+    public function show_page($slug)
+    {
+        $page=Page::whereSlug($slug)->first();
+        return view('page',compact('page'));
+    }
 }

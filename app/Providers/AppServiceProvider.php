@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Page;
 use App\UserCategory;
 use App\UserRole;
 use Illuminate\Support\Facades\Schema;
@@ -35,7 +36,6 @@ class AppServiceProvider extends ServiceProvider
         $user_parent_category = UserCategory::whereNull('parent_id')->get();
         $user_child_category = UserCategory::whereNotNull('parent_id')->get()->groupBy('parent_id');
 
-//      /**/  dd($user_child_category);
 
         View::share(
             'user_parent_category', $user_parent_category
@@ -52,6 +52,13 @@ class AppServiceProvider extends ServiceProvider
         $industries=UserRole::where('role','!=','admin')->get();
         view::composer('directory.cat_directory',function($view) use($industries){
             $view->with('industries',$industries);
+        });
+
+
+
+        View::composer('layouts.public.app',function($view){
+            $pages=Page::whereIsPublic(1)->get();
+            $view->with('pages',$pages);
         });
     }
 }

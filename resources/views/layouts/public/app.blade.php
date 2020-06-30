@@ -50,23 +50,16 @@
                         <li class="nav-item ">
                             <a class="nav-link" href="{{route('directory')}}">DIRECTORY <span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">MEDIA PROS</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">BUSINESS</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">BLOG</a>
-                        </li>
+                        @foreach($pages as $page)
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('public.page',$page->slug)}}">{{strtoupper($page->title)}}</a>
+                            </li>
+                        @endforeach
                     </ul>
 
                 </div>
             </nav>
-
             <!-- Nav-end -->
-
-
         </div>
 
 
