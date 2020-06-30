@@ -90,17 +90,7 @@
                                         Page Content
                                     </div>
                                     <div>
-                                        <textarea name="content" id="tinymce_full" rows="7"><h2>Edit Page Content</h2>
-                                                    Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                    elit. Aliquam ullamcorper sapien non nisl facilisis bibendum in
-                                                    quis tellus.
-                                                    <h4>Editable</h4>
-                                                    <ul>
-                                                        <li> Lorem ipsum dolor sit amet, consectetur adipiscing</li>
-                                                        <li> Aliquam ullamcorper sapien non nisl facilisis.</li>
-                                                    </ul>
-                                                    <h4></h4>Proin nunc justo felis mollis tincidunt, risus risus pede, posuere cubilia Curae, Nullam euismod, enim. Etiam nibh ultricies dolor
-                                        </textarea>
+                                        <textarea name="content" id="tinymce_full" rows="7">Write Here...</textarea>
                                     </div>
                                 </div>
                                 @csrf
