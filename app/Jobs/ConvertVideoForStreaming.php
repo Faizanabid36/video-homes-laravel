@@ -44,9 +44,9 @@ class ConvertVideoForStreaming implements ShouldQueue {
             ->setKiloBitrate( $this->bitrate )
             ->setAudioChannels( 2 )
             ->setAudioKiloBitrate( 126 )
-            ->setLevel( 3.1 );
-        $lowBitrateFormat->setAdditionalParameters(array('-preset','medium', '-crf','23','-x264-params','ref=4','-level', 3.0,'-profile:v','main','-movflags','+faststart'));
-
+//            ->setLevel( 3.1 );
+//        $lowBitrateFormat->setAdditionalParameters(array('-preset','medium', '-crf','23','-x264-params','ref=4','-level', 3.0,'-profile:v','main','-movflags','+faststart'));
+;
 
         $video = \FFMpeg::open( $this->video->video_path );
 
