@@ -46,7 +46,7 @@ if ( ! function_exists( 'saveVideoByResolution' ) ) {
         return $savePath;
     }
 }
-
+//libmp3lame
 if ( ! function_exists( 'saveVideoStream' ) ) {
     function saveVideoStream( $path, $width, $height, $bitrate = '500' ) {
         // set the quality
