@@ -68,7 +68,7 @@ export default class General extends React.Component {
         axios.post('/update_company_logo', fd)
             .then((res) => {
                 console.log('res', res)
-                // window.location.reload();
+                window.location.reload();
             })
             .catch((err) => {
                 console.log(err)
