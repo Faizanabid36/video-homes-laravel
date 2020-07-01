@@ -40,23 +40,17 @@ class ConvertVideoForStreaming implements ShouldQueue {
      */
     public function handle() {
         // create a video format...
-        $lowBitrateFormat = ( new X264( 'aac', 'libx264' ) )
-            ->setKiloBitrate( $this->bitrate )
-            ->setAudioChannels( 2 )
-            ->setAudioKiloBitrate( 126 )
-//            ->setLevel( 3.1 );
-//        $lowBitrateFormat->setAdditionalParameters(array('-preset','medium', '-crf','23','-x264-params','ref=4','-level', 3.0,'-profile:v','main','-movflags','+faststart'));
-;
+        $lowBitrateFormat = ( new X264( 'libmp3lame', 'libx264' ) )->setKiloBitrate( $this->bitrate );
 
         $video = \FFMpeg::open( $this->video->video_path );
-
+        Log::info("Essa Outside Angle",[$this->angle]);
         if ( $this->angle ) {
-            Log::info( "Essa Inside Angle", [ $this->angle ] );
+            Log::info("Essa Inside Angle",[$this->angle]);
             $video->filters()->rotate( $this->angle );
         }
         $video->filters()->pad( new Dimension( $this->width, $this->height ) );
 
-        $video->export()->inFormat($lowBitrateFormat)->save( getCleanFileName( $this->video->video_path, "_{$this->height}p_converted.mp4" ) );
+        $video->export()->inFormat( $lowBitrateFormat )->save( getCleanFileName( $this->video->video_path, "_{$this->height}p_converted.mp4" ) );
 
         // update the database so we know the convertion is done!
         Log::info( 'This is some useful information.', [
@@ -76,7 +70,6 @@ class ConvertVideoForStreaming implements ShouldQueue {
             case 90:
                 return RotateFilter::ROTATE_90;
         }
-
         return false;
     }
 
