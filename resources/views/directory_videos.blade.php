@@ -99,7 +99,7 @@
 
                     <div id="background" class="hidden"></div>
                     <div class="col-md-8 player-video" style="margin-top: 0 !important">
-                        <div class="video-player pt_video_player " id="pt_video_player">
+                        <h2 class="video-player pt_video_player " id="pt_video_player">
                             <span class="mejs__offscreen">Video Player</span>
                             @if(!is_null($video))
                                     <video id="my-video_html5"
@@ -157,9 +157,9 @@
                                 <div class="icons hidden">
                                     <span class="expend-player"><i class="fa fa-expand fa-fw"></i></span>
                                 </div>
-                                <div>
+                                <h2>
                                     {{ucfirst($video->title)}}
-                                </div>
+                                </h2>
                                 @else
                                     <div>
                                         <h1 class="alert alert-info">No Video Uploaded By this User</h1>
