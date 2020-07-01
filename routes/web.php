@@ -90,6 +90,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::get('users','AdminController@users')->name('admin.list_user');
+    Route::get('delete_user/{id}','AdminController@delete_user')->name('admin.delete_user');
+    Route::get('deactivate_user/{id}','AdminController@deactivate_user')->name('admin.deactivate_user');
 
 });
 Route::get('/embed/{video_id}', 'VideoController@get_embedded_video')->name('embed_video');

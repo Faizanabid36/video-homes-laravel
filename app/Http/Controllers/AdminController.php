@@ -223,7 +223,22 @@ class AdminController extends Controller
 
     public function users()
     {
-        $users=User::paginate(10);
+        $users=User::where('role','!=',1)->paginate(10);
         return view('admin.users.list',compact('users'));
+    }
+
+    public function delete_user($id)
+    {
+        User::whereId($id)->delete();
+        return back()->withSuccess('User Deleted Successfully');
+    }
+    public function deactivate_user($id)
+    {
+        $user=User::find($id);
+        $user->active=!$user->active;
+        $user->save();
+        if($user->active==1)
+            return back()->withSuccess('User Activated Successfully');
+        return back()->withSuccess('User Deactivated Successfully');
     }
 }

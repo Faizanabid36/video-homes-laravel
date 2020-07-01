@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -42,9 +43,16 @@ class LoginController extends Controller
 
     protected function authenticated(\Illuminate\Http\Request $request, $user)
     {
-        if ($user->role == 1) {// do your magic here
-            return redirect()->route('admin_panel');
+        if($user->active==0)
+        {
+            Auth::logout();
+            return redirect('login')->withErrors(['active' => 'Your Account Is Inactive.']);
         }
-        return redirect('/dashboard');
+        else{
+            if ($user->role == 1) {// do your magic here
+                return redirect()->route('admin_panel');
+            }
+            return redirect('/dashboard');
+        }
     }
 }

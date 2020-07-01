@@ -35,6 +35,8 @@
                                     <th>Email</th>
                                     <th>Contact</th>
                                     <th>Address</th>
+                                    <th>Delete</th>
+                                    <th>Activate/Deactivate</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -47,9 +49,16 @@
                                         <td>{{$user->phone}}</td>
                                         <td>{{$user->address}}</td>
                                         <td>
-                                            <a href="{{action('AdminController@delete_video',$user->id)}}">
-                                                <button class="btn  btn-danger">
+                                            <a href="{{action('AdminController@delete_user',$user->id)}}">
+                                                <button class="btn btn-danger">
                                                     Delete User
+                                                </button>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="{{action('AdminController@deactivate_user',$user->id)}}">
+                                                <button class="btn {{$user->active==0?'btn-success':'btn-warning'}}">
+                                                    {{$user->active==0?'Activate':'Deactivate'}}
                                                 </button>
                                             </a>
                                         </td>
@@ -58,6 +67,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        {{$users->links()}}
                     </div>
                 </div>
             </div>
