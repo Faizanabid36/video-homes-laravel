@@ -99,7 +99,7 @@
 
                     <div id="background" class="hidden"></div>
                     <div class="col-md-8 player-video" style="margin-top: 0 !important">
-                        <h2 class="video-player pt_video_player " id="pt_video_player">
+                        <div class="video-player pt_video_player " id="pt_video_player">
                             <span class="mejs__offscreen">Video Player</span>
                             @if(!is_null($video))
                                     <video id="my-video_html5"
