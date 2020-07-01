@@ -40,12 +40,13 @@ class ConvertVideoForStreaming implements ShouldQueue {
      */
     public function handle() {
         // create a video format...
-        $lowBitrateFormat = ( new X264( 'copy', 'libx264' ) )
-            ->setKiloBitrate( $this->bitrate )
+        $lowBitrateFormat = new X264( 'aac', 'libx264' );
+        $lowBitrateFormat
+            ->setKiloBitrate( 1200 )
+            ->setPasses(1)
             ->setAudioChannels( 2 )
-            ->setAudioKiloBitrate( 126 )
-            ->setLevel( 3.1 );
-        $lowBitrateFormat->setAdditionalParameters(array('-preset medium', '-crf 23 -x264-params ref=4'));
+            ->setAudioKiloBitrate( 256 )
+            ->setAdditionalParameters(array('-preset','medium', '-crf','23','-x264-params','ref=4','-level', 3.0,'-profile:v','main','-movflags','+faststart'));
 
 
         $video = \FFMpeg::open( $this->video->video_path );
