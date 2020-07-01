@@ -151,15 +151,14 @@
                                                 data-quality="240p" title="240p" label="240p" res="240">
                                         Your browser does not support HTML5 video.
                                     </video>
-
+                                <div class="icons hidden">
+                                    <span class="expend-player"><i class="fa fa-expand fa-fw"></i></span>
+                                </div>
                                 @else
                                     <div>
                                         <h1 class="alert alert-info">No Video Uploaded By this User</h1>
                                     </div>
                                 @endif
-                                <div class="icons hidden">
-                                    <span class="expend-player"><i class="fa fa-expand fa-fw"></i></span>
-                                </div>
                             </div>
                             <div class="clear"></div>
                         </div>
@@ -181,8 +180,8 @@
                                                 </h4>
                                             </div>
                                             <div class="pt_mn_wtch_switch pull-right">
-                                                <input id="autoplay" type="checkbox" class="tgl autoplay-video">
-                                                <label class="tgl-btn" for="autoplay">Autoplay</label>
+{{--                                                <input id="autoplay" type="checkbox" class="tgl autoplay-video">--}}
+{{--                                                <label class="tgl-btn" for="autoplay">Autoplay</label>--}}
                                             </div>
                                             <div class="clear"></div>
                                         @endif
@@ -202,6 +201,7 @@
                                                             <polygon points="10 8 16 12 10 16 10 8"></polygon>
                                                         </svg>
                                                     </div>
+                                                    <div>{{ucfirst($related_video->title)}}</div>
                                                     <div class="video-duration">{{gmdate("i:s", $related_video->duration)}}</div>
                                                 </a>
                                             </div>
@@ -227,10 +227,10 @@
             </div>
             <div class="col-sm-12 my-3 col-md-7">
                 <p>
-                    {{$user->name}}
+                    Name: {{ucfirst($user->name)}}
                 </p>
 
-                <p> Address: {{$user->address}} </p>
+                <p> Address: {{ucfirst($user->address)}} </p>
 
                 <p> Phone: {{$user->phone}} </p>
                 </p>

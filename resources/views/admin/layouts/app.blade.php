@@ -41,13 +41,9 @@
             @include('admin.layouts.header')
             @include('admin.layouts.sidebar')
             @endauth
-
-
             <div id="content" class="bg-container" style="min-height: 610px;">
                 @yield('content')
             </div>
-
-
         </div>
 </div>
 <script src="{{asset('js/jquery-3.min.js')}}"></script>
