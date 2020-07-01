@@ -219,4 +219,11 @@ class AdminController extends Controller
         $video = Video::where('is_video_approved', 0)->where('id', $id)->firstOrFail();
         return view('admin.review_video', compact('video'));
     }
+
+
+    public function users()
+    {
+        $users=User::paginate(10);
+        return view('admin.users.list',compact('users'));
+    }
 }

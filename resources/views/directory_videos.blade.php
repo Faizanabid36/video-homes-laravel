@@ -202,7 +202,7 @@
                                                             <polygon points="10 8 16 12 10 16 10 8"></polygon>
                                                         </svg>
                                                     </div>
-                                                    <div class="video-duration">00:00</div>
+                                                    <div class="video-duration">{{gmdate("i:s", $related_video->duration)}}</div>
                                                 </a>
                                             </div>
                                         @endforeach

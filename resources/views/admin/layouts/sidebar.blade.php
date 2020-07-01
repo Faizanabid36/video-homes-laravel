@@ -33,6 +33,14 @@
                     </a>
                 </li>
                 <li class="">
+                    <a href="{{route('admin.list_user')}}">
+                        <i class="fa fa-tachometer"></i>
+                        <span class="link-title menu_hide">&nbsp;Users List
+
+                            </span>
+                    </a>
+                </li>
+                <li class="">
                     <a href="{{route('videos_for_approval')}}">
                         <i class="fa fa-tachometer"></i>
                         <span class="link-title menu_hide">&nbsp;Videos For Apporval

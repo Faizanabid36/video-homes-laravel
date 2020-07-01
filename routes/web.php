@@ -88,6 +88,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('add_tag',function (){return view('admin.add_tag');})->name('add_tag');
     Route::post('store_tag','AdminController@store_tag')->name('store_tag');
 
+
+    Route::get('users','AdminController@users')->name('admin.list_user');
+
 });
 Route::get('/embed/{video_id}', 'VideoController@get_embedded_video')->name('embed_video');
 Route::get('{username}/watch_video', 'VideoController@watch_video');
