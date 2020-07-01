@@ -40,12 +40,18 @@ class ConvertVideoForStreaming implements ShouldQueue {
      */
     public function handle() {
         // create a video format...
-        $lowBitrateFormat = ( new X264( 'libmp3lame', 'libx264' ) )->setKiloBitrate( $this->bitrate );
+        $lowBitrateFormat = ( new X264( 'libmp3lame', 'libx264' ) )
+            ->setKiloBitrate( $this->bitrate )
+            ->setAudioChannels( 2 )
+            ->setAudioKiloBitrate( 126 )
+            ->setLevel( 3.1 );
+        $lowBitrateFormat->setAdditionalParameters(array('-preset medium', '-crf 23 -x264-params'));
+
 
         $video = \FFMpeg::open( $this->video->video_path );
-        Log::info("Essa Outside Angle",[$this->angle]);
+
         if ( $this->angle ) {
-            Log::info("Essa Inside Angle",[$this->angle]);
+            Log::info( "Essa Inside Angle", [ $this->angle ] );
             $video->filters()->rotate( $this->angle );
         }
         $video->filters()->pad( new Dimension( $this->width, $this->height ) );
@@ -70,6 +76,7 @@ class ConvertVideoForStreaming implements ShouldQueue {
             case 90:
                 return RotateFilter::ROTATE_90;
         }
+
         return false;
     }
 
