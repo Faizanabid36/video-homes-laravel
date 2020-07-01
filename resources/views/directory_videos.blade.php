@@ -311,7 +311,7 @@
 {{--                                </div>--}}
 {{--                            </div>--}}
                             <p><a href=""> <i style="color:lightBlue ; font-size:14px" class='fas icon fa-circle'></i>{{$user->address}}</a></p>
-                            <button class="btn btn-primary"> GET DIRECTION</button>
+{{--                            <button class="btn btn-primary"> GET DIRECTION</button>--}}
                         </div>
                     @endif
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
