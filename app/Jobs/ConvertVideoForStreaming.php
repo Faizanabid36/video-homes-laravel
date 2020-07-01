@@ -40,7 +40,7 @@ class ConvertVideoForStreaming implements ShouldQueue {
      */
     public function handle() {
         // create a video format...
-        $lowBitrateFormat = ( new X264( 'libmp3lame', 'libx264' ) )
+        $lowBitrateFormat = ( new X264( 'copy', 'libx264' ) )
             ->setKiloBitrate( $this->bitrate )
             ->setAudioChannels( 2 )
             ->setAudioKiloBitrate( 126 )
