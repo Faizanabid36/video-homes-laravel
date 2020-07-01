@@ -157,6 +157,9 @@
                                 <div class="icons hidden">
                                     <span class="expend-player"><i class="fa fa-expand fa-fw"></i></span>
                                 </div>
+                                <div>
+                                    {{ucfirst($video->title)}}
+                                </div>
                                 @else
                                     <div>
                                         <h1 class="alert alert-info">No Video Uploaded By this User</h1>
