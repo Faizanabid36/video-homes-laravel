@@ -34,7 +34,7 @@ if ( ! function_exists( 'saveVideoByResolution' ) ) {
         // set the quality
         $savePath         = getCleanFileName( $path, "_${height}p_converted.mp4" );
         $video            = \FFMpeg::open( $path );
-        $lowBitrateFormat = ( new X264( 'libmp3lame', 'libx264' ) )->setKiloBitrate( $bitrate );
+        $lowBitrateFormat = ( new X264( 'aac', 'libx264' ) )->setKiloBitrate( $bitrate );
         $video
             ->addFilter( function ( $filters ) use ( $width, $height ) {
                 $filters->resize( new Dimension( $width, $height ) );
@@ -52,7 +52,7 @@ if ( ! function_exists( 'saveVideoStream' ) ) {
         // set the quality
         $savePath         = getCleanFileName( $path, "_${height}p_converted.mp4" );
         $video            = \FFMpeg::open( $path );
-        $lowBitrateFormat = ( new X264( 'libmp3lame', 'libx264' ) )->setKiloBitrate( $bitrate );
+        $lowBitrateFormat = ( new X264( 'aac', 'libx264' ) )->setKiloBitrate( $bitrate );
         $video
             ->addFilter( function ( $filters ) use ( $width, $height ) {
                 $filters->resize( new Dimension( $width, $height ) );
