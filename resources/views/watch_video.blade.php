@@ -596,7 +596,26 @@
         }
     </script>
     <script type="text/javascript">
-
+        $('#share-video').on('click', function (event) {
+            event.preventDefault();
+            $('.share-video').toggleClass('hidden');
+            if (!$('.embed-placement').hasClass('hidden')) {
+                $('.embed-placement').toggleClass('hidden');
+            }
+            if (!$('.download-placement').hasClass('hidden')) {
+                $('.download-placement').toggleClass('hidden');
+            }
+        });
+        $('#embed-video').on('click', function (event) {
+            event.preventDefault();
+            $('.embed-placement').toggleClass('hidden');
+            if (!$('.share-video').hasClass('hidden')) {
+                $('.share-video').toggleClass('hidden');
+            }
+            if (!$('.download-placement').hasClass('hidden')) {
+                $('.download-placement').toggleClass('hidden');
+            }
+        });
 
         $('video').mediaelementplayer({
             pluginPath: 'https://cdnjs.com/libraries/mediaelement-plugins/',
