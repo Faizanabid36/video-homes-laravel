@@ -92,12 +92,12 @@ class MainController extends Controller
     {
         $video = Video::whereHas('user', function ($query) use ($username) {
             $query->whereUsername($username);
-        })->where('is_video_approved', 1)->latest()->first();
+        })->where('processed',1)->where('is_video_approved', 1)->latest()->first();
         $related_videos = [];
         if (!is_null($video)) {
             $related_videos = Video::whereHas('user', function ($query) use ($username) {
                 $query->whereUsername($username);
-            })->where('id', '!=', $video->id)->where('is_video_approved', 1)->latest()->get();
+            })->where('id', '!=', $video->id)->where('processed',1)->where('is_video_approved', 1)->latest()->get();
         }
         $user = User::whereUsername($username)->with('account_types')->firstOrFail();
         return view('directory_videos', compact('user', 'video', 'related_videos'));
@@ -108,13 +108,13 @@ class MainController extends Controller
         $user = User::whereUsername($username)->with('account_types')->first();
         $video = Video::whereHas('user', function ($query) use ($username) {
             $query->whereUsername($username);
-        })->where('is_video_approved', 1)->where('video_id', $video_id)->first();
+        })->where('processed',1)->where('is_video_approved', 1)->where('video_id', $video_id)->first();
         $related_videos=[];
         if(!is_null($video))
         {
             $related_videos = Video::whereHas('user', function ($query) use ($username) {
                 $query->whereUsername($username);
-            })->where('is_video_approved', 1)->where('id', '!=', $video->id)->latest()->get();
+            })->where('processed',1)->where('is_video_approved', 1)->where('id', '!=', $video->id)->latest()->get();
         }
         return view('directory_videos', compact('user', 'video', 'related_videos'));
     }
