@@ -129,11 +129,11 @@
                                     </div>
                                 @endforeach
                             </div>
-                            <div class="load-related-videos">
-                                <button class="btn btn-default" id="load-related-videos">
-                                    <span>Load More</span><i class="fa fa-circle-o-notch spin hidden"></i>
-                                </button>
-                            </div>
+{{--                            <div class="load-related-videos">--}}
+{{--                                <button class="btn btn-default" id="load-related-videos">--}}
+{{--                                    <span>Load More</span><i class="fa fa-circle-o-notch spin hidden"></i>--}}
+{{--                                </button>--}}
+{{--                            </div>--}}
                         </div>
                     </div>
                     <div class="col-md-8 ">
