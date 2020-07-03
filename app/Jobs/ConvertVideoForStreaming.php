@@ -40,7 +40,7 @@ class ConvertVideoForStreaming implements ShouldQueue {
      */
     public function handle() {
         // create a video format...
-        $lowBitrateFormat = ( new X264(  ) )->setKiloBitrate( $this->bitrate );
+        $lowBitrateFormat = ( new X264( 'copy', 'libx264' ) )->setKiloBitrate( $this->bitrate );
 //        $lowBitrateFormat->setInitialParameters(array('-acodec', 'copy'));
 
         $video = \FFMpeg::open( $this->video->video_path );
