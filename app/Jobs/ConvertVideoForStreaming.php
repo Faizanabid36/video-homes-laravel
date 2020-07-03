@@ -40,10 +40,10 @@ class ConvertVideoForStreaming implements ShouldQueue {
      */
     public function handle() {
         // create a video format...
-        $lowBitrateFormat = ( new X264( 'libfdk_aac', 'libx264' ) )->setKiloBitrate( $this->bitrate )->setAudioCodec('copy');
+        $lowBitrateFormat = ( new X264( 'aac', 'libx264' ) )->setKiloBitrate( $this->bitrate );
 //        $lowBitrateFormat->setInitialParameters(array('-acodec', 'copy'));
 
-        $video = \FFMpeg::open( $this->video->video_path );
+        $video = \FFMpeg::open( $this->video->video_path )->addFilter(['-profile:v', 'main','-level',3.0]);
         Log::info(  "Essa Outside Angle",[$this->angle]);
         if ( $this->angle ) {
             Log::info("Essa Inside Angle",[$this->angle]);
