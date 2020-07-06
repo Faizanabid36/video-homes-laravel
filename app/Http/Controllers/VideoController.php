@@ -45,9 +45,7 @@ class VideoController extends Controller
             'width' => $dimension->getWidth(),
             'stream_path' => getCleanFileName($path, '_240p_converted.mp4')
         ]);
-        VideoLikesDislikes::create([
-            'video_id' => $video->id,
-        ]);
+
         ConvertVideoForStreaming::dispatch($video, 320, 240, [
             'converted_for_streaming_at' => Carbon::now(),
             'processed' => true

@@ -21,8 +21,11 @@ class Video extends Model
             $playlist = Playlist::whereUserId(auth()->id())->first()->id;
             $video->setAttribute('user_id', auth()->id());
             $video->setAttribute('video_id', \Str::random(16));
-            $video->setAttribute('disk', "public");
+            $video->setAttribute('disk', 'public');
             $video->setAttribute('playlist_id', $playlist);
+        });
+        static::created(function($video){
+            VideoLikesDislikes::create([ 'video_id' => $video->id ]);
         });
     }
 
