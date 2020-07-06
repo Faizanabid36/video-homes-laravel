@@ -40,23 +40,23 @@ class ConvertVideoForStreaming implements ShouldQueue {
      */
     public function handle() {
         // create a video format...
-        $lowBitrateFormat = ( new X264( 'copy', 'libx264' ) )->setKiloBitrate( $this->bitrate );
+        $lowBitrateFormat = ( new X264( 'aac', 'libx264' ) )->setKiloBitrate( $this->bitrate );
 //        $lowBitrateFormat->setInitialParameters(array('-acodec', 'copy'));
 
         $video = \FFMpeg::open( $this->video->video_path );
-        Log::info(  "Essa Outside Angle",[$this->angle]);
-        if ( $this->angle ) {
-            Log::info("Essa Inside Angle",[$this->angle]);
-            $video->filters()->rotate( $this->angle );
-        }
+//        Log::info(  "Essa Outside Angle",[$this->angle]);
+//        if ( $this->angle ) {
+//            Log::info("Essa Inside Angle",[$this->angle]);
+//            $video->filters()->rotate( $this->angle );
+//        }
         $video->filters()->pad( new Dimension( $this->width, $this->height ) );
 
         $video->export()->inFormat( $lowBitrateFormat )->save( getCleanFileName( $this->video->video_path, "_{$this->height}p_converted.mp4" ) );
 
         // update the database so we know the convertion is done!
         Log::info( 'This is some useful information.', [
-            "file_path" => $this->video->stream_path . "_{$this->height}p_converted.mp4",
-            "update"    => $this->update
+            'file_path' => $this->video->stream_path . "_{$this->height}p_converted.mp4",
+            'update'    => $this->update
         ] );
 
         $this->video->update( $this->update );
