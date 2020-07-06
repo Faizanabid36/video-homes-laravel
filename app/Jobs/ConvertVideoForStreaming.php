@@ -44,11 +44,11 @@ class ConvertVideoForStreaming implements ShouldQueue {
 //        $lowBitrateFormat->setInitialParameters(array('-acodec', 'copy'));
 
         $video = \FFMpeg::open( $this->video->video_path );
-//        Log::info(  "Essa Outside Angle",[$this->angle]);
-//        if ( $this->angle ) {
-//            Log::info("Essa Inside Angle",[$this->angle]);
-//            $video->filters()->rotate( $this->angle );
-//        }
+        Log::info(  "Essa Outside Angle",[$this->angle]);
+        if ( $this->angle ) {
+            Log::info("Essa Inside Angle",[$this->angle]);
+            $video->filters()->rotate( $this->getAngle($this->angle) );
+        }
         $video->filters()->pad( new Dimension( $this->width, $this->height ) );
 
         $video->export()->inFormat( $lowBitrateFormat )->save( getCleanFileName( $this->video->video_path, "_{$this->height}p_converted.mp4" ) );
