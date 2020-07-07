@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use App\Jobs\ConvertVideoForStreaming;
 use App\Http\Requests\StoreVideoRequest;
 use phpDocumentor\Reflection\Types\Compound;
+use Illuminate\Support\Facades\Log;
 
 class VideoController extends Controller
 {
@@ -30,7 +31,7 @@ class VideoController extends Controller
         $media = \FFMpeg::open($path);
         $videostream = $media->getStreams()->videos()->first();
         $angle = getVideoRotation($videostream);
-
+        Log::info("Rotation: $angle");
         $dimension = $videostream->getDimensions();
         $newThumbnails = generateThumbnailsFromVideo($media, $path, $angle);
         $video = Video::create([
