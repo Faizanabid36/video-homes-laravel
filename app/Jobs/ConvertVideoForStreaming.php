@@ -47,7 +47,7 @@ class ConvertVideoForStreaming implements ShouldQueue {
         Log::info(  "Essa Outside Angle",[$this->angle]);
         if ( $this->angle ) {
             Log::info("Essa Inside Angle",[$this->angle]);
-            $video->filters()->rotate( $this->getAngle($this->angle) );
+            $video->filters()->rotate( $this->angle );
         }
         $video->filters()->pad( new Dimension( $this->width, $this->height ) );
 
