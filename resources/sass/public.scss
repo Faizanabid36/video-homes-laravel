@@ -227,13 +227,14 @@
 
 }
 
-.footer-top {
-    background: rgb(27, 100, 236);
-    height: 5px;
-    margin-top: 30px;
-}
+//.footer-top {
+//    background: rgb(27, 100, 236);
+//    height: 5px;
+//    margin-top: 30px;
+//}
 
 .footer1 {
+    border:5px solid rgb(27, 100, 236);
     background-color: black;
     height: 140px;
     text-align: center !important;
@@ -253,8 +254,8 @@ $theme-colors: (
 );
 
 .btn-primary{
-    height: 44px;
-    
+    //height: 44px;
+
     font-size: 14px !important;
     border-color: #0f7fa6 !important;
 
@@ -301,7 +302,7 @@ input.text {
     color: white;
     padding: 10px;
     font-size: 12px;
-    
+
 }
 
 .InsideSearchbox-link{
@@ -321,13 +322,13 @@ input.text {
     & > div{
         // border-bottom: solid rgb(18, 18, 160) 1px;
         margin:20px 0px;
-      
+
     }
 
     & a{
         color: rgb(71, 71, 71);
         font-size: 12px;
-        
+
         &:hover{
             text-decoration: none;
         }
@@ -350,25 +351,25 @@ input.text {
     display: flex;
     align-items: center;
     width: 42px;
-    
-    
+
+
     height: 50px;
     border-radius: 0px !important;
-    @media (max-width: 695.98px) { display:none }  
+    @media (max-width: 695.98px) { display:none }
 
     & i{
         height: 22px ;
     }
 
-    
-   
+
+
 }
 
   .active .icon{
     color: white;
-  
 
-   
+
+
 }
 
 .nav-pills .nav-link.active{
@@ -376,18 +377,18 @@ input.text {
 }
 
 .search-icon , .location-icon{
-   
+
         position: absolute;
-        top: 8px;      
+        top: 8px;
         right: 0;
         color: #726d6d;
-      
-    
-    
+
+
+
     height: 50% !important;
     min-width: 50px !important;
     font-size: 18px !important;
-    
+
 }
 
 input.text{
@@ -396,7 +397,7 @@ input.text{
 .tab-pane {
     width: 100%;
     height: 100%;
-    
+
 }
 
 
@@ -410,7 +411,7 @@ span.checked{
 
 .custom-tooltip button{
     font-size: 22px;
- 
+
     margin-left: 10px;
     padding-bottom: 12px;
 }
@@ -430,22 +431,22 @@ span.checked{
 img {
     vertical-align: middle;
   }
-  
+
   /* Position the image container (needed to position the left and right arrows) */
   .container {
     position: relative;
   }
-  
+
   /* Hide the images by default */
   .mySlides {
     display: none;
   }
-  
+
   /* Add a pointer when hovering over the thumbnail images */
   .cursor {
     cursor: pointer;
   }
-  
+
   /* Next & previous buttons */
   .prev,
   .next {
@@ -462,19 +463,19 @@ img {
     user-select: none;
     -webkit-user-select: none;
   }
-  
+
   /* Position the "next button" to the right */
   .next {
     right: 0;
     border-radius: 3px 0 0 3px;
   }
-  
+
   /* On hover, add a black background color with a little bit see-through */
   .prev:hover,
   .next:hover {
     background-color: rgba(0, 0, 0, 0.8);
   }
-  
+
   /* Number text (1/3 etc) */
   .numbertext {
     color: #f2f2f2;
@@ -483,7 +484,7 @@ img {
     position: absolute;
     top: 0;
   }
-  
+
   /* Container for image text */
   .caption-container {
     text-align: center;
@@ -491,24 +492,24 @@ img {
     padding: 2px 16px;
     color: white;
   }
-  
+
   .row:after {
     content: "";
     display: table;
     clear: both;
   }
-  
+
   /* Six columns side by side */
   .column {
     float: left;
     width: 16.66%;
   }
-  
+
   /* Add a transparency effect for thumnbail images */
   .demo {
     opacity: 0.6;
   }
-  
+
   .active,
   .demo:hover {
     opacity: 1;
@@ -519,13 +520,13 @@ img {
     width: 200px;
     // border: 1px solid red;
     font-size: 14px;
-    
+
     color: gray;
     &  i.icon{
         color: #03a9f4;
-       
-        
-        
+
+
+
     }
 
     & div div {
@@ -533,7 +534,7 @@ img {
         // border: green 1px solid;
     }
 
-    
+
   }
 .custom-progress{
     background: #000;
@@ -562,7 +563,7 @@ img {
       width: 60px;
   }
 
- 
+
 
   .rating-star-field > div{
     margin: 0px 13px ;

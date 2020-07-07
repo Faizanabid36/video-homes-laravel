@@ -19,10 +19,10 @@
                         </svg></div>
                     <div class="header-content">
 
-                        <h4> Connecting Small Bussiness Owners with Local Marketing Pros </h4>
+                        <h4> Connecting Small Business Owners with Local Marketing Pros </h4>
                         <div class="header-button">
                             <button class="  btnCustom1"> VIDEOGRAPHERS</button>
-                            <button class=" btnCustom2"> BUSSINESS OWNERS</button>
+                            <button class=" btnCustom2"> BUSINESS OWNERS</button>
                         </div>
 
                     </div>
@@ -131,7 +131,4 @@
 
             </div>
         </div>
-
-
-
     @endsection;

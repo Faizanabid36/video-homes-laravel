@@ -71,20 +71,15 @@
 
     <div class="bigContainer">
 
-        <div class="row ">
-
-        </div>
         <!-- 2nd row -->
         <div class="row">
             <div class="col-12 my-2 p-0 ">
                 <div class="Search-boxes">
                     <div class="form-row ">
                         <div class="col my-4">
-                            <input type="text" class="form-control text" placeholder="Select Cateogy"/>
+                            <input type="text" class="form-control text" placeholder="Select Category"/>
                             <i class="fal fa-search icon search-icon"></i>
 
-                            <br/>
-                            <p> Try to search: <b> videographers, local marketing </b></p>
 
                         </div>
                         <div class="col my-4">

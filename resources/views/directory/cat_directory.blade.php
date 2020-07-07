@@ -15,10 +15,8 @@
                         <div class="form-row">
                             <div class="col my-2">
                                 <input required name="query" type="text" class="form-control"
-                                       placeholder="Search With Username, Email, Address or Phone"/>
+                                       placeholder="Search Videos"/>
                                 {{--                                <i class="fal fa-search icon search-icon"></i>--}}
-                                <br/>
-                                <p> Try to search: <b> videographers, local marketing </b></p>
                             </div>
                             <div class="col my-2">
                                 <select name="industry" class="form-control text" id="">
@@ -43,7 +41,7 @@
         <div class="row Category-Boxes ">
             @if(isset($directory) && $directory)
                 @foreach($tags as $tag)
-                    <div class="col-6"><span> <a
+                    <div class="col-6 my-0"><span> <a
                                 href="{{route('ex_directory_by_category',preg_replace('/\W|\_+/m', '-', $tag->role))}}"> {{ucfirst($tag->role)}}</a></span>
                         <span
                             class="float-right">{{$tag->account_types_count}}</span>

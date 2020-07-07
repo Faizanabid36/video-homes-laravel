@@ -101,6 +101,9 @@ class VideoController extends Controller
         if (!$video->processed) {
             return view('errors.processing')->with('video', $video);
         }
+
+
+
 //        if (!$video->is_video_approved) {
 //            return view('errors.pending_approval')->with('video', $video);
 //        }

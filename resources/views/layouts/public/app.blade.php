@@ -29,7 +29,7 @@
             <!-- Nav       -->
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light home-nav ">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="{{url('/')}}">
 
                     <img src="https://www.videohomes.com/wp-content/uploads/2020/04/cropped-VideoHomes-3.png"
                          class="logo" alt="video Homes Logo"/>
@@ -69,8 +69,8 @@
     </div>
     <div class="row sayHello m-0 p-0 ">
         <div class="col-12 m-0 p-0 ">
-            <div class="footer-top"></div>
-            <div class="footer1"><h3> © VideoHomes.com LLC 2020 </h3></div>
+{{--            <div class="footer-top"></div>--}}
+            <div class="footer1"><h3> &copy; VideoHomes.com LLC 2020 </h3></div>
         </div>
     </div>
 

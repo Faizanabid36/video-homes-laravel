@@ -31,34 +31,33 @@ class AppServiceProvider extends ServiceProvider
     {
 
         Schema::defaultStringLength(191);
-        $roles = UserRole::where('role', '!=', 'admin')->get();
-        $roles_assoc = UserCategory::whereNull('parent_id')->get()->groupBy('role_id');
-        $user_parent_category = UserCategory::whereNull('parent_id')->get();
-        $user_child_category = UserCategory::whereNotNull('parent_id')->get()->groupBy('parent_id');
+        if (! $this->app->runningInConsole()) {
+            $industries           = UserRole::where( 'role', '!=', 'admin' )->get();
+            $roles_assoc          = UserCategory::whereNull( 'parent_id' )->get()->groupBy( 'role_id' );
+            $user_parent_category = UserCategory::whereNull( 'parent_id' )->get();
+            $user_child_category  = UserCategory::whereNotNull( 'parent_id' )->get()->groupBy( 'parent_id' );
 
 
-        View::share(
-            'user_parent_category', $user_parent_category
-        );
-        View::share(
-            'user_child_category', $user_child_category
-        );
-        View::share(
-            'roles', $roles
-        );
-        View::share(
-            'roles_assoc', $roles_assoc
-        );
-        $industries=UserRole::where('role','!=','admin')->get();
-        view::composer('directory.cat_directory',function($view) use($industries){
-            $view->with('industries',$industries);
-        });
+            View::share(
+                'user_parent_category', $user_parent_category
+            );
+            View::share(
+                'user_child_category', $user_child_category
+            );
+            View::share( 'roles', $industries );
+            View::share(
+                'roles_assoc', $roles_assoc
+            );
+
+            view::composer( 'directory.cat_directory', function ( $view ) use ( $industries ) {
+                $view->with( compact( 'industries' ) );
+            } );
 
 
-
-        View::composer('layouts.public.app',function($view){
-            $pages=Page::whereIsPublic(1)->get();
-            $view->with('pages',$pages);
-        });
+            View::composer( 'layouts.public.app', function ( $view ) {
+                $pages = Page::whereIsPublic( 1 )->get();
+                $view->with( compact('pages') );
+            } );
+        }
     }
 }
