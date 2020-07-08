@@ -11,11 +11,6 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     //
-    public function dashboard()
-    {
-
-        return view('container');
-    }
 
     public function dashboard_type(Request $request)
     {

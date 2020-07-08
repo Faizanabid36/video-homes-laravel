@@ -28,9 +28,9 @@ Route::post( '{username}/', 'VideoController@watch_video' );
 Route::get( '/categories', 'CategoryController@index' );
 //Auth User
 Route::group( [ 'middleware' => 'auth' ], function () {
+    Route::view( '/dashboard', 'dashboard' )->name( 'dashboard' );
     Route::post( 'delete_video', 'VideoController@delete_video' );
 
-    Route::get( '/dashboard', 'DashboardController@dashboard' )->name( 'dashboard' );
     Route::post( '/dashboard_statistics', 'DashboardController@dashboard_type' )->name( 'dashboard_type' );
     Route::post( '/get_all_statistics', 'DashboardController@get_all_statistics' );
     Route::get( 'video_is_played/{id}', 'HomeController@video_is_played' )->name( 'video_is_played' );
