@@ -19,7 +19,7 @@ Auth::routes();
 Route::resource( 'report_query', 'ReportQueryController' );
 
 Route::get( 'reported_query_videos', 'ReportQueryController@reported_videos' );
-Route::get( '/page/{slug}', 'PageController@show_page' )->name( 'public.page' );
+Route::get( '/page/{slug}', 'PageController@view' )->name( 'public.page' );
 Route::post( '/search_in_directory', 'MainController@search_in_directory' )->name( 'search_in_directory' );
 Route::get( '/embed/{video_id}', 'VideoController@get_embedded_video' )->name( 'embed_video' );
 Route::get( '{username}/watch_video', 'VideoController@watch_video' );

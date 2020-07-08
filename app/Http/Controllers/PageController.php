@@ -54,7 +54,7 @@ class PageController extends Controller
         return back()->withSuccess('Page Deleted Successfully');
     }
 
-    public function show_page($slug)
+    public function view($slug)
     {
         $page=Page::whereSlug($slug)->first();
         return view('page',compact('page'));
