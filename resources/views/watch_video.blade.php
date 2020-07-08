@@ -269,13 +269,13 @@
                                 <div class="publisher-element pull-left pt_mn_wtch_pub">
                                     <div class="publisher-avatar pull-left hide-in-mobile-720">
                                         <a href="#" class="mt-5">
-                                            @if(!is_null(auth()->user()->avatar))
-                                                <img class="header-image"
-                                                     src="{{auth()->user()->avatar}}">
-                                            @else
-                                                <img class="header-image"
-                                                     src="{{asset('images/blank.png')}}">
-                                            @endif
+{{--                                            @if(!is_null(auth()->user()->avatar))--}}
+{{--                                                <img class="header-image"--}}
+{{--                                                     src="{{auth()->user()->avatar}}">--}}
+{{--                                            @else--}}
+{{--                                                <img class="header-image"--}}
+{{--                                                     src="{{asset('images/blank.png')}}">--}}
+{{--                                            @endif--}}
 {{--                                            {{auth()->user()->name}}--}}
                                         </a>
                                     </div>
