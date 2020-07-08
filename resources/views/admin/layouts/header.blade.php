@@ -3,7 +3,7 @@
     <nav class="navbar navbar-static-top">
         <div class="container-fluid m-0">
             <a class="navbar-brand float-left" href="index.html">
-                <h4> Video Homes</h4>
+                <h4> VideoHomes</h4>
             </a>
             <div class="topnav dropdown-menu-right float-right">
                 <div class="btn-group">

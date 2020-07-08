@@ -32,7 +32,7 @@
                 <a class="navbar-brand" href="{{url('/')}}">
 
                     <img src="https://www.videohomes.com/wp-content/uploads/2020/04/cropped-VideoHomes-3.png"
-                         class="logo" alt="video Homes Logo"/>
+                         class="logo" alt="videoHomes Logo"/>
 
 
                 </a>
