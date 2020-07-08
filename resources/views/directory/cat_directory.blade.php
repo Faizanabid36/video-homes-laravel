@@ -27,8 +27,8 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col">
-                            <input type="submit" value="Search" class="btn btn-primary float-right"/>
+                        <div class="form-row">
+                            <input type="submit" value="Find a Pro" class="btn btn-block btn-primary"/>
                         </div>
                     </form>
                 </div>

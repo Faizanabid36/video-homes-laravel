@@ -33,9 +33,10 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         if (! $this->app->runningInConsole()) {
             $industries           = UserRole::where( 'role', '!=', 'admin' )->get();
-            $roles_assoc          = UserCategory::whereNull( 'parent_id' )->get()->groupBy( 'role_id' );
             $user_parent_category = UserCategory::whereNull( 'parent_id' )->get();
-            $user_child_category  = UserCategory::whereNotNull( 'parent_id' )->get()->groupBy( 'parent_id' );
+            $roles_assoc          = $user_parent_category->groupBy( 'role_id' );
+
+            $user_child_category  = $user_parent_category->groupBy( 'parent_id' );
 
 
             View::share(

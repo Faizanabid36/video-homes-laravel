@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>{{env('APP_NAME')}}</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{env('APP_NAME')}}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
      <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
     <link href="{{asset('css/public.css')}}" rel="stylesheet">
@@ -70,7 +70,7 @@
     <div class="row sayHello m-0 p-0 ">
         <div class="col-12 m-0 p-0 ">
 {{--            <div class="footer-top"></div>--}}
-            <div class="footer1"><h3> &copy; VideoHomes.com LLC 2020 </h3></div>
+            <div class="footer1"><h3> © VideoHomes.com LLC 2020 </h3></div>
         </div>
     </div>
 

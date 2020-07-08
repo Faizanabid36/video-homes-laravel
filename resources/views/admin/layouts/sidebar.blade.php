@@ -19,7 +19,7 @@
             </div>
             <ul id="menu">
                 <li>
-                    <a href="{{route('dashboard')}}">
+                    <a href="{{route('admin_panel')}}">
                         <i class="fa fa-home"></i>
                         <span class="link-title menu_hide">&nbsp;Dashboard</span>
                     </a>
@@ -27,7 +27,7 @@
                 <li class="">
                     <a href="{{route('public_pages.index')}}">
                         <i class="fa fa-tachometer"></i>
-                        <span class="link-title menu_hide">&nbsp;Public Pages
+                        <span class="link-title menu_hide">&nbsp;Pages
 
                             </span>
                     </a>
@@ -35,7 +35,7 @@
                 <li class="">
                     <a href="{{route('admin.list_user')}}">
                         <i class="fa fa-tachometer"></i>
-                        <span class="link-title menu_hide">&nbsp;Users List
+                        <span class="link-title menu_hide">&nbsp;Users
 
                             </span>
                     </a>
@@ -43,9 +43,14 @@
                 <li class="">
                     <a href="{{route('videos_for_approval')}}">
                         <i class="fa fa-tachometer"></i>
-                        <span class="link-title menu_hide">&nbsp;Videos For Apporval
-
-                            </span>
+                        <span class="link-title menu_hide">&nbsp;User's Videos</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="{{route('admin.videos_list')}}">
+                        <i class="fa fa-tachometer"></i>
+                        <span class="link-title menu_hide">&nbsp;Videos List
+                        </span>
                     </a>
                 </li>
 
@@ -61,24 +66,18 @@
                 <li class="">
                     <a href="{{route('user_tags')}}">
                         <i class="fa fa-tachometer"></i>
-                        <span class="link-title menu_hide">&nbsp;Define User Roles
+                        <span class="link-title menu_hide">&nbsp;Industry
                         </span>
                     </a>
                 </li>
                 <li class="">
                     <a href="{{route('all_user_categories')}}">
                         <i class="fa fa-tachometer"></i>
-                        <span class="link-title menu_hide">&nbsp;Roles Categories
+                        <span class="link-title menu_hide">&nbsp;Profession/Expertise
                         </span>
                     </a>
                 </li>
-                <li class="">
-                    <a href="{{route('admin.videos_list')}}">
-                        <i class="fa fa-tachometer"></i>
-                        <span class="link-title menu_hide">&nbsp;Videos List
-                        </span>
-                    </a>
-                </li>
+
                 <li class="">
                     <a href="{{action('ReportQueryController@index')}}">
                         <i class="fa fa-tachometer"></i>

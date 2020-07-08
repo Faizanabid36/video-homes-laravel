@@ -131,4 +131,4 @@
 
             </div>
         </div>
-    @endsection;
+    @endsection
