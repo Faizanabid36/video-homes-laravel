@@ -8,8 +8,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 
-class LoginController extends Controller
-{
+class LoginController extends Controller {
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -36,23 +35,17 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
+    public function __construct() {
+        $this->middleware( 'guest' )->except( 'logout' );
     }
 
-    protected function authenticated(\Illuminate\Http\Request $request, $user)
-    {
-        if($user->active==0)
-        {
-            Auth::logout();
-            return redirect('login')->withErrors(['active' => 'Your Account Is Inactive.']);
+    protected function authenticated( \Illuminate\Http\Request $request, $user ) {
+
+        if ( $user->isAdmin() ) {
+            return redirect()->route( 'admin_panel' );
         }
-        else{
-            if ($user->role == 1) {// do your magic here
-                return redirect()->route('admin_panel');
-            }
-            return redirect('/dashboard');
-        }
+
+        return redirect( $this->redirectTo );
+
     }
 }
