@@ -15,9 +15,7 @@ class AdminController extends Controller {
         $this->middleware( 'admin' );
     }
 
-    public function index() {
-        return view( 'admin.home' );
-    }
+
 
     public function videos_for_approval() {
         $videos = Video::whereIsVideoApproved( 0 )->get();

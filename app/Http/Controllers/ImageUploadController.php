@@ -35,6 +35,8 @@ class ImageUploadController extends Controller
      */
     public function imageUploadPost(Request $request)
     {
+
+        //Todo: needs to be fixed.
         $data = $request->get('image');
         list($type, $data) = explode(';', $data);
         list(, $data) = explode(',', $data);

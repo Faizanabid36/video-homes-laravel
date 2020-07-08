@@ -84,10 +84,10 @@ class VideoController extends Controller
 
     public function watch_video($username)
     {
-        if(!isset(auth()->user()->id))
-        {
-            abort(404);
-        }
+//        if(!isset(auth()->user()->id))
+//        {
+//            abort(404);
+//        }
 //        if (isset(auth()->user()->id)) {
 //            $BlockedUser = BlockedUser::where('blocked_user_id', auth()->user()->id)
 //                ->where('user_id', $user->id)->first();

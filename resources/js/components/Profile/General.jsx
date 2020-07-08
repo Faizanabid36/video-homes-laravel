@@ -177,25 +177,29 @@ export default class General extends React.Component {
             <div className="form-horizontal user-setting-panel pt_shadow display-shadow-box"
                  id="general-settings">
                 <div className="setting-general-alert">
-                    {
-                        this.state.message ?
-                            <div className='alert alert-info'>{this.state.message}</div> : ''
-                    }
+                    {this.state.message && <div className='alert alert-info'>{this.state.message}</div>}
                 </div>
                 <Row className="custom-vh-form">
-                    <div className="form-group input-form-group col-lg-6">
-                        <label className="col-md-12" htmlFor="name">Name</label>
-                        <div className="col-md-12">
-                            <input onChange={this.handleChangeInput} id="name" name="name" type="text" placeholder=""
-                                   className="form-control custom-vh-form-input" defaultValue={this.state.user.name}/>
-                        </div>
+
+                    <div class="form-group">
+                        <label htmlFor="name">Name</label>
+                        <input onChange={this.handleChangeInput} type="text" class="form-control" name="name" id="name" aria-describedby="name"
+                               placeholder="Name" />
                     </div>
+                    {/*<div className="form-group input-form-group col-lg-6">*/}
+                    {/*    <label className="col-md-12" htmlFor="name">Name</label>*/}
+                    {/*    <div className="col-md-12">*/}
+                    {/*        <input onChange={this.handleChangeInput} id="name" name="name" type="text" placeholder=""*/}
+                    {/*               className="form-control custom-vh-form-input" defaultValue={this.state.user.name}/>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                     <div className="form-group input-form-group col-lg-6">
-                        <label className="col-md-12" htmlFor="username">Username</label>
+                        <label className="col-md-12" htmlFor="username">Personal URL</label>
                         <div className="col-md-12">
-                            <input onChange={this.handleChangeInput} id="username" name="username" type="text"
-                                   placeholder=""
-                                   className="form-control custom-vh-form-input" defaultValue={this.state.user.username}/>
+                            <p>{window.VIDEO_APP.base_url}/<input onChange={this.handleChangeInput} id="username" name="username" type="text"
+                                                                 placeholder=""
+                                                                 className="form-control custom-vh-form-input" defaultValue={this.state.user.username}/></p>
+
                         </div>
                     </div>
                     <div className="form-group input-form-group col-lg-6">
@@ -276,7 +280,7 @@ export default class General extends React.Component {
                         </div>
                     </div>
                     <div className="form-group input-form-group col-lg-6">
-                        <label className="col-md-12" htmlFor="gender">Role</label>
+                        <label className="col-md-12" htmlFor="gender">Industry</label>
                         <div className="col-md-12">
                             <select onChange={this.handleChangeRole} id="role" name="role"
                                     className="form-control custom-vh-form-input">
@@ -291,7 +295,7 @@ export default class General extends React.Component {
                         </div>
                     </div>
                     <div className="form-group input-form-group col-lg-6">
-                        <label className="col-md-12" htmlFor="gender">Role Type</label>
+                        <label className="col-md-12" htmlFor="gender">Profession</label>
                         <div className="col-md-12">
                             <select onChange={this.handleChangeSubRole} id="tags" name="sub_role"
                                     className="form-control custom-vh-form-input">
@@ -306,7 +310,7 @@ export default class General extends React.Component {
                         </div>
                     </div>
                     <div className="form-group input-form-group col-lg-6">
-                        <label className="col-md-12" htmlFor="gender">Role Category</label>
+                        <label className="col-md-12" htmlFor="gender">Expertise</label>
                         <div className="col-md-12">
                             <select onChange={(e) => {
                                 this.setState({sub_role_cat:e.target.value})
