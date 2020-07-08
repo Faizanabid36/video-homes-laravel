@@ -63,7 +63,7 @@ Route::group( [ 'middleware' => 'auth' ], function () {
 
 Route::group( [ 'middleware' => 'admin' ], function () {
     Route::prefix( 'admin' )->group( function () {
-        Route::get( '/', 'AdminController@index' )->name( 'admin_panel' );
+        Route::view( '/', 'admin.home' )->name( 'admin_panel' );
         Route::resource( 'public_pages', 'PageController' );
         Route::get( 'create_user_categories', 'AdminController@create_user_categories' )->name( 'create_user_categories' );
         Route::post( 'add_user_category', 'AdminController@add_user_category' )->name( 'add_user_category' );
