@@ -323,13 +323,13 @@
                                 <span id="comments_count">{{$comments['comments_count']}}</span> Comments
                             </div>
                             <div class="w100 pt_blogcomm_combo">
-                                @if(!is_null(auth()->user()->avatar))
-                                    <img class="header-image"
-                                         src="{{auth()->user()->avatar}}">
-                                @else
-                                    <img class="header-image"
-                                         src="{{asset('images/blank.png')}}">
-                                @endif
+{{--                                @if(!is_null(auth()->user()->avatar))--}}
+{{--                                    <img class="header-image"--}}
+{{--                                         src="{{auth()->user()->avatar}}">--}}
+{{--                                @else--}}
+{{--                                    <img class="header-image"--}}
+{{--                                         src="{{asset('images/blank.png')}}">--}}
+{{--                                @endif--}}
                                 <textarea name="comment" class="form-control" id="comment-textarea"
                                           placeholder="Write your comment.."></textarea>
 
