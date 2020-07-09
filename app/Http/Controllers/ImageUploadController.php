@@ -5,15 +5,13 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 
-class ImageUploadController extends Controller
-{
+class ImageUploadController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         //
     }
 
@@ -22,81 +20,85 @@ class ImageUploadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
-    public function imageUploadPost()
-    {
+    public function imageUploadPost() {
         if ( request( 'image' ) && preg_match( "/data:\w+\/\w+;base64,.*/", request( 'image' ) ) == 1 ) {
             $image = request( 'image' );
             $name  = time() . '.' . explode( '/', explode( ':', substr( $image, 0, strpos( $image, ';' ) ) )[1] )[1];
 
-            \Image::make( $image )->orientate()->save( public_path( 'images/' ) . $name );
-            User::whereId(auth()->user()->id)->update(['avatar' => asset('images/' . $name)]);
-            return ['message' => 'Picture Updated'];
+            $imageUpload = \Image::make( $image )->orientate()->encode();
+            \Storage::disk('public')->put("uploads/images/$name",$imageUpload);
+//            save( public_path( 'images/' ) . $name );
+            User::whereId( auth()->user()->id )->update( [ 'avatar' => asset( "storage/uploads/images/$name" ) ] );
+
+            return response( [ 'message' => 'Picture Updated' ] );
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show( $id ) {
         //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit( $id ) {
         //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update( Request $request, $id ) {
         //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy( $id ) {
         //
     }
-    public function update_company_logo(Request $request)
-    {
-        $data = $request->get('image');
-        list($type, $data) = explode(';', $data);
-        list(, $data) = explode(',', $data);
-        $data = base64_decode($data);
-        file_put_contents(public_path('images/' . $request->filename), $data);
-        User::whereId(auth()->user()->id)->update(['company_logo' => asset('images/' . $request->filename)]);
-        return ['message' => 'Picture Updated'];
+
+    public function update_company_logo( Request $request ) {
+        if ( request( 'image' ) && preg_match( "/data:\w+\/\w+;base64,.*/", request( 'image' ) ) == 1 ) {
+            $image = request( 'image' );
+            $name  = time() . '.' . explode( '/', explode( ':', substr( $image, 0, strpos( $image, ';' ) ) )[1] )[1];
+
+            $imageUpload = \Image::make( $image )->orientate()->encode();
+            \Storage::disk('public')->put("uploads/images/$name",$imageUpload);
+//            save( public_path( 'images/' ) . $name );
+            User::whereId( auth()->user()->id )->update( [ 'company_logo' => asset( "storage/uploads/images/$name" ) ] );
+        }
     }
 }
