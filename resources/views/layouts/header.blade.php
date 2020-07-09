@@ -12,22 +12,22 @@
 
                         <ul class="navbar-nav mr-auto items">
                             <li class="nav-item ">
-                                <a class="nav-link links2" href="{{route('dashboard')}}/#/videos">Videos
+                                <a class="nav-link links2" href="#/videos">Videos
                                     <div class="borderBottom"></div>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link links2" href="{{route('dashboard')}}/#/playlist">Playlist
+                                <a class="nav-link links2" href="#/playlist">Playlist
                                     <div class="borderBottom"></div>
                                 </a>
                             </li>
+{{--                            <li class="nav-item">--}}
+{{--                                <a class="nav-link links2" href="#/customize_player">Customization--}}
+{{--                                    <div class="borderBottom"></div>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
                             <li class="nav-item">
-                                <a class="nav-link links2" href="{{route('dashboard')}}/#/customize_player">Customization
-                                    <div class="borderBottom"></div>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link links2" href="{{route('dashboard')}}/#/analytics">Analytics
+                                <a class="nav-link links2" href="#/analytics">Analytics
                                     <div class="borderBottom"></div>
                                 </a>
                             </li>
@@ -44,7 +44,7 @@
         </div>
 
         <div class="col-5 col-lg-2 p-0 my-3 ">
-              <span> <a href="{{route('dashboard')}}/#/upload-video" class="btn  cloud-upload  btn-primary"> <i
+              <span> <a href="#/upload-video" class="btn  cloud-upload  btn-primary"> <i
                           style="font-size:17px; " class="fa   fa-cloud-upload  " color="black"> </i> Upload Video  </a>
               </span>
             <span class="dropdown nav-item dropdown-Custom  ">
@@ -83,12 +83,12 @@
                         <div class="dowpdown-box">
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                                <a class="dropdown-item" href="{{route('dashboard')}}/#/profile">
+                                <a class="dropdown-item" href="#/profile">
                                     <i class="fa fa-user icons"></i></a>
-                                <a class="dropdown-item" href="{{route('dashboard')}}/#/upload-video">
+                                <a class="dropdown-item" href="#/upload-video">
                                     <i class="fa fa-cloud-upload icons "></i>
                                 </a>
-                                <a class="dropdown-item" href="{{route('dashboard')}}/#/settings">
+                                <a class="dropdown-item" href="#/settings">
                                     <i class="fa fa-cog icons"></i>
                                 </a>
                                 <a class="dropdown-item">
