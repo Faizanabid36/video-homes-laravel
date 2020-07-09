@@ -33,19 +33,16 @@ class ImageUploadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function imageUploadPost(Request $request)
+    public function imageUploadPost()
     {
+        if ( request( 'image' ) && preg_match( "/data:\w+\/\w+;base64,.*/", request( 'image' ) ) == 1 ) {
+            $image = request( 'image' );
+            $name  = time() . '.' . explode( '/', explode( ':', substr( $image, 0, strpos( $image, ';' ) ) )[1] )[1];
 
-        //Todo: needs to be fixed.
-        $data = $request->get('image');
-        list($type, $data) = explode(';', $data);
-        list(, $data) = explode(',', $data);
-        $data = base64_decode($data);
-        file_put_contents(public_path('images/' . $request->filename), $data);
-        User::whereId(auth()->user()->id)->update(['avatar' => asset('images/' . $request->filename)]);
-        return ['message' => 'Picture Updated'];
-
-
+            \Image::make( $image )->orientate()->save( public_path( 'images/' ) . $name );
+            User::whereId(auth()->user()->id)->update(['avatar' => asset('images/' . $name)]);
+            return ['message' => 'Picture Updated'];
+        }
     }
 
     /**
