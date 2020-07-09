@@ -15,17 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
-
-Route::resource( 'report_query', 'ReportQueryController' );
-
-Route::get( 'reported_query_videos', 'ReportQueryController@reported_videos' );
-Route::get( '/page/{slug}', 'PageController@view' )->name( 'public.page' );
-Route::post( '/search_in_directory', 'MainController@search_in_directory' )->name( 'search_in_directory' );
-Route::get( '/embed/{video_id}', 'VideoController@get_embedded_video' )->name( 'embed_video' );
-Route::get( '{username}/watch_video', 'VideoController@watch_video' );
-Route::get( '{username}/watch_video/is_watchable', 'VideoController@watchable_video' );
-Route::post( '{username}/', 'VideoController@watch_video' );
-Route::get( '/categories', 'CategoryController@index' );
 //Auth User
 Route::group( [ 'middleware' => 'auth' ], function () {
     Route::view( '/dashboard', 'dashboard' )->name( 'dashboard' );
@@ -103,6 +92,17 @@ Route::group( [ 'middleware' => 'admin' ], function () {
         Route::get( 'deactivate_user/{id}', 'AdminController@deactivate_user' )->name( 'admin.deactivate_user' );
     } );
 } );
+
+Route::resource( 'report_query', 'ReportQueryController' );
+
+Route::get( 'reported_query_videos', 'ReportQueryController@reported_videos' );
+Route::get( '/page/{slug}', 'PageController@view' )->name( 'public.page' );
+Route::post( '/search_in_directory', 'MainController@search_in_directory' )->name( 'search_in_directory' );
+Route::get( '/embed/{video_id}', 'VideoController@get_embedded_video' )->name( 'embed_video' );
+Route::get( '{username}/watch_video', 'VideoController@watch_video' );
+Route::get( '{username}/watch_video/is_watchable', 'VideoController@watchable_video' );
+Route::post( '{username}/', 'VideoController@watch_video' );
+Route::get( '/categories', 'CategoryController@index' );
 
 
 

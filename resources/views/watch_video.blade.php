@@ -180,7 +180,6 @@
                                         </svg>
                                         Share
                                     </button>
-                                    @if(!auth()->guest() && ($video->user_id==auth()->user()->id))
                                     <button class="btn-share" id="embed-video">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                              viewBox="0 0 24 24">
@@ -189,6 +188,7 @@
                                         </svg>
                                         Embed
                                     </button>
+                                    @if(!auth()->guest() && ($video->user_id==auth()->user()->id))
                                         <a class="btn btn-share"
                                            href="{{route('dashboard')}}#/edit_video/{{request('v')}}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
