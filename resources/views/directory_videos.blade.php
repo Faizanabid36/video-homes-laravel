@@ -98,7 +98,7 @@
                 <div class="row">
 
                     <div id="background" class="hidden"></div>
-                    <div class="col-md-8 player-video" style="margin-top: 0 !important">
+                    <div class="col-md-{{count($related_videos) > 1 ? 8 : 12}} player-video" style="margin-top: 0 !important">
                         <div class="video-player pt_video_player " id="pt_video_player">
                             <span class="mejs__offscreen">Video Player</span>
                             @if(!is_null($video))
@@ -260,12 +260,12 @@
                             </div>
                             <div class="clear"></div>
                         </div>
-                    @if(!is_null($video))
-                        <div class="col-md-4 no-padding-left pull-right deskto  p">
+                    @if(count($related_videos)>0)
+                        <div class="col-md-4 no-padding-left pull-right desktop">
                             <div class="content video-list pt_shadow">
                                 <div class="ads-placment"></div>
                                     <div class="next-video">
-                                        @if(count($related_videos)>0)
+
                                             <div class="next-text pull-left pt_mn_wtch_nxttxt">
                                                 <h4>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -282,7 +282,7 @@
 {{--                                                <label class="tgl-btn" for="autoplay">Autoplay</label>--}}
                                             </div>
                                             <div class="clear"></div>
-                                        @endif
+
                                         @foreach($related_videos as $related_video)
                                             <div class="video-thumb">
                                                 <a href="{{route('directory_by_user_video',[$user->username,$related_video->video_id])}}">
@@ -532,42 +532,43 @@
     </div>  <!--parentContainer -->
 
 
-    <script>
-        var slideIndex = 1;
-        showSlides(slideIndex);
 
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
-        }
-
-        function currentSlide(n) {
-            showSlides(slideIndex = n);
-        }
-
-        function showSlides(n) {
-            var i;
-            var slides = document.getElementsByClassName("mySlides");
-            var dots = document.getElementsByClassName("demo");
-            var captionText = document.getElementById("caption");
-            if (n > slides.length) {
-                slideIndex = 1
-            }
-            if (n < 1) {
-                slideIndex = slides.length
-            }
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active", "");
-            }
-            slides[slideIndex - 1].style.display = "block";
-            // dots[slideIndex - 1].className += " active";
-            // captionText.innerHTML = dots[slideIndex - 1].alt;
-        }
-    </script>
 @endsection;
 @section('script')
+{{--    <script>--}}
+{{--        var slideIndex = 1;--}}
+{{--        showSlides(slideIndex);--}}
+
+{{--        function plusSlides(n) {--}}
+{{--            showSlides(slideIndex += n);--}}
+{{--        }--}}
+
+{{--        function currentSlide(n) {--}}
+{{--            showSlides(slideIndex = n);--}}
+{{--        }--}}
+
+{{--        function showSlides(n) {--}}
+{{--            var i;--}}
+{{--            var slides = document.getElementsByClassName("mySlides");--}}
+{{--            var dots = document.getElementsByClassName("demo");--}}
+{{--            var captionText = document.getElementById("caption");--}}
+{{--            if (n > slides.length) {--}}
+{{--                slideIndex = 1--}}
+{{--            }--}}
+{{--            if (n < 1) {--}}
+{{--                slideIndex = slides.length--}}
+{{--            }--}}
+{{--            for (i = 0; i < slides.length; i++) {--}}
+{{--                slides[i].style.display = "none";--}}
+{{--            }--}}
+{{--            for (i = 0; i < dots.length; i++) {--}}
+{{--                dots[i].className = dots[i].className.replace(" active", "");--}}
+{{--            }--}}
+{{--            slides[slideIndex - 1].style.display = "block";--}}
+{{--            // dots[slideIndex - 1].className += " active";--}}
+{{--            // captionText.innerHTML = dots[slideIndex - 1].alt;--}}
+{{--        }--}}
+{{--    </script>--}}
 {{--    <script>--}}
 {{--    var slideIndex = 1;--}}
 {{--    showSlides(slideIndex);--}}
@@ -1009,23 +1010,13 @@
 <script type="text/javascript">
     $('#share-video').on('click', function (event) {
         event.preventDefault();
+        $('.embed-placement').addClass('hidden');
         $('.share-video').toggleClass('hidden');
-        if (!$('.embed-placement').hasClass('hidden')) {
-            $('.embed-placement').toggleClass('hidden');
-        }
-        if (!$('.download-placement').hasClass('hidden')) {
-            $('.download-placement').toggleClass('hidden');
-        }
     });
     $('#embed-video').on('click', function (event) {
         event.preventDefault();
         $('.embed-placement').toggleClass('hidden');
-        if (!$('.share-video').hasClass('hidden')) {
-            $('.share-video').toggleClass('hidden');
-        }
-        if (!$('.download-placement').hasClass('hidden')) {
-            $('.download-placement').toggleClass('hidden');
-        }
+        $('.share-video').addClass('hidden');
     });
 
     $('video').mediaelementplayer({
