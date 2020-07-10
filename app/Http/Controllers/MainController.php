@@ -108,9 +108,9 @@ class MainController extends Controller
         $videos = Video::userVideos($username,$video_id)->get()->toArray();
 
         $user = User::whereUsername($username)->with('account_types')->first();
-        $video = (object) array_slice($videos,0,1);
-        dd($video);
-        $related_videos = (object) array_slice($videos,1);
+        $video = collect(array_slice($videos,0,1))->first();
+
+        $related_videos = array_slice($videos,1);
         return view('directory_videos', compact('user', 'video','related_videos'));
     }
     public function account_types()
