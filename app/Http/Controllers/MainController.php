@@ -105,8 +105,8 @@ class MainController extends Controller
 
     public function directory_by_user_video($username, $video_id = null)
     {
-        $videos = Video::userVideos($username,$video_id);
-        return response($videos);
+        $videos = Video::userVideos($username,$video_id)->get()->toArray();
+
         $user = User::whereUsername($username)->with('account_types')->first();
         $video = array_slice($videos,0,1);
         $related_videos = array_slice($videos,1);
