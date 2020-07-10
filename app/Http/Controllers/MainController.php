@@ -109,7 +109,7 @@ class MainController extends Controller
 
         $user = User::whereUsername($username)->with('account_types')->first();
         $video = collect(array_slice($videos,0,1))->first();
-
+dd($video);
         $related_videos = array_slice($videos,1);
         return view('directory_videos', compact('user', 'video','related_videos'));
     }
