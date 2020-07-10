@@ -48,4 +48,15 @@ class Video extends Model
         return $this->hasMany(Comment::class, 'video_id', 'id');
     }
 
+    public function scopeUserVideos($query,$username, $video_id = false){
+        return $query->whereHas('user', function ($query) use ($username) {
+            $query->whereUsername($username);
+        })->whereProcessed(1)->whereIsVideoApproved(1)->when($video_id,function($query) use($video_id){
+            $id = Video::whereVideoId($video_id)->first();
+            $query->where('id', '>=', $id);
+        })->when(!$video_id,function($query){
+            $query->latest();
+        })->take(5)->toArray();
+    }
+
 }

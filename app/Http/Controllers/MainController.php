@@ -103,20 +103,13 @@ class MainController extends Controller
         return view('directory_videos', compact('user', 'video', 'related_videos'));
     }
 
-    public function directory_by_user_video($username, $video_id)
+    public function directory_by_user_video($username, $video_id = null)
     {
+        $videos = Video::userVideos($username,$video_id);
         $user = User::whereUsername($username)->with('account_types')->first();
-        $video = Video::whereHas('user', function ($query) use ($username) {
-            $query->whereUsername($username);
-        })->where('processed',1)->where('is_video_approved', 1)->where('video_id', $video_id)->first();
-        $related_videos=[];
-        if(!is_null($video))
-        {
-            $related_videos = Video::whereHas('user', function ($query) use ($username) {
-                $query->whereUsername($username);
-            })->where('processed',1)->where('is_video_approved', 1)->where('id', '!=', $video->id)->latest()->get();
-        }
-        return view('directory_videos', compact('user', 'video', 'related_videos'));
+        $video = array_slice($videos,0,1);
+        $related_videos = array_slice($videos,1);
+        return view('directory_videos', compact('user', 'video','related_videos'));
     }
     public function account_types()
     {
