@@ -56,7 +56,7 @@ class Video extends Model
             $query->where('id', '>=', $id);
         })->when(!$video_id,function($query){
             $query->latest();
-        })->take(5)->toArray();
+        })->take(5);
     }
 
 }
