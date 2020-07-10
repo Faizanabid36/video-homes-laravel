@@ -110,7 +110,7 @@ class MainController extends Controller
         $user = User::whereUsername($username)->with('account_types')->first();
         $video = collect($videos)->first();
 
-        $related_videos = count($video) > 0 ? array_slice($videos,1): [];
+        $related_videos = $videos->count() > 0 ? array_slice($videos,1): [];
         return view('directory_videos', compact('user', 'video','related_videos'));
     }
     public function account_types()
