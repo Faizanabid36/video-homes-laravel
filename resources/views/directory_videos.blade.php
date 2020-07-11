@@ -108,7 +108,7 @@
                         {{--                                    <span class="expend-player"><i class="fa fa-expand fa-fw"></i></span>--}}
                         {{--                                </div>--}}
                         <div class="video-options pt_mn_wtch_opts">
-                            <button class="btn-share" id="share-video">
+                            <button class="btn btn-primary btn-share" id="share-video">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                      viewBox="0 0 24 24">
                                     <path fill="currentColor"
@@ -116,7 +116,7 @@
                                 </svg>
                                 Share
                             </button>
-                            <button class="btn-share" id="embed-video">
+                            <button class="btn btn-warning btn-share" id="embed-video">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                      viewBox="0 0 24 24">
                                     <path fill="currentColor"
@@ -187,10 +187,10 @@
                                           d="M14.4,6L14,4H5V21H7V14H12.6L13,16H20V6H14.4Z"></path>
                                 </svg>
                                 <span>Report</span></button>
-                            <div class="embed-placement hidden">
+                            <div class="embed-placement d-none">
                                 <textarea name="embed" id="embed" cols="30" rows="3" class="form-control">&lt;iframe src="{{route('embed_video',$video->video_id)}}" frameborder="0" width="700" height="400" allowfullscreen&gt;&lt;/iframe&gt;</textarea>
                             </div>
-                            <div class="share-video hidden">
+                            <div class="share-video d-none">
                                 <div class="row share-input">
                                     <div class="col-md-4">
                                         <input type="text" value="{{request()->fullUrl()}}"
@@ -957,13 +957,14 @@
 <script type="text/javascript">
     $('#share-video').on('click', function (event) {
         event.preventDefault();
-        $('.embed-placement').addClass('hidden');
-        $('.share-video').toggleClass('hidden');
+
+        $('.embed-placement').addClass('d-none');
+        $('.share-video').toggleClass('d-none');
     });
     $('#embed-video').on('click', function (event) {
         event.preventDefault();
-        $('.embed-placement').toggleClass('hidden');
-        $('.share-video').addClass('hidden');
+        $('.embed-placement').toggleClass('d-none');
+        $('.share-video').addClass('d-none');
     });
 
     $('video').mediaelementplayer({

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
     <link href="{{asset('css/public.css')}}" rel="stylesheet">
 <!-- <link href="{{asset('css/app.css')}}" rel="stylesheet"> -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="{{asset('css/jquery-ui.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/jquery.tagit.css')}}">
     <link rel="stylesheet" href="{{asset('css/font-awesome-4.7.0/css/font-awesome.min.css')}}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/css/bootstrap-select.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/css/bootstrap-select.css">
     @yield('style')
     <script>
         window.VIDEO_APP = {
@@ -44,15 +45,17 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto links-home">
-                    <li class="nav-item ">
+                        <li class="nav-item ">
                             <a class="nav-link" href="{{route('login')}}">LOGIN </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="{{route('directory')}}">DIRECTORY <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{route('directory')}}">DIRECTORY <span
+                                    class="sr-only">(current)</span></a>
                         </li>
                         @foreach($pages as $page)
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('public.page',$page->slug)}}">{{strtoupper($page->title)}}</a>
+                                <a class="nav-link"
+                                   href="{{route('public.page',$page->slug)}}">{{strtoupper($page->title)}}</a>
                             </li>
                         @endforeach
                     </ul>
@@ -65,11 +68,10 @@
 
     </div>
     <div style="min-height:100vh;">
-    @yield('content')
+        @yield('content')
     </div>
     <div class="row sayHello m-0 p-0 ">
         <div class="col-12 m-0 p-0 ">
-{{--            <div class="footer-top"></div>--}}
             <div class="footer1"><h3> © VideoHomes.com LLC 2020 </h3></div>
         </div>
     </div>

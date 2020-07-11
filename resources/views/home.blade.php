@@ -2,12 +2,8 @@
 @section('content')
 
         <div class="row">
-
             <div class="col-12 m-0 p-0 ">
-
                 <div class="header-wrapper">
-
-
                     <div class="video-frame">
                     <iframe id="ytplayer" type="text/html" style="width:100%;height:100vh;"
                         src="https://www.youtube.com/embed/3iXYciBTQ0c?autoplay=1&cc_load_policy=1&enablejsapi=1&loop=1&color=white&controls=0&iv_load_policy=3&modestbranding=1&playsinline=1&rel=0"
@@ -102,7 +98,7 @@
                 <div class="form-home">
 
                     <h1> Say Hello ! </h1>
-                    <p> Please contact us for more inforamation </p>
+                    <p> Please contact us for more information.</p>
 
                     <form class="myform">
                         <div class="form-group">
