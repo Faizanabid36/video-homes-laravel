@@ -31,7 +31,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light home-nav ">
                 <a class="navbar-brand" href="{{url('/')}}">
 
-                    <img src="https://www.videohomes.com/wp-content/uploads/2020/04/cropped-VideoHomes-3.png"
+                    <img src="{{asset('img/cropped-VideoHomes-3.png')}}"
                          class="logo" alt="videoHomes Logo"/>
 
 

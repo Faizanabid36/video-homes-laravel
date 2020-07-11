@@ -33,7 +33,7 @@
 
                             <div class="card" style="width: 18rem;">
                                 <img class="card-img-top images"
-                                     src="http://videohomes.com/wp-content/uploads/2019/07/video-image-141px.jpeg"
+                                     src="{{asset('img/video-image-141px.jpeg')}}"
                                      alt="Card image cap"/>
                                 <div class="card-body">
                                     <h5 class="card-title">Videographers</h5>
@@ -44,7 +44,7 @@
 
                             <div class="card" style="width: 18rem;">
                                 <img class="card-img-top images"
-                                     src="http://videohomes.com/wp-content/uploads/2019/07/Index-Card-jpeg.jpg"
+                                     src="{{asset('img/Index-Card-jpeg.jpg')}}"
                                      alt="Card image cap"/>
                                 <div class="card-body">
                                     <h5 class="card-title">Local Business Owners</h5>
@@ -55,7 +55,7 @@
 
                             <div class="card" style="width: 18rem;">
                                 <img class="card-img-top images"
-                                     src="http://videohomes.com/wp-content/uploads/2019/07/House-Icon-Jpeg.jpg"
+                                     src="{{asset('img/House-Icon-Jpeg.jpg')}}"
                                      alt="Card image cap"/>
                                 <div class="card-body">
                                     <h5 class="card-title">Real Estate Agents</h5>
@@ -67,7 +67,7 @@
 
                             <div class="card" style="width: 18rem;">
                                 <img class="card-img-top images"
-                                     src="http://videohomes.com/wp-content/uploads/2019/07/Rss-icon-jpeg.jpg"
+                                     src="{{asset('img/Rss-icon-jpeg.jpg')}}"
                                      alt="Card image cap"/>
                                 <div class="card-body">
                                     <h5 class="card-title">Writers and Content Producers</h5>
