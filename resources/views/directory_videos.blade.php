@@ -265,7 +265,7 @@
 
         <!-- 3rd row -->
 
-        <div class="row py-2">
+        <div class="row my-4">
             <div class="col-12">
                 <h4 class="font-weight-bold " style="color:gray"> CONTACT INFORMATION</h4>
                 <div class="borderBottomBold my-3"></div>
