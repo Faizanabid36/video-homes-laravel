@@ -1015,8 +1015,9 @@
 </script>
     <script>
         function initMap() {
+            let uluru = {lat:39.2846854,long:-76.6905368};
             @if(!is_null($user->user_extra->location_latitude)||!is_null($user->user_extra->location_longitude))
-            var uluru = {
+             uluru = {
                     lat: {{$user->user_extra->location_latitude}},
                     lng: {{$user->user_extra->location_longitude}}
                 };
@@ -1026,7 +1027,7 @@
 
 
             @if(!is_null($user->user_extra->location_latitude)||!is_null($user->user_extra->location_longitude))
-            var uluru = {
+             uluru = {
                     lat: {{$user->user_extra->location_latitude}},
                     lng: {{$user->user_extra->location_longitude}}
                 };
