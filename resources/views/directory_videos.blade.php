@@ -10,49 +10,18 @@
 @endsection
 @section('content')
 
-    <div class="bigContainer">
+    <div class="container">
         <div class="row">
-
-
-
-
-            <div class="col-md-7 my-3 float-left col-sm-12">
+            <div class="col-12">
                 <h2 style="text-transform:uppercase">
                     {{$user->name}}
                 </h2>
             </div>
-            <hr/>
-
-            {{--            <div class="col-md-5 col-sm-12 my-3  float-right ">--}}
-            {{--                <div class="text-right custom-tooltip">--}}
-            {{--                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"--}}
-            {{--                            title="submit new listing">--}}
-            {{--                        <i class='fas icon fa-plus'></i>--}}
-            {{--                    </button>--}}
-            {{--                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"--}}
-            {{--                            title="My bookmarks">--}}
-            {{--                        <i class="far icon fa-star"></i>--}}
-            {{--                    </button>--}}
-            {{--                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"--}}
-            {{--                            title="Print listing">--}}
-            {{--                        <i class='fas  icon fa-print'></i>--}}
-            {{--                    </button>--}}
-            {{--                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"--}}
-            {{--                            title="Add/Remove Bookmarks">--}}
-            {{--                        <i class='fas icon fa-heart'></i>--}}
-            {{--                    </button>--}}
-            {{--                    <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top"--}}
-            {{--                            title="save listing PDF">--}}
-            {{--                        <i class='fas icon fa-download'></i>--}}
-            {{--                    </button>--}}
-            {{--                </div>--}}
-            {{--            </div>--}}
-
         </div>
         <br/>
         <hr/>
         <div class="row">
-            <div class=" col-sm-12 col-xs-12 col-lg-2 my-3">
+            <div class=" col-sm-12 col-lg-2 my-3">
                 <img
 
                     @if( !is_null($user->avatar) )
