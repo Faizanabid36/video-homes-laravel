@@ -1,26 +1,20 @@
 <html>
 <head>
-    <title> {{$title ?? ''}}{{env('APP_NAME')}}</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <link rel="stylesheet" href="{{asset('css/mediaelementplayer.min.css')}}">
-
-    <script>
-        window.VIDEO_APP = {
-            base_url: '{{url('/')}}',
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
         }
-    </script>
+    </style>
 </head>
 <body>
-<video
+<video style="width: 100%; height: 100vh"
        poster="{{asset("storage/$video->thumbnail")}}"
        preload="none" autoplay controls>
     @if($video->{'8k'})
         <source src="{{asset("storage/".str_replace('240p','4320p',$video->stream_path))}}"
                 type="video/mp4" controls
-                data-quality="4320p" title="4320p" label="4320p" rel="4320">
+                data-quality="4320p" title="4320p" label="4320p" res="4320">
     @endif
     @if($video->{'4K'})
         <source src="{{asset("storage/".str_replace('240p','2160p',$video->stream_path))}}"
@@ -70,49 +64,6 @@
 <script src="{{asset('js/emoji/emojionearea/dist/emojionearea.js')}}"></script>
 <script src="{{asset('js/mediaelement-and-player.min.js')}}"></script>
 
-<script>
-    $('video').mediaelementplayer({
-        pluginPath: 'https://cdnjs.com/libraries/mediaelement-plugins/',
-        shimScriptAccess: 'always',
-        autoplay: true,
-        features: ['playpause', 'current', 'progress', 'duration', 'speed', 'skipback', 'jumpforward', 'tracks', 'markers', 'volume', 'chromecast', 'contextmenu', 'flash', 'fullscreen', 'sourcechooser'],
-        vastAdTagUrl: '',
-        vastAdsType: '',
-        setDimensions: true,
-        enableAutosize: true,
-        jumpForwardInterval: 20,
-        adsPrerollMediaUrl: [''],
-        adsPrerollAdUrl: [''],
-        adsPrerollAdEnableSkip: false,
-        adsPrerollAdSkipSeconds: 0,
-        success: function (media) {
-            media.addEventListener('ended', function (e) {
 
-                if ($('#autoplay').is(":checked")) {
-                    var url = $('#next-video').find('.video-title').find('a').attr('href');
-                    if (url) {
-                        window.location.href = url;
-                    }
-                } else {
-                    /* pass */
-                }
-            }, false);
-
-            media.addEventListener('playing', function (e) {
-                // if (pt_elexists('.ads-overlay-info')) {
-                //     $('.ads-overlay-info').remove();
-                // }
-
-                $('.ads-test').remove();
-
-                if ($('body').attr('resized') == 'true') {
-                    PT_Resize(true);
-                }
-                $('.mejs__container').css('height', ($('.mejs__container').width() / 1.77176216) + 'px');
-                $('video, iframe').css('height', '100%');
-            });
-        },
-    });
-</script>
 </body>
 </html>
