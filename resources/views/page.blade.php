@@ -4,7 +4,6 @@
         <div class="row">
             <div class="col-12 mx-auto mt-5">
                 {!! $page->content !!}
-
             </div>
         </div>
     </div>
