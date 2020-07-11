@@ -85,235 +85,223 @@
                 </div>
             </div>
 
+        </div>
+        <div class="row">
 
-            <div class="col-sm-12 col-xs-12 col-lg-10 ">
+            <div id="background" class="hidden"></div>
+            <div class="col-md-{{count($related_videos) > 1 ? 8 : 12}} player-video" style="margin-top: 0 !important">
+                <div class="video-player pt_video_player " id="pt_video_player">
+                    <span class="mejs__offscreen">Video Player</span>
+                    @if(!is_null($video))
+                        <video id="my-video_html5"
+                               style="width: 100%; height: 451.872px; position: relative;"
+                               poster="{{asset("storage/$video->thumbnail")}}"
+                               preload="none"
+                        >
+                            @if($video->{'8k'})
+                                <source
+                                    src="{{asset("storage/".str_replace('240p','4320p',$video->stream_path))}}"
+                                    type="video/mp4"
+                                    data-quality="4320p" title="4320p" label="4320p" res="4320">
+                            @endif
+                            @if($video->{'4K'})
+                                <source
+                                    src="{{asset("storage/".str_replace('240p','2160p',$video->stream_path))}}"
+                                    type="video/mp4"
+                                    data-quality="2160p" title="2160p" label="2160p" res="2160">
+                            @endif
+                            @if($video->{'1440p'})
+                                <source
+                                    src="{{asset("storage/".str_replace('240p','1440p',$video->stream_path))}}"
+                                    type="video/mp4"
+                                    data-quality="1440p" title="1440p" label="1440p" res="1440">
+                            @endif
+                            @if($video->{'1080p'})
+                                <source
+                                    src="{{asset("storage/".str_replace('240p','1080p',$video->stream_path))}}"
+                                    type="video/mp4"
+                                    data-quality="1080p" title="1080p" label="1080p" res="1080">
+                            @endif
+                            @if($video->{'720p'})
+                                <source
+                                    src="{{asset("storage/".str_replace('240p','720p',$video->stream_path))}}"
+                                    type="video/mp4"
+                                    data-quality="720p" title="720p" label="720p" res="720">
+                            @endif
+                            @if($video->{'480p'})
+                                <source
+                                    src="{{asset("storage/".str_replace('240p','480p',$video->stream_path))}}"
+                                    type="video/mp4"
+                                    data-quality="480p" title="480p" label="480p" res="480">
+                            @endif
 
-
-                <h3> Address: </h3>
-                <p>{{ucfirst($user->address)}}<p>
-                    <br/>
-                <h3> Description:</h3>
-                <p>{{ucfirst($user->bio)}}</p>
-                <br>
-                <div class="row">
-
-                    <div id="background" class="hidden"></div>
-                    <div class="col-md-{{count($related_videos) > 1 ? 8 : 12}} player-video" style="margin-top: 0 !important">
-                        <div class="video-player pt_video_player " id="pt_video_player">
-                            <span class="mejs__offscreen">Video Player</span>
-                            @if(!is_null($video))
-                                    <video id="my-video_html5"
-                                           style="width: 100%; height: 451.872px; position: relative;"
-                                           poster="{{asset("storage/$video->thumbnail")}}"
-                                           preload="none"
-                                    >
-                                        @if($video->{'8k'})
-                                            <source
-                                                src="{{asset("storage/".str_replace('240p','4320p',$video->stream_path))}}"
-                                                type="video/mp4"
-                                                data-quality="4320p" title="4320p" label="4320p" res="4320">
-                                        @endif
-                                        @if($video->{'4K'})
-                                            <source
-                                                src="{{asset("storage/".str_replace('240p','2160p',$video->stream_path))}}"
-                                                type="video/mp4"
-                                                data-quality="2160p" title="2160p" label="2160p" res="2160">
-                                        @endif
-                                        @if($video->{'1440p'})
-                                            <source
-                                                src="{{asset("storage/".str_replace('240p','1440p',$video->stream_path))}}"
-                                                type="video/mp4"
-                                                data-quality="1440p" title="1440p" label="1440p" res="1440">
-                                        @endif
-                                        @if($video->{'1080p'})
-                                            <source
-                                                src="{{asset("storage/".str_replace('240p','1080p',$video->stream_path))}}"
-                                                type="video/mp4"
-                                                data-quality="1080p" title="1080p" label="1080p" res="1080">
-                                        @endif
-                                        @if($video->{'720p'})
-                                            <source
-                                                src="{{asset("storage/".str_replace('240p','720p',$video->stream_path))}}"
-                                                type="video/mp4"
-                                                data-quality="720p" title="720p" label="720p" res="720">
-                                        @endif
-                                        @if($video->{'480p'})
-                                            <source
-                                                src="{{asset("storage/".str_replace('240p','480p',$video->stream_path))}}"
-                                                type="video/mp4"
-                                                data-quality="480p" title="480p" label="480p" res="480">
-                                        @endif
-
-                                        @if($video->{'360p'})
-                                            <source
-                                                src="{{asset("storage/".str_replace('240p','360p',$video->stream_path))}}"
-                                                type="video/mp4"
-                                                data-quality="360p" title="360p" label="360p" res="360">
-                                        @endif
-                                        <source src="{{asset("storage/$video->stream_path")}}" type="video/mp4"
-                                                data-quality="240p" title="240p" label="240p" res="240">
-                                        Your browser does not support HTML5 video.
-                                    </video>
-{{--                                <div class="icons hidden">--}}
-{{--                                    <span class="expend-player"><i class="fa fa-expand fa-fw"></i></span>--}}
-{{--                                </div>--}}
-                                <div class="video-options pt_mn_wtch_opts">
-                                    <button class="btn-share" id="share-video">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                             viewBox="0 0 24 24">
-                                            <path fill="currentColor"
-                                                  d="M18,16.08C17.24,16.08 16.56,16.38 16.04,16.85L8.91,12.7C8.96,12.47 9,12.24 9,12C9,11.76 8.96,11.53 8.91,11.3L15.96,7.19C16.5,7.69 17.21,8 18,8A3,3 0 0,0 21,5A3,3 0 0,0 18,2A3,3 0 0,0 15,5C15,5.24 15.04,5.47 15.09,5.7L8.04,9.81C7.5,9.31 6.79,9 6,9A3,3 0 0,0 3,12A3,3 0 0,0 6,15C6.79,15 7.5,14.69 8.04,14.19L15.16,18.34C15.11,18.55 15.08,18.77 15.08,19C15.08,20.61 16.39,21.91 18,21.91C19.61,21.91 20.92,20.61 20.92,19A2.92,2.92 0 0,0 18,16.08Z"></path>
-                                        </svg>
-                                        Share
-                                    </button>
-                                    <button class="btn-share" id="embed-video">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                             viewBox="0 0 24 24">
-                                            <path fill="currentColor"
-                                                  d="M14.6,16.6L19.2,12L14.6,7.4L16,6L22,12L16,18L14.6,16.6M9.4,16.6L4.8,12L9.4,7.4L8,6L2,12L8,18L9.4,16.6Z"></path>
-                                        </svg>
-                                        Embed
-                                    </button>
-                                    @if(!auth()->guest() && ($video->user_id==auth()->user()->id))
-                                        <a class="btn btn-share"
-                                           href="{{route('dashboard')}}#/edit_video/{{request('v')}}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                 viewBox="0 0 24 24">
-                                                <path fill="currentColor"
-                                                      d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"></path>
-                                            </svg>
-                                            Edit video
-                                        </a>
-                                        <a href="{{route('dashboard')}}"
-                                           class="btn-share">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                 viewBox="0 0 24 24">
-                                                <path fill="currentColor"
-                                                      d="M3,14L3.5,14.07L8.07,9.5C7.89,8.85 8.06,8.11 8.59,7.59C9.37,6.8 10.63,6.8 11.41,7.59C11.94,8.11 12.11,8.85 11.93,9.5L14.5,12.07L15,12C15.18,12 15.35,12 15.5,12.07L19.07,8.5C19,8.35 19,8.18 19,8A2,2 0 0,1 21,6A2,2 0 0,1 23,8A2,2 0 0,1 21,10C20.82,10 20.65,10 20.5,9.93L16.93,13.5C17,13.65 17,13.82 17,14A2,2 0 0,1 15,16A2,2 0 0,1 13,14L13.07,13.5L10.5,10.93C10.18,11 9.82,11 9.5,10.93L4.93,15.5L5,16A2,2 0 0,1 3,18A2,2 0 0,1 1,16A2,2 0 0,1 3,14Z"></path>
-                                            </svg>
-                                            Analytics
-                                        </a>
-                                    @endif
-                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form method="POST" action="{{action('ReportQueryController@store')}}">
-                                                        @csrf
-                                                        <div class="form-group">
-                                                            <label for="exampleFormControlInput1">Contact Name</label>
-                                                            <input name="name" type="text" required class="form-control" id="exampleFormControlInput1" placeholder="">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="exampleFormControlInput1">Contact Email</label>
-                                                            <input name="email" type="email" required class="form-control" id="exampleFormControlInput1" placeholder="">
-                                                        </div>
-                                                        <input type="hidden" name="type" value="video">
-                                                        <input type="hidden" name="reported_on_video" value="{{$video->title}}">
-                                                        <div class="form-group">
-                                                            <label for="exampleFormControlTextarea1">Message Text</label>
-                                                            <textarea name="message_body" required class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                        </div>
-                                                        <button class="btn btn-primary">Report Video</button>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                </div>
-                                            </div>
+                            @if($video->{'360p'})
+                                <source
+                                    src="{{asset("storage/".str_replace('240p','360p',$video->stream_path))}}"
+                                    type="video/mp4"
+                                    data-quality="360p" title="360p" label="360p" res="360">
+                            @endif
+                            <source src="{{asset("storage/$video->stream_path")}}" type="video/mp4"
+                                    data-quality="240p" title="240p" label="240p" res="240">
+                            Your browser does not support HTML5 video.
+                        </video>
+                        {{--                                <div class="icons hidden">--}}
+                        {{--                                    <span class="expend-player"><i class="fa fa-expand fa-fw"></i></span>--}}
+                        {{--                                </div>--}}
+                        <div class="video-options pt_mn_wtch_opts">
+                            <button class="btn-share" id="share-video">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                     viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                          d="M18,16.08C17.24,16.08 16.56,16.38 16.04,16.85L8.91,12.7C8.96,12.47 9,12.24 9,12C9,11.76 8.96,11.53 8.91,11.3L15.96,7.19C16.5,7.69 17.21,8 18,8A3,3 0 0,0 21,5A3,3 0 0,0 18,2A3,3 0 0,0 15,5C15,5.24 15.04,5.47 15.09,5.7L8.04,9.81C7.5,9.31 6.79,9 6,9A3,3 0 0,0 3,12A3,3 0 0,0 6,15C6.79,15 7.5,14.69 8.04,14.19L15.16,18.34C15.11,18.55 15.08,18.77 15.08,19C15.08,20.61 16.39,21.91 18,21.91C19.61,21.91 20.92,20.61 20.92,19A2.92,2.92 0 0,0 18,16.08Z"></path>
+                                </svg>
+                                Share
+                            </button>
+                            <button class="btn-share" id="embed-video">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                     viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                          d="M14.6,16.6L19.2,12L14.6,7.4L16,6L22,12L16,18L14.6,16.6M9.4,16.6L4.8,12L9.4,7.4L8,6L2,12L8,18L9.4,16.6Z"></path>
+                                </svg>
+                                Embed
+                            </button>
+                            @if(!auth()->guest() && ($video->user_id==auth()->user()->id))
+                                <a class="btn btn-share"
+                                   href="{{route('dashboard')}}#/edit_video/{{request('v')}}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                         viewBox="0 0 24 24">
+                                        <path fill="currentColor"
+                                              d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"></path>
+                                    </svg>
+                                    Edit video
+                                </a>
+                                <a href="{{route('dashboard')}}"
+                                   class="btn-share">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                         viewBox="0 0 24 24">
+                                        <path fill="currentColor"
+                                              d="M3,14L3.5,14.07L8.07,9.5C7.89,8.85 8.06,8.11 8.59,7.59C9.37,6.8 10.63,6.8 11.41,7.59C11.94,8.11 12.11,8.85 11.93,9.5L14.5,12.07L15,12C15.18,12 15.35,12 15.5,12.07L19.07,8.5C19,8.35 19,8.18 19,8A2,2 0 0,1 21,6A2,2 0 0,1 23,8A2,2 0 0,1 21,10C20.82,10 20.65,10 20.5,9.93L16.93,13.5C17,13.65 17,13.82 17,14A2,2 0 0,1 15,16A2,2 0 0,1 13,14L13.07,13.5L10.5,10.93C10.18,11 9.82,11 9.5,10.93L4.93,15.5L5,16A2,2 0 0,1 3,18A2,2 0 0,1 1,16A2,2 0 0,1 3,14Z"></path>
+                                    </svg>
+                                    Analytics
+                                </a>
+                            @endif
+                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
                                         </div>
-                                    </div>
-                                    <button data-toggle="modal" data-target="#exampleModalCenter" class="btn-share btn-report pull-right" onclick=""
-                                            data-rep="1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                             viewBox="0 0 24 24">
-                                            <path fill="currentColor"
-                                                  d="M14.4,6L14,4H5V21H7V14H12.6L13,16H20V6H14.4Z"></path>
-                                        </svg>
-                                        <span>Report</span></button>
-                                    <div class="embed-placement hidden">
-                                        <textarea name="embed" id="embed" cols="30" rows="3" class="form-control">&lt;iframe src="{{route('embed_video',$video->video_id)}}" frameborder="0" width="700" height="400" allowfullscreen&gt;&lt;/iframe&gt;</textarea>
-                                    </div>
-                                    <div class="share-video hidden">
-                                        <div class="row share-input">
-                                            <div class="col-md-4">
-                                                <input type="text" value="{{request()->fullUrl()}}"
-                                                       class="form-control input-md" readonly=""
-                                                       onclick="this.select();">
-                                            </div>
+                                        <div class="modal-body">
+                                            <form method="POST" action="{{action('ReportQueryController@store')}}">
+                                                @csrf
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlInput1">Contact Name</label>
+                                                    <input name="name" type="text" required class="form-control" id="exampleFormControlInput1" placeholder="">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlInput1">Contact Email</label>
+                                                    <input name="email" type="email" required class="form-control" id="exampleFormControlInput1" placeholder="">
+                                                </div>
+                                                <input type="hidden" name="type" value="video">
+                                                <input type="hidden" name="reported_on_video" value="{{$video->title}}">
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlTextarea1">Message Text</label>
+                                                    <textarea name="message_body" required class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                </div>
+                                                <button class="btn btn-primary">Report Video</button>
+                                            </form>
                                         </div>
-                                        <a href="#" onclick="copyToClipboard(this)" class="fa fa-link"
-                                           link="{{request()->fullUrl()}}"></a>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
                                     </div>
                                 </div>
-                                @else
-                                    <div>
-                                        <h1 class="alert alert-info">No Video Uploaded By this User</h1>
-                                    </div>
-                                @endif
                             </div>
-                            <div class="clear"></div>
+                            <button data-toggle="modal" data-target="#exampleModalCenter" class="btn-share btn-report pull-right" onclick=""
+                                    data-rep="1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                     viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                          d="M14.4,6L14,4H5V21H7V14H12.6L13,16H20V6H14.4Z"></path>
+                                </svg>
+                                <span>Report</span></button>
+                            <div class="embed-placement hidden">
+                                <textarea name="embed" id="embed" cols="30" rows="3" class="form-control">&lt;iframe src="{{route('embed_video',$video->video_id)}}" frameborder="0" width="700" height="400" allowfullscreen&gt;&lt;/iframe&gt;</textarea>
+                            </div>
+                            <div class="share-video hidden">
+                                <div class="row share-input">
+                                    <div class="col-md-4">
+                                        <input type="text" value="{{request()->fullUrl()}}"
+                                               class="form-control input-md" readonly=""
+                                               onclick="this.select();">
+                                    </div>
+                                </div>
+                                <a href="#" onclick="copyToClipboard(this)" class="fa fa-link"
+                                   link="{{request()->fullUrl()}}"></a>
+                            </div>
                         </div>
-                    @if(count($related_videos)>0)
-                        <div class="col-md-4 no-padding-left pull-right desktop">
-                            <div class="content video-list pt_shadow">
-                                <div class="ads-placment"></div>
-                                    <div class="next-video">
-
-                                            <div class="next-text pull-left pt_mn_wtch_nxttxt">
-                                                <h4>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                         viewBox="0 0 24 24">
-                                                        <path fill="currentColor"
-                                                              d="M16,18H18V6H16M6,18L14.5,12L6,6V18Z"></path>
-                                                    </svg>
-                                                    <x></x>
-                                                    Up Next
-                                                </h4>
-                                            </div>
-                                            <div class="pt_mn_wtch_switch pull-right">
-{{--                                                <input id="autoplay" type="checkbox" class="tgl autoplay-video">--}}
-{{--                                                <label class="tgl-btn" for="autoplay">Autoplay</label>--}}
-                                            </div>
-                                            <div class="clear"></div>
-
-                                        @foreach($related_videos as $related_video)
-                                            <div class="video-thumb">
-                                                <a href="{{route('directory_by_user_video',[$user->username,$related_video->video_id])}}">
-                                                    <img width="200px" height="200px"
-                                                         src="{{asset('storage/'.$related_video->thumbnail)}}"
-                                                         alt="Products">
-                                                    <div class='play_hover_btn' onmouseenter="show_gif(this,'')"
-                                                         onmouseleave="hide_gif(this)">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                             class="feather feather-play-circle">
-                                                            <circle cx="12" cy="12" r="10"></circle>
-                                                            <polygon points="10 8 16 12 10 16 10 8"></polygon>
-                                                        </svg>
-                                                    </div>
-                                                    <div>{{ucfirst($related_video->title)}}</div>
-                                                    <div class="video-duration">{{gmdate('i:s', $related_video->duration)}}</div>
-                                                </a>
-                                            </div>
-                                        @endforeach
-                                        <div></div>
-                                    </div>
-                            </div>
+                    @else
+                        <div>
+                            <h1 class="alert alert-info">No Video Uploaded By this User</h1>
                         </div>
                     @endif
-
                 </div>
+                <div class="clear"></div>
             </div>
-        </div>
+            @if(count($related_videos)>0)
+                <div class="col-md-4 no-padding-left pull-right desktop">
+                    <div class="content video-list pt_shadow">
+                        <div class="ads-placment"></div>
+                        <div class="next-video">
 
+                            <div class="next-text pull-left pt_mn_wtch_nxttxt">
+                                <h4>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                         viewBox="0 0 24 24">
+                                        <path fill="currentColor"
+                                              d="M16,18H18V6H16M6,18L14.5,12L6,6V18Z"></path>
+                                    </svg>
+                                    <x></x>
+                                    Up Next
+                                </h4>
+                            </div>
+                            <div class="pt_mn_wtch_switch pull-right">
+                                {{--                                                <input id="autoplay" type="checkbox" class="tgl autoplay-video">--}}
+                                {{--                                                <label class="tgl-btn" for="autoplay">Autoplay</label>--}}
+                            </div>
+                            <div class="clear"></div>
+
+                            @foreach($related_videos as $related_video)
+                                <div class="video-thumb">
+                                    <a href="{{route('directory_by_user_video',[$user->username,$related_video->video_id])}}">
+                                        <img width="200px" height="200px"
+                                             src="{{asset('storage/'.$related_video->thumbnail)}}"
+                                             alt="Products">
+                                        <div class='play_hover_btn' onmouseenter="show_gif(this,'')"
+                                             onmouseleave="hide_gif(this)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                 class="feather feather-play-circle">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                                            </svg>
+                                        </div>
+                                        <div>{{ucfirst($related_video->title)}}</div>
+                                        <div class="video-duration">{{gmdate('i:s', $related_video->duration)}}</div>
+                                    </a>
+                                </div>
+                            @endforeach
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+        </div>
 
 
         <!-- 3rd row -->
