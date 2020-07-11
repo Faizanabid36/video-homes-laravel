@@ -79,7 +79,7 @@
                     <p id="caption">Company Logo</p>
                 </div>
             </div>
-            <div class="col-md-{{count($related_videos) > 1 ? 8 : 10}} player-video" style="margin-top: 0 !important">
+            <div class="col-md-{{count($related_videos) > 1 ? 7 : 10}} player-video" style="margin-top: 0 !important">
                 <div class="video-player pt_video_player " id="pt_video_player">
                     <span class="mejs__offscreen">Video Player</span>
                     @if(!is_null($video))
@@ -242,7 +242,7 @@
                 <div class="clear"></div>
             </div>
             @if(count($related_videos)>0)
-                <div class="col-md-4 no-padding-left pull-right desktop">
+                <div class="col-md-3 no-padding-left pull-right desktop">
                     <div class="content video-list pt_shadow">
                         <div class="ads-placment"></div>
                         <div class="next-video">
