@@ -1,13 +1,20 @@
 <html>
 <head>
-    <style>
-        *{
-            padding: 0px;
-            margin: 0px;
+    <title> {{$title ?? ''}}{{env('APP_NAME')}}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link href="{{asset('css/public.css')}}" rel="stylesheet">
+
+    <script>
+        window.VIDEO_APP = {
+            base_url: '{{url('/')}}',
         }
-    </style>
+    </script>
 </head>
 <body>
+<div class="embed-responsive embed-responsive-16by9">
+
 <video style="width: 100%; height: 100vh"
        poster="{{asset("storage/$video->thumbnail")}}"
        preload="none" autoplay controls>
@@ -51,6 +58,7 @@
             data-quality="240p" title="240p" label="240p" res="240">
     Your browser does not support HTML5 video.
 </video>
+</div>
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{asset('js/jquery-3.min.js')}}"></script>
 <script src="{{asset('js/jquery-ui.min.js')}}"></script>
