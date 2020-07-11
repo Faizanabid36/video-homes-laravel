@@ -265,11 +265,10 @@
 
         <!-- 3rd row -->
 
-        <div class="row">
+        <div class="row py-2">
             <div class="col-12">
-                <h4 class="font-weight-bold " style="color:gray"> CONTACT INFORMATION
-                    <div class="borderBottomBold my-3"></div>
-                </h4>
+                <h4 class="font-weight-bold " style="color:gray"> CONTACT INFORMATION</h4>
+                <div class="borderBottomBold my-3"></div>
 
             </div>
             <div class="col-12 contactWidgets my-2 ">
@@ -277,10 +276,12 @@
                     <div class="font-weight-bold "><i class='fas icon fa-phone'></i> Name</div>
                     <div> {{$user->name}}</div>
                 </div>
+                <hr/>
                 <div class="d-flex">
                     <div class="font-weight-bold "><i class='fas icon fa-phone'></i> Address</div>
                     <div> {{$user->address}}</div>
                 </div>
+                <hr/>
                 <div class="d-flex">
                     <div class="font-weight-bold "><i class='fas icon fa-phone'></i> Phone</div>
                     <div> {{$user->phone}}</div>
