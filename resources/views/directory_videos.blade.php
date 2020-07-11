@@ -179,7 +179,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button data-toggle="modal" data-target="#exampleModalCenter" class="btn-share btn-report pull-right" onclick=""
+                            <button data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-primary btn-share btn-report pull-right" onclick=""
                                     data-rep="1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                      viewBox="0 0 24 24">
