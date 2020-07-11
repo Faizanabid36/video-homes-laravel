@@ -5,12 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <style>
-        *{
-            padding: 0px;
-            margin: 0px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{asset('css/mediaelementplayer.min.css')}}">
+
     <script>
         window.VIDEO_APP = {
             base_url: '{{url('/')}}',
@@ -24,7 +20,7 @@
     @if($video->{'8k'})
         <source src="{{asset("storage/".str_replace('240p','4320p',$video->stream_path))}}"
                 type="video/mp4" controls
-                data-quality="4320p" title="4320p" label="4320p" res="4320">
+                data-quality="4320p" title="4320p" label="4320p" rel="4320">
     @endif
     @if($video->{'4K'})
         <source src="{{asset("storage/".str_replace('240p','2160p',$video->stream_path))}}"
