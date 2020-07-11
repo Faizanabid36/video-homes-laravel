@@ -56,7 +56,7 @@ class PageController extends Controller
 
     public function view($slug)
     {
-        $page=Page::viewPage($slug)->first();
+        $page=Page::viewPage($slug)->firstOrFail();
         return view('page',compact('page'));
     }
 }
