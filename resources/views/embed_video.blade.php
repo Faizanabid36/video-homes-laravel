@@ -14,7 +14,7 @@
     </script>
 </head>
 <body>
-<video
+<video width="100%" height="100vh"
        poster="{{asset("storage/$video->thumbnail")}}"
        preload="none" autoplay controls>
     @if($video->{'8k'})
