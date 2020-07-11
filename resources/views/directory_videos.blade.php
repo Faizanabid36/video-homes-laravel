@@ -53,42 +53,32 @@
         <hr/>
         <div class="row">
             <div class=" col-sm-12 col-xs-12 col-lg-2 my-3">
+                <img
 
-                <div class="container">
-                        <img
+                    @if( !is_null($user->avatar) )
+                    src= '{{asset($user->avatar) }}'
+                    @else
+                    src= 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMgrxYAqZF6-kdFuLQesPwdAyonhn93LsxvKXax0vzbCCGd_wQ&usqp=CAU'
+                    @endif
 
-                                @if( !is_null($user->avatar) )
-                                src= '{{asset($user->avatar) }}'
-                                @else
-                                src= 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMgrxYAqZF6-kdFuLQesPwdAyonhn93LsxvKXax0vzbCCGd_wQ&usqp=CAU'
-                                @endif
-
-                                style="width:100% ; ">
-                        <div class="caption-container">
-                            <p id="caption">Profile Image</p>
-                        </div>
+                    style="width:100% ; ">
+                <div class="caption-container">
+                    <p id="caption">Profile Image</p>
                 </div>
                 <hr/>
-                <div class="container">
-                        <img
+                <img
 
-                            @if( !is_null($user->company_logo) )
-                            src= '{{ $user->company_logo }}'
-                            @else
-                            src= 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMgrxYAqZF6-kdFuLQesPwdAyonhn93LsxvKXax0vzbCCGd_wQ&usqp=CAU'
-                            @endif
+                    @if( !is_null($user->company_logo) )
+                    src= '{{ $user->company_logo }}'
+                    @else
+                    src= 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMgrxYAqZF6-kdFuLQesPwdAyonhn93LsxvKXax0vzbCCGd_wQ&usqp=CAU'
+                    @endif
 
-                            style="width:100% ; ">
-                    <div class="caption-container">
-                        <p id="caption">Company Logo</p>
-                    </div>
+                    style="width:100% ; ">
+                <div class="caption-container">
+                    <p id="caption">Company Logo</p>
                 </div>
             </div>
-
-        </div>
-        <div class="row">
-
-            <div id="background" class="hidden"></div>
             <div class="col-md-{{count($related_videos) > 1 ? 8 : 12}} player-video" style="margin-top: 0 !important">
                 <div class="video-player pt_video_player " id="pt_video_player">
                     <span class="mejs__offscreen">Video Player</span>
@@ -300,8 +290,8 @@
                     </div>
                 </div>
             @endif
-
         </div>
+
 
 
         <!-- 3rd row -->
