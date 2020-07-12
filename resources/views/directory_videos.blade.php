@@ -470,7 +470,7 @@
 
 
 
-@endsection;
+@endsection
 @section('script')
 {{--    <script>--}}
 {{--        var slideIndex = 1;--}}
