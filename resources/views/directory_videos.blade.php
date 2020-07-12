@@ -107,7 +107,7 @@
                         {{--                                <div class="icons hidden">--}}
                         {{--                                    <span class="expend-player"><i class="fa fa-expand fa-fw"></i></span>--}}
                         {{--                                </div>--}}
-                        <div class="video-options pt_mn_wtch_opts">
+                        <div class="video-options pt_mn_wtch_opts pt-4">
                             <button class="btn btn-primary btn-share" id="share-video">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                      viewBox="0 0 24 24">
@@ -116,7 +116,7 @@
                                 </svg>
                                 Share
                             </button>
-                            <button class="btn btn-warning btn-share" id="embed-video">
+                            <button class="btn btn-secondary btn-share" id="embed-video">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                      viewBox="0 0 24 24">
                                     <path fill="currentColor"
@@ -273,12 +273,12 @@
             </div>
             <div class="col-12 contactWidgets my-2 ">
                 <div class="d-flex">
-                    <div class="font-weight-bold "><i class='fas icon fa-phone'></i> Name</div>
+                    <div class="font-weight-bold "><i class='fas icon fa-signature'></i> Name</div>
                     <div> {{$user->name}}</div>
                 </div>
                 <hr/>
                 <div class="d-flex">
-                    <div class="font-weight-bold "><i class='fas icon fa-phone'></i> Address</div>
+                    <div class="font-weight-bold "><i class='fas icon fa-map-marker'></i> Address</div>
                     <div> {{$user->address}}</div>
                 </div>
                 <hr/>
@@ -292,11 +292,11 @@
                     <div><a href="{{$user->website_link}}"> {{$user->website_title}} </a></div>
                 </div>
                 <hr/>
-                <div class="d-flex">
-                    <div class="font-weight-bold "><i class='fas icon fa-envelope'></i> Email</div>
-                    <div><a href="mailto: {{$user->email}}"> {{$user->email}} </a></div>
-                </div>
-                <hr/>
+{{--                <div class="d-flex">--}}
+{{--                    <div class="font-weight-bold "><i class='fas icon fa-envelope'></i> Email</div>--}}
+{{--                    <div><a href="mailto: {{$user->email}}"> {{$user->email}} </a></div>--}}
+{{--                </div>--}}
+{{--                <hr/>--}}
             </div>
 
         </div>
