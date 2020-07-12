@@ -24,26 +24,15 @@
             <div class=" col-sm-12 col-lg-2 my-3">
                 <img
 
-                    @if( !is_null($user->avatar) )
-                    src= '{{asset($user->avatar) }}'
-                    @else
-                    src= 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMgrxYAqZF6-kdFuLQesPwdAyonhn93LsxvKXax0vzbCCGd_wQ&usqp=CAU'
-                    @endif
-
-                    style="width:100% ; ">
+                    src='{{$user->avatar === null ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMgrxYAqZF6-kdFuLQesPwdAyonhn93LsxvKXax0vzbCCGd_wQ&usqp=CAU' : asset($user->avatar) }}'
+                    style="width:100%;" />
                 <div class="caption-container">
                     <p id="caption">Profile Image</p>
                 </div>
                 <hr/>
                 <img
-
-                    @if( !is_null($user->company_logo) )
-                    src= '{{ $user->company_logo }}'
-                    @else
-                    src= 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMgrxYAqZF6-kdFuLQesPwdAyonhn93LsxvKXax0vzbCCGd_wQ&usqp=CAU'
-                    @endif
-
-                    style="width:100% ; ">
+                    src='{{$user->company_logo === null ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMgrxYAqZF6-kdFuLQesPwdAyonhn93LsxvKXax0vzbCCGd_wQ&usqp=CAU' : asset($user->company_logo) }}'
+                    style="width:100%;">
                 <div class="caption-container">
                     <p id="caption">Company Logo</p>
                 </div>
