@@ -22,7 +22,7 @@ class Profile extends React.Component {
                 return <DeleteAccount/>;
             case 'change-password':
                 return <ChangePassword/>;
-           
+
             default:
                 return <General/>
         }
@@ -34,7 +34,7 @@ class Profile extends React.Component {
                 <div className="">
                     <Row>
                         <div className="col-md-1"></div>
-                        <div className="col-md-3">
+                        <div className="col-md-3">l
                             <div className="settings-sidebar display-shadow-box">
                                 <ul className="list-group">
                                     <li className="list-group-item"
@@ -63,7 +63,7 @@ class Profile extends React.Component {
                                             Change Password</a>
                                     </li>
 
-                                    <li className={this.state.tab == 'delete-account' ? 'list-group-item active' : 'list-group-item'}>
+                                    <li className={this.state.tab === 'delete-account' ? 'list-group-item active' : 'list-group-item'}>
                                         <a onClick={(e) => {
                                             e.preventDefault();
                                             this.setState({tab: 'delete-account'})
@@ -75,7 +75,7 @@ class Profile extends React.Component {
                                             </svg>
                                             Delete account</a>
                                     </li>
-                                  
+
                                 </ul>
                             </div>
                         </div>

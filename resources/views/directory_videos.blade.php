@@ -262,7 +262,7 @@
             </div>
             <div class="col-12 contactWidgets my-2 ">
                 <div class="d-flex">
-                    <div class="font-weight-bold "><i class='fas icon fa-signature'></i> Name</div>
+                    <div class="font-weight-bold "><i class='fas icon fa-id-card'></i> Name</div>
                     <div> {{$user->name}}</div>
                 </div>
                 <hr/>

@@ -12,20 +12,30 @@
                         </div>
                     @endif
                     <div class="form-group">
-                        <input class="form-control" type="text" name="email" id="username" placeholder="Email" required="" value="">
+                        <input class="form-control" type="text" name="email" id="username" placeholder="Email"
+                               required="required" />
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="password" name="password" id="password" placeholder="Password" required="">
+                        <input class="form-control" type="password" name="password" id="password" placeholder="Password"
+                               required="required" />
                     </div>
-                    <div class="new-here pull-left">
-                        <a href="#">Forgot your password?</a>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input type="checkbox" name="remember"
+                                   id="remember_me" {{ old('remember') ? 'checked' : '' }} />
+                            <label class="form-check-label" for="remember_me">
+                                {{ __('Remember Me') }}
+                            </label>
+                        </div>
                     </div>
-                    <div class="pull-right login-icons">
-                    </div>
-                    <div class="clear"></div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Log In</button>
                     </div>
+                    <div class="form-group">
+                        <a class="btn btn-link"
+                           href="{{route('password.request')}}">{{ __('Forgot Your Password?') }}</a>
+                    </div>
+
                     <div class="new-here text-center">
                         New here? <a class="dec" href="{{route('register')}}">Sign Up!</a>
                     </div>

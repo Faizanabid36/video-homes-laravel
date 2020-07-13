@@ -141,3 +141,60 @@ function sortVideosInOrder($order,$videos)
         break;
     }
 }
+function level_generator($albums,$key) {
+    $rv = array();
+    foreach( $albums as &$album) {
+
+        if ( is_null($album[$key]) ) {
+            // no parentId -> entry in the root array
+            $rv[] = &$album;
+        }
+        else {
+            $pid = $album[$key];
+            if ( !isset($albums[$pid]) ) {
+                echo 'orphant album: ', $album['id'], "\n";
+            }
+            else {
+                if ( !isset($albums[$pid]['children']) ) {
+                    $albums[$pid]['children'] = array();
+                }
+                $albums[$pid]['children'][] = &$album;
+            }
+        }
+    }
+    return $rv;
+}
+function convertToTree( $flat, $idField = 'id', $parentIdField = 'parent_id', $childNodesField = 'childNodes') {
+    $indexed = array();
+    // first pass - get the array indexed by the primary id
+    foreach ($flat as $row) {
+        $indexed[$row[$idField]] = $row;
+        $indexed[$row[$idField]][$childNodesField] = array();
+    }
+
+    //second pass
+    $root = null;
+    foreach ($indexed as $id => $row) {
+        $indexed[$row[$parentIdField]][$childNodesField][$id] =& $indexed[$id];
+        if (!$row[$parentIdField]) {
+            $root = $id;
+        }
+    }
+
+    return array_values(array($root => $indexed[$root]));
+}
+function buildTree(array &$elements, $parentId = null) {
+    $branch = array();
+
+    foreach ($elements as $element) {
+        if ($element['parent_id'] == $parentId) {
+            $children = buildTree($elements, $element['id']);
+            if ($children) {
+                $element['children'] = $children;
+            }
+            $branch[$element['id']] = $element;
+            unset($elements[$element['id']]);
+        }
+    }
+    return $branch;
+}

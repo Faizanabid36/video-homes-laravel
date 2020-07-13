@@ -45,9 +45,18 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto links-home">
+                        @guest
                         <li class="nav-item ">
                             <a class="nav-link" href="{{route('login')}}">LOGIN </a>
                         </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{route('register')}}">REGISTER </a>
+                            </li>
+                        @else
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{route('dashboard')}}">DASHBOARD </a>
+                            </li>
+                        @endguest
                         <li class="nav-item ">
                             <a class="nav-link" href="{{route('directory')}}">DIRECTORY <span
                                     class="sr-only">(current)</span></a>

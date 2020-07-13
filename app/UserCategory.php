@@ -46,4 +46,9 @@ class UserCategory extends Model
     {
         return $this->hasMany(AccountType::class,'sub_role_category','id');
     }
+    public function scopeLevelCategories($query){
+        return $query->selectRaw('user_categories.*,uc1.name as parent_name')->leftJoin('user_categories as uc1','user_categories.parent_id','uc1.id')
+            ->get()->toArray();
+    }
+
 }
