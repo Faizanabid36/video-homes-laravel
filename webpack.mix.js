@@ -15,3 +15,4 @@ mix.react('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/public.scss', 'public/css')
     .copyDirectory('resources/img','public/img');
+mix.js('resources/js/public.js','public/js');

@@ -91,7 +91,7 @@
 
 
                     <p> Search in radius 0 miles </p>
-                    <input type="range" class="custom-range" id="customRange1">
+                    <input type="range" class="custom-range" id="customRange1" />
                     <div class="col my-2">
 
                         <button class="btn btn-primary float-right my-2"> Search</button>

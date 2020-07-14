@@ -221,7 +221,7 @@
     padding: 25px 35px;
     color: gray;
     width: 50%;
-    height: 625;
+    height: 625px;
     margin-left: auto;
     margin-right: auto;
 
@@ -581,3 +581,8 @@ img {
   }
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+@import '~font-awesome/css/font-awesome.css';
+@import '~jquery-ui/themes/base/all.css';
+@import '~tag-it/css/jquery.tagit.css';
+@import '~mediaelement/build/mediaelementplayer.min.css';

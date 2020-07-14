@@ -5,10 +5,18 @@
             position: relative;
         }
 
-        .dropdown-submenu .dropdown-menu {
+        .dropdown-submenu>a:after {
+            content: "\f0da";
+            float: right;
+            border: none;
+            font-family: 'FontAwesome';
+        }
+
+        .dropdown-submenu>.dropdown-menu {
             top: 0;
             left: 100%;
-            margin-top: -1px;
+            margin-top: 0;
+            margin-left: 0;
         }
     </style>
 @endsection
@@ -36,42 +44,25 @@
                     </div>
                     <div class="form-group">
                         <input class="form-control" type="password" name="password" id="password" placeholder="Password"
-                               required="">
+                               required>
                     </div>
                     <div class="form-group">
                         <input class="form-control" type="password" name="password_confirmation" id="cpassword"
                                placeholder="Confirm Password"
-                               required="">
+                               required>
                     </div>
-                    {{--                    <div class="form-group">--}}
-                    {{--                        <select onchange="changeVisibility(this)" class="form-control" name="role" id="role"--}}
-                    {{--                                required="">--}}
-                    {{--                            <option selected disabled>Choose My Industry</option>--}}
-                    {{--                            @foreach($roles as $role)--}}
-                    {{--                                <option value="{{$role->id}}">{{$role->role}}</option>--}}
-                    {{--                            @endforeach--}}
-                    {{--                        </select>--}}
-                    {{--                    </div>--}}
-                    {{--                    <div id="tags" class="form-group">--}}
-
-                    {{--                    </div>--}}
-                    {{--                    <div id="parent" class="form-group">--}}
-                    {{--                    </div>--}}
-
-                    {{--                    <div id="child" class="form-group">--}}
-                    {{--                    </div>--}}
                     @if (count($user_category) > 0)
                         <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="category_instance">Industry</button>
+                            <a id="category_instance" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-primary dropdown-toggle">Dropdown</a>
                             @foreach($user_category as $u)
-                                <div class="dropdown-menu" aria-labelledby="category_instance">
+                                <ul aria-labelledby="category_instance" class="dropdown-menu border-0 shadow">
                                     <h3>Industry</h3>
                                     @if (empty($u['childNodes']))
-                                        <li><a class="btn btn-link text-capitalize" tabindex="-1" href="#">{{$u['name']}}</a></li>
+                                        <li><a href="#" tabindex="-1" class="dropdown-item">{{$u['name']}}</a></li>
                                     @else
                                         @include('partial.category_partial', ['user_category'=>$u['childNodes'],"write"=>"Profession"])
                                     @endif
-                                </div>
+                                </ul>
                             @endforeach
                         </div>
                     @endif
@@ -98,87 +89,30 @@
 
 
 @section('script')
-    {{--    <script type="text/javascript">--}}
-    {{--        function changeVisibility(e) {--}}
-    {{--            var select = document.createElement("select");--}}
-    {{--            select.name = "sub_role";--}}
-    {{--            select.id = 'parent_selector';--}}
-    {{--            select.classList.add('form-control')--}}
-    {{--            let selector = document.getElementById('parent')--}}
-    {{--            selector.innerHTML = ''--}}
-    {{--            let el = document.getElementById('child')--}}
-    {{--            el.innerHTML = ''--}}
-    {{--            let values = [];--}}
-    {{--            let valu = [];--}}
-    {{--            @foreach($roles_assoc as $key=>$val)--}}
-    {{--            if (e.value == {{$key}}) {--}}
-    {{--                @foreach($val as $v)--}}
-    {{--                values.push('{{$v->name}}')--}}
-    {{--                valu.push('{{$v->id}}')--}}
-    {{--                @endforeach--}}
-    {{--            }--}}
-    {{--            @endforeach--}}
-    {{--            if (values.length != 0) {--}}
-    {{--                var option = document.createElement("option");--}}
-    {{--                option.value = "";--}}
-    {{--                option.text = "Choose My Expertise"--}}
-    {{--                option.selected;--}}
-    {{--                option.disabled--}}
-    {{--                select.appendChild(option);--}}
-    {{--                for (let i = 0; i < values.length; i++) {--}}
-    {{--                    var option = document.createElement("option");--}}
-    {{--                    option.value = valu[i];--}}
-    {{--                    option.text = values[i].charAt(0).toUpperCase() + values[i].slice(1);--}}
-    {{--                    select.appendChild(option);--}}
-    {{--                }--}}
-    {{--                document.getElementById("parent").appendChild(select);--}}
-    {{--            }--}}
-    {{--        }--}}
-    {{--    </script>--}}
-    {{--    <script type="text/javascript">--}}
-    {{--        $(document).on('click', '#parent_selector', function () {--}}
-    {{--            let e = document.getElementById('parent_selector')--}}
-    {{--            var select = document.createElement("select");--}}
-    {{--            select.name = "sub_role_category";--}}
-    {{--            select.classList.add('form-control')--}}
-    {{--            let selector = document.getElementById('child')--}}
-    {{--            selector.innerHTML = ''--}}
-    {{--            let values = [];--}}
-    {{--            let valu = [];--}}
-    {{--            @foreach($user_child_category as $key=>$val)--}}
-    {{--            if (e.value == {{$key}}) {--}}
-    {{--                @foreach($val as $v)--}}
-    {{--                values.push('{{$v->name}}')--}}
-    {{--                valu.push('{{$v->id}}')--}}
-    {{--                @endforeach--}}
-    {{--            }--}}
-    {{--            @endforeach--}}
-    {{--            if (values.length != 0) {--}}
-    {{--                var option = document.createElement("option");--}}
-    {{--                option.value = "";--}}
-    {{--                option.text = "Choose My Profession"--}}
-    {{--                option.selected;--}}
-    {{--                option.disabled--}}
-    {{--                select.appendChild(option);--}}
-    {{--                for (let i = 0; i < values.length; i++) {--}}
-    {{--                    var option = document.createElement("option");--}}
-    {{--                    option.value = valu[i];--}}
-    {{--                    option.text = values[i].charAt(0).toUpperCase() + values[i].slice(1);--}}
-    {{--                    select.appendChild(option);--}}
-    {{--                }--}}
-    {{--                document.getElementById("child").appendChild(select);--}}
-    {{--            }--}}
-    {{--        });--}}
-    {{--    </script>--}}
     <script>
         $(document).ready(function () {
-            $('.dropdown-submenu a.test').on("click", function (e) {
-                $(this).next('ul').toggle();
-                e.stopPropagation();
-                e.preventDefault();
+            // $('.dropdown-submenu a.test').on("click", function (e) {
+            //     $(this).next('ul').toggle();
+            //     e.stopPropagation();
+            //     e.preventDefault();
+            // });
+            $("ul.dropdown-menu [data-toggle='dropdown']").on("click", function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                $(this).siblings().toggleClass("show");
+
+
+                if (!$(this).next().hasClass('show')) {
+                    // $(this).parents('.dropdown-menu').first().toggleClass('show');
+                    $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+                }
+                $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
+                    $('.dropdown-submenu .show').removeClass("show");
+                });
+
             });
         });
-
     </script>
 @endsection
 
