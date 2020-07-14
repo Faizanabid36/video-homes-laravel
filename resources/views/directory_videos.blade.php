@@ -68,7 +68,7 @@
                                 <source
                                     src="{{asset("storage/".str_replace('240p','1080p',$video->stream_path))}}"
                                     type="video/mp4"
-                                    data-quality="1080p" title="1080p" label="1080p" res="1080">
+                                    data-quality="1080p" qualityText="1080" title="1080p" label="1080p" res="1080">
                             @endif
                             @if($video->{'720p'})
                                 <source
@@ -957,48 +957,48 @@
         $('.share-video').addClass('d-none');
     });
 
-    // $('video').mediaelementplayer({
-    //     pluginPath: 'https://cdnjs.com/libraries/mediaelement-plugins/',
-    //     shimScriptAccess: 'always',
-    //     autoplay: true,
-    //     features: ['playpause', 'current', 'progress', 'duration', 'speed', 'skipback', 'jumpforward', 'tracks', 'markers', 'volume', 'chromecast', 'contextmenu', 'flash', 'fullscreen', 'sourcechooser'],
-    //     vastAdTagUrl: '',
-    //     vastAdsType: '',
-    //     setDimensions: true,
-    //     enableAutosize: true,
-    //     jumpForwardInterval: 20,
-    //     adsPrerollMediaUrl: [''],
-    //     adsPrerollAdUrl: [''],
-    //     adsPrerollAdEnableSkip: false,
-    //     adsPrerollAdSkipSeconds: 0,
-    //     success: function (media) {
-    //         media.addEventListener('ended', function (e) {
-    //
-    //             if ($('#autoplay').is(":checked")) {
-    //                 var url = $('#next-video').find('.video-title').find('a').attr('href');
-    //                 if (url) {
-    //                     window.location.href = url;
-    //                 }
-    //             } else {
-    //                 /* pass */
-    //             }
-    //         }, false);
-    //
-    //         media.addEventListener('playing', function (e) {
-    //             // if (pt_elexists('.ads-overlay-info')) {
-    //             //     $('.ads-overlay-info').remove();
-    //             // }
-    //
-    //             $('.ads-test').remove();
-    //
-    //             if ($('body').attr('resized') == 'true') {
-    //                 PT_Resize(true);
-    //             }
-    //             $('.mejs__container').css('height', ($('.mejs__container').width() / 1.77176216) + 'px');
-    //             $('video, iframe').css('height', '100%');
-    //         });
-    //     },
-    // });
+    $('video').mediaelementplayer({
+        pluginPath: 'https://cdnjs.com/libraries/mediaelement-plugins/',
+        shimScriptAccess: 'always',
+        autoplay: true,
+        features: ['playpause', 'current', 'progress', 'duration', 'speed', 'skipback', 'jumpforward', 'tracks', 'markers', 'volume', 'chromecast', 'contextmenu', 'flash', 'fullscreen', 'quality'],
+        vastAdTagUrl: '',
+        vastAdsType: '',
+        setDimensions: true,
+        enableAutosize: true,
+        jumpForwardInterval: 20,
+        adsPrerollMediaUrl: [''],
+        adsPrerollAdUrl: [''],
+        adsPrerollAdEnableSkip: false,
+        adsPrerollAdSkipSeconds: 0,
+        success: function (media) {
+            media.addEventListener('ended', function (e) {
+
+                if ($('#autoplay').is(":checked")) {
+                    var url = $('#next-video').find('.video-title').find('a').attr('href');
+                    if (url) {
+                        window.location.href = url;
+                    }
+                } else {
+                    /* pass */
+                }
+            }, false);
+
+            media.addEventListener('playing', function (e) {
+                // if (pt_elexists('.ads-overlay-info')) {
+                //     $('.ads-overlay-info').remove();
+                // }
+
+                $('.ads-test').remove();
+
+                if ($('body').attr('resized') == 'true') {
+                    PT_Resize(true);
+                }
+                $('.mejs__container').css('height', ($('.mejs__container').width() / 1.77176216) + 'px');
+                $('video, iframe').css('height', '100%');
+            });
+        },
+    });
 
 
 </script>
