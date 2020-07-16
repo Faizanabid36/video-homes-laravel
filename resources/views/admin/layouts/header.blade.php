@@ -10,7 +10,7 @@
                     <div class="user-settings no-bg">
                         <button type="button" class="btn btn-default no-bg micheal_btn"
                                 data-toggle="dropdown">
-                            <img src="  {{asset('img/admin.jpg')}}"
+                            <img src="{{asset("img/admin.jpg")}}"
                                  class="admin_img2 img-thumbnail rounded-circle avatar-img"
                                  alt="avatar"> <strong>{{ Auth::user()->name }} </strong>
                             <span class="fa fa-sort-down white_bg"></span>
