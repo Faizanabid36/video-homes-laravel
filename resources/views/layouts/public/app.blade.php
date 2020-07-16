@@ -7,8 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link href="{{asset('css/public.css')}}" rel="stylesheet">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/css/bootstrap-select.css">
+
     @yield('style')
     <script>
         window.VIDEO_APP = {

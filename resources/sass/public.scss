@@ -1,5 +1,5 @@
 @import 'variables';
-
+@import '~bootstrap-select/sass/variables';
 
 .sticky {
     position: -webkit-sticky;
@@ -581,7 +581,7 @@ img {
   }
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-@import '~bootstrap-select/dist/css/bootstrap-select.min.css';
+@import '~bootstrap-select/sass/bootstrap-select';
 @import '~font-awesome/css/font-awesome.css';
 @import '~jquery-ui/themes/base/all.css';
 @import '~tag-it/css/jquery.tagit.css';

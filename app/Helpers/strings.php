@@ -190,7 +190,7 @@ function buildTree(array &$elements, $parentId = null) {
         if ($element['parent_id'] == $parentId) {
             $children = buildTree($elements, $element['id']);
             if ($children) {
-                $element['children'] = $children;
+                $element['childNodes'] = $children;
             }
             $branch[$element['id']] = $element;
             unset($elements[$element['id']]);

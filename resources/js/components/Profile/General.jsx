@@ -113,8 +113,8 @@ export default class General extends React.Component {
             .then((res) => {
                 this.setState({user: res.data.user}, () => {
                     this.setState({
-                        sub_role_cat: this.state.user.account_types.sub_role_category,
-                        sub_role: this.state.user.account_types.sub_role
+                        sub_role_cat: this.state.user.account_types && this.state.user.account_types.sub_role_category,
+                        sub_role: this.state.user.account_types && this.state.user.account_types.sub_role
                     })
                 })
             })
@@ -173,7 +173,7 @@ export default class General extends React.Component {
         });
     }
     render() {
-        return <div className="col-md-7 pt_sett_mani_page">
+        return <div className="pt_sett_mani_page">
             <div className="form-horizontal user-setting-panel pt_shadow display-shadow-box"
                  id="general-settings">
                 <div className="setting-general-alert">
@@ -181,9 +181,9 @@ export default class General extends React.Component {
                 </div>
                 <Row className="custom-vh-form">
 
-                    <div class="form-group">
+                    <div className="form-group">
                         <label htmlFor="name">Name</label>
-                        <input onChange={this.handleChangeInput} type="text" class="form-control" name="name" id="name" aria-describedby="name"
+                        <input onChange={this.handleChangeInput} type="text" className="form-control" name="name" id="name" aria-describedby="name"
                                placeholder="Name" />
                     </div>
                     {/*<div className="form-group input-form-group col-lg-6">*/}
@@ -284,12 +284,12 @@ export default class General extends React.Component {
                         <div className="col-md-12">
                             <select onChange={this.handleChangeRole} id="role" name="role"
                                     className="form-control custom-vh-form-input">
-                                <option value="" selected>Select An Option</option>
+                                <option defaultValue="">Select An Option</option>
                                 {this.state.roles.map((item, id) => {
                                     return <option
                                         key={"cat" + id}
                                         selected={this.state.user.role == item.id ? "selected" : ""}
-                                        value={item.id}>{item.role}</option>
+                                        defaultValue={item.id}>{item.role}</option>
                                 })}
                             </select>
                         </div>
@@ -299,12 +299,12 @@ export default class General extends React.Component {
                         <div className="col-md-12">
                             <select onChange={this.handleChangeSubRole} id="tags" name="sub_role"
                                     className="form-control custom-vh-form-input">
-                                <option value="" selected>Select An Option</option>
+                                <option defaultValue="">Select An Option</option>
                                 {this.state.role.length > 0 && this.state.role.map((item) => {
                                     return <option
                                         key={"role"+item}
-                                        selected={this.state.user.account_types.sub_role == item.id ? "selected" : ""}
-                                        value={item.id}>{item.name}</option>
+                                        selected={this.state.user.account_types && this.state.user.account_types.sub_role == item.id ? "selected" : ""}
+                                        defaultValue={item.id}>{item.name}</option>
                                 })}
                             </select>
                         </div>
@@ -316,12 +316,12 @@ export default class General extends React.Component {
                                 this.setState({sub_role_cat:e.target.value})
                             }} id="role_cat" name="role_cat"
                                     className="form-control custom-vh-form-input">
-                                <option value="" selected>Select An Option</option>
+                                <option defaultValue="">Select An Option</option>
                                 {this.state.role_cat.map((item) => {
                                     return <option
                                         key={"sub"+item}
-                                        selected={this.state.user.account_types.sub_role_category == item.id ? "selected" : ""}
-                                        value={item.id}>{item.name}</option>
+                                        selected={this.state.user.account_types && this.state.user.account_types.sub_role_category == item.id ? "selected" : ""}
+                                        defaultValue={item.id}>{item.name}</option>
                                 })}
                             </select>
                         </div>
