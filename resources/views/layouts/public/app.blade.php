@@ -39,14 +39,17 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto links-home">
-                        @auth('auth')
-                            <li class="nav-item ">
-                                <a class="nav-link" href="{{route('dashboard')}}">DASHBOARD </a>
-                            </li>
-                            @auth('admin')
+                        @auth
+                            @if (auth()->user()->isAdmin())
                                 <li class="nav-item ">
                                     <a class="nav-link" href="{{route('admin_panel')}}">Admin </a>
                                 </li>
+                            @else
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="{{route('dashboard')}}">DASHBOARD </a>
+                                </li>
+                            @endif
+
                         @else
                             <li class="nav-item ">
                                 <a class="nav-link" href="{{route('login')}}">LOGIN </a>
@@ -54,7 +57,7 @@
                             <li class="nav-item ">
                                 <a class="nav-link" href="{{route('register')}}">REGISTER </a>
                             </li>
-                        @endguest
+                        @endauth
                         <li class="nav-item ">
                             <a class="nav-link" href="{{route('directory')}}">DIRECTORY <span
                                     class="sr-only">(current)</span></a>
