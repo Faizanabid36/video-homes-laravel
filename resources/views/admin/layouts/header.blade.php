@@ -2,7 +2,7 @@
     <!-- .navbar -->
     <nav class="navbar navbar-static-top">
         <div class="container-fluid m-0">
-            <a class="navbar-brand float-left" href="{{url('/'}}">
+            <a class="navbar-brand float-left" href="{{url('/')}}">
                 <h4> VideoHomes</h4>
             </a>
             <div class="topnav dropdown-menu-right float-right">
