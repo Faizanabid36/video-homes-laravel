@@ -68,7 +68,8 @@
                                 <source
                                     src="{{asset("storage/".str_replace('240p','1080p',$video->stream_path))}}"
                                     type="video/mp4"
-                                    data-quality="1080p" qualityText="1080" title="1080p" label="1080p" res="1080">
+                                    dataQuality="1080p"
+                                    data-quality="1080p" quality-text="1080" title="1080p" label="1080p" res="1080">
                             @endif
                             @if($video->{'720p'})
                                 <source
