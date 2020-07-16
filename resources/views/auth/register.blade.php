@@ -14,21 +14,21 @@
                     <div class="errors success form-group"></div>
                     <div class="form-group">
                         <input class="form-control" type="text" name="name" id="name" placeholder="Name" required
-                               value="{{old('name')}}">
+                               value="{{old('name')}}" />
                     </div>
                     <div class="form-group">
                         <input class="form-control" type="text" name="email" id="email" placeholder="E-mail address"
                                required
-                               value="{{old('email')}}">
+                               value="{{old('email')}}" />
                     </div>
                     <div class="form-group">
                         <input class="form-control" type="password" name="password" id="password" placeholder="Password"
-                               required>
+                               required />
                     </div>
                     <div class="form-group">
                         <input class="form-control" type="password" name="password_confirmation" id="cpassword"
                                placeholder="Confirm Password"
-                               required>
+                               required />
                     </div>
 
                     @if (count($user_category) > 0)
