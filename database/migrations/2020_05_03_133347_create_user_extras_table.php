@@ -16,10 +16,7 @@ class CreateUserExtrasTable extends Migration
         Schema::create('user_extras', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id')->unique();
-//            $table->string('who_watches')->default('Everyone');
-//            $table->string('who_comments')->default('Everyone');
-//            $table->string('who_shares')->default('Everyone');
-            $table->string('user_category_id')->nullable();
+            $table->bigInteger('user_category_id');
             $table->timestamps();
         });
     }

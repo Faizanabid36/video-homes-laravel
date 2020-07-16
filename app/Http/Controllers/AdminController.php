@@ -16,7 +16,6 @@ class AdminController extends Controller {
     }
 
 
-
     public function videos_for_approval() {
         $videos = Video::whereIsVideoApproved( 0 )->get();
 
@@ -140,19 +139,12 @@ class AdminController extends Controller {
     }
 
     public function add_user_category( Request $reqeust ) {
-        $this->validate( $reqeust, [
+        $this->validate( request()->all(), [
             'name'        => 'required',
             'description' => 'required',
-            'parent_role' => 'required'
         ] );
-        if ( ! is_null( \request( 'parent_id' ) ) ) {
-            $role_id = UserCategory::whereId( \request( 'parent_id' ) )->first();
-            \request()->merge( [ 'role_id' => $role_id->role_id ] );
-        } else {
-            \request()->merge( [ 'role_id' => \request( 'parent_role' ) ] );
-        }
-        \request()->merge( [ 'slug' => preg_replace( '/\W|\_+/m', '-', \request( 'name' ) ) ] );
-        UserCategory::create( \request()->except( '_token', 'parent_role' ) );
+        request()->merge( [ 'slug' => \Str::slug( request( 'name' ) ) ] );
+        UserCategory::create( request()->except( '_token', 'parent_role' ) );
 
         return back()->with( 'success', 'Category Created Successfully' );
     }
