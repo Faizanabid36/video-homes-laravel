@@ -50,7 +50,7 @@
             <span class="dropdown nav-item dropdown-Custom  ">
                    <button class="btn dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                       @if(is_null(auth()->user()->avatar))
+                       @guest
                            <div>
                                <img
                                    src="{{asset('images/blank.png')}}"
