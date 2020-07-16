@@ -50,9 +50,9 @@ class AppServiceProvider extends ServiceProvider
 //                'roles_assoc', $roles_assoc
 //            );
 //
-//            view::composer( 'directory.cat_directory', function ( $view ) use ( $industries ) {
-//                $view->with( compact( 'industries' ) );
-//            } );
+            view::composer( 'directory.cat_directory', function ( $view ) use ( $industries ) {
+                $view->with( compact( 'industries' ) );
+            } );
 
 
             View::composer( 'layouts.public.app', function ( $view ) {
