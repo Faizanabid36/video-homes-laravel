@@ -42,7 +42,7 @@
                         @auth
                             @if (auth()->user()->isAdmin())
                                 <li class="nav-item ">
-                                    <a class="nav-link" href="{{route('admin_panel')}}">Admin </a>
+                                    <a class="nav-link" href="{{route('admin_panel')}}">ADMIN PANEL</a>
                                 </li>
                             @else
                                 <li class="nav-item ">
