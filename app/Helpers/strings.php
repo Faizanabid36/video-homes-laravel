@@ -6,24 +6,23 @@ use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Format\Video\X264;
 
 if ( ! function_exists( 'dashboardChart' ) ) {
-    function dashboardChart($labels, $label, $data, $showBorder)
-    {
-        $Data = [];
-        $Data['labels'] = $labels;
-        $datasets['data'] = $data;
+    function dashboardChart( $labels, $label, $data, $showBorder ) {
+        $Data              = [];
+        $Data['labels']    = $labels;
+        $datasets['data']  = $data;
         $datasets['label'] = $label;
-        if ($showBorder) {
+        if ( $showBorder ) {
             $datasets['backgroundColor'] = [
                 'rgb(255, 102, 102)',
                 'rgb(209, 71, 163)'
             ];
-            $datasets['borderColor'] = [
+            $datasets['borderColor']     = [
                 'rgb(255, 102, 102)',
                 'rgb(209, 71, 163)'
             ];
-            $datasets['borderWidth'] = 2;
+            $datasets['borderWidth']     = 2;
         }
-        $Data['datasets'] = [$datasets];
+        $Data['datasets'] = [ $datasets ];
 
         return $Data;
     }
@@ -79,9 +78,9 @@ if ( ! function_exists( 'generateThumbnailsFromVideo' ) ) {
         for ( $i = 1; $i <= $thumbnail_shots; $i ++ ) {
             $newThumbnail[ $i ] = str_replace( "." . request()->video->getClientOriginalExtension(), "-$i.png", $path );
             $media->getFrameFromSeconds( $seconds )->export()->save( $newThumbnail[ $i ] );
-            if($angle){
-                $imageUpdate = storage_path("app/public/${newThumbnail[ $i ]}");
-                imagepng(imagerotate(imagecreatefrompng($imageUpdate), $angle, 0),$imageUpdate);
+            if ( $angle ) {
+                $imageUpdate = storage_path( "app/public/${newThumbnail[ $i ]}" );
+                imagepng( imagerotate( imagecreatefrompng( $imageUpdate ), $angle, 0 ), $imageUpdate );
             }
 
             $seconds += $divide_result;
@@ -108,93 +107,139 @@ function getVideoRotation( $videostream ) {
 }
 
 
-function sortVideosInOrder($order,$videos)
-{
-    switch($order){
+function sortVideosInOrder( $order, $videos ) {
+    switch ( $order ) {
         case 'created_at':
-            return collect($videos)->map(function ($video) {
-                $v = VideoView::getTotalVideoViews($video);
-                $views = !is_null($v) ? $v : 0;
-                return collect($video)->merge(['views' => $views, 'daysAgo' => $video->created_at->diffForHumans()]);
-            })->sortBy('created_at')->values();
-        break;
+            return collect( $videos )->map( function ( $video ) {
+                $v     = VideoView::getTotalVideoViews( $video );
+                $views = ! is_null( $v ) ? $v : 0;
+
+                return collect( $video )->merge( [
+                    'views'   => $views,
+                    'daysAgo' => $video->created_at->diffForHumans()
+                ] );
+            } )->sortBy( 'created_at' )->values();
+            break;
         case 'views':
-            return collect($videos)->map(function ($video) {
-                $v = VideoView::getTotalVideoViews($video);
-                $views = !is_null($v) ? $v : 0;
-                return collect($video)->merge(['views' => $views, 'daysAgo' => $video->created_at->diffForHumans()]);
-            })->sortByDesc('views')->values();
-        break;
+            return collect( $videos )->map( function ( $video ) {
+                $v     = VideoView::getTotalVideoViews( $video );
+                $views = ! is_null( $v ) ? $v : 0;
+
+                return collect( $video )->merge( [
+                    'views'   => $views,
+                    'daysAgo' => $video->created_at->diffForHumans()
+                ] );
+            } )->sortByDesc( 'views' )->values();
+            break;
         case 'title':
-            return collect($videos)->map(function ($video) {
-                $v = VideoView::getTotalVideoViews($video);
-                $views = !is_null($v) ? $v : 0;
-                return collect($video)->merge(['views' => $views, 'daysAgo' => $video->created_at->diffForHumans()]);
-            })->sortBy('title')->values();
-        break;
+            return collect( $videos )->map( function ( $video ) {
+                $v     = VideoView::getTotalVideoViews( $video );
+                $views = ! is_null( $v ) ? $v : 0;
+
+                return collect( $video )->merge( [
+                    'views'   => $views,
+                    'daysAgo' => $video->created_at->diffForHumans()
+                ] );
+            } )->sortBy( 'title' )->values();
+            break;
         default:
-            return collect($videos)->map(function ($video) {
-                $v = VideoView::getTotalVideoViews($video);
-                $views = !is_null($v) ? $v : 0;
-                return collect($video)->merge(['views' => $views, 'daysAgo' => $video->created_at->diffForHumans()]);
-            });
-        break;
+            return collect( $videos )->map( function ( $video ) {
+                $v     = VideoView::getTotalVideoViews( $video );
+                $views = ! is_null( $v ) ? $v : 0;
+
+                return collect( $video )->merge( [
+                    'views'   => $views,
+                    'daysAgo' => $video->created_at->diffForHumans()
+                ] );
+            } );
+            break;
     }
 }
-function level_generator($albums,$key) {
-    $rv = array();
-    foreach( $albums as &$album) {
 
-        if ( is_null($album[$key]) ) {
+function level_generator( $albums, $key ) {
+    $rv = array();
+    foreach ( $albums as &$album ) {
+
+        if ( is_null( $album[ $key ] ) ) {
             // no parentId -> entry in the root array
             $rv[] = &$album;
-        }
-        else {
-            $pid = $album[$key];
-            if ( !isset($albums[$pid]) ) {
+        } else {
+            $pid = $album[ $key ];
+            if ( ! isset( $albums[ $pid ] ) ) {
                 echo 'orphant album: ', $album['id'], "\n";
-            }
-            else {
-                if ( !isset($albums[$pid]['children']) ) {
-                    $albums[$pid]['children'] = array();
+            } else {
+                if ( ! isset( $albums[ $pid ]['children'] ) ) {
+                    $albums[ $pid ]['children'] = array();
                 }
-                $albums[$pid]['children'][] = &$album;
+                $albums[ $pid ]['children'][] = &$album;
             }
         }
     }
+
     return $rv;
 }
-function convertToTree( $flat, $idField = 'id', $parentIdField = 'parent_id', $childNodesField = 'childNodes') {
+
+function convertToTree( $flat, $idField = 'id', $parentIdField = 'parent_id', $childNodesField = 'childNodes' ) {
     $indexed = array();
     // first pass - get the array indexed by the primary id
-    foreach ($flat as $row) {
-        $indexed[$row[$idField]] = $row;
-        $indexed[$row[$idField]][$childNodesField] = array();
+    foreach ( $flat as $row ) {
+        $indexed[ $row[ $idField ] ]                     = $row;
+        $indexed[ $row[ $idField ] ][ $childNodesField ] = array();
     }
 
     //second pass
     $root = null;
-    foreach ($indexed as $id => $row) {
-        $indexed[$row[$parentIdField]][$childNodesField][$id] =& $indexed[$id];
-        if (!$row[$parentIdField]) {
+    foreach ( $indexed as $id => $row ) {
+        $indexed[ $row[ $parentIdField ] ][ $childNodesField ][ $id ] =& $indexed[ $id ];
+        if ( ! $row[ $parentIdField ] ) {
             $root = $id;
         }
     }
 
-    return array_values(array($root => $indexed[$root]));
+    return array_values( array( $root => $indexed[ $root ] ) );
 }
-function buildTree(array &$elements, $parentId = null) {
+
+function buildTree( array &$elements, $parentId = null ) {
     $branch = array();
 
-    foreach ($elements as $element) {
-        if ($element['parent_id'] == $parentId) {
-            $children = buildTree($elements, $element['id']);
-            if ($children) {
+    foreach ( $elements as $element ) {
+        if ( $element['parent_id'] == $parentId ) {
+            $children = buildTree( $elements, $element['id'] );
+            if ( $children ) {
                 $element['childNodes'] = $children;
             }
-            $branch[$element['id']] = $element;
-            unset($elements[$element['id']]);
+            $branch[ $element['id'] ] = $element;
+            unset( $elements[ $element['id'] ] );
         }
     }
+
     return $branch;
+}
+
+$data = [];
+function grabUsers( $categories, $forceClear = false ) {
+    global $data;
+
+    if ( $forceClear ) {
+        $categories = [ $categories ];
+        $data       = [];
+    }
+
+    foreach ( $categories as $val ) {
+        if ( isset( $val['list'] ) && ! empty( $val['list'] ) ) {
+            foreach ( $val['list'] as $user ) {
+                $user                           = $user->toArray();
+                $d                              = array_merge( $user['user_id'], [
+                    'location_latitude'  => $user['location_latitude'],
+                    'location_longitude' => $user['location_longitude']
+                ] );
+                $data[ $user['user_id']['id'] ] = $d;
+            }
+        }
+        if ( isset( $val['children'] ) && ! empty( $val['children'] ) ) {
+            grabUsers( $val['children'] );
+        }
+    }
+
+    return array_values( $data );
 }
