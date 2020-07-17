@@ -228,6 +228,8 @@ function grabUsers( $categories, $forceClear = false ) {
     foreach ( $categories as $val ) {
         if ( isset( $val['list'] ) && ! empty( $val['list'] ) ) {
             foreach ( $val['list'] as $user ) {
+
+                var_dump($user);
                 $user                           = $user->toArray();
                 $d                              = array_merge( $user['user_id'], [
                     'location_latitude'  => $user['location_latitude'],
