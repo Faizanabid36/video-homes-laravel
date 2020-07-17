@@ -27,7 +27,7 @@ class UserCategory extends Model {
             return $query->whereSlug( $level1 );
         } )->when( $level2, function ( $query ) use ( $level2 ) {
             return $query->whereSlug( $level2 );
-        } );
+        } )->get();
 
     }
 

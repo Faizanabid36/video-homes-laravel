@@ -24,12 +24,10 @@ class MainController extends Controller {
 
     public function directory1( $level1 = null, $level2 = null ) {
 
-        $industries = UserCategory::getCategories()->get();
-        $categories = UserCategory::getCategories($level1,$level2)->get();
+        $industries = UserCategory::getCategories();
+        $categories = UserCategory::getCategories( $level1, $level2 );
         $users      = grabUsers( $categories );
-
-
-        return view( 'directory1.index', compact( 'users', 'categories', 'industries','level1' ) );
+        return view( 'directory1.index', compact( 'users', 'categories', 'industries', 'level1' ) );
     }
 
     public function directory() {
