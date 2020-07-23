@@ -230,8 +230,8 @@ function grabUsers( $categories, $forceClear = false ) {
             foreach ( $val['list'] as $user ) {
                 $user                           = $user->toArray();
                 $d                              = array_merge( $user['user_id'], [
-                    'location_latitude'  => isset( $user['location_latitude'] ) ? $user['location_latitude'] : 0,
-                    'location_longitude' => isset( $user['location_longitude'] ) ? $user['location_longitude'] : 0
+                    'location_latitude'  => $user['location_latitude'] ?? 0,
+                    'location_longitude' => $user['location_longitude'] ?? 0
                 ] );
                 $data[ $user['user_id']['id'] ] = $d;
             }
