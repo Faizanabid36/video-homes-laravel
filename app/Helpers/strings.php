@@ -7,7 +7,7 @@ use FFMpeg\Format\Video\X264;
 
 if ( ! function_exists( 'dashboardChart' ) ) {
     function dashboardChart( $labels, $label, $data, $showBorder ) {
-        $Data              = [];
+        $Data         b     = [];
         $Data['labels']    = $labels;
         $datasets['data']  = $data;
         $datasets['label'] = $label;
@@ -230,8 +230,8 @@ function grabUsers( $categories, $forceClear = false ) {
             foreach ( $val['list'] as $user ) {
                 $user                           = $user->toArray();
                 $d                              = array_merge( $user['user_id'], [
-                    'location_latitude'  => $user['location_latitude'] ?? 'null',
-                    'location_longitude' => $user['location_longitude'] ?? 'null'
+                    'location_latitude'  => $user['location_latitude'] ?? 0,
+                    'location_longitude' => $user['location_longitude'] ?? 0
                 ] );
                 $data[ $user['user_id']['id'] ] = $d;
             }
