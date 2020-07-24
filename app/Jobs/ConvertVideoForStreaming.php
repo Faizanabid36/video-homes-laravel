@@ -21,9 +21,9 @@ class ConvertVideoForStreaming implements ShouldQueue {
     /**
      * Create a new job instance.
      *
-     * @param $video
+     * @param Video $video
      */
-    public function __construct( $video, $width, $height, $update = [], $angle = false, $bitrate = '500' ) {
+    public function __construct( Video $video, $width, $height, $update = [], $angle = false, $bitrate = '500' ) {
         //
         $this->video   = $video;
         $this->width   = $width;
@@ -44,9 +44,9 @@ class ConvertVideoForStreaming implements ShouldQueue {
 //        $lowBitrateFormat->setInitialParameters(array('-acodec', 'copy'));
 
         $video = \FFMpeg::open( $this->video->video_path );
-        Log::info( "Essa Outside Angle", [ $this->angle ] );
+        Log::info(  "Essa Outside Angle",[$this->angle]);
         if ( $this->angle ) {
-            Log::info( "Essa Inside Angle", [ $this->angle ] );
+            Log::info("Essa Inside Angle",[$this->angle]);
             $video->filters()->rotate( $this->angle );
         }
         $video->filters()->pad( new Dimension( $this->width, $this->height ) );
@@ -59,8 +59,7 @@ class ConvertVideoForStreaming implements ShouldQueue {
             'update'    => $this->update
         ] );
 
-//        $this->video->update( $this->update );
-        \App\Video::find( $this->video->id )->update( $this->update );
+        $this->video->update( $this->update );
     }
 
     private function getAngle( $angle ) {
@@ -72,7 +71,6 @@ class ConvertVideoForStreaming implements ShouldQueue {
             case 90:
                 return RotateFilter::ROTATE_90;
         }
-
         return false;
     }
 

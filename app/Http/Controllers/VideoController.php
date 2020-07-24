@@ -72,7 +72,7 @@ class VideoController extends Controller
         if ($video->width >= 7680) {
             ConvertVideoForStreaming::dispatch($video, 7680, 4320, ['8k' => 1], $angle, 2000);
         }
-        $message = "Video is uploading... in backgroud";
+        $message = "Video is uploading... in background";
 
         return compact('message', 'video');
     }

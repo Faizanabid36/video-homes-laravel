@@ -150,7 +150,7 @@ class AdminController extends Controller {
     }
 
     public function all_user_categories() {
-        $categories = UserCategory::with( 'children' )->with( 'parent' )->get();
+        $categories = UserCategory::with( 'children' )->get();
 
         return view( 'admin.view_user_categories', compact( 'categories' ) );
 
