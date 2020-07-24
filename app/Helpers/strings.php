@@ -7,7 +7,7 @@ use FFMpeg\Format\Video\X264;
 
 if ( ! function_exists( 'dashboardChart' ) ) {
     function dashboardChart( $labels, $label, $data, $showBorder ) {
-        $Data         b    = [];
+        $Data    = [];
         $Data['labels']    = $labels;
         $datasets['data']  = $data;
         $datasets['label'] = $label;
