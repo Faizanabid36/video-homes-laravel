@@ -245,6 +245,6 @@ function grabUsers( $categories, $forceClear = false ) {
             grabUsers( $val['children'] );
         }
     }
-    dd($data);
-    return array_values( $data );
+
+    return $data ? array_values( $data ) : [];
 }
