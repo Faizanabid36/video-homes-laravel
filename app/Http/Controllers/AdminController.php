@@ -178,9 +178,9 @@ class AdminController extends Controller {
     }
 
     public function edit_user_category( $id ) {
-        $cat        = UserCategory::whereId( $id )->with( 'children' )->first();
-        $categories = UserCategory::where( 'id', '!=', $id )->whereNull( 'parent_id' )->with( 'children' )->get();
-        $roles      = UserRole::where( 'role', '!=', 'admin' )->get();
+        $cat        = UserCategory::whereId( $id )->first();
+        $categories = UserCategory::where( 'id', '!=', $id )->whereNull( 'parent_id' )->get();
+        $roles      = $categories;
 
         return view( 'admin.edit_user_category', compact( 'cat', 'categories', 'roles' ) );
     }
