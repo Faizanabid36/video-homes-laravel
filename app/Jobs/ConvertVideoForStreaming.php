@@ -21,9 +21,9 @@ class ConvertVideoForStreaming implements ShouldQueue {
     /**
      * Create a new job instance.
      *
-     * @param Video $video
+     * @param $video
      */
-    public function __construct( Video $video, $width, $height, $update = [], $angle = false, $bitrate = '500' ) {
+    public function __construct( $video, $width, $height, $update = [], $angle = false, $bitrate = '500' ) {
         //
         $this->video   = $video;
         $this->width   = $width;
@@ -60,7 +60,7 @@ class ConvertVideoForStreaming implements ShouldQueue {
         ] );
 
 //        $this->video->update( $this->update );
-        Video::find( $this->video->id )->update( $this->update );
+        \App\Video::find( $this->video->id )->update( $this->update );
     }
 
     private function getAngle( $angle ) {
