@@ -63,17 +63,17 @@
                     </a>
                 </li>
 
-                <li class="">
-                    <a href="{{route('user_tags')}}">
-                        <i class="fa fa-tachometer"></i>
-                        <span class="link-title menu_hide">&nbsp;Industry
-                        </span>
-                    </a>
-                </li>
+{{--                <li class="">--}}
+{{--                    <a href="{{route('user_tags')}}">--}}
+{{--                        <i class="fa fa-tachometer"></i>--}}
+{{--                        <span class="link-title menu_hide">&nbsp;Industry--}}
+{{--                        </span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
                 <li class="">
                     <a href="{{route('all_user_categories')}}">
                         <i class="fa fa-tachometer"></i>
-                        <span class="link-title menu_hide">&nbsp;Profession/Expertise
+                        <span class="link-title menu_hide">&nbsp;Industry/Profession/Expertise
                         </span>
                     </a>
                 </li>
