@@ -37,7 +37,7 @@
                     <p id="caption">Company Logo</p>
                 </div>
             </div>
-            <div class="col-md-{{$related_videos ? 7 : 10}} player-video" style="margin-top: 0 !important">
+            <div class="col-md-{{$related_videos ? 7 : 10}} player-video mt-0">
                 <div class="video-player pt_video_player " id="pt_video_player">
                     <span class="mejs__offscreen">Video Player</span>
                     @if(!is_null($video))
@@ -218,7 +218,7 @@
                                 </svg>
                                 <span>Up Next</span>
                             </div>
-
+                            <div>
                             @foreach($related_videos as $related_video)
                                 <a href="{{route('directory_by_username',[$user->username,$related_video->video_id])}}">
                                     <div class="video-thumb overlay"
@@ -233,13 +233,13 @@
                                                 <polygon points="10 8 16 12 10 16 10 8"></polygon>
                                             </svg>
                                         </div>
-                                        <div>{{ucfirst($related_video->title)}}</div>
-                                        <div class="video-duration">{{gmdate('i:s', $related_video->duration)}}</div>
+                                        <span>{{ucfirst($related_video->title)}}</span>
+                                        <span class="video-duration">{{gmdate('i:s', $related_video->duration)}}</span>
 
                                     </div>
                                 </a>
                             @endforeach
-                            <div></div>
+
                         </div>
                     </div>
                 </div>
