@@ -202,14 +202,14 @@ class Profile extends React.Component {
                         <Form.Group controlId="address">
                             <Form.Label>Address</Form.Label>
                             <GooglePlacesAutocomplete
-                                onSelect={({address}) => {
+                                onSelect={({description}) => {
                                     geocodeByAddress(address)
                                         .then((results) => {
                                             let {user} = this.state;
                                             let {address, location_latitude, location_longitude} = user;
+                                            address = description;
                                             location_latitude = results[0].geometry.location.lat();
                                             location_longitude = results[0].geometry.location.lng();
-                                            address = address;
                                             this.setState(user);
                                             console.log(results, address)
                                         })
@@ -238,10 +238,10 @@ class Profile extends React.Component {
                         </Form.Group>
                     </Col>
                     <Col md={6}>
-                        <Form.Group controlId="license">
+                        <Form.Group controlId="license_no">
                             <Form.Label>License</Form.Label>
-                            <Form.Control name='license' onChange={this.handleChangeInput}
-                                          defaultValue={this.defaultValue('license')} type="text"
+                            <Form.Control name='license_no' onChange={this.handleChangeInput}
+                                          defaultValue={this.defaultValue('license_no')} type="text"
                                           placeholder="#######"/>
                         </Form.Group>
                     </Col>
@@ -296,7 +296,7 @@ class Profile extends React.Component {
                 <Row><Col>
                     <Form.Group controlId="bio_about">
                         <Form.Label>About/Bio (Max 600 words)</Form.Label>
-                        <Form.Control as="textarea" rows="3" defaultValue={this.defaultValue('bio')}
+                        <Form.Control name="bio" as="textarea" rows="3" defaultValue={this.defaultValue('bio')}
                                       onChange={this.handleChangeInput}/>
                     </Form.Group>
                 </Col></Row>
@@ -332,9 +332,9 @@ class Profile extends React.Component {
                         <Button onClick={() => this.setState({company_logo_preview: true})}>Upload Company Logo</Button>
                     </Col>
                 </Row>
-                <Row>
+                <Row className='mt-3'>
                     <Col>
-                        <Button block onClick={e=>console.log(this.state)}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        <Button onClick={e=>console.log(this.state)}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                            strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
                                            className="feather feather-check-circle">
@@ -342,6 +342,7 @@ class Profile extends React.Component {
                             <polyline points="22 4 12 14.01 9 11.01"></polyline>
                         </svg>
                             Update</Button>
+                        <Button variant='danger' onClick={e=>alert("Danger!!!!")}>Delete the Account</Button>
                     </Col>
                 </Row>
             </Container>
