@@ -218,29 +218,27 @@
                                 </svg>
                                 <span>Up Next</span>
                             </div>
-                            <div>
-                            @foreach($related_videos as $related_video)
-                                <a href="{{route('directory_by_username',[$user->username,$related_video->video_id])}}">
-                                    <div class="video-thumb overlay"
-                                         style="background-image: url({{asset('storage/'.$related_video->thumbnail)}})">
-                                        <div class='play_hover_btn' onmouseenter="show_gif(this,'')"
-                                             onmouseleave="hide_gif(this)">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                 class="feather feather-play-circle">
-                                                <circle cx="12" cy="12" r="10"></circle>
-                                                <polygon points="10 8 16 12 10 16 10 8"></polygon>
-                                            </svg>
-                                        </div>
-                                        <span>{{ucfirst($related_video->title)}}</span>
-                                        <span class="video-duration">{{gmdate('i:s', $related_video->duration)}}</span>
-
-                                    </div>
-                                </a>
-                            @endforeach
-
                         </div>
+                        @foreach($related_videos as $related_video)
+                            <a href="{{route('directory_by_username',[$user->username,$related_video->video_id])}}">
+                                <div class="video-thumb overlay"
+                                     style="background-image: url({{asset('storage/'.$related_video->thumbnail)}})">
+                                    <div class='play_hover_btn' onmouseenter="show_gif(this,'')"
+                                         onmouseleave="hide_gif(this)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                             class="feather feather-play-circle">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                                        </svg>
+                                    </div>
+                                    <span>{{ucfirst($related_video->title)}}</span>
+                                    <span class="video-duration">{{gmdate('i:s', $related_video->duration)}}</span>
+
+                                </div>
+                            </a>
+                        @endforeach
                     </div>
                 </div>
             @endif
