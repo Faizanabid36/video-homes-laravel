@@ -65,7 +65,7 @@ class ChangePassword extends React.Component {
                     </div>
                 </div>
                 <div className="form-group">
-                    <label className="col-md-12" htmlFor="new_password">New Passowrd</label>
+                    <label className="col-md-12" htmlFor="new_password">New Password</label>
                     <div className="col-md-12">
                         <input id="new_password" onChange={this.handleChangeInput} name="new_password" type="password"
                                placeholder=""
@@ -73,7 +73,7 @@ class ChangePassword extends React.Component {
                     </div>
                 </div>
                 <div className="form-group">
-                    <label className="col-md-12" htmlFor="confirm_new_password">Confirm new password</label>
+                    <label className="col-md-12" htmlFor="confirm_new_password">Confirm Password</label>
                     <div className="col-md-12">
                         <input id="confirm_new_password" onChange={this.handleChangeInput} name="confirm_new_password"
                                type="password" placeholder=""

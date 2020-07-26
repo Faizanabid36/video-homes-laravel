@@ -153,7 +153,7 @@ class Profile extends React.Component {
 
             {/*</Container>*/}
 
-            <Container fluid>
+            <Container>
                 <Row>
                     <Col md={6}>
                         <Form.Group controlId="name">
