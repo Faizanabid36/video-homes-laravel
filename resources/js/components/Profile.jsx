@@ -26,10 +26,11 @@ function UploadImage(props) {
                 <Avatar
                     width={390}
                     height={295}
-                    onCrop={props.onHide}
+                    onCrop={e=>props.onChange(e,'profile_picture')}
                     onClose={props.onHide}
                     src={props.src}
                 />
+                <img src={props.src} alt={props.title} />
             </Modal.Body>
         </Modal>
     );
@@ -44,11 +45,18 @@ class Profile extends React.Component {
             profile_preview: false,
             company_logo_preview: null,
         };
-        this.handleChangeInput = this.handleChangeInput.bind(this)
-        this.onCrop = this.onCrop.bind(this)
-        this.onClose = this.onClose.bind(this)
-    }
+        this.handleChangeInput = this.handleChangeInput.bind(this);
+        this.onCrop = this.onCrop.bind(this);
+        this.onClose = this.onClose.bind(this);
+        this.onBeforeFileLoad = this.onBeforeFileLoad.bind(this)
 
+    }
+    onBeforeFileLoad(elem) {
+        if(elem.target.files[0].size > 71680){
+            alert("File is too big!");
+            elem.target.value = "";
+        };
+    }
     onClose() {
         this.setState({preview: null})
     }
@@ -75,9 +83,9 @@ class Profile extends React.Component {
         }
     }
 
-    handleChangeInput(e) {
+    handleChangeInput(e, key = false) {
         let {user} = this.state;
-        user[e.target.name] = e.target.value;
+        user[key || e.target.name] = key ? e : e.target.value;
         this.setState({...user});
     }
 
@@ -294,7 +302,7 @@ class Profile extends React.Component {
                     <Col md={6}>
                         <h4>Profile Picture</h4>
                         <UploadImage title="Profile Picture" src={this.defaultValue('profile_picture')} show={this.state.profile_preview}
-                                     onHide={() => this.setState({profile_preview: !this.state.profile_preview})}/>
+                                     onHide={() => this.handleChangeInput(false,'profile_preview')} onChange={this.handleChangeInput}/>
                          <Button onClick={()=>this.setState({profile_preview:true})}>Upload Profile Picture</Button>
                     </Col>
                     <Col md={6}>
