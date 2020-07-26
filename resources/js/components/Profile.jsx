@@ -88,7 +88,7 @@ class Profile extends React.Component {
     handleChangeInput(e, key = false) {
         let {user} = this.state;
         user[key || e.target.name] = key ? e : e.target.value;
-        this.setState({...user});
+        this.setState({user});
     }
 
     defaultValue(key) {
@@ -210,8 +210,7 @@ class Profile extends React.Component {
                                             address = description;
                                             location_latitude = results[0].geometry.location.lat();
                                             location_longitude = results[0].geometry.location.lng();
-                                            this.setState(user);
-                                            console.log(results, description)
+                                            this.setState({user});
                                         })
                                         .catch(error => console.error(error));
                                 }}
@@ -301,10 +300,10 @@ class Profile extends React.Component {
                     </Form.Group>
                 </Col></Row>
                 <Row>
-                    <Col md={6} >
+                    <Col sm={6} >
                         <h4>Profile Picture</h4>
-                        {this.defaultValue('profile_picture') && <div className='position-relative'>
-                            <button onClick={e=>this.handleChangeInput(null,'profile_picture')} type="button" className="close" aria-label="Close">
+                        {this.defaultValue('profile_picture') && <div className='position-relative mb-2'>
+                            <button onClick={e=>this.handleChangeInput(null,'profile_picture')} type="button" className="close float-left" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             <Image className="shadow-lg d-block rounded w-25" src={this.defaultValue('profile_picture')} roundedCircle />
@@ -317,10 +316,10 @@ class Profile extends React.Component {
                                      onChange={this.handleChangeInput} state_name="profile_picture"/>
                         <Button onClick={() => this.setState({profile_preview: true})}>Upload Profile Picture</Button>
                     </Col>
-                    <Col md={6} >
+                    <Col sm={6} >
                         <h4>Company Logo</h4>
-                        {this.defaultValue('company_logo') && <div className='position-relative'>
-                            <button onClick={e=>this.handleChangeInput(null,'company_logo')} type="button" className="close" aria-label="Close">
+                        {this.defaultValue('company_logo') && <div className='position-relative mb-2'>
+                            <button onClick={e=>this.handleChangeInput(null,'company_logo')} type="button" className="close float-left" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             <Image className="shadow-lg d-block rounded w-25" src={this.defaultValue('company_logo')} roundedCircle /></div>}
@@ -334,14 +333,14 @@ class Profile extends React.Component {
                 </Row>
                 <Row className='mt-3'>
                     <Col>
-                        <Button onClick={e=>console.log(this.state)}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        <Button onClick={e=>console.log(this.state.user)}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                            strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
                                            className="feather feather-check-circle">
                             <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                             <polyline points="22 4 12 14.01 9 11.01"></polyline>
                         </svg>
-                            Update</Button>
+                            Update</Button> &nbsp;
                         <Button variant='danger' onClick={e=>alert("Danger!!!!")}>Delete the Account</Button>
                     </Col>
                 </Row>
