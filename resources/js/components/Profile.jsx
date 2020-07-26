@@ -26,6 +26,8 @@ function UploadImage(props) {
                 <Avatar
                     width={390}
                     height={295}
+                    onCrop={props.onHide}
+                    onClose={props.onHide}
                     src={props.src}
                 />
             </Modal.Body>
