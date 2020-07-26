@@ -163,7 +163,6 @@ class Profile extends React.Component {
                 </Row>
                 <Row>
                     <Col md={6}>
-
                         <Form.Group controlId="exampleForm.ControlInput1">
                             <Form.Label>Address</Form.Label>
                             <GooglePlacesAutocomplete
@@ -183,6 +182,8 @@ class Profile extends React.Component {
                                 inputClassName="form-control custom-vh-form-input"
                             />
                         </Form.Group>
+                    </Col>
+                    <Col md={6}>
                         <Form.Group controlId="exampleForm.ControlInput1">
                             <Form.Label>Office Phone</Form.Label>
                             <Form.Control name='office_phone' onChange={this.handleChangeInput}
