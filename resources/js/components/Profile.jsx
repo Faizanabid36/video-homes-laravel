@@ -8,8 +8,8 @@ import ChangePassword from "./Profile/ChangePassword";
 import Tags from "./Profile/Tags";
 
 class Profile extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(...arguments);
         this.state = {
             user: {},
             tab: 'general',
@@ -29,8 +29,7 @@ class Profile extends React.Component {
     }
 
     render() {
-        return
-        <Container className="main-content">
+        return <Container className="main-content">
             <div id="container_content">
                 <Row>
                     <div className="col-md-3">
@@ -83,12 +82,12 @@ class Profile extends React.Component {
                 </Row>
             </div>
 
-            <Row>
-                <div className="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                    <h3>New Design</h3>
-                </div>
-                <div className="col-xs-12 col-sm-12 col-md-9 col-lg-9"></div>
-            </Row>
+            {/*<Row>*/}
+            {/*    <div className="col-xs-12 col-sm-12 col-md-3 col-lg-3">*/}
+            {/*        <h3>New Design</h3>*/}
+            {/*    </div>*/}
+            {/*    <div className="col-xs-12 col-sm-12 col-md-9 col-lg-9"/>*/}
+            {/*</Row>*/}
         </Container>
 
     }
