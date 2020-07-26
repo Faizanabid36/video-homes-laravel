@@ -29,7 +29,7 @@ class HomeController extends Controller
 
     public function logged_user()
     {
-        return  collect(auth()->user()->user_extra)->merge(auth()->user())->except('user_extra');
+        return  collect(auth()->user()->user_extra)->merge(auth()->user())->except(['user_extra','user_id']);
 //        return compact('user');
     }
 
