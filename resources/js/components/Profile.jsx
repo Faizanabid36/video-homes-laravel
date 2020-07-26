@@ -26,7 +26,7 @@ function UploadImage(props) {
                 <Avatar
                     width={390}
                     height={295}
-                    onCrop={e => props.onChange(e, 'profile_picture')}
+                    onCrop={e => props.onChange(e, props.state_name)}
                     onClose={props.onHide}
                     src={props.src}
                 />
@@ -308,7 +308,7 @@ class Profile extends React.Component {
                                      src={this.defaultValue('profile_picture')}
                                      show={this.state.profile_preview}
                                      onHide={() => this.setState({profile_preview: false})}
-                                     onChange={this.handleChangeInput}/>
+                                     onChange={this.handleChangeInput} state_name="profile_picture"/>
                         <Button onClick={() => this.setState({profile_preview: true})}>Upload Profile Picture</Button>
                     </Col>
                     <Col md={6}>
@@ -318,7 +318,7 @@ class Profile extends React.Component {
                                      src={this.defaultValue('company_logo')}
                                      show={this.state.company_logo_preview}
                                      onHide={() => this.setState({company_logo_preview: false})}
-                                     onChange={this.handleChangeInput}/>
+                                     onChange={this.handleChangeInput} state_name="company_logo"/>
                         <Button onClick={() => this.setState({company_logo_preview: true})}>Upload Company Logo</Button>
                     </Col>
                 </Row>
