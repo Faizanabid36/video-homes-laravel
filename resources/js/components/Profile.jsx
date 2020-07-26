@@ -121,7 +121,7 @@ class Profile extends React.Component {
                                         {window.VIDEO_APP.base_url}/u/
                                     </InputGroup.Text>
                                 </InputGroup.Prepend>
-                                <FormControl onChange={this.handleChangeInput} defaultValue={this.defaultValue('username')} id="basic-url" aria-describedby="basic-addon3" />
+                                <FormControl name='username' onChange={this.handleChangeInput} defaultValue={this.defaultValue('username')} id="basic-url" aria-describedby="basic-addon3" />
                             </InputGroup>
                         </Form.Group>
                     </Col>
@@ -130,13 +130,13 @@ class Profile extends React.Component {
                     <Col md={6}>
                         <Form.Group controlId="exampleForm.ControlInput1">
                             <Form.Label>Direct Phone</Form.Label>
-                            <Form.Control onChange={this.handleChangeInput} defaultValue={this.defaultValue('phone')} type="tel" placeholder="(888) 888-8888"/>
+                            <Form.Control name='phone' onChange={this.handleChangeInput} defaultValue={this.defaultValue('phone')} type="tel" placeholder="(888) 888-8888"/>
                         </Form.Group>
                     </Col>
                     <Col md={6}>
                         <Form.Group controlId="exampleForm.ControlInput1">
                             <Form.Label>Office Phone</Form.Label>
-                            <Form.Control onChange={this.handleChangeInput} defaultValue={this.defaultValue('phone')} type="tel" placeholder="(888) 888-8888"/>
+                            <Form.Control name='phone2' onChange={this.handleChangeInput} defaultValue={this.defaultValue('phone2')} type="tel" placeholder="(888) 888-8888"/>
                         </Form.Group>
                     </Col>
                 </Row>
@@ -144,7 +144,7 @@ class Profile extends React.Component {
                     <Col md={6}>
                         <Form.Group controlId="exampleForm.ControlInput1">
                             <Form.Label>Company Name</Form.Label>
-                            <Form.Control onChange={this.handleChangeInput} defaultValue={this.defaultValue('phone')} type="tel" placeholder="(888) 888-8888"/>
+                            <Form.Control name='company_name' onChange={this.handleChangeInput} defaultValue={this.defaultValue('phone')} type="tel" placeholder="(888) 888-8888"/>
                         </Form.Group>
                     </Col>
                 </Row>
