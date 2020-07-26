@@ -223,9 +223,9 @@
                         </div>
                         <div class="row">
                             @foreach($related_videos as $related_video)
-                                <div class="col-12 shadow-lg p-3 mb-5 bg-white rounded">
+                                <div class="col-12">
                                     <a href="{{route('directory_by_username',[$user->username,$related_video->video_id])}}">
-                                        <div class="video-thumb overlay"
+                                        <div class="p-2 shadow-lg bg-white rounded video-thumb overlay"
                                              style="background-image: url({{asset('storage/'.$related_video->thumbnail)}});background-size: cover;height:200px;">
                                             <div class='play_hover_btn' style="top: 50%;left: 50%;position: absolute;transform: translate(-50%, -50%);">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"
@@ -236,8 +236,8 @@
                                                     <polygon points="10 8 16 12 10 16 10 8"></polygon>
                                                 </svg>
                                             </div>
-                                            <span style="text-shadow: 1px 1px 4px #000;" class="text-light font-weight-light">{{ucfirst($related_video->title)}}</span>
-                                            <span style="text-shadow: 1px 1px 4px #000;" class="text-light font-weight-light video-duration">{{gmdate('i:s', $related_video->duration)}}</span>
+                                            <span style="text-shadow: 1px 1px 2px #000;" class="text-light font-weight-light">{{ucfirst($related_video->title)}}</span>
+                                            <span style="text-shadow: 1px 1px 2px #000;" class="text-light font-weight-light video-duration">{{gmdate('i:s', $related_video->duration)}}</span>
                                         </div>
                                     </a>
                                 </div>
