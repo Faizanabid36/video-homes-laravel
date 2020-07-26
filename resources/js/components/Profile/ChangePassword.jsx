@@ -14,7 +14,6 @@ class ChangePassword extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChangeInput = this.handleChangeInput.bind(this);
     }
-
     handleSubmit() {
         let {user, password, new_password, confirm_new_password} = this.state;
         let tab = 'change-password';
