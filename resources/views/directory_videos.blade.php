@@ -225,7 +225,7 @@
 
                             @foreach($related_videos as $related_video)
                                 <div class="video-thumb">
-                                    <a href="{{route('directory_by_user_video',[$user->username,$related_video->video_id])}}">
+                                    <a href="{{route('directory_by_username',[$user->username,$related_video->video_id])}}">
                                         <img width="200px" height="200px"
                                              src="{{asset('storage/'.$related_video->thumbnail)}}"
                                              alt="Products">
