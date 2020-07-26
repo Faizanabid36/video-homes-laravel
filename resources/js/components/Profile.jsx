@@ -1,4 +1,4 @@
-import { Button, Carousel, Col, Row, Container, Form, InputGroup, FormControl, Modal } from "react-bootstrap";
+import { Button, Carousel, Col, Row, Container, Form, InputGroup, FormControl, Modal,Image } from "react-bootstrap";
 import React from "react";
 import axios from "axios";
 import General from "./Profile/General";
@@ -26,11 +26,11 @@ function UploadImage(props) {
                 <Avatar
                     width={390}
                     height={295}
-                    onCrop={e=>props.onChange(e,'profile_picture')}
+                    onCrop={e => props.onChange(e, 'profile_picture')}
                     onClose={props.onHide}
                     src={props.src}
                 />
-                <img src={props.src} alt={props.title} />
+
             </Modal.Body>
         </Modal>
     );
@@ -43,7 +43,7 @@ class Profile extends React.Component {
             user: {},
             tab: 'general',
             profile_preview: false,
-            company_logo_preview: null,
+            company_logo_preview: false,
         };
         this.handleChangeInput = this.handleChangeInput.bind(this);
         this.onCrop = this.onCrop.bind(this);
@@ -51,12 +51,15 @@ class Profile extends React.Component {
         this.onBeforeFileLoad = this.onBeforeFileLoad.bind(this)
 
     }
+
     onBeforeFileLoad(elem) {
-        if(elem.target.files[0].size > 71680){
+        if (elem.target.files[0].size > 71680) {
             alert("File is too big!");
             elem.target.value = "";
-        };
+        }
+        ;
     }
+
     onClose() {
         this.setState({preview: null})
     }
@@ -300,14 +303,24 @@ class Profile extends React.Component {
                 </Col></Row>
                 <Row>
                     <Col md={6}>
+
                         <h4>Profile Picture</h4>
-                        <UploadImage title="Profile Picture" src={this.defaultValue('profile_picture')} show={this.state.profile_preview}
-                                     onHide={() => this.handleChangeInput(false,'profile_preview')} onChange={this.handleChangeInput}/>
-                         <Button onClick={()=>this.setState({profile_preview:true})}>Upload Profile Picture</Button>
+                        {this.defaultValue('profile_picture') && <Image className="shadow-lg rounded" src={this.defaultValue('profile_picture')} roundedCircle />}
+                        {/*<img src={this.defaultValue('profile_picture')} alt="" style={}/>*/}
+                        <UploadImage title="Profile Picture" src={this.defaultValue('profile_picture')}
+                                     show={this.state.profile_preview}
+                                     onHide={() => this.handleChangeInput(false, 'profile_preview')}
+                                     onChange={this.handleChangeInput}/>
+                        <Button onClick={() => this.setState({profile_preview: true})}>Upload Profile Picture</Button>
                     </Col>
                     <Col md={6}>
                         <h4>Company Logo</h4>
-
+                        {this.defaultValue('company_logo') && <Image className="shadow-lg rounded" src={this.defaultValue('company_logo')} roundedCircle />}
+                        <UploadImage title="Company Logo" src={this.defaultValue('company_logo')}
+                                     show={this.state.company_logo_preview}
+                                     onHide={() => this.handleChangeInput(false, 'company_logo_preview')}
+                                     onChange={this.handleChangeInput}/>
+                        <Button onClick={() => this.setState({company_logo_preview: true})}>Upload Company Logo</Button>
                     </Col>
                 </Row>
             </Container>
