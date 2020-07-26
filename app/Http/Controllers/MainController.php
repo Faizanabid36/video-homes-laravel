@@ -116,7 +116,7 @@ class MainController extends Controller {
         $videos = Video::userVideos( $username, $video_id )->dd();
         $video = collect( $videos )->first();
         $user = $video->user;
-        $related_videos = $videos->count() > 2 ? array_slice( $videos, 1 ) : [];
+        $related_videos = $videos->shift();
         return view( 'directory_videos', compact( 'user', 'video', 'related_videos' ) );
     }
 
