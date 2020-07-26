@@ -116,6 +116,7 @@ class MainController extends Controller {
         $video = Video::userVideos( $username, $video_id )->first();
         $user = $video->user;
         $related_videos = Video::userVideos( $username, $video->id,true)->get();
+//        return compact( 'user', 'video', 'related_videos' ) ;
         return view( 'directory_videos', compact( 'user', 'video', 'related_videos' ) );
     }
 
