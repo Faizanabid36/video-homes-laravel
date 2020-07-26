@@ -223,7 +223,7 @@
                         </div>
                         <div class="row">
                             @foreach($related_videos as $related_video)
-                                <div class="col-12">
+                                <div class="col-12 shadow-lg p-3 mb-5 bg-white rounded">
                                     <a href="{{route('directory_by_username',[$user->username,$related_video->video_id])}}">
                                         <div class="video-thumb overlay"
                                              style="background-image: url({{asset('storage/'.$related_video->thumbnail)}});background-size: cover;height:200px;">
@@ -237,8 +237,8 @@
                                                     <polygon points="10 8 16 12 10 16 10 8"></polygon>
                                                 </svg>
                                             </div>
-                                            <span class="text-light">{{ucfirst($related_video->title)}}</span>
-                                            <span class="text-light video-duration">{{gmdate('i:s', $related_video->duration)}}</span>
+                                            <span class="text-light font-weight-light">{{ucfirst($related_video->title)}}</span>
+                                            <span class="text-light font-weight-light video-duration">{{gmdate('i:s', $related_video->duration)}}</span>
                                         </div>
                                     </a>
                                 </div>
