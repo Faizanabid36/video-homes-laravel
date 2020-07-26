@@ -153,7 +153,7 @@
                                           {{--                                          @endif--}}
                                       @endif
                                     <p class="card-text my-3">  <i
-                                            class="fa icon-blue mr-2 fa-phone"></i>   <b>Phone:</b> {{$account_user['phone']}}</p>
+                                            class="fa icon-blue mr-2 fa-phone"></i>   <b>Phone:</b> {{$account_user['direct_phone']}}</p>
                                   </div>
                                 </div>
                               </div>
