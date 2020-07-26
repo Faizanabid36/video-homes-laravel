@@ -115,8 +115,9 @@ class MainController extends Controller {
     public function directory_by_user_video( $username, $video_id = null ) {
         $videos = Video::userVideos( $username, $video_id )->get();
 
-        $user  = User::whereUsername( $username )->with( 'account_types' )->first();
+//        $user  = User::whereUsername( $username )->with( 'account_types' )->first();
         $video = collect( $videos )->first();
+        $user = collect( $videos )->user;
 
         $related_videos = $videos->count() > 2 ? array_slice( $videos, 1 ) : [];
 
