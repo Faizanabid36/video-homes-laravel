@@ -102,7 +102,7 @@
                 <span class="tab-pane fade show active  " id="pills-home" role="tabpanel"
                       aria-labelledby="pills-home-tab">
                     @foreach($users as $account_user)
-                        {{dd($account_user)}}
+
                         <div class="card mx-auto" style="max-width: 1040px;">
                               <div class="row no-gutters">
                                 <div class="col-md-4">
