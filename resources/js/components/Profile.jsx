@@ -1,4 +1,4 @@
-import { Button, Carousel, Col, Row, Container, Form, InputGroup, FormControl } from "react-bootstrap";
+import { Button, Carousel, Col, Row, Container, Form, InputGroup, FormControl, Modal } from "react-bootstrap";
 import React from "react";
 import axios from "axios";
 import General from "./Profile/General";
@@ -7,7 +7,31 @@ import DeleteAccount from "./Profile/DeleteAccount";
 import ChangePassword from "./Profile/ChangePassword";
 import Tags from "./Profile/Tags";
 import GooglePlacesAutocomplete, { geocodeByAddress } from "react-google-places-autocomplete";
-import Avatar from 'react-avatar-edit'
+import Avatar from 'react-avatar-edit';
+
+function UploadImage(props) {
+    return (
+        <Modal
+            {...props}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+        >
+            <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-vcenter">
+                    {props.title}
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Avatar
+                    width={390}
+                    height={295}
+                    src={props.defaultValue('company_logo')}
+                />
+            </Modal.Body>
+        </Modal>
+    );
+}
 
 class Profile extends React.Component {
     constructor(props) {
@@ -267,23 +291,13 @@ class Profile extends React.Component {
                 <Row>
                     <Col md={6}>
                         <h4>Profile Picture</h4>
-                        <Avatar
-                            width={390}
-                            height={295}
-                            onCrop={this.onCrop}
-                            onClose={this.onClose}
-                            src={this.defaultValue('profile_picture')}
-                        />
+                        <UploadImage defaultValue={this.defaultValue('profile_picture')} show={this.state.profile_preview}
+                                     onHide={() => this.setState({profile_preview: !this.state.profile_preview})}/>
+                         <Button onChange={()=>this.setState({profile_preview:!this.state.profile_preview})}>Upload Profile Picture</Button>
                     </Col>
                     <Col md={6}>
                         <h4>Company Logo</h4>
-                        <Avatar
-                            width={390}
-                            height={295}
-                            onCrop={this.onCrop}
-                            onClose={this.onClose}
-                            src={this.defaultValue('company_logo')}
-                        />
+
                     </Col>
                 </Row>
             </Container>
