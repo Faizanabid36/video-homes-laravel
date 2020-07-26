@@ -210,7 +210,7 @@ class Profile extends React.Component {
                                             address = description;
                                             location_latitude = results[0].geometry.location.lat();
                                             location_longitude = results[0].geometry.location.lng();
-                                            this.setState({user});
+                                            this.setState({user},()=>console.log(this.state.user,address,location_latitude,location_longitude));
                                         })
                                         .catch(error => console.error(error));
                                 }}
