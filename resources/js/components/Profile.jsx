@@ -1,4 +1,4 @@
-import { Button, Carousel, Col, Row, Container, Form } from "react-bootstrap";
+import { Button, Carousel, Col, Row, Container, Form,InputGroup,FormControl } from "react-bootstrap";
 import React from "react";
 import axios from "axios";
 import General from "./Profile/General";
@@ -114,23 +114,37 @@ class Profile extends React.Component {
                     </Col>
                     <Col md={6}>
                         <Form.Group controlId="exampleForm.ControlInput1">
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control name="email" type="email" placeholder="name@example.com"
-                                          onChange={this.handleChangeInput} defaultValue={this.defaultValue('email')}/>
+                            <label htmlFor="basic-url">Personal URL</label>
+                            <InputGroup className="mb-3">
+                                <InputGroup.Prepend>
+                                    <InputGroup.Text id="basic-addon3">
+                                        {window.VIDEO_APP.base_url}/u/
+                                    </InputGroup.Text>
+                                </InputGroup.Prepend>
+                                <FormControl onChange={this.handleChangeInput} defaultValue={this.defaultValue('username')} id="basic-url" aria-describedby="basic-addon3" />
+                            </InputGroup>
                         </Form.Group>
                     </Col>
                 </Row>
                 <Row>
                     <Col md={6}>
                         <Form.Group controlId="exampleForm.ControlInput1">
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="name@example.com"/>
+                            <Form.Label>Direct Phone</Form.Label>
+                            <Form.Control onChange={this.handleChangeInput} defaultValue={this.defaultValue('phone')} type="tel" placeholder="(888) 888-8888"/>
                         </Form.Group>
                     </Col>
                     <Col md={6}>
                         <Form.Group controlId="exampleForm.ControlInput1">
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="name@example.com"/>
+                            <Form.Label>Office Phone</Form.Label>
+                            <Form.Control onChange={this.handleChangeInput} defaultValue={this.defaultValue('phone')} type="tel" placeholder="(888) 888-8888"/>
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={6}>
+                        <Form.Group controlId="exampleForm.ControlInput1">
+                            <Form.Label>Company Name</Form.Label>
+                            <Form.Control onChange={this.handleChangeInput} defaultValue={this.defaultValue('phone')} type="tel" placeholder="(888) 888-8888"/>
                         </Form.Group>
                     </Col>
                 </Row>

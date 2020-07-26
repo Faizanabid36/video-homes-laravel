@@ -29,7 +29,7 @@ class HomeController extends Controller
 
     public function logged_user()
     {
-        $user = User::whereId(auth()->user()->id)->with('account_types')->first();
+        $user = auth()->user();
         return compact('user');
     }
 
