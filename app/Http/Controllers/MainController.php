@@ -113,7 +113,7 @@ class MainController extends Controller {
     }
 
     public function directory_by_user_video( $username, $video_id = null ) {
-        $videos = Video::userVideos( $username, $video_id )->dd();
+        $videos = Video::userVideos( $username, $video_id )->get();
         $video = collect( $videos )->first();
         $user = $video->user;
         $related_videos = $videos->shift();
