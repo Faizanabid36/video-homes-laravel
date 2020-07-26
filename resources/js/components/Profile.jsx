@@ -22,7 +22,7 @@ function UploadImage(props) {
                     {props.title}
                 </Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body className="mx-auto">
                 <Avatar
                     width={390}
                     height={295}
