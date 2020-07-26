@@ -52,6 +52,12 @@ class Profile extends React.Component {
 
     }
 
+    handleSubmit() {
+        axios.post('/edit_user_profile/'+this.state.user.id,{...this.state.user}).then(({data})=>{
+            console.log(data);
+        }).catch(e=>console.log)
+    }
+
     onBeforeFileLoad(elem) {
         if (elem.target.files[0].size > 71680) {
             alert("File is too big!");
@@ -73,17 +79,17 @@ class Profile extends React.Component {
         });
     }
 
-    renderTemplate() {
-        switch (this.state.tab) {
-            case 'delete-account':
-                return <DeleteAccount/>;
-            case 'change-password':
-                return <ChangePassword/>;
-
-            default:
-                return <General/>
-        }
-    }
+    // renderTemplate() {
+    //     switch (this.state.tab) {
+    //         case 'delete-account':
+    //             return <DeleteAccount/>;
+    //         case 'change-password':
+    //             return <ChangePassword/>;
+    //
+    //         default:
+    //             return <General/>
+    //     }
+    // }
 
     handleChangeInput(e, key = false) {
         let {user} = this.state;
@@ -209,7 +215,7 @@ class Profile extends React.Component {
                                             user.address = description;
                                             user.location_latitude = results[0].geometry.location.lat();
                                             user.location_longitude = results[0].geometry.location.lng();
-                                            this.setState({user},()=>console.log(this.state.user));
+                                            this.setState({user});
                                         })
                                         .catch(error => console.error(error));
                                 }}

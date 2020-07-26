@@ -34,7 +34,39 @@ class HomeController extends Controller {
 
     }
 
-    public function edit_user_profile() {
+    public function edit_user_profile( User $user ) {
+        if ( request( 'company_logo' ) && preg_match( "/data:\w+\/\w+;base64,.*/", request( 'company_logo' ) ) == 1 ) {
+            $image       = request( 'company_logo' );
+            $name        = time() . '.' . explode( '/', explode( ':', substr( $image, 0, strpos( $image, ';' ) ) )[1] )[1];
+            $imageUpload = \Image::make( $image )->orientate()->encode();
+            \Storage::disk( 'public' )->put( "uploads/images/$name", $imageUpload );
+            request()->merge( [ 'company_logo' => asset( "storage/uploads/images/$name" ) ] );
+        }
+        if ( request( 'profile_picture' ) && preg_match( "/data:\w+\/\w+;base64,.*/", request( 'profile_picture' ) ) == 1 ) {
+            $image       = request( 'profile_picture' );
+            $name        = time() . '.' . explode( '/', explode( ':', substr( $image, 0, strpos( $image, ';' ) ) )[1] )[1];
+            $imageUpload = \Image::make( $image )->orientate()->encode();
+            \Storage::disk( 'public' )->put( "uploads/images/$name", $imageUpload );
+            request()->merge( [ 'profile_picture' => asset( "storage/uploads/images/$name" ) ] );
+        }
+        $user->update( request()->only( [ 'username', 'name' ] ) );
+        return UserExtra::updateOrCreate( [ "user_id" => whereUserId( $user->id ) ], request()->except( [
+            'username',
+            'name',
+            'email',
+            'id',
+            'active',
+            'role',
+            'updated_at',
+            'created_at',
+            'email_verified_at',
+            'remember_token',
+            'password'
+        ] ) );
+
+    }
+
+    public function edit_user_profile1() {
         $tab       = \request( 'tab' );
         $user      = \request( 'user' );
         $latitude  = \request( 'location_latitude' );
