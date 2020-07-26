@@ -118,7 +118,7 @@ class MainController extends Controller {
 //        $user  = User::whereUsername( $username )->with( 'account_types' )->first();
         $video = collect( $videos )->first();
 
-        $user = $videos->user;
+        $user = $video->user;
 //        return $user;
 
         $related_videos = $videos->count() > 2 ? array_slice( $videos, 1 ) : [];
