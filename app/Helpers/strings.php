@@ -234,10 +234,11 @@ function grabUsers( $categories, $forceClear = false ) {
                     dd($user);
                 }
                 if($user['user_id']){
-                    $d                              = array_merge( $user['user_id'], [
-                        'location_latitude'  => $user['location_latitude'] ?? 0,
-                        'location_longitude' => $user['location_longitude'] ?? 0
-                    ] );
+                    $d = collect( $user['user_id'] )->merge( collect($user)->except('user_id') )->toArray();
+//                    $d                              = array_merge( $user['user_id'], [
+//                        'location_latitude'  => $user['location_latitude'] ?? 0,
+//                        'location_longitude' => $user['location_longitude'] ?? 0
+//                    ] );
                     $data[ $user['user_id']['id'] ] = $d;
                 }
 
