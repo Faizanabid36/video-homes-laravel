@@ -227,7 +227,7 @@ class Profile extends React.Component {
                     </Col>
                     <Col md={4}>
                         <Form.Group controlId="exampleForm.ControlInput1">
-                            <label htmlFor="basic-url">Facebook</label>
+                            <label htmlFor="basic-url">Instagram</label>
                             <InputGroup className="mb-3">
                                 <InputGroup.Prepend>
                                     <InputGroup.Text id="basic-addon3">
@@ -242,7 +242,7 @@ class Profile extends React.Component {
                     </Col>
                     <Col md={4}>
                         <Form.Group controlId="exampleForm.ControlInput1">
-                            <label htmlFor="basic-url">Facebook</label>
+                            <label htmlFor="basic-url">Youtube</label>
                             <InputGroup className="mb-3">
                                 <InputGroup.Prepend>
                                     <InputGroup.Text id="basic-addon3">
@@ -275,7 +275,7 @@ class Profile extends React.Component {
                         />
                     </Col>
                     <Col md={6}>
-                        <h4>Profile Picture</h4>
+                        <h4>Company Logo</h4>
                         <Avatar
                             width={390}
                             height={295}
