@@ -206,11 +206,10 @@ class Profile extends React.Component {
                                     geocodeByAddress(description)
                                         .then((results) => {
                                             let {user} = this.state;
-                                            let {address, location_latitude, location_longitude} = user;
-                                            address = description;
-                                            location_latitude = results[0].geometry.location.lat();
-                                            location_longitude = results[0].geometry.location.lng();
-                                            this.setState({user},()=>console.log(this.state.user,address,location_latitude,location_longitude));
+                                            user.address = description;
+                                            user.location_latitude = results[0].geometry.location.lat();
+                                            user.location_longitude = results[0].geometry.location.lng();
+                                            this.setState({user},()=>console.log(this.state.user));
                                         })
                                         .catch(error => console.error(error));
                                 }}
