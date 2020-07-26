@@ -1247,17 +1247,8 @@ height: 40px;
 
 }
 
-input[type=text] {
-  // height: 30px !important;
-  background: white;
- border: none;
+.form-control {
   border-radius: 50px;
-  width: 221px;
-
-  &:focus{
-    color: $color!important;
-    border: 1px solid $color;
-  }
 }
 
 //Radio Select Theme
