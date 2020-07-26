@@ -68,8 +68,8 @@ class Profile extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('get_logged_user').then((res) => {
-            this.setState({user: res.data.user})
+        axios.get('get_logged_user').then(({data}) => {
+            this.setState({user: data.user})
         });
     }
 
