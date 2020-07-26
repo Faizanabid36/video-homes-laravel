@@ -37,7 +37,7 @@
                     <p id="caption">Company Logo</p>
                 </div>
             </div>
-            <div class="col-md-{{!empty($related_videos) ? 7 : 10}} player-video mt-0">
+            <div class="col-md-{{$related_videos->count() ? 7 : 10}} player-video mt-0">
                 <div class="video-player pt_video_player " id="pt_video_player">
                     <span class="mejs__offscreen">Video Player</span>
                     @if(!is_null($video))
@@ -206,7 +206,7 @@
                 </div>
                 <div class="clear"></div>
             </div>
-            @if(!empty($related_videos))
+            @if($related_videos->count())
                 <div class="col-md-3 col-sm-5 ">
                     <div class="container m-0 p-0">
                         <div class="row">
