@@ -29,7 +29,7 @@ class Profile extends React.Component {
     }
 
     render() {
-        return <Container className="main-content">
+        return <><Container className="main-content">
             <div id="container_content">
                 <Row>
                     <div className="col-md-3">
@@ -82,13 +82,21 @@ class Profile extends React.Component {
                 </Row>
             </div>
 
-            {/*<Row>*/}
-            {/*    <div className="col-xs-12 col-sm-12 col-md-3 col-lg-3">*/}
-            {/*        <h3>New Design</h3>*/}
-            {/*    </div>*/}
-            {/*    <div className="col-xs-12 col-sm-12 col-md-9 col-lg-9"/>*/}
-            {/*</Row>*/}
+
         </Container>
+
+            <Container fluid>
+                <Row>
+                    <Col md="auto">
+                        <Form.Group controlId="exampleForm.ControlInput1">
+                            <Form.Label>Email address</Form.Label>
+                            <Form.Control type="email" placeholder="name@example.com" />
+                        </Form.Group>
+                    </Col>
+                </Row>
+            </Container>
+        </>
+
 
     }
 }
