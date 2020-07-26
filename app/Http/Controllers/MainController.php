@@ -27,6 +27,7 @@ class MainController extends Controller {
         $industries = UserCategory::getCategories();
         $categories = UserCategory::getCategories( $level1, $level2 );
         $users      = grabUsers( $categories );
+
         return view( 'directory1.index', compact( 'users', 'categories', 'industries', 'level1' ) );
     }
 
@@ -113,9 +114,10 @@ class MainController extends Controller {
     }
 
     public function directory_by_user_video( $username, $video_id = null ) {
-        $video = Video::userVideos( $username, $video_id )->first();
-        $user = $video->user;
-        $related_videos = Video::userVideos( $username, $video->id,true)->get();
+        $video          = Video::userVideos( $username, $video_id )->first();
+        $user           = $video->user;
+        $related_videos = Video::userVideos( $username, $video->id, true )->get();
+
 //        return compact( 'user', 'video', 'related_videos' ) ;
         return view( 'directory_videos', compact( 'user', 'video', 'related_videos' ) );
     }
