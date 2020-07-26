@@ -13,7 +13,7 @@ function UploadImage(props) {
     return (
         <Modal
             show={props.show}
-            size="lg"
+            size="xl"
             aria-labelledby="contained-modal-title-vcenter"
             centered
             onHide={props.onHide}
@@ -23,7 +23,7 @@ function UploadImage(props) {
                     {props.title}
                 </Modal.Title>
             </Modal.Header>
-            <Modal.Body className="mx-auto">
+            <Modal.Body className="mx-auto overflow-hidden">
                 <Avatar
                     width={390}
                     height={295}
@@ -56,8 +56,7 @@ class Profile extends React.Component {
         if (elem.target.files[0].size > 71680) {
             alert("File is too big!");
             elem.target.value = "";
-        }
-        ;
+        };
     }
 
     onClose() {
@@ -304,7 +303,12 @@ class Profile extends React.Component {
                 <Row>
                     <Col md={6} >
                         <h4>Profile Picture</h4>
-                        {this.defaultValue('profile_picture') && <Image className="shadow-lg d-block rounded w-25" src={this.defaultValue('profile_picture')} roundedCircle />}
+                        {this.defaultValue('profile_picture') && <div className='position-relative'>
+                            <button onClick={e=>this.handleChangeInput(null,'profile_picture')} type="button" className="close" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <Image className="shadow-lg d-block rounded w-25" src={this.defaultValue('profile_picture')} roundedCircle />
+                        </div>}
 
                         <UploadImage title="Profile Picture"
                                      src={this.defaultValue('profile_picture')}
@@ -315,8 +319,11 @@ class Profile extends React.Component {
                     </Col>
                     <Col md={6} >
                         <h4>Company Logo</h4>
-                        {this.defaultValue('company_logo') && <Image className="shadow-lg d-block rounded w-25" src={this.defaultValue('company_logo')} roundedCircle />}
-                        <br/>
+                        {this.defaultValue('company_logo') && <div className='position-relative'>
+                            <button onClick={e=>this.handleChangeInput(null,'company_logo')} type="button" className="close" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <Image className="shadow-lg d-block rounded w-25" src={this.defaultValue('company_logo')} roundedCircle /></div>}
                         <UploadImage title="Company Logo"
                                      src={this.defaultValue('company_logo')}
                                      show={this.state.company_logo_preview}
