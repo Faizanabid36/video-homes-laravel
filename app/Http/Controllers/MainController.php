@@ -114,7 +114,7 @@ class MainController extends Controller {
 
     public function directory_by_user_video( $username, $video_id = null ) {
         $videos = Video::userVideos( $username, $video_id )->get();
-        $video = collect( $videos )->first();
+        $video = $videos->first();
         $user = $video->user;
         $related_videos = $videos->shift();
         return view( 'directory_videos', compact( 'user', 'video', 'related_videos' ) );
