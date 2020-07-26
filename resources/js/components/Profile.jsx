@@ -39,7 +39,7 @@ class Profile extends React.Component {
         this.state = {
             user: {},
             tab: 'general',
-            profile_preview: null,
+            profile_preview: false,
             company_logo_preview: null,
         };
         this.handleChangeInput = this.handleChangeInput.bind(this)
@@ -152,7 +152,7 @@ class Profile extends React.Component {
                     </Col>
                     <Col md={6}>
                         <Form.Group controlId="exampleForm.ControlInput1">
-                            <label htmlFor="basic-url">Personal URL</label>
+                            <label htmlFor="personal-url">Personal URL</label>
                             <InputGroup className="mb-3">
                                 <InputGroup.Prepend>
                                     <InputGroup.Text id="basic-addon3">
@@ -160,7 +160,7 @@ class Profile extends React.Component {
                                     </InputGroup.Text>
                                 </InputGroup.Prepend>
                                 <FormControl name='username' onChange={this.handleChangeInput}
-                                             defaultValue={this.defaultValue('username')} id="basic-url"
+                                             defaultValue={this.defaultValue('username')} id="personal-url"
                                              aria-describedby="basic-addon3"/>
                             </InputGroup>
                         </Form.Group>
@@ -237,46 +237,46 @@ class Profile extends React.Component {
                 <Row>
                     <Col md={4}>
                         <Form.Group controlId="exampleForm.ControlInput1">
-                            <label htmlFor="basic-url">Facebook</label>
+                            <label htmlFor="facebook-url">Facebook</label>
                             <InputGroup className="mb-3">
                                 <InputGroup.Prepend>
-                                    <InputGroup.Text id="basic-addon3">
+                                    <InputGroup.Text id="facebook-addon3">
                                         https://www.facebook.com/
                                     </InputGroup.Text>
                                 </InputGroup.Prepend>
                                 <FormControl name='facebook' onChange={this.handleChangeInput}
-                                             defaultValue={this.defaultValue('facebook')} id="basic-url"
-                                             aria-describedby="basic-addon3"/>
+                                             defaultValue={this.defaultValue('facebook')} id="facebook-url"
+                                             aria-describedby="facebook-addon3"/>
                             </InputGroup>
                         </Form.Group>
                     </Col>
                     <Col md={4}>
                         <Form.Group controlId="exampleForm.ControlInput1">
-                            <label htmlFor="basic-url">Instagram</label>
+                            <label htmlFor="instgram-url">Instagram</label>
                             <InputGroup className="mb-3">
                                 <InputGroup.Prepend>
-                                    <InputGroup.Text id="basic-addon3">
+                                    <InputGroup.Text id="instgram-addon3">
                                         https://www.instagram.com/
                                     </InputGroup.Text>
                                 </InputGroup.Prepend>
                                 <FormControl name='instagram' onChange={this.handleChangeInput}
-                                             defaultValue={this.defaultValue('instagram')} id="basic-url"
-                                             aria-describedby="basic-addon3"/>
+                                             defaultValue={this.defaultValue('instagram')} id="instgram-url"
+                                             aria-describedby="instgram-addon3"/>
                             </InputGroup>
                         </Form.Group>
                     </Col>
                     <Col md={4}>
                         <Form.Group controlId="exampleForm.ControlInput1">
-                            <label htmlFor="basic-url">Youtube</label>
+                            <label htmlFor="youtube-url">Youtube</label>
                             <InputGroup className="mb-3">
                                 <InputGroup.Prepend>
-                                    <InputGroup.Text id="basic-addon3">
+                                    <InputGroup.Text id="youtube-url-addon3">
                                         https://www.youtube.com/
                                     </InputGroup.Text>
                                 </InputGroup.Prepend>
                                 <FormControl name='youtube' onChange={this.handleChangeInput}
-                                             defaultValue={this.defaultValue('youtube')} id="basic-url"
-                                             aria-describedby="basic-addon3"/>
+                                             defaultValue={this.defaultValue('youtube')} id="youtube-url"
+                                             aria-describedby="youtube-url-addon3"/>
                             </InputGroup>
                         </Form.Group>
                     </Col>
@@ -293,7 +293,7 @@ class Profile extends React.Component {
                         <h4>Profile Picture</h4>
                         <UploadImage title="Profile Picture" src={this.defaultValue('profile_picture')} show={this.state.profile_preview}
                                      onHide={() => this.setState({profile_preview: !this.state.profile_preview})}/>
-                         <Button onChange={()=>this.setState({profile_preview:!this.state.profile_preview})}>Upload Profile Picture</Button>
+                         <Button onChange={()=>this.setState({profile_preview:true})}>Upload Profile Picture</Button>
                     </Col>
                     <Col md={6}>
                         <h4>Company Logo</h4>
