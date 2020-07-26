@@ -26,7 +26,7 @@ function UploadImage(props) {
                 <Avatar
                     width={390}
                     height={295}
-                    src={props.defaultValue('profile_picture')}
+                    src={props.src}
                 />
             </Modal.Body>
         </Modal>
@@ -291,7 +291,7 @@ class Profile extends React.Component {
                 <Row>
                     <Col md={6}>
                         <h4>Profile Picture</h4>
-                        <UploadImage defaultValue={this.defaultValue} show={this.state.profile_preview}
+                        <UploadImage src={this.defaultValue('profile_picture')} show={this.state.profile_preview}
                                      onHide={() => this.setState({profile_preview: !this.state.profile_preview})}/>
                          <Button onChange={()=>this.setState({profile_preview:!this.state.profile_preview})}>Upload Profile Picture</Button>
                     </Col>
