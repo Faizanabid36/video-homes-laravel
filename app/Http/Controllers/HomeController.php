@@ -50,7 +50,7 @@ class HomeController extends Controller {
             request()->merge( [ 'profile_picture' => asset( "storage/uploads/images/$name" ) ] );
         }
         $user->update( request()->only( [ 'username', 'name' ] ) );
-        return UserExtra::updateOrCreate( [ "user_id" => whereUserId( $user->id ) ], request()->except( [
+        return UserExtra::updateOrCreate( [ "user_id" => $user->id  ], request()->except( [
             'username',
             'name',
             'email',
