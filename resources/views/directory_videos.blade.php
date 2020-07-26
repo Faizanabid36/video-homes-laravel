@@ -201,7 +201,7 @@
                 <div class="clear"></div>
             </div>
             @if($related_videos)
-                <div class="col-md-3 no-padding-left pull-right desktop">
+                <div class="col-md-5">
                     <div class="content video-list pt_shadow">
                         <div class="next-video">
                             <div class="next-text pull-left pt_mn_wtch_nxttxt">
@@ -210,9 +210,7 @@
                                     <path fill="currentColor"
                                           d="M16,18H18V6H16M6,18L14.5,12L6,6V18Z"></path>
                                 </svg>
-                                <h4>
-                                    Up Next
-                                </h4>
+                                <span>Up Next</span>
                             </div>
 
                             @foreach($related_videos as $related_video)
