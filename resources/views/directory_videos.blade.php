@@ -209,36 +209,42 @@
             @if($related_videos)
                 <div class="col-md-5">
                     <div class="content video-list pt_shadow">
-                        <div class="next-video">
-                            <div class="next-text pull-left pt_mn_wtch_nxttxt">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                     viewBox="0 0 24 24">
-                                    <path fill="currentColor"
-                                          d="M16,18H18V6H16M6,18L14.5,12L6,6V18Z"></path>
-                                </svg>
-                                <span>Up Next</span>
-                            </div>
-                        </div>
-                        @foreach($related_videos as $related_video)
-                            <a href="{{route('directory_by_username',[$user->username,$related_video->video_id])}}">
-                                <div class="video-thumb overlay"
-                                     style="background-image: url({{asset('storage/'.$related_video->thumbnail)}})">
-                                    <div class='play_hover_btn' onmouseenter="show_gif(this,'')"
-                                         onmouseleave="hide_gif(this)">
+                        <div class="row">
+                            <div class="col-12"><div class="next-video">
+                                    <div class="next-text pull-left pt_mn_wtch_nxttxt">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                             class="feather feather-play-circle">
-                                            <circle cx="12" cy="12" r="10"></circle>
-                                            <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                                             viewBox="0 0 24 24">
+                                            <path fill="currentColor"
+                                                  d="M16,18H18V6H16M6,18L14.5,12L6,6V18Z"></path>
                                         </svg>
+                                        <span>Up Next</span>
                                     </div>
-                                    <span>{{ucfirst($related_video->title)}}</span>
-                                    <span class="video-duration">{{gmdate('i:s', $related_video->duration)}}</span>
+                                </div></div>
+                        </div>
+                        <div class="row">
+                            @foreach($related_videos as $related_video)
+                                <div class="col-12">
+                                    <a href="{{route('directory_by_username',[$user->username,$related_video->video_id])}}">
+                                        <div class="video-thumb overlay"
+                                             style="background-image: url({{asset('storage/'.$related_video->thumbnail)}})">
+                                            <div class='play_hover_btn' onmouseenter="show_gif(this,'')"
+                                                 onmouseleave="hide_gif(this)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                     class="feather feather-play-circle">
+                                                    <circle cx="12" cy="12" r="10"></circle>
+                                                    <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                                                </svg>
+                                            </div>
+                                            <span>{{ucfirst($related_video->title)}}</span>
+                                            <span class="video-duration">{{gmdate('i:s', $related_video->duration)}}</span>
 
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             @endif
