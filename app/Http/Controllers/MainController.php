@@ -113,16 +113,10 @@ class MainController extends Controller {
     }
 
     public function directory_by_user_video( $username, $video_id = null ) {
-        $videos = Video::userVideos( $username, $video_id )->get();
-
-//        $user  = User::whereUsername( $username )->with( 'account_types' )->first();
+        $videos = Video::userVideos( $username, $video_id )->dd();
         $video = collect( $videos )->first();
-
         $user = $video->user;
-//        return $user;
-
         $related_videos = $videos->count() > 2 ? array_slice( $videos, 1 ) : [];
-
         return view( 'directory_videos', compact( 'user', 'video', 'related_videos' ) );
     }
 
