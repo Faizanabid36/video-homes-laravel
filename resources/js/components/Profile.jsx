@@ -203,7 +203,7 @@ class Profile extends React.Component {
                             <Form.Label>Address</Form.Label>
                             <GooglePlacesAutocomplete
                                 onSelect={({description}) => {
-                                    geocodeByAddress(address)
+                                    geocodeByAddress(description)
                                         .then((results) => {
                                             let {user} = this.state;
                                             let {address, location_latitude, location_longitude} = user;
@@ -211,7 +211,7 @@ class Profile extends React.Component {
                                             location_latitude = results[0].geometry.location.lat();
                                             location_longitude = results[0].geometry.location.lng();
                                             this.setState(user);
-                                            console.log(results, address)
+                                            console.log(results, description)
                                         })
                                         .catch(error => console.error(error));
                                 }}
