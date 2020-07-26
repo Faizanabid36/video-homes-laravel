@@ -144,14 +144,14 @@ class Profile extends React.Component {
             <Container fluid>
                 <Row>
                     <Col md={6}>
-                        <Form.Group controlId="exampleForm.ControlInput1">
+                        <Form.Group controlId="name">
                             <Form.Label>Name</Form.Label>
                             <Form.Control name="name" onChange={this.handleChangeInput}
                                           defaultValue={this.defaultValue('name')} type="text" placeholder="Your Name"/>
                         </Form.Group>
                     </Col>
                     <Col md={6}>
-                        <Form.Group controlId="exampleForm.ControlInput1">
+                        <Form.Group controlId="personal_url">
                             <label htmlFor="personal-url">Personal URL</label>
                             <InputGroup className="mb-3">
                                 <InputGroup.Prepend>
@@ -168,7 +168,7 @@ class Profile extends React.Component {
                 </Row>
                 <Row>
                     <Col md={6}>
-                        <Form.Group controlId="exampleForm.ControlInput1">
+                        <Form.Group controlId="direct_phone">
                             <Form.Label>Direct Phone</Form.Label>
                             <Form.Control name='direct_phone' onChange={this.handleChangeInput}
                                           defaultValue={this.defaultValue('direct_phone')} type="tel"
@@ -176,7 +176,7 @@ class Profile extends React.Component {
                         </Form.Group>
                     </Col>
                     <Col md={6}>
-                        <Form.Group controlId="exampleForm.ControlInput1">
+                        <Form.Group controlId="company_name">
                             <Form.Label>Company Name</Form.Label>
                             <Form.Control name='company_name' onChange={this.handleChangeInput}
                                           defaultValue={this.defaultValue('company_name')} type="text"
@@ -187,7 +187,7 @@ class Profile extends React.Component {
                 </Row>
                 <Row>
                     <Col md={6}>
-                        <Form.Group controlId="exampleForm.ControlInput1">
+                        <Form.Group controlId="address">
                             <Form.Label>Address</Form.Label>
                             <GooglePlacesAutocomplete
                                 onSelect={({address}) => {
@@ -208,7 +208,7 @@ class Profile extends React.Component {
                         </Form.Group>
                     </Col>
                     <Col md={6}>
-                        <Form.Group controlId="exampleForm.ControlInput1">
+                        <Form.Group controlId="office_phone">
                             <Form.Label>Office Phone</Form.Label>
                             <Form.Control name='office_phone' onChange={this.handleChangeInput}
                                           defaultValue={this.defaultValue('office_phone')} type="tel"
@@ -218,7 +218,7 @@ class Profile extends React.Component {
                 </Row>
                 <Row>
                     <Col md={6}>
-                        <Form.Group controlId="exampleForm.ControlInput1">
+                        <Form.Group controlId="website">
                             <Form.Label>Website</Form.Label>
                             <Form.Control name='website' onChange={this.handleChangeInput}
                                           defaultValue={this.defaultValue('website')} type="text"
@@ -226,7 +226,7 @@ class Profile extends React.Component {
                         </Form.Group>
                     </Col>
                     <Col md={6}>
-                        <Form.Group controlId="exampleForm.ControlInput1">
+                        <Form.Group controlId="license">
                             <Form.Label>License</Form.Label>
                             <Form.Control name='license' onChange={this.handleChangeInput}
                                           defaultValue={this.defaultValue('license')} type="text"
@@ -236,7 +236,7 @@ class Profile extends React.Component {
                 </Row>
                 <Row>
                     <Col md={4}>
-                        <Form.Group controlId="exampleForm.ControlInput1">
+                        <Form.Group controlId="facebook">
                             <label htmlFor="facebook-url">Facebook</label>
                             <InputGroup className="mb-3">
                                 <InputGroup.Prepend>
@@ -251,7 +251,7 @@ class Profile extends React.Component {
                         </Form.Group>
                     </Col>
                     <Col md={4}>
-                        <Form.Group controlId="exampleForm.ControlInput1">
+                        <Form.Group controlId="instagram">
                             <label htmlFor="instgram-url">Instagram</label>
                             <InputGroup className="mb-3">
                                 <InputGroup.Prepend>
@@ -266,7 +266,7 @@ class Profile extends React.Component {
                         </Form.Group>
                     </Col>
                     <Col md={4}>
-                        <Form.Group controlId="exampleForm.ControlInput1">
+                        <Form.Group controlId="youtube">
                             <label htmlFor="youtube-url">Youtube</label>
                             <InputGroup className="mb-3">
                                 <InputGroup.Prepend>
@@ -282,7 +282,7 @@ class Profile extends React.Component {
                     </Col>
                 </Row>
                 <Row><Col>
-                    <Form.Group controlId="exampleForm.ControlTextarea1">
+                    <Form.Group controlId="bio_about">
                         <Form.Label>About/Bio (Max 600 words)</Form.Label>
                         <Form.Control as="textarea" rows="3" defaultValue={this.defaultValue('bio')}
                                       onChange={this.handleChangeInput}/>
