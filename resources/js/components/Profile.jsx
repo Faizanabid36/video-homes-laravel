@@ -291,7 +291,7 @@ class Profile extends React.Component {
                 <Row>
                     <Col md={6}>
                         <h4>Profile Picture</h4>
-                        <UploadImage src={this.defaultValue('profile_picture')} show={this.state.profile_preview}
+                        <UploadImage title="Profile Picture" src={this.defaultValue('profile_picture')} show={this.state.profile_preview}
                                      onHide={() => this.setState({profile_preview: !this.state.profile_preview})}/>
                          <Button onChange={()=>this.setState({profile_preview:!this.state.profile_preview})}>Upload Profile Picture</Button>
                     </Col>
