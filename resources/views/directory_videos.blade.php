@@ -25,7 +25,7 @@
                 <img
 
                     src='{{$user->avatar === null ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMgrxYAqZF6-kdFuLQesPwdAyonhn93LsxvKXax0vzbCCGd_wQ&usqp=CAU' : asset($user->avatar) }}'
-                    style="width:100%;" />
+                    style="width:100%;"/>
                 <div class="caption-container">
                     <p id="caption">Profile Image</p>
                 </div>
@@ -134,7 +134,8 @@
                                     Analytics
                                 </a>
                             @endif
-                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -148,28 +149,33 @@
                                                 @csrf
                                                 <div class="form-group">
                                                     <label for="exampleFormControlInput1">Contact Name</label>
-                                                    <input name="name" type="text" required class="form-control" id="exampleFormControlInput1" placeholder="">
+                                                    <input name="name" type="text" required class="form-control"
+                                                           id="exampleFormControlInput1" placeholder="">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="exampleFormControlInput1">Contact Email</label>
-                                                    <input name="email" type="email" required class="form-control" id="exampleFormControlInput1" placeholder="">
+                                                    <input name="email" type="email" required class="form-control"
+                                                           id="exampleFormControlInput1" placeholder="">
                                                 </div>
                                                 <input type="hidden" name="type" value="video">
                                                 <input type="hidden" name="reported_on_video" value="{{$video->title}}">
                                                 <div class="form-group">
                                                     <label for="exampleFormControlTextarea1">Message Text</label>
-                                                    <textarea name="message_body" required class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                    <textarea name="message_body" required class="form-control"
+                                                              id="exampleFormControlTextarea1" rows="3"></textarea>
                                                 </div>
                                                 <button class="btn btn-primary">Report Video</button>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <button data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-primary btn-share btn-report pull-right" onclick=""
+                            <button data-toggle="modal" data-target="#exampleModalCenter"
+                                    class="btn btn-primary btn-share btn-report pull-right" onclick=""
                                     data-rep="1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                      viewBox="0 0 24 24">
@@ -214,11 +220,9 @@
                             </div>
 
                             @foreach($related_videos as $related_video)
-                                <div class="video-thumb">
-                                    <a href="{{route('directory_by_username',[$user->username,$related_video->video_id])}}">
-                                        <img width="200px" height="200px"
-                                             src="{{asset('storage/'.$related_video->thumbnail)}}"
-                                             alt="Products">
+                                <a href="{{route('directory_by_username',[$user->username,$related_video->video_id])}}">
+                                    <div class="video-thumb overlay"
+                                         style="background-image: url({{asset('storage/'.$related_video->thumbnail)}})">
                                         <div class='play_hover_btn' onmouseenter="show_gif(this,'')"
                                              onmouseleave="hide_gif(this)">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -231,8 +235,9 @@
                                         </div>
                                         <div>{{ucfirst($related_video->title)}}</div>
                                         <div class="video-duration">{{gmdate('i:s', $related_video->duration)}}</div>
-                                    </a>
-                                </div>
+
+                                    </div>
+                                </a>
                             @endforeach
                             <div></div>
                         </div>
@@ -240,7 +245,6 @@
                 </div>
             @endif
         </div>
-
 
 
         <!-- 3rd row -->
@@ -272,11 +276,11 @@
                     <div><a href="{{$user->website_link}}"> {{$user->website_title}} </a></div>
                 </div>
                 <hr/>
-{{--                <div class="d-flex">--}}
-{{--                    <div class="font-weight-bold "><i class='fas icon fa-envelope'></i> Email</div>--}}
-{{--                    <div><a href="mailto: {{$user->email}}"> {{$user->email}} </a></div>--}}
-{{--                </div>--}}
-{{--                <hr/>--}}
+                {{--                <div class="d-flex">--}}
+                {{--                    <div class="font-weight-bold "><i class='fas icon fa-envelope'></i> Email</div>--}}
+                {{--                    <div><a href="mailto: {{$user->email}}"> {{$user->email}} </a></div>--}}
+                {{--                </div>--}}
+                {{--                <hr/>--}}
             </div>
 
         </div>
@@ -292,10 +296,10 @@
                         </li>
                     @endif
                     @if(isset($user->bio))
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                           aria-controls="profile" aria-selected="false">Bio</a>
-                    </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                               aria-controls="profile" aria-selected="false">Bio</a>
+                        </li>
                     @endif
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab"
@@ -318,18 +322,18 @@
                             </div>
                             <br/>
 
-{{--                            <h4 class="my-3"> Get directions from: </h4>--}}
-{{--                            <div class="input-group mb-3">--}}
-{{--                                <input type="text" class="form-control" placeholder="Enter address or zip code"--}}
-{{--                                       aria-label="Recipient's username" aria-describedby="button-addon2">--}}
-{{--                                <div class="input-group-append">--}}
-{{--                                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i--}}
-{{--                                            style="color:gray ; font-size:14px" class='fas icon fa-map-marker'></i>--}}
-{{--                                    </button>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <p><a href=""> <i style="color:lightBlue ; font-size:14px" class='fas icon fa-circle'></i>{{$user->address}}</a></p>--}}
-{{--                            <button class="btn btn-primary"> GET DIRECTION</button>--}}
+                            {{--                            <h4 class="my-3"> Get directions from: </h4>--}}
+                            {{--                            <div class="input-group mb-3">--}}
+                            {{--                                <input type="text" class="form-control" placeholder="Enter address or zip code"--}}
+                            {{--                                       aria-label="Recipient's username" aria-describedby="button-addon2">--}}
+                            {{--                                <div class="input-group-append">--}}
+                            {{--                                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i--}}
+                            {{--                                            style="color:gray ; font-size:14px" class='fas icon fa-map-marker'></i>--}}
+                            {{--                                    </button>--}}
+                            {{--                                </div>--}}
+                            {{--                            </div>--}}
+                            {{--                            <p><a href=""> <i style="color:lightBlue ; font-size:14px" class='fas icon fa-circle'></i>{{$user->address}}</a></p>--}}
+                            {{--                            <button class="btn btn-primary"> GET DIRECTION</button>--}}
                         </div>
                     @endif
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -432,17 +436,20 @@
                             @csrf
                             <div class="form-group">
                                 <label for="exampleFormControlInput1">Contact Name</label>
-                                <input name="name" type="text" required class="form-control" id="exampleFormControlInput1" placeholder="">
+                                <input name="name" type="text" required class="form-control"
+                                       id="exampleFormControlInput1" placeholder="">
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlInput1">Contact Email</label>
-                                <input name="email" type="email" required class="form-control" id="exampleFormControlInput1" placeholder="">
+                                <input name="email" type="email" required class="form-control"
+                                       id="exampleFormControlInput1" placeholder="">
                             </div>
                             <input type="hidden" name="type" value="message">
                             <input type="hidden" name="reported_on_user" value="{{$user->username}}">
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1">Message Text</label>
-                                <textarea name="message_body" required class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <textarea name="message_body" required class="form-control"
+                                          id="exampleFormControlTextarea1" rows="3"></textarea>
                             </div>
                             <button class="btn btn-primary"> Send Message</button>
                         </form>
@@ -463,554 +470,554 @@
 
 @endsection
 @section('script')
-{{--    <script>--}}
-{{--        var slideIndex = 1;--}}
-{{--        showSlides(slideIndex);--}}
-
-{{--        function plusSlides(n) {--}}
-{{--            showSlides(slideIndex += n);--}}
-{{--        }--}}
-
-{{--        function currentSlide(n) {--}}
-{{--            showSlides(slideIndex = n);--}}
-{{--        }--}}
-
-{{--        function showSlides(n) {--}}
-{{--            var i;--}}
-{{--            var slides = document.getElementsByClassName("mySlides");--}}
-{{--            var dots = document.getElementsByClassName("demo");--}}
-{{--            var captionText = document.getElementById("caption");--}}
-{{--            if (n > slides.length) {--}}
-{{--                slideIndex = 1--}}
-{{--            }--}}
-{{--            if (n < 1) {--}}
-{{--                slideIndex = slides.length--}}
-{{--            }--}}
-{{--            for (i = 0; i < slides.length; i++) {--}}
-{{--                slides[i].style.display = "none";--}}
-{{--            }--}}
-{{--            for (i = 0; i < dots.length; i++) {--}}
-{{--                dots[i].className = dots[i].className.replace(" active", "");--}}
-{{--            }--}}
-{{--            slides[slideIndex - 1].style.display = "block";--}}
-{{--            // dots[slideIndex - 1].className += " active";--}}
-{{--            // captionText.innerHTML = dots[slideIndex - 1].alt;--}}
-{{--        }--}}
-{{--    </script>--}}
-{{--    <script>--}}
-{{--    var slideIndex = 1;--}}
-{{--    showSlides(slideIndex);--}}
-
-{{--    function plusSlides(n) {--}}
-{{--        showSlides(slideIndex += n);--}}
-{{--    }--}}
-
-{{--    function currentSlide(n) {--}}
-{{--        showSlides(slideIndex = n);--}}
-{{--    }--}}
-
-{{--    function showSlides(n) {--}}
-{{--        var i;--}}
-{{--        var slides = document.getElementsByClassName("mySlides");--}}
-{{--        var dots = document.getElementsByClassName("demo");--}}
-{{--        var captionText = document.getElementById("caption");--}}
-{{--        if (n > slides.length) {--}}
-{{--            slideIndex = 1--}}
-{{--        }--}}
-{{--        if (n < 1) {--}}
-{{--            slideIndex = slides.length--}}
-{{--        }--}}
-{{--        for (i = 0; i < slides.length; i++) {--}}
-{{--            slides[i].style.display = "none";--}}
-{{--        }--}}
-{{--        for (i = 0; i < dots.length; i++) {--}}
-{{--            dots[i].className = dots[i].className.replace(" active", "");--}}
-{{--        }--}}
-{{--        slides[slideIndex - 1].style.display = "block";--}}
-{{--        // dots[slideIndex - 1].className += " active";--}}
-{{--        // captionText.innerHTML = dots[slideIndex - 1].alt;--}}
-{{--    }--}}
-{{--</script>--}}
-{{--    <script type="text/javascript">--}}
-{{--        function setCookie(cname, cvalue, exdays) {--}}
-{{--            var d = new Date();--}}
-{{--            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));--}}
-{{--            var expires = "expires=" + d.toUTCString();--}}
-{{--            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";--}}
-{{--        }--}}
-
-{{--        var myTimeout;--}}
-
-{{--        function show_gif(self, gif) {--}}
-{{--            if (gif && gif != '') {--}}
-{{--                myTimeout = setTimeout(function () {--}}
-{{--                    $(self).append('<img src="' + gif + '">');--}}
-{{--                }, 1000);--}}
-{{--            }--}}
-{{--        }--}}
-
-{{--        function hide_gif(self) {--}}
-{{--            $(self).find('img').remove();--}}
-{{--            clearTimeout(myTimeout);--}}
-{{--        }--}}
-
-{{--        function PT_OpenStripe(pkg, self, video_id = 0, price = 0, user_id = 0) {--}}
-
-{{--            $('#pay-go-pro').modal('hide');--}}
-{{--            $('#stripe_modal').modal('show');--}}
-{{--            stripe_array['video_id'] = video_id;--}}
-{{--            stripe_array['user_id'] = user_id;--}}
-{{--            if (pkg == 'rent') {--}}
-{{--                stripe_array['pay_type'] = 'rent';--}}
-{{--            } else {--}}
-{{--                stripe_array['pay_type'] = '';--}}
-{{--            }--}}
-{{--        }--}}
-
-
-{{--        var sources = [];--}}
-{{--        for (var i = 0; i < $('video').find('source').length; i++) {--}}
-{{--            sources[i] = parseFloat($($('video').find('source')[i]).attr('res'));--}}
-{{--        }--}}
-
-{{--        var imageAddr = "http://www.kenrockwell.com/contax/images/g2/examples/31120037-5mb.jpg";--}}
-{{--        var downloadSize = 4995374;--}}
-{{--        // var imageAddr = site_url + "/upload/photos/speed.jpg";--}}
-{{--        // var downloadSize = 1082828;--}}
-
-{{--        function getCookie(name) {--}}
-{{--            var value = "; " + document.cookie;--}}
-{{--            var parts = value.split("; " + name + "=");--}}
-{{--            if (parts.length == 2) return parts.pop().split(";").shift();--}}
-{{--        }--}}
-
-{{--        function getQuality() {--}}
-{{--            MeasureConnectionSpeed();--}}
-
-
-{{--            function MeasureConnectionSpeed() {--}}
-{{--                if (getCookie('internet_speed') > 0) {--}}
-{{--                    showResults(getCookie('internet_speed'));--}}
-{{--                } else {--}}
-{{--                    var startTime, endTime;--}}
-{{--                    var download = new Image();--}}
-{{--                    download.onload = function () {--}}
-{{--                        endTime = (new Date()).getTime();--}}
-{{--                        showResults();--}}
-{{--                    }--}}
-
-{{--                    download.onerror = function (err, msg) {--}}
-{{--                        ShowProgressMessage(0);--}}
-{{--                    }--}}
-
-{{--                    startTime = (new Date()).getTime();--}}
-{{--                    var cacheBuster = "?nnn=" + startTime;--}}
-{{--                    download.src = imageAddr + cacheBuster;--}}
-{{--                }--}}
-
-{{--                //console.log($.cookie("internet_speed"));--}}
-
-
-{{--                function showResults(speed = 0) {--}}
-{{--                    if (speed == 0) {--}}
-{{--                        var duration = (endTime - startTime) / 1000;--}}
-{{--                        var bitsLoaded = downloadSize * 8;--}}
-{{--                        var speedBps = (bitsLoaded / duration).toFixed(2);--}}
-{{--                        var speedKbps = (speedBps / 1024).toFixed(2);--}}
-{{--                        var speedMbps = (speedKbps / 1024).toFixed(2);--}}
-{{--                        setCookie("internet_speed", speedKbps, 1);--}}
-
-{{--                    } else {--}}
-{{--                        speedKbps = speed;--}}
-{{--                        if (speed < 240) {--}}
-{{--                            speedKbps = 250;--}}
-{{--                        }--}}
-{{--                    }--}}
-{{--                    for (var i = 0; i < sources.length; i++) {--}}
-{{--                        if (sources[i] < parseFloat(speedKbps)) {--}}
-{{--                            is_clicked = true;--}}
-{{--                            video_source = sources[i];--}}
-{{--                            $('#' + $('.mejs__container').attr('id') + '-qualities-' + video_source + 'p').click();--}}
-{{--                            $('.mejs__qualities-button').find('button').text('auto');--}}
-{{--                            $('.mejs__qualities-selector-label').removeClass('mejs__qualities-selected');--}}
-{{--                            $('#quality__auto').addClass('mejs__qualities-selected');--}}
-{{--                            break;--}}
-{{--                        }--}}
-{{--                    }--}}
-{{--                }--}}
-{{--            }--}}
-{{--        }--}}
-
-{{--        function setAuto(self) {--}}
-{{--            $('.mejs__qualities-button').find('button').text('auto');--}}
-{{--            $('.mejs__qualities-selector-label').removeClass('mejs__qualities-selected');--}}
-{{--            $('#quality__auto').addClass('mejs__qualities-selected');--}}
-{{--            getQuality();--}}
-{{--            setTimeout(function (argument) {--}}
-{{--                setCookie('auto', 'auto', 1);--}}
-{{--            }, 1000);--}}
-
-{{--        }--}}
-
-{{--        $(document).ready(function () {--}}
-{{--            document.querySelector('video').addEventListener("loadeddata", function () {--}}
-{{--                setCookie('auto', '', 1);--}}
-{{--            });--}}
-{{--        });--}}
-
-{{--    </script>--}}
-
-{{--    <script type="text/javascript">--}}
-{{--        function go_to_duration(duration) {--}}
-{{--            window.scrollTo(0, 0);--}}
-{{--            var vid = document.querySelector("video");--}}
-{{--            vid.currentTime = duration;--}}
-{{--            vid.play();--}}
-{{--        }--}}
-{{--    </script>--}}
-{{--    <script type="text/javascript">--}}
-
-
-{{--        $('video').mediaelementplayer({--}}
-{{--            pluginPath: 'https://cdnjs.com/libraries/mediaelement-plugins/',--}}
-{{--            shimScriptAccess: 'always',--}}
-{{--            autoplay: true,--}}
-{{--            features: ['playpause', 'current', 'progress', 'duration', 'speed', 'skipback', 'jumpforward', 'tracks', 'markers', 'volume', 'chromecast', 'contextmenu', 'flash', 'fullscreen', 'sourcechooser'],--}}
-{{--            vastAdTagUrl: '',--}}
-{{--            vastAdsType: '',--}}
-{{--            setDimensions: true,--}}
-{{--            enableAutosize: true,--}}
-{{--            jumpForwardInterval: 20,--}}
-{{--            adsPrerollMediaUrl: [''],--}}
-{{--            adsPrerollAdUrl: [''],--}}
-{{--            adsPrerollAdEnableSkip: false,--}}
-{{--            adsPrerollAdSkipSeconds: 0,--}}
-{{--            success: function (media) {--}}
-{{--                media.addEventListener('ended', function (e) {--}}
-
-{{--                    if ($('#autoplay').is(":checked")) {--}}
-{{--                        var url = $('#next-video').find('.video-title').find('a').attr('href');--}}
-{{--                        if (url) {--}}
-{{--                            window.location.href = url;--}}
-{{--                        }--}}
-{{--                    } else {--}}
-{{--                        /* pass */--}}
-{{--                    }--}}
-{{--                }, false);--}}
-
-{{--                media.addEventListener('playing', function (e) {--}}
-{{--                    // if (pt_elexists('.ads-overlay-info')) {--}}
-{{--                    //     $('.ads-overlay-info').remove();--}}
-{{--                    // }--}}
-
-{{--                    $('.ads-test').remove();--}}
-
-{{--                    if ($('body').attr('resized') == 'true') {--}}
-{{--                        PT_Resize(true);--}}
-{{--                    }--}}
-{{--                    $('.mejs__container').css('height', ($('.mejs__container').width() / 1.77176216) + 'px');--}}
-{{--                    $('video, iframe').css('height', '100%');--}}
-{{--                });--}}
-{{--            },--}}
-{{--        });--}}
-
-
-{{--        if (sources.length > 1) {--}}
-{{--            setTimeout(function () {--}}
-{{--                $('.mejs__qualities-selector-list').append('<li class="mejs__qualities-selector-list-item" onclick="setAuto(this)"><input class="mejs__qualities-selector-input" type="radio" name="mep_0_qualities" value="auto" id="mep_0-qualities-auto"><label for="mep_0-qualities-auto" class="mejs__qualities-selector-label" id="quality__auto">auto</label></li>');--}}
-{{--            }, 1000);--}}
-{{--        }--}}
-
-
-{{--    </script>--}}
-
-{{--    <script>--}}
-
-{{--        jQuery(window).ready(function ($) {--}}
-{{--            var width = $('.video-player').width().toString();--}}
-{{--            var width = width.substring(0, width.lastIndexOf("."))--}}
-{{--            $('.fb-video').attr('data-width', width);--}}
-{{--            //$( 'iframe' ).attr( 'src', function ( i, val ) { return val; });--}}
-{{--            $("#load-related-videos").click(function (event) {--}}
-{{--                let id = 0;--}}
-{{--                if ($("div[data-sidebar-video]").length > 0) {--}}
-{{--                    id = $("div[data-sidebar-video]").last().attr('data-sidebar-video');--}}
-{{--                }--}}
-
-{{--                $("#load-related-videos").find('i.spin').removeClass('hidden');--}}
-
-{{--            });--}}
-{{--        });--}}
-
-{{--        $('.ad-link').on('click', function (event) {--}}
-{{--            $('.ad-link').remove();--}}
-{{--            $('video')[0].play();--}}
-{{--        });--}}
-
-{{--        $('.autoplay-video').on('change', function (event) {--}}
-{{--            event.preventDefault();--}}
-{{--            checked = 1;--}}
-{{--            if ($(this).is(":checked")) {--}}
-{{--                checked = 2;--}}
-{{--            }--}}
-{{--            $.post('http://localhost:9002//aj/set-cookies', {name: 'autoplay', value: checked});--}}
-{{--        });--}}
-{{--        $('.ads-test').on('click', function (event) {--}}
-{{--            $(this).remove();--}}
-{{--        });--}}
-
-
-{{--        $(function () {--}}
-{{--            $('.rad-transaction').click(function (event) {--}}
-{{--                $(this).off("click").removeClass('rad-transaction');--}}
-{{--                $.get('http://localhost:9002//aj/ads/rad-transaction', function (data) { /* pass */--}}
-{{--                });--}}
-{{--            });--}}
-
-{{--            if ($('[data-litsitem-id]').length > 4) {--}}
-{{--                var listItemtopPos = $("div[data-litsitem-id=MVVIbINPjrRSP69]").offset();--}}
-{{--                $('.play-list-cont').scrollTop((listItemtopPos.top - 170));--}}
-{{--            }--}}
-
-
-{{--            $('#share-video').on('click', function (event) {--}}
-{{--                event.preventDefault();--}}
-{{--                $('.share-video').toggleClass('hidden');--}}
-{{--                if (!$('.embed-placement').hasClass('hidden')) {--}}
-{{--                    $('.embed-placement').toggleClass('hidden');--}}
-{{--                }--}}
-{{--                if (!$('.download-placement').hasClass('hidden')) {--}}
-{{--                    $('.download-placement').toggleClass('hidden');--}}
-{{--                }--}}
-{{--            });--}}
-{{--            $('#embed-video').on('click', function (event) {--}}
-{{--                event.preventDefault();--}}
-{{--                $('.embed-placement').toggleClass('hidden');--}}
-{{--                if (!$('.share-video').hasClass('hidden')) {--}}
-{{--                    $('.share-video').toggleClass('hidden');--}}
-{{--                }--}}
-{{--                if (!$('.download-placement').hasClass('hidden')) {--}}
-{{--                    $('.download-placement').toggleClass('hidden');--}}
-{{--                }--}}
-{{--            });--}}
-{{--            $('#download-video').on('click', function (event) {--}}
-{{--                event.preventDefault();--}}
-{{--                $('.download-placement').toggleClass('hidden');--}}
-{{--                if (!$('.embed-placement').hasClass('hidden')) {--}}
-{{--                    $('.embed-placement').toggleClass('hidden');--}}
-{{--                }--}}
-{{--                if (!$('.share-video').hasClass('hidden')) {--}}
-{{--                    $('.share-video').toggleClass('hidden');--}}
-{{--                }--}}
-{{--            });--}}
-
-{{--            $('#save-button').on('click', function (event) {--}}
-{{--                event.preventDefault();--}}
-{{--                var logged = $('#main-container').attr('data-logged');--}}
-{{--                if (!logged) {--}}
-{{--                    window.location.href = "http://localhost:9002//login?to=http://localhost:9002%2F%2Fpage_loading.php%3Flink1%3Dwatch%26id%3D14-march-2020-loom-recording_MVVIbINPjrRSP69.html%26hash%3D5eb422b39a69f7fec5c053501c62460114fa6e16%26_%3D1587557139927";--}}
-{{--                    return false;--}}
-{{--                }--}}
-{{--                var video_id = $('#video-id').val();--}}
-{{--                if ($(this).attr('saved')) {--}}
-{{--                    $(this).html('<i class="fa fa-floppy-o fa-fw"></i> Save');--}}
-{{--                    $(this).removeAttr('saved');--}}
-{{--                } else {--}}
-{{--                    $(this).html('<i class="fa fa-check fa-fw"></i> Saved');--}}
-{{--                    $(this).attr('saved', 'true');--}}
-{{--                }--}}
-{{--                $.post('http://localhost:9002//aj/save-video', {video_id: video_id});--}}
-{{--            });--}}
-{{--            $('.desc').on('click', function (event) {--}}
-{{--                event.preventDefault();--}}
-{{--                if ($(this).hasClass('expended')) {--}}
-{{--                    $('.watch-video-description').css({--}}
-{{--                        'max-height': '100px',--}}
-{{--                        'height': '100px',--}}
-{{--                        'overflow': 'hidden'--}}
-{{--                    });--}}
-{{--                    $(this).removeClass('expended');--}}
-{{--                    $(this).text("Show more");--}}
-{{--                } else {--}}
-{{--                    $('.watch-video-description').css({--}}
-{{--                        'max-height': '4000px',--}}
-{{--                        'height': 'auto',--}}
-{{--                        'overflow': 'auto'--}}
-{{--                    });--}}
-{{--                    $(this).addClass('expended');--}}
-{{--                    $(this).text("Show less");--}}
-{{--                }--}}
-{{--            });--}}
-
-
-{{--            $('.expend-player').on('click', function (event) {--}}
-{{--                event.preventDefault();--}}
-{{--                var resize = 0;--}}
-{{--                if ($('.player-video').hasClass('col-md-12')) {--}}
-{{--                    resize = 0;--}}
-{{--                } else {--}}
-{{--                    resize = 1;--}}
-{{--                }--}}
-{{--                $.post('http://localhost:9002//aj/set-cookies', {name: 'resize', value: resize});--}}
-{{--                PT_Resize();--}}
-{{--            });--}}
-{{--            $(window).resize(function (event) {--}}
-{{--                if ($('body').attr('resized') == 'true') {--}}
-{{--                    PT_Resize(true);--}}
-{{--                }--}}
-{{--            });--}}
-
-{{--        });--}}
-
-
-{{--        if (document.addEventListener) {--}}
-{{--            document.addEventListener('webkitfullscreenchange', exitHandler, false);--}}
-{{--            document.addEventListener('mozfullscreenchange', exitHandler, false);--}}
-{{--            document.addEventListener('fullscreenchange', exitHandler, false);--}}
-{{--            document.addEventListener('MSFullscreenChange', exitHandler, false);--}}
-{{--        }--}}
-
-{{--        function exitHandler() {--}}
-{{--            if (document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement !== null) {--}}
-{{--                setTimeout(function () {--}}
-{{--                    PT_Resize(false);--}}
-{{--                }, 100);--}}
-{{--            }--}}
-{{--        }--}}
-
-{{--        function PT_Resize(type) {--}}
-
-{{--            if ($('.player-video').hasClass('col-md-12') && type != true) {--}}
-{{--                $('.mejs__layer').css('display', 'none');--}}
-{{--                $('.player-video').addClass('col-md-8');--}}
-{{--                $('.player-video').removeClass('col-md-12');--}}
-{{--                $('.player-video').css('margin-bottom', '0');--}}
-{{--                $('.player-video').css('margin-top', '0');--}}
-{{--                $('.mejs__container, video, iframe').css('width', '100%');--}}
-{{--                $('.mejs__container').css('height', ($('.mejs__container').width() / 1.77176216) + 'px');--}}
-{{--                $('video, iframe').css('height', '100%');--}}
-{{--                $('.second-header-layout').removeClass('hidden');--}}
-{{--                $('.header-layout').css('background', '#fff');--}}
-{{--                $('.header-layout').css('border-bottom', '1px solid #f1f1f1');--}}
-{{--                $('#search-bar').css('border', '1px solid #f5f5f5');--}}
-{{--                $('#search-bar').css('color', '#444');--}}
-{{--                $('nav.navbar-findcond ul.navbar-nav.sec_lay_hdr a').css('color', '#3e3e3e');--}}
-{{--                $('.hide-resize').removeClass('hidden');--}}
-{{--                $('.logo-img').find('img').attr('src', 'http://localhost:9002//themes/default/img/logo.png');--}}
-{{--                $('.top-header a').css('color', '#444');--}}
-{{--                $('#background').addClass('hidden');--}}
-{{--                $('body').attr('resized', 'false');--}}
-{{--                $('body').css('padding-top', '0px');--}}
-{{--            } else {--}}
-{{--                var pixels = ($(window).height() / 100) * 88;--}}
-{{--                $('.player-video').removeClass('col-md-8');--}}
-{{--                $('.player-video').addClass('col-md-12');--}}
-{{--                $('.second-header-layout').addClass('hidden');--}}
-{{--                $('.player-video').css('margin-bottom', '10px');--}}
-{{--                $('.player-video').css('margin-top', '0px');--}}
-{{--                $('body').css('padding-top', '57px !important');--}}
-{{--                $('.mejs__container, video, iframe').css('width', '100%');--}}
-{{--                $('.mejs__container').css('height', pixels + 'px');--}}
-{{--                $('video, iframe').css('height', '100%');--}}
-{{--                $('.header-layout').css('background', 'rgb(32,32,32)');--}}
-{{--                $('.header-layout').css('border-bottom', 'none');--}}
-{{--                $('#search-bar').css('border', '1px solid #555');--}}
-{{--                $('#search-bar').css('color', '#fff');--}}
-{{--                $('nav.navbar-findcond ul.navbar-nav.sec_lay_hdr a').css('color', '#fff');--}}
-{{--                $('.hide-resize').addClass('hidden');--}}
-{{--                $('.logo-img').find('img').attr('src', 'http://localhost:9002//themes/default/img/logo-light.png');--}}
-{{--                $('.top-header a').css('color', '#fff');--}}
-{{--                $('#background').removeClass('hidden');--}}
-{{--                $('#background').css('height', '89.4%');--}}
-{{--                $('body').attr('resized', 'true');--}}
-{{--            }--}}
-{{--        }--}}
-
-{{--        $('.player-video').hover(function () {--}}
-{{--            $('.icons').removeClass('hidden');--}}
-{{--        });--}}
-{{--        $('.player-video').mouseleave(function () {--}}
-{{--            $('.icons').addClass('hidden');--}}
-{{--        });--}}
-
-{{--    </script>--}}
-{{--    --}}
-<script type="text/javascript">
-    $('#share-video').on('click', function (event) {
-        event.preventDefault();
-
-        $('.embed-placement').addClass('d-none');
-        $('.share-video').toggleClass('d-none');
-    });
-    $('#embed-video').on('click', function (event) {
-        event.preventDefault();
-        $('.embed-placement').toggleClass('d-none');
-        $('.share-video').addClass('d-none');
-    });
-
-    $('video').mediaelementplayer({
-        pluginPath: 'https://cdnjs.com/libraries/mediaelement-plugins/',
-        shimScriptAccess: 'always',
-        autoplay: true,
-        features: ['playpause', 'current', 'progress', 'duration', 'speed', 'skipback', 'jumpforward', 'tracks', 'markers', 'volume', 'chromecast', 'contextmenu', 'flash', 'fullscreen', 'quality'],
-        vastAdTagUrl: '',
-        vastAdsType: '',
-        setDimensions: true,
-        enableAutosize: true,
-        jumpForwardInterval: 20,
-        adsPrerollMediaUrl: [''],
-        adsPrerollAdUrl: [''],
-        adsPrerollAdEnableSkip: false,
-        adsPrerollAdSkipSeconds: 0,
-        success: function (media) {
-            media.addEventListener('ended', function (e) {
-
-                if ($('#autoplay').is(":checked")) {
-                    var url = $('#next-video').find('.video-title').find('a').attr('href');
-                    if (url) {
-                        window.location.href = url;
+    {{--    <script>--}}
+    {{--        var slideIndex = 1;--}}
+    {{--        showSlides(slideIndex);--}}
+
+    {{--        function plusSlides(n) {--}}
+    {{--            showSlides(slideIndex += n);--}}
+    {{--        }--}}
+
+    {{--        function currentSlide(n) {--}}
+    {{--            showSlides(slideIndex = n);--}}
+    {{--        }--}}
+
+    {{--        function showSlides(n) {--}}
+    {{--            var i;--}}
+    {{--            var slides = document.getElementsByClassName("mySlides");--}}
+    {{--            var dots = document.getElementsByClassName("demo");--}}
+    {{--            var captionText = document.getElementById("caption");--}}
+    {{--            if (n > slides.length) {--}}
+    {{--                slideIndex = 1--}}
+    {{--            }--}}
+    {{--            if (n < 1) {--}}
+    {{--                slideIndex = slides.length--}}
+    {{--            }--}}
+    {{--            for (i = 0; i < slides.length; i++) {--}}
+    {{--                slides[i].style.display = "none";--}}
+    {{--            }--}}
+    {{--            for (i = 0; i < dots.length; i++) {--}}
+    {{--                dots[i].className = dots[i].className.replace(" active", "");--}}
+    {{--            }--}}
+    {{--            slides[slideIndex - 1].style.display = "block";--}}
+    {{--            // dots[slideIndex - 1].className += " active";--}}
+    {{--            // captionText.innerHTML = dots[slideIndex - 1].alt;--}}
+    {{--        }--}}
+    {{--    </script>--}}
+    {{--    <script>--}}
+    {{--    var slideIndex = 1;--}}
+    {{--    showSlides(slideIndex);--}}
+
+    {{--    function plusSlides(n) {--}}
+    {{--        showSlides(slideIndex += n);--}}
+    {{--    }--}}
+
+    {{--    function currentSlide(n) {--}}
+    {{--        showSlides(slideIndex = n);--}}
+    {{--    }--}}
+
+    {{--    function showSlides(n) {--}}
+    {{--        var i;--}}
+    {{--        var slides = document.getElementsByClassName("mySlides");--}}
+    {{--        var dots = document.getElementsByClassName("demo");--}}
+    {{--        var captionText = document.getElementById("caption");--}}
+    {{--        if (n > slides.length) {--}}
+    {{--            slideIndex = 1--}}
+    {{--        }--}}
+    {{--        if (n < 1) {--}}
+    {{--            slideIndex = slides.length--}}
+    {{--        }--}}
+    {{--        for (i = 0; i < slides.length; i++) {--}}
+    {{--            slides[i].style.display = "none";--}}
+    {{--        }--}}
+    {{--        for (i = 0; i < dots.length; i++) {--}}
+    {{--            dots[i].className = dots[i].className.replace(" active", "");--}}
+    {{--        }--}}
+    {{--        slides[slideIndex - 1].style.display = "block";--}}
+    {{--        // dots[slideIndex - 1].className += " active";--}}
+    {{--        // captionText.innerHTML = dots[slideIndex - 1].alt;--}}
+    {{--    }--}}
+    {{--</script>--}}
+    {{--    <script type="text/javascript">--}}
+    {{--        function setCookie(cname, cvalue, exdays) {--}}
+    {{--            var d = new Date();--}}
+    {{--            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));--}}
+    {{--            var expires = "expires=" + d.toUTCString();--}}
+    {{--            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";--}}
+    {{--        }--}}
+
+    {{--        var myTimeout;--}}
+
+    {{--        function show_gif(self, gif) {--}}
+    {{--            if (gif && gif != '') {--}}
+    {{--                myTimeout = setTimeout(function () {--}}
+    {{--                    $(self).append('<img src="' + gif + '">');--}}
+    {{--                }, 1000);--}}
+    {{--            }--}}
+    {{--        }--}}
+
+    {{--        function hide_gif(self) {--}}
+    {{--            $(self).find('img').remove();--}}
+    {{--            clearTimeout(myTimeout);--}}
+    {{--        }--}}
+
+    {{--        function PT_OpenStripe(pkg, self, video_id = 0, price = 0, user_id = 0) {--}}
+
+    {{--            $('#pay-go-pro').modal('hide');--}}
+    {{--            $('#stripe_modal').modal('show');--}}
+    {{--            stripe_array['video_id'] = video_id;--}}
+    {{--            stripe_array['user_id'] = user_id;--}}
+    {{--            if (pkg == 'rent') {--}}
+    {{--                stripe_array['pay_type'] = 'rent';--}}
+    {{--            } else {--}}
+    {{--                stripe_array['pay_type'] = '';--}}
+    {{--            }--}}
+    {{--        }--}}
+
+
+    {{--        var sources = [];--}}
+    {{--        for (var i = 0; i < $('video').find('source').length; i++) {--}}
+    {{--            sources[i] = parseFloat($($('video').find('source')[i]).attr('res'));--}}
+    {{--        }--}}
+
+    {{--        var imageAddr = "http://www.kenrockwell.com/contax/images/g2/examples/31120037-5mb.jpg";--}}
+    {{--        var downloadSize = 4995374;--}}
+    {{--        // var imageAddr = site_url + "/upload/photos/speed.jpg";--}}
+    {{--        // var downloadSize = 1082828;--}}
+
+    {{--        function getCookie(name) {--}}
+    {{--            var value = "; " + document.cookie;--}}
+    {{--            var parts = value.split("; " + name + "=");--}}
+    {{--            if (parts.length == 2) return parts.pop().split(";").shift();--}}
+    {{--        }--}}
+
+    {{--        function getQuality() {--}}
+    {{--            MeasureConnectionSpeed();--}}
+
+
+    {{--            function MeasureConnectionSpeed() {--}}
+    {{--                if (getCookie('internet_speed') > 0) {--}}
+    {{--                    showResults(getCookie('internet_speed'));--}}
+    {{--                } else {--}}
+    {{--                    var startTime, endTime;--}}
+    {{--                    var download = new Image();--}}
+    {{--                    download.onload = function () {--}}
+    {{--                        endTime = (new Date()).getTime();--}}
+    {{--                        showResults();--}}
+    {{--                    }--}}
+
+    {{--                    download.onerror = function (err, msg) {--}}
+    {{--                        ShowProgressMessage(0);--}}
+    {{--                    }--}}
+
+    {{--                    startTime = (new Date()).getTime();--}}
+    {{--                    var cacheBuster = "?nnn=" + startTime;--}}
+    {{--                    download.src = imageAddr + cacheBuster;--}}
+    {{--                }--}}
+
+    {{--                //console.log($.cookie("internet_speed"));--}}
+
+
+    {{--                function showResults(speed = 0) {--}}
+    {{--                    if (speed == 0) {--}}
+    {{--                        var duration = (endTime - startTime) / 1000;--}}
+    {{--                        var bitsLoaded = downloadSize * 8;--}}
+    {{--                        var speedBps = (bitsLoaded / duration).toFixed(2);--}}
+    {{--                        var speedKbps = (speedBps / 1024).toFixed(2);--}}
+    {{--                        var speedMbps = (speedKbps / 1024).toFixed(2);--}}
+    {{--                        setCookie("internet_speed", speedKbps, 1);--}}
+
+    {{--                    } else {--}}
+    {{--                        speedKbps = speed;--}}
+    {{--                        if (speed < 240) {--}}
+    {{--                            speedKbps = 250;--}}
+    {{--                        }--}}
+    {{--                    }--}}
+    {{--                    for (var i = 0; i < sources.length; i++) {--}}
+    {{--                        if (sources[i] < parseFloat(speedKbps)) {--}}
+    {{--                            is_clicked = true;--}}
+    {{--                            video_source = sources[i];--}}
+    {{--                            $('#' + $('.mejs__container').attr('id') + '-qualities-' + video_source + 'p').click();--}}
+    {{--                            $('.mejs__qualities-button').find('button').text('auto');--}}
+    {{--                            $('.mejs__qualities-selector-label').removeClass('mejs__qualities-selected');--}}
+    {{--                            $('#quality__auto').addClass('mejs__qualities-selected');--}}
+    {{--                            break;--}}
+    {{--                        }--}}
+    {{--                    }--}}
+    {{--                }--}}
+    {{--            }--}}
+    {{--        }--}}
+
+    {{--        function setAuto(self) {--}}
+    {{--            $('.mejs__qualities-button').find('button').text('auto');--}}
+    {{--            $('.mejs__qualities-selector-label').removeClass('mejs__qualities-selected');--}}
+    {{--            $('#quality__auto').addClass('mejs__qualities-selected');--}}
+    {{--            getQuality();--}}
+    {{--            setTimeout(function (argument) {--}}
+    {{--                setCookie('auto', 'auto', 1);--}}
+    {{--            }, 1000);--}}
+
+    {{--        }--}}
+
+    {{--        $(document).ready(function () {--}}
+    {{--            document.querySelector('video').addEventListener("loadeddata", function () {--}}
+    {{--                setCookie('auto', '', 1);--}}
+    {{--            });--}}
+    {{--        });--}}
+
+    {{--    </script>--}}
+
+    {{--    <script type="text/javascript">--}}
+    {{--        function go_to_duration(duration) {--}}
+    {{--            window.scrollTo(0, 0);--}}
+    {{--            var vid = document.querySelector("video");--}}
+    {{--            vid.currentTime = duration;--}}
+    {{--            vid.play();--}}
+    {{--        }--}}
+    {{--    </script>--}}
+    {{--    <script type="text/javascript">--}}
+
+
+    {{--        $('video').mediaelementplayer({--}}
+    {{--            pluginPath: 'https://cdnjs.com/libraries/mediaelement-plugins/',--}}
+    {{--            shimScriptAccess: 'always',--}}
+    {{--            autoplay: true,--}}
+    {{--            features: ['playpause', 'current', 'progress', 'duration', 'speed', 'skipback', 'jumpforward', 'tracks', 'markers', 'volume', 'chromecast', 'contextmenu', 'flash', 'fullscreen', 'sourcechooser'],--}}
+    {{--            vastAdTagUrl: '',--}}
+    {{--            vastAdsType: '',--}}
+    {{--            setDimensions: true,--}}
+    {{--            enableAutosize: true,--}}
+    {{--            jumpForwardInterval: 20,--}}
+    {{--            adsPrerollMediaUrl: [''],--}}
+    {{--            adsPrerollAdUrl: [''],--}}
+    {{--            adsPrerollAdEnableSkip: false,--}}
+    {{--            adsPrerollAdSkipSeconds: 0,--}}
+    {{--            success: function (media) {--}}
+    {{--                media.addEventListener('ended', function (e) {--}}
+
+    {{--                    if ($('#autoplay').is(":checked")) {--}}
+    {{--                        var url = $('#next-video').find('.video-title').find('a').attr('href');--}}
+    {{--                        if (url) {--}}
+    {{--                            window.location.href = url;--}}
+    {{--                        }--}}
+    {{--                    } else {--}}
+    {{--                        /* pass */--}}
+    {{--                    }--}}
+    {{--                }, false);--}}
+
+    {{--                media.addEventListener('playing', function (e) {--}}
+    {{--                    // if (pt_elexists('.ads-overlay-info')) {--}}
+    {{--                    //     $('.ads-overlay-info').remove();--}}
+    {{--                    // }--}}
+
+    {{--                    $('.ads-test').remove();--}}
+
+    {{--                    if ($('body').attr('resized') == 'true') {--}}
+    {{--                        PT_Resize(true);--}}
+    {{--                    }--}}
+    {{--                    $('.mejs__container').css('height', ($('.mejs__container').width() / 1.77176216) + 'px');--}}
+    {{--                    $('video, iframe').css('height', '100%');--}}
+    {{--                });--}}
+    {{--            },--}}
+    {{--        });--}}
+
+
+    {{--        if (sources.length > 1) {--}}
+    {{--            setTimeout(function () {--}}
+    {{--                $('.mejs__qualities-selector-list').append('<li class="mejs__qualities-selector-list-item" onclick="setAuto(this)"><input class="mejs__qualities-selector-input" type="radio" name="mep_0_qualities" value="auto" id="mep_0-qualities-auto"><label for="mep_0-qualities-auto" class="mejs__qualities-selector-label" id="quality__auto">auto</label></li>');--}}
+    {{--            }, 1000);--}}
+    {{--        }--}}
+
+
+    {{--    </script>--}}
+
+    {{--    <script>--}}
+
+    {{--        jQuery(window).ready(function ($) {--}}
+    {{--            var width = $('.video-player').width().toString();--}}
+    {{--            var width = width.substring(0, width.lastIndexOf("."))--}}
+    {{--            $('.fb-video').attr('data-width', width);--}}
+    {{--            //$( 'iframe' ).attr( 'src', function ( i, val ) { return val; });--}}
+    {{--            $("#load-related-videos").click(function (event) {--}}
+    {{--                let id = 0;--}}
+    {{--                if ($("div[data-sidebar-video]").length > 0) {--}}
+    {{--                    id = $("div[data-sidebar-video]").last().attr('data-sidebar-video');--}}
+    {{--                }--}}
+
+    {{--                $("#load-related-videos").find('i.spin').removeClass('hidden');--}}
+
+    {{--            });--}}
+    {{--        });--}}
+
+    {{--        $('.ad-link').on('click', function (event) {--}}
+    {{--            $('.ad-link').remove();--}}
+    {{--            $('video')[0].play();--}}
+    {{--        });--}}
+
+    {{--        $('.autoplay-video').on('change', function (event) {--}}
+    {{--            event.preventDefault();--}}
+    {{--            checked = 1;--}}
+    {{--            if ($(this).is(":checked")) {--}}
+    {{--                checked = 2;--}}
+    {{--            }--}}
+    {{--            $.post('http://localhost:9002//aj/set-cookies', {name: 'autoplay', value: checked});--}}
+    {{--        });--}}
+    {{--        $('.ads-test').on('click', function (event) {--}}
+    {{--            $(this).remove();--}}
+    {{--        });--}}
+
+
+    {{--        $(function () {--}}
+    {{--            $('.rad-transaction').click(function (event) {--}}
+    {{--                $(this).off("click").removeClass('rad-transaction');--}}
+    {{--                $.get('http://localhost:9002//aj/ads/rad-transaction', function (data) { /* pass */--}}
+    {{--                });--}}
+    {{--            });--}}
+
+    {{--            if ($('[data-litsitem-id]').length > 4) {--}}
+    {{--                var listItemtopPos = $("div[data-litsitem-id=MVVIbINPjrRSP69]").offset();--}}
+    {{--                $('.play-list-cont').scrollTop((listItemtopPos.top - 170));--}}
+    {{--            }--}}
+
+
+    {{--            $('#share-video').on('click', function (event) {--}}
+    {{--                event.preventDefault();--}}
+    {{--                $('.share-video').toggleClass('hidden');--}}
+    {{--                if (!$('.embed-placement').hasClass('hidden')) {--}}
+    {{--                    $('.embed-placement').toggleClass('hidden');--}}
+    {{--                }--}}
+    {{--                if (!$('.download-placement').hasClass('hidden')) {--}}
+    {{--                    $('.download-placement').toggleClass('hidden');--}}
+    {{--                }--}}
+    {{--            });--}}
+    {{--            $('#embed-video').on('click', function (event) {--}}
+    {{--                event.preventDefault();--}}
+    {{--                $('.embed-placement').toggleClass('hidden');--}}
+    {{--                if (!$('.share-video').hasClass('hidden')) {--}}
+    {{--                    $('.share-video').toggleClass('hidden');--}}
+    {{--                }--}}
+    {{--                if (!$('.download-placement').hasClass('hidden')) {--}}
+    {{--                    $('.download-placement').toggleClass('hidden');--}}
+    {{--                }--}}
+    {{--            });--}}
+    {{--            $('#download-video').on('click', function (event) {--}}
+    {{--                event.preventDefault();--}}
+    {{--                $('.download-placement').toggleClass('hidden');--}}
+    {{--                if (!$('.embed-placement').hasClass('hidden')) {--}}
+    {{--                    $('.embed-placement').toggleClass('hidden');--}}
+    {{--                }--}}
+    {{--                if (!$('.share-video').hasClass('hidden')) {--}}
+    {{--                    $('.share-video').toggleClass('hidden');--}}
+    {{--                }--}}
+    {{--            });--}}
+
+    {{--            $('#save-button').on('click', function (event) {--}}
+    {{--                event.preventDefault();--}}
+    {{--                var logged = $('#main-container').attr('data-logged');--}}
+    {{--                if (!logged) {--}}
+    {{--                    window.location.href = "http://localhost:9002//login?to=http://localhost:9002%2F%2Fpage_loading.php%3Flink1%3Dwatch%26id%3D14-march-2020-loom-recording_MVVIbINPjrRSP69.html%26hash%3D5eb422b39a69f7fec5c053501c62460114fa6e16%26_%3D1587557139927";--}}
+    {{--                    return false;--}}
+    {{--                }--}}
+    {{--                var video_id = $('#video-id').val();--}}
+    {{--                if ($(this).attr('saved')) {--}}
+    {{--                    $(this).html('<i class="fa fa-floppy-o fa-fw"></i> Save');--}}
+    {{--                    $(this).removeAttr('saved');--}}
+    {{--                } else {--}}
+    {{--                    $(this).html('<i class="fa fa-check fa-fw"></i> Saved');--}}
+    {{--                    $(this).attr('saved', 'true');--}}
+    {{--                }--}}
+    {{--                $.post('http://localhost:9002//aj/save-video', {video_id: video_id});--}}
+    {{--            });--}}
+    {{--            $('.desc').on('click', function (event) {--}}
+    {{--                event.preventDefault();--}}
+    {{--                if ($(this).hasClass('expended')) {--}}
+    {{--                    $('.watch-video-description').css({--}}
+    {{--                        'max-height': '100px',--}}
+    {{--                        'height': '100px',--}}
+    {{--                        'overflow': 'hidden'--}}
+    {{--                    });--}}
+    {{--                    $(this).removeClass('expended');--}}
+    {{--                    $(this).text("Show more");--}}
+    {{--                } else {--}}
+    {{--                    $('.watch-video-description').css({--}}
+    {{--                        'max-height': '4000px',--}}
+    {{--                        'height': 'auto',--}}
+    {{--                        'overflow': 'auto'--}}
+    {{--                    });--}}
+    {{--                    $(this).addClass('expended');--}}
+    {{--                    $(this).text("Show less");--}}
+    {{--                }--}}
+    {{--            });--}}
+
+
+    {{--            $('.expend-player').on('click', function (event) {--}}
+    {{--                event.preventDefault();--}}
+    {{--                var resize = 0;--}}
+    {{--                if ($('.player-video').hasClass('col-md-12')) {--}}
+    {{--                    resize = 0;--}}
+    {{--                } else {--}}
+    {{--                    resize = 1;--}}
+    {{--                }--}}
+    {{--                $.post('http://localhost:9002//aj/set-cookies', {name: 'resize', value: resize});--}}
+    {{--                PT_Resize();--}}
+    {{--            });--}}
+    {{--            $(window).resize(function (event) {--}}
+    {{--                if ($('body').attr('resized') == 'true') {--}}
+    {{--                    PT_Resize(true);--}}
+    {{--                }--}}
+    {{--            });--}}
+
+    {{--        });--}}
+
+
+    {{--        if (document.addEventListener) {--}}
+    {{--            document.addEventListener('webkitfullscreenchange', exitHandler, false);--}}
+    {{--            document.addEventListener('mozfullscreenchange', exitHandler, false);--}}
+    {{--            document.addEventListener('fullscreenchange', exitHandler, false);--}}
+    {{--            document.addEventListener('MSFullscreenChange', exitHandler, false);--}}
+    {{--        }--}}
+
+    {{--        function exitHandler() {--}}
+    {{--            if (document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement !== null) {--}}
+    {{--                setTimeout(function () {--}}
+    {{--                    PT_Resize(false);--}}
+    {{--                }, 100);--}}
+    {{--            }--}}
+    {{--        }--}}
+
+    {{--        function PT_Resize(type) {--}}
+
+    {{--            if ($('.player-video').hasClass('col-md-12') && type != true) {--}}
+    {{--                $('.mejs__layer').css('display', 'none');--}}
+    {{--                $('.player-video').addClass('col-md-8');--}}
+    {{--                $('.player-video').removeClass('col-md-12');--}}
+    {{--                $('.player-video').css('margin-bottom', '0');--}}
+    {{--                $('.player-video').css('margin-top', '0');--}}
+    {{--                $('.mejs__container, video, iframe').css('width', '100%');--}}
+    {{--                $('.mejs__container').css('height', ($('.mejs__container').width() / 1.77176216) + 'px');--}}
+    {{--                $('video, iframe').css('height', '100%');--}}
+    {{--                $('.second-header-layout').removeClass('hidden');--}}
+    {{--                $('.header-layout').css('background', '#fff');--}}
+    {{--                $('.header-layout').css('border-bottom', '1px solid #f1f1f1');--}}
+    {{--                $('#search-bar').css('border', '1px solid #f5f5f5');--}}
+    {{--                $('#search-bar').css('color', '#444');--}}
+    {{--                $('nav.navbar-findcond ul.navbar-nav.sec_lay_hdr a').css('color', '#3e3e3e');--}}
+    {{--                $('.hide-resize').removeClass('hidden');--}}
+    {{--                $('.logo-img').find('img').attr('src', 'http://localhost:9002//themes/default/img/logo.png');--}}
+    {{--                $('.top-header a').css('color', '#444');--}}
+    {{--                $('#background').addClass('hidden');--}}
+    {{--                $('body').attr('resized', 'false');--}}
+    {{--                $('body').css('padding-top', '0px');--}}
+    {{--            } else {--}}
+    {{--                var pixels = ($(window).height() / 100) * 88;--}}
+    {{--                $('.player-video').removeClass('col-md-8');--}}
+    {{--                $('.player-video').addClass('col-md-12');--}}
+    {{--                $('.second-header-layout').addClass('hidden');--}}
+    {{--                $('.player-video').css('margin-bottom', '10px');--}}
+    {{--                $('.player-video').css('margin-top', '0px');--}}
+    {{--                $('body').css('padding-top', '57px !important');--}}
+    {{--                $('.mejs__container, video, iframe').css('width', '100%');--}}
+    {{--                $('.mejs__container').css('height', pixels + 'px');--}}
+    {{--                $('video, iframe').css('height', '100%');--}}
+    {{--                $('.header-layout').css('background', 'rgb(32,32,32)');--}}
+    {{--                $('.header-layout').css('border-bottom', 'none');--}}
+    {{--                $('#search-bar').css('border', '1px solid #555');--}}
+    {{--                $('#search-bar').css('color', '#fff');--}}
+    {{--                $('nav.navbar-findcond ul.navbar-nav.sec_lay_hdr a').css('color', '#fff');--}}
+    {{--                $('.hide-resize').addClass('hidden');--}}
+    {{--                $('.logo-img').find('img').attr('src', 'http://localhost:9002//themes/default/img/logo-light.png');--}}
+    {{--                $('.top-header a').css('color', '#fff');--}}
+    {{--                $('#background').removeClass('hidden');--}}
+    {{--                $('#background').css('height', '89.4%');--}}
+    {{--                $('body').attr('resized', 'true');--}}
+    {{--            }--}}
+    {{--        }--}}
+
+    {{--        $('.player-video').hover(function () {--}}
+    {{--            $('.icons').removeClass('hidden');--}}
+    {{--        });--}}
+    {{--        $('.player-video').mouseleave(function () {--}}
+    {{--            $('.icons').addClass('hidden');--}}
+    {{--        });--}}
+
+    {{--    </script>--}}
+    {{--    --}}
+    <script type="text/javascript">
+        $('#share-video').on('click', function (event) {
+            event.preventDefault();
+
+            $('.embed-placement').addClass('d-none');
+            $('.share-video').toggleClass('d-none');
+        });
+        $('#embed-video').on('click', function (event) {
+            event.preventDefault();
+            $('.embed-placement').toggleClass('d-none');
+            $('.share-video').addClass('d-none');
+        });
+
+        $('video').mediaelementplayer({
+            pluginPath: 'https://cdnjs.com/libraries/mediaelement-plugins/',
+            shimScriptAccess: 'always',
+            autoplay: true,
+            features: ['playpause', 'current', 'progress', 'duration', 'speed', 'skipback', 'jumpforward', 'tracks', 'markers', 'volume', 'chromecast', 'contextmenu', 'flash', 'fullscreen', 'quality'],
+            vastAdTagUrl: '',
+            vastAdsType: '',
+            setDimensions: true,
+            enableAutosize: true,
+            jumpForwardInterval: 20,
+            adsPrerollMediaUrl: [''],
+            adsPrerollAdUrl: [''],
+            adsPrerollAdEnableSkip: false,
+            adsPrerollAdSkipSeconds: 0,
+            success: function (media) {
+                media.addEventListener('ended', function (e) {
+
+                    if ($('#autoplay').is(":checked")) {
+                        var url = $('#next-video').find('.video-title').find('a').attr('href');
+                        if (url) {
+                            window.location.href = url;
+                        }
+                    } else {
+                        /* pass */
                     }
-                } else {
-                    /* pass */
-                }
-            }, false);
+                }, false);
 
-            media.addEventListener('playing', function (e) {
-                // if (pt_elexists('.ads-overlay-info')) {
-                //     $('.ads-overlay-info').remove();
-                // }
+                media.addEventListener('playing', function (e) {
+                    // if (pt_elexists('.ads-overlay-info')) {
+                    //     $('.ads-overlay-info').remove();
+                    // }
 
-                $('.ads-test').remove();
+                    $('.ads-test').remove();
 
-                if ($('body').attr('resized') == 'true') {
-                    PT_Resize(true);
-                }
-                $('.mejs__container').css('height', ($('.mejs__container').width() / 1.77176216) + 'px');
-                $('video, iframe').css('height', '100%');
-            });
-        },
-    });
+                    if ($('body').attr('resized') == 'true') {
+                        PT_Resize(true);
+                    }
+                    $('.mejs__container').css('height', ($('.mejs__container').width() / 1.77176216) + 'px');
+                    $('video, iframe').css('height', '100%');
+                });
+            },
+        });
 
 
-</script>
+    </script>
     <script>
         function initMap() {
-            let uluru = {lat:39.2846854,long:-76.6905368};
+            let uluru = {lat: 39.2846854, long: -76.6905368};
             @if(!is_null($user->user_extra->location_latitude)||!is_null($user->user_extra->location_longitude))
-             uluru = {
-                    lat: {{$user->user_extra->location_latitude}},
-                    lng: {{$user->user_extra->location_longitude}}
-                };
+                uluru = {
+                lat: {{$user->user_extra->location_latitude}},
+                lng: {{$user->user_extra->location_longitude}}
+            };
                 @endif
             var map = new google.maps.Map(
                 document.getElementById('map'), {zoom: 11, center: uluru});
 
 
             @if(!is_null($user->user_extra->location_latitude)||!is_null($user->user_extra->location_longitude))
-             uluru = {
-                    lat: {{$user->user_extra->location_latitude}},
-                    lng: {{$user->user_extra->location_longitude}}
-                };
+                uluru = {
+                lat: {{$user->user_extra->location_latitude}},
+                lng: {{$user->user_extra->location_longitude}}
+            };
             new google.maps.Marker({position: uluru, map: map});
             @endif
         }
