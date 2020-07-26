@@ -305,6 +305,7 @@ class Profile extends React.Component {
                     <Col md={6}>
                         <h4>Profile Picture</h4>
                         {this.defaultValue('profile_picture') && <Image className="shadow-lg rounded" src={this.defaultValue('profile_picture')} roundedCircle />}
+                        <br/>
                         <UploadImage title="Profile Picture"
                                      src={this.defaultValue('profile_picture')}
                                      show={this.state.profile_preview}
@@ -315,6 +316,7 @@ class Profile extends React.Component {
                     <Col md={6}>
                         <h4>Company Logo</h4>
                         {this.defaultValue('company_logo') && <Image className="shadow-lg rounded" src={this.defaultValue('company_logo')} roundedCircle />}
+                        <br/>
                         <UploadImage title="Company Logo"
                                      src={this.defaultValue('company_logo')}
                                      show={this.state.company_logo_preview}
