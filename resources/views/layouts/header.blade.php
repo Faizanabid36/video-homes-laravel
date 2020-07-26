@@ -45,26 +45,12 @@
 
         <div class="col-5 col-lg-2 p-0 my-3 ">
               <span> <a href="#/upload-video" class="btn  cloud-upload  btn-primary"> <i
-                          style="font-size:17px; " class="fa   fa-cloud-upload  " color="black"> </i> Upload Video  </a>
+                          style="font-size:17px;" class="fa fa-cloud-upload" color="black"> </i> Upload Video  </a>
               </span>
             <span class="dropdown nav-item dropdown-Custom  ">
                    <button class="btn dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                       @guest
-                           <div>
-                               <img
-                                   src="{{asset('images/blank.png')}}"
-                                   style="background-repeat: no-repeat;
-                                                              background-size: cover;
-                                                              border-radius: 100%;
-                                                              width: 45px;
-                                                              height: 43px;
-                                                              z-index: 16;
-                                                              position: absolute;
-                                                              top: -14px; "
-                                   alt="">
-                           </div>
-                       @else
+
                            <div>
                                <img style="background-repeat: no-repeat;
                                                               background-size: cover;
@@ -74,9 +60,9 @@
                                                               z-index: 16;
                                                               position: absolute;
                                                               top: -14px; "
-                                    src="{{auth()->user()->avatar}}"/>
+                                    src="{{auth()->user()->user_extra->profile_picture ?? asset('images/blank.png')}}"/>
                            </div>
-                       @endif
+
 
                    </button>
                     <span class="dropdowncontainer ">
