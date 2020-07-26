@@ -41,7 +41,7 @@ class Profile extends React.Component {
         this.state = {
             user: {},
             tab: 'general',
-            profile_preview: false,
+            profile_preview: true,
             company_logo_preview: null,
         };
         this.handleChangeInput = this.handleChangeInput.bind(this)
