@@ -24,14 +24,14 @@
             <div class=" col-sm-12 col-lg-2 my-3">
                 <img
 
-                    src='{{$user->avatar === null ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMgrxYAqZF6-kdFuLQesPwdAyonhn93LsxvKXax0vzbCCGd_wQ&usqp=CAU' : asset($user->avatar) }}'
+                    src='{{$user->user_extra->profile_picture ?? 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMgrxYAqZF6-kdFuLQesPwdAyonhn93LsxvKXax0vzbCCGd_wQ&usqp=CAU' }}'
                     style="width:100%;"/>
                 <div class="caption-container">
                     <p id="caption">Profile Image</p>
                 </div>
                 <hr/>
                 <img
-                    src='{{$user->company_logo === null ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMgrxYAqZF6-kdFuLQesPwdAyonhn93LsxvKXax0vzbCCGd_wQ&usqp=CAU' : asset($user->company_logo) }}'
+                    src='{{$user->user_extra->company_logo ?? 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMgrxYAqZF6-kdFuLQesPwdAyonhn93LsxvKXax0vzbCCGd_wQ&usqp=CAU' }}'
                     style="width:100%;">
                 <div class="caption-container">
                     <p id="caption">Company Logo</p>
@@ -265,17 +265,17 @@
                 <hr/>
                 <div class="d-flex">
                     <div class="font-weight-bold "><i class='fas icon fa-map-marker'></i> Address</div>
-                    <div> {{$user->address}}</div>
+                    <div> {{$user->user_extra->address}}</div>
                 </div>
                 <hr/>
                 <div class="d-flex">
-                    <div class="font-weight-bold "><i class='fas icon fa-phone'></i> Phone</div>
-                    <div> {{$user->phone}}</div>
+                    <div class="font-weight-bold "><i class='fas icon fa-phone'></i> Direct Phone</div>
+                    <div> {{$user->user_extra->direct_phone}}</div>
                 </div>
                 <hr/>
                 <div class="d-flex">
                     <div class="font-weight-bold "><i class='fas icon fa-globe'></i> Website</div>
-                    <div><a href="{{$user->website_link}}"> {{$user->website_title}} </a></div>
+                    <div><a href="{{$user->user_extra->website}}"> {{$user->user_extra->website}} </a></div>
                 </div>
                 <hr/>
                 {{--                <div class="d-flex">--}}
@@ -291,13 +291,13 @@
             <div class="col-12 pr-0">
 
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    @if(isset($user->address))
+                    @if(isset($user->user_extra->address))
                         <li class="nav-item" role="presentation">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
                                aria-controls="home" aria-selected="true">Map</a>
                         </li>
                     @endif
-                    @if(isset($user->bio))
+                    @if(isset($user->user_extra->bio))
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                                aria-controls="profile" aria-selected="false">Bio</a>
@@ -317,7 +317,7 @@
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
-                    @if(isset($user->address))
+                    @if(isset($user->user_extra->address))
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
                             <div id="map">
@@ -339,7 +339,7 @@
                         </div>
                     @endif
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <h1 class="my-3 font-weight-bold">{{$user->bio}}</h1>
+                        <h1 class="my-3 font-weight-bold">{{$user->user_extra->bio}}</h1>
                     </div>
                     <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
                         <button class="btn btn-primary my-3"> Add Review</button>
