@@ -119,7 +119,7 @@ class MainController extends Controller {
 
         $user           = $video->user;
         $related_videos = Video::userVideos( $username, $video->id, true )->get();
-        dd($related_videos->count());
+
 //        return compact( 'user', 'video', 'related_videos' ) ;
         return view( 'directory_videos', compact( 'user', 'video', 'related_videos' ) );
     }
