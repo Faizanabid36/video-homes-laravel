@@ -14,6 +14,7 @@ class Profile extends React.Component {
             user: {},
             tab: 'general',
         }
+        this.handleChangeInput = this.handleChangeInput.bind(this)
     }
 
     renderTemplate() {
@@ -28,8 +29,19 @@ class Profile extends React.Component {
         }
     }
 
+    handleChangeInput(e) {
+        let {user} = this.state;
+        user[e.target.name] = e.target.value;
+        this.setState({...user});
+    }
+
+    defaultValue(key) {
+        return this.state.user[key];
+    }
+
     render() {
-        return <><Container className="main-content">
+        return <>
+            <Container className="main-content">
             <div id="container_content">
                 <Row>
                     <div className="col-md-3">
@@ -89,14 +101,14 @@ class Profile extends React.Component {
                 <Row>
                     <Col md={6}>
                         <Form.Group controlId="exampleForm.ControlInput1">
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="name@example.com" />
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control name="name" onChange={this.handleChangeInput} defaultValue={this.defaultValue('name')} type="text" placeholder="Your Name" />
                         </Form.Group>
                     </Col>
                     <Col md={6}>
                         <Form.Group controlId="exampleForm.ControlInput1">
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="name@example.com" />
+                            <Form.Control name="email" type="email" placeholder="name@example.com" onChange={this.handleChangeInput} defaultValue={this.defaultValue('email')} />
                         </Form.Group>
                     </Col>
                 </Row>
