@@ -230,15 +230,15 @@
                                             <div class='play_hover_btn' onmouseenter="show_gif(this,'')"
                                                  onmouseleave="hide_gif(this)" style="top: 50%;left: 50%;position: absolute;transform: translate(-50%, -50%);">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"
-                                                     viewBox="0 0 50 50" fill="none" stroke="currentColor"
+                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                     class="feather feather-play-circle">
+                                                     class="text-white feather feather-play-circle">
                                                     <circle cx="12" cy="12" r="10"></circle>
                                                     <polygon points="10 8 16 12 10 16 10 8"></polygon>
                                                 </svg>
                                             </div>
-                                            <span class="text-light font-weight-light">{{ucfirst($related_video->title)}}</span>
-                                            <span class="text-light font-weight-light video-duration">{{gmdate('i:s', $related_video->duration)}}</span>
+                                            <span style="text-shadow: 1px 1px 4px #000;" class="text-light font-weight-light">{{ucfirst($related_video->title)}}</span>
+                                            <span style="text-shadow: 1px 1px 4px #000;" class="text-light font-weight-light video-duration">{{gmdate('i:s', $related_video->duration)}}</span>
                                         </div>
                                     </a>
                                 </div>
