@@ -239,6 +239,7 @@ function grabUsers( $categories, $forceClear = false ) {
 //                        'location_latitude'  => $user['location_latitude'] ?? 0,
 //                        'location_longitude' => $user['location_longitude'] ?? 0
 //                    ] );
+                    dd($d);
                     $data[ $user['user_id']['id'] ] = $d;
                 }
 
