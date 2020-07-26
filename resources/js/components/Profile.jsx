@@ -30,7 +30,6 @@ function UploadImage(props) {
                     onClose={props.onHide}
                     src={props.src}
                 />
-
             </Modal.Body>
         </Modal>
     );
@@ -306,19 +305,19 @@ class Profile extends React.Component {
 
                         <h4>Profile Picture</h4>
                         {this.defaultValue('profile_picture') && <Image className="shadow-lg rounded" src={this.defaultValue('profile_picture')} roundedCircle />}
-                        {/*<img src={this.defaultValue('profile_picture')} alt="" style={}/>*/}
                         <UploadImage title="Profile Picture" src={this.defaultValue('profile_picture')}
                                      show={this.state.profile_preview}
-                                     onHide={() => this.handleChangeInput(false, 'profile_preview')}
+                                     onHide={() => this.setState({profile_preview: false})}
                                      onChange={this.handleChangeInput}/>
                         <Button onClick={() => this.setState({profile_preview: true})}>Upload Profile Picture</Button>
                     </Col>
                     <Col md={6}>
                         <h4>Company Logo</h4>
                         {this.defaultValue('company_logo') && <Image className="shadow-lg rounded" src={this.defaultValue('company_logo')} roundedCircle />}
-                        <UploadImage title="Company Logo" src={this.defaultValue('company_logo')}
+                        <UploadImage title="Company Logo"
+                                     src={this.defaultValue('company_logo')}
                                      show={this.state.company_logo_preview}
-                                     onHide={() => this.handleChangeInput(false, 'company_logo_preview')}
+                                     onHide={() => this.setState({company_logo_preview: false})}
                                      onChange={this.handleChangeInput}/>
                         <Button onClick={() => this.setState({company_logo_preview: true})}>Upload Company Logo</Button>
                     </Col>
