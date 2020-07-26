@@ -115,8 +115,9 @@ class MainController extends Controller {
 
     public function directory_by_user_video( $username, $video_id = null ) {
         $video          = Video::userVideos( $username, $video_id )->first();
+        abort_if(!$video,403,"User has no video.");
 
-        $user           = User::whereUsername( $username )->first();
+        $user           = $video->user;
         $related_videos = Video::userVideos( $username, $video->id, true )->get();
 
 //        return compact( 'user', 'video', 'related_videos' ) ;
