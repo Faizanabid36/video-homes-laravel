@@ -12,7 +12,7 @@ import Avatar from 'react-avatar-edit';
 function UploadImage(props) {
     return (
         <Modal
-            {...props}
+            show={props.show}
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
@@ -41,7 +41,7 @@ class Profile extends React.Component {
         this.state = {
             user: {},
             tab: 'general',
-            profile_preview: true,
+            profile_preview: false,
             company_logo_preview: null,
         };
         this.handleChangeInput = this.handleChangeInput.bind(this)
@@ -295,7 +295,7 @@ class Profile extends React.Component {
                         <h4>Profile Picture</h4>
                         <UploadImage title="Profile Picture" src={this.defaultValue('profile_picture')} show={this.state.profile_preview}
                                      onHide={() => this.setState({profile_preview: !this.state.profile_preview})}/>
-                         <Button onChange={()=>this.setState({profile_preview:true})}>Upload Profile Picture</Button>
+                         <Button onClick={()=>this.setState({profile_preview:true})}>Upload Profile Picture</Button>
                     </Col>
                     <Col md={6}>
                         <h4>Company Logo</h4>
