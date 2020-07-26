@@ -208,9 +208,9 @@
             </div>
             @if($related_videos)
                 <div class="col-md-3 col-sm-5 ">
-                    <div class="container">
+                    <div class="container m-0 p-0">
                         <div class="row">
-                            <div class="col-12"><div class="next-video">
+                            <div class="col-12 m-0 p-0"><div class="next-video">
                                     <div class="next-text pull-left pt_mn_wtch_nxttxt">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                              viewBox="0 0 24 24">
@@ -223,7 +223,7 @@
                         </div>
                         <div class="row">
                             @foreach($related_videos as $related_video)
-                                <div class="col-12">
+                                <div class="col-12 m-0 p-0" >
                                     <a href="{{route('directory_by_username',[$user->username,$related_video->video_id])}}">
                                         <div class="p-2 shadow-lg bg-white rounded video-thumb overlay"
                                              style="background-image: url({{asset('storage/'.$related_video->thumbnail)}});background-size: cover;height:200px;">
