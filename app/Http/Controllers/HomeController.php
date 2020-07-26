@@ -30,7 +30,7 @@ class HomeController extends Controller
     public function logged_user()
     {
         $user = auth()->user();
-        $user = collect($user)->except('user_extras.user_id');
+        $user = collect($user)->except('user_extra.user_id');
         return compact('user');
     }
 
