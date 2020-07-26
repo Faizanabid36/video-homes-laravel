@@ -208,7 +208,7 @@
             </div>
             @if($related_videos)
                 <div class="col-md-5">
-                    <div class="content video-list pt_shadow">
+                    <div class="container">
                         <div class="row">
                             <div class="col-12"><div class="next-video">
                                     <div class="next-text pull-left pt_mn_wtch_nxttxt">
