@@ -2,7 +2,7 @@
 @section('content')
 
     <div class="row">
-        <div class="col-12 my-2 p-0 ">
+        <div class="col-12">
             <div class="Search-boxes">
                 <form action="{{route('search_in_directory')}}" method="POST">
                     @csrf
@@ -32,7 +32,7 @@
 
     <!-- 3rd row -->
     @if(count($users)>0)
-        <div class="row Category-Boxes">
+        <div class="row p-2">
             @if(!empty($categories) )
                 @foreach(($level1 ? collect($categories)->first()['children'] : $industries) as $category)
                     <div class="col-6 my-0"><span> <a
@@ -44,12 +44,12 @@
                 @endforeach
             @endif
         </div>
-        <div class="row">
+        <div class="row my-2">
             <div class="col-12">
                 <div id="map"></div>
             </div>
         </div>
-        <div class="row">
+        <div class="row m-y">
             <div class="col-12">
                 <div class="float-left">
                     <h6 class="my-3"> Found<span class="h-8"> {{count($users)}} </span>listings </h6>
@@ -65,7 +65,7 @@
                     {{--                            </div>--}}
                     {{--                        </div>--}}
                 </div>
-                <div class="float-right" >
+                <div class="float-right">
                     <ul class="nav Custom-nav2 nav-pills mb-3" id="pills-tab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home"
@@ -82,13 +82,13 @@
                 </div>
             </div>
 
-            <div class="col-12 p-0">
+            <div class="col-12 my-2">
                 <div class="tab-content Custom-Tab2" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                          aria-labelledby="pills-home-tab">
                         @foreach($users as $account_user)
-                            <div class="card mx-auto" style="max-width: 1040px;">
-                                <div class="row no-gutters">
+                            <div class="card my-1">
+                                <div class="row">
                                     <div class="col-md-4">
                                         <img
                                             src="{{$account_user['company_logo'] ?? asset('images/blank.png')}}"
