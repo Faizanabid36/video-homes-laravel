@@ -9,7 +9,6 @@ import axios from "axios";
 import GooglePlacesAutocomplete, { geocodeByAddress } from "react-google-places-autocomplete";
 import Avatar from 'react-avatar-edit';
 import InputMask from "react-input-mask";
-import { Editor } from '@tinymce/tinymce-react';
 
 
 function UploadImage(props) {
@@ -198,7 +197,9 @@ class Profile extends React.Component {
                         <Form.Group controlId="direct_phone">
                             <Form.Label>Direct Phone</Form.Label>
                             <InputMask mask="(999) 999-9999" maskPlaceholder="(999) 999-99999" name='direct_phone' className='form-control' onChange={this.handleChangeInput} value={this.defaultValue('direct_phone')} />
-
+                            <Form.Control name='direct_phone' onChange={this.handleChangeInput}
+                                          defaultValue={this.defaultValue('direct_phone')} type="tel"
+                                          placeholder="(888) 888-8888"/>
                         </Form.Group>
                     </Col>
                     <Col md={6}>
@@ -241,6 +242,9 @@ class Profile extends React.Component {
                         <Form.Group controlId="office_phone">
                             <Form.Label>Office Phone</Form.Label>
                             <InputMask mask="(999) 999-9999" maskPlaceholder="(999) 999-99999" name='office_phone' className='form-control' onChange={this.handleChangeInput} value={this.defaultValue('office_phone')} />
+                            {/*<Form.Control name='office_phone' onChange={this.handleChangeInput}*/}
+                            {/*              defaultValue={this.defaultValue('office_phone')} type="tel"*/}
+                            {/*              placeholder="(888) 888-8888"/>*/}
                         </Form.Group>
                     </Col>
                 </Row>
@@ -294,17 +298,17 @@ class Profile extends React.Component {
                         </Form.Group>
                     </Col>
                     <Col md={4}>
-                        <Form.Group controlId="twitter">
-                            <label htmlFor="twitter-url">Twiiter</label>
+                        <Form.Group controlId="youtube">
+                            <label htmlFor="youtube-url">Youtube</label>
                             <InputGroup className="mb-3">
                                 <InputGroup.Prepend>
-                                    <InputGroup.Text id="twitter-url-addon3">
-                                        https://www.twitter.com/
+                                    <InputGroup.Text id="youtube-url-addon3">
+                                        https://www.youtube.com/
                                     </InputGroup.Text>
                                 </InputGroup.Prepend>
                                 <FormControl name='youtube' onChange={this.handleChangeInput}
-                                             defaultValue={this.defaultValue('youtube')} id="twitter-url"
-                                             aria-describedby="twitter-url-addon3"/>
+                                             defaultValue={this.defaultValue('youtube')} id="youtube-url"
+                                             aria-describedby="youtube-url-addon3"/>
                             </InputGroup>
                         </Form.Group>
                     </Col>
@@ -337,24 +341,6 @@ class Profile extends React.Component {
                         <Form.Label>About/Bio (Max 600 words)</Form.Label>
                         <Form.Control name="bio" as="textarea" rows="3" defaultValue={this.defaultValue('bio')}
                                       onChange={this.handleChangeInput}/>
-                        <Editor
-                            name="bio"
-                            initialValue={this.defaultValue('bio')}
-                            init={{
-                                height: 500,
-                                menubar: false,
-                                plugins: [
-                                    'advlist autolink lists link image charmap print preview anchor',
-                                    'searchreplace visualblocks code fullscreen',
-                                    'insertdatetime media table paste code help wordcount'
-                                ],
-                                toolbar:
-                                    'undo redo | formatselect | bold italic backcolor | \
-                                    alignleft aligncenter alignright alignjustify | \
-                                    bullist numlist outdent indent | removeformat | help'
-                            }}
-                            onEditorChange={(content, editor)=>this.handleChangeInput(content,'bio')}
-                        />
                     </Form.Group>
                 </Col>
                 </Row>
