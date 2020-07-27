@@ -133,31 +133,10 @@
                                         <i class="fa icon-blue fa-map-marker mr-2"></i>
                                         <b> Address: </b>{{ucfirst($account_user['address'])}}
                                     </p>
-                                      @if(isset($account_user['user_role']) && !is_null($account_user['user_role']))
-                                          <button class="btn-tags"> {{ucfirst($account_user['user_role']['role'])}}
-                                                  <span class="fa  fa-tag"></span>
-                                          </button>
-                                          {{--                                          @if()--}}
-                                          {{--                                          @else--}}
-                                          {{--                                          <button class="btn-tags"> {{ucfirst(str_replace('-',' ',$role_slug))}}--}}
-                                          {{--                                                  <span class="fa  fa-tag"></span>--}}
-                                          {{--                                          </button>--}}
-                                          {{--                                          @endif--}}
-                                          {{--                                          @if(isset($role_cat))--}}
-                                          {{--                                              <button class="btn-tags"> {{ucfirst(str_replace('-',' ',$sub_role_slug))}}--}}
-                                          {{--                                                  <span class="fa  fa-tag"></span>--}}
-                                          {{--                                              </button>--}}
-                                          {{--                                          @endif--}}
-                                          {{--                                          @if(isset($sub_role_cat)&&isset($role_cat))--}}
-                                          {{--                                              <button class="btn-tags"> {{ucfirst(str_replace('-',' ',$sub_cat_slug))}}--}}
-                                          {{--                                                  <span class="fa  fa-tag"></span>--}}
-                                          {{--                                              </button>--}}
-                                          {{--                                          @endif--}}
-                                      @endif
                                     <p class="card-text my-3">  <i
                                             class="fa icon-blue mr-2 fa-phone"></i>   <b>Phone:</b> {{$account_user['direct_phone']}}</p>
                                        <p class="card-text my-3">  <i
-                                               class="fa icon-blue mr-2 fa-phone"></i>   <b>Phone Office:</b> {{$account_user['office_phoe']}}</p>
+                                               class="fa icon-blue mr-2 fa-phone"></i>   <b>Phone Office:</b> {{$account_user['office_phone']}}</p>
                                   </div>
                                 </div>
                               </div>
