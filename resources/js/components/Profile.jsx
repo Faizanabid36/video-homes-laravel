@@ -339,6 +339,7 @@ class Profile extends React.Component {
                         <Form.Control name="bio" as="textarea" rows="3" defaultValue={this.defaultValue('bio')}
                                       onChange={this.handleChangeInput}/>
                         <Editor
+                            apiKey="squs5ficzrgoutolw85bstu5b8r4dij0c3sc38ir49inthac"
                             name="bio"
                             initialValue={this.defaultValue('bio')}
                             init={{
