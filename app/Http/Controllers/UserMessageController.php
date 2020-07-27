@@ -25,14 +25,7 @@ class UserMessageController extends Controller
     public function create()
     {
         //
-        request()->validate([
-            "user_id"=>"required|integer|exists:users,id",
-            "video_id"=>"required|integer|exists:videos,id",
-            "name"=>"required|min:3",
-            "phone"=>"required|integer",
-        ]);
-        UserMessage::create(request()->all());
-        return back()->withSuccess(['message'=>"Message Sent"]);
+
     }
 
     /**
@@ -44,6 +37,14 @@ class UserMessageController extends Controller
     public function store(Request $request)
     {
         //
+        request()->validate([
+            "user_id"=>"required|integer|exists:users,id",
+            "video_id"=>"required|integer|exists:videos,id",
+            "name"=>"required|min:3",
+            "phone"=>"required|integer",
+        ]);
+        UserMessage::create(request()->all());
+        return back()->withSuccess(['message'=>"Message Sent"]);
     }
 
     /**
