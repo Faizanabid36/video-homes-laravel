@@ -65,8 +65,7 @@ class Profile extends React.Component {
         if (elem.target.files[0].size > 71680) {
             alert("File is too big!");
             elem.target.value = "";
-        }
-        ;
+        };
     }
 
     onClose() {
@@ -80,7 +79,9 @@ class Profile extends React.Component {
     componentDidMount() {
         axios.get('get_logged_user').then(({data}) => {
             console.log(data.categories);
-            this.setState({user: data.user, categories: data.categories})
+            this.setState({user: data.user, categories: data.categories},()=>{
+                $('.selectpicker').selectpicker();
+            })
         });
     }
 
