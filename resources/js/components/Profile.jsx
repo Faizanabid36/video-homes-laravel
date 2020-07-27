@@ -1,13 +1,15 @@
 import { Button, Carousel, Col, Row, Container, Form, InputGroup, FormControl, Modal, Image } from "react-bootstrap";
 import React from "react";
 import axios from "axios";
-import General from "./Profile/General";
-import Videos from "./Videos/Videos";
-import DeleteAccount from "./Profile/DeleteAccount";
-import ChangePassword from "./Profile/ChangePassword";
-import Tags from "./Profile/Tags";
+// import General from "./Profile/General";
+// import Videos from "./Videos/Videos";
+// import DeleteAccount from "./Profile/DeleteAccount";
+// import ChangePassword from "./Profile/ChangePassword";
+// import Tags from "./Profile/Tags";
 import GooglePlacesAutocomplete, { geocodeByAddress } from "react-google-places-autocomplete";
 import Avatar from 'react-avatar-edit';
+import InputMask from "react-input-mask";
+
 
 function UploadImage(props) {
     return (
@@ -238,9 +240,10 @@ class Profile extends React.Component {
                     <Col md={6}>
                         <Form.Group controlId="office_phone">
                             <Form.Label>Office Phone</Form.Label>
-                            <Form.Control name='office_phone' onChange={this.handleChangeInput}
-                                          defaultValue={this.defaultValue('office_phone')} type="tel"
-                                          placeholder="(888) 888-8888"/>
+                            <InputMask mask="999-999-9999" maskPlaceholder="-" name='office_phoe' classame='form-control' onChange={this.handleChangeInput} value={this.defaultValue('office_phone')} />
+                            {/*<Form.Control name='office_phone' onChange={this.handleChangeInput}*/}
+                            {/*              defaultValue={this.defaultValue('office_phone')} type="tel"*/}
+                            {/*              placeholder="(888) 888-8888"/>*/}
                         </Form.Group>
                     </Col>
                 </Row>
