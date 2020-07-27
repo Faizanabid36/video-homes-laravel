@@ -430,7 +430,7 @@
                     <!-- Contact -->
                     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                         <h1 class="my-3 font-weight-bold"> Contact to {{$user->name}} </h1>
-                        <form method="POST" action="{{route('user_message.create')}}">
+                        <form method="POST" action="{{route('user_message.store')}}">
                             @csrf
                             <input type="hidden" name="user_id" value="{{$video->user_id}}">
                             <input type="hidden" name="video_id" value="{{$video->id}}">
