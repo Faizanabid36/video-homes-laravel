@@ -86,13 +86,13 @@
                             <li class="nav-item">
                                 <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home"
                                    role="tab"
-                                   aria-controls="pills-home" aria-selected="true"><i class="fafa-list icon"></i></a>
+                                   aria-controls="pills-home" aria-selected="true"><i class="fa fa-list icon"></i></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile"
                                    role="tab"
                                    aria-controls="pills-profile" aria-selected="false"><i
-                                        class="fafa-th-large icon"></i></a>
+                                        class="fa fa-th-large icon"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -100,63 +100,66 @@
 
                 <div class="col-12 p-0">
                     <div class="tab-content Custom-Tab2" id="pills-tabContent">
-                <span class="tab-pane fade show active  " id="pills-home" role="tabpanel"
-                      aria-labelledby="pills-home-tab">
-                    @foreach($users as $account_user)
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                             aria-labelledby="pills-home-tab">
+                            @foreach($users as $account_user)
 
-                        <div class="card mx-auto" style="max-width: 1040px;">
-                              <div class="row no-gutters">
-                                <div class="col-md-4">
+                                <div class="card mx-auto" style="max-width: 1040px;">
+                                    <div class="row no-gutters">
+                                        <div class="col-md-4">
 
-                                    @if(!is_null($account_user['company_logo']))
-                                        <img
-                                            src="{{$account_user['company_logo']}}"
-                                            class="card-img"
-                                            alt="...">
-                                    @else
-                                        <img
-                                            src="{{asset('images/blank.png')}}"
-                                            class="card-img"
-                                            alt="...">
-                                    @endif
+                                            @if(!is_null($account_user['company_logo']))
+                                                <img
+                                                    src="{{$account_user['company_logo']}}"
+                                                    class="card-img"
+                                                    alt="...">
+                                            @else
+                                                <img
+                                                    src="{{asset('images/blank.png')}}"
+                                                    class="card-img"
+                                                    alt="...">
+                                            @endif
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <h2 class="card-title ">
+                                                    <a
+                                                        href="{{route('directory_by_username',$account_user['username'])}}">
+                                                        <img src="{{$account_user['profile_picture']}}"
+                                                             class="rounded-circle rounded"
+                                                             style="width:50px;" alt="">
+                                                        {{ucfirst($account_user['name'])}} </a>
+                                                </h2>
+                                                <br/>
+                                                @if ($account_user['bio'] && $account_user['bio'] != '')
+                                                    <p class="card-text my-2">{!! substr($account_user['bio'],0,150) !!}
+                                                        @if (strlen($account_user['bio']) > 150)
+                                                            ...
+                                                        @endif</p>
+                                                @endif
+                                                @if ($account_user['bio'] && $account_user['address'] != '')
+                                                    <p class="card-text my-2">
+                                                        <i class="fa icon-blue fa-map-marker mr-2"></i>
+                                                        <b>Address: </b>{{ucfirst($account_user['address'])}}
+                                                    </p>
+                                                @endif
+                                                @if ($account_user['bio'] && $account_user['direct_phone'] != '')
+                                                    <p class="card-text my-3"><i
+                                                            class="fa icon-blue mr-2 fa-phone"></i>
+                                                        <b>Phone:</b> {{$account_user['direct_phone']}}</p>
+                                                @endif
+                                                @if ($account_user['bio'] && $account_user['office_phone'] != '')
+                                                    <p class="card-text my-3"><i
+                                                            class="fa icon-blue mr-2 fa-phone"></i> <b>Phone
+                                                            Office:</b> {{$account_user['office_phone']}}</p>
+                                                @endif
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-8">
-                                  <div class="card-body">
-                                    <h2 class="card-title ">
-                                        <a
-                                            href="{{route('directory_by_username',$account_user['username'])}}">
-                                            <img src="$account_user['profile_picture']" class="rounded-circle rounded"
-                                                 style="width:50px;" alt="">
-                                            {{ucfirst($account_user['name'])}} </a>
-                                    </h2>
-                                    <br/>
-                                    @if ($account_user['bio'] && $account_user['bio'] != '')
-                                          <p class="card-text my-2">{!! substr($account_user['bio'],0,150) !!}
-                                              @if (strlen($account_user['bio']) > 150)
-                                                  ...
-                                              @endif</p>
-                                      @endif
-                                      @if ($account_user['bio'] && $account_user['address'] != '')
-                                          <p class="card-text my-2">
-                                        <i class="fa icon-blue fa-map-marker mr-2"></i>
-                                        <b>Address: </b>{{ucfirst($account_user['address'])}}
-                                    </p>
-                                      @endif
-                                      @if ($account_user['bio'] && $account_user['direct_phone'] != '')
-                                          <p class="card-text my-3">  <i
-                                                  class="fa icon-blue mr-2 fa-phone"></i>   <b>Phone:</b> {{$account_user['direct_phone']}}</p>
-                                      @endif
-                                      @if ($account_user['bio'] && $account_user['office_phone'] != '')
-                                          <p class="card-text my-3">  <i
-                                                  class="fa icon-blue mr-2 fa-phone"></i>   <b>Phone Office:</b> {{$account_user['office_phone']}}</p>
-                                      @endif
-
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                    @endforeach
-                </span>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
