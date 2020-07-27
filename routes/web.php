@@ -95,6 +95,7 @@ Route::group( [ 'middleware' => 'admin' ], function () {
 } );
 
 Route::resource( 'report_query', 'ReportQueryController' );
+Route::resource( 'user_message', 'UserMessageController' );
 
 Route::get( 'reported_query_videos', 'ReportQueryController@reported_videos' );
 Route::get( '/page/{slug}', 'PageController@view' )->name( 'public.page' );

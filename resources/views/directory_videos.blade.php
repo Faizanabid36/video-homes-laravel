@@ -322,9 +322,9 @@
         </div>
 
         <div class="row">
-            <div class="col-12 pr-0">
+            <div class="col-12">
 
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <ul class="nav nav-tabs" role="tablist">
                     @if(isset($user->user_extra->address))
                         <li class="nav-item" role="presentation">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
@@ -350,30 +350,14 @@
                            aria-controls="report" aria-selected="false">Report</a>
                     </li>
                 </ul>
-                <div class="tab-content" id="myTabContent">
+                <div class="tab-content p-3 card">
                     @if(isset($user->user_extra->address))
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-
-                            <div id="map">
-                            </div>
-                            <br/>
-
-                            {{--                            <h4 class="my-3"> Get directions from: </h4>--}}
-                            {{--                            <div class="input-group mb-3">--}}
-                            {{--                                <input type="text" class="form-control" placeholder="Enter address or zip code"--}}
-                            {{--                                       aria-label="Recipient's username" aria-describedby="button-addon2">--}}
-                            {{--                                <div class="input-group-append">--}}
-                            {{--                                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i--}}
-                            {{--                                            style="color:gray ; font-size:14px" class='fa icon fa-map-marker'></i>--}}
-                            {{--                                    </button>--}}
-                            {{--                                </div>--}}
-                            {{--                            </div>--}}
-                            {{--                            <p><a href=""> <i style="color:lightBlue ; font-size:14px" class='fa icon fa-circle'></i>{{$user->address}}</a></p>--}}
-                            {{--                            <button class="btn btn-primary"> GET DIRECTION</button>--}}
+                            <div id="map"></div>
                         </div>
                     @endif
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <h1 class="my-3 font-weight-bold">{{$user->user_extra->bio}}</h1>
+                        <p>{{$user->user_extra->bio}}</p>
                     </div>
                     <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
                         <button class="btn btn-primary my-3"> Add Review</button>
@@ -445,23 +429,29 @@
                     <!-- reviews end -->
                     <!-- Contact -->
                     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                        <h1 class="my-3 font-weight-bold"> Send message to listing owner </h1>
-                        <form>
+                        <h1 class="my-3 font-weight-bold"> Contact to {{$user->name}} </h1>
+                        <form method="POST" action="{{route('user_message.create')}}">
+                            @csrf
+                            <input type="hidden" name="user_id" value="{{$video->user_id}}">
+                            <input type="hidden" name="video_id" value="{{$video->id}}">
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">Contact Name</label>
-                                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlInput1">Contact Email</label>
-                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="">
-                            </div>
 
-
-                            <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Example textarea</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <label for="contact_name">Contact Name</label>
+                                <input required name="name" type="text" class="form-control" id="contact_name" placeholder="Your Name">
                             </div>
-                            <button class="btn btn-primary"> Send Message</button>
+                            <div class="form-group">
+                                <label for="contact_email">Contact Email</label>
+                                <input required name="email" type="email" class="form-control" id="contact_email" placeholder="Email address">
+                            </div>
+                            <div class="form-group">
+                                <label for="contact_phone">Contact Phone</label>
+                                <input required name="phone" type="tel" class="form-control" id="contact_phone" placeholder="Phone">
+                            </div>
+                            <div class="form-group">
+                                    <label for="message">Message</label>
+                                    <textarea name="message" class="form-control" id="message" rows="3" placeholder="Message here"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary"> Send</button>
                         </form>
                     </div>
                     <div class="tab-pane fade" id="report" role="tabpanel" aria-labelledby="report-tab">

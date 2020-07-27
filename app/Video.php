@@ -3,8 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Nagy\LaravelRating\Traits\Rate\Rateable;
 
 class Video extends Model {
+    use Rateable;
     //
     protected $guarded = [];
     protected $dates = [ 'converted_for_streaming_at', ];

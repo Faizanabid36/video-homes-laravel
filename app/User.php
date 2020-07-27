@@ -4,10 +4,11 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Nagy\LaravelRating\Traits\Rate\CanRate;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable,CanRate;
 
     protected $with = ['user_extra'];
 
@@ -44,14 +45,6 @@ class User extends Authenticatable
             $playlist->name = 'Unlisted';
             $playlist->user_id = $user->id;
             $playlist->save();
-
-//            $identity = new SocialIdentity();
-//            $identity->user_id = $user->id;
-//            $identity->facebook = '';
-//            $identity->instagram = '';
-//            $identity->youtube_channel = '';
-//            $identity->twitter = '';
-//            $identity->save();
         });
     }
 

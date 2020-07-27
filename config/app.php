@@ -176,7 +176,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Pbmedia\LaravelFFMpeg\FFMpegServiceProvider::class,
-
+        Nagy\LaravelRating\LaravelRatingServiceProvider::class
     ],
 
     /*
@@ -230,7 +230,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'FFMpeg' => Pbmedia\LaravelFFMpeg\FFMpegFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
-
+        "LaravelRating" => \Nagy\LaravelRating\LaravelRatingFacade::class
     ],
 
 ];
