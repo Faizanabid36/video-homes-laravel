@@ -29,15 +29,15 @@
                 <div class="caption-container">
                     <p id="caption">{{$user->name}}
                         <br>
-                        @if ($user->user_extra->facebook !== '')
+                        @if ($user->user_extra->facebook && $user->user_extra->facebook !== '')
                             <a href="https://www.facebook.com/{{$user->user_extra->facebook}}"><i
                                     class="fa fa-facebook-f"></i></a>
                         @endif
-                        @if ($user->user_extra->instagram !== '')
+                        @if ($user->user_extra->instagram && $user->user_extra->instagram !== '')
                             <a href="https://www.instagram.com/{{$user->user_extra->instagram}}"><i
                                     class="fa fa-instagram"></i></a>
                         @endif
-                        @if ($user->user_extra->youtube !== '')
+                        @if ($user->user_extra->youtube && $user->user_extra->youtube !== '')
                             <a href="https://www.youtube.com/{{$user->user_extra->youtube}}"><i
                                     class="fa fa-youtube"></i></a>
                         @endif
