@@ -41,7 +41,7 @@ class Profile extends React.Component {
         super(...arguments);
         this.state = {
             user: {},
-            categories:[],
+            categories: [],
             tab: 'general',
             profile_preview: false,
             company_logo_preview: false,
@@ -319,15 +319,14 @@ class Profile extends React.Component {
                                         title="Choose one of the following Profession and Expertise...">
                                     {this.state.categories.map(u => {
                                         return <optgroup label={u['name']}>
-                                            {u['childNodes'].length > 0 ? u['childNodes'].map((u1, k) => {
-                                                return u1['childNodes'].length > 0 ? u1['childNodes'].map((u2, k) =>
+                                            {u['children'].length > 0 ? u['children'].map((u1, k) => {
+                                                return u1['children'].length > 0 ? u1['children'].map((u2, k) =>
                                                         <option value={u2['id']}
                                                                 data-subtext={u1['name']}>{u2['name']}</option>) :
                                                     <option value={u1['id']}>{u1['name']}</option>;
                                             }) : <option value={u['id']}>{u['name']}</option>
                                             }
-
-                                        </optgroup>
+                                        </optgroup>;
                                     })}
                                 </select>
                             </div>}

@@ -53,7 +53,8 @@ class UserCategory extends Model {
     }
 
     public function scopeLevelCategories( $query ) {
-        return $query->selectRaw( 'user_categories.*,uc1.name as parent_name' )->leftJoin( 'user_categories as uc1', 'user_categories.parent_id', 'uc1.id' )
+        return $query->selectRaw( 'user_categories.*,uc1.name as parent_name' )
+                     ->leftJoin( 'user_categories as uc1', 'user_categories.parent_id', 'uc1.id' )
                      ->get()->toArray();
     }
 
