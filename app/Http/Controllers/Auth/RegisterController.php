@@ -48,8 +48,8 @@ class RegisterController extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function showRegistrationForm() {
-        $data          = UserCategory::levelCategories();
-        $user_category = collect( buildTree( $data ) )->values();
+        $user_category          = UserCategory::levelCategories();
+//        $user_category = collect( buildTree( $user_category ) )->values();
 
 //        return $user_category;
         return view( 'auth.register', compact( 'user_category' ) );

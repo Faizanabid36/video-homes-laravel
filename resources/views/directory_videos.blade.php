@@ -48,7 +48,7 @@
                     src='{{$user->user_extra->company_logo ?? 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMgrxYAqZF6-kdFuLQesPwdAyonhn93LsxvKXax0vzbCCGd_wQ&usqp=CAU' }}'
                     style="width:100%;">
                 <div class="caption-container">
-                    <p id="caption">{{$user->user_extra->company_name}}o</p>
+                    <p id="caption">{{$user->user_extra->company_name}}</p>
                 </div>
             </div>
             <div class="col-md-{{$related_videos->count() ? 7 : 10}} player-video mt-0">
@@ -283,6 +283,11 @@
                 </div>
                 <hr/>
                 <div class="d-flex">
+                    <div class="font-weight-bold "><i class='fa icon fa-id-card'></i> Company Name</div>
+                    <div> {{$user->user_extra->company_name}}</div>
+                </div>
+                <hr/>
+                <div class="d-flex">
                     <div class="font-weight-bold "><i class='fa icon fa-map-marker'></i> Address</div>
                     <div> {{$user->user_extra->address}}</div>
                 </div>
@@ -300,6 +305,11 @@
                 <div class="d-flex">
                     <div class="font-weight-bold "><i class='fa icon fa-globe'></i> Website</div>
                     <div><a href="{{$user->user_extra->website}}"> {{$user->user_extra->website}} </a></div>
+                </div>
+                <hr/>
+                <div class="d-flex">
+                    <div class="font-weight-bold "><i class='fa icon fa-globe'></i> License #</div>
+                    <div>{{$user->user_extra->license_no}} </div>
                 </div>
                 <hr/>
                 {{--                <div class="d-flex">--}}

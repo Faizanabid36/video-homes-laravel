@@ -159,12 +159,9 @@
                               </div>
                             </div>
                     @endforeach
-
                 </span>
                 </div>
             </div>
-
-
         </div>
         @else
             <h1>No Result Found</h1>

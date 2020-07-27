@@ -321,10 +321,10 @@ class Profile extends React.Component {
                                     {this.state.categories.map(u => <optgroup key={u.id} label={u['name']}>
                                         {u['children'].length > 0 ? u['children'].map((u1, k) => {
                                             return u1['children'].length > 0 ? u1['children'].map((u2, k) =>
-                                                    <option  selected={u2['id'] == this.defaultValue('user_category_id')} key={k} value={u2['id']}
+                                                    <option selected={u2['id'] === this.defaultValue('user_category_id')} key={k} value={u2['id']}
                                                             data-subtext={u1['name']}>{u2['name']}</option>) :
-                                                <option selected={u1['id'] == this.defaultValue('user_category_id')} key={k} value={u1['id']}>{u1['name']}</option>;
-                                        }) : <option selected={u['id'] == this.defaultValue('user_category_id')} key={u.id} value={u['id']}>{u['name']}</option>
+                                                <option selected={u1['id'] === this.defaultValue('user_category_id')} key={k} value={u1['id']}>{u1['name']}</option>;
+                                        }) : <option selected={u['id'] === this.defaultValue('user_category_id')} key={u.id} value={u['id']}>{u['name']}</option>
                                         }
                                     </optgroup>)}
                                 </select>
