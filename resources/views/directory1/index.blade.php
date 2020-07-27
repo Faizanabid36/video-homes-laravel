@@ -103,31 +103,24 @@
                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                              aria-labelledby="pills-home-tab">
                             @foreach($users as $account_user)
-
                                 <div class="card mx-auto" style="max-width: 1040px;">
                                     <div class="row no-gutters">
                                         <div class="col-md-4">
-
-                                            @if(!is_null($account_user['company_logo']))
-                                                <img
-                                                    src="{{$account_user['company_logo']}}"
-                                                    class="card-img"
-                                                    alt="...">
-                                            @else
-                                                <img
-                                                    src="{{asset('images/blank.png')}}"
-                                                    class="card-img"
-                                                    alt="...">
-                                            @endif
+                                            <img
+                                                src="{{$account_user['company_logo'] ?? asset('images/blank.png')}}"
+                                                class="card-img"
+                                                alt="{{$account_user['company_name']}}">
+                                            <p>{{$account_user['company_name']}}</p>
                                         </div>
                                         <div class="col-md-8">
                                             <div class="card-body">
                                                 <h2 class="card-title ">
                                                     <a
                                                         href="{{route('directory_by_username',$account_user['username'])}}">
-                                                        <img src="{{$account_user['profile_picture']}}"
-                                                             class="rounded-circle rounded"
-                                                             style="width:50px;" alt="">
+                                                        <img
+                                                            src="{{$account_user['profile_picture'] ?? asset('images/blank.png')}}"
+                                                            class="rounded-circle rounded"
+                                                            style="width:50px;" alt="">
                                                         {{ucfirst($account_user['name'])}} </a>
                                                 </h2>
                                                 <br/>
@@ -146,12 +139,16 @@
                                                 @if ($account_user['bio'] && $account_user['direct_phone'] != '')
                                                     <p class="card-text my-3"><i
                                                             class="fa icon-blue mr-2 fa-phone"></i>
-                                                        <b>Phone:</b> <a href="tel:{{$account_user['direct_phone']}}">{{$account_user['direct_phone']}}</a></p>
+                                                        <b>Phone:</b> <a
+                                                            href="tel:{{$account_user['direct_phone']}}">{{$account_user['direct_phone']}}</a>
+                                                    </p>
                                                 @endif
                                                 @if ($account_user['bio'] && $account_user['office_phone'] != '')
                                                     <p class="card-text my-3"><i
                                                             class="fa icon-blue mr-2 fa-phone"></i> <b>Phone
-                                                            Office:</b> <a href="tel:{{$account_user['office_phone']}}">{{$account_user['office_phone']}}</a></p>
+                                                            Office:</b> <a
+                                                            href="tel:{{$account_user['office_phone']}}">{{$account_user['office_phone']}}</a>
+                                                    </p>
                                                 @endif
 
                                             </div>
