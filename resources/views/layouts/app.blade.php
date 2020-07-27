@@ -39,7 +39,7 @@
 
 
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
+
 <script src="{{asset('js/jquery-3.min.js')}}"></script>
 <script src="{{asset('js/jquery-ui.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/jquery.form.min.js')}}"></script>
@@ -51,6 +51,7 @@
 <script src="{{asset('js/Fingerprintjs2/fingerprint2.js')}}"></script>
 <script src="{{asset('js/emoji/emojionearea/dist/emojionearea.js')}}"></script>
 <script src="{{asset('js/mediaelement-and-player.min.js')}}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 @yield('footer_script')
 </body>
 </html>
