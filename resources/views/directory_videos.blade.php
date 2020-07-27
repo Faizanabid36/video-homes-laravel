@@ -27,14 +27,19 @@
                     src='{{$user->user_extra->profile_picture ?? 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMgrxYAqZF6-kdFuLQesPwdAyonhn93LsxvKXax0vzbCCGd_wQ&usqp=CAU' }}'
                     style="width:100%;"/>
                 <div class="caption-container">
-                    <p id="caption">Profile Image</p>
+                    <p id="caption">{{$user->name}}</p>
+                    <p>
+                        <a href="{{$user->user_extra->facebook}}"><i class="fa fa-facebook-f"></i></a>
+                        <a href="{{$user->user_extra->instagram}}"><i class="fa fa-instagram"></i></a>
+                        <a href="{{$user->user_extra->youtube}}"><i class="fa fa-youtube"></i></a>
+                    </p>
                 </div>
                 <hr/>
                 <img
                     src='{{$user->user_extra->company_logo ?? 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMgrxYAqZF6-kdFuLQesPwdAyonhn93LsxvKXax0vzbCCGd_wQ&usqp=CAU' }}'
                     style="width:100%;">
                 <div class="caption-container">
-                    <p id="caption">Company Logo</p>
+                    <p id="caption">{{$user->user_extra->company_name}}o</p>
                 </div>
             </div>
             <div class="col-md-{{$related_videos->count() ? 7 : 10}} player-video mt-0">
@@ -270,7 +275,12 @@
                 <hr/>
                 <div class="d-flex">
                     <div class="font-weight-bold "><i class='faicon fa-phone'></i> Direct Phone</div>
-                    <div> {{$user->user_extra->direct_phone}}</div>
+                    <div><a href="tel:{{$user->user_extra->direct_phone}}">{{$user->user_extra->direct_phone}}</a></div>
+                </div>
+                <hr/>
+                <div class="d-flex">
+                    <div class="font-weight-bold "><i class='faicon fa-phone'></i> Office Phone</div>
+                    <div><a href="tel:{{$user->user_extra->office_phone}}">{{$user->user_extra->office_phone}}</a></div>
                 </div>
                 <hr/>
                 <div class="d-flex">
