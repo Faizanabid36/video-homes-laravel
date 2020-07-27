@@ -273,6 +273,7 @@
         <div class="row my-4">
             <div class="col-12">
                 <h4 class="font-weight-bold " style="color:gray"> CONTACT INFORMATION</h4>
+
                 <div class="borderBottomBold my-3"></div>
 
             </div>
@@ -430,6 +431,7 @@
                     <!-- Contact -->
                     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                         <h1 class="my-3 font-weight-bold"> Contact to {{$user->name}} </h1>
+
                         <form method="POST" action="{{route('user_message.store')}}">
                             @csrf
                             <input type="hidden" name="user_id" value="{{$video->user_id}}">
