@@ -16,19 +16,13 @@
     </script>
 </head>
 <body>
-<div class="container-fluid m-0 p-0">
-
-    <div class="row  m-0 p-0">
-        <div class="col m-0 p-0 ">
-            <!-- Nav       -->
-
+<div class="container">
+    <div class="row">
+        <div class="col-12">
             <nav class="navbar navbar-expand-lg navbar-light bg-light home-nav ">
                 <a class="navbar-brand" href="{{url('/')}}">
-
                     <img src="{{asset('img/cropped-VideoHomes-3.png')}}"
                          class="logo" alt="videoHomes Logo"/>
-
-
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -73,8 +67,6 @@
             </nav>
             <!-- Nav-end -->
         </div>
-
-
     </div>
     <div style="min-height:100vh;">
         @yield('content')
