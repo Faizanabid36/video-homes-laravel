@@ -210,6 +210,12 @@ class Profile extends React.Component {
                         <Form.Group controlId="address">
                             <Form.Label>Address</Form.Label>
                             <GooglePlacesAutocomplete
+                                initialValue={this.defaultValue('address')}
+                                autocompletionRequest={{
+                                    componentRestrictions: {
+                                        country: ['us'],
+                                    }
+                                }}
                                 onSelect={({description}) => {
                                     geocodeByAddress(description)
                                         .then((results) => {
