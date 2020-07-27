@@ -362,7 +362,7 @@
                         </div>
                     @endif
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <p>{{$user->user_extra->bio}}</p>
+                        <p>{!! $user->user_extra->bio !!}</p>
                     </div>
                     <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
                         <button class="btn btn-primary my-3"> Add Review</button>
