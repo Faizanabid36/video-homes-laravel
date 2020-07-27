@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AccountType;
+use App\UserCategory;
 use App\Video;
 use App\VideoView;
 use App\VideoLikesDislikes;
@@ -25,11 +26,13 @@ class HomeController extends Controller {
 
 
     public function logged_user() {
+        $data = UserCategory::levelCategories();
         return [
             'user' => collect( auth()->user()->user_extra )->merge( auth()->user() )->except( [
                 'user_extra',
                 'user_id'
-            ] )
+            ]),
+            'categories'=> collect( buildTree( $data ) )->values()
         ];
 
     }

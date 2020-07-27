@@ -94,7 +94,7 @@ class Videos extends React.Component {
 
 
                 {this.state.approvedVideos.length ? this.state.approvedVideos.map((item, index) => {
-                    let link = window.VIDEO_APP.base_url + '/' + item.user.username + '/watch_video?v=' + item.video_id;
+                    let link = window.VIDEO_APP.base_url + '/u/' + item.user.username + '/' + item.video_id;
                     return <Col key={index} xs={12} sm={6} md={4} lg={3}>
                         <a href={link}>
                             <Card className="card2">

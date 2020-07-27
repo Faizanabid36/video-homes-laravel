@@ -1,4 +1,4 @@
-import { Button, Carousel, Col, Row, Container, Form, InputGroup, FormControl, Modal,Image } from "react-bootstrap";
+import { Button, Carousel, Col, Row, Container, Form, InputGroup, FormControl, Modal, Image } from "react-bootstrap";
 import React from "react";
 import axios from "axios";
 import General from "./Profile/General";
@@ -55,16 +55,17 @@ class Profile extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        axios.put('/edit_user_profile/'+this.state.user.id,{...this.state.user}).then(({data})=>{
+        axios.put('/edit_user_profile/' + this.state.user.id, {...this.state.user}).then(({data}) => {
             console.log(data);
-        }).catch(e=>console.log)
+        }).catch(e => console.log)
     }
 
     onBeforeFileLoad(elem) {
         if (elem.target.files[0].size > 71680) {
             alert("File is too big!");
             elem.target.value = "";
-        };
+        }
+        ;
     }
 
     onClose() {
@@ -77,7 +78,7 @@ class Profile extends React.Component {
 
     componentDidMount() {
         axios.get('get_logged_user').then(({data}) => {
-            this.setState({user: data.user})
+            this.setState({user: data.user, categories: data.categories})
         });
     }
 
@@ -305,21 +306,50 @@ class Profile extends React.Component {
                         </Form.Group>
                     </Col>
                 </Row>
+                <Row>
+                    <Col>
+                        <Form.Group controlId="category_id">
+                            <Form.Label>Profession</Form.Label>
+                            {this.state.categories.length > 0 && <div className="form-group">
+                                <select name="category_id" className="selectpicker show-tick form-control"
+                                        data-style="btn-primary"
+                                        data-live-search="true"
+                                        title="Choose one of the following Profession and Expertise...">
+                                    {this.state.categories.map(u => {
+                                        return <optgroup label={u['name']}>
+                                            {u['childNodes'].length > 0 ? u['childNodes'].map((u1, k) => {
+                                                return u1['childNodes'].length > 0 ? u1['childNodes'].map((u2, k) =>
+                                                        <option value={u2['id']}
+                                                                data-subtext={u1['name']}>{u2['name']}</option>) :
+                                                    <option value={u1['id']}>{u1['name']}</option>;
+                                            }) : <option value={u['id']}>{u['name']}</option>
+                                            }
+
+                                        </optgroup>
+                                    })}
+                                </select>
+                            </div>}
+                        </Form.Group>
+                    </Col>
+                </Row>
                 <Row><Col>
                     <Form.Group controlId="bio_about">
                         <Form.Label>About/Bio (Max 600 words)</Form.Label>
                         <Form.Control name="bio" as="textarea" rows="3" defaultValue={this.defaultValue('bio')}
                                       onChange={this.handleChangeInput}/>
                     </Form.Group>
-                </Col></Row>
+                </Col>
+                </Row>
                 <Row>
-                    <Col sm={6} >
+                    <Col sm={6}>
                         <h4>Profile Picture</h4>
                         {this.defaultValue('profile_picture') && <div className='position-relative mb-2'>
-                            <button onClick={e=>this.handleChangeInput(null,'profile_picture')} type="button" className="close float-left" aria-label="Close">
+                            <button onClick={e => this.handleChangeInput(null, 'profile_picture')} type="button"
+                                    className="close float-left" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <Image className="shadow-lg d-block rounded w-25" src={this.defaultValue('profile_picture')} roundedCircle />
+                            <Image className="shadow-lg d-block rounded w-25" src={this.defaultValue('profile_picture')}
+                                   roundedCircle/>
                         </div>}
 
                         <UploadImage title="Profile Picture"
@@ -329,13 +359,15 @@ class Profile extends React.Component {
                                      onChange={this.handleChangeInput} state_name="profile_picture"/>
                         <Button onClick={() => this.setState({profile_preview: true})}>Upload Profile Picture</Button>
                     </Col>
-                    <Col sm={6} >
+                    <Col sm={6}>
                         <h4>Company Logo</h4>
                         {this.defaultValue('company_logo') && <div className='position-relative mb-2'>
-                            <button onClick={e=>this.handleChangeInput(null,'company_logo')} type="button" className="close float-left" aria-label="Close">
+                            <button onClick={e => this.handleChangeInput(null, 'company_logo')} type="button"
+                                    className="close float-left" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <Image className="shadow-lg d-block rounded w-25" src={this.defaultValue('company_logo')} roundedCircle /></div>}
+                            <Image className="shadow-lg d-block rounded w-25" src={this.defaultValue('company_logo')}
+                                   roundedCircle/></div>}
                         <UploadImage title="Company Logo"
                                      src={this.defaultValue('company_logo')}
                                      show={this.state.company_logo_preview}
@@ -346,15 +378,16 @@ class Profile extends React.Component {
                 </Row>
                 <Row className='mt-3'>
                     <Col>
-                        <Button onClick={this.handleSubmit}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                           viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                           strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-                                           className="feather feather-check-circle">
-                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                        </svg>
+                        <Button onClick={this.handleSubmit}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                                 className="feather feather-check-circle">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
                             Update</Button> &nbsp;
-                        <Button variant='danger' onClick={e=>alert("Danger!!!!")}>Delete the Account</Button>
+                        <Button variant='danger' onClick={e => alert("Danger!!!!")}>Delete the Account</Button>
                     </Col>
                 </Row>
             </Container>
