@@ -28,7 +28,6 @@ function UploadImage(props) {
             </Modal.Header>
             <Modal.Body className="mx-auto overflow-hidden">
                 <Avatar
-                    cropRadius={0}
                     width={390}
                     height={295}
                     onCrop={e => props.onChange(e, props.state_name)}
@@ -338,25 +337,24 @@ class Profile extends React.Component {
                         <Form.Label>About/Bio (Max 600 words)</Form.Label>
                         <Form.Control name="bio" as="textarea" rows="3" defaultValue={this.defaultValue('bio')}
                                       onChange={this.handleChangeInput}/>
-                        {/*<Editor*/}
-                        {/*    apiKey="squs5ficzrgoutolw85bstu5b8r4dij0c3sc38ir49inthac"*/}
-                        {/*    name="bio"*/}
-                        {/*    initialValue={this.defaultValue('bio')}*/}
-                        {/*    init={{*/}
-                        {/*        height: 500,*/}
-                        {/*        menubar: false,*/}
-                        {/*        plugins: [*/}
-                        {/*            'advlist autolink lists link image charmap print preview anchor',*/}
-                        {/*            'searchreplace visualblocks code fullscreen',*/}
-                        {/*            'insertdatetime media table paste code help wordcount'*/}
-                        {/*        ],*/}
-                        {/*        toolbar:*/}
-                        {/*            'undo redo | formatselect | bold italic backcolor | \*/}
-                        {/*            alignleft aligncenter alignright alignjustify | \*/}
-                        {/*            bullist numlist outdent indent | removeformat | help'*/}
-                        {/*    }}*/}
-                        {/*    onEditorChange={(content, editor)=>this.handleChangeInput(content,'bio')}*/}
-                        {/*/>*/}
+                        <Editor
+                            name="bio"
+                            initialValue={this.defaultValue('bio')}
+                            init={{
+                                height: 500,
+                                menubar: false,
+                                plugins: [
+                                    'advlist autolink lists link image charmap print preview anchor',
+                                    'searchreplace visualblocks code fullscreen',
+                                    'insertdatetime media table paste code help wordcount'
+                                ],
+                                toolbar:
+                                    'undo redo | formatselect | bold italic backcolor | \
+                                    alignleft aligncenter alignright alignjustify | \
+                                    bullist numlist outdent indent | removeformat | help'
+                            }}
+                            onEditorChange={(content, editor)=>this.handleChangeInput(content,'bio')}
+                        />
                     </Form.Group>
                 </Col>
                 </Row>
