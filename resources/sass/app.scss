@@ -4,5 +4,93 @@
 
 //@import 'styles';
 
+.card2{
+
+    // width: $width ;
+    // width: 100% ;
+    box-shadow: 0px -10px 30px rgba(0, 0, 0, 0.5);
+    min-height: 355px;
+
+    transition: transform .2s;
+
+    &:hover {
+
+        transform: scale(1.03);
+    }
+
+    @media (max-width: 1000.98px) {
+
+        margin-bottom:  50px   ;
+    }
+
+}
+
+
+
+.cardtitle{
+    font-weight: bolder;
+    line-height: 28px;
+    letter-spacing: 0.02em;
+    color: #000000;
+}
+
+.cardtitle2{
+    font-size: 15px;
+    color: #000000;
+}
+
+.overlay {
+    position: relative;
+    height: 200px ;
+    // width: $width  ;
+
+    background-image:  linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5) ) , url("https://c0.wallpaperflare.com/preview/27/313/180/man-singing-on-stage.jpg");
+    background-repeat: no-repeat ;
+    background-size: cover;
+    transition: all 0.5s ease;
+    display: flex;
+    color: white ;
+    font-size: 13px;
+
+    font-weight: normal;
+    line-height: 28px;
+
+
+    & .one{
+        position: absolute;
+        left: 0;
+        top: 34%;
+        width: 100%;
+        text-align: center;
+
+    }
+    & .two{
+        position: absolute;
+        top: 8px;
+        right: 16px;
+
+
+    }
+    & .three{
+        position: absolute;
+        bottom: 8px;
+        left: 16px;
+
+        & span {
+
+            letter-spacing: 0.03em;
+            // padding-left: 3px;
+
+        }
+    }
+    & .four{
+        position: absolute;
+        bottom: 8px;
+        right: 16px;
+    }
+}
+
+
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
