@@ -89,8 +89,8 @@
                         @foreach($users as $account_user)
                             <div class="card my-1">
                                 <div class="row">
-                                    <div class="col-md-4 text-center" >
-                                        <img class="w-100 p-3"
+                                    <div class="col-md-4  p-3 text-center" >
+                                        <img class="w-75"
                                             src="{{$account_user['company_logo'] ?? asset('images/blank.png')}}"
                                             alt="{{$account_user['company_name']}}">
                                         <p class="text-center">{{$account_user['company_name']}}</p>
