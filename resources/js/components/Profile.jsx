@@ -197,7 +197,7 @@ class Profile extends React.Component {
                     <Col md={6}>
                         <Form.Group controlId="direct_phone">
                             <Form.Label>Direct Phone</Form.Label>
-                            <InputMask mask="(999) 999-9999" maskPlaceholder="(999) 999-99999" name='direct_phone' className='form-control' onChange={this.handleChangeInput} value={this.defaultValue('direct_phone')} />
+                            <InputMask mask="999-999-9999" maskPlaceholder="999-999-99999" name='direct_phone' className='form-control' onChange={this.handleChangeInput} value={this.defaultValue('direct_phone')} />
 
                         </Form.Group>
                     </Col>
@@ -240,7 +240,7 @@ class Profile extends React.Component {
                     <Col md={6}>
                         <Form.Group controlId="office_phone">
                             <Form.Label>Office Phone</Form.Label>
-                            <InputMask mask="(999) 999-9999" maskPlaceholder="(999) 999-99999" name='office_phone' className='form-control' onChange={this.handleChangeInput} value={this.defaultValue('office_phone')} />
+                            <InputMask mask="999-999-9999" maskPlaceholder="999-999-99999" name='office_phone' className='form-control' onChange={this.handleChangeInput} value={this.defaultValue('office_phone')} />
                         </Form.Group>
                     </Col>
                 </Row>
