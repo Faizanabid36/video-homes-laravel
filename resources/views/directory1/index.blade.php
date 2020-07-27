@@ -93,7 +93,6 @@
                                         <img
                                             src="{{$account_user['company_logo'] ?? asset('images/blank.png')}}"
                                             class="card-img"
-                                            style="width:50px;height:50px"
                                             alt="{{$account_user['company_name']}}">
                                         <p class="text-center">{{$account_user['company_name']}}</p>
                                     </div>
@@ -105,7 +104,7 @@
                                                     <img
                                                         src="{{$account_user['profile_picture'] ?? asset('images/blank.png')}}"
                                                         class="rounded-circle rounded"
-                                                        style="width:50px;" alt="">
+                                                        style="width:50px;height:50px" alt="">
                                                     {{ucfirst($account_user['name'])}} </a>
                                             </h2>
                                             <br/>
