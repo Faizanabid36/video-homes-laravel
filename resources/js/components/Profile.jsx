@@ -81,7 +81,7 @@ class Profile extends React.Component {
             console.log(data.categories);
             this.setState({user: data.user, categories: data.categories},()=>{
                 $('.selectpicker').selectpicker();
-            })
+            });
         });
     }
 
