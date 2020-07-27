@@ -121,12 +121,14 @@
                                 </div>
                                 <div class="col-md-8">
                                   <div class="card-body">
-                                    <h2 class="card-title "> <a
-                                            href="{{route('directory_by_username',$account_user['username'])}}"
-                                            style="font-weight:900"> {{ucfirst($account_user['name'])}} </a>
+                                    <h2 class="card-title ">
+                                        <a
+                                            href="{{route('directory_by_username',$account_user['username'])}}">
+                                            <img src="$account_user['profile_picture']" class="rounded-circle rounded" style="width:50px;" alt="">
+                                            {{ucfirst($account_user['name'])}} </a>
                                     </h2>
                                     <br/>
-                                    <p class="card-text my-2">{{ucfirst($account_user['bio'])}}</p>
+                                    <p class="card-text my-2">{!! substr(ucfirst($account_user['bio']),0,60) !!}...</p>
                                     <p class="card-text my-2">
                                         <i class="fa icon-blue fa-map-marker mr-2"></i>
                                         <b> Address: </b>{{ucfirst($account_user['address'])}}
@@ -154,6 +156,8 @@
                                       @endif
                                     <p class="card-text my-3">  <i
                                             class="fa icon-blue mr-2 fa-phone"></i>   <b>Phone:</b> {{$account_user['direct_phone']}}</p>
+                                       <p class="card-text my-3">  <i
+                                               class="fa icon-blue mr-2 fa-phone"></i>   <b>Phone Office:</b> {{$account_user['office_phoe']}}</p>
                                   </div>
                                 </div>
                               </div>
