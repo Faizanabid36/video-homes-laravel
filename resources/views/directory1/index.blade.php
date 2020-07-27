@@ -107,7 +107,6 @@
                                                         style="width:50px;height:50px" alt="">
                                                     {{ucfirst($account_user['name'])}} </a>
                                             </h2>
-                                            <br/>
                                             @if ($account_user['bio'] && $account_user['bio'] != '')
                                                 <p class="card-text my-2">{!! substr($account_user['bio'],0,150) !!}
                                                     @if (strlen($account_user['bio']) > 150)
