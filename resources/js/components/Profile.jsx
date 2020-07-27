@@ -335,8 +335,7 @@ class Profile extends React.Component {
                 <Row><Col>
                     <Form.Group controlId="bio_about">
                         <Form.Label>About/Bio (Max 600 words)</Form.Label>
-                        <Form.Control name="bio" as="textarea" rows="3" defaultValue={this.defaultValue('bio')}
-                                      onChange={this.handleChangeInput}/>
+
                         <Editor
                             name="bio"
                             initialValue={this.defaultValue('bio')}
