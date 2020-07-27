@@ -41,6 +41,7 @@ class Profile extends React.Component {
         super(...arguments);
         this.state = {
             user: {},
+            categories:[],
             tab: 'general',
             profile_preview: false,
             company_logo_preview: false,
