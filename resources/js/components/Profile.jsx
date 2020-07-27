@@ -317,17 +317,15 @@ class Profile extends React.Component {
                                         data-style="btn-primary"
                                         data-live-search="true"
                                         title="Choose one of the following Profession and Expertise...">
-                                    {this.state.categories.map(u => {
-                                        return <optgroup label={u['name']}>
-                                            {u['children'].length > 0 ? u['children'].map((u1, k) => {
-                                                return u1['children'].length > 0 ? u1['children'].map((u2, k) =>
-                                                        <option value={u2['id']}
-                                                                data-subtext={u1['name']}>{u2['name']}</option>) :
-                                                    <option value={u1['id']}>{u1['name']}</option>;
-                                            }) : <option value={u['id']}>{u['name']}</option>
-                                            }
-                                        </optgroup>;
-                                    })}
+                                    {this.state.categories.map(u => <optgroup key={u.id} label={u['name']}>
+                                        {u['children'].length > 0 ? u['children'].map((u1, k) => {
+                                            return u1['children'].length > 0 ? u1['children'].map((u2, k) =>
+                                                    <option key={k} value={u2['id']}
+                                                            data-subtext={u1['name']}>{u2['name']}</option>) :
+                                                <option key={k} value={u1['id']}>{u1['name']}</option>;
+                                        }) : <option key={u.id} value={u['id']}>{u['name']}</option>
+                                        }
+                                    </optgroup>)}
                                 </select>
                             </div>}
                         </Form.Group>
