@@ -92,7 +92,6 @@
                                     <div class="col-md-4 text-center" >
                                         <img
                                             src="{{$account_user['company_logo'] ?? asset('images/blank.png')}}"
-                                            class="rounded-circle rounded"
                                             alt="{{$account_user['company_name']}}">
                                         <p class="text-center">{{$account_user['company_name']}}</p>
                                     </div>
