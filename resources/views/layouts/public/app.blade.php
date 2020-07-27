@@ -31,7 +31,7 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto links-home">
+                    <ul class="navbar-nav ml-auto links-home pr-0">
                         @auth
                             @if (auth()->user()->isAdmin())
                                 <li class="nav-item ">
