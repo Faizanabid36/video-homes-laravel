@@ -32,7 +32,7 @@
 
     <!-- 3rd row -->
     @if(count($users)>0)
-        <div class="row p-2">
+        <div class="row mt-3 px-1">
             @if(!empty($categories) )
                 @foreach(($level1 ? collect($categories)->first()['children'] : $industries) as $category)
                     <div class="col-6 my-0"><span> <a
@@ -49,7 +49,7 @@
                 <div id="map"></div>
             </div>
         </div>
-        <div class="row m-y">
+        <div class="row mt-3">
             <div class="col-12">
                 <div class="float-left">
                     <h6 class="my-3"> Found<span class="h-8"> {{count($users)}} </span>listings </h6>
