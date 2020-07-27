@@ -27,11 +27,20 @@
                     src='{{$user->user_extra->profile_picture ?? 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMgrxYAqZF6-kdFuLQesPwdAyonhn93LsxvKXax0vzbCCGd_wQ&usqp=CAU' }}'
                     style="width:100%;"/>
                 <div class="caption-container">
-                    <p id="caption">{{$user->name}}</p>
-                    <p>
-                        <a href="{{$user->user_extra->facebook}}"><i class="fa fa-facebook-f"></i></a>
-                        <a href="{{$user->user_extra->instagram}}"><i class="fa fa-instagram"></i></a>
-                        <a href="{{$user->user_extra->youtube}}"><i class="fa fa-youtube"></i></a>
+                    <p id="caption">{{$user->name}}
+                        <br>
+                        @if ($user->user_extra->facebook !== '')
+                            <a href="https://www.facebook.com/{{$user->user_extra->facebook}}"><i
+                                    class="fa fa-facebook-f"></i></a>
+                        @endif
+                        @if ($user->user_extra->instagram !== '')
+                            <a href="https://www.instagram.com/{{$user->user_extra->instagram}}"><i
+                                    class="fa fa-instagram"></i></a>
+                        @endif
+                        @if ($user->user_extra->youtube !== '')
+                            <a href="https://www.youtube.com/{{$user->user_extra->youtube}}"><i
+                                    class="fa fa-youtube"></i></a>
+                        @endif
                     </p>
                 </div>
                 <hr/>
@@ -215,7 +224,8 @@
                 <div class="col-md-3 col-sm-5 ">
                     <div class="container m-0 p-0">
                         <div class="row">
-                            <div class="col-12 m-0 p-0"><div class="next-video">
+                            <div class="col-12 m-0 p-0">
+                                <div class="next-video">
                                     <div class="next-text pull-left pt_mn_wtch_nxttxt">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                              viewBox="0 0 24 24">
@@ -224,15 +234,17 @@
                                         </svg>
                                         <span>Up Next</span>
                                     </div>
-                                </div></div>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             @foreach($related_videos as $related_video)
-                                <div class="col-12 m-0 p-0" >
+                                <div class="col-12 m-0 p-0">
                                     <a href="{{route('directory_by_username',[$user->username,$related_video->video_id])}}">
                                         <div class="p-2 shadow-lg bg-white rounded video-thumb overlay"
                                              style="background-image: url({{asset('storage/'.$related_video->thumbnail)}});background-size: cover;height:200px;">
-                                            <div class='play_hover_btn' style="top: 50%;left: 50%;position: absolute;transform: translate(-50%, -50%);">
+                                            <div class='play_hover_btn'
+                                                 style="top: 50%;left: 50%;position: absolute;transform: translate(-50%, -50%);">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"
                                                      viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                      stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -241,8 +253,10 @@
                                                     <polygon points="10 8 16 12 10 16 10 8"></polygon>
                                                 </svg>
                                             </div>
-                                            <span style="text-shadow: 1px 1px 2px #000;" class="text-light font-weight-light">{{ucfirst($related_video->title)}}</span>
-                                            <span style="text-shadow: 1px 1px 2px #000;" class="text-light font-weight-light video-duration">{{gmdate('i:s', $related_video->duration)}}</span>
+                                            <span style="text-shadow: 1px 1px 2px #000;"
+                                                  class="text-light font-weight-light">{{ucfirst($related_video->title)}}</span>
+                                            <span style="text-shadow: 1px 1px 2px #000;"
+                                                  class="text-light font-weight-light video-duration">{{gmdate('i:s', $related_video->duration)}}</span>
                                         </div>
                                     </a>
                                 </div>
