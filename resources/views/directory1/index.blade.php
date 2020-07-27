@@ -50,38 +50,28 @@
                     @endforeach
                 @endif
             </div>
-            <div id="map">
-            </div>
-
             <div class="row">
-                <!--The div element for the map -->
-                {{--            <div class="col-12 text-center border p-0 pt-3 ">--}}
-                {{--                <iframe width="100%" height="450"--}}
-                {{--                        src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street%2C%20Dublin%2C%20Ireland+(My%20Business%20Name)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed"--}}
-                {{--                        frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a--}}
-                {{--                        href="https://www.maps.ie/draw-radius-circle-map/">Create radius map</a></iframe>--}}
-                {{--                <br/>--}}
-                {{--            </div>--}}
+                <div class="col-12">
+                    <div id="map"></div>
+                </div>
             </div>
-
             <div class="row">
-                <div class="col-12 my-4 p-0">
+                <div class="col-12">
                     <div class="float-left">
                         <h6 class="my-3"> Found<span class="h-8"> {{count($users)}} </span>listings </h6>
-                        <div class="dropdown">
-                            <button class="btn btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                Sort By
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Date</a>
-                                <a class="dropdown-item" href="#"> New to Old</a>
-                                <a class="dropdown-item" href="#">Alpahabet</a>
-                            </div>
-                        </div>
+{{--                        <div class="dropdown">--}}
+{{--                            <button class="btn btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown"--}}
+{{--                                    aria-haspopup="true" aria-expanded="false">--}}
+{{--                                Sort By--}}
+{{--                            </button>--}}
+{{--                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--}}
+{{--                                <a class="dropdown-item" href="#">Date</a>--}}
+{{--                                <a class="dropdown-item" href="#"> New to Old</a>--}}
+{{--                                <a class="dropdown-item" href="#">Alpahabet</a>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                     </div>
-                    <div class="float-right" style="position: relative;top: 38px;">
-
+                    <div class="float-right" >
                         <ul class="nav Custom-nav2 nav-pills mb-3" id="pills-tab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home"
