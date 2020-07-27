@@ -146,12 +146,12 @@
                                                 @if ($account_user['bio'] && $account_user['direct_phone'] != '')
                                                     <p class="card-text my-3"><i
                                                             class="fa icon-blue mr-2 fa-phone"></i>
-                                                        <b>Phone:</b> {{$account_user['direct_phone']}}</p>
+                                                        <b>Phone:</b> <a href="tel:{{$account_user['direct_phone']}}">{{$account_user['direct_phone']}}</a></p>
                                                 @endif
                                                 @if ($account_user['bio'] && $account_user['office_phone'] != '')
                                                     <p class="card-text my-3"><i
                                                             class="fa icon-blue mr-2 fa-phone"></i> <b>Phone
-                                                            Office:</b> {{$account_user['office_phone']}}</p>
+                                                            Office:</b> <a href="tel:{{$account_user['office_phone']}}">{{$account_user['office_phone']}}</a></p>
                                                 @endif
 
                                             </div>
