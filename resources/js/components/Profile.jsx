@@ -28,6 +28,7 @@ function UploadImage(props) {
             </Modal.Header>
             <Modal.Body className="mx-auto overflow-hidden">
                 <Avatar
+                    cropRadius={0}
                     width={390}
                     height={295}
                     onCrop={e => props.onChange(e, props.state_name)}
@@ -294,17 +295,17 @@ class Profile extends React.Component {
                         </Form.Group>
                     </Col>
                     <Col md={4}>
-                        <Form.Group controlId="youtube">
-                            <label htmlFor="youtube-url">Youtube</label>
+                        <Form.Group controlId="twitter">
+                            <label htmlFor="twitter-url">Twiiter</label>
                             <InputGroup className="mb-3">
                                 <InputGroup.Prepend>
-                                    <InputGroup.Text id="youtube-url-addon3">
-                                        https://www.youtube.com/
+                                    <InputGroup.Text id="twitter-url-addon3">
+                                        https://www.twitter.com/
                                     </InputGroup.Text>
                                 </InputGroup.Prepend>
                                 <FormControl name='youtube' onChange={this.handleChangeInput}
-                                             defaultValue={this.defaultValue('youtube')} id="youtube-url"
-                                             aria-describedby="youtube-url-addon3"/>
+                                             defaultValue={this.defaultValue('youtube')} id="twitter-url"
+                                             aria-describedby="twitter-url-addon3"/>
                             </InputGroup>
                         </Form.Group>
                     </Col>

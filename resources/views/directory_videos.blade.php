@@ -38,8 +38,8 @@
                                     class="fa fa-instagram"></i></a>
                         @endif
                         @if ($user->user_extra->youtube && $user->user_extra->youtube !== '')
-                            <a href="https://www.youtube.com/{{$user->user_extra->youtube}}"><i
-                                    class="fa fa-youtube"></i></a>
+                            <a href="https://www.twitter.com/{{$user->user_extra->youtube}}"><i
+                                    class="fa fa-twitter"></i></a>
                         @endif
                     </p>
                 </div>
