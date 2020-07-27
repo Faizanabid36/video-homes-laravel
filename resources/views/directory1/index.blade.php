@@ -146,10 +146,10 @@
                             @if($k % 2 === 0)
                                 <div class="row">
                                     @endif
-                                    <div class="col-md-6">
-                                        <div class="card my-1">
+                                    <div class="col-md-6 text-center">
+                                        <div class="card">
                                             <div class="card-header">
-                                                <img class="w-75"
+                                                <img class="w-100"
                                                      src="{{$account_user['company_logo'] ?? asset('images/blank.png')}}"
                                                      alt="{{$account_user['company_name']}}">
                                                 <p class="text-center">{{$account_user['company_name']}}</p>
