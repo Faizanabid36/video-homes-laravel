@@ -39,10 +39,10 @@
                                     title="Choose one of the following Profession and Expertise...">
                                 @foreach($user_category as $u)
                                     <optgroup label="{{$u['name']}}">
-                                        @if(!empty($u['childNodes'] ))
-                                            @foreach($u['childNodes'] as $k => $u1)
-                                                @if (!empty($u1['childNodes']))
-                                                    @foreach($u1['childNodes'] as $k => $u2)
+                                        @if(!empty($u['children'] ))
+                                            @foreach($u['children'] as $k => $u1)
+                                                @if (!empty($u1['children']))
+                                                    @foreach($u1['children'] as $k => $u2)
                                                         <option value="{{$u2['id']}}"
                                                                 data-subtext="{{$u1['name']}}">{{$u2['name']}}</option>
                                                     @endforeach
