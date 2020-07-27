@@ -194,7 +194,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @if ($k % 2 === 0)
+                                    @if ($k % 2 === 1)
                                 </div>
                             @endif
                         @endforeach
