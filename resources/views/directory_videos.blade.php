@@ -259,27 +259,27 @@
             </div>
             <div class="col-12 contactWidgets my-2 ">
                 <div class="d-flex">
-                    <div class="font-weight-bold "><i class='fas icon fa-id-card'></i> Name</div>
+                    <div class="font-weight-bold "><i class='faicon fa-id-card'></i> Name</div>
                     <div> {{$user->name}}</div>
                 </div>
                 <hr/>
                 <div class="d-flex">
-                    <div class="font-weight-bold "><i class='fas icon fa-map-marker'></i> Address</div>
+                    <div class="font-weight-bold "><i class='faicon fa-map-marker'></i> Address</div>
                     <div> {{$user->user_extra->address}}</div>
                 </div>
                 <hr/>
                 <div class="d-flex">
-                    <div class="font-weight-bold "><i class='fas icon fa-phone'></i> Direct Phone</div>
+                    <div class="font-weight-bold "><i class='faicon fa-phone'></i> Direct Phone</div>
                     <div> {{$user->user_extra->direct_phone}}</div>
                 </div>
                 <hr/>
                 <div class="d-flex">
-                    <div class="font-weight-bold "><i class='fas icon fa-globe'></i> Website</div>
+                    <div class="font-weight-bold "><i class='faicon fa-globe'></i> Website</div>
                     <div><a href="{{$user->user_extra->website}}"> {{$user->user_extra->website}} </a></div>
                 </div>
                 <hr/>
                 {{--                <div class="d-flex">--}}
-                {{--                    <div class="font-weight-bold "><i class='fas icon fa-envelope'></i> Email</div>--}}
+                {{--                    <div class="font-weight-bold "><i class='faicon fa-envelope'></i> Email</div>--}}
                 {{--                    <div><a href="mailto: {{$user->email}}"> {{$user->email}} </a></div>--}}
                 {{--                </div>--}}
                 {{--                <hr/>--}}
@@ -330,11 +330,11 @@
                             {{--                                       aria-label="Recipient's username" aria-describedby="button-addon2">--}}
                             {{--                                <div class="input-group-append">--}}
                             {{--                                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i--}}
-                            {{--                                            style="color:gray ; font-size:14px" class='fas icon fa-map-marker'></i>--}}
+                            {{--                                            style="color:gray ; font-size:14px" class='faicon fa-map-marker'></i>--}}
                             {{--                                    </button>--}}
                             {{--                                </div>--}}
                             {{--                            </div>--}}
-                            {{--                            <p><a href=""> <i style="color:lightBlue ; font-size:14px" class='fas icon fa-circle'></i>{{$user->address}}</a></p>--}}
+                            {{--                            <p><a href=""> <i style="color:lightBlue ; font-size:14px" class='faicon fa-circle'></i>{{$user->address}}</a></p>--}}
                             {{--                            <button class="btn btn-primary"> GET DIRECTION</button>--}}
                         </div>
                     @endif

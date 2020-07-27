@@ -3,7 +3,9 @@
 @import 'variables';
 
 //@import 'styles';
-
+.playicon {
+    font-size: 50px;
+}
 .card2{
 
     // width: $width ;
@@ -57,11 +59,10 @@
 
 
     & .one{
+        top: 50%;
+        left: 50%;
         position: absolute;
-        left: 0;
-        top: 34%;
-        width: 100%;
-        text-align: center;
+        transform: translate(-50%, -50%);
 
     }
     & .two{

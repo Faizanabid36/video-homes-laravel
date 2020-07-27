@@ -57,39 +57,36 @@ class Videos extends React.Component {
                     >
                         <div className="dropItems">
                             <div>
-                                {" "}
-                                <a className="cross2  ">
-                                    {" "}
-                                    <FontAwesomeIcon icon={faTimes}/>{" "}
-                                </a>{" "}
+                                <a className="cross2">
+                                    <FontAwesomeIcon icon={faTimes}/>
+                                </a>
                             </div>
 
                             <Dropdown.Item onClick={(e) => {
                                 e.preventDefault();
                                 this.changeFilter('newest')
                             }}>
-                                {" "}
-                                <p className="items"> New to Oldest </p>{" "}
+                                <p className="items"> New to Oldest </p>
                             </Dropdown.Item>
                             <Dropdown.Item onClick={(e) => {
                                 e.preventDefault();
                                 this.changeFilter('oldest')
                             }}>
-                                <p className="items"> Oldest to Newest </p>{" "}
+                                <p className="items"> Oldest to Newest </p>
                             </Dropdown.Item>
                             <Dropdown.Item onClick={(e) => {
                                 e.preventDefault();
                                 this.changeFilter('popular')
                             }}>
-                                {" "}
-                                <p className="items"> Most Popular </p>{" "}
+
+                                <p className="items"> Most Popular </p>
                             </Dropdown.Item>
                             <Dropdown.Item onClick={(e) => {
                                 e.preventDefault();
                                 this.changeFilter('alphabetical')
                             }}>
-                                {" "}
-                                <p className="items"> Alphabetical </p>{" "}
+
+                                <p className="items"> Alphabetical </p>
                             </Dropdown.Item>
                         </div>
                     </DropdownButton>
@@ -109,12 +106,12 @@ class Videos extends React.Component {
                                     icon={faPlayCircle}
                                     className="playicon"
                                     color="white"
-                                />{" "}
+                                />
                             </span>
                                     <span className="two">
                               <span>
                                 In: {item.category.name}
-                              </span>{" "}
+                              </span>
                             </span>
                                     <span className="three">
                               <span> {item.views} Views </span>
@@ -128,12 +125,12 @@ class Videos extends React.Component {
                                 <Card.Body className="card-body">
 
                                     <Card.Title>
-                                        {" "}
+
                                         <h5 className="cardtitle"> {item.title} </h5>
                                     </Card.Title>
 
                                     <Card.Text>
-                                        {" "}
+
                                         <p className="cardtitle2">
                                             {item.description}{" "}
                                             Upload By: {item.user.username}
