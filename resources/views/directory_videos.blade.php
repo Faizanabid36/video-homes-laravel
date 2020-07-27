@@ -273,7 +273,11 @@
         <div class="row my-4">
             <div class="col-12">
                 <h4 class="font-weight-bold " style="color:gray"> CONTACT INFORMATION</h4>
-
+                @if (session()->has('message_sent'))
+                    <div class="alert alert-success">
+                        {{ session()->get('message_sent') }}
+                    </div>
+                @endif
                 <div class="borderBottomBold my-3"></div>
 
             </div>
@@ -439,19 +443,23 @@
                             <div class="form-group">
 
                                 <label for="contact_name">Contact Name</label>
-                                <input required name="name" type="text" class="form-control" id="contact_name" placeholder="Your Name">
+                                <input required name="name" type="text" class="form-control" id="contact_name"
+                                       placeholder="Your Name">
                             </div>
                             <div class="form-group">
                                 <label for="contact_email">Contact Email</label>
-                                <input required name="email" type="email" class="form-control" id="contact_email" placeholder="Email address">
+                                <input required name="email" type="email" class="form-control" id="contact_email"
+                                       placeholder="Email address">
                             </div>
                             <div class="form-group">
                                 <label for="contact_phone">Contact Phone</label>
-                                <input required name="phone" type="tel" class="form-control" id="contact_phone" placeholder="Phone">
+                                <input required name="phone" type="tel" class="form-control" id="contact_phone"
+                                       placeholder="Phone">
                             </div>
                             <div class="form-group">
-                                    <label for="message">Message</label>
-                                    <textarea name="message" class="form-control" id="message" rows="3" placeholder="Message here"></textarea>
+                                <label for="message">Message</label>
+                                <textarea name="message" class="form-control" id="message" rows="3"
+                                          placeholder="Message here"></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary"> Send</button>
                         </form>

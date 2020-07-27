@@ -44,7 +44,7 @@ class UserMessageController extends Controller
             "phone"=>"required|integer",
         ]);
         UserMessage::create(request()->all());
-        return back()->withSuccess(['message'=>"Message Sent"]);
+        return back()->with(["message_sent"=>"Message Sent"]);
     }
 
     /**
