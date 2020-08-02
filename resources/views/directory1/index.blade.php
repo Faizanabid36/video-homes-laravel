@@ -246,7 +246,7 @@
             @endforeach
             map.fitBounds(bounds);
             var listener = google.maps.event.addListener(map, "idle", function () {
-                map.setZoom(13);
+                map.setZoom(6);
                 google.maps.event.removeListener(listener);
             });
             @endif
