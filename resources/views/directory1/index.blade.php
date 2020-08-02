@@ -12,7 +12,7 @@
                             {{--                                <i class="fal fa-search icon search-icon"></i>--}}
                         </div>
                         <div class="col my-2">
-                            <select required name="industry" class="form-control text" id="">
+                            <select required id="industry" class="form-control text" id="">
                                 <option value="" selected disabled>Choose Industry</option>
                                 @foreach($industries as $industry)
                                     <option value="{{$industry->slug}}">{{$industry->name}}</option>

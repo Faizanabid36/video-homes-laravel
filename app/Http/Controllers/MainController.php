@@ -28,7 +28,6 @@ class MainController extends Controller {
         $categories = UserCategory::getCategories( $level1, $level2 );
         $users      = collect( grabUsers( $categories ) )->when( request( 'query' ), function ( $collect ) {
             return $collect->filter( function ( $value ) {
-
                 return (
                     stripos( $value['name'], request( 'query' ) ) !== FALSE ||
                     stripos( $value['office_phone'], request( 'query' ) )  !== FALSE ||
