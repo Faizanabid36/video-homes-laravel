@@ -36,10 +36,10 @@ class UserCategory extends Model {
                         ->orWhere( 'company_name', 'like', request( 'query' ) . '%' )
                         ->orWhere( 'address', 'like', request( 'query' ) . '%' );
                 } );
-            } );
+            } )->dd();
         } )->when( $level2, function ( $query ) use ( $level2 ) {
             return $query->whereSlug( $level2 );
-        } )->dd();
+        } )->get();
 
     }
 
