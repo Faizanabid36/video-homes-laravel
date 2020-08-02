@@ -7,9 +7,9 @@ try {
     require('bootstrap-select');
     require('mediaelement');
 
-    $('#findapro').submit(function(e) {
-        console.log(window.location.toString()+"/"+$( this ).find("option:selected").val());
+    $('#findaprobtn').click(function(e) {
+        let action = window.location.toString()+"/"+$( this ).find("option:selected").val();
+        $("#findapro").attr("action",action).submit();
         e.preventDefault();
-        // $(this).attr("action",).submit();
     })
 } catch (e) {}

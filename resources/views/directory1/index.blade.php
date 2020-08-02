@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <input type="submit" value="Find a Pro" class="btn btn-block btn-primary"/>
+                        <input id="findaprobtn" type="button" value="Find a Pro" class="btn btn-block btn-primary"/>
                     </div>
                 </form>
             </div>
