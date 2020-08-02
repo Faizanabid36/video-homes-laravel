@@ -223,31 +223,61 @@
     </script>
     <script>
         function initMap() {
-                @foreach($users as $u)
-                @if(!is_null($u['location_latitude'])||!is_null($u['location_longitude']))
-            var uluru = {
-                    lat: {{$u['location_latitude']}},
-                    lng: {{$u['location_longitude']}}
-                };
-            @endif
-                @endforeach
-            if (uluru) {
-                mapArea = document.getElementById('map');
-                mapArea.style.width = "100%"
-                mapArea.style.height = "400px"
-                var map = new google.maps.Map(mapArea, {zoom: 11, center: uluru});
-            }
+            @if(!empty($users))
+                let mapArea = document.getElementById('map');
+            mapArea.style.width = "100%"
+            mapArea.style.height = "400px"
+            var map = new google.maps.Map(mapArea, {zoom: 11, center: uluru});
+            var bounds = new google.maps.LatLngBounds();
+            var infowindow = new google.maps.InfoWindow();
 
-                @foreach($users as $u)
-
-                @if(!is_null($u['location_latitude'])||!is_null($u['location_longitude']))
-            var uluru = {
-                    lat: {{$u['location_latitude']}},
-                    lng: {{$u['location_longitude']}}
-                };
-            new google.maps.Marker({position: uluru, map: map});
-            @endif
+                @foreach($users as $k => $u)
+            var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng({{$u['location_latitude']}}, {{$u['location_longitude']}}),
+                    map: map
+                });
+            bounds.extend(marker.position);
+            google.maps.event.addListener(marker, 'click', (function(marker, {{$k}}) {
+                return function() {
+                    infowindow.setContent({{$u['name']}});
+                    infowindow.open(map, marker);
+                }
+            })(marker, i));
             @endforeach
+            map.fitBounds(bounds);
+            var listener = google.maps.event.addListener(map, "idle", function () {
+                map.setZoom(3);
+                google.maps.event.removeListener(listener);
+            });
+            @endif
+
+
+
+{{--                @foreach($users as $u)--}}
+{{--                @if(!is_null($u['location_latitude'])||!is_null($u['location_longitude']))--}}
+{{--            var uluru = {--}}
+{{--                    lat: {{$u['location_latitude']}},--}}
+{{--                    lng: {{$u['location_longitude']}}--}}
+{{--                };--}}
+{{--            @endif--}}
+{{--                @endforeach--}}
+{{--            if (uluru) {--}}
+{{--                mapArea = document.getElementById('map');--}}
+{{--                mapArea.style.width = "100%"--}}
+{{--                mapArea.style.height = "400px"--}}
+{{--                var map = new google.maps.Map(mapArea, {zoom: 11, center: uluru});--}}
+{{--            }--}}
+
+{{--                @foreach($users as $u)--}}
+
+{{--                @if(!is_null($u['location_latitude'])||!is_null($u['location_longitude']))--}}
+{{--            var uluru = {--}}
+{{--                    lat: {{$u['location_latitude']}},--}}
+{{--                    lng: {{$u['location_longitude']}}--}}
+{{--                };--}}
+{{--            new google.maps.Marker({position: uluru, map: map});--}}
+{{--            @endif--}}
+{{--            @endforeach--}}
         }
     </script>
     <script async defer
