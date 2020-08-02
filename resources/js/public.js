@@ -8,7 +8,8 @@ try {
     require('mediaelement');
 
     $('#findapro').submit(function(e) {
+        console.log(window.location.toString()+"/"+$( this ).find("option:selected").val());
         e.preventDefault();
-        $(this).attr("action",window.location.toString()+"/"+$( this ).find("option:selected").val()).submit();
+        // $(this).attr("action",).submit();
     })
 } catch (e) {}
