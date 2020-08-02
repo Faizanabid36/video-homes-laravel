@@ -237,7 +237,8 @@
                     map: map
                 });
             bounds.extend(marker.position);
-            google.maps.event.addListener(marker, 'click', (function(marker, {{$k}}) {
+            let i = {{$k}};
+            google.maps.event.addListener(marker, 'click', (function(marker, i) {
                 return function() {
                     infowindow.setContent({{$u['name']}});
                     infowindow.open(map, marker);
