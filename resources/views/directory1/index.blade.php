@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-12">
             <div class="Search-boxes">
-                <form action="{{route('search_in_directory')}}" method="POST">
+                <form action="{{url()->current()}}" method="GET" onsubmit="findapro()">
                     @csrf
                     <div class="form-row">
                         <div class="col my-2">
@@ -13,7 +13,7 @@
                             {{--                                <i class="fal fa-search icon search-icon"></i>--}}
                         </div>
                         <div class="col my-2">
-                            <select name="industry" class="form-control text" id="">
+                            <select required name="industry" class="form-control text" id="">
                                 <option value="" selected disabled>Choose Industry</option>
                                 @foreach($industries as $industry)
                                     <option value="{{$industry->id}}">{{$industry->name}}</option>
@@ -52,7 +52,7 @@
         <div class="row mt-3">
             <div class="col-12">
                 <div class="float-left">
-                    <h6 class="my-3"> Found<span class="h-8"> {{count($users)}} </span>listings </h6>
+                    <h6 class="my-3">Found<span class="h-8"> {{count($users)}} </span>listings </h6>
                     {{--                        <div class="dropdown">--}}
                     {{--                            <button class="btn btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown"--}}
                     {{--                                    aria-haspopup="true" aria-expanded="false">--}}
