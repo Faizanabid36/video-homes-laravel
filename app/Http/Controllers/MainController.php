@@ -26,15 +26,16 @@ class MainController extends Controller {
 
         $industries = UserCategory::getCategories();
         $categories = UserCategory::getCategories( $level1, $level2 );
-        $users      = collect( grabUsers( $categories ) )->when( request( 'query' ), function ( $q ) {
-            return $q->filter( function ( $value ) {
+        $users      = collect( grabUsers( $categories ) )->when( request( 'query' ), function ( $collect ) {
+            return $collect->filter( function ( $value ) {
+                dd($value);
                 return (
-                    stripos( $value['direct_phone'], request( 'query' ) ) ||
+                    stripos( $value['name'], request( 'query' ) ) ||
                     stripos( $value['office_phone'], request( 'query' ) ) ||
                     $value['license_no'] === request( 'query' ) ||
                     stripos( $value['company_name'], request( 'query' ) ) ||
                     stripos( $value['address'], request( 'query' ) ) ||
-                    stripos( $value['name'], request( 'query' ) ) );
+                    stripos( $value['direct_phone'], request( 'query' ) ) );
             } );
 //            $q->where( 'direct_phone', 'like', request( 'query' ) . '%' )
 //              ->orWhere( 'office_phone', 'like', request( 'query' ) . '%' )
