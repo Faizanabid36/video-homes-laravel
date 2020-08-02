@@ -223,14 +223,11 @@
     </script>
     <script>
         function initMap() {
-            @if(!empty($users))
-                let mapArea = document.getElementById('map'),i;
-            mapArea.style.width = "100%"
-            mapArea.style.height = "400px"
-            var map = new google.maps.Map(mapArea, {zoom: 11, center: uluru});
-            var bounds = new google.maps.LatLngBounds();
-            var infowindow = new google.maps.InfoWindow();
-
+                @if(!empty($users))
+            let mapArea = document.getElementById('map'), i, map = new google.maps.Map(mapArea, {zoom: 11}),
+                bounds = new google.maps.LatLngBounds(), infowindow = new google.maps.InfoWindow();
+            mapArea.style.width = "100%";
+            mapArea.style.height = "400px";
                 @foreach($users as $k => $u)
             var marker = new google.maps.Marker({
                     position: new google.maps.LatLng({{$u['location_latitude']}}, {{$u['location_longitude']}}),
@@ -238,8 +235,8 @@
                 });
             bounds.extend(marker.position);
             i = {{$k}};
-            google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                return function() {
+            google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                return function () {
                     infowindow.setContent("{{$u['name']}}");
                     infowindow.open(map, marker);
                 }
@@ -254,31 +251,31 @@
 
 
 
-{{--                @foreach($users as $u)--}}
-{{--                @if(!is_null($u['location_latitude'])||!is_null($u['location_longitude']))--}}
-{{--            var uluru = {--}}
-{{--                    lat: {{$u['location_latitude']}},--}}
-{{--                    lng: {{$u['location_longitude']}}--}}
-{{--                };--}}
-{{--            @endif--}}
-{{--                @endforeach--}}
-{{--            if (uluru) {--}}
-{{--                mapArea = document.getElementById('map');--}}
-{{--                mapArea.style.width = "100%"--}}
-{{--                mapArea.style.height = "400px"--}}
-{{--                var map = new google.maps.Map(mapArea, {zoom: 11, center: uluru});--}}
-{{--            }--}}
+            {{--                @foreach($users as $u)--}}
+            {{--                @if(!is_null($u['location_latitude'])||!is_null($u['location_longitude']))--}}
+            {{--            var uluru = {--}}
+            {{--                    lat: {{$u['location_latitude']}},--}}
+            {{--                    lng: {{$u['location_longitude']}}--}}
+            {{--                };--}}
+            {{--            @endif--}}
+            {{--                @endforeach--}}
+            {{--            if (uluru) {--}}
+            {{--                mapArea = document.getElementById('map');--}}
+            {{--                mapArea.style.width = "100%"--}}
+            {{--                mapArea.style.height = "400px"--}}
+            {{--                var map = new google.maps.Map(mapArea, {zoom: 11, center: uluru});--}}
+            {{--            }--}}
 
-{{--                @foreach($users as $u)--}}
+            {{--                @foreach($users as $u)--}}
 
-{{--                @if(!is_null($u['location_latitude'])||!is_null($u['location_longitude']))--}}
-{{--            var uluru = {--}}
-{{--                    lat: {{$u['location_latitude']}},--}}
-{{--                    lng: {{$u['location_longitude']}}--}}
-{{--                };--}}
-{{--            new google.maps.Marker({position: uluru, map: map});--}}
-{{--            @endif--}}
-{{--            @endforeach--}}
+            {{--                @if(!is_null($u['location_latitude'])||!is_null($u['location_longitude']))--}}
+            {{--            var uluru = {--}}
+            {{--                    lat: {{$u['location_latitude']}},--}}
+            {{--                    lng: {{$u['location_longitude']}}--}}
+            {{--                };--}}
+            {{--            new google.maps.Marker({position: uluru, map: map});--}}
+            {{--            @endif--}}
+            {{--            @endforeach--}}
         }
     </script>
     <script async defer
