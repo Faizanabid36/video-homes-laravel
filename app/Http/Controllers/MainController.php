@@ -26,8 +26,23 @@ class MainController extends Controller {
 
         $industries = UserCategory::getCategories();
         $categories = UserCategory::getCategories( $level1, $level2 );
-        $users      = grabUsers( $categories );
-        dd($users);
+        $users      = collect( grabUsers( $categories ) )->when( request( 'query' ), function ( $q ) {
+            return $q->filter( function ( $value ) {
+                return (
+                    stripos( $value->direct_phone, request( 'query' ) ) ||
+                    stripos( $value->office_phone, request( 'query' ) ) ||
+                    $value->license_no === request( 'query' ) ||
+                    stripos( $value->company_name, request( 'query' ) ) ||
+                    stripos( $value->address, request( 'query' ) ) ||
+                    stripos( $value->name, request( 'query' ) ) );
+            } );
+//            $q->where( 'direct_phone', 'like', request( 'query' ) . '%' )
+//              ->orWhere( 'office_phone', 'like', request( 'query' ) . '%' )
+//              ->orWhere( 'license_no', request( 'query' ) )
+//              ->orWhere( 'company_name', 'like', request( 'query' ) . '%' )
+//              ->orWhere( 'address', 'like', request( 'query' ) . '%' )
+//              ->orWhere( 'name', 'like', request( 'query' ) . '%' );
+        } );
 
         return view( 'directory1.index', compact( 'users', 'categories', 'industries', 'level1' ) );
     }
@@ -115,8 +130,8 @@ class MainController extends Controller {
     }
 
     public function directory_by_user_video( $username, $video_id = null ) {
-        $video          = Video::userVideos( $username, $video_id )->first();
-        abort_if(!$video,403,"User has no video.");
+        $video = Video::userVideos( $username, $video_id )->first();
+        abort_if( ! $video, 403, "User has no video." );
 
         $user           = $video->user;
         $related_videos = Video::userVideos( $username, $video->id, true )->get();
