@@ -27,6 +27,7 @@ class MainController extends Controller {
         $industries = UserCategory::getCategories();
         $categories = UserCategory::getCategories( $level1, $level2 );
         $users      = grabUsers( $categories );
+        dd($users);
 
         return view( 'directory1.index', compact( 'users', 'categories', 'industries', 'level1' ) );
     }
