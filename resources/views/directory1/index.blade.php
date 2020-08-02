@@ -224,7 +224,7 @@
     <script>
         function initMap() {
             @if(!empty($users))
-                let mapArea = document.getElementById('map');
+                let mapArea = document.getElementById('map'),i;
             mapArea.style.width = "100%"
             mapArea.style.height = "400px"
             var map = new google.maps.Map(mapArea, {zoom: 11, center: uluru});
@@ -237,7 +237,7 @@
                     map: map
                 });
             bounds.extend(marker.position);
-            let i = {{$k}};
+            i = {{$k}};
             google.maps.event.addListener(marker, 'click', (function(marker, i) {
                 return function() {
                     infowindow.setContent("{{$u['name']}}");
