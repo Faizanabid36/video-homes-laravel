@@ -4,8 +4,7 @@
     <div class="row">
         <div class="col-12">
             <div class="Search-boxes">
-                <form action="{{url()->current()}}" method="GET" onsubmit="findapro()">
-                    @csrf
+                <form action="{{url()->current()}}" method="GET" id="findapro">
                     <div class="form-row">
                         <div class="col my-2">
                             <input required name="query" type="text" class="form-control"
@@ -16,7 +15,7 @@
                             <select required name="industry" class="form-control text" id="">
                                 <option value="" selected disabled>Choose Industry</option>
                                 @foreach($industries as $industry)
-                                    <option value="{{$industry->id}}">{{$industry->name}}</option>
+                                    <option value="{{$industry->slug}}">{{$industry->name}}</option>
                                 @endforeach
                             </select>
                         </div>
