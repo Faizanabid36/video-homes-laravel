@@ -27,19 +27,19 @@ class UserCategory extends Model {
             return $query->whereSlug( $level1 )->when( request( 'query' ), function ( $q ) {
                 return $q->whereHas( 'list', function ( $q ) {
                     return $q
-                        ->where( 'direct_phone', 'like', request( 'query' ) . '%' )
+                        ->whereHas( 'user_id', function ( $q ) {
+                            return $q->where( 'name', 'like', request( 'query' ) . '%' );
+                        } )
+                        ->orWhere( 'direct_phone', 'like', request( 'query' ) . '%' )
                         ->orWhere( 'office_phone', 'like', request( 'query' ) . '%' )
                         ->orWhere( 'license_no', request( 'query' ) )
                         ->orWhere( 'company_name', 'like', request( 'query' ) . '%' )
-                        ->orWhere( 'address', 'like', request( 'query' ) . '%' )
-                        ->orWhereHas( 'user_id', function ( $q ) {
-                            return $q->where( 'name', 'like', request( 'query' ) . '%' );
-                        } );
+                        ->orWhere( 'address', 'like', request( 'query' ) . '%' );
                 } );
             } );
         } )->when( $level2, function ( $query ) use ( $level2 ) {
             return $query->whereSlug( $level2 );
-        } )->get();
+        } )->dd();
 
     }
 
