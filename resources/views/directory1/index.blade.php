@@ -229,9 +229,9 @@
             mapArea.style.width = "100%";
             mapArea.style.height = "400px";
                 @foreach($users as $k => $u)
-                @if((!is_null($u['location_latitude']) && $u['location_latitude'] !== "") && (!is_null($u['location_longitude']) && $u['location_longitude'] !== "") )
+
             var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng({{$u['location_latitude']}}, {{$u['location_longitude']}}),
+                    position: new google.maps.LatLng("{{$u['location_latitude']}}", "{{$u['location_longitude']}}"),
                     map: map
                 });
             bounds.extend(marker.position);
@@ -242,7 +242,7 @@
                     infowindow.open(map, marker);
                 }
             })(marker, i));
-            @endif
+
             @endforeach
             map.fitBounds(bounds);
             var listener = google.maps.event.addListener(map, "idle", function () {
