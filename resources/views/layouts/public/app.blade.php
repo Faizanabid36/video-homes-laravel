@@ -79,7 +79,7 @@
 
 
 </div>
-<script src="{{ asset('js/public.js') }}"></script>
+<script src="{{ asset('js/public.js?version=').time() }}"></script>
 @yield('script')
 </body>
 </html>
