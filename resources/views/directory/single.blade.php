@@ -115,6 +115,23 @@
                         {{--                                    <span class="expend-player"><i class="fa fa-expand fa-fw"></i></span>--}}
                         {{--                                </div>--}}
                         <div class="video-options pt_mn_wtch_opts pt-4">
+
+                            <button class="btn bg-light text-dark btn-share" id="info-video">
+                                <i class="fa fa-info text-white"></i>
+                                More info
+                            </button>
+                            <div class="info-video d-none">
+                                {{$video->title}}
+                                <br>
+                                {!! $video->discription !!}
+                                <br>
+                                Tags: <span
+                                    class="badge badge-primary">{{str_replace(",",'</span><span class="badge badge-primary">',$video->tags)}}</span>
+                                <br>
+                                Category: {{$video->category->name}}
+
+
+                            </div>
                             <button class="btn btn-primary btn-share" id="share-video">
                                 <i class="fa fa-share-alt text-white"></i>
                                 Share
@@ -127,7 +144,8 @@
                                                    class="form-control input-md copylink" readonly=""
                                             >
                                             <div class="input-group-prepend">
-                                                <button class="btn btn-primary copylink"><i class="fa fa-link"></i></button>
+                                                <button class="btn btn-primary copylink"><i class="fa fa-link"></i>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -138,7 +156,7 @@
                                 <i class="fa fa-code"></i>
                                 Embed
                             </button>
-                            <div class="embed-placement d-none">
+                            <div class="embed-video d-none">
                                 <div class="input-group">
                                     <textarea name="embed" id="embed" cols="30" rows="3" class="form-control copyembed">&lt;iframe src="{{route('embed_video',$video->video_id)}}" frameborder="0" width="100%" height="400" allowfullscreen&gt;&lt;/iframe&gt;</textarea>
                                     <div class="input-group-prepend">
@@ -986,17 +1004,30 @@
     {{--    </script>--}}
     {{--    --}}
     <script type="text/javascript">
-        $('#share-video').on('click', function (event) {
-            event.preventDefault();
+        // $('#share-video').on('click', function (event) {
+        //     event.preventDefault();
+        //
+        //     $('.embed-placement').addClass('d-none');
+        //     $('.share-video').toggleClass('d-none');
+        // });
+        // $('#embed-video').on('click', function (event) {
+        //     event.preventDefault();
+        //     $('.embed-placement').toggleClass('d-none');
+        //     $('.share-video').addClass('d-none');
+        // });
+        // $('#info-video').on('click', function (event) {
+        //     event.preventDefault();
+        //     $('.embed-placement').toggleClass('d-none');
+        //     $('.share-video').addClass('d-none');
+        // });
 
-            $('.embed-placement').addClass('d-none');
-            $('.share-video').toggleClass('d-none');
-        });
-        $('#embed-video').on('click', function (event) {
-            event.preventDefault();
-            $('.embed-placement').toggleClass('d-none');
-            $('.share-video').addClass('d-none');
-        });
+
+        $(".btn-share").click(function () {
+            $(".btn-share").each(function (val) {
+                $("#" + $(val).attr("id")).addClass("d-none");
+            })
+            $("#" + $(this).attr("id")).removeClass("d-none");
+        })
 
         $('video').mediaelementplayer({
             pluginPath: 'https://cdnjs.com/libraries/mediaelement-plugins/',
