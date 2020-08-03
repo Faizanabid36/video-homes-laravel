@@ -30,7 +30,7 @@ class MainController extends Controller {
         $video_categories = Category::all();
         $users         = collect( grabUsers( $categories ) );
         if ( request( 'category_id' ) ) {
-            $vidoes = Category::with(['videos'])->find(request('category_id'));
+            $videos = Category::with(['videos'])->find(request('category_id'));
             return $videos;
 
         }
