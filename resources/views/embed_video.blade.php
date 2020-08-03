@@ -53,7 +53,7 @@
 </video>
 <script src="{{ asset('js/public.js') }}"></script>
 <script>
-    $("video").on("play",function(e){
+    $("video").once("play",function(e){
         axios.put('{{route('is_played',$video->id)}}').then(({data})=>{
             console.log(data);
         })

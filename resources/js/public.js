@@ -9,7 +9,7 @@ try {
     require('mediaelement');
 
     $('#findaprobtn').click(function (e) {
-        let form = $(this).parent('form');
+        let form = $(this).parents('form');
         form.attr("action", form.attr("action") + "/" + form.find("option:selected").val()).submit();
         e.preventDefault();
     })
