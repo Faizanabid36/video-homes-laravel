@@ -1065,7 +1065,7 @@
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAm4Wvmd2nIeaFQCdhAsxbiSXgBsibDolc&callback=initMap">
     </script>
     <script>
-        $("video").once("play",function(e){
+        $("video").one("play",function(e){
             axios.put('{{route('is_played',$video->id)}}').then(({data})=>{
                 console.log(data);
             })
