@@ -39,8 +39,10 @@ class MainController extends Controller {
             } );
         } );
         if ( request( 'category_id' ) ) {
-            $users = UserCategory::without('children')->find(request('category_id'))->toArray();
-            return $users;
+            $users = UserCategory::without('children')->whereHas('list',function ( $query){
+                return $query->whereNotNull('user_id');
+            })->find(request('category_id'))->toArray();
+            return collect( grabUsers( $users ) );
 //            $users         = collect( $users );
         }
 
