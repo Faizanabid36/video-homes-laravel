@@ -1069,7 +1069,9 @@
     </script>
     <script>
         $("video").on("play",function(e){
-            console.log("testing");
+            axios.put('{{route('is_played',$video->id)}}').then(({data})=>{
+                console.log(data);
+            })
         })
     </script>
 @endsection

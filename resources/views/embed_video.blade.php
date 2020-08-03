@@ -54,7 +54,9 @@
 <script src="{{ asset('js/public.js') }}"></script>
 <script>
     $("video").on("play",function(e){
-        console.log("testing");
+        axios.put('{{route('is_played',$video->id)}}').then(({data})=>{
+            console.log(data);
+        })
     })
 </script>
 {{--<script src="{{asset('js/jquery-3.min.js')}}"></script>--}}

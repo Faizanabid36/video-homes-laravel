@@ -105,13 +105,15 @@ Route::get( '{username}/watch_video', 'VideoController@watch_video' );
 Route::get( '{username}/watch_video/is_watchable', 'VideoController@watchable_video' );
 Route::post( '{username}/', 'VideoController@watch_video' );
 Route::get( '/categories', 'CategoryController@index' );
-Route::get('/', 'MainController@index')->name('home');
+Route::get( '/', 'MainController@index' )->name( 'home' );
 
 
 //Directory and Embed Videos
-Route::get('/directory/{level1?}/{level2?}', 'MainController@directory')->name('directory');
-Route::get('/u/{username}/{video_id?}','MainController@directory_by_username')->name('directory_by_username');
+Route::get( '/directory/{level1?}/{level2?}', 'MainController@directory' )->name( 'directory' );
+Route::get( '/u/{username}/{video_id?}', 'MainController@directory_by_username' )->name( 'directory_by_username' );
 Route::get( '/embed/{video_id}', 'MainController@embed_video' )->name( 'embed_video' );
-
+Route::put( 'is_play/{video}', function ( \App\Video $video ) {
+    return ["success"=>\App\VideoView::videoViews( $video, [ "is_played" => 1 ] )];
+} )->name('is_played');
 
 
