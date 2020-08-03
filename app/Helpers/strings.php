@@ -245,7 +245,7 @@ function grabUsers( $categories, $forceClear = false ) {
 }
 function userMerger($categories){
     $d = [];
-
+dd($categories);
     foreach ( $categories as $val ) {
         dd($val);die;
         if ( isset( $val['list'] ) && ! empty( $val['list'] ) ) {
