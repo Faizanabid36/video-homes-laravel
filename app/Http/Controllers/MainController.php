@@ -48,6 +48,13 @@ class MainController extends Controller {
 
         return view( 'directory_videos', compact( 'user', 'video', 'related_videos' ) );
     }
+    public function directory_by_user_video( $username, $video_id = null ) {
+        $video = Video::userVideos( $username, $video_id )->first();
+        abort_if( ! $video, 403, "User has no video." );
+        $user           = $video->user;
+        $related_videos = Video::userVideos( $username, $video->id, true )->get();
+        return view( 'directory_videos', compact( 'user', 'video', 'related_videos' ) );
+    }
 
 
 //    public function directory() {
@@ -59,16 +66,16 @@ class MainController extends Controller {
 //        return view( 'directory.cat_directory', compact( 'users', 'tags', 'role_slug', 'directory' ) );
 //    }
 //
-//    public function directory_by_user_video( $username, $video_id = null ) {
-//        $video = Video::userVideos( $username, $video_id )->first();
-//        abort_if( ! $video, 403, "User has no video." );
-//
-//        $user           = $video->user;
-//        $related_videos = Video::userVideos( $username, $video->id, true )->get();
-//
-////        return compact( 'user', 'video', 'related_videos' ) ;
-//        return view( 'directory_videos', compact( 'user', 'video', 'related_videos' ) );
-//    }
+    public function directory_by_user_video( $username, $video_id = null ) {
+        $video = Video::userVideos( $username, $video_id )->first();
+        abort_if( ! $video, 403, "User has no video." );
+
+        $user           = $video->user;
+        $related_videos = Video::userVideos( $username, $video->id, true )->get();
+
+//        return compact( 'user', 'video', 'related_videos' ) ;
+        return view( 'directory_videos', compact( 'user', 'video', 'related_videos' ) );
+    }
 //
 //    public function account_types() {
 //        $roles = UserRole::where( 'role', '!=', 'admin' )->get();
