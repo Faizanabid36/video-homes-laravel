@@ -9,7 +9,6 @@ try {
 
     $('#findaprobtn').click(function(e) {
         let form = $( '#findapro' );
-
         form.attr("action",form.attr("action")+"/"+form.find("option:selected").val()).submit();
         e.preventDefault();
     })
