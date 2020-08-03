@@ -3,6 +3,7 @@
 
     <div class="row">
         <div class="col-6">
+            <div class="Search-boxes">
             <form action="">
                 <div class="form-row">
                     <div class="col my-2">
@@ -42,7 +43,7 @@
                         <input id="searchvideos" type="button" value="Search Videos" class="btn btn-block btn-primary"/>
                     </div>
                 </div>
-            </form>
+            </form></div>
         </div>
         <div class="col-6">
             <div class="Search-boxes">
