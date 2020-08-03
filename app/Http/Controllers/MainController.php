@@ -24,28 +24,27 @@ class MainController extends Controller {
 
     public function directory1( $level1 = null, $level2 = null ) {
 
-        $industries = UserCategory::getCategories();
-        $categories = UserCategory::getCategories( $level1, $level2 );
-        $user_category          = UserCategory::levelCategories();
-        $users      = collect( grabUsers( $categories ) )->when( request( 'query' ), function ( $collect ) {
+        $industries    = UserCategory::getCategories();
+        $categories    = UserCategory::getCategories( $level1, $level2 );
+        $user_category = UserCategory::levelCategories();
+        $users         = collect( grabUsers( $categories ) )->when( request( 'query' ), function ( $collect ) {
             return $collect->filter( function ( $value ) {
                 return (
-                    stripos( $value['name'], request( 'query' ) ) !== FALSE ||
-                    stripos( $value['office_phone'], request( 'query' ) )  !== FALSE ||
+                    stripos( $value['name'], request( 'query' ) ) !== false ||
+                    stripos( $value['office_phone'], request( 'query' ) ) !== false ||
                     $value['license_no'] === request( 'query' ) ||
-                    stripos( $value['company_name'], request( 'query' ) ) !== FALSE  ||
-                    stripos( $value['address'], request( 'query' ) ) !== FALSE  ||
-                    stripos( $value['direct_phone'], request( 'query' ) ) !== FALSE  );
+                    stripos( $value['company_name'], request( 'query' ) ) !== false ||
+                    stripos( $value['address'], request( 'query' ) ) !== false ||
+                    stripos( $value['direct_phone'], request( 'query' ) ) !== false );
             } );
-//            $q->where( 'direct_phone', 'like', request( 'query' ) . '%' )
-//              ->orWhere( 'office_phone', 'like', request( 'query' ) . '%' )
-//              ->orWhere( 'license_no', request( 'query' ) )
-//              ->orWhere( 'company_name', 'like', request( 'query' ) . '%' )
-//              ->orWhere( 'address', 'like', request( 'query' ) . '%' )
-//              ->orWhere( 'name', 'like', request( 'query' ) . '%' );
         } );
+        if ( request( 'category_id' ) ) {
+            $users = User::whereHas( 'user_extra', function ( $query ) {
+                $query->whereCategoryId(reqeust('category_id'));
+            } )->get();
+        }
 
-        return view( 'directory1.index', compact( 'users', 'categories', 'industries', 'level1','user_category' ) );
+        return view( 'directory1.index', compact( 'users', 'categories', 'industries', 'level1', 'user_category' ) );
     }
 
     public function directory() {
