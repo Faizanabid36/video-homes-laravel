@@ -31,11 +31,11 @@
         </div>
         <div class="col-6">
             <div class="Search-boxes">
-                <form action="{{url()->current()}}" method="GET" id="findapro">
+                <form action="{{route('directory')}}" method="GET" id="findapro">
                     <div class="form-row">
                         <div class="col my-2">
                             <select required id="industry" class="form-control text">
-                                <option value="" selected disabled>Choose Industry</option>
+                                <option selected disabled>Choose Industry</option>
                                 @foreach($industries as $industry)
                                     <option value="{{$industry->slug}}">{{$industry->name}}</option>
                                 @endforeach
