@@ -256,5 +256,5 @@ function userMerger( $categories ) {
         }
     }
 
-    return $d;
+    return $d ? array_values( $d ) : [];
 }
