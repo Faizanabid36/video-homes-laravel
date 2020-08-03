@@ -29,24 +29,24 @@ class VideoView extends Model
 
     public static function getTotalViews()
     {
-        return VideoView::all()->count();
+        return self::all()->count();
     }
 
     public static function getTotalVideoViews($video)
     {
-        return VideoView::where('video_id', $video->id)->where('video_slug', $video->video_id)->count();
+        return self::where('video_id', $video->id)->where('video_slug', $video->video_id)->count();
     }
 
     public static function getMostViewed()
     {
-        return VideoView::select(array('video_views.video_id', \DB::raw('COUNT(video_id) as views')))
+        return self::select(array('video_views.video_id', \DB::raw('COUNT(video_id) as views')))
             ->orderBy(\DB::raw('COUNT(video_id)'), 'desc')
             ->groupBy('video_id')->get();
     }
 
     public static function getViewsByDays($video, $time)
     {
-        return VideoView::select(array('video_views.video_id', \DB::raw('COUNT(video_id) as views')))
+        return self::select(array('video_views.video_id', \DB::raw('COUNT(video_id) as views')))
             ->where('video_id', $video->id)
             ->where('created_at', '<=', \Carbon\Carbon::parse($time[1]))
             ->where('created_at', '>=', \Carbon\Carbon::parse($time[0]))

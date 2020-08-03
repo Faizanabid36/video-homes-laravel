@@ -52,6 +52,11 @@
     Your browser does not support HTML5 video.
 </video>
 <script src="{{ asset('js/public.js') }}"></script>
+<script>
+    $("video").on("play",function(e){
+        console.log("testing");
+    })
+</script>
 {{--<script src="{{asset('js/jquery-3.min.js')}}"></script>--}}
 {{--<script src="{{asset('js/jquery-ui.min.js')}}"></script>--}}
 {{--<script type="text/javascript" src="{{asset('js/jquery.form.min.js')}}"></script>--}}

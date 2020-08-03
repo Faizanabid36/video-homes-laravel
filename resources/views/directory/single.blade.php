@@ -1057,8 +1057,15 @@
             new google.maps.Marker({position: uluru, map: map});
             @endif
         }
+
+
     </script>
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAm4Wvmd2nIeaFQCdhAsxbiSXgBsibDolc&callback=initMap">
+    </script>
+    <script>
+        $("video").on("play",function(e){
+            console.log("testing");
+        })
     </script>
 @endsection
