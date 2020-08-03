@@ -18,7 +18,7 @@
 
 </head>
 <body>
-<div class="container">
+<div class="container-fluid bg-white">
     <div class="row">
         <div class="col-12">
             <nav class="navbar navbar-expand-lg navbar-light bg-light home-nav ">
@@ -70,6 +70,8 @@
             <!-- Nav-end -->
         </div>
     </div>
+</div>
+<div class="container">
     <div style="min-height:100vh;">
         @yield('content')
     </div>
