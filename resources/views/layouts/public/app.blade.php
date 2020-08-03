@@ -74,9 +74,7 @@
     </div>
 </div>
 <div class="container">
-    <div style="min-height:100vh;">
-        @yield('content')
-    </div>
+    @yield('content')
     <div class="row sayHello m-0 p-0 ">
         <div class="col-12 m-0 p-0 ">
             <div class="footer1"><h3> © VideoHomes.com LLC 2020 </h3></div>
