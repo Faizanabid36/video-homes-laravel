@@ -73,7 +73,7 @@
     </div>
 
     <!-- 3rd row -->
-    @if(count($users)>0)
+    @if((is_array($users) && count($users)>0) || $users->count())
         <div class="row mt-3 px-1">
             @if(!empty($categories) )
                 @foreach(($level1 ? collect($categories)->first()['children'] : $industries) as $category)
