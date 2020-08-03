@@ -135,22 +135,9 @@
     margin-top: 50px;
 
 
-}
-
-.icons-boxes {
-
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: stretch;
-    flex-wrap: wrap;
-    position: relative;
-
-
     & .card {
-        border: 1px solid black;
         // width: 200px;
-        border: 1px solid rgb(233, 217, 217) !important;
+        border: 1px solid rgb(233, 217, 217);
         text-align: center;
         padding-top: 20px;
 
@@ -174,7 +161,7 @@
     background: #2186C4;
     display: flex;
     align-items: center;
-    padding: 0px 10px;
+    padding: 0 10px;
 
     justify-content: space-around;
 
