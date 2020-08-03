@@ -38,7 +38,7 @@
                     </div>
                     <div class="form-row">
                         <div class="col my-2">
-                            <button id="searchvideos" type="button" class="btn btn-block btn-primary"><i
+                            <button id="searchvideos" type="submit" class="btn btn-block btn-primary"><i
                                     class="fa fa-search text-white"></i> Search Videos
                             </button>
                         </div>
