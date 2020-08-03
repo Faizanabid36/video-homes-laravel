@@ -1,4 +1,4 @@
-@extends('layouts.public.app')
+@extends('layouts.public.app',["title"=>"Home"])
 @section('content')
 
         <div class="row">

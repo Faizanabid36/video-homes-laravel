@@ -1,4 +1,4 @@
-@extends('layouts.public.app')
+@extends('layouts.public.app',["title"=>"Register"])
 @section('content')
     <div class="container login-page">
         <div class="row">
@@ -11,7 +11,6 @@
                             <strong>Error</strong> {{$errors->first()}}
                         </div>
                     @endif
-                    <div class="errors success form-group"></div>
                     <div class="form-group">
                         <input class="form-control" type="text" name="name" id="name" placeholder="Name" required
                                value="{{old('name')}}" />

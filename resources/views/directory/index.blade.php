@@ -400,19 +400,6 @@
 @section('script')
     @if (!request('category_id'))
         <script>
-            // const onRating = (id) => {
-            //     console.log(document.documentElement.style);
-            //     console.log(document.getElementById('rating-head').children);
-            //     let ratingComponent = document.getElementById('rating-head').children;
-            //
-            //     for (let i = 0; i < id; i++) {
-            //         ratingComponent[i].style.setProperty('color', 'orange');
-            //     }
-            //
-            //     for (let i = id; i <= ratingComponent.length - 1; i++) {
-            //         ratingComponent[i].style.setProperty('color', 'black');
-            //     }
-            // }
 
             function initMap() {
                     @if(!empty($users))
