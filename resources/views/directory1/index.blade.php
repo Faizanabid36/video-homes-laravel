@@ -122,20 +122,20 @@
                             @foreach($users as $account_user)
                                 <div class="card my-1">
                                     <div class="row">
-                                        <div class="col-md-4  p-3 text-center">
-                                            <img class="w-75 thumbnail"
+                                        <div class="col-md-4  p-3 text-center thumbnail">
+                                            <img class="w-75"
                                                  src="{{$account_user['company_logo'] ?? asset('images/blank.png')}}"
                                                  alt="{{$account_user['company_name']}}">
                                             <p class="text-center">{{$account_user['company_name']}}</p>
                                         </div>
                                         <div class="col-md-8">
                                             <div class="card-body">
-                                                <h2 class="card-title ">
+                                                <h2 class="card-title">
                                                     <a
                                                         href="{{route('directory_by_username',$account_user['username'])}}">
                                                         <img
                                                             src="{{$account_user['profile_picture'] ?? asset('images/blank.png')}}"
-                                                            class="rounded-circle rounded thumbnail"
+                                                            class="rounded-circle rounded "
                                                             style="width:50px;height:50px" alt="">
                                                         {{ucfirst($account_user['name'])}} </a>
                                                 </h2>
@@ -181,8 +181,8 @@
                                         @endif
                                         <div class="col-md-6 text-center">
                                             <div class="card">
-                                                <div class="card-header">
-                                                    <img class="w-100 thumbnail"
+                                                <div class="card-header thumbnail">
+                                                    <img class="w-100"
                                                          src="{{$account_user['company_logo'] ?? asset('images/blank.png')}}"
                                                          alt="{{$account_user['company_name']}}">
                                                     <p class="text-center">{{$account_user['company_name']}}</p>
@@ -193,7 +193,7 @@
                                                             href="{{route('directory_by_username',$account_user['username'])}}">
                                                             <img
                                                                 src="{{$account_user['profile_picture'] ?? asset('images/blank.png')}}"
-                                                                class="rounded-circle rounded thumbnail"
+                                                                class="rounded-circle rounded"
                                                                 style="width:50px;height:50px" alt="">
                                                             {{ucfirst($account_user['name'])}} </a>
                                                     </h2>
@@ -281,8 +281,8 @@
                             @foreach($videos->videos as $k => $video)
                                 <div class="card my-1">
                                     <div class="row">
-                                        <div class="col-md-4  p-3 text-center">
-                                            <img class="w-75 thumbnail"
+                                        <div class="col-md-4  p-3 text-center thumbnail">
+                                            <img class="w-75 "
                                                  src="{{asset("storage/".$video['thumbnail'])}}"
                                                  alt="{{ucfirst($video['title'])}}">
 {{--                                            <p class="text-center">{{$account_user['company_name']}}</p>--}}
@@ -339,8 +339,8 @@
                                         @endif
                                         <div class="col-md-6 text-center">
                                             <div class="card">
-                                                <div class="card-header">
-                                                    <img class="w-100 thumbnail"
+                                                <div class="card-header thumbnail">
+                                                    <img class="w-100 "
                                                          src="{{asset("storage/".$video['thumbnail'])}}"
                                                          alt="{{ucfirst($video['title'])}}">
 {{--                                                    <p class="text-center">{{$video['user']['user_extra']['company_name']}}</p>--}}
