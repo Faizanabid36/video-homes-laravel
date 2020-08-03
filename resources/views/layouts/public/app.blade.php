@@ -18,11 +18,11 @@
 
 </head>
 <body>
-<div class="container-fluid bg-white">
+<div class="container-fluid bg-light">
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light home-nav ">
+                <nav class="navbar navbar-expand-lg navbar-light home-nav ">
                     <a class="navbar-brand" href="{{url('/')}}">
                         <img src="{{asset('img/cropped-VideoHomes-3.png')}}"
                              class="logo" alt="videoHomes Logo"/>
