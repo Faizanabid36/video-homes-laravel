@@ -59,6 +59,8 @@
 </video>
 <script src="{{ asset('js/public.js') }}"></script>
 <script>
+{{--    Get iframe attributes --}}
+{{--   $(window.frameElement).attr("width") --}}
     $("video").one("play", function (e) {
         axios.put('{{route('is_played',$video->id)}}').then(({data}) => {
             console.log(data);
