@@ -232,11 +232,11 @@
             <h1>No Result Found</h1>
         @endif
     @else
-        @if(count($vidoes->videos))
+        @if(count($videos->videos))
             <div class="row mt-3">
                 <div class="col-12">
                     <div class="float-left">
-                        <h6 class="my-3">Found<span class="h-8"> {{count($vidoes->videos)}} </span>videos </h6>
+                        <h6 class="my-3">Found<span class="h-8"> {{count($videos->videos)}} </span>videos </h6>
                         {{--                        <div class="dropdown">--}}
                         {{--                            <button class="btn btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown"--}}
                         {{--                                    aria-haspopup="true" aria-expanded="false">--}}
@@ -270,7 +270,7 @@
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                              aria-labelledby="pills-home-tab">
-                            @foreach($vidoes->videos as $k => $video)
+                            @foreach($videos->videos as $k => $video)
                                 <div class="card my-1">
                                     <div class="row">
                                         <div class="col-md-4  p-3 text-center">
@@ -325,7 +325,7 @@
 
                         <div class="tab-pane fade" id="pills-profile" role="tabpanel"
                              aria-labelledby="pills-profile-tab">
-                            @foreach($vidoes->videos as $k => $video)
+                            @foreach($videos->videos as $k => $video)
                                 @if($k % 2 === 0)
                                     <div class="row">
                                         @endif
