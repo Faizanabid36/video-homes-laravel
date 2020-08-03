@@ -10,19 +10,18 @@ class VideoView extends Model
 
     protected $guarded = [];
 
-    public static function videoViews($video, $postsViews = [])
+    public static function videoViews($video, $update = [])
     {
-        if(empty($postsViews)){
-            $postsViews = [
-                'video_id' => $video->id,
-                'video_slug' => $video->video_id,
-                'url' => url()->full(),
-                'session_id' => request()->session()->getId(),
-                'ip' => request()->ip(),
-                'agent' => request()->header('User-Agent'),
-                'video_user'=>$video->user_id,
-            ];
-        }
+        $postsViews = array_merge([
+            'video_id' => $video->id,
+            'video_slug' => $video->video_id,
+            'url' => url()->full(),
+            'session_id' => request()->session()->getId(),
+            'ip' => request()->ip(),
+            'agent' => request()->header('User-Agent'),
+            'video_user'=>$video->user_id,
+        ],$update);
+
 
         self::updateOrCreate([ 'video_id' => $video->id, 'ip' => request()->ip() ], $postsViews);
         return self::whereVideoId($video->id)->count();
