@@ -275,7 +275,7 @@
                                     <div class="row">
                                         <div class="col-md-4  p-3 text-center">
                                             <img class="w-75"
-                                                 src="{{asset("storage/$video['thumbnail']")}}"
+                                                 src="{{asset("storage/".$video['thumbnail'])}}"
                                                  alt="{{ucfirst($video['title'])}}">
 {{--                                            <p class="text-center">{{$account_user['company_name']}}</p>--}}
                                         </div>
@@ -333,7 +333,7 @@
                                             <div class="card">
                                                 <div class="card-header">
                                                     <img class="w-100"
-                                                         src="{{asset("storage/$video['thumbnail']")}}"
+                                                         src="{{asset("storage/".$video['thumbnail'])}}"
                                                          alt="{{ucfirst($video['title'])}}">
 {{--                                                    <p class="text-center">{{$video['user']['user_extra']['company_name']}}</p>--}}
                                                 </div>
