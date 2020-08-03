@@ -62,8 +62,10 @@
 
 
 .header-separator {
+    height:150px;
     svg {
         fill: white;
+        top:-9rem;
     }
 }
 
@@ -129,6 +131,7 @@
 
 .iconBoxParent {
     margin-top: 50px;
+    z-index:999;
 
 
     & .card {

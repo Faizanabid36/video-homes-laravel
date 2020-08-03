@@ -21,8 +21,8 @@
                         </div>
 
                     </div>
-                    <div class="row iconBoxParent">
-                        <div class="card col-md-3 col-sm-6">
+                    <div class="row iconBoxParent position-relative">
+                        <div class="card col-md-3 col-sm-6 shadow-lg">
                             <img class="card-img-top images"
                                  src="{{asset('img/video-image-141px.jpeg')}}"
                                  alt="Card image cap"/>
@@ -32,7 +32,7 @@
                                 <a href="#" class="btn btn-primary">LEARN MORE</a>
                             </div>
                         </div>
-                        <div class="card col-md-3 col-sm-6">
+                        <div class="card col-md-3 col-sm-6 shadow-lg">
                             <img class="card-img-top images"
                                  src="{{asset('img/Index-Card-jpeg.jpg')}}"
                                  alt="Card image cap"/>
@@ -42,7 +42,7 @@
                                 <a href="#" class="btn btn-success">LEARN MORE</a>
                             </div>
                         </div>
-                        <div class="card col-md-3 col-sm-6">
+                        <div class="card col-md-3 col-sm-6 shadow-lg">
                             <img class="card-img-top images"
                                  src="{{asset('img/House-Icon-Jpeg.jpg')}}"
                                  alt="Card image cap"/>
@@ -53,7 +53,7 @@
                                 <a href="#" class="btn btn-warning">LEARN MORE</a>
                             </div>
                         </div>
-                        <div class="card col-md-3 col-sm-6">
+                        <div class="card col-md-3 col-sm-6 shadow-lg">
                             <img class="card-img-top images"
                                  src="{{asset('img/Rss-icon-jpeg.jpg')}}"
                                  alt="Card image cap"/>
@@ -70,8 +70,8 @@
         </div>
     </div>
     <div class="container-fluid m-0 p-0">
-        <div class="header-separator">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+        <div class="header-separator position-relative bg-white">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none" >
                 <path class="svg-white-bg" d="M737.9,94.7L0,0v100h1000V0L737.9,94.7z"/>
             </svg>
         </div>
