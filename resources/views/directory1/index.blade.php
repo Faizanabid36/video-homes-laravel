@@ -1,4 +1,12 @@
 @extends('layouts.public.app')
+@section('style')
+    <style>
+        .thumbail{
+            max-height: 300px !important;
+            overflow: hidden;
+        }
+    </style>
+    @endsection
 @section('content')
 
     <div class="row">
@@ -115,7 +123,7 @@
                                 <div class="card my-1">
                                     <div class="row">
                                         <div class="col-md-4  p-3 text-center">
-                                            <img class="w-75"
+                                            <img class="w-75 thumbnail"
                                                  src="{{$account_user['company_logo'] ?? asset('images/blank.png')}}"
                                                  alt="{{$account_user['company_name']}}">
                                             <p class="text-center">{{$account_user['company_name']}}</p>
@@ -127,7 +135,7 @@
                                                         href="{{route('directory_by_username',$account_user['username'])}}">
                                                         <img
                                                             src="{{$account_user['profile_picture'] ?? asset('images/blank.png')}}"
-                                                            class="rounded-circle rounded"
+                                                            class="rounded-circle rounded thumbnail"
                                                             style="width:50px;height:50px" alt="">
                                                         {{ucfirst($account_user['name'])}} </a>
                                                 </h2>
@@ -174,7 +182,7 @@
                                         <div class="col-md-6 text-center">
                                             <div class="card">
                                                 <div class="card-header">
-                                                    <img class="w-100"
+                                                    <img class="w-100 thumbnail"
                                                          src="{{$account_user['company_logo'] ?? asset('images/blank.png')}}"
                                                          alt="{{$account_user['company_name']}}">
                                                     <p class="text-center">{{$account_user['company_name']}}</p>
@@ -185,7 +193,7 @@
                                                             href="{{route('directory_by_username',$account_user['username'])}}">
                                                             <img
                                                                 src="{{$account_user['profile_picture'] ?? asset('images/blank.png')}}"
-                                                                class="rounded-circle rounded"
+                                                                class="rounded-circle rounded thumbnail"
                                                                 style="width:50px;height:50px" alt="">
                                                             {{ucfirst($account_user['name'])}} </a>
                                                     </h2>
@@ -274,7 +282,7 @@
                                 <div class="card my-1">
                                     <div class="row">
                                         <div class="col-md-4  p-3 text-center">
-                                            <img class="w-75"
+                                            <img class="w-75 thumbnail"
                                                  src="{{asset("storage/".$video['thumbnail'])}}"
                                                  alt="{{ucfirst($video['title'])}}">
 {{--                                            <p class="text-center">{{$account_user['company_name']}}</p>--}}
@@ -332,7 +340,7 @@
                                         <div class="col-md-6 text-center">
                                             <div class="card">
                                                 <div class="card-header">
-                                                    <img class="w-100"
+                                                    <img class="w-100 thumbnail"
                                                          src="{{asset("storage/".$video['thumbnail'])}}"
                                                          alt="{{ucfirst($video['title'])}}">
 {{--                                                    <p class="text-center">{{$video['user']['user_extra']['company_name']}}</p>--}}
