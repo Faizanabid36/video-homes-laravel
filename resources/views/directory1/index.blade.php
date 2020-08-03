@@ -1,7 +1,7 @@
 @extends('layouts.public.app')
 @section('style')
     <style>
-        .thumbail{
+        .thumbnail{
             max-height: 300px !important;
             overflow: hidden;
         }
