@@ -2,29 +2,64 @@
 @section('content')
 
     <div class="row">
-        <div class="col-12">
+        <div class="col-6">
             <div class="Search-boxes">
                 <form action="{{url()->current()}}" method="GET" id="findapro">
                     <div class="form-row">
                         <div class="col my-2">
-                            <input required name="query" type="text" class="form-control"
-                                   placeholder="Search Videos"/>
-                            {{--                                <i class="fal fa-search icon search-icon"></i>--}}
-                        </div>
-                        <div class="col my-2">
-                            <select required id="industry" class="form-control text" id="">
+                            <select required id="industry" class="form-control text">
                                 <option value="" selected disabled>Choose Industry</option>
                                 @foreach($industries as $industry)
                                     <option value="{{$industry->slug}}">{{$industry->name}}</option>
                                 @endforeach
                             </select>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <input id="findaprobtn" type="button" value="Find a Pro" class="btn btn-block btn-primary"/>
+                        <div class="col my-2">
+                            <i class="fa fa-search icon search-icon"></i>
+                            <input id="findaprobtn" type="button" value="Find a Pro" class="btn btn-block btn-primary"/>
+                        </div>
                     </div>
                 </form>
             </div>
+        </div>
+        <div class="col-6">
+            <form action="">
+                <div class="form-row">
+                    <div class="col my-2">
+                        @if (count($industry) > 0)
+                            <div class="form-group">
+                                <select name="category_id" class="selectpicker show-tick form-control"
+                                        data-style="btn-primary"
+                                        data-live-search="true"
+                                        title="Choose one of the following Profession and Expertise...">
+                                    @foreach($industry as $u)
+                                        <optgroup label="{{$u['name']}}">
+                                            @if(!empty($u['children'] ))
+                                                @foreach($u['children'] as $k => $u1)
+                                                    @if (!empty($u1['children']))
+                                                        @foreach($u1['children'] as $k => $u2)
+                                                            <option value="{{$u2['id']}}" data-subtext="{{$u1['name']}}">{{$u2['name']}}</option>
+                                                        @endforeach
+                                                    @else
+                                                        <option value="{{$u1['id']}}">{{$u1['name']}}</option>
+                                                    @endif
+                                                @endforeach
+                                            @else
+                                                <option value="{{$u['id']}}">{{$u['name']}}</option>
+                                            @endif
+                                        </optgroup>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @endif
+
+                    </div>
+                    <div class="col my-2">
+                        <i class="fa fa-search icon search-icon"></i>
+                        <input id="searchvideos" type="button" value="Search Videos" class="btn btn-block btn-primary"/>
+                    </div>
+                </div>
+            </form>
         </div>
 
     </div>
@@ -220,8 +255,7 @@
                 ratingComponent[i].style.setProperty('color', 'black');
             }
         }
-    </script>
-    <script>
+
         function initMap() {
                 @if(!empty($users))
             let mapArea = document.getElementById('map'), i, map = new google.maps.Map(mapArea, {zoom: 11}),
@@ -250,34 +284,6 @@
                 google.maps.event.removeListener(listener);
             });
             @endif
-
-
-
-            {{--                @foreach($users as $u)--}}
-            {{--                @if(!is_null($u['location_latitude'])||!is_null($u['location_longitude']))--}}
-            {{--            var uluru = {--}}
-            {{--                    lat: {{$u['location_latitude']}},--}}
-            {{--                    lng: {{$u['location_longitude']}}--}}
-            {{--                };--}}
-            {{--            @endif--}}
-            {{--                @endforeach--}}
-            {{--            if (uluru) {--}}
-            {{--                mapArea = document.getElementById('map');--}}
-            {{--                mapArea.style.width = "100%"--}}
-            {{--                mapArea.style.height = "400px"--}}
-            {{--                var map = new google.maps.Map(mapArea, {zoom: 11, center: uluru});--}}
-            {{--            }--}}
-
-            {{--                @foreach($users as $u)--}}
-
-            {{--                @if(!is_null($u['location_latitude'])||!is_null($u['location_longitude']))--}}
-            {{--            var uluru = {--}}
-            {{--                    lat: {{$u['location_latitude']}},--}}
-            {{--                    lng: {{$u['location_longitude']}}--}}
-            {{--                };--}}
-            {{--            new google.maps.Marker({position: uluru, map: map});--}}
-            {{--            @endif--}}
-            {{--            @endforeach--}}
         }
     </script>
     <script async defer
