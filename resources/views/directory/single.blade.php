@@ -113,19 +113,11 @@
                         {{--                                </div>--}}
                         <div class="video-options pt_mn_wtch_opts pt-4">
                             <button class="btn btn-primary btn-share" id="share-video">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                     viewBox="0 0 24 24">
-                                    <path fill="currentColor"
-                                          d="M18,16.08C17.24,16.08 16.56,16.38 16.04,16.85L8.91,12.7C8.96,12.47 9,12.24 9,12C9,11.76 8.96,11.53 8.91,11.3L15.96,7.19C16.5,7.69 17.21,8 18,8A3,3 0 0,0 21,5A3,3 0 0,0 18,2A3,3 0 0,0 15,5C15,5.24 15.04,5.47 15.09,5.7L8.04,9.81C7.5,9.31 6.79,9 6,9A3,3 0 0,0 3,12A3,3 0 0,0 6,15C6.79,15 7.5,14.69 8.04,14.19L15.16,18.34C15.11,18.55 15.08,18.77 15.08,19C15.08,20.61 16.39,21.91 18,21.91C19.61,21.91 20.92,20.61 20.92,19A2.92,2.92 0 0,0 18,16.08Z"></path>
-                                </svg>
+                                <i class="fa fa-share-alt text-white"></i>
                                 Share
                             </button>
-                            <button class="btn btn-secondary btn-share" id="embed-video">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                     viewBox="0 0 24 24">
-                                    <path fill="currentColor"
-                                          d="M14.6,16.6L19.2,12L14.6,7.4L16,6L22,12L16,18L14.6,16.6M9.4,16.6L4.8,12L9.4,7.4L8,6L2,12L8,18L9.4,16.6Z"></path>
-                                </svg>
+                            <button class="btn btn-info btn-share" id="embed-video">
+                                <i class="fa fa-code"></i>
                                 Embed
                             </button>
                             @if(!auth()->guest() && ($video->user_id==auth()->user()->id))
@@ -198,7 +190,12 @@
                                 </svg>
                                 <span>Report</span></button>
                             <div class="embed-placement d-none">
-                                <textarea name="embed" id="embed" cols="30" rows="3" class="form-control">&lt;iframe src="{{route('embed_video',$video->video_id)}}" frameborder="0" width="700" height="400" allowfullscreen&gt;&lt;/iframe&gt;</textarea>
+                                <div class="input-group">
+                                    <textarea name="embed" id="embed" cols="30" rows="3" class="form-control copyembed">&lt;iframe src="{{route('embed_video',$video->video_id)}}" frameborder="0" width="700" height="400" allowfullscreen&gt;&lt;/iframe&gt;</textarea>
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-primary copyembed"><i class="fa fa-link"></i></button>
+                                    </div>
+                                </div>
                             </div>
                             <div class="share-video d-none">
                                 <div class="row share-input">
