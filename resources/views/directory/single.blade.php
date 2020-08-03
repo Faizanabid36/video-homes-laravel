@@ -148,8 +148,8 @@
                                     Analytics
                                 </a>
                             @endif
-                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal fade" id="report" tabindex="-1" role="dialog"
+                                 aria-labelledby="reportTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -188,7 +188,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button data-toggle="modal" data-target="#exampleModalCenter"
+                            <button data-toggle="modal" data-target="#report"
                                     class="btn btn-primary btn-share btn-report pull-right" onclick=""
                                     data-rep="1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -203,13 +203,20 @@
                             <div class="share-video d-none">
                                 <div class="row share-input">
                                     <div class="col-md-4">
-                                        <input type="text" value="{{request()->fullUrl()}}"
-                                               class="form-control input-md" readonly=""
-                                               onclick="this.select();">
+                                        <div class="input-group mb-3">
+                                            <input type="text copylink" value="{{request()->fullUrl()}}"
+                                                   class="form-control input-md" readonly=""
+                                                   onclick="this.select();">
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-primary copylink"><i class="fa fa-link"></i></button>
+                                            </div>
+                                        </div>
+
+
+
                                     </div>
                                 </div>
-                                <a href="#" onclick="copyToClipboard(this)" class="fa fa-link"
-                                   link="{{request()->fullUrl()}}"></a>
+
                             </div>
                         </div>
                     @else

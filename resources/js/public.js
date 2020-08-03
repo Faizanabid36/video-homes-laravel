@@ -8,8 +8,11 @@ try {
     require('mediaelement');
 
     $('#findaprobtn').click(function(e) {
-        let form = $( '#findapro' );
+        let form = $( this).parent('form');
         form.attr("action",form.attr("action")+"/"+form.find("option:selected").val()).submit();
         e.preventDefault();
     })
+    $(".copylink").click(function (e) {
+       console.log(e);
+    });
 } catch (e) {}
