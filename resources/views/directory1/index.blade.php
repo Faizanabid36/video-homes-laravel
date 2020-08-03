@@ -3,29 +3,6 @@
 
     <div class="row">
         <div class="col-6">
-            <div class="Search-boxes">
-                <form action="{{url()->current()}}" method="GET" id="findapro">
-                    <div class="form-row">
-                        <div class="col my-2">
-                            <select required id="industry" class="form-control text">
-                                <option value="" selected disabled>Choose Industry</option>
-                                @foreach($industries as $industry)
-                                    <option value="{{$industry->slug}}">{{$industry->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col my-2">
-                            <i class="fa fa-search icon search-icon"></i>
-                            <input id="findaprobtn" type="button" value="Find a Pro" class="btn btn-block btn-primary"/>
-                        </div>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-        <div class="col-6">
             <form action="">
                 <div class="form-row">
                     <div class="col my-2">
@@ -67,7 +44,29 @@
                 </div>
             </form>
         </div>
+        <div class="col-6">
+            <div class="Search-boxes">
+                <form action="{{url()->current()}}" method="GET" id="findapro">
+                    <div class="form-row">
+                        <div class="col my-2">
+                            <select required id="industry" class="form-control text">
+                                <option value="" selected disabled>Choose Industry</option>
+                                @foreach($industries as $industry)
+                                    <option value="{{$industry->slug}}">{{$industry->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col my-2">
+                            <i class="fa fa-search icon search-icon"></i>
+                            <input id="findaprobtn" type="button" value="Find a Pro" class="btn btn-block btn-primary"/>
+                        </div>
+                    </div>
 
+                </form>
+            </div>
+        </div>
     </div>
 
     <!-- 3rd row -->
