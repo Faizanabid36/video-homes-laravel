@@ -49,6 +49,7 @@ Route::group( [ 'middleware' => 'auth' ], function () {
     Route::post( 'delete_comment', 'CommentsController@destroy' )->name( 'delete_comment' );
     Route::get( 'get_total_comments', 'CommentsController@countTotalComments' );
     Route::post( 'createVideoAction', 'VideoController@createVideoAction' )->name( 'createVideoAction' );
+    Route::get( '/categories', 'CategoryController@index' );
 } );
 
 Route::group( [ 'middleware' => 'admin' ], function () {
@@ -104,7 +105,7 @@ Route::get( 'reported_query_videos', 'ReportQueryController@reported_videos' );
 //Route::get( '{username}/watch_video', 'VideoController@watch_video' );
 //Route::get( '{username}/watch_video/is_watchable', 'VideoController@watchable_video' );
 //Route::post( '{username}/', 'VideoController@watch_video' );
-//Route::get( '/categories', 'CategoryController@index' );
+//
 
 //Home
 Route::get( '/', 'MainController@index' )->name( 'home' );

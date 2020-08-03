@@ -209,6 +209,7 @@ class VideoController extends Controller
             $thumbnails[$i] = preg_replace('/(-)\d(\.png)/', "-$i$2", $video->thumbnail, 1);
         }
         $video->username = auth()->user()->username;
+
         return compact('video', 'thumbnails', 'categories');
     }
 
