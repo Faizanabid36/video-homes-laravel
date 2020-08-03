@@ -280,6 +280,9 @@
                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                              aria-labelledby="pills-home-tab">
                             @foreach($videos->videos as $k => $video)
+                                @if (is_null($video['user']))
+                                    @continue
+                                @endif
                                 <div class="card my-1">
                                     <div class="row">
                                         <div class="col-md-4  p-3 text-center thumbnail">
