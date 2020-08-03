@@ -8,7 +8,7 @@
                     <div class="form-row">
                         <div class="col mt-2">
                             @if (count($user_category) > 0)
-                                <div class="form-group">
+                                <div class="form-group mb-2">
                                     <select name="category_id" class="selectpicker show-tick form-control"
                                             data-style="btn-primary bg-light text-dark"
                                             data-live-search="true"
