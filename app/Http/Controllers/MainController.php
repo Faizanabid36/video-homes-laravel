@@ -40,7 +40,7 @@ class MainController extends Controller {
         } );
         if ( request( 'category_id' ) ) {
             $users = UserCategory::without('children')->find(request('category_id'))->toArray();
-//            return $users;
+            return $users;
 //            $users         = collect( $users );
         }
 
