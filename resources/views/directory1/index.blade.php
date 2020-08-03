@@ -26,13 +26,13 @@
             <form action="">
                 <div class="form-row">
                     <div class="col my-2">
-                        @if (count($industry) > 0)
+                        @if (count($industries) > 0)
                             <div class="form-group">
                                 <select name="category_id" class="selectpicker show-tick form-control"
                                         data-style="btn-primary"
                                         data-live-search="true"
                                         title="Choose one of the following Profession and Expertise...">
-                                    @foreach($industry as $u)
+                                    @foreach($industries as $u)
                                         <optgroup label="{{$u['name']}}">
                                             @if(!empty($u['children'] ))
                                                 @foreach($u['children'] as $k => $u1)
