@@ -41,6 +41,7 @@ export default function EditVideo(props) {
     useEffect(() => {
         axios.get(`edit_video/${props.match.params.id}`).then(({data}) => {
             setState({...data.video});
+            console.log(state);
             let index = data.video.thumbnail.match(/-(\d+).png/);
             if (index && index[1]) {
                 setIndex(index[1] - 1);
@@ -49,7 +50,7 @@ export default function EditVideo(props) {
             setCategories(data.categories)
         })
     }, []);
-    let tags = JSON.parse(state.tags) ?? [];
+
     return <Container className="container main-content" id="main-container">
         <div id="container_content">
             <Row><Col xs={8} className="mx-auto">
@@ -97,7 +98,7 @@ export default function EditVideo(props) {
                 </Form.Group>
                 <Form.Group controlId="tags">
                     <Form.Label>Tags</Form.Label>
-                    <TagsInput value={tags} onChange={tags => {
+                    <TagsInput value={state.tags ?? []} onChange={tags => {
                         state.tags = tags;
                         setState(state);
                     }}/>
