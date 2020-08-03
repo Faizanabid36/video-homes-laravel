@@ -75,15 +75,14 @@
 </div>
 <div class="container">
     @yield('content')
-    <div class="row sayHello m-0 p-0 ">
-        <div class="col-12 m-0 p-0 ">
-            <div class="footer1"><h3> © VideoHomes.com LLC 2020 </h3></div>
+    <div class="container-fluid bg-dark ">
+        <div class="row">
+            <div class="col-12  border-primary text-white py-5 text-center">
+                <h3> © VideoHomes.com LLC 2020 </h3>
+            </div>
         </div>
     </div>
-
-
-</div>
-<script src="{{ asset('js/public.js?version=').time() }}"></script>
+    <script src="{{ asset('js/public.js?version=').time() }}"></script>
 @yield('script')
 </body>
 </html>
