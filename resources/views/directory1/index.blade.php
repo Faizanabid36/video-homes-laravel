@@ -39,7 +39,7 @@
                     <div class="form-row">
                         <div class="col my-2">
                             <button id="searchvideos" type="button" class="btn btn-block btn-primary"><i
-                                    class="fa fa-search icon search-icon text-white"></i> Search Videos
+                                    class="fa fa-search text-white"></i> Search Videos
                             </button>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                     <div class="form-row">
                         <div class="col my-2">
                             <button id="findaprobtn" type="button" class="btn btn-block btn-primary"><i
-                                    class="fa fa-search icon search-icon text-white"></i> Find a Pro
+                                    class="fa fa-search text-white"></i> Find a Pro
                             </button>
                         </div>
                     </div>
