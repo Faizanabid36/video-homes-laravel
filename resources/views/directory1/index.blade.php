@@ -9,8 +9,8 @@
                         <div class="col mt-2">
                             @if (count($video_categories) > 0)
                                 <div class="form-group mb-2">
-                                    <select name="category_id" required id="industry" class="form-control text">
-                                        <option value="" selected disabled>Choose Category</option>
+                                    <select name="category_id" required id="category_id" class="form-control text">
+                                        <option selected disabled>Choose Category</option>
                                         @foreach($video_categories as $industry)
                                             <option value="{{$industry->id}}">{{$industry->name}}</option>
                                         @endforeach
