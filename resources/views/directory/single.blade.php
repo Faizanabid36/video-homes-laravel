@@ -204,9 +204,9 @@
                                 <div class="row share-input">
                                     <div class="col-md-4">
                                         <div class="input-group mb-3">
-                                            <input type="text copylink" value="{{request()->fullUrl()}}"
-                                                   class="form-control input-md" readonly=""
-                                                   onclick="this.select();">
+                                            <input type="text" value="{{url()->full()}}"
+                                                   class="form-control input-md copylink" readonly=""
+                                                   >
                                             <div class="input-group-prepend">
                                                 <button class="btn btn-primary copylink"><i class="fa fa-link"></i></button>
                                             </div>
