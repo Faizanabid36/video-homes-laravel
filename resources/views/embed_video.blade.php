@@ -12,6 +12,12 @@
             margin: 0;
         }
     </style>
+    <script>
+        window.VIDEO_APP = {
+            base_url: '{{url('/')}}',
+            video_url: "{{route('is_played',$video->id)}}"
+        }
+    </script>
 </head>
 <body>
 <video style="width: 100%; height: 100vh"
@@ -59,14 +65,14 @@
 </video>
 <script src="{{ asset('js/public.js') }}"></script>
 <script>
-{{--    Get iframe attributes --}}
-{{--   $(window.frameElement).attr("width") --}}
-{{--    window.frameElement.getAttribute("src") --}}
-    $("video").one("play", function (e) {
-        axios.put('{{route('is_played',$video->id)}}').then(({data}) => {
-            console.log(data);
-        })
-    })
+    {{--    Get iframe attributes --}}
+    {{--   $(window.frameElement).attr("width") --}}
+    {{--    window.frameElement.getAttribute("src") --}}
+    {{--    $("video").one("play", function (e) {--}}
+    {{--        axios.put('{{route('is_played',$video->id)}}').then(({data}) => {--}}
+    {{--            console.log(data);--}}
+    {{--        })--}}
+    {{--    })--}}
 </script>
 </body>
 </html>

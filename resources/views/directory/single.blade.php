@@ -1,4 +1,7 @@
 @extends('layouts.public.app')
+@section('header_script')
+    window.VIDEO_APP.video_url = "{{route('is_played',$video->id)}}";
+@stop
 @section('style')
     <style>
         /* Set the size of the div element that contains the map */
@@ -1064,11 +1067,5 @@
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAm4Wvmd2nIeaFQCdhAsxbiSXgBsibDolc&callback=initMap">
     </script>
-    <script>
-        $("video").one("play",function(e){
-            axios.put('{{route('is_played',$video->id)}}').then(({data})=>{
-                console.log(data);
-            })
-        })
-    </script>
+
 @endsection

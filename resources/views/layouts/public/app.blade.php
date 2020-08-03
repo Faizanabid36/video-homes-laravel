@@ -13,7 +13,9 @@
         window.VIDEO_APP = {
             base_url: '{{url('/')}}',
         }
+        @yield('header_script')
     </script>
+
 </head>
 <body>
 <div class="container">

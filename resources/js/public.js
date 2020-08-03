@@ -23,5 +23,10 @@ try {
         document.querySelector("textarea.copyembed").setSelectionRange(0, 99999);
         document.execCommand("copy");
     });
+    $("video").one("play", function (e) {
+        axios.put(window.VIDEO_APP.video_url).then(({data}) => {
+            console.log(data);
+        })
+    })
 } catch (e) {
 }
