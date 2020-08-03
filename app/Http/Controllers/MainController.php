@@ -40,7 +40,7 @@ class MainController extends Controller {
         } );
         if ( request( 'category_id' ) ) {
             $users = UserCategory::find(request('category_id'))->get();
-            $users         = collect( grabUsers( $users ) );
+//            $users         = collect( $users );
         }
 
         return view( 'directory1.index', compact( 'users', 'categories', 'industries', 'level1', 'user_category' ) );
