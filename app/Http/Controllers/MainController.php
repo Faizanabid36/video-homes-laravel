@@ -39,9 +39,8 @@ class MainController extends Controller {
             } );
         } );
         if ( request( 'category_id' ) ) {
-            $users = User::whereHas( 'user_extra', function ( $query ) {
-                $query->whereUserCategoryId(request('category_id'));
-            } )->get();
+            $users = UserCategory::find(request('category_id'))->get();
+            $users         = collect( grabUsers( $users ) );
         }
 
         return view( 'directory1.index', compact( 'users', 'categories', 'industries', 'level1', 'user_category' ) );
