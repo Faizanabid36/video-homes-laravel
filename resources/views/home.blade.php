@@ -76,7 +76,7 @@
             </svg>
         </div>
     </div>
-    <div class="container-fluid bg-white">
+    <div class="container-fluid" style="background: #2186C4;">
         <div class="container">
             <!-- next -->
 
@@ -87,9 +87,12 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="container-fluid" style="background: #7e7a7a;">
+        <div class="container">
 
-
-            <div class="row sayHello m-0 p-0 ">
+            <div class="row m-0 p-0 ">
                 <div class="col-12">
                     <div class="form-home">
 
