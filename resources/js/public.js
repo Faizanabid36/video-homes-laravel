@@ -34,8 +34,8 @@ try {
         })
         $("." + $(this).attr("id")).removeClass("d-none");
     });
-    if($('video').length){
-        $('video').mediaelementplayer({
+    if($('#my-video_html5').length){
+        $('#my-video_html5').mediaelementplayer({
             pluginPath: 'https://cdnjs.com/libraries/mediaelement-plugins/',
             shimScriptAccess: 'always',
             autoplay: true,

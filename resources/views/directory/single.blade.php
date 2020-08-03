@@ -26,9 +26,9 @@
         <div class="row">
             <div class="col-md-2 my-3">
                 <img
-
+class="w-100"
                     src='{{$user->user_extra->profile_picture ?? 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMgrxYAqZF6-kdFuLQesPwdAyonhn93LsxvKXax0vzbCCGd_wQ&usqp=CAU' }}'
-                    style="width:100%;"/>
+                    />
                 <div class="caption-container">
                     <p id="caption">{{$user->name}}
                         <br>
