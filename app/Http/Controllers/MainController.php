@@ -42,7 +42,7 @@ class MainController extends Controller {
             $users = UserCategory::without('children')->find(request('category_id'))->toArray();
 
             $users         = userMerger( $users );
-            return $users;
+//            return $users;
         }
 
         return view( 'directory1.index', compact( 'users', 'categories', 'industries', 'level1', 'user_category' ) );

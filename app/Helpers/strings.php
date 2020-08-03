@@ -250,9 +250,7 @@ function userMerger( $categories ) {
     if ( count( $categories['list'] ) > 0 ) {
         foreach ( $categories['list'] as $user ) {
             $user = is_array( $user ) ? $user : $user->toArray();
-
             if ( isset( $user['user_id'] ) && ! is_null( $user['user_id'] ) ) {
-
                 $d[ $user['user_id']['id'] ] = collect( $user['user_id'] )->merge( collect( $user )->except( 'user_id' ) )->toArray();
             }
         }
