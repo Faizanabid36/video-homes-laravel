@@ -49,7 +49,7 @@ export default function EditVideo(props) {
             setCategories(data.categories)
         })
     }, []);
-
+    let tags = JSON.parse(state.tags) ?? [];
     return <Container className="container main-content" id="main-container">
         <div id="container_content">
             <Row><Col xs={8} className="mx-auto">
@@ -97,7 +97,7 @@ export default function EditVideo(props) {
                 </Form.Group>
                 <Form.Group controlId="tags">
                     <Form.Label>Tags</Form.Label>
-                    <TagsInput value={JSON.parse(state.tags) ?? []} onChange={tags => {
+                    <TagsInput value={tags} onChange={tags => {
                         state.tags = tags;
                         setState(state);
                     }}/>
