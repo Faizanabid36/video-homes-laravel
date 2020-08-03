@@ -20,14 +20,14 @@
                                                         @if (!empty($u1['children']))
                                                             @foreach($u1['children'] as $k => $u2)
                                                                 <option value="{{$u2['id']}}"
-                                                                        data-subtext="{{$u1['name']}}">{{$u2['name']}}</option>
+                                                                        data-subtext="{{$u1['name']}}">{{$u2['name']}} {{count(grabUsers($u2,true))}}</option>
                                                             @endforeach
                                                         @else
-                                                            <option value="{{$u1['id']}}">{{$u1['name']}}</option>
+                                                            <option value="{{$u1['id']}}">{{$u1['name']}} {{count(grabUsers($u1,true))}}</option>
                                                         @endif
                                                     @endforeach
                                                 @else
-                                                    <option value="{{$u['id']}}">{{$u['name']}}</option>
+                                                    <option value="{{$u['id']}}">{{$u['name']}} {{count(grabUsers($u,true))}}</option>
                                                 @endif
                                             </optgroup>
                                         @endforeach
