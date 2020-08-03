@@ -46,7 +46,7 @@ class MainController extends Controller {
         return view( 'directory.single', compact( 'user', 'video', 'related_videos', 'views' ) );
     }
 
-    public function get_embedded_video( $video_id ) {
+    public function embed_video( $video_id ) {
         $video = Video::singleVideo( $video_id )->firstOrFail();
         VideoView::videoViews( $video, [ "from_website" => 0 ] );
         return view( 'embed_video', compact( 'video' ) );

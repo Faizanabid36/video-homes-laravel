@@ -111,7 +111,7 @@ Route::get('/', 'MainController@index')->name('home');
 //Directory and Embed Videos
 Route::get('/directory/{level1?}/{level2?}', 'MainController@directory')->name('directory');
 Route::get('/u/{username}/{video_id?}','MainController@directory_by_username')->name('directory_by_username');
-Route::get( '/embed/{video_id}', 'MaiController@get_embedded_video' )->name( 'embed_video' );
+Route::get( '/embed/{video_id}', 'MainController@embed_video' )->name( 'embed_video' );
 
 
 
