@@ -97,7 +97,7 @@ export default function EditVideo(props) {
                 </Form.Group>
                 <Form.Group controlId="tags">
                     <Form.Label>Tags</Form.Label>
-                    <TagsInput value={state.tags ?? []} onChange={tags => {
+                    <TagsInput value={JSON.parse(state.tags) ?? []} onChange={tags => {
                         state.tags = tags;
                         setState(state);
                     }}/>
