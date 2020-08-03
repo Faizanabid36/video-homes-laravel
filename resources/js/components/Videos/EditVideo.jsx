@@ -1,6 +1,7 @@
 import { Button, Carousel, Col, Row, Container, Form } from "react-bootstrap";
 import React, { useCallback, useState, useEffect } from "react";
-
+import TagsInput from 'react-tagsinput'
+import 'react-tagsinput/react-tagsinput.css'
 
 export default function EditVideo(props) {
     const [state, setState] = useState(false);
@@ -14,33 +15,35 @@ export default function EditVideo(props) {
         setState(state);
     }, [state, thumbnails]);
     const onUpdate = useCallback(e => {
+        console.log(state);
         axios.put('update-video/' + state.id, {...state}).then(({data}) => {
             window.location.href = window.VIDEO_APP.base_url + "/" + state.username + "/watch_video?v=" + state.video_id;
         })
     }, [state, thumbnails]);
-    const deleteVideo = useCallback(e=>{
+    const deleteVideo = useCallback(e => {
         let retVal = confirm("Do you really want to Delete?");
-        if( retVal) {
+        if (retVal) {
             axios.post('delete_video', {...state})
-                .then((res)=>{
-                    if(res.data.success!=0)
-                    {
-                        window.location.href=window.VIDEO_APP.base_url+'/dashboard/#/videos';
+                .then((res) => {
+                    if (res.data.success != 0) {
+                        window.location.href = window.VIDEO_APP.base_url + '/dashboard/#/videos';
                     }
                 })
-                .catch((err)=>{console.log(err)})
+                .catch((err) => {
+                    console.log(err)
+                })
             return true;
         } else {
             return false;
         }
-    },[state])
+    }, [state]);
 
     useEffect(() => {
         axios.get(`edit_video/${props.match.params.id}`).then(({data}) => {
             setState({...data.video});
             let index = data.video.thumbnail.match(/-(\d+).png/);
-            if(index && index[1]){
-                setIndex(index[1] -1);
+            if (index && index[1]) {
+                setIndex(index[1] - 1);
             }
             setThumbnails(data.thumbnails);
             setCategories(data.categories)
@@ -94,10 +97,14 @@ export default function EditVideo(props) {
                 </Form.Group>
                 <Form.Group controlId="tags">
                     <Form.Label>Tags</Form.Label>
-                    <Form.Control placeholder="Tags" defaultValue={state.tags} onChange={e => {
-                        state.tags = e.target.value;
+                    <TagsInput value={state.tags} onChange={tags => {
+                        state.tags = tags;
                         setState(state);
                     }}/>
+                    {/*<Form.Control placeholder="Tags" defaultValue={state.tags} onChange={e => {*/}
+                    {/*    state.tags = e.target.value;*/}
+                    {/*    setState(state);*/}
+                    {/*}}/>*/}
                 </Form.Group>
                 {categories && <Form.Group controlId="category">
                     <Form.Label>Category</Form.Label>

@@ -1,6 +1,4 @@
 import React, {useCallback, useState, useEffect} from 'react';
-import TagsInput from 'react-tagsinput'
-import 'react-tagsinput/react-tagsinput.css'
 import {useDropzone} from 'react-dropzone'
 import {Carousel, Form, Row, Col, Container, ProgressBar, Button} from 'react-bootstrap';
 

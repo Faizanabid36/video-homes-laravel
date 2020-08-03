@@ -98,20 +98,27 @@ Route::resource( 'report_query', 'ReportQueryController' );
 Route::resource( 'user_message', 'UserMessageController' );
 
 Route::get( 'reported_query_videos', 'ReportQueryController@reported_videos' );
-Route::get( '/page/{slug}', 'PageController@view' )->name( 'public.page' );
-Route::post( '/search_in_directory', 'MainController@search_in_directory' )->name( 'search_in_directory' );
 
-Route::get( '{username}/watch_video', 'VideoController@watch_video' );
-Route::get( '{username}/watch_video/is_watchable', 'VideoController@watchable_video' );
-Route::post( '{username}/', 'VideoController@watch_video' );
-Route::get( '/categories', 'CategoryController@index' );
+//Route::post( '/search_in_directory', 'MainController@search_in_directory' )->name( 'search_in_directory' );
+
+//Route::get( '{username}/watch_video', 'VideoController@watch_video' );
+//Route::get( '{username}/watch_video/is_watchable', 'VideoController@watchable_video' );
+//Route::post( '{username}/', 'VideoController@watch_video' );
+//Route::get( '/categories', 'CategoryController@index' );
+
+//Home
 Route::get( '/', 'MainController@index' )->name( 'home' );
+//Pages
+Route::get( '/page/{slug}', 'PageController@view' )->name( 'public.page' );
 
-
-//Directory and Embed Videos
+//Directory
 Route::get( '/directory/{level1?}/{level2?}', 'MainController@directory' )->name( 'directory' );
 Route::get( '/u/{username}/{video_id?}', 'MainController@directory_by_username' )->name( 'directory_by_username' );
+
+///Embed Videos
 Route::get( '/embed/{video_id}', 'MainController@embed_video' )->name( 'embed_video' );
+
+//Video
 Route::put( 'is_play/{video}', function ( \App\Video $video ) {
     return ["success"=>\App\VideoView::videoViews( $video, [ "is_played" => 1 ] )];
 } )->name('is_played');
