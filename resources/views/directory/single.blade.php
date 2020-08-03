@@ -261,7 +261,7 @@
                         </div>
                         <div class="row">
                             @foreach($related_videos as $related_video)
-                                <div class="col-12 m-0 p-0 my-2">
+                                <div class="col-12 m-0 p-0 my-2" id="related_video">
                                     <a href="{{route('directory_by_username',[$user->username,$related_video->video_id])}}">
                                         <div class="p-2 shadow-lg bg-white rounded video-thumb overlay"
                                              style="background-image: url({{asset('storage/'.$related_video->thumbnail)}});background-size: cover;height:200px;">
@@ -339,11 +339,6 @@
                     <div>{{$user->user_extra->license_no}} </div>
                 </div>
                 <hr/>
-                {{--                <div class="d-flex">--}}
-                {{--                    <div class="font-weight-bold "><i class='fa icon fa-envelope'></i> Email</div>--}}
-                {{--                    <div><a href="mailto: {{$user->email}}"> {{$user->email}} </a></div>--}}
-                {{--                </div>--}}
-                {{--                <hr/>--}}
             </div>
 
         </div>
@@ -1000,97 +995,17 @@
 
     {{--    </script>--}}
     {{--    --}}
-    <script type="text/javascript">
-        // $('#share-video').on('click', function (event) {
-        //     event.preventDefault();
-        //
-        //     $('.embed-placement').addClass('d-none');
-        //     $('.share-video').toggleClass('d-none');
-        // });
-        // $('#embed-video').on('click', function (event) {
-        //     event.preventDefault();
-        //     $('.embed-placement').toggleClass('d-none');
-        //     $('.share-video').addClass('d-none');
-        // });
-        // $('#info-video').on('click', function (event) {
-        //     event.preventDefault();
-        //     $('.embed-placement').toggleClass('d-none');
-        //     $('.share-video').addClass('d-none');
-        // });
-
-
-        $(".btn-share").click(function () {
-            $(".btn-share").each(function (key, val) {
-                $("." + $(val).attr("id")).addClass("d-none");
-            })
-            $("." + $(this).attr("id")).removeClass("d-none");
-        })
-
-        $('video').mediaelementplayer({
-            pluginPath: 'https://cdnjs.com/libraries/mediaelement-plugins/',
-            shimScriptAccess: 'always',
-            autoplay: true,
-            features: ['playpause', 'current', 'progress', 'duration', 'speed', 'skipback', 'jumpforward', 'tracks', 'markers', 'volume', 'chromecast', 'contextmenu', 'flash', 'fullscreen', 'quality'],
-            vastAdTagUrl: '',
-            vastAdsType: '',
-            setDimensions: true,
-            enableAutosize: true,
-            jumpForwardInterval: 20,
-            adsPrerollMediaUrl: [''],
-            adsPrerollAdUrl: [''],
-            adsPrerollAdEnableSkip: false,
-            adsPrerollAdSkipSeconds: 0,
-            success: function (media) {
-                media.addEventListener('ended', function (e) {
-
-                    if ($('#autoplay').is(":checked")) {
-                        var url = $('#next-video').find('.video-title').find('a').attr('href');
-                        if (url) {
-                            window.location.href = url;
-                        }
-                    } else {
-                        /* pass */
-                    }
-                }, false);
-
-                media.addEventListener('playing', function (e) {
-                    // if (pt_elexists('.ads-overlay-info')) {
-                    //     $('.ads-overlay-info').remove();
-                    // }
-
-                    $('.ads-test').remove();
-
-                    if ($('body').attr('resized') == 'true') {
-                        PT_Resize(true);
-                    }
-                    $('.mejs__container').css('height', ($('.mejs__container').width() / 1.77176216) + 'px');
-                    $('video, iframe').css('height', '100%');
-                });
-            },
-        });
-
-
-    </script>
     <script>
         function initMap() {
-            let uluru = {lat: 39.2846854, long: -76.6905368};
             @if(!is_null($user->user_extra->location_latitude)||!is_null($user->user_extra->location_longitude))
                 uluru = {
                 lat: {{$user->user_extra->location_latitude}},
                 lng: {{$user->user_extra->location_longitude}}
             };
-                @endif
             var map = new google.maps.Map(
                 document.getElementById('map'), {zoom: 11, center: uluru});
-
-
-            @if(!is_null($user->user_extra->location_latitude)||!is_null($user->user_extra->location_longitude))
-                uluru = {
-                lat: {{$user->user_extra->location_latitude}},
-                lng: {{$user->user_extra->location_longitude}}
-            };
             new google.maps.Marker({position: uluru, map: map});
-            @endif
+                @endif
         }
 
 

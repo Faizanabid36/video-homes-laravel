@@ -27,6 +27,44 @@ try {
         axios.put(window.VIDEO_APP.video_url).then(({data}) => {
             console.log(data);
         })
-    })
+    });
+    $(".btn-share").click(function () {
+        $(".btn-share").each(function (key, val) {
+            $("." + $(val).attr("id")).addClass("d-none");
+        })
+        $("." + $(this).attr("id")).removeClass("d-none");
+    });
+    if($('video').length){
+        $('video').mediaelementplayer({
+            pluginPath: 'https://cdnjs.com/libraries/mediaelement-plugins/',
+            shimScriptAccess: 'always',
+            autoplay: true,
+            features: ['playpause', 'current', 'progress', 'duration', 'speed', 'skipback', 'jumpforward', 'tracks', 'markers', 'volume', 'chromecast', 'contextmenu', 'flash', 'fullscreen', 'quality'],
+            vastAdTagUrl: '',
+            vastAdsType: '',
+            setDimensions: true,
+            enableAutosize: true,
+            jumpForwardInterval: 5,
+            adsPrerollMediaUrl: [''],
+            adsPrerollAdUrl: [''],
+            adsPrerollAdEnableSkip: false,
+            adsPrerollAdSkipSeconds: 0,
+            success: function (media) {
+                media.addEventListener('ended', function (e) {
+                    if ($('#related_video').length) {
+                        var url = $('#related_video').find('a').attr('href');
+                        if (url) {
+                            window.location.href = url;
+                        }
+                    } else {
+                        /* pass */
+                    }
+                }, false);
+
+
+            },
+        });
+    }
+
 } catch (e) {
 }
