@@ -115,18 +115,19 @@
                         {{--                                    <span class="expend-player"><i class="fa fa-expand fa-fw"></i></span>--}}
                         {{--                                </div>--}}
                         <div class="video-options pt_mn_wtch_opts pt-4">
-                            <button class="btn bg-light text-dark btn-share" id="info-video">
-                                <i class="fa fa-info text-white"></i>
+                            <button class="btn border-primary text-black btn-share" id="info-video">
+                                <i class="fa fa-info text-black"></i>
                                 More info
                             </button>
                             <button class="btn btn-primary btn-share" id="share-video">
                                 <i class="fa fa-share-alt text-white"></i>
                                 Share
                             </button>
-                            <button class="btn btn-info btn-share" id="embed-video">
+                            <button class="btn btn-info btn-share text-white" id="embed-video">
                                 <i class="fa fa-code"></i>
                                 Embed
                             </button>
+                            <span>Views: {{$views}}</span>
                             @if(!auth()->guest() && ($video->user_id==auth()->user()->id))
                                 <a class="btn btn-share"
                                    href="{{route('dashboard')}}#/edit_video/{{request('v')}}">
@@ -165,30 +166,31 @@
                                 </div>
                             </div>
                             <div class="share-video d-none">
-                                <div class="row share-input">
-                                    <div class="col-md-4">
-                                        <div class="input-group mb-3">
-                                            <input type="text" value="{{url()->full()}}"
-                                                   class="form-control input-md copylink" readonly=""
-                                            >
-                                            <div class="input-group-prepend">
-                                                <button class="btn btn-primary copylink"><i class="fa fa-link"></i>
-                                                </button>
-                                            </div>
-                                        </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" value="{{url()->full()}}"
+                                           class="form-control input-md copylink" readonly=""
+                                    >
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-primary copylink"><i class="fa fa-link"></i>
+                                        </button>
                                     </div>
+
                                 </div>
 
                             </div>
                             <div class="info-video d-none">
-                                {{$video->title}}
-                                <br>
-                                {!! $video->discription !!}
-                                <br>
-                                Tags: <span
-                                    class="badge badge-primary">{{str_replace(",",'</span><span class="badge badge-primary">',$video->tags)}}</span>
-                                <br>
-                                Category: {{$video->category->name}}
+                               <div class="card">
+                                   <div class="card-body">
+                                       {{$video->title}}
+                                       <p>
+                                           {!! $video->discription !!}
+                                       </p>
+                                       Tags: <span
+                                           class="badge badge-primary">{{str_replace(",",'</span><span class="badge badge-primary">',$video->tags)}}</span>
+                                       <br>
+                                       Category: {{$video->category->name}}
+                                   </div>
+                               </div>
 
 
                             </div>
@@ -1020,7 +1022,7 @@
 
 
         $(".btn-share").click(function () {
-            $(".btn-share").each(function (key,val) {
+            $(".btn-share").each(function (key, val) {
                 $("." + $(val).attr("id")).addClass("d-none");
             })
             $("." + $(this).attr("id")).removeClass("d-none");
