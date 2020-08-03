@@ -6,7 +6,7 @@
             <div class="Search-boxes">
                 <form action="">
                     <div class="form-row">
-                        <div class="col my-2">
+                        <div class="col mt-2">
                             @if (count($user_category) > 0)
                                 <div class="form-group">
                                     <select name="category_id" class="selectpicker show-tick form-control"
