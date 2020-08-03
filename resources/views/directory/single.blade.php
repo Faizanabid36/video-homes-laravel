@@ -120,50 +120,16 @@
                                 <i class="fa fa-info text-white"></i>
                                 More info
                             </button>
-                            <div class="info-video d-none">
-                                {{$video->title}}
-                                <br>
-                                {!! $video->discription !!}
-                                <br>
-                                Tags: <span
-                                    class="badge badge-primary">{{str_replace(",",'</span><span class="badge badge-primary">',$video->tags)}}</span>
-                                <br>
-                                Category: {{$video->category->name}}
 
-
-                            </div>
                             <button class="btn btn-primary btn-share" id="share-video">
                                 <i class="fa fa-share-alt text-white"></i>
                                 Share
                             </button>
-                            <div class="share-video d-none">
-                                <div class="row share-input">
-                                    <div class="col-md-4">
-                                        <div class="input-group mb-3">
-                                            <input type="text" value="{{url()->full()}}"
-                                                   class="form-control input-md copylink" readonly=""
-                                            >
-                                            <div class="input-group-prepend">
-                                                <button class="btn btn-primary copylink"><i class="fa fa-link"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
-                            </div>
                             <button class="btn btn-info btn-share" id="embed-video">
                                 <i class="fa fa-code"></i>
                                 Embed
                             </button>
-                            <div class="embed-video d-none">
-                                <div class="input-group">
-                                    <textarea name="embed" id="embed" cols="30" rows="3" class="form-control copyembed">&lt;iframe src="{{route('embed_video',$video->video_id)}}" frameborder="0" width="100%" height="400" allowfullscreen&gt;&lt;/iframe&gt;</textarea>
-                                    <div class="input-group-prepend">
-                                        <button class="btn btn-primary copyembed"><i class="fa fa-link"></i></button>
-                                    </div>
-                                </div>
-                            </div>
 
                             @if(!auth()->guest() && ($video->user_id==auth()->user()->id))
                                 <a class="btn btn-share"
@@ -226,7 +192,7 @@
                                 </div>
                             </div>
                             <button data-toggle="modal" data-target="#report"
-                                    class="btn btn-primary btn-share btn-report pull-right" onclick=""
+                                    class="btn btn-primary btn-report pull-right" onclick=""
                                     data-rep="1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                      viewBox="0 0 24 24">
@@ -234,6 +200,42 @@
                                           d="M14.4,6L14,4H5V21H7V14H12.6L13,16H20V6H14.4Z"></path>
                                 </svg>
                                 <span>Report</span></button>
+                            <div class="embed-video d-none">
+                                <div class="input-group">
+                                    <textarea name="embed" id="embed" cols="30" rows="3" class="form-control copyembed">&lt;iframe src="{{route('embed_video',$video->video_id)}}" frameborder="0" width="100%" height="400" allowfullscreen&gt;&lt;/iframe&gt;</textarea>
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-primary copyembed"><i class="fa fa-link"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="share-video d-none">
+                                <div class="row share-input">
+                                    <div class="col-md-4">
+                                        <div class="input-group mb-3">
+                                            <input type="text" value="{{url()->full()}}"
+                                                   class="form-control input-md copylink" readonly=""
+                                            >
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-primary copylink"><i class="fa fa-link"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="info-video d-none">
+                                {{$video->title}}
+                                <br>
+                                {!! $video->discription !!}
+                                <br>
+                                Tags: <span
+                                    class="badge badge-primary">{{str_replace(",",'</span><span class="badge badge-primary">',$video->tags)}}</span>
+                                <br>
+                                Category: {{$video->category->name}}
+
+
+                            </div>
 
 
                         </div>
