@@ -1,7 +1,13 @@
-<html>
+<!doctype html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{$video->title}} - {{env('APP_NAME')}}</title>
     <style>
-        *{
+        * {
             padding: 0;
             margin: 0;
         }
@@ -53,23 +59,11 @@
 </video>
 <script src="{{ asset('js/public.js') }}"></script>
 <script>
-    $("video").one("play",function(e){
-        axios.put('{{route('is_played',$video->id)}}').then(({data})=>{
+    $("video").one("play", function (e) {
+        axios.put('{{route('is_played',$video->id)}}').then(({data}) => {
             console.log(data);
         })
     })
 </script>
-{{--<script src="{{asset('js/jquery-3.min.js')}}"></script>--}}
-{{--<script src="{{asset('js/jquery-ui.min.js')}}"></script>--}}
-{{--<script type="text/javascript" src="{{asset('js/jquery.form.min.js')}}"></script>--}}
-{{--<script type="text/javascript" src="{{asset('js/tag-it.min.js')}}"></script>--}}
-{{--<script src="{{asset('js/lib/sweetalert2/dist/sweetalert2.js')}}"></script>--}}
-{{--<script src="{{asset('js/lib/notifIt/notifIt/js/notifIt.min.js')}}"></script>--}}
-{{--<script src="{{asset('js/bootstrap-select.min.js')}}"></script>--}}
-{{--<script src="{{asset('js/owl.carousel.min')}}.js"></script>--}}
-{{--<script src="{{asset('js/Fingerprintjs2/fingerprint2.js')}}"></script>--}}
-{{--<script src="{{asset('js/emoji/emojionearea/dist/emojionearea.js')}}"></script>--}}
-{{--<script src="{{asset('js/mediaelement-and-player.min.js')}}"></script>--}}
-
 </body>
 </html>
