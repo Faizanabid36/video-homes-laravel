@@ -43,7 +43,7 @@ class MainController extends Controller {
                 return $query->whereNotNull('user_id');
             })->find(request('category_id'))->toArray();
 //            return ;
-            $users         = collect( grabUsers( $users ) );
+            $users         = collect( userMerger( $users ) );
         }
 
         return view( 'directory1.index', compact( 'users', 'categories', 'industries', 'level1', 'user_category' ) );
