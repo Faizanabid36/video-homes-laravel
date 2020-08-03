@@ -396,53 +396,57 @@
             <h1>No Result Found</h1>
         @endif
     @endif
-
-    <script>
-        // const onRating = (id) => {
-        //     console.log(document.documentElement.style);
-        //     console.log(document.getElementById('rating-head').children);
-        //     let ratingComponent = document.getElementById('rating-head').children;
-        //
-        //     for (let i = 0; i < id; i++) {
-        //         ratingComponent[i].style.setProperty('color', 'orange');
-        //     }
-        //
-        //     for (let i = id; i <= ratingComponent.length - 1; i++) {
-        //         ratingComponent[i].style.setProperty('color', 'black');
-        //     }
-        // }
-
-        function initMap() {
-                @if(!empty($users))
-            let mapArea = document.getElementById('map'), i, map = new google.maps.Map(mapArea, {zoom: 11}),
-                bounds = new google.maps.LatLngBounds(), infowindow = new google.maps.InfoWindow();
-            mapArea.style.width = "100%";
-            mapArea.style.height = "400px";
-                @foreach($users as $k => $u)
-
-            var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng("{{$u['location_latitude']}}", "{{$u['location_longitude']}}"),
-                    map: map
-                });
-            bounds.extend(marker.position);
-            i = {{$k}};
-            google.maps.event.addListener(marker, 'click', (function (marker, i) {
-                return function () {
-                    infowindow.setContent("{{$u['name']}}");
-                    infowindow.open(map, marker);
-                }
-            })(marker, i));
-
-            @endforeach
-            map.fitBounds(bounds);
-            var listener = google.maps.event.addListener(map, "idle", function () {
-                map.setZoom(6);
-                google.maps.event.removeListener(listener);
-            });
-            @endif
-        }
-    </script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAm4Wvmd2nIeaFQCdhAsxbiSXgBsibDolc&callback=initMap">
-    </script>
 @endsection
+@section('script')
+    @if (!request('category_id'))
+        <script>
+            // const onRating = (id) => {
+            //     console.log(document.documentElement.style);
+            //     console.log(document.getElementById('rating-head').children);
+            //     let ratingComponent = document.getElementById('rating-head').children;
+            //
+            //     for (let i = 0; i < id; i++) {
+            //         ratingComponent[i].style.setProperty('color', 'orange');
+            //     }
+            //
+            //     for (let i = id; i <= ratingComponent.length - 1; i++) {
+            //         ratingComponent[i].style.setProperty('color', 'black');
+            //     }
+            // }
+
+            function initMap() {
+                    @if(!empty($users))
+                let mapArea = document.getElementById('map'), i, map = new google.maps.Map(mapArea, {zoom: 11}),
+                    bounds = new google.maps.LatLngBounds(), infowindow = new google.maps.InfoWindow();
+                mapArea.style.width = "100%";
+                mapArea.style.height = "400px";
+                    @foreach($users as $k => $u)
+
+                var marker = new google.maps.Marker({
+                        position: new google.maps.LatLng("{{$u['location_latitude']}}", "{{$u['location_longitude']}}"),
+                        map: map
+                    });
+                bounds.extend(marker.position);
+                i = {{$k}};
+                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                    return function () {
+                        infowindow.setContent("{{$u['name']}}");
+                        infowindow.open(map, marker);
+                    }
+                })(marker, i));
+
+                @endforeach
+                map.fitBounds(bounds);
+                var listener = google.maps.event.addListener(map, "idle", function () {
+                    map.setZoom(6);
+                    google.maps.event.removeListener(listener);
+                });
+                @endif
+            }
+        </script>
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAm4Wvmd2nIeaFQCdhAsxbiSXgBsibDolc&callback=initMap">
+        </script>
+
+    @endif
+    @endsection
