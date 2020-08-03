@@ -26,6 +26,7 @@ class MainController extends Controller {
 
         $industries = UserCategory::getCategories();
         $categories = UserCategory::getCategories( $level1, $level2 );
+        $user_category          = UserCategory::levelCategories();
         $users      = collect( grabUsers( $categories ) )->when( request( 'query' ), function ( $collect ) {
             return $collect->filter( function ( $value ) {
                 return (
@@ -44,7 +45,7 @@ class MainController extends Controller {
 //              ->orWhere( 'name', 'like', request( 'query' ) . '%' );
         } );
 
-        return view( 'directory1.index', compact( 'users', 'categories', 'industries', 'level1' ) );
+        return view( 'directory1.index', compact( 'users', 'categories', 'industries', 'level1','user_category' ) );
     }
 
     public function directory() {

@@ -4,46 +4,47 @@
     <div class="row">
         <div class="col-6">
             <div class="Search-boxes">
-            <form action="">
-                <div class="form-row">
-                    <div class="col my-2">
-                        @if (count($categories) > 0)
-                            <div class="form-group">
-                                <select name="category_id" class="selectpicker show-tick form-control"
-                                        c
-                                        data-live-search="true"
-                                        title="Choose one of the following Profession and Expertise...">
-                                    @foreach($categories as $u)
-                                        <optgroup label="{{$u['name']}}">
-                                            @if(!empty($u['children'] ))
-                                                @foreach($u['children'] as $k => $u1)
-                                                    @if (!empty($u1['children']))
-                                                        @foreach($u1['children'] as $k => $u2)
-                                                            <option value="{{$u2['id']}}"
-                                                                    data-subtext="{{$u1['name']}}">{{$u2['name']}}</option>
-                                                        @endforeach
-                                                    @else
-                                                        <option value="{{$u1['id']}}">{{$u1['name']}}</option>
-                                                    @endif
-                                                @endforeach
-                                            @else
-                                                <option value="{{$u['id']}}">{{$u['name']}}</option>
-                                            @endif
-                                        </optgroup>
-                                    @endforeach
-                                </select>
-                            </div>
-                        @endif
-
+                <form action="">
+                    <div class="form-row">
+                        <div class="col my-2">
+                            @if (count($user_category) > 0)
+                                <div class="form-group">
+                                    <select name="category_id" class="selectpicker show-tick form-control"
+                                            data-style="btn-primary bg-dark text-white"
+                                            data-live-search="true"
+                                            title="Choose one of the following Profession and Expertise...">
+                                        @foreach($user_category as $u)
+                                            <optgroup label="{{$u['name']}}">
+                                                @if(!empty($u['children'] ))
+                                                    @foreach($u['children'] as $k => $u1)
+                                                        @if (!empty($u1['children']))
+                                                            @foreach($u1['children'] as $k => $u2)
+                                                                <option value="{{$u2['id']}}"
+                                                                        data-subtext="{{$u1['name']}}">{{$u2['name']}}</option>
+                                                            @endforeach
+                                                        @else
+                                                            <option value="{{$u1['id']}}">{{$u1['name']}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                @else
+                                                    <option value="{{$u['id']}}">{{$u['name']}}</option>
+                                                @endif
+                                            </optgroup>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endif
+                        </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="col my-2">
-                        <i class="fa fa-search icon search-icon"></i>
-                        <input id="searchvideos" type="button" value="Search Videos" class="btn btn-block btn-primary"/>
+                    <div class="form-row">
+                        <div class="col my-2">
+                            <button id="searchvideos" type="button" class="btn btn-block btn-primary"><i
+                                    class="fa fa-search icon search-icon text-white"></i> Search Videos
+                            </button>
+                        </div>
                     </div>
-                </div>
-            </form></div>
+                </form>
+            </div>
         </div>
         <div class="col-6">
             <div class="Search-boxes">
@@ -60,11 +61,11 @@
                     </div>
                     <div class="form-row">
                         <div class="col my-2">
-                            <i class="fa fa-search icon search-icon"></i>
-                            <input id="findaprobtn" type="button" value="Find a Pro" class="btn btn-block btn-primary"/>
+                            <button id="findaprobtn" type="button" class="btn btn-block btn-primary"><i
+                                    class="fa fa-search icon search-icon text-white"></i> Find a Pro
+                            </button>
                         </div>
                     </div>
-
                 </form>
             </div>
         </div>
