@@ -194,7 +194,7 @@
                                 <span>Report</span></button>
                             <div class="embed-placement d-none">
                                 <div class="input-group">
-                                    <textarea name="embed" id="embed" cols="30" rows="3" class="form-control copyembed">&lt;iframe src="{{route('embed_video',$video->video_id)}}" frameborder="0" width="700" height="400" allowfullscreen&gt;&lt;/iframe&gt;</textarea>
+                                    <textarea name="embed" id="embed" cols="30" rows="3" class="form-control copyembed">&lt;iframe src="{{route('embed_video',$video->video_id)}}" frameborder="0" width="100%" height="400" allowfullscreen&gt;&lt;/iframe&gt;</textarea>
                                     <div class="input-group-prepend">
                                         <button class="btn btn-primary copyembed"><i class="fa fa-link"></i></button>
                                     </div>
