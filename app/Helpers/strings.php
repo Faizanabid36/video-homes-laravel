@@ -247,6 +247,7 @@ function userMerger($categories){
     $d = [];
 
     foreach ( $categories as $val ) {
+        dd($val);die;
         if ( isset( $val['list'] ) && ! empty( $val['list'] ) ) {
             foreach ( $val['list'] as $user ) {
                 $user = is_array( $user ) ? $user : $user->toArray();
