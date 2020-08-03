@@ -21,7 +21,7 @@
         <br/>
         <hr/>
         <div class="row">
-            <div class=" col-sm-12 col-lg-2 my-3">
+            <div class="col-md-2 my-3">
                 <img
 
                     src='{{$user->user_extra->profile_picture ?? 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMgrxYAqZF6-kdFuLQesPwdAyonhn93LsxvKXax0vzbCCGd_wQ&usqp=CAU' }}'
@@ -221,7 +221,7 @@
                 <div class="clear"></div>
             </div>
             @if($related_videos->count())
-                <div class="col-md-3 col-sm-5 ">
+                <div class="col-md-3">
                     <div class="container m-0 p-0">
                         <div class="row">
                             <div class="col-12 m-0 p-0">
@@ -239,7 +239,7 @@
                         </div>
                         <div class="row">
                             @foreach($related_videos as $related_video)
-                                <div class="col-12 m-0 p-0">
+                                <div class="col-12 m-0 p-0 my-2">
                                     <a href="{{route('directory_by_username',[$user->username,$related_video->video_id])}}">
                                         <div class="p-2 shadow-lg bg-white rounded video-thumb overlay"
                                              style="background-image: url({{asset('storage/'.$related_video->thumbnail)}});background-size: cover;height:200px;">
