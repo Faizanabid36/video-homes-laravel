@@ -31,11 +31,10 @@ class MainController extends Controller {
         $users         = collect( grabUsers( $categories ) );
         if ( request( 'category_id' ) ) {
             $videos = Category::with(['videos'])->find(request('category_id'));
-            return $videos;
-
+//            return $videos;
         }
 
-        return view( 'directory1.index', compact( 'users', 'categories', 'industries', 'level1', 'video_categories' ) );
+        return view( 'directory1.index', compact( 'users', 'categories', 'industries', 'level1', 'video_categories','videos' ) );
     }
 
     public function directory() {
