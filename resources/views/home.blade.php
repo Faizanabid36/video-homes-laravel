@@ -4,11 +4,13 @@
         <div class="row">
             <div class="col-12 m-0 p-0 ">
                 <div class="header-wrapper">
-                    <div class="video-frame">
-                    <iframe id="ytplayer" type="text/html" style="width:100%;height:100vh;"
-                        src="https://www.youtube.com/embed/3iXYciBTQ0c?autoplay=1&cc_load_policy=1&enablejsapi=1&loop=1&color=white&controls=0&iv_load_policy=3&modestbranding=1&playsinline=1&rel=0"
+                    <div class="video-background">
+                    <div class="video-foreground">
+                    <iframe type="text/html"
+                        src="https://www.youtube.com/embed/3iXYciBTQ0c?autoplay=1&cc_load_policy=1&enablejsapi=1&loop=1&color=white&controls=0&iv_load_policy=3&modestbranding=1&playsinline=1&rel=0&showinfo=0"
                         frameborder="0" allowfullscreen>
                         </iframe>
+                    </div>
                     </div>
                     <div class="header-separator header-separator-bottom "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
                             <path class="svg-white-bg" d="M737.9,94.7L0,0v100h1000V0L737.9,94.7z"/>
@@ -94,7 +96,7 @@
 
 
         <div class="row sayHello m-0 p-0 ">
-            <div class="col-12 m-0 p-0 ">
+            <div class="col-12">
                 <div class="form-home">
 
                     <h1> Say Hello ! </h1>
