@@ -244,15 +244,16 @@ function grabUsers( $categories, $forceClear = false ) {
     return $data ? array_values( $data ) : [];
 }
 function userMerger($categories){
+    $d = [];
     foreach ( $categories as $val ) {
         if ( isset( $val['list'] ) && ! empty( $val['list'] ) ) {
             foreach ( $val['list'] as $user ) {
                 $user = is_array( $user ) ? $user : $user->toArray();
-                if ( $user['user_id'] ) {
-                    $categories[ $user['user_id']['id'] ] = collect( $user['user_id'] )->merge( collect( $user )->except( 'user_id' ) )->toArray();
+                if ( isset($user['user_id']) && !is_null($user['user_id']) ) {
+                    $d[ $user['user_id']['id'] ] = collect( $user['user_id'] )->merge( collect( $user )->except( 'user_id' ) )->toArray();
                 }
             }
         }
     }
-    return $categories;
+    return $d;
 }
