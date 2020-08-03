@@ -94,7 +94,7 @@
         <div class="row mt-3">
             <div class="col-12">
                 <div class="float-left">
-                    <h6 class="my-3">Found<span class="h-8"> {{count($users)}} </span>listings </h6>
+                    <h6 class="my-3">Found<span class="h-8"> {{is_array($users) ? count($users) : $users->count()}} </span>listings </h6>
                     {{--                        <div class="dropdown">--}}
                     {{--                            <button class="btn btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown"--}}
                     {{--                                    aria-haspopup="true" aria-expanded="false">--}}
