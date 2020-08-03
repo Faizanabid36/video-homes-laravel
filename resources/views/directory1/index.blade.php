@@ -73,7 +73,7 @@
     </div>
 
     <!-- 3rd row -->
-    @if((is_array($users) && count($users)>0) || $users->count())
+    @if(count($users)>0)
         <div class="row mt-3 px-1">
             @if(!empty($categories) )
                 @foreach(($level1 ? collect($categories)->first()['children'] : $industries) as $category)
@@ -94,7 +94,7 @@
         <div class="row mt-3">
             <div class="col-12">
                 <div class="float-left">
-                    <h6 class="my-3">Found<span class="h-8"> {{is_array($users) ? count($users) : $users->count()}} </span>listings </h6>
+                    <h6 class="my-3">Found<span class="h-8"> {{count($users)}} </span>listings </h6>
                     {{--                        <div class="dropdown">--}}
                     {{--                            <button class="btn btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown"--}}
                     {{--                                    aria-haspopup="true" aria-expanded="false">--}}
@@ -184,7 +184,6 @@
 
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel"
                          aria-labelledby="pills-profile-tab">
-
                         @foreach($users as $k => $account_user)
                             @if($k % 2 === 0)
                                 <div class="row">
