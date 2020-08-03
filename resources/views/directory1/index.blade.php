@@ -184,6 +184,7 @@
 
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel"
                          aria-labelledby="pills-profile-tab">
+                        {{dd($users)}}
                         @foreach($users as $k => $account_user)
                             @if($k % 2 === 0)
                                 <div class="row">
