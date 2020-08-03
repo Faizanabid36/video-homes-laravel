@@ -12,9 +12,7 @@
                         </iframe>
                     </div>
                     </div>
-                    <div class="header-separator header-separator-bottom "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
-                            <path class="svg-white-bg" d="M737.9,94.7L0,0v100h1000V0L737.9,94.7z"/>
-                        </svg></div>
+
                     <div class="header-content">
 
                         <h4> Connecting Small Business Owners with Local Marketing Pros </h4>
@@ -27,56 +25,55 @@
 
 
                     <div class=" iconBoxParent">
-                        <div class="icons-boxes  ">
-
-                            <div class="card" style="width: 18rem;">
-                                <img class="card-img-top images"
-                                     src="{{asset('img/video-image-141px.jpeg')}}"
-                                     alt="Card image cap"/>
-                                <div class="card-body">
-                                    <h5 class="card-title">Videographers</h5>
-                                    <p class="card-text">A Platform for your business.</p>
-                                    <a href="#" class="btn btn-primary">LEARN MORE</a>
-                                </div>
+                        <div class="card">
+                            <img class="card-img-top images"
+                                 src="{{asset('img/video-image-141px.jpeg')}}"
+                                 alt="Card image cap"/>
+                            <div class="card-body">
+                                <h5 class="card-title">Videographers</h5>
+                                <p class="card-text">A Platform for your business.</p>
+                                <a href="#" class="btn btn-primary">LEARN MORE</a>
                             </div>
+                        </div>
 
-                            <div class="card" style="width: 18rem;">
-                                <img class="card-img-top images"
-                                     src="{{asset('img/Index-Card-jpeg.jpg')}}"
-                                     alt="Card image cap"/>
-                                <div class="card-body">
-                                    <h5 class="card-title">Local Business Owners</h5>
-                                    <p class="card-text">You have a story..let our Marketing Pros tell it!</p>
-                                    <a href="#" class="btn btn-success">LEARN MORE</a>
-                                </div>
+                        <div class="card">
+                            <img class="card-img-top images"
+                                 src="{{asset('img/Index-Card-jpeg.jpg')}}"
+                                 alt="Card image cap"/>
+                            <div class="card-body">
+                                <h5 class="card-title">Local Business Owners</h5>
+                                <p class="card-text">You have a story..let our Marketing Pros tell it!</p>
+                                <a href="#" class="btn btn-success">LEARN MORE</a>
                             </div>
+                        </div>
 
-                            <div class="card" style="width: 18rem;">
-                                <img class="card-img-top images"
-                                     src="{{asset('img/House-Icon-Jpeg.jpg')}}"
-                                     alt="Card image cap"/>
-                                <div class="card-body">
-                                    <h5 class="card-title">Real Estate Agents</h5>
-                                    <p class="card-text">Finally a fully integrated solution for production and
-                                        distribution that puts you in control.</p>
-                                    <a href="#" class="btn btn-warning">LEARN MORE</a>
-                                </div>
+                        <div class="card">
+                            <img class="card-img-top images"
+                                 src="{{asset('img/House-Icon-Jpeg.jpg')}}"
+                                 alt="Card image cap"/>
+                            <div class="card-body">
+                                <h5 class="card-title">Real Estate Agents</h5>
+                                <p class="card-text">Finally a fully integrated solution for production and
+                                    distribution that puts you in control.</p>
+                                <a href="#" class="btn btn-warning">LEARN MORE</a>
                             </div>
+                        </div>
 
-                            <div class="card" style="width: 18rem;">
-                                <img class="card-img-top images"
-                                     src="{{asset('img/Rss-icon-jpeg.jpg')}}"
-                                     alt="Card image cap"/>
-                                <div class="card-body">
-                                    <h5 class="card-title">Writers and Content Producers</h5>
-                                    <p class="card-text">Tap into our network of video pros and see what cool things you
-                                        can accomplish.</p>
-                                    <a href="#" class="btn btn-dark">LEARN MORE</a>
-                                </div>
+                        <div class="card">
+                            <img class="card-img-top images"
+                                 src="{{asset('img/Rss-icon-jpeg.jpg')}}"
+                                 alt="Card image cap"/>
+                            <div class="card-body">
+                                <h5 class="card-title">Writers and Content Producers</h5>
+                                <p class="card-text">Tap into our network of video pros and see what cool things you
+                                    can accomplish.</p>
+                                <a href="#" class="btn btn-dark">LEARN MORE</a>
                             </div>
-
                         </div>
                     </div>
+                    <div class="header-separator header-separator-bottom "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+                            <path class="svg-white-bg" d="M737.9,94.7L0,0v100h1000V0L737.9,94.7z"/>
+                        </svg></div>
                 </div>
 
 
