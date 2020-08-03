@@ -42,8 +42,9 @@ class MainController extends Controller {
             $users = UserCategory::without('children')->whereHas('list',function ( $query){
                 return $query->whereNotNull('user_id');
             })->find(request('category_id'))->toArray();
-//            return ;
+
             $users         = collect( userMerger( $users ) );
+            return $users;
         }
 
         return view( 'directory1.index', compact( 'users', 'categories', 'industries', 'level1', 'user_category' ) );

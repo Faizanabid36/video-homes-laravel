@@ -249,7 +249,7 @@ function userMerger($categories){
             foreach ( $val['list'] as $user ) {
                 $user = is_array( $user ) ? $user : $user->toArray();
                 if ( $user['user_id'] ) {
-                    $data[ $user['user_id']['id'] ] = collect( $user['user_id'] )->merge( collect( $user )->except( 'user_id' ) )->toArray();
+                    $categories[ $user['user_id']['id'] ] = collect( $user['user_id'] )->merge( collect( $user )->except( 'user_id' ) )->toArray();
                 }
             }
         }
