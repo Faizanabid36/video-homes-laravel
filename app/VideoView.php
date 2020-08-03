@@ -10,22 +10,22 @@ class VideoView extends Model
 
     protected $guarded = [];
 
-    public static function createViewLog($video)
+    public static function videoViews($video, $postsViews = [])
     {
-        $postsViews = [
-            'video_id' => $video->id,
-            'video_slug' => $video->video_id,
-            'url' => \Request::fullUrl(),
-            'session_id' => \Request::getSession()->getId(),
-            'ip' => \Request::getClientIp(),
-            'agent' => \Request::header('User-Agent'),
-            'video_user'=>$video->user_id,
-        ];
-        $view = VideoView::updateOrCreate([
-            'video_id' => $video->id,
-            'ip' => \Request::getClientIp()
-        ], $postsViews);
-        return $view->id;
+        if(empty($postsViews)){
+            $postsViews = [
+                'video_id' => $video->id,
+                'video_slug' => $video->video_id,
+                'url' => url()->full(),
+                'session_id' => request()->session()->getId(),
+                'ip' => request()->ip(),
+                'agent' => request()->header('User-Agent'),
+                'video_user'=>$video->user_id,
+            ];
+        }
+
+        self::updateOrCreate([ 'video_id' => $video->id, 'ip' => request()->ip() ], $postsViews);
+        return self::whereVideoId($video->id)->count();
     }
 
     public static function getTotalViews()

@@ -10,6 +10,7 @@ use App\UserExtra;
 use App\UserRole;
 use App\UserTags;
 use App\Video;
+use App\VideoView;
 use Illuminate\Http\Request;
 
 class MainController extends Controller {
@@ -21,24 +22,35 @@ class MainController extends Controller {
     public function index() {
         return view( 'home' );
     }
+
     public function directory( $level1 = null, $level2 = null ) {
 
-        $industries    = UserCategory::getCategories();
-        $categories    = UserCategory::getCategories( $level1, $level2 );
+        $industries       = UserCategory::getCategories();
+        $categories       = UserCategory::getCategories( $level1, $level2 );
         $video_categories = Category::all();
-        $users         = collect( grabUsers( $categories ) );
+        $users            = collect( grabUsers( $categories ) );
+        $vidoes           = [];
         if ( request( 'category_id' ) ) {
-            $videos = Category::with(['videos'])->find(request('category_id'));
-            return view( 'directory1.index', compact( 'users', 'categories', 'industries', 'level1', 'video_categories','videos' ) );
+            $videos = Category::approvedVideos()->find( request( 'category_id' ) );
         }
-        return view( 'directory1.index', compact( 'users', 'categories', 'industries', 'level1', 'video_categories' ) );
+        return view( 'directory1.index', compact( 'users', 'categories', 'industries', 'level1', 'video_categories', 'videos' ) );
     }
+
     public function directory_by_username( $username, $video_id = null ) {
         $video = Video::userVideos( $username, $video_id )->first();
         abort_if( ! $video, 403, "User has no video." );
+        $views          = VideoView::createViewLog( $video );
         $user           = $video->user;
         $related_videos = Video::userVideos( $username, $video->id, true )->get();
-        return view( 'directory_videos', compact( 'user', 'video', 'related_videos' ) );
+
+        return view( 'directory_videos', compact( 'user', 'video', 'related_videos', 'views' ) );
+    }
+
+    public function get_embedded_video( $video_id ) {
+        $video = Video::singleVideos( $video_id )->firstOrFail();
+        VideoView::createViewLog( $video, [ "from_website" => 0 ] );
+
+        return view( 'embed_video', compact( 'video' ) );
     }
 
 //    public function directory_by_user_video( $username ) {

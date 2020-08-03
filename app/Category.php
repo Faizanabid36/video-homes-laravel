@@ -12,4 +12,9 @@ class Category extends Model
     public function videos(){
         return $this->hasMany(Video::class);
     }
+    public function scopeApprovedVideos($query){
+        return $query->with( [ 'videos' ] )->whereHas('videos',function($q){
+            return $q->whereProcessed(1)->whereIsVideoApproved(1);
+        });
+    }
 }

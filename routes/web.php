@@ -100,11 +100,18 @@ Route::resource( 'user_message', 'UserMessageController' );
 Route::get( 'reported_query_videos', 'ReportQueryController@reported_videos' );
 Route::get( '/page/{slug}', 'PageController@view' )->name( 'public.page' );
 Route::post( '/search_in_directory', 'MainController@search_in_directory' )->name( 'search_in_directory' );
-Route::get( '/embed/{video_id}', 'VideoController@get_embedded_video' )->name( 'embed_video' );
+
 Route::get( '{username}/watch_video', 'VideoController@watch_video' );
 Route::get( '{username}/watch_video/is_watchable', 'VideoController@watchable_video' );
 Route::post( '{username}/', 'VideoController@watch_video' );
 Route::get( '/categories', 'CategoryController@index' );
+Route::get('/', 'MainController@index')->name('home');
+
+
+//Directory and Embed Videos
+Route::get('/directory/{level1?}/{level2?}', 'MainController@directory')->name('directory');
+Route::get('/u/{username}/{video_id?}','MainController@directory_by_username')->name('directory_by_username');
+Route::get( '/embed/{video_id}', 'MaiController@get_embedded_video' )->name( 'embed_video' );
 
 
 
