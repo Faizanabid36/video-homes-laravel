@@ -1,4 +1,4 @@
-@extends('layouts.public.app')
+@extends('layouts.public.app',['title'=>"Directory"])
 @section('style')
     <style>
         .thumbnail{
