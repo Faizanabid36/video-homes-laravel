@@ -80,11 +80,10 @@
         <div class="container">
             <!-- next -->
 
-            <div class="row  m-0 p-0 ">
-                <div class="col-12 m-0 p-0 ">
-                    <div class="joinUs">
-                        <span> <b> Join Us. </b>It will only take a minute </span> <span>  <button class="btn "> GET STARTED TODAY </button>  </span>
-                    </div>
+            <div class="row">
+                <div class="col-12 py-5">
+                    <h3 class="text-white"> <strong> Join Us.</strong> It will only take a minute </h3>
+                    <button class="btn btn-warning float-right"> GET STARTED TODAY </button>
                 </div>
             </div>
         </div>
