@@ -14,11 +14,14 @@
                                 @endforeach
                             </select>
                         </div>
+                    </div>
+                    <div class="form-row">
                         <div class="col my-2">
                             <i class="fa fa-search icon search-icon"></i>
                             <input id="findaprobtn" type="button" value="Find a Pro" class="btn btn-block btn-primary"/>
                         </div>
                     </div>
+
                 </form>
             </div>
         </div>
@@ -38,7 +41,8 @@
                                                 @foreach($u['children'] as $k => $u1)
                                                     @if (!empty($u1['children']))
                                                         @foreach($u1['children'] as $k => $u2)
-                                                            <option value="{{$u2['id']}}" data-subtext="{{$u1['name']}}">{{$u2['name']}}</option>
+                                                            <option value="{{$u2['id']}}"
+                                                                    data-subtext="{{$u1['name']}}">{{$u2['name']}}</option>
                                                         @endforeach
                                                     @else
                                                         <option value="{{$u1['id']}}">{{$u1['name']}}</option>
@@ -54,6 +58,8 @@
                         @endif
 
                     </div>
+                </div>
+                <div class="form-row">
                     <div class="col my-2">
                         <i class="fa fa-search icon search-icon"></i>
                         <input id="searchvideos" type="button" value="Search Videos" class="btn btn-block btn-primary"/>
