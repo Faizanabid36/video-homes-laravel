@@ -1024,9 +1024,9 @@
 
         $(".btn-share").click(function () {
             $(".btn-share").each(function (key,val) {
-                $("#" + $(val).attr("id")).addClass("d-none");
+                $("." + $(val).attr("id")).addClass("d-none");
             })
-            $("#" + $(this).attr("id")).removeClass("d-none");
+            $("." + $(this).attr("id")).removeClass("d-none");
         })
 
         $('video').mediaelementplayer({
