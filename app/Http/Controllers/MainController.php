@@ -29,7 +29,7 @@ class MainController extends Controller {
         $categories       = UserCategory::getCategories( $level1, $level2 );
         $video_categories = Category::all();
         $users            = collect( grabUsers( $categories ) );
-        $vidoes           = [];
+        $videos           = [];
         if ( request( 'category_id' ) ) {
             $videos = Category::approvedVideos()->find( request( 'category_id' ) );
         }
