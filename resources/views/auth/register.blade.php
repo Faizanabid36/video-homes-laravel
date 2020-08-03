@@ -34,7 +34,7 @@
                     @if (count($user_category) > 0)
                         <div class="form-group">
                             <select name="category_id" class="selectpicker show-tick form-control"
-                                    data-style="btn-primary"
+                                    data-style="btn-primary bg-light text-dark"
                                     data-live-search="true"
                                     title="Choose one of the following Profession and Expertise...">
                                 @foreach($user_category as $u)
