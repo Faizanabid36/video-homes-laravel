@@ -7,30 +7,12 @@
                 <form action="{{route('directory')}}">
                     <div class="form-row">
                         <div class="col mt-2">
-                            @if (count($user_category) > 0)
+                            @if (count($video_categories) > 0)
                                 <div class="form-group mb-2">
-                                    <select name="category_id" class="selectpicker show-tick form-control"
-                                            data-style="btn-primary bg-light text-dark"
-                                            data-live-search="true"
-                                            title="Search Videos...">
-
-                                        @foreach($user_category as $u)
-                                            <optgroup label="{{$u['name']}}">
-                                                @if(!empty($u['children'] ))
-                                                    @foreach($u['children'] as $k => $u1)
-                                                        @if (!empty($u1['children']))
-                                                            @foreach($u1['children'] as $k => $u2)
-                                                                <option value="{{$u2['id']}}"
-                                                                        data-subtext="{{$u1['name']}}">{{$u2['name']}} <span class="h-8">({{count(grabUsers($u2,true))}})</span></option>
-                                                            @endforeach
-                                                        @else
-                                                            <option value="{{$u1['id']}}">{{$u1['name']}} <span class="h8">({{count(grabUsers($u1,true))}})</span></option>
-                                                        @endif
-                                                    @endforeach
-                                                @else
-                                                    <option value="{{$u['id']}}">{{$u['name']}}  <span class="h8">({{count(grabUsers($u,true))}})</span></option>
-                                                @endif
-                                            </optgroup>
+                                    <select name="category_id" required id="industry" class="form-control text">
+                                        <option value="" selected disabled>Choose Category</option>
+                                        @foreach($video_categories as $industry)
+                                            <option value="{{$industry->id}}">{{$industry->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AccountType;
+use App\Category;
 use App\User;
 use App\UserCategory;
 use App\UserExtra;
@@ -26,26 +27,15 @@ class MainController extends Controller {
 
         $industries    = UserCategory::getCategories();
         $categories    = UserCategory::getCategories( $level1, $level2 );
-        $user_category = UserCategory::levelCategories();
-        $users         = collect( grabUsers( $categories ) )->when( request( 'query' ), function ( $collect ) {
-            return $collect->filter( function ( $value ) {
-                return (
-                    stripos( $value['name'], request( 'query' ) ) !== false ||
-                    stripos( $value['office_phone'], request( 'query' ) ) !== false ||
-                    $value['license_no'] === request( 'query' ) ||
-                    stripos( $value['company_name'], request( 'query' ) ) !== false ||
-                    stripos( $value['address'], request( 'query' ) ) !== false ||
-                    stripos( $value['direct_phone'], request( 'query' ) ) !== false );
-            } );
-        } );
+        $video_categories = Category::all();
+        $users         = collect( grabUsers( $categories ) );
         if ( request( 'category_id' ) ) {
-            $users = UserCategory::without('children')->find(request('category_id'))->toArray();
+            $vidoes = Category::with(['videos'])->find(request('category_id'));
+            return $videos;
 
-            $users         = userMerger( $users );
-//            return $users;
         }
 
-        return view( 'directory1.index', compact( 'users', 'categories', 'industries', 'level1', 'user_category' ) );
+        return view( 'directory1.index', compact( 'users', 'categories', 'industries', 'level1', 'video_categories' ) );
     }
 
     public function directory() {
