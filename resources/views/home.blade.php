@@ -76,50 +76,53 @@
             </svg>
         </div>
     </div>
-    <div class="container">
-        <!-- next -->
+    <div class="container-fluid bg-white">
+        <div class="container">
+            <!-- next -->
 
-        <div class="row  m-0 p-0 ">
-            <div class="col-12 m-0 p-0 ">
-                <div class="joinUs">
-                    <span> <b> Join Us. </b>It will only take a minute </span> <span>  <button class="btn "> GET STARTED TODAY </button>  </span>
+            <div class="row  m-0 p-0 ">
+                <div class="col-12 m-0 p-0 ">
+                    <div class="joinUs">
+                        <span> <b> Join Us. </b>It will only take a minute </span> <span>  <button class="btn "> GET STARTED TODAY </button>  </span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row sayHello m-0 p-0 ">
+                <div class="col-12">
+                    <div class="form-home">
+
+                        <h1> Say Hello ! </h1>
+                        <p> Please contact us for more information.</p>
+
+                        <form class="myform">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">YOUR NAME(REQUIRED)</label>
+                                <input type="text" class="form-control" id="name" aria-describedby="name">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">YOUR EMAIL (REQUIRED)</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1"
+                                       aria-describedby="emailHelp">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">SUBJECT</label>
+                                <input type="TEXT" class="form-control" id="exampleInputPassword1" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">YOUR MESSAGE</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">SEND</button>
+                        </form>
+                    </div>
+
                 </div>
             </div>
         </div>
-
-
-        <div class="row sayHello m-0 p-0 ">
-            <div class="col-12">
-                <div class="form-home">
-
-                    <h1> Say Hello ! </h1>
-                    <p> Please contact us for more information.</p>
-
-                    <form class="myform">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">YOUR NAME(REQUIRED)</label>
-                            <input type="text" class="form-control" id="name" aria-describedby="name">
-
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">YOUR EMAIL (REQUIRED)</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                   aria-describedby="emailHelp">
-
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">SUBJECT</label>
-                            <input type="TEXT" class="form-control" id="exampleInputPassword1" placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">YOUR MESSAGE</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">SEND</button>
-                    </form>
-                </div>
-
-            </div>
-        </div>
+    </div>
 @endsection
