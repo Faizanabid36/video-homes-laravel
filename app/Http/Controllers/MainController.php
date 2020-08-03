@@ -29,7 +29,7 @@ class MainController extends Controller {
         $categories       = UserCategory::getCategories( $level1, $level2 );
         $video_categories = Category::all();
         $users            = collect( grabUsers( $categories ) );
-        $videos           = [];     
+        $videos           = [];
         if ( request( 'category_id' ) ) {
             $videos = Category::approvedVideos()->find( request( 'category_id' ) );
         }
@@ -39,7 +39,7 @@ class MainController extends Controller {
     public function directory_by_username( $username, $video_id = null ) {
         $video = Video::userVideos( $username, $video_id )->first();
         abort_if( ! $video, 403, "User has no video." );
-        $views          = VideoView::createViewLog( $video );
+        $views          = VideoView::videoViews( $video );
         $user           = $video->user;
         $related_videos = Video::userVideos( $username, $video->id, true )->get();
 
@@ -48,7 +48,7 @@ class MainController extends Controller {
 
     public function get_embedded_video( $video_id ) {
         $video = Video::singleVideos( $video_id )->firstOrFail();
-        VideoView::createViewLog( $video, [ "from_website" => 0 ] );
+        VideoView::videoViews( $video, [ "from_website" => 0 ] );
 
         return view( 'embed_video', compact( 'video' ) );
     }
