@@ -162,21 +162,21 @@
                                             <form method="POST" action="{{action('ReportQueryController@store')}}">
                                                 @csrf
                                                 <div class="form-group">
-                                                    <label for="exampleFormControlInput1">Contact Name</label>
+                                                    <label for="contact_name">Contact Name</label>
                                                     <input name="name" type="text" required class="form-control"
-                                                           id="exampleFormControlInput1" placeholder="">
+                                                           id="contact_name" placeholder="">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="exampleFormControlInput1">Contact Email</label>
+                                                    <label for="contact_email">Contact Email</label>
                                                     <input name="email" type="email" required class="form-control"
-                                                           id="exampleFormControlInput1" placeholder="">
+                                                           id="contact_email" placeholder="">
                                                 </div>
                                                 <input type="hidden" name="type" value="video">
                                                 <input type="hidden" name="reported_on_video" value="{{$video->title}}">
                                                 <div class="form-group">
-                                                    <label for="exampleFormControlTextarea1">Message Text</label>
+                                                    <label for="contact_message">Message Text</label>
                                                     <textarea name="message_body" required class="form-control"
-                                                              id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                              id="contact_message" rows="3"></textarea>
                                                 </div>
                                                 <button class="btn btn-primary">Report Video</button>
                                             </form>
@@ -211,9 +211,6 @@
                                                 <button class="btn btn-primary copylink"><i class="fa fa-link"></i></button>
                                             </div>
                                         </div>
-
-
-
                                     </div>
                                 </div>
 
@@ -478,21 +475,21 @@
                         <form method="POST" action="{{action('ReportQueryController@store')}}">
                             @csrf
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">Contact Name</label>
+                                <label for="report_name">Contact Name</label>
                                 <input name="name" type="text" required class="form-control"
-                                       id="exampleFormControlInput1" placeholder="">
+                                       id="report_name" placeholder="">
                             </div>
                             <div class="form-group">
-                                <label for="exampleFormControlInput1">Contact Email</label>
+                                <label for="report_email">Contact Email</label>
                                 <input name="email" type="email" required class="form-control"
-                                       id="exampleFormControlInput1" placeholder="">
+                                       id="report_email" placeholder="">
                             </div>
                             <input type="hidden" name="type" value="message">
                             <input type="hidden" name="reported_on_user" value="{{$user->username}}">
                             <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Message Text</label>
+                                <label for="report_message">Message Text</label>
                                 <textarea name="message_body" required class="form-control"
-                                          id="exampleFormControlTextarea1" rows="3"></textarea>
+                                          id="report_message" rows="3"></textarea>
                             </div>
                             <button class="btn btn-primary"> Send Message</button>
                         </form>
