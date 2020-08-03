@@ -182,13 +182,12 @@
                                <div class="card">
                                    <div class="card-body">
                                        {{$video->title}}
-                                       <p>
-                                           {!! $video->discription !!}
-                                       </p>
-                                       Tags: <span
-                                           class="badge badge-primary">{{str_replace(",",'</span><span class="badge badge-primary">',$video->tags)}}</span>
+                                       <p>{!! $video->discription !!}</p>
+                                       Tags: <span class="badge badge-primary">{{str_replace(",",'</span><span class="badge badge-primary">',$video->tags)}}</span>
                                        <br>
                                        Category: {{$video->category->name}}
+                                       <br>
+                                       Views: {{$views}}
                                    </div>
                                </div>
 
