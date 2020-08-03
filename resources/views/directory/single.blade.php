@@ -115,22 +115,18 @@
                         {{--                                    <span class="expend-player"><i class="fa fa-expand fa-fw"></i></span>--}}
                         {{--                                </div>--}}
                         <div class="video-options pt_mn_wtch_opts pt-4">
-
                             <button class="btn bg-light text-dark btn-share" id="info-video">
                                 <i class="fa fa-info text-white"></i>
                                 More info
                             </button>
-
                             <button class="btn btn-primary btn-share" id="share-video">
                                 <i class="fa fa-share-alt text-white"></i>
                                 Share
                             </button>
-
                             <button class="btn btn-info btn-share" id="embed-video">
                                 <i class="fa fa-code"></i>
                                 Embed
                             </button>
-
                             @if(!auth()->guest() && ($video->user_id==auth()->user()->id))
                                 <a class="btn btn-share"
                                    href="{{route('dashboard')}}#/edit_video/{{request('v')}}">
@@ -151,46 +147,6 @@
                                     Analytics
                                 </a>
                             @endif
-                            <div class="modal fade" id="report" tabindex="-1" role="dialog"
-                                 aria-labelledby="reportTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form method="POST" action="{{action('ReportQueryController@store')}}">
-                                                @csrf
-                                                <div class="form-group">
-                                                    <label for="contact_name">Contact Name</label>
-                                                    <input name="name" type="text" required class="form-control"
-                                                           id="contact_name" placeholder="">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="contact_email">Contact Email</label>
-                                                    <input name="email" type="email" required class="form-control"
-                                                           id="contact_email" placeholder="">
-                                                </div>
-                                                <input type="hidden" name="type" value="video">
-                                                <input type="hidden" name="reported_on_video" value="{{$video->title}}">
-                                                <div class="form-group">
-                                                    <label for="contact_message">Message Text</label>
-                                                    <textarea name="message_body" required class="form-control"
-                                                              id="contact_message" rows="3"></textarea>
-                                                </div>
-                                                <button class="btn btn-primary">Report Video</button>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <button data-toggle="modal" data-target="#report"
                                     class="btn btn-primary btn-report pull-right" onclick=""
                                     data-rep="1">
@@ -236,7 +192,46 @@
 
 
                             </div>
-
+                            <div class="modal fade" id="report" tabindex="-1" role="dialog"
+                                 aria-labelledby="reportTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="POST" action="{{action('ReportQueryController@store')}}">
+                                                @csrf
+                                                <div class="form-group">
+                                                    <label for="contact_name">Contact Name</label>
+                                                    <input name="name" type="text" required class="form-control"
+                                                           id="contact_name" placeholder="">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="contact_email">Contact Email</label>
+                                                    <input name="email" type="email" required class="form-control"
+                                                           id="contact_email" placeholder="">
+                                                </div>
+                                                <input type="hidden" name="type" value="video">
+                                                <input type="hidden" name="reported_on_video" value="{{$video->title}}">
+                                                <div class="form-group">
+                                                    <label for="contact_message">Message Text</label>
+                                                    <textarea name="message_body" required class="form-control"
+                                                              id="contact_message" rows="3"></textarea>
+                                                </div>
+                                                <button class="btn btn-primary">Report Video</button>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
                     @else
