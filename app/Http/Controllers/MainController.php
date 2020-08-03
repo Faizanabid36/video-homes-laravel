@@ -40,7 +40,7 @@ class MainController extends Controller {
         } );
         if ( request( 'category_id' ) ) {
             $users = User::whereHas( 'user_extra', function ( $query ) {
-                $query->whereCategoryId(reqeust('category_id'));
+                $query->whereCategoryId(request('category_id'));
             } )->get();
         }
 
