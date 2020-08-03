@@ -8,6 +8,7 @@
     </style>
     @endsection
 @section('content')
+<div class="container">
 
     <div class="row">
         <div class="col-6">
@@ -285,7 +286,7 @@
                                             <img class="w-75 "
                                                  src="{{asset("storage/".$video['thumbnail'])}}"
                                                  alt="{{ucfirst($video['title'])}}">
-{{--                                            <p class="text-center">{{$account_user['company_name']}}</p>--}}
+                                            {{--                                            <p class="text-center">{{$account_user['company_name']}}</p>--}}
                                         </div>
                                         <div class="col-md-8">
                                             <div class="card-body">
@@ -343,16 +344,16 @@
                                                     <img class="w-100 "
                                                          src="{{asset("storage/".$video['thumbnail'])}}"
                                                          alt="{{ucfirst($video['title'])}}">
-{{--                                                    <p class="text-center">{{$video['user']['user_extra']['company_name']}}</p>--}}
+                                                    {{--                                                    <p class="text-center">{{$video['user']['user_extra']['company_name']}}</p>--}}
                                                 </div>
                                                 <div class="card-body">
                                                     <h2 class="card-title ">
                                                         <a
                                                             href="{{route('directory_by_username',[$video['user']['username'],$video['video_id']])}}">
-{{--                                                            <img--}}
-{{--                                                                src="{{$video['user']['user_extra']['profile_picture'] ?? asset('images/blank.png')}}"--}}
-{{--                                                                class="rounded-circle rounded"--}}
-{{--                                                                style="width:50px;height:50px" alt="">--}}
+                                                            {{--                                                            <img--}}
+                                                            {{--                                                                src="{{$video['user']['user_extra']['profile_picture'] ?? asset('images/blank.png')}}"--}}
+                                                            {{--                                                                class="rounded-circle rounded"--}}
+                                                            {{--                                                                style="width:50px;height:50px" alt="">--}}
                                                             {{ucfirst($video['title'])}} </a>
                                                     </h2>
                                                     @if ($video['description'] && $video['description'] != '')
@@ -396,6 +397,7 @@
             <h1>No Result Found</h1>
         @endif
     @endif
+</div>
 @endsection
 @section('script')
     @if (!request('category_id'))
