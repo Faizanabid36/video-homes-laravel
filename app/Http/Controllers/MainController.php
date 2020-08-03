@@ -30,32 +30,33 @@ class MainController extends Controller {
         $users         = collect( grabUsers( $categories ) );
         if ( request( 'category_id' ) ) {
             $videos = Category::with(['videos'])->find(request('category_id'));
+            return view( 'directory1.index', compact( 'users', 'categories', 'industries', 'level1', 'video_categories','videos' ) );
         }
-        return view( 'directory1.index', compact( 'users', 'categories', 'industries', 'level1', 'video_categories','videos' ) );
+        return view( 'directory1.index', compact( 'users', 'categories', 'industries', 'level1', 'video_categories' ) );
+    }
+    public function directory_by_username( $username ) {
+        $video          = Video::whereHas( 'user', function ( $query ) use ( $username ) {
+            $query->whereUsername( $username );
+        } )->where( 'processed', 1 )->where( 'is_video_approved', 1 )->latest()->first();
+        $related_videos = [];
+        if ( ! is_null( $video ) ) {
+            $related_videos = Video::whereHas( 'user', function ( $query ) use ( $username ) {
+                $query->whereUsername( $username );
+            } )->where( 'id', '!=', $video->id )->where( 'processed', 1 )->where( 'is_video_approved', 1 )->latest()->get();
+        }
+        $user = User::whereUsername( $username )->with( 'account_types' )->firstOrFail();
+
+        return view( 'directory_videos', compact( 'user', 'video', 'related_videos' ) );
     }
 
-    public function directory() {
-        $role_slug = '';
-        $directory = true;
-        $tags      = UserRole::withCount( 'account_types' )->where( 'role', '!=', 'admin' )->get();
-        $users     = User::with( 'user_role' )->where( 'role', '!=', 1 )->get();
 
-        return view( 'directory.cat_directory', compact( 'users', 'tags', 'role_slug', 'directory' ) );
-    }
-
-//    public function directory_by_username( $username ) {
-//        $video          = Video::whereHas( 'user', function ( $query ) use ( $username ) {
-//            $query->whereUsername( $username );
-//        } )->where( 'processed', 1 )->where( 'is_video_approved', 1 )->latest()->first();
-//        $related_videos = [];
-//        if ( ! is_null( $video ) ) {
-//            $related_videos = Video::whereHas( 'user', function ( $query ) use ( $username ) {
-//                $query->whereUsername( $username );
-//            } )->where( 'id', '!=', $video->id )->where( 'processed', 1 )->where( 'is_video_approved', 1 )->latest()->get();
-//        }
-//        $user = User::whereUsername( $username )->with( 'account_types' )->firstOrFail();
+//    public function directory() {
+//        $role_slug = '';
+//        $directory = true;
+//        $tags      = UserRole::withCount( 'account_types' )->where( 'role', '!=', 'admin' )->get();
+//        $users     = User::with( 'user_role' )->where( 'role', '!=', 1 )->get();
 //
-//        return view( 'directory_videos', compact( 'user', 'video', 'related_videos' ) );
+//        return view( 'directory.cat_directory', compact( 'users', 'tags', 'role_slug', 'directory' ) );
 //    }
 //
 //    public function directory_by_user_video( $username, $video_id = null ) {
