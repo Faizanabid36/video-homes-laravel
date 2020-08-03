@@ -40,6 +40,7 @@ class MainController extends Controller {
         } );
         if ( request( 'category_id' ) ) {
             $users = UserCategory::find(request('category_id'))->get();
+            return $users;
 //            $users         = collect( $users );
         }
 
