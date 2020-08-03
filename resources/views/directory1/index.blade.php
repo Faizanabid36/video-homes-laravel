@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-6">
             <div class="Search-boxes">
-                <form action="">
+                <form action="{{route('directory')}}">
                     <div class="form-row">
                         <div class="col mt-2">
                             @if (count($user_category) > 0)
