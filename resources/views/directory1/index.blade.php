@@ -12,7 +12,8 @@
                                     <select name="category_id" class="selectpicker show-tick form-control"
                                             data-style="btn-primary bg-light text-dark"
                                             data-live-search="true"
-                                            title="Choose one of the following Profession and Expertise...">
+                                            title="Search Videos...">
+
                                         @foreach($user_category as $u)
                                             <optgroup label="{{$u['name']}}">
                                                 @if(!empty($u['children'] ))
