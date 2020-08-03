@@ -7,7 +7,7 @@ use FFMpeg\Format\Video\X264;
 
 if ( ! function_exists( 'dashboardChart' ) ) {
     function dashboardChart( $labels, $label, $data, $showBorder ) {
-        $Data    = [];
+        $Data              = [];
         $Data['labels']    = $labels;
         $datasets['data']  = $data;
         $datasets['label'] = $label;
@@ -228,9 +228,9 @@ function grabUsers( $categories, $forceClear = false ) {
     foreach ( $categories as $val ) {
         if ( isset( $val['list'] ) && ! empty( $val['list'] ) ) {
             foreach ( $val['list'] as $user ) {
-                $user                           = is_array($user) ? $user : $user->toArray();
-                if($user['user_id']){
-                    $data[ $user['user_id']['id'] ] = collect( $user['user_id'] )->merge( collect($user)->except('user_id') )->toArray();
+                $user = is_array( $user ) ? $user : $user->toArray();
+                if ( $user['user_id'] ) {
+                    $data[ $user['user_id']['id'] ] = collect( $user['user_id'] )->merge( collect( $user )->except( 'user_id' ) )->toArray();
                 }
 
 
@@ -243,21 +243,20 @@ function grabUsers( $categories, $forceClear = false ) {
 
     return $data ? array_values( $data ) : [];
 }
-function userMerger($categories){
-    $d = [];
-dd($categories);
-    foreach ( $categories as $val ) {
-        dd($val);die;
-        if ( isset( $val['list'] ) && ! empty( $val['list'] ) ) {
-            foreach ( $val['list'] as $user ) {
-                $user = is_array( $user ) ? $user : $user->toArray();
-                dd($user);
-                if ( isset($user['user_id']) && !is_null($user['user_id']) ) {
 
-                    $d[ $user['user_id']['id'] ] = collect( $user['user_id'] )->merge( collect( $user )->except( 'user_id' ) )->toArray();
-                }
+function userMerger( $categories ) {
+    $d = [];
+
+    if ( count( $categories['list'] ) > 0 ) {
+        foreach ( $categories['list'] as $user ) {
+            $user = is_array( $user ) ? $user : $user->toArray();
+
+            if ( isset( $user['user_id'] ) && ! is_null( $user['user_id'] ) ) {
+
+                $d[ $user['user_id']['id'] ] = collect( $user['user_id'] )->merge( collect( $user )->except( 'user_id' ) )->toArray();
             }
         }
     }
+
     return $d;
 }
