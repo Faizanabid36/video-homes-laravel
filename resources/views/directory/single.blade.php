@@ -127,7 +127,6 @@
                                 <i class="fa fa-code"></i>
                                 Embed
                             </button>
-                            <span>Views: {{$views}}</span>
                             @if(!auth()->guest() && ($video->user_id==auth()->user()->id))
                                 <a class="btn btn-share"
                                    href="{{route('dashboard')}}#/edit_video/{{request('v')}}">
@@ -179,7 +178,7 @@
 
                             </div>
                             <div class="info-video d-none">
-                               <div class="card">
+                               <div class="card w-100">
                                    <div class="card-body">
                                        {{$video->title}}
                                        <p>{!! $video->discription !!}</p>
