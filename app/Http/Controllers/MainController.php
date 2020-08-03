@@ -33,7 +33,7 @@ class MainController extends Controller {
         if ( request( 'category_id' ) ) {
             $videos = Category::approvedVideos()->find( request( 'category_id' ) );
         }
-        return view( 'directory1.index', compact( 'users', 'categories', 'industries', 'level1', 'video_categories', 'videos' ) );
+        return view( 'directory.index', compact( 'users', 'categories', 'industries', 'level1', 'video_categories', 'videos' ) );
     }
 
     public function directory_by_username( $username, $video_id = null ) {
@@ -43,7 +43,7 @@ class MainController extends Controller {
         $user           = $video->user;
         $related_videos = Video::userVideos( $username, $video->id, true )->get();
 
-        return view( 'directory1.single', compact( 'user', 'video', 'related_videos', 'views' ) );
+        return view( 'directory.single', compact( 'user', 'video', 'related_videos', 'views' ) );
     }
 
     public function get_embedded_video( $video_id ) {
