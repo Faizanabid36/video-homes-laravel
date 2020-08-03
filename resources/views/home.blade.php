@@ -78,11 +78,9 @@
     </div>
     <div class="container-fluid" style="background: #2186C4;">
         <div class="container">
-            <!-- next -->
-
             <div class="row">
-                <div class="col-12 py-5">
-                    <h3 class="text-white"> <strong> Join Us.</strong> It will only take a minute </h3>
+                <div class="col py-5">
+                    <h3 class="text-white float-left"> <strong> Join Us.</strong> It will only take a minute </h3>
                     <button class="btn btn-warning float-right"> GET STARTED TODAY </button>
                 </div>
             </div>
@@ -90,19 +88,15 @@
     </div>
     <div class="container-fluid" style="background: #7e7a7a;">
         <div class="container">
-
-            <div class="row m-0 p-0 ">
-                <div class="col-12">
-                    <div class="form-home">
-
-                        <h1> Say Hello ! </h1>
+            <div class="row">
+                <div class="offset-md-2 col-md-8 py-5">
+                    <div class="text-center text-white">
+                        <h1>Say Hello!</h1>
                         <p> Please contact us for more information.</p>
-
-                        <form class="myform">
+                        <form class="form bg-white text-dark p-3">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">YOUR NAME(REQUIRED)</label>
                                 <input type="text" class="form-control" id="name" aria-describedby="name">
-
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">YOUR EMAIL (REQUIRED)</label>
@@ -112,7 +106,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">SUBJECT</label>
-                                <input type="TEXT" class="form-control" id="exampleInputPassword1" placeholder="">
+                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="">
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1">YOUR MESSAGE</label>
