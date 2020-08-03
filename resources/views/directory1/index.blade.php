@@ -137,20 +137,20 @@
                                                             ...
                                                         @endif</p>
                                                 @endif
-                                                @if ($account_user['bio'] && $account_user['address'] != '')
+                                                @if ($account_user['address'] && $account_user['address'] != '')
                                                     <p class="card-text my-2">
                                                         <i class="fa icon-blue fa-map-marker mr-2"></i>
                                                         <b>Address: </b>{{ucfirst($account_user['address'])}}
                                                     </p>
                                                 @endif
-                                                @if ($account_user['bio'] && $account_user['direct_phone'] != '')
+                                                @if ($account_user['direct_phone'] && $account_user['direct_phone'] != '')
                                                     <p class="card-text my-3"><i
                                                             class="fa icon-blue mr-2 fa-phone"></i>
                                                         <b>Phone:</b> <a
                                                             href="tel:{{$account_user['direct_phone']}}">{{$account_user['direct_phone']}}</a>
                                                     </p>
                                                 @endif
-                                                @if ($account_user['bio'] && $account_user['office_phone'] != '')
+                                                @if ($account_user['office_phone'] && $account_user['office_phone'] != '')
                                                     <p class="card-text my-3"><i
                                                             class="fa icon-blue mr-2 fa-phone"></i> <b>Phone
                                                             Office:</b> <a
@@ -270,50 +270,49 @@
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                              aria-labelledby="pills-home-tab">
-                            @foreach($users as $account_user)
+                            @foreach($vidoes->videos as $k => $video)
                                 <div class="card my-1">
                                     <div class="row">
                                         <div class="col-md-4  p-3 text-center">
                                             <img class="w-75"
-                                                 src="{{$account_user['company_logo'] ?? asset('images/blank.png')}}"
-                                                 alt="{{$account_user['company_name']}}">
-                                            <p class="text-center">{{$account_user['company_name']}}</p>
+                                                 src="{{asset("storage/$video['thumbnail']")}}"
+                                                 alt="{{ucfirst($video['title'])}}">
+{{--                                            <p class="text-center">{{$account_user['company_name']}}</p>--}}
                                         </div>
                                         <div class="col-md-8">
                                             <div class="card-body">
                                                 <h2 class="card-title ">
                                                     <a
-                                                        href="{{route('directory_by_username',$account_user['username'])}}">
-                                                        <img
-                                                            src="{{$account_user['profile_picture'] ?? asset('images/blank.png')}}"
-                                                            class="rounded-circle rounded"
-                                                            style="width:50px;height:50px" alt="">
-                                                        {{ucfirst($account_user['name'])}} </a>
+                                                        href="{{route('directory_by_username',[$video['user']['username'],$video['video_id']])}}">
+                                                        {{--                                                            <img--}}
+                                                        {{--                                                                src="{{$video['user']['user_extra']['profile_picture'] ?? asset('images/blank.png')}}"--}}
+                                                        {{--                                                                class="rounded-circle rounded"--}}
+                                                        {{--                                                                style="width:50px;height:50px" alt="">--}}
+                                                        {{ucfirst($video['title'])}} </a>
                                                 </h2>
-                                                @if ($account_user['bio'] && $account_user['bio'] != '')
-                                                    <p class="card-text my-2">{!! substr($account_user['bio'],0,150) !!}
-                                                        @if (strlen($account_user['bio']) > 150)
+                                                @if ($video['description'] && $video['description'] != '')
+                                                    <p class="card-text my-2">{!! substr($video['description'],0,150) !!}
+                                                        @if (strlen($video['description']) > 150)
                                                             ...
                                                         @endif</p>
                                                 @endif
-                                                @if ($account_user['bio'] && $account_user['address'] != '')
+                                                @if ($video['user']['user_extra']['address'] && $video['user']['user_extra']['address'] != '')
                                                     <p class="card-text my-2">
                                                         <i class="fa icon-blue fa-map-marker mr-2"></i>
-                                                        <b>Address: </b>{{ucfirst($account_user['address'])}}
+                                                        <b>Address: </b>{{ucfirst($video['user']['user_extra']['address'])}}
                                                     </p>
                                                 @endif
-                                                @if ($account_user['bio'] && $account_user['direct_phone'] != '')
-                                                    <p class="card-text my-3"><i
+                                                @if ($video['user']['user_extra']['direct_phoe'] && $video['user']['user_extra']['direct_phone'] != '')
+                                                    <p class="card-text my-2"><i
                                                             class="fa icon-blue mr-2 fa-phone"></i>
                                                         <b>Phone:</b> <a
                                                             href="tel:{{$account_user['direct_phone']}}">{{$account_user['direct_phone']}}</a>
                                                     </p>
                                                 @endif
-                                                @if ($account_user['bio'] && $account_user['office_phone'] != '')
-                                                    <p class="card-text my-3"><i
-                                                            class="fa icon-blue mr-2 fa-phone"></i> <b>Phone
-                                                            Office:</b> <a
-                                                            href="tel:{{$account_user['office_phone']}}">{{$account_user['office_phone']}}</a>
+                                                @if ($video['user']['user_extra']['office_phone'] && $video['user']['user_extra']['office_phone'] != '')
+                                                    <p class="card-text my-2"><i
+                                                            class="fa icon-blue mr-2 fa-phone"></i> <b>Office Phone:</b> <a
+                                                            href="tel:{{$video['user']['user_extra']['office_phone']}}">{{$video['user']['user_extra']['office_phone']}}</a>
                                                     </p>
                                                 @endif
 
