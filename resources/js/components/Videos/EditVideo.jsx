@@ -16,7 +16,8 @@ export default function EditVideo(props) {
         setState(state);
     }, [state, thumbnails]);
     const onUpdate = useCallback(e => {
-        // console.log(state);
+        console.log({tags,...state});
+        debugger;
         axios.put('update-video/' + state.id, {tags,...state}).then(({data}) => {
             window.location.href = window.VIDEO_APP.base_url + "/u/" + state.username + "/" + state.video_id;
         })
