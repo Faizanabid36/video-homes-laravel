@@ -43,7 +43,7 @@ export default function EditVideo(props) {
     useEffect(() => {
         axios.get(`edit_video/${props.match.params.id}`).then(({data}) => {
             setState({...data.video});
-            console.log(state);
+            console.log(data);
             let index = data.video.thumbnail.match(/-(\d+).png/);
             if (index && index[1]) {
                 setIndex(index[1] - 1);
