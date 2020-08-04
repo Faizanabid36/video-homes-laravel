@@ -5,6 +5,7 @@ import 'react-tagsinput/react-tagsinput.css'
 
 export default function EditVideo(props) {
     const [state, setState] = useState(false);
+    const [tags, setTags] = useState([]);
     const [categories, setCategories] = useState(false);
     const [manualupload, setManualupload] = useState(false);
     const [thumbnails, setThumbnails] = useState(false);
@@ -40,11 +41,11 @@ export default function EditVideo(props) {
     }, [state]);
 
     useEffect(() => {
-        console.log("first time load");
+
         axios.get(`edit_video/${props.match.params.id}`).then(({data}) => {
             data.video.tags = data.video.tags ?? [];
             setState({...data.video});
-            console.log(data);
+            setTags(data.video.tags);
             let index = data.video.thumbnail.match(/-(\d+).png/);
             if (index && index[1]) {
                 setIndex(index[1] - 1);
@@ -101,9 +102,10 @@ export default function EditVideo(props) {
                 </Form.Group>
                 <Form.Group controlId="tags">
                     <Form.Label>Tags</Form.Label>
-                    {state.tags && <TagsInput value={state.tags} onChange={tags => {
+                    {tags && <TagsInput value={tags} onChange={e => {
                         //console.log(tags[0]);
-                        state.tags.concat(tags[0]);
+                        setTags(e);
+                        state.tags = tags;
                         setState(state);
                     }}/>}
                     {/*<Form.Control placeholder="Tags" defaultValue={state.tags} onChange={e => {*/}
