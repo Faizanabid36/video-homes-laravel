@@ -187,7 +187,7 @@
                                         </button>
                                         <button onclick="OpenShareWindow('https://plus.google.com/share?url={{url()->current()}}')" class="btn btn-primary"><i class="fa fa-google"></i>
                                         </button>
-                                        <button onclick="OpenShareWindow('https://www.linkedin.com/shareArticle?mini=true&url={{url()->current()}}&title={{$video->title}}')" class="btn btn-primary"><i class="fa fa-linnkedin"></i>
+                                        <button onclick="OpenShareWindow('https://www.linkedin.com/shareArticle?mini=true&url={{url()->current()}}&title={{$video->title}}')" class="btn btn-primary"><i class="fa fa-linkedin"></i>
                                         </button>
                                         <button onclick="OpenShareWindow('https://pinterest.com/pin/create/button/?url={{url()->current()}}&media={{asset("storage/$video->stream_path")}}')" class="btn btn-primary"><i class="fa fa-pinterest"></i>
                                         </button>
