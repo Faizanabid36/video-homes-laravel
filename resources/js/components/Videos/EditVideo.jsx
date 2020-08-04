@@ -5,7 +5,6 @@ import 'react-tagsinput/react-tagsinput.css'
 
 export default function EditVideo(props) {
     const [state, setState] = useState(false);
-    const [tags, setTags] = useState([]);
     const [categories, setCategories] = useState(false);
     const [manualupload, setManualupload] = useState(false);
     const [thumbnails, setThumbnails] = useState(false);
@@ -16,12 +15,12 @@ export default function EditVideo(props) {
         setState(state);
     }, [state, thumbnails]);
     const onUpdate = useCallback(e => {
-        console.log({...state,tags});
+        console.log({...state});
         //debugger;
-        axios.put('update-video/' + state.id, {tags,...state}).then(({data}) => {
+        axios.put('update-video/' + state.id, {...state}).then(({data}) => {
             //window.location.href = window.VIDEO_APP.base_url + "/u/" + state.username + "/" + state.video_id;
         })
-    }, [state, thumbnails,tags]);
+    }, [state, thumbnails]);
     const deleteVideo = useCallback(e => {
         let retVal = confirm("Do you really want to Delete?");
         if (retVal) {
@@ -42,13 +41,13 @@ export default function EditVideo(props) {
 
     useEffect(() => {
         axios.get(`edit_video/${props.match.params.id}`).then(({data}) => {
+            data.video.tags = data.video.tags ?? [];
             setState({...data.video});
             console.log(data);
             let index = data.video.thumbnail.match(/-(\d+).png/);
             if (index && index[1]) {
                 setIndex(index[1] - 1);
             }
-            setTags(data.video.tags ?? []);
             setThumbnails(data.thumbnails);
             setCategories(data.categories)
         })
@@ -101,7 +100,10 @@ export default function EditVideo(props) {
                 </Form.Group>
                 <Form.Group controlId="tags">
                     <Form.Label>Tags</Form.Label>
-                    <TagsInput value={tags} onChange={tags => setTags(tags)}/>
+                    {state.tags && <TagsInput value={state.tags} onChange={tags => {
+                        state.tags = tags;
+                        setState(state);
+                    }}/>}
                     {/*<Form.Control placeholder="Tags" defaultValue={state.tags} onChange={e => {*/}
                     {/*    state.tags = e.target.value;*/}
                     {/*    setState(state);*/}
