@@ -180,8 +180,10 @@
                                     <div class="card-body">
                                         {{$video->title}}
                                         <p>{!! $video->discription !!}</p>
-                                        Tags: <span
-                                            class="badge badge-primary">{{str_replace(",",'</span><span class="badge badge-primary">',$video->tags)}}</span>
+                                        Tags: @foreach($video->tags as $tags)
+{{--                                            <span class="badge badge-primary">{{str_replace(",",'</span><span class="badge badge-primary">',$video->tags)}}</span>--}}
+                                            <span class="badge badge-primary">{{$tags}}</span>
+                                                  @endforeach
                                         <br>
                                         Category: {{$video->category->name}}
                                         <br>

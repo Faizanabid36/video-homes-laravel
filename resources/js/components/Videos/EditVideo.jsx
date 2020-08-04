@@ -55,7 +55,7 @@ export default function EditVideo(props) {
 
     return <Container className="container main-content" id="main-container">
         <div id="container_content">
-            <Row><Col xs={8} className="mx-auto">
+            <Row><Col>
                 <Form.Group controlId="manual_upload">
                     {!manualupload ? <Carousel interval={null} activeIndex={index} onSelect={handleSelect}>
                             {thumbnails && Object.values(thumbnails).map(v => {
