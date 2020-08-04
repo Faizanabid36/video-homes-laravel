@@ -12,7 +12,7 @@
     <script>
         window.VIDEO_APP = {
             base_url: '{{url('/')}}',
-        }
+        };
         @yield('header_script')
     </script>
 
@@ -25,7 +25,7 @@
                 <nav class="navbar navbar-expand-lg navbar-light home-nav ">
                     <a class="navbar-brand" href="{{url('/')}}">
                         <img src="{{asset('img/cropped-VideoHomes-3.png')}}"
-                             class="logo" alt="videoHomes Logo"/>
+                             class="logo" alt="VideoHomes Logo"/>
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

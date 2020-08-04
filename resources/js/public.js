@@ -64,5 +64,22 @@ try {
         });
     }
 
+    function openShareWindow( url, w, h ) {
+
+        var screenLeft = window.screenLeft !== undefined ? window.screenLeft : screen.left;
+        var screenTop = window.screenTop !== undefined ? window.screenTop : screen.top;
+        var width = window.innerWidth ? window.innerWidth : doc.documentElement.clientWidth ? doc.documentElement.clientWidth : screen.width;
+        var height = window.innerHeight ? window.innerHeight : doc.documentElement.clientHeight ? doc.documentElement.clientHeight : screen.height;
+
+        var left = ( ( width / 2 ) - ( w / 2 ) ) + screenLeft;
+        var top = ( ( height / 2 ) - ( h / 2 ) ) + screenTop;
+
+        var newWin = window.open( url, "", "scrollbars=no,width=" + w + ",height=" + h + ",top=" + top + ",left=" + left );
+
+        if ( newWin ) {
+            newWin.focus();
+        }
+    }
+
 } catch (e) {
 }

@@ -125,9 +125,9 @@
                                 <i class="fa fa-code"></i>
                                 Embed
                             </button>
-                            @if(!auth()->guest() && ($video->user_id==auth()->user()->id))
-                                <a class="btn btn-share"
-                                   href="{{route('dashboard')}}#/edit_video/{{request('v')}}">
+                            @if(auth()->check() && ($video->user_id==auth()->user()->id))
+                                <a class="btn btn-outline-success"
+                                   href="{{route('directory_by_username',[$video->user_id,$video->video_id])}}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                          viewBox="0 0 24 24">
                                         <path fill="currentColor"
@@ -135,8 +135,8 @@
                                     </svg>
                                     Edit video
                                 </a>
-                                <a href="{{route('dashboard')}}"
-                                   class="btn-share">
+                                <a href="{{url('dashboard#/analytics')}}"
+                                   class="btn btn-outline-warning">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                          viewBox="0 0 24 24">
                                         <path fill="currentColor"
@@ -155,23 +155,48 @@
                                 </svg>
                                 <span>Report</span></button>
                             <div class="embed-video d-none">
-                                <div class="input-group">
-                                    <textarea name="embed" id="embed" cols="30" rows="3" class="form-control copyembed">&lt;iframe src="{{route('embed_video',$video->video_id)}}" frameborder="0" width="100%" height="400" allowfullscreen&gt;&lt;/iframe&gt;</textarea>
-                                    <div class="input-group-prepend">
-                                        <button class="btn btn-primary copyembed"><i class="fa fa-link"></i></button>
+                                <div class="card w-100">
+                                    <div class="card-body">
+                                        <div class="input-group">
+                                            <textarea name="embed" id="embed" cols="30" rows="3"
+                                                      class="form-control copyembed">&lt;iframe src="{{route('embed_video',$video->video_id)}}" frameborder="0" width="100%" height="400" allowfullscreen&gt;&lt;/iframe&gt;</textarea>
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-primary copyembed"><i class="fa fa-link"> Copy</i>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="share-video d-none">
-                                <div class="input-group mb-3">
-                                    <input type="text" value="{{url()->full()}}"
-                                           class="form-control input-md copylink" readonly=""
-                                    >
-                                    <div class="input-group-prepend">
-                                        <button class="btn btn-primary copylink"><i class="fa fa-link"></i>
-                                        </button>
-                                    </div>
+                                <div class="card w-100">
+                                    <div class="card-body">
+                                        <div class="input-group mb-3">
+                                            <input type="text" value="{{url()->full()}}"
+                                                   class="form-control input-md copylink" readonly=""
+                                            >
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-primary copylink"><i class="fa fa-link"> Copy</i>
+                                                </button>
+                                            </div>
 
+                                        </div>
+                                        <button onclick="OpenShareWindow('https://www.facebook.com/sharer/sharer.php?u={{url()->current()}}')" class="btn btn-primary"><i class="fa fa-facebook"></i>
+                                        </button>
+                                        <button onclick="OpenShareWindow('https://twitter.com/intent/tweet?url={{url()->current()}}')" class="btn btn-primary"><i class="fa fa-twitter"></i>
+                                        </button>
+                                        <button onclick="OpenShareWindow('https://plus.google.com/share?url={{url()->current()}}')" class="btn btn-primary"><i class="fa fa-google"></i>
+                                        </button>
+                                        <button onclick="OpenShareWindow('https://www.linkedin.com/shareArticle?mini=true&url={{url()->current()}}&title={{$video->title}}')" class="btn btn-primary"><i class="fa fa-linnkedin"></i>
+                                        </button>
+                                        <button onclick="OpenShareWindow('https://pinterest.com/pin/create/button/?url={{url()->current()}}&media={{asset("storage/$video->stream_path")}}')" class="btn btn-primary"><i class="fa fa-pinterest"></i>
+                                        </button>
+                                        <button onclick="OpenShareWindow('http://www.tumblr.com/share/link?url={{url()->current()}}')" class="btn btn-primary"><i
+                                                class="fa fa-tumblr"></i>
+                                        </button>
+                                        <button onclick="OpenShareWindow('http://www.reddit.com/submit?url={{url()->current()}}')" class="btn btn-primary"><i
+                                                class="fa fa-reddit"></i></button>
+                                    </div>
                                 </div>
 
                             </div>
@@ -181,9 +206,9 @@
                                         {{$video->title}}
                                         <p>{!! $video->discription !!}</p>
                                         Tags: @foreach($video->tags as $tags)
-{{--                                            <span class="badge badge-primary">{{str_replace(",",'</span><span class="badge badge-primary">',$video->tags)}}</span>--}}
+                                            {{--                                            <span class="badge badge-primary">{{str_replace(",",'</span><span class="badge badge-primary">',$video->tags)}}</span>--}}
                                             <span class="badge badge-primary">{{$tags}}</span>
-                                                  @endforeach
+                                        @endforeach
                                         <br>
                                         Category: {{$video->category->name}}
                                         <br>
