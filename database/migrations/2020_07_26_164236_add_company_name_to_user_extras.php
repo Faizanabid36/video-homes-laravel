@@ -26,7 +26,7 @@ class AddCompanyNameToUserExtras extends Migration
             //
             $table->string('direct_phone')->nullable();
             $table->string('company_name')->nullable();
-            $table->string('address')->nullable();
+            $table->string('address')->default('USA');
             $table->string('office_phone')->nullable();
             $table->string('website')->nullable();
             $table->string('license_no')->nullable();

@@ -15,8 +15,8 @@ class AddGeolocationToUserExtras extends Migration
     {
         Schema::table('user_extras', function (Blueprint $table) {
             //
-            $table->string('location_latitude')->nullable();
-            $table->string('location_longitude')->nullable();
+            $table->string('location_latitude')->default('36.2452154');
+            $table->string('location_longitude')->default('-113.7297624');
         });
     }
 
