@@ -79,10 +79,10 @@
     <div class="container-fluid" style="background: #2186C4;">
         <div class="container">
             <div class="row py-5">
-                <div class="col ">
+                <div class="col-md-6 text-sm-center text-md-left">
                     <h3 class="text-white"><strong> Join Us.</strong> It will only take a minute </h3>
                 </div>
-                <div class="col">
+                <div class="col-md-6 text-sm-center text-md-right">
                     <button class="btn btn-warning float-right"> GET STARTED TODAY</button>
                 </div>
             </div>
