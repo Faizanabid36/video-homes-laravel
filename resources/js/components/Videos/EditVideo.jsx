@@ -48,7 +48,7 @@ export default function EditVideo(props) {
             if (index && index[1]) {
                 setIndex(index[1] - 1);
             }
-            setTags(data.tags);
+            setTags(data.video.tags ?? []);
             setThumbnails(data.thumbnails);
             setCategories(data.categories)
         })
