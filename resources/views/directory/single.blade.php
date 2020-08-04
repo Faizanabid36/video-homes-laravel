@@ -393,8 +393,8 @@
                            aria-controls="contact" aria-selected="false">Contact</a>
                     </li>
                     <li class="nav-item" role="Report">
-                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#report" role="tab"
-                           aria-controls="report" aria-selected="false">Report</a>
+                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#report_message" role="tab"
+                           aria-controls="report_message" aria-selected="false">Report</a>
                     </li>
                 </ul>
                 <div class="tab-content p-3 card">
@@ -506,7 +506,7 @@
                             <button type="submit" class="btn btn-primary"> Send</button>
                         </form>
                     </div>
-                    <div class="tab-pane fade" id="report" role="tabpanel" aria-labelledby="report-tab">
+                    <div class="tab-pane fade" id="report_message" role="tabpanel" aria-labelledby="report-tab">
                         <!-- .report. -->
 
                         <h1 class="my-3 font-weight-bold"> Send message to moderator </h1>
