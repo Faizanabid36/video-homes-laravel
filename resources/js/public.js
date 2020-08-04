@@ -67,7 +67,7 @@ try {
         openShareWindow($(this).data('url'));
     });
 
-    function openShareWindow(url, w = 400, h = 400) {
+    function openShareWindow(url, w = 600, h = 600) {
 
         var screenLeft = window.screenLeft !== undefined ? window.screenLeft : screen.left;
         var screenTop = window.screenTop !== undefined ? window.screenTop : screen.top;
