@@ -179,22 +179,19 @@
                                                 <button class="btn btn-primary copylink"><i class="fa fa-link"> Copy</i>
                                                 </button>
                                             </div>
-
                                         </div>
-                                        <button onclick="openShareWindow('https://www.facebook.com/sharer/sharer.php?u={{url()->current()}}')" class="btn btn-primary"><i class="fa fa-facebook"></i>
+                                        <button data-url="https://www.facebook.com/sharer/sharer.php?u={{url()->current()}}" class="btn btn-primary share-social"><i class="fa fa-facebook"></i>
                                         </button>
-                                        <button onclick="openShareWindow('https://twitter.com/intent/tweet?url={{url()->current()}}')" class="btn btn-primary"><i class="fa fa-twitter"></i>
+                                        <button data-url="https://twitter.com/intent/tweet?url={{url()->current()}}" class="btn btn-primary share-social"><i class="fa fa-twitter"></i>
                                         </button>
-                                        <button onclick="openShareWindow('https://plus.google.com/share?url={{url()->current()}}')" class="btn btn-primary"><i class="fa fa-google"></i>
+                                        <button data-url="https://www.linkedin.com/shareArticle?mini=true&url={{url()->current()}}&title={{$video->title}}" class="btn btn-primary share-social"><i class="fa fa-linkedin"></i>
                                         </button>
-                                        <button onclick="openShareWindow('https://www.linkedin.com/shareArticle?mini=true&url={{url()->current()}}&title={{$video->title}}')" class="btn btn-primary"><i class="fa fa-linkedin"></i>
+                                        <button data-url="https://pinterest.com/pin/create/button/?url={{url()->current()}}&media={{asset("storage/$video->stream_path")}}" class="btn btn-primar share-social"><i class="fa fa-pinterest"></i>
                                         </button>
-                                        <button onclick="openShareWindow('https://pinterest.com/pin/create/button/?url={{url()->current()}}&media={{asset("storage/$video->stream_path")}}')" class="btn btn-primary"><i class="fa fa-pinterest"></i>
-                                        </button>
-                                        <button onclick="openShareWindow('http://www.tumblr.com/share/link?url={{url()->current()}}')" class="btn btn-primary"><i
+                                        <button data-url="https://www.tumblr.com/share/link?url={{url()->current()}}" class="btn btn-primary share-social"><i
                                                 class="fa fa-tumblr"></i>
                                         </button>
-                                        <button onclick="openShareWindow('http://www.reddit.com/submit?url={{url()->current()}}')" class="btn btn-primary"><i
+                                        <button data-url="https://www.reddit.com/submit?url={{url()->current()}}" class="btn btn-primary share-social"><i
                                                 class="fa fa-reddit"></i></button>
                                     </div>
                                 </div>
