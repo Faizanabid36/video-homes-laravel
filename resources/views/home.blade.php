@@ -83,7 +83,7 @@
                     <h3 class="text-white"><strong> Join Us.</strong> It will only take a minute </h3>
                 </div>
                 <div class="col-md-6 text-sm-center text-md-right">
-                    <button class="btn btn-warning float-right"> GET STARTED TODAY</button>
+                    <button class="btn btn-warning"> GET STARTED TODAY</button>
                 </div>
             </div>
         </div>
