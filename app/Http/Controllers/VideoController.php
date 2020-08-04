@@ -197,7 +197,6 @@ class VideoController extends Controller
 
     public function update_video(Video $video)
     {
-        dd(request('tags'));
         return ['status' => $video->update(request(['description', 'title', 'thumbnail', 'video_type', 'tags','category_id']))];
     }
 
