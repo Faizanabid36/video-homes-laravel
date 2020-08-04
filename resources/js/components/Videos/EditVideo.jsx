@@ -59,12 +59,6 @@ export default function EditVideo(props) {
         <div id="container_content">
             <Row><Col xs={8} className="mx-auto">
                 <Form.Group controlId="manual_upload">
-                    {/*<Form.Check*/}
-                    {/*    type="switch"*/}
-                    {/*    id="upload-switch"*/}
-                    {/*    label="Upload Thumbnail"*/}
-                    {/*    onChange={e => setManualupload(!manualupload)}*/}
-                    {/*/>*/}
                     {!manualupload ? <Carousel interval={null} activeIndex={index} onSelect={handleSelect}>
                             {thumbnails && Object.values(thumbnails).map(v => {
 
@@ -105,13 +99,8 @@ export default function EditVideo(props) {
                     {tags && <TagsInput value={tags} onChange={e => {
                         setTags(e);
                         state.tags = e;
-                        console.log(tags,e,state.tags);
                         setState(state);
                     }}/>}
-                    {/*<Form.Control placeholder="Tags" defaultValue={state.tags} onChange={e => {*/}
-                    {/*    state.tags = e.target.value;*/}
-                    {/*    setState(state);*/}
-                    {/*}}/>*/}
                 </Form.Group>
                 {categories && <Form.Group controlId="category">
                     <Form.Label>Category</Form.Label>
