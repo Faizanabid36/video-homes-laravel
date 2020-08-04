@@ -181,6 +181,7 @@
                                             </div>
                                         </div>
                                         <button data-url="https://www.facebook.com/sharer/sharer.php?u={{url()->current()}}" class="btn btn-primary share-social"><i class="fa fa-facebook"></i>
+                                        </button><button data-url="https://wa.me/?text={{url()->current()}}" class="btn btn-primary share-social"><i class="fa fa-whatsapp"></i>
                                         </button>
                                         <button data-url="https://twitter.com/intent/tweet?url={{url()->current()}}" class="btn btn-primary share-social"><i class="fa fa-twitter"></i>
                                         </button>
