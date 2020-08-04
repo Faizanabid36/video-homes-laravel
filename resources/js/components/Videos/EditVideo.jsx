@@ -16,10 +16,10 @@ export default function EditVideo(props) {
         setState(state);
     }, [state, thumbnails]);
     const onUpdate = useCallback(e => {
-        console.log({tags,...state});
-        debugger;
+        console.log({...state,tags});
+        //debugger;
         axios.put('update-video/' + state.id, {tags,...state}).then(({data}) => {
-            window.location.href = window.VIDEO_APP.base_url + "/u/" + state.username + "/" + state.video_id;
+            //window.location.href = window.VIDEO_APP.base_url + "/u/" + state.username + "/" + state.video_id;
         })
     }, [state, thumbnails,tags]);
     const deleteVideo = useCallback(e => {
@@ -48,6 +48,7 @@ export default function EditVideo(props) {
             if (index && index[1]) {
                 setIndex(index[1] - 1);
             }
+            setTags(data.tags);
             setThumbnails(data.thumbnails);
             setCategories(data.categories)
         })
