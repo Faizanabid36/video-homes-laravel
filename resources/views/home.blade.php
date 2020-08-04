@@ -78,10 +78,12 @@
     </div>
     <div class="container-fluid" style="background: #2186C4;">
         <div class="container">
-            <div class="row">
-                <div class="col py-5">
-                    <h3 class="text-white float-left"><strong> Join Us.</strong> It will only take a minute </h3>
-                    <button class="btn btn-warning float-right"> GET STARTED TODAY</button>
+            <div class="row py-5">
+                <div class="col ">
+                    <h3 class="text-white"><strong> Join Us.</strong> It will only take a minute </h3>
+                </div>
+                <div class="col">
+                    <button class="btn btn-warning"> GET STARTED TODAY</button>
                 </div>
             </div>
         </div>
