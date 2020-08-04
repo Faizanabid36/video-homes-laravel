@@ -21,7 +21,7 @@ export default function EditVideo(props) {
         axios.put('update-video/' + state.id, {tags,...state}).then(({data}) => {
             window.location.href = window.VIDEO_APP.base_url + "/u/" + state.username + "/" + state.video_id;
         })
-    }, [state, thumbnails]);
+    }, [state, thumbnails,tags]);
     const deleteVideo = useCallback(e => {
         let retVal = confirm("Do you really want to Delete?");
         if (retVal) {
