@@ -12,7 +12,7 @@ class Video extends Model {
     protected $dates = [ 'converted_for_streaming_at', ];
     protected $hidden = [];
     protected $with = [ 'user', 'comments' ];
-    protected $casts = [ 'processed' => 'boolean' ];
+    protected $casts = [ 'processed' => 'boolean','tags'=>'array' ];
 
 
     protected static function boot() {
