@@ -103,10 +103,9 @@ export default function EditVideo(props) {
                 <Form.Group controlId="tags">
                     <Form.Label>Tags</Form.Label>
                     {tags && <TagsInput value={tags} onChange={e => {
-
                         setTags(e);
-                        console.log(tags,e);
-                        state.tags = tags;
+                        state.tags = e;
+                        console.log(tags,e,state.tags);
                         setState(state);
                     }}/>}
                     {/*<Form.Control placeholder="Tags" defaultValue={state.tags} onChange={e => {*/}
