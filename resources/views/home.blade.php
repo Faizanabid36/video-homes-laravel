@@ -69,7 +69,7 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid m-0 p-0">
+    <div class="container-fluid p-0" style="margin-top:-100px;">
         <div class="header-separator position-relative bg-white">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none" class="position-absolute">
                 <path class="bg-white" d="M737.9,94.7L0,0v100h1000V0L737.9,94.7z"/>
