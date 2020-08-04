@@ -40,6 +40,7 @@ export default function EditVideo(props) {
     }, [state]);
 
     useEffect(() => {
+        console.log("first time load");
         axios.get(`edit_video/${props.match.params.id}`).then(({data}) => {
             data.video.tags = data.video.tags ?? [];
             setState({...data.video});
