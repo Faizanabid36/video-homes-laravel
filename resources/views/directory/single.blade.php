@@ -16,8 +16,9 @@
         <div class="row">
             <div class="col-12">
                 <h2 style="text-transform:uppercase">
-                    {{$user->name}} {{$video->is_video_approved ? "" : "| This page is not public yet, because your video is pending mode, it needs admin approvel."}}
+                    {{$user->name}}
                 </h2>
+                <span class="label label-danger">{{$video->is_video_approved ? "" : "This page is not public yet, because your video is pending mode, it needs admin approvel."}}</span>
             </div>
         </div>
         <br/>
