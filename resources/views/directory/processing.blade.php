@@ -1,5 +1,5 @@
 @extends('layouts.public.app',["title"=>$video->title])
-@section('container')
+@section('content')
 
     <div id="main-container" style="margin-top:100px" class="container main-content" data-logged="true">
         <div id="container_content">
@@ -31,7 +31,7 @@
     </div>
     </div>
 @endsection
-@section('footer_script')
+@section('script')
     <script type="text/javascript">
         $(document).ready(function () {
             let isProcessed = false;
