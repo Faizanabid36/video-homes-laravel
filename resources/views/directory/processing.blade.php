@@ -3,10 +3,18 @@
 
     <div id="main-container" style="margin-top:100px" class="container main-content" data-logged="true">
         <div id="container_content">
-            <h4 class="text-center alert alert-info">
-                <p id="video_status">Video encoding is in process, Please wait a while.</p> <br>
-                The page automatically reloads when the video would be encoded.
-            </h4>
+            <div class="content pt_shadow">
+                <div class="pt_upload_vdo col">
+                    <div class="upload upload-video" data-block="video-drop-zone">
+                        <div>
+                            <h2 class="mt-3">{{$video->title}}</h2>
+                            <img src="{{asset('/storage/'.$video->thumbnail)}}" class="w-100">
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <br>
+            </div>
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                  style="margin: auto; display: block; shape-rendering: auto;" width="100px"
                  height="80px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
@@ -16,30 +24,22 @@
                                       keyTimes="0;1" values="0 50 51;360 50 51"/>
                 </path>
             </svg>
-            <div class="content pt_shadow">
-                <div class="pt_upload_vdo col">
-                    <div class="upload upload-video" data-block="video-drop-zone">
-                        <div>
-                            <img src="{{asset('/storage/'.$video->thumbnail)}}" width="400">
-                            <h2 class="mt-3">{{$video->title}}</h2>
-                            <p></p></div>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <br>
-            </div>
+            <h4 class="text-center alert alert-info">
+                <p id="video_status">Video encoding is in process, Please wait a while.</p> <br>
+                The page automatically reloads when the video would be encoded.
+            </h4>
         </div>
     </div>
 @endsection
 @section('script')
     <script type="text/javascript">
-        setTimeout(function () {
+        setInterval(function () {
+            axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
             axios.get('{{url()->full()}}').then(({data}) => {
-                console.log(data);
                 if (data.isProcessed) {
                     location.reload();
                 }
             })
-        }, 2500);
+        }, 1200);
     </script>
 @endsection
