@@ -42,7 +42,7 @@ class MainController extends Controller {
         $views          = VideoView::videoViews( $video );
         $user           = $video->user;
         $related_videos = Video::userVideos( $username, $video->id, true )->get();
-        return view( $video->is_processed ? 'errors.processing': 'directory.single', compact( 'user', 'video', 'related_videos', 'views' ) );
+        return view( $video->processed ? 'errors.processing': 'directory.single', compact( 'user', 'video', 'related_videos', 'views' ) );
     }
 
     public function embed_video( $video_id ) {
