@@ -37,7 +37,9 @@ class MainController extends Controller {
     }
 
     public function directory_by_username( $username, $video_id = null ) {
-
+        if(request()->ajax()){
+            return ["isProcessed"=>Video::userVideos( $username, $video_id )->first()->processed];
+        }
         $video = Video::userVideos( $username, $video_id )->firstOrFail();
         $views          = VideoView::videoViews( $video );
         $user           = $video->user;

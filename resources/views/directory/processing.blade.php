@@ -24,37 +24,22 @@
                             <h2 class="mt-3">{{$video->title}}</h2>
                             <p></p></div>
                     </div>
-                <div class="clear"></div>
+                    <div class="clear"></div>
+                </div>
+                <br>
             </div>
-            <br>
         </div>
-    </div>
     </div>
 @endsection
 @section('script')
     <script type="text/javascript">
-        $(document).ready(function () {
-            let isProcessed = false;
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            setInterval(function () {
-                $.ajax({
-                    type: 'GET',
-                    url: '{{url()->current().'/is_watchable?v='.$video->video_id}}',
-                    dataType: 'json',
-                    success: function (data) {
-                        isProcessed = data.isProcessed
-                    }, error: function (data) {
-                        console.log(data);
-                    }
-                })
-                if (isProcessed) {
+        setTimeout(function () {
+            axios.get('{{url()->full()}}').then(({data}) => {
+                console.log(data);
+                if (data.isProcessed) {
                     location.reload();
                 }
-            }, 2500)
-        })
+            })
+        }, 2500);
     </script>
 @endsection
