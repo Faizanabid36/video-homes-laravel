@@ -51,20 +51,20 @@
                                             </select>
                                         </div>
                                         <div class="input-group m-t-35">
-                                            <input type="text" class="form-control" name="name"
+                                            <input required type="text" class="form-control" name="name"
                                                    placeholder="Category Name">
                                         </div>
                                         <div class="input-group m-t-35">
-                                            <input type="text" class="form-control" name="description"
+                                            <input required type="text" class="form-control" name="description"
                                                    placeholder="Category Description">
                                         </div>
                                         <div class="input-group m-t-35">
-                                            @if(count($user_cactegories)>0)
+                                            @if(count($user_categories)>0)
                                                 <select name="parent_id" class="form-control">
                                                     <option value="" disabled selected>Parent Category(Leave Blank if None)</option>
-                                                    @foreach($user_cactegories as $user_cactegory)
-                                                        <option class="form-control" value="{{$user_cactegory->id}}">
-                                                            {{$user_cactegory->name}}
+                                                    @foreach($user_categories as $user_category)
+                                                        <option class="form-control" value="{{$user_category->id}}">
+                                                            {{$user_category->name}}
                                                         </option>
                                                     @endforeach
                                                 </select>

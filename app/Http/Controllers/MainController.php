@@ -37,19 +37,18 @@ class MainController extends Controller {
     }
 
     public function directory_by_username( $username, $video_id = null ) {
-        $video = Video::userVideos( $username, $video_id )->first();
-        abort_if( ! $video, 403, "User has no video." );
+
+        $video = Video::userVideos( $username, $video_id )->firstOrFail();
         $views          = VideoView::videoViews( $video );
         $user           = $video->user;
         $related_videos = Video::userVideos( $username, $video->id, true )->get();
-
-        return view( 'directory.single', compact( 'user', 'video', 'related_videos', 'views' ) );
+        return view( $video->is_processed ? 'errors.processing': 'directory.single', compact( 'user', 'video', 'related_videos', 'views' ) );
     }
 
     public function embed_video( $video_id ) {
         $video = Video::singleVideo( $video_id )->firstOrFail();
         VideoView::videoViews( $video, [ "from_website" => 0 ] );
-        return view( 'embed_video', compact( 'video' ) );
+        return view( 'embed_video', compact(    'video' ) );
     }
 
 //    public function directory_by_user_video( $username ) {

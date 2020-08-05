@@ -48,7 +48,9 @@ class Video extends Model {
     public function scopeUserVideos( $query, $username, $video_id = false, $related = false ) {
         return $query->whereHas( 'user', function ( $query ) use ( $username ) {
             $query->whereUsername( $username );
-        } )->whereProcessed( 1 )->whereIsVideoApproved( 1 )->when( $video_id, function ( $query ) use ( $video_id, $related ) {
+        } )->when(auth()->user()->username !== $username,function($q){
+            $q->whereProcessed( 1 )->whereIsVideoApproved( 1 );
+        })->when( $video_id, function ( $query ) use ( $video_id, $related ) {
             return $related ? $query->where( 'id', '!=', $video_id ) : $query->whereVideoId( $video_id );
 
         } )->when( ! $video_id, function ( $query ) {

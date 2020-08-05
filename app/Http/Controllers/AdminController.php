@@ -132,10 +132,10 @@ class AdminController extends Controller {
     }
 
     public function create_user_categories() {
-        $user_cactegories = UserCategory::whereNull( 'parent_id' )->get();
+        $user_categories = UserCategory::whereNull( 'parent_id' )->get();
         $roles            = UserRole::where( 'role', '!=', 'admin' )->get();
 
-        return view( 'admin.create_user_category', compact( 'user_cactegories', 'roles' ) );
+        return view( 'admin.create_user_category', compact( 'user_categories', 'roles' ) );
     }
 
     public function add_user_category( Request $reqeust ) {

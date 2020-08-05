@@ -12,12 +12,11 @@
     </style>
 @endsection
 @section('content')
-
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <h2 style="text-transform:uppercase">
-                    {{$user->name}}
+                    {{$user->name}} {{$video->is_video_approved ? "" : "| This page is not public yet, because your video is pending mode, it needs admin approvel."}}
                 </h2>
             </div>
         </div>
@@ -483,7 +482,6 @@
                             <input type="hidden" name="user_id" value="{{$video->user_id}}">
                             <input type="hidden" name="video_id" value="{{$video->id}}">
                             <div class="form-group">
-
                                 <label for="contact_name">Contact Name</label>
                                 <input required name="name" type="text" class="form-control" id="contact_name"
                                        placeholder="Your Name">
