@@ -18,8 +18,8 @@
                 <h2 style="text-transform:uppercase">
                     {{$user->name}}
                 </h2>
-                bs4-b
-                <span class="badge badge-danger">{{$video->is_video_approved ? "" : "This page is not public yet, because your video is pending mode, it needs admin approvel."}}</span>
+
+                <div class="alert alert-warning">{{$video->is_video_approved ? "" : "This page is not public yet, because your video is pending mode, it needs admin approvel."}}</div>
             </div>
         </div>
         <br/>
