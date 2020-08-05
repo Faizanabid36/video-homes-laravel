@@ -18,8 +18,9 @@
                 <h2 style="text-transform:uppercase">
                     {{$user->name}}
                 </h2>
-
-                <div class="alert alert-warning">{{$video->is_video_approved ? "" : "This page is not public yet, because your video is pending mode, it needs admin approvel."}}</div>
+@if($video->is_video_approved)
+                <div class="alert alert-warning">This page is not public yet, because your video is pending mode, it needs admin approval.</div>
+    @endif
             </div>
         </div>
         <br/>
