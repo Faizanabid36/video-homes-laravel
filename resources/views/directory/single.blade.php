@@ -18,9 +18,11 @@
                 <h2 style="text-transform:uppercase">
                     {{$user->name}}
                 </h2>
-@if(!$video->is_video_approved)
-                <div class="alert alert-warning">This page is not public yet, because your video is pending mode, it needs admin approval.</div>
-    @endif
+                @if(!$video->is_video_approved)
+                    <div class="alert alert-warning">This page is not public yet, because your video is pending mode, it
+                        needs admin approval.
+                    </div>
+                @endif
             </div>
         </div>
         <br/>
@@ -163,7 +165,8 @@
                                             <textarea name="embed" id="embed" cols="30" rows="3"
                                                       class="form-control copyembed">&lt;iframe src="{{route('embed_video',$video->video_id)}}" frameborder="0" width="100%" height="400" allowfullscreen&gt;&lt;/iframe&gt;</textarea>
                                             <div class="input-group-prepend">
-                                                <button class="btn btn-primary copyembed"><i class="fa fa-link"> Copy</i>
+                                                <button class="btn btn-primary copyembed"><i class="fa fa-link">
+                                                        Copy</i>
                                                 </button>
                                             </div>
                                         </div>
@@ -182,20 +185,30 @@
                                                 </button>
                                             </div>
                                         </div>
-                                        <button data-url="https://www.facebook.com/sharer/sharer.php?u={{url()->current()}}" class="btn btn-primary share-social"><i class="fa fa-facebook"></i>
+                                        <button
+                                            data-url="https://www.facebook.com/sharer/sharer.php?u={{url()->current()}}"
+                                            class="btn btn-primary share-social"><i class="fa fa-facebook"></i>
                                         </button>
-                                        <button data-url="https://wa.me/?text={{url()->current()}}" class="btn btn-primary share-social"><i class="fa fa-whatsapp"></i>
+                                        <button data-url="https://wa.me/?text={{url()->current()}}"
+                                                class="btn btn-primary share-social"><i class="fa fa-whatsapp"></i>
                                         </button>
-                                        <button data-url="https://twitter.com/intent/tweet?url={{url()->current()}}" class="btn btn-primary share-social"><i class="fa fa-twitter"></i>
+                                        <button data-url="https://twitter.com/intent/tweet?url={{url()->current()}}"
+                                                class="btn btn-primary share-social"><i class="fa fa-twitter"></i>
                                         </button>
-                                        <button data-url="https://www.linkedin.com/shareArticle?mini=true&url={{url()->current()}}&title={{$video->title}}" class="btn btn-primary share-social"><i class="fa fa-linkedin"></i>
+                                        <button
+                                            data-url="https://www.linkedin.com/shareArticle?mini=true&url={{url()->current()}}&title={{$video->title}}"
+                                            class="btn btn-primary share-social"><i class="fa fa-linkedin"></i>
                                         </button>
-                                        <button data-url="https://pinterest.com/pin/create/button/?url={{url()->current()}}&media={{asset("storage/$video->stream_path")}}" class="btn btn-primary share-social"><i class="fa fa-pinterest"></i>
+                                        <button
+                                            data-url="https://pinterest.com/pin/create/button/?url={{url()->current()}}&media={{asset("storage/$video->stream_path")}}"
+                                            class="btn btn-primary share-social"><i class="fa fa-pinterest"></i>
                                         </button>
-                                        <button data-url="https://www.tumblr.com/share/link?url={{url()->current()}}" class="btn btn-primary share-social"><i
+                                        <button data-url="https://www.tumblr.com/share/link?url={{url()->current()}}"
+                                                class="btn btn-primary share-social"><i
                                                 class="fa fa-tumblr"></i>
                                         </button>
-                                        <button data-url="https://www.reddit.com/submit?url={{url()->current()}}" class="btn btn-primary share-social"><i
+                                        <button data-url="https://www.reddit.com/submit?url={{url()->current()}}"
+                                                class="btn btn-primary share-social"><i
                                                 class="fa fa-reddit"></i></button>
                                     </div>
                                 </div>
@@ -206,10 +219,12 @@
                                     <div class="card-body">
                                         {{$video->title}}
                                         <p>{!! $video->discription !!}</p>
+                                        @if(!is_array($video->tags))
                                         Tags: @foreach($video->tags as $tags)
                                             {{--                                            <span class="badge badge-primary">{{str_replace(",",'</span><span class="badge badge-primary">',$video->tags)}}</span>--}}
                                             <span class="badge badge-primary">{{$tags}}</span>
                                         @endforeach
+                                        @endif
                                         <br>
                                         Category: {{$video->category->name}}
                                         <br>
