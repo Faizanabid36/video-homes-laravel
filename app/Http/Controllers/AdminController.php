@@ -138,7 +138,7 @@ class AdminController extends Controller {
         return view( 'admin.create_user_category', compact( 'user_categories', 'roles' ) );
     }
 
-    public function add_user_category( Request $reqeust ) {
+    public function add_user_category( Request $request ) {
         $this->validate( $request, [
             'name'        => 'required',
             'description' => 'required',
