@@ -165,15 +165,13 @@ class AdminController extends Controller {
 
     }
 
-    public function update_user_category() {
-        if ( ! is_null( \request( 'parent_id' ) ) ) {
-            $role_id = UserCategory::whereId( \request( 'parent_id' ) )->first();
-            \request()->merge( [ 'role_id' => $role_id->role_id ] );
-        } else {
-            \request()->merge( [ 'role_id' => \request( 'parent_role' ) ] );
-        }
-        \request()->merge( [ 'slug' => preg_replace( '/\W|\_+/m', '-', \request( 'name' ) ) ] );
-        UserCategory::whereId( \request( 'id' ) )->update( \request()->except( '_token', 'id', 'parent_role' ) );
+    public function update_user_category(Request $request) {
+        $this->validate( $request, [
+            'name'        => 'required',
+            'description' => 'required',
+        ] );
+        request()->merge( [ 'slug' => \Str::slug( request( 'name' ) ) ] );
+        UserCategory::whereId( \request( 'id' ) )->update( \request()->except( '_token', 'id' ) );
 
         return back()->with( 'success', 'Updated Successfully' );
     }
