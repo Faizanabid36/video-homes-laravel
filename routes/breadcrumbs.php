@@ -1,6 +1,7 @@
 <?php
 
 use App\Page;
+use \App\UserCategory;
 use \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 // Home
 Breadcrumbs::for('home', function ($trail) {
@@ -16,11 +17,22 @@ Breadcrumbs::for('public.page', function ($trail,$slug) {
 // Home > Blog > [Category]
 Breadcrumbs::for('directory', function ($trail, $level1 = null,$level2 = null) {
     $trail->parent('home');
-    $trail->push('Directory', route('directory', $level1));
+    $trail->push('Directory', route('directory'));
     if($level1){
-        $trail->push(\App\UserCategory::whereSlug($level1)->first()->name, route('directory', $level1));
+        $trail->push(UserCategory::whereSlug($level1)->first()->name, route('directory', $level1));
     }
     if($level2){
-        $trail->push(\App\UserCategory::whereSlug($level2)->first()->name, route('directory', $level2));
+        $trail->push(UserCategory::whereSlug($level2)->first()->name, route('directory', $level2));
     }
+});
+
+Breadcrumbs::for('directory_by_username', function ($trail, $username,$video_id = null) {
+    $trail->parent('home');
+    $trail->push('Directory', route('directory'));
+//    if($level1){
+//        $trail->push(UserCategory::whereSlug($level1)->first()->name, route('directory', $level1));
+//    }
+//    if($level2){
+//        $trail->push(UserCategory::whereSlug($level2)->first()->name, route('directory', $level2));
+//    }
 });
