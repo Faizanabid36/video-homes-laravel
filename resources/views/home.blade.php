@@ -22,7 +22,7 @@
 
                     </div>
                     <div class="row iconBoxParent position-relative">
-                        <div class="card col-md-3 col-sm-6 shadow-lg">
+                        <div class="card col shadow-lg">
                             <img class="card-img-top images"
                                  src="{{asset('img/video-image-141px.jpeg')}}"
                                  alt="Card image cap"/>
@@ -32,7 +32,7 @@
                                 <a href="#" class="btn btn-primary">LEARN MORE</a>
                             </div>
                         </div>
-                        <div class="card col-md-3 col-sm-6 shadow-lg">
+                        <div class="card col shadow-lg">
                             <img class="card-img-top images"
                                  src="{{asset('img/Index-Card-jpeg.jpg')}}"
                                  alt="Card image cap"/>
@@ -42,7 +42,7 @@
                                 <a href="#" class="btn btn-success">LEARN MORE</a>
                             </div>
                         </div>
-                        <div class="card col-md-3 col-sm-6 shadow-lg">
+                        <div class="card col shadow-lg">
                             <img class="card-img-top images"
                                  src="{{asset('img/House-Icon-Jpeg.jpg')}}"
                                  alt="Card image cap"/>
@@ -53,7 +53,7 @@
                                 <a href="#" class="btn btn-warning">LEARN MORE</a>
                             </div>
                         </div>
-                        <div class="card col-md-3 col-sm-6 shadow-lg">
+                        <div class="card col shadow-lg">
                             <img class="card-img-top images"
                                  src="{{asset('img/Rss-icon-jpeg.jpg')}}"
                                  alt="Card image cap"/>
