@@ -2,22 +2,7 @@
 @section('header_script')
     window.VIDEO_APP.video_url = "{{route('is_played',$video->id)}}";
 @endsection
-@section('style')
-    <style>
-        /* Set the size of the div element that contains the map */
-        #map {
-            height: 400px; /* The height is 400 pixels */
-            width: 100%; /* The width is the width of the web page */
-        }
-        .watermark_logo {
-            width:120px;
-            bottom:40px;
-        }
-        #my-video_html5 video{
-            width:100%!important;
-        }
-    </style>
-@endsection
+
 @section('content')
     <div class="container">
         <div class="row">
