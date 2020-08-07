@@ -481,7 +481,7 @@ label {
 }
 
 .video-list {
-    overflow: scroll;
+    overflow-y: auto;
     max-height: 500px;
 }
 #map {
