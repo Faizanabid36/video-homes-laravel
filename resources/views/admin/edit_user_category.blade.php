@@ -44,19 +44,20 @@
 {{--                                    <div class="col-lg-1"></div>--}}
                                     <div class="col-lg-3">
                                         <div class="input-group m-t-35">
-                                            <select class="form-control" name="parent_role">
-                                                @foreach($roles as $role)
-                                                    <option
-                                                        <?php
-                                                        if($role->id==$cat->role_id){
-                                                        ?>
-                                                        selected
-                                                        <?php
-                                                        }
-                                                        ?>
-                                                        value="{{$role->id}}">{{$role->role}}</option>
-                                                @endforeach
-                                            </select>
+                                            <div class="input-group m-t-35">
+                                                @if(count($user_categories)>0)
+                                                    <select name="parent_id" class="form-control">
+                                                        <option value="" disabled selected>Parent Category(Leave Blank if None)</option>
+                                                        @foreach($user_categories as $user_category)
+                                                            <option @if ($user_category->id === $cat->parent_id)
+                                                                
+                                                            @endif class="form-control" value="{{$user_category->id}}">
+                                                                {{$user_category->name}}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
@@ -72,34 +73,7 @@
                                                    placeholder=" Category Description">
                                         </div>
                                     </div>
-                                    <div class="col-lg-3">
-                                        <div class="input-group m-t-35">
-                                            <select name="parent_id" class="form-control">
-                                                @if(!is_null($cat->parent_id))
-                                                    @foreach($categories as $category)
-                                                        <option
-                                                            <?php
-                                                            if($category->id==$cat->parent_id){
-                                                            ?>
-                                                            selected
-                                                            <?php
-                                                            }
-                                                            ?>
-                                                            class="form-control" value="{{$category->id}}">
-                                                            {{$category->name}}
-                                                        </option>
-                                                    @endforeach
-                                                @else
-                                                    <option value="" disabled selected>Parent Category(Leave Blank if None)</option>
-                                                    @foreach($categories as $category)
-                                                        <option class="form-control" value="{{$category->id}}">
-                                                            {{$category->name}}
-                                                        </option>
-                                                    @endforeach
-                                                @endif
-                                            </select>
-                                        </div>
-                                    </div>
+                                   
                                     <div class="col-lg-3 m-t-35">
                                         <button
                                             class="btn btn-primary layout_btn_prevent btn-responsive form_inline_btn_margin-top">
