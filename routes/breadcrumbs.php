@@ -31,6 +31,7 @@ Breadcrumbs::for('directory_by_username', function ($trail, $username,$video_id 
     $trail->parent('home');
     $trail->push('Directory', route('directory'));
     $video = Video::userVideos( $username, $video_id )->firstOrFail();
+
     $category = UserCategory::find($video->user_extra->user_category_id);
     $level1 = $category;
     $level2 = false;
