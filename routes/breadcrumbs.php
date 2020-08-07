@@ -18,9 +18,9 @@ Breadcrumbs::for('directory', function ($trail, $level1 = null,$level2 = null) {
     $trail->parent('home');
     $trail->push('Directory', route('directory', $level1));
     if($level1){
-        $trail->push($level1, route('directory', $level1));
+        $trail->push(\App\UserCategory::whereSlug($level1)->first()->name, route('directory', $level1));
     }
     if($level2){
-        $trail->push($level2, route('directory', $level2));
+        $trail->push(\App\UserCategory::whereSlug($level2)->first()->name, route('directory', $level2));
     }
 });
