@@ -9,7 +9,19 @@
 @endsection
 @section('content')
     <div class="container">
-
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        @foreach(breadcrumbs("Directory","directory") as $key=> $val)
+                            <li class="breadcrumb-item @if($loop->last) active @endif"
+                                aria-current="{{$key}}">@if($loop->last){{$key}} @else <a
+                                    href="{{$val}}">{{$key}}</a> @endif</li>
+                        @endforeach
+                    </ol>
+                </nav>
+            </div>
+        </div>
         <div class="row">
             <div class="col-6">
                 <div class="Search-boxes">
