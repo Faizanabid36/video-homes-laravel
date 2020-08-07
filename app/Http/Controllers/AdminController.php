@@ -144,7 +144,7 @@ class AdminController extends Controller {
             'description' => 'required',
         ] );
         request()->merge( [ 'slug' => \Str::slug( request( 'name' ) ) ] );
-        return request()->all();
+
         UserCategory::create( request()->except( '_token', 'parent_role' ) );
 
         return back()->with( 'success', 'Category Created Successfully' );
