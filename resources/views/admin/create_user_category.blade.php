@@ -43,22 +43,6 @@
                                     <div class="col-lg-1"></div>
                                     <div class="col-lg-4">
                                         <div class="input-group m-t-35">
-                                            <select class="form-control" name="parent_role">
-                                                <option selected disabled>Select Role</option>
-                                                @foreach($roles as $role)
-                                                    <option value="{{$role->id}}">{{$role->role}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="input-group m-t-35">
-                                            <input required type="text" class="form-control" name="name"
-                                                   placeholder="Category Name">
-                                        </div>
-                                        <div class="input-group m-t-35">
-                                            <input required type="text" class="form-control" name="description"
-                                                   placeholder="Category Description">
-                                        </div>
-                                        <div class="input-group m-t-35">
                                             @if(count($user_categories)>0)
                                                 <select name="parent_id" class="form-control">
                                                     <option value="" disabled selected>Parent Category(Leave Blank if None)</option>
@@ -70,6 +54,15 @@
                                                 </select>
                                             @endif
                                         </div>
+                                        <div class="input-group m-t-35">
+                                            <input required type="text" class="form-control" name="name"
+                                                   placeholder="Category Name">
+                                        </div>
+                                        <div class="input-group m-t-35">
+                                            <input required type="text" class="form-control" name="description"
+                                                   placeholder="Category Description">
+                                        </div>
+
                                     </div>
                                     <div class="col-lg-3 m-t-35">
                                         <button
