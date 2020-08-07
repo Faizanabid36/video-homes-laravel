@@ -41,7 +41,7 @@ class MainController extends Controller {
             return ["isProcessed"=>Video::userVideos( $username, $video_id )->first()->processed];
         }
         $video = Video::userVideos( $username, $video_id )->firstOrFail();
-        return $video;
+
         $views          = VideoView::videoViews( $video );
         $user           = $video->user;
         $related_videos = Video::userVideos( $username, $video->id, true )->get();
