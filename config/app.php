@@ -230,7 +230,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'FFMpeg' => Pbmedia\LaravelFFMpeg\FFMpegFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        "LaravelRating" => \Nagy\LaravelRating\LaravelRatingFacade::class
+        "LaravelRating" => \Nagy\LaravelRating\LaravelRatingFacade::class,
+        'Breadcrumbs'=> \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs::class,
     ],
 
 ];

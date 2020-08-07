@@ -259,9 +259,3 @@ function userMerger( $categories ) {
     return $d ? array_values( $d ) : [];
 }
 
-function breadcrumbs( $addAnchor, $addLink, $add = [] ) {//["directory"=>["level1","level2"]
-    $links = [ "Home" => url( '/' ), $addAnchor => route( $addLink ) ];
-    $links = array_merge( $links, $add );
-
-    return $links;
-}

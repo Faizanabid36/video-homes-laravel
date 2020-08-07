@@ -73,6 +73,13 @@
         </div>
     </div>
 </div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            {{Breadcrumbs::render()}}
+        </div>
+    </div>
+</div>
 @yield('content')
     <div class="container-fluid bg-dark ">
         <div class="row">
