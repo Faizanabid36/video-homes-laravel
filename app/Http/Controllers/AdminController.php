@@ -139,7 +139,7 @@ class AdminController extends Controller {
     }
 
     public function add_user_category( Request $reqeust ) {
-        $this->validate( request()->all(), [
+        $this->validate( $request, [
             'name'        => 'required',
             'description' => 'required',
         ] );
