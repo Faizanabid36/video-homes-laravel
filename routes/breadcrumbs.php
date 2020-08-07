@@ -10,7 +10,7 @@ Breadcrumbs::for('home', function ($trail) {
 Breadcrumbs::for('public.page', function ($trail,$slug) {
     $page=Page::viewPage($slug)->firstOrFail();
     $trail->parent('home');
-    $trail->push($page->title, route('public.page'));
+    $trail->push($page->title, route('public.page',$slug));
 });
 
 // Home > Blog > [Category]
