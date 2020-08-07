@@ -10,7 +10,7 @@
             width: 100%; /* The width is the width of the web page */
         }
         .watermark_logo {
-            width:200px;
+            width:120px;
             bottom:40px;
         }
         #my-video_html5 video{
