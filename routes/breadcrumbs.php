@@ -14,7 +14,7 @@ Breadcrumbs::for('public.page', function ($trail,$slug) {
 });
 
 // Home > Blog > [Category]
-Breadcrumbs::for('directory', function ($trail, $level1,$level2) {
+Breadcrumbs::for('directory', function ($trail, $level1 = null,$level2 = null) {
     $trail->parent('home');
     $trail->push('Directory', route('directory', $level1));
     if($level1){
