@@ -6,7 +6,7 @@ use App\Video;
 use \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 // Home
 Breadcrumbs::for('home', function ($trail) {
-    $trail->push('Home', route('home'));
+//    $trail->push('Home', route('home'));
 });
 
 Breadcrumbs::for('public.page', function ($trail,$slug) {
