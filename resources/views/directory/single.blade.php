@@ -13,6 +13,9 @@
             width:200px;
             bottom:40px;
         }
+        #my-video_html5 video{
+            width:100%!important;
+        }
     </style>
 @endsection
 @section('content')
