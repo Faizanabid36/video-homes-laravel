@@ -280,7 +280,7 @@
                 <div class="col-md-3">
                     <div class="container m-0 p-0">
                         <div class="row">
-                            <div class="col-12 m-0 p-0 video-list">
+                            <div class="col-12 m-0 p-0">
                                 <div class="next-video">
                                     <div class="next-text pull-left pt_mn_wtch_nxttxt">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -293,7 +293,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row video-list">
                             @foreach($related_videos as $related_video)
                                 <div class="col-12 m-0 p-0 my-2" id="related_video">
                                     <a href="{{route('directory_by_username',[$user->username,$related_video->video_id])}}">
