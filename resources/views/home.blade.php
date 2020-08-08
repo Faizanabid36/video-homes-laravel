@@ -21,7 +21,7 @@
                         </div>
 
                     </div>
-                    <div class="row position-relative iconBoxParent">
+                    <div class="row position-relative iconBoxParent text-center">
                         <div class="card col shadow-lg p-1">
                             <img class="w-100 pt-4 px-2"
                                  src="{{asset('img/video-image-141px.jpeg')}}"
