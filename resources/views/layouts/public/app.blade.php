@@ -34,10 +34,11 @@
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ml-auto links-home pr-0">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item"><a href="{{route('home')}}" class="nav-link">Home</a></li>
                             @auth
                                 @if (auth()->user()->isAdmin())
-                                    <li class="nav-item ">
+                                    <li class="nav-item">
                                         <a class="nav-link" href="{{route('admin_panel')}}">ADMIN PANEL</a>
                                     </li>
                                 @else

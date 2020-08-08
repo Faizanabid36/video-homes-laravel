@@ -11,18 +11,26 @@
 //    z-index: 10000 !important;
 //}
 //
+//Navigation Bar
 .navbar-header {
-    .links-home {
-        padding: 0 40px;
-        font-size: 12px;
-        font-weight: 300;
-        li a {
-            color: black !important;
-            margin-right: 15px;
-        }
-    }
     .logo {
         height: 4rem;
+    }
+}
+//Home Page
+.video-background {
+    background: #000;
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
+    z-index: -99;
+
+    .video-foreground, iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
     }
 }
 //
@@ -33,21 +41,7 @@
 //
 //// }
 //
-//.video-background {
-//    background: #000;
-//    position: fixed;
-//    top: 0; right: 0; bottom: 0; left: 0;
-//    z-index: -99;
-//
-//    .video-foreground, iframe {
-//        position: absolute;
-//        top: 0;
-//        left: 0;
-//        width: 100%;
-//        height: 100%;
-//        pointer-events: none;
-//    }
-//}
+
 //
 //
 //.header-separator {
