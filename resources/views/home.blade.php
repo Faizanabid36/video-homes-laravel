@@ -21,9 +21,9 @@
                         </div>
 
                     </div>
-                    <div class="row position-relative" style="z-index:9999">
+                    <div class="row position-relative mt-5" style="z-index:9999">
                         <div class="card col shadow-lg">
-                            <img class="w-100 p-2"
+                            <img class="w-100 pt-4 px-2"
                                  src="{{asset('img/video-image-141px.jpeg')}}"
                                  alt="Card image cap"/>
                             <div class="card-body">
@@ -33,7 +33,7 @@
                             </div>
                         </div>
                         <div class="card col shadow-lg">
-                            <img class="w-100 p-2"
+                            <img class="w-100 pt-4 px-2"
                                  src="{{asset('img/Index-Card-jpeg.jpg')}}"
                                  alt="Card image cap"/>
                             <div class="card-body">
@@ -43,7 +43,7 @@
                             </div>
                         </div>
                         <div class="card col shadow-lg">
-                            <img class="w-100 p-2"
+                            <img class="w-100 pt-4 px-2"
                                  src="{{asset('img/House-Icon-Jpeg.jpg')}}"
                                  alt="Card image cap"/>
                             <div class="card-body">
@@ -54,7 +54,7 @@
                             </div>
                         </div>
                         <div class="card col shadow-lg">
-                            <img class="w-100 p-2"
+                            <img class="w-100 pt-4 px-2"
                                  src="{{asset('img/Rss-icon-jpeg.jpg')}}"
                                  alt="Card image cap"/>
                             <div class="card-body">
