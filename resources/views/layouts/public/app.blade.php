@@ -18,7 +18,7 @@
 
 </head>
 <body>
-<div class="container-fluid bg-light">
+<div class="container-fluid bg-white">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -84,7 +84,7 @@
     </div>
     @endif
 @yield('content')
-    <div class="container-fluid bg-dark ">
+    <div class="container-fluid bg-black ">
         <div class="row">
             <div class="col-12  border-primary text-white py-5 text-center" style="border-top: 5px solid;">
                 <h3> © VideoHomes.com LLC 2020 </h3>
