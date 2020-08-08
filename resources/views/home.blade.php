@@ -23,7 +23,7 @@
                     </div>
                     <div class="row position-relative iconBoxParent text-center">
                         <div class="card col-md-3 col-sm-12 shadow-lg p-1">
-                            <img class="w-100 pt-4 px-2 mx-auto"
+                            <img class="w-50 pt-4 px-2 mx-auto"
                                  src="{{asset('img/video-image-141px.jpeg')}}"
                                  alt="Card image cap"/>
                             <div class="card-body px-1">
@@ -33,7 +33,7 @@
                             </div>
                         </div>
                         <div class="card col-md-3 col-sm-12 shadow-lg p-1">
-                            <img class="w-100 pt-4 px-2 mx-auto"
+                            <img class="w-50 pt-4 px-2 mx-auto"
                                  src="{{asset('img/Index-Card-jpeg.jpg')}}"
                                  alt="Card image cap"/>
                             <div class="card-body px-1">
@@ -43,7 +43,7 @@
                             </div>
                         </div>
                         <div class="card col-md-3 col-sm-12 shadow-lg p-1">
-                            <img class="w-100 pt-4 px-2 mx-auto"
+                            <img class="w-50 pt-4 px-2 mx-auto"
                                  src="{{asset('img/House-Icon-Jpeg.jpg')}}"
                                  alt="Card image cap"/>
                             <div class="card-body px-1">
@@ -54,7 +54,7 @@
                             </div>
                         </div>
                         <div class="card col-md-3 col-sm-12 shadow-lg p-1">
-                            <img class="w-100 pt-4 px-2 mx-auto"
+                            <img class="w-50 pt-4 px-2 mx-auto"
                                  src="{{asset('img/Rss-icon-jpeg.jpg')}}"
                                  alt="Card image cap"/>
                             <div class="card-body px-1">
