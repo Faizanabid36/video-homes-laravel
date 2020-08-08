@@ -11,32 +11,20 @@
 //    z-index: 10000 !important;
 //}
 //
-//.home-nav {
-//
-//    // min-height: 150px;
-//
-//    // top: 0;
-//
-//    & .links-home {
-//
-//        padding: 0 40px;
-//        font-size: 12px;
-//        font-weight: 300;
-//
-//        & li a {
-//            color: black !important;
-//            margin-right: 15px;
-//        }
-//
-//
-//    }
-//
-//    & .logo {
-//        height: 4rem;
-//    }
-//
-//
-//}
+.navbar-header {
+    .links-home {
+        padding: 0 40px;
+        font-size: 12px;
+        font-weight: 300;
+        li a {
+            color: black !important;
+            margin-right: 15px;
+        }
+    }
+    .logo {
+        height: 4rem;
+    }
+}
 //
 //// .header-wrapper{
 ////   width: 1349px;

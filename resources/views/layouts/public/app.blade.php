@@ -22,7 +22,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <nav class="navbar navbar-expand-lg navbar-light home-nav ">
+                <nav class="navbar navbar-expand-lg navbar-light navbar-header">
                     <a class="navbar-brand" href="{{url('/')}}">
                         <img src="{{asset('img/cropped-VideoHomes-3.png')}}"
                              class="logo" alt="VideoHomes Logo"/>
