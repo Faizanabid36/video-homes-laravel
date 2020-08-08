@@ -22,42 +22,42 @@
 
                     </div>
                     <div class="row position-relative mt-5" style="z-index:9999">
-                        <div class="card col shadow-lg">
+                        <div class="card col shadow-lg p-1">
                             <img class="w-100 pt-4 px-2"
                                  src="{{asset('img/video-image-141px.jpeg')}}"
                                  alt="Card image cap"/>
-                            <div class="card-body">
+                            <div class="card-body px-1">
                                 <h5 class="card-title">Videographers</h5>
                                 <p class="card-text">A Platform for your business.</p>
                                 <a href="#" class="btn btn-primary">LEARN MORE</a>
                             </div>
                         </div>
-                        <div class="card col shadow-lg">
+                        <div class="card col shadow-lg p-1">
                             <img class="w-100 pt-4 px-2"
                                  src="{{asset('img/Index-Card-jpeg.jpg')}}"
                                  alt="Card image cap"/>
-                            <div class="card-body">
+                            <div class="card-body px-1">
                                 <h5 class="card-title">Local Business Owners</h5>
                                 <p class="card-text">You have a story..let our Marketing Pros tell it!</p>
                                 <a href="#" class="btn btn-success">LEARN MORE</a>
                             </div>
                         </div>
-                        <div class="card col shadow-lg">
+                        <div class="card col shadow-lg p-1">
                             <img class="w-100 pt-4 px-2"
                                  src="{{asset('img/House-Icon-Jpeg.jpg')}}"
                                  alt="Card image cap"/>
-                            <div class="card-body">
+                            <div class="card-body px-1">
                                 <h5 class="card-title">Real Estate Agents</h5>
                                 <p class="card-text">Finally a fully integrated solution for production and
                                     distribution that puts you in control.</p>
                                 <a href="#" class="btn btn-warning">LEARN MORE</a>
                             </div>
                         </div>
-                        <div class="card col shadow-lg">
+                        <div class="card col shadow-lg p-1">
                             <img class="w-100 pt-4 px-2"
                                  src="{{asset('img/Rss-icon-jpeg.jpg')}}"
                                  alt="Card image cap"/>
-                            <div class="card-body">
+                            <div class="card-body px-1">
                                 <h5 class="card-title">Writers and Content Producers</h5>
                                 <p class="card-text">Tap into our network of video pros and see what cool things you
                                     can accomplish.</p>
