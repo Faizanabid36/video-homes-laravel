@@ -35,7 +35,7 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item"><a href="{{route('home')}}" class="nav-link">Home</a></li>
+                            <li class="nav-item"><a href="{{route('home')}}" class="nav-link">HOME</a></li>
                             @auth
                                 @if (auth()->user()->isAdmin())
                                     <li class="nav-item">
