@@ -16,8 +16,8 @@
 
                         <h4> Connecting Small Business Owners with Local Marketing Pros </h4>
                         <div class="header-button">
-                            <button class="  btnCustom1"> VIDEOGRAPHERS</button>
-                            <button class=" btnCustom2"> BUSINESS OWNERS</button>
+                            <button class="btn  btnCustom1"> VIDEOGRAPHERS</button>
+                            <button class="btn btnCustom2"> BUSINESS OWNERS</button>
                         </div>
 
                     </div>
