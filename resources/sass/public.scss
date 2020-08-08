@@ -17,6 +17,11 @@
         height: 4rem;
     }
 }
+
+//Breadcrumbs
+.breadcrumb-item+.breadcrumb-item:before{
+    content:"&" !important;
+}
 //Home Page
 .video-background {
     background: #000;
