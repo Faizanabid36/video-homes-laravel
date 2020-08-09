@@ -16,48 +16,48 @@
 
                         <h4> Connecting Small Business Owners with Local Marketing Pros </h4>
                         <div class="header-button">
-                            <button class="  btnCustom1"> VIDEOGRAPHERS</button>
-                            <button class=" btnCustom2"> BUSINESS OWNERS</button>
+                            <button class="btnCustom1"> VIDEOGRAPHERS</button>
+                            <button class="btnCustom2"> BUSINESS OWNERS</button>
                         </div>
 
                     </div>
-                    <div class="row iconBoxParent position-relative">
-                        <div class="card col shadow-lg">
-                            <img class="card-img-top images"
+                    <div class="row position-relative iconBoxParent text-center">
+                        <div class="card col-md-3 col-sm-12 shadow-lg p-1">
+                            <img class="w-50 pt-4 px-2 mx-auto"
                                  src="{{asset('img/video-image-141px.jpeg')}}"
                                  alt="Card image cap"/>
-                            <div class="card-body">
+                            <div class="card-body px-1">
                                 <h5 class="card-title">Videographers</h5>
                                 <p class="card-text">A Platform for your business.</p>
                                 <a href="#" class="btn btn-primary">LEARN MORE</a>
                             </div>
                         </div>
-                        <div class="card col shadow-lg">
-                            <img class="card-img-top images"
+                        <div class="card col-md-3 col-sm-12 shadow-lg p-1">
+                            <img class="w-50 pt-4 px-2 mx-auto"
                                  src="{{asset('img/Index-Card-jpeg.jpg')}}"
                                  alt="Card image cap"/>
-                            <div class="card-body">
+                            <div class="card-body px-1">
                                 <h5 class="card-title">Local Business Owners</h5>
                                 <p class="card-text">You have a story..let our Marketing Pros tell it!</p>
                                 <a href="#" class="btn btn-success">LEARN MORE</a>
                             </div>
                         </div>
-                        <div class="card col shadow-lg">
-                            <img class="card-img-top images"
+                        <div class="card col-md-3 col-sm-12 shadow-lg p-1">
+                            <img class="w-50 pt-4 px-2 mx-auto"
                                  src="{{asset('img/House-Icon-Jpeg.jpg')}}"
                                  alt="Card image cap"/>
-                            <div class="card-body">
+                            <div class="card-body px-1">
                                 <h5 class="card-title">Real Estate Agents</h5>
                                 <p class="card-text">Finally a fully integrated solution for production and
                                     distribution that puts you in control.</p>
                                 <a href="#" class="btn btn-warning">LEARN MORE</a>
                             </div>
                         </div>
-                        <div class="card col shadow-lg">
-                            <img class="card-img-top images"
+                        <div class="card col-md-3 col-sm-12 shadow-lg p-1">
+                            <img class="w-50 pt-4 px-2 mx-auto"
                                  src="{{asset('img/Rss-icon-jpeg.jpg')}}"
                                  alt="Card image cap"/>
-                            <div class="card-body">
+                            <div class="card-body px-1">
                                 <h5 class="card-title">Writers and Content Producers</h5>
                                 <p class="card-text">Tap into our network of video pros and see what cool things you
                                     can accomplish.</p>

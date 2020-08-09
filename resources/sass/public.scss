@@ -1,5 +1,8 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
 @import 'variables';
-@import '~bootstrap-select/sass/variables';
+//@import '~bootstrap-select/sass/variables';
 
 .sticky {
     position: -webkit-sticky;
@@ -495,6 +498,14 @@ label {
 #my-video_html5 video{
     width:100%!important;
 }
+//Breadcrumbs
+.breadcrumb-item+.breadcrumb-item:before{
+    content:"&" !important;
+}
+@include media-breakpoint-up(sm) {  }
+@include media-breakpoint-up(md) {  }
+@include media-breakpoint-up(lg) {  }
+@include media-breakpoint-up(xl) {  }
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
