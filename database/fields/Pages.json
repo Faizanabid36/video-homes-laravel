@@ -1,0 +1,31 @@
+{
+    "fields": [
+        {
+            "name": "title",
+            "type": "string"
+        },
+        {
+            "name": "slug",
+            "type": "string"
+        },
+        {
+            "name": "content",
+            "type": "text"
+        },
+        {
+            "name": "seo_title",
+            "type": "string"
+        },
+        {
+            "name": "seo_description",
+            "type": "string"
+        }
+    ],
+
+    "validations": [
+        {
+            "field": "title",
+            "rules": "required|max:4"
+        }
+    ]
+}

@@ -161,6 +161,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+
 
         /*
          * Package Service Providers...
@@ -232,6 +234,8 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         "LaravelRating" => \Nagy\LaravelRating\LaravelRatingFacade::class,
         'Breadcrumbs'=> \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'HTML' => Collective\Html\HtmlFacade::class,
     ],
 
 ];

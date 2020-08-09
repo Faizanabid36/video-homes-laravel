@@ -1,0 +1,27 @@
+{
+    "fields": [
+        {
+            "name": "name",
+            "type": "string"
+        },
+        {
+            "name": "description",
+            "type": "text"
+        },
+        {
+            "name": "parent_id",
+            "type": "select",
+            "options": {
+                "technology": "Technology",
+                "tips": "Tips",
+                "health": "Health"
+            }
+        }
+    ],
+    "validations": [
+        {
+            "field": "name",
+            "rules": "required|max:4"
+        }
+    ]
+}

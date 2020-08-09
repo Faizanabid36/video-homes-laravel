@@ -55,13 +55,18 @@ Route::group( [ 'middleware' => 'auth' ], function () {
 Route::group( [ 'middleware' => 'admin' ], function () {
     Route::prefix( 'admin' )->group( function () {
         Route::view( '/', 'admin.home' )->name( 'admin_panel' );
+        Route::resource('categories', 'Admin\\CategoriesController');
+        Route::resource('pages', 'Admin\\PagesController');
+        Route::resource('user-categories', 'Admin\\UserCategoriesController');
+
+
         Route::resource( 'public_pages', 'PageController' );
         Route::get( 'create_user_categories', 'AdminController@create_user_categories' )->name( 'create_user_categories' );
-        Route::post( 'add_user_category', 'AdminController@add_user_category' )->name( 'add_user_category' );
-        Route::get( 'all_user_categories', 'AdminController@all_user_categories' )->name( 'all_user_categories' );
-        Route::get( 'edit_user_category/{id}', 'AdminController@edit_user_category' )->name( 'edit_user_category' );
-        Route::post( 'update_user_category', 'AdminController@update_user_category' )->name( 'update_user_category' );
-        Route::get( 'delete_user_category/{id}', 'AdminController@delete_user_category' )->name( 'delete_user_category' );
+//        Route::post( 'add_user_category', 'AdminController@add_user_category' )->name( 'add_user_category' );
+//        Route::get( 'all_user_categories', 'AdminController@all_user_categories' )->name( 'all_user_categories' );
+//        Route::get( 'edit_user_category/{id}', 'AdminController@edit_user_category' )->name( 'edit_user_category' );
+//        Route::post( 'update_user_category', 'AdminController@update_user_category' )->name( 'update_user_category' );
+//        Route::get( 'delete_user_category/{id}', 'AdminController@delete_user_category' )->name( 'delete_user_category' );
         Route::get( 'videos_list', 'AdminController@videos_list' )->name( 'admin.videos_list' );
         Route::get( 'admin_delete_video/{id}', 'AdminController@delete_video' )->name( 'admin.delete_video' );
         Route::get( 'users_list', 'AdminController@users_list' )->name( 'users_list' );
@@ -71,22 +76,22 @@ Route::group( [ 'middleware' => 'admin' ], function () {
         Route::get( 'review_video/{id}', 'AdminController@review_video' )->name( 'review_video' );
         Route::get( 'approve_video/{id}', 'AdminController@approve_video' )->name( 'approve_video' );
         Route::get( 'decline_video/{id}', 'AdminController@decline_video' )->name( 'decline_video' );
-        Route::get( 'category', 'AdminController@category' )->name( 'category' );
-        Route::get( 'delete_category/{id}', 'AdminController@delete_category' );
-        Route::get( 'edit_category/{id}', 'AdminController@edit_category' );
-        Route::post( 'update_category', 'AdminController@update_category' );
-        Route::get( 'add_category', function () {
-            return view( 'admin.add_category' );
-        } )->name( 'add_category' );
-        Route::post( 'store_category', 'AdminController@store_category' );
-        Route::get( 'user_tags', 'AdminController@list_user_tags' )->name( 'user_tags' );
-        Route::get( 'edit_user_tag/{id}', 'AdminController@edit_tag' )->name( 'edit_tag' );
-        Route::post( 'update_user_tag/{id}', 'AdminController@update_tag' )->name( 'update_tag' );
-        Route::get( 'delete_user_tag/{id}', 'AdminController@delete_tag' )->name( 'delete_tag' );
-        Route::get( 'add_tag', function () {
-            return view( 'admin.add_tag' );
-        } )->name( 'add_tag' );
-        Route::post( 'store_tag', 'AdminController@store_tag' )->name( 'store_tag' );
+//        Route::get( 'category', 'AdminController@category' )->name( 'category' );
+//        Route::get( 'delete_category/{id}', 'AdminController@delete_category' );
+//        Route::get( 'edit_category/{id}', 'AdminController@edit_category' );
+//        Route::post( 'update_category', 'AdminController@update_category' );
+//        Route::get( 'add_category', function () {
+//            return view( 'admin.add_category' );
+//        } )->name( 'add_category' );
+//        Route::post( 'store_category', 'AdminController@store_category' );
+//        Route::get( 'user_tags', 'AdminController@list_user_tags' )->name( 'user_tags' );
+//        Route::get( 'edit_user_tag/{id}', 'AdminController@edit_tag' )->name( 'edit_tag' );
+//        Route::post( 'update_user_tag/{id}', 'AdminController@update_tag' )->name( 'update_tag' );
+//        Route::get( 'delete_user_tag/{id}', 'AdminController@delete_tag' )->name( 'delete_tag' );
+//        Route::get( 'add_tag', function () {
+//            return view( 'admin.add_tag' );
+//        } )->name( 'add_tag' );
+//        Route::post( 'store_tag', 'AdminController@store_tag' )->name( 'store_tag' );
 
 
         Route::get( 'users', 'AdminController@users' )->name( 'admin.list_user' );
@@ -123,5 +128,6 @@ Route::get( '/embed/{video_id}', 'MainController@embed_video' )->name( 'embed_vi
 Route::put( 'is_play/{video}', function ( \App\Video $video ) {
     return ["success"=>\App\VideoView::videoViews( $video, [ "is_played" => 1 ] )];
 } )->name('is_played');
+
 
 
