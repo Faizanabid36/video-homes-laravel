@@ -1,6 +1,6 @@
 <div id="top">
 
-    <nav class="navbar navbar-expand-lg fixed-top">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
         <a class="navbar-brand mr-auto mr-lg-0" href="#">{{env('APP_NAME')}}</a>
         <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
             <span class="navbar-toggler-icon"></span>
