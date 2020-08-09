@@ -42,7 +42,7 @@
                                 @foreach($users as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td><img src="{{asset(is_null($item->avatar)?'images/blank.png':$item->avatar)}}" style="width:30px;" class="rounded-circle" alt=""></td>
+                                        <td width="30px"><img src="{{asset(is_null($item->avatar)?'images/blank.png':$item->avatar)}}" class="w-25" alt=""></td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->username }}</td>
                                         <td>{{ $item->email }}</td>
