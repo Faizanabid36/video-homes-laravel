@@ -7,7 +7,7 @@
 
             <div class="col">
                 <div class="card">
-                    <div class="card-header">Usercategories</div>
+                    <div class="card-header">User Categories</div>
                     <div class="card-body">
                         <a href="{{ url('/admin/user-categories/create') }}" class="btn btn-success btn-sm" title="Add New UserCategory">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
@@ -37,7 +37,8 @@
                                 @foreach($usercategories as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->name }}</td><td>{{ $item->description }}</td><td>{{ $item->parent_id }}</td>
+                                        <td>{{ $item->name }}</td><td>{{ $item->description }}</td>
+                                        <td>{{ $item->parent->name }}</td>
                                         <td>
                                             <a href="{{ url('/admin/user-categories/' . $item->id) }}" title="View UserCategory"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/admin/user-categories/' . $item->id . '/edit') }}" title="Edit UserCategory"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
