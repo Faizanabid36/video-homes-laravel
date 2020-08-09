@@ -19,7 +19,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{route('admin.list_user')}}">
+                <a class="nav-link" href="{{route('users.index')}}">
                     <i class="fa fa-tachometer"></i> Users
                 </a>
             </li>
