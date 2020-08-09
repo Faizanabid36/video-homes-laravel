@@ -23,7 +23,7 @@ class UserCategoriesController extends Controller {
                 'parent' => function ( $query ) use ( $keyword ) {
                     return $query->where( 'name', 'LIKE', "%$keyword%" );
                 }
-            ] )->where( 'name', 'LIKE', "%$keyword%" )
+            ] )->orWhere( 'name', 'LIKE', "%$keyword%" )
                                           ->orWhere( 'description', 'LIKE', "%$keyword%" )
                                           ->latest()->paginate( $perPage );
         } else {
