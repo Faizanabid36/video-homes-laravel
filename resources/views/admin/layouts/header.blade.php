@@ -26,7 +26,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{route('videos.index')}}">
                     <i class="fa fa-tachometer"></i>
-                    <span class="link-title menu_hide">&nbsp;Videos List</span>
+                    Videos List
                 </a>
             </li>
 {{--            <li class="nav-item">--}}
