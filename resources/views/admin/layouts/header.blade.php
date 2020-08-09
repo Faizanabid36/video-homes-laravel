@@ -81,12 +81,8 @@
 {{--                    <a class="dropdown-item" href="#">Something else here</a>--}}
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
         </ul>
-        <form id="logout-form" class="d-none" action="{{ route('logout') }}" method="POST"
-              >
+        <form id="logout-form" class="d-none" action="{{ route('logout') }}" method="POST">
             @csrf
         </form>
     </div>
