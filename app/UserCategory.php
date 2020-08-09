@@ -19,7 +19,7 @@ class UserCategory extends Model {
         return $this->hasMany( UserExtra::class, 'user_category_id' );
     }
     public function parent() {
-        return $this->belongsTo( $this, 'id','parent_id' );
+        return $this->belongsTo( $this, 'parent_id');
     }
 
 
