@@ -30,7 +30,7 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Name</th><th>Description</th><th>Parent Id</th><th>Actions</th>
+                                        <th>#</th><th>Name</th><th>Description</th><th>Parent</th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
