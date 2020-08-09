@@ -41,12 +41,11 @@
                                         <td>{{ $item->username }}</td>
                                         <td>{{ $item->email }}</td>
                                         <td>
-                                            <form method="POST" action="{{ url('/admin/users/' . $item->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+                                            <form method="POST" id="status" action="{{ url('/admin/users/' . $item->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                                                 {{ method_field('PATCH') }}
                                                 {{ csrf_field() }}
-                                                <label><input name="active" type="radio" value="1" {{ (isset($item) && 1 == $item->active) ? 'checked' : '' }}> Active</label>
-                                                <label><input name="active" type="radio" value="0" @if (isset($item)) {{ (0 == $item->active) ? 'checked' : '' }} @else {{ 'checked' }} @endif> Inactive</label>
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete User" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                                                <label><input onchange="document.getElementById('status').submit();" name="active" type="radio" value="1" {{ (isset($item) && 1 == $item->active) ? 'checked' : '' }}> Active</label>
+                                                <label><input onchange="document.getElementById('status').submit();" name="active" type="radio" value="0" @if (isset($item)) {{ (0 == $item->active) ? 'checked' : '' }} @else {{ 'checked' }} @endif> Inactive</label>
                                             </form>
                                             </td>
                                         <td>
