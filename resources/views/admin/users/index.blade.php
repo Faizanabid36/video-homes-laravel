@@ -61,17 +61,13 @@
                                                             value="1" {{ (isset($item) && 1 == $item->active) ? 'checked' : '' }}>
                                                         Active</label>
                                                     <label
-                                                        class="btn btn-sm btn-{{ (isset($item) && 1 == $item->active) ? 'info' : 'secondary' }}"><input
+                                                        class="btn btn-sm btn-{{ (isset($item) && 0 == $item->active) ? 'info' : 'secondary' }}"><input
                                                             onchange="document.getElementById('status').submit();"
                                                             name="active" type="radio"
                                                             value="0" @if (isset($item)) {{ (0 == $item->active) ? 'checked' : '' }} @else {{ 'checked' }} @endif>
                                                         Inactive</label>
                                                 </div>
                                             </form>
-                                        </td>
-                                        <td>
-                                            {{--                                            <a href="{{ url('/admin/users/' . $item->id) }}" title="View User"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>--}}
-                                            {{--                                            <a href="{{ url('/admin/users/' . $item->id . '/edit') }}" title="Edit User"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>--}}
 
                                             <form method="POST" action="{{ url('/admin/users' . '/' . $item->id) }}"
                                                   accept-charset="UTF-8" style="display:inline">
