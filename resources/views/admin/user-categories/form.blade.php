@@ -11,8 +11,9 @@
 <div class="form-group {{ $errors->has('parent_id') ? 'has-error' : ''}}">
     <label for="parent_id" class="control-label">{{ 'Parent Id' }}</label>
     <select name="parent_id" class="form-control" id="parent_id" >
-    @foreach (json_decode('{"technology":"Technology","tips":"Tips","health":"Health"}', true) as $optionKey => $optionValue)
-        <option value="{{ $optionKey }}" {{ (isset($usercategory->parent_id) && $usercategory->parent_id == $optionKey) ? 'selected' : ''}}>{{ $optionValue }}</option>
+        <option value="" disabled selected>Parent Category(Leave Blank if None)</option>
+    @foreach ($user_categories as $optionKey => $optionValue)
+        <option value="{{ $optionValue->id }}" {{ (isset($usercategory->parent_id) && $usercategory->parent_id == $optionValue->id) ? 'selected' : ''}}>{{$optionValue->name}}</option>
     @endforeach
 </select>
     {!! $errors->first('parent_id', '<p class="help-block">:message</p>') !!}

@@ -39,7 +39,8 @@ class UserCategoriesController extends Controller
      */
     public function create()
     {
-        return view('admin.user-categories.create');
+        $user_categories = UserCategory::whereNull( 'parent_id' )->get();
+        return view('admin.user-categories.create'.compact('user_categories'));
     }
 
     /**
@@ -55,7 +56,7 @@ class UserCategoriesController extends Controller
 			'name' => 'required|max:4'
 		]);
         $requestData = $request->all();
-        
+
         UserCategory::create($requestData);
 
         return redirect('admin/user-categories')->with('flash_message', 'UserCategory added!');
@@ -71,8 +72,8 @@ class UserCategoriesController extends Controller
     public function show($id)
     {
         $usercategory = UserCategory::findOrFail($id);
-
-        return view('admin.user-categories.show', compact('usercategory'));
+        $user_categories = UserCategory::whereNull( 'parent_id' )->get();
+        return view('admin.user-categories.show', compact('usercategory','user_categories'));
     }
 
     /**
@@ -103,7 +104,7 @@ class UserCategoriesController extends Controller
 			'name' => 'required|max:4'
 		]);
         $requestData = $request->all();
-        
+
         $usercategory = UserCategory::findOrFail($id);
         $usercategory->update($requestData);
 
