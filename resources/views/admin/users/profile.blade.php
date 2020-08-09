@@ -17,7 +17,10 @@
                                 @endforeach
                             </ul>
                         @endif
-                        {{$user = auth()->user()}}
+                        @php
+                            $user = auth()->user()
+                        @endphp
+
                         <form method="POST" action="{{ url('/admin/users/' . $user->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             {{ csrf_field() }}
