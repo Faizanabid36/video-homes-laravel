@@ -54,7 +54,7 @@
                                         <td>{{round((($video->size)/1024)/1024,2)}} MB</td>
                                         <td>{{$video->is_video_approved ? "Approved" : "Rejected"}} </td>
                                         <td>
-                                            <a href="{{ url('/admin/videos/' . $video->id) }}" title="View Video"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
+                                            <a href="{{ url('/admin/videos/' . $video->id) }}" title="View Video"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Action</button></a>
 {{--                                            <a href="{{ url('/admin/videos/' . $video->id . '/edit') }}" title="Edit Video"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>--}}
 
                                             <form method="POST" action="{{ url('/admin/videos' . '/' . $video->id) }}" accept-charset="UTF-8" style="display:inline">
