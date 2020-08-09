@@ -55,11 +55,12 @@ Route::group( [ 'middleware' => 'auth' ], function () {
 Route::group( [ 'middleware' => 'admin' ], function () {
     Route::prefix( 'admin' )->group( function () {
         Route::view( '/', 'admin.home' )->name( 'admin_panel' );
-        Route::resource('categories', 'Admin\\CategoriesController');
-        Route::resource('pages', 'Admin\\PagesController');
-        Route::resource('user-categories', 'Admin\\UserCategoriesController');
-        Route::resource('videos', 'Admin\\VideosController');
-        Route::resource('users', 'Admin\\UsersController');
+        Route::resource( 'categories', 'Admin\\CategoriesController' );
+        Route::resource( 'pages', 'Admin\\PagesController' );
+        Route::resource( 'user-categories', 'Admin\\UserCategoriesController' );
+        Route::resource( 'videos', 'Admin\\VideosController' );
+        Route::resource( 'users', 'Admin\\UsersController' );
+        Route::view( 'profile', 'admin.users.profile' )->name( 'admin.profile' );
 ////        Route::resource( 'public_pages', 'PageController' );
 //        Route::get( 'create_user_categories', 'AdminController@create_user_categories' )->name( 'create_user_categories' );
 ////        Route::post( 'add_user_category', 'AdminController@add_user_category' )->name( 'add_user_category' );
@@ -103,7 +104,7 @@ Route::group( [ 'middleware' => 'admin' ], function () {
 Route::resource( 'report_query', 'ReportQueryController' );
 Route::resource( 'user_message', 'UserMessageController' );
 
-Route::get( 'reported_query_videos', 'ReportQueryController@reported_videos' )->name('reported_query_videos');
+Route::get( 'reported_query_videos', 'ReportQueryController@reported_videos' )->name( 'reported_query_videos' );
 
 //Route::post( '/search_in_directory', 'MainController@search_in_directory' )->name( 'search_in_directory' );
 
@@ -126,10 +127,7 @@ Route::get( '/u/{username}/{video_id?}', 'MainController@directory_by_username' 
 Route::get( '/embed/{video_id}', 'MainController@embed_video' )->name( 'embed_video' );
 
 //Video
-Route::put( 'is_play/{video}', 'MainController@is_played' )->name('is_played');
+Route::put( 'is_play/{video}', 'MainController@is_played' )->name( 'is_played' );
 
 
-
-
-
-Route::resource('admin/users', 'Admin\\UsersController');
+Route::resource( 'admin/users', 'Admin\\UsersController' );
