@@ -10,7 +10,7 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a class="nav-link" href="{{route('admin_panel')}}">
-                    <i class="fa fa-home"></i> Dashboard
+                    Dashboard
                 </a>
             </li>
             <li class="nav-item">
