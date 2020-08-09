@@ -94,7 +94,7 @@ Route::group( [ 'middleware' => 'admin' ], function () {
 //        Route::post( 'store_tag', 'AdminController@store_tag' )->name( 'store_tag' );
 
 
-        Route::get( 'users', 'AdminController@users' )->name( 'admin.list_user' );
+        Route::get( 'user', 'AdminController@users' )->name( 'admin.list_user' );
         Route::get( 'delete_user/{id}', 'AdminController@delete_user' )->name( 'admin.delete_user' );
         Route::get( 'deactivate_user/{id}', 'AdminController@deactivate_user' )->name( 'admin.deactivate_user' );
     } );
