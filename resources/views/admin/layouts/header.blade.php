@@ -66,7 +66,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img src="{{asset('img/admin.jpg')}}"
-                         class="w-25 img-thumbnail rounded-circle avatar-img"
+                         class="rounded-circle" style="width:25px;"
                          alt="avatar"> <strong>{{ auth()->user()->name }} </strong>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
