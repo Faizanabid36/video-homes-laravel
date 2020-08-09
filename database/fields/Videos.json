@@ -1,0 +1,37 @@
+{
+    "fields": [
+        {
+            "name": "thumbnail",
+            "type": "file"
+        },
+        {
+            "name": "title",
+            "type": "string"
+        },
+        {
+            "name": "description",
+            "type": "text"
+        },
+        {
+            "name": "user_id",
+            "type": "integer#unsigned"
+        }
+    ],
+    "relationships": [
+        {
+            "name": "user",
+            "type": "belongsTo",
+            "class": "App\\User"
+        }
+    ],
+    "validations": [
+        {
+            "field": "title",
+            "rules": "required|max:4"
+        },
+        {
+            "field": "description",
+            "rules": "max:6"
+        }
+    ]
+}

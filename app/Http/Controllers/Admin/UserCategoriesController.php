@@ -19,13 +19,13 @@ class UserCategoriesController extends Controller {
         $perPage = 25;
 
         if ( ! empty( $keyword ) ) {
-            $usercategories = UserCategory::with( [
-                'parent' => function ( $query ) use ( $keyword ) {
+            $usercategories = UserCategory::with( [ 'parent' => function ( $query ) use ( $keyword ) {
                     return $query->where( 'name', 'LIKE', "%$keyword%" );
-                }
-            ] )->orWhere( 'name', 'LIKE', "%$keyword%" )
-                                          ->orWhere( 'description', 'LIKE', "%$keyword%" )
-                                          ->latest()->paginate( $perPage );
+                } ] )
+                ->orWhere( 'name', 'LIKE', "%$keyword%" )
+                ->orWhere( 'description', 'LIKE', "%$keyword%" )
+                ->latest()
+                ->paginate( $perPage );
         } else {
             $usercategories = UserCategory::with( [ 'parent' ] )->latest()->paginate( $perPage );
         }

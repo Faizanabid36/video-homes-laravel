@@ -58,6 +58,8 @@ Route::group( [ 'middleware' => 'admin' ], function () {
         Route::resource('categories', 'Admin\\CategoriesController');
         Route::resource('pages', 'Admin\\PagesController');
         Route::resource('user-categories', 'Admin\\UserCategoriesController');
+        Route::resource('videos', 'Admin\\VideosController');
+        Route::resource('users', 'Admin\\UsersController');
 //        Route::resource( 'public_pages', 'PageController' );
         Route::get( 'create_user_categories', 'AdminController@create_user_categories' )->name( 'create_user_categories' );
 //        Route::post( 'add_user_category', 'AdminController@add_user_category' )->name( 'add_user_category' );
@@ -125,6 +127,7 @@ Route::get( '/embed/{video_id}', 'MainController@embed_video' )->name( 'embed_vi
 
 //Video
 Route::put( 'is_play/{video}', 'MainController@is_played' )->name('is_played');
+
 
 
 

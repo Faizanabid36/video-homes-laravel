@@ -1,0 +1,26 @@
+{
+    "fields": [
+        {
+            "name": "name",
+            "type": "string"
+        },
+        {
+            "name": "email",
+            "type": "string"
+        },
+        {
+            "name": "active",
+            "type": "radio"
+        }
+    ],
+    "validations": [
+        {
+            "field": "name",
+            "rules": "required|max:4"
+        },
+        {
+            "field": "active",
+            "rules": "required"
+        }
+    ]
+}
