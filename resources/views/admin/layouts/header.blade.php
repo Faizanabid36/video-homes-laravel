@@ -71,8 +71,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ route('logout') }}"
-                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                       onclick="event.preventDefault();                     document.getElementById('logout-form').submit();">
                         <i class="fa fa-lock"></i> {{ __('Logout') }}
                     </a>
 {{--                    <a class="dropdown-item" href="#">Another action</a>--}}
