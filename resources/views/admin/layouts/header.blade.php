@@ -35,24 +35,24 @@
 {{--                </a>--}}
 {{--            </li>--}}
 
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('categories.index')}}">
-                    <i class="fa fa-tachometer"></i> Video&nbsp;Categories
-                </a>
-            </li>
+{{--            <li class="nav-item">--}}
+{{--                <a class="nav-link" href="{{route('categories.index')}}">--}}
+{{--                    <i class="fa fa-tachometer"></i> Video&nbsp;Categories--}}
+{{--                </a>--}}
+{{--            </li>--}}
 
-            {{--                <li class="">--}}
-            {{--                    <a class="nav-link" href="{{route('user_tags')}}">--}}
-            {{--                        <i class="fa fa-tachometer"></i>--}}
-            {{--                        <span class="link-title menu_hide">&nbsp;Industry--}}
-            {{--                        </span>--}}
-            {{--                    </a>--}}
-            {{--                </li>--}}
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('user-categories.index')}}">
-                    <i class="fa fa-tachometer"></i> User Categories
-                </a>
-            </li>
+{{--            --}}{{--                <li class="">--}}
+{{--            --}}{{--                    <a class="nav-link" href="{{route('user_tags')}}">--}}
+{{--            --}}{{--                        <i class="fa fa-tachometer"></i>--}}
+{{--            --}}{{--                        <span class="link-title menu_hide">&nbsp;Industry--}}
+{{--            --}}{{--                        </span>--}}
+{{--            --}}{{--                    </a>--}}
+{{--            --}}{{--                </li>--}}
+{{--            <li class="nav-item">--}}
+{{--                <a class="nav-link" href="{{route('user-categories.index')}}">--}}
+{{--                    <i class="fa fa-tachometer"></i> User Categories--}}
+{{--                </a>--}}
+{{--            </li>--}}
 
             <li class="nav-item">
                 <a class="nav-link" href="{{action('ReportQueryController@index')}}">
