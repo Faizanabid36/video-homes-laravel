@@ -49,7 +49,7 @@
                                         <td>
                                             <form method="POST" id="status"
                                                   action="{{ url('/admin/users/' . $item->id) }}" accept-charset="UTF-8"
-                                                  class="form-horizontal" enctype="multipart/form-data">
+                                                  class="form-horizontal d-inline" enctype="multipart/form-data">
                                                 {{ method_field('PATCH') }}
                                                 {{ csrf_field() }}
                                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
