@@ -10,24 +10,17 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a href="{{route('admin_panel')}}">
-                        <i class="fa fa-home"></i>
-                        <span class="link-title menu_hide">&nbsp;Dashboard</span>
+                        <i class="fa fa-home"></i> Dashboard
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('pages.index')}}">
-                        <i class="fa fa-tachometer"></i>
-                        <span class="link-title menu_hide">&nbsp;Pages
-
-                            </span>
+                        <i class="fa fa-tachometer"></i> Pages
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('admin.list_user')}}">
-                        <i class="fa fa-tachometer"></i>
-                        <span class="link-title menu_hide">&nbsp;Users
-
-                            </span>
+                        <i class="fa fa-tachometer"></i> Users
                     </a>
                 </li>
                 <li class="nav-item">
@@ -38,18 +31,13 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('admin.videos_list')}}">
-                        <i class="fa fa-tachometer"></i>
-                        <span class="link-title menu_hide">&nbsp;Videos List
-                        </span>
+                        <i class="fa fa-tachometer"></i> Videos List
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{route('categories.index')}}">
-                        <i class="fa fa-tachometer"></i>
-                        <span class="link-title menu_hide">Video&nbsp;Categories
-
-                        </span>
+                        <i class="fa fa-tachometer"></i> Video&nbsp;Categories
                     </a>
                 </li>
 
@@ -62,24 +50,18 @@
                 {{--                </li>--}}
                 <li class="nav-item">
                     <a href="{{route('user-categories.index')}}">
-                        <i class="fa fa-tachometer"></i>
-                        <span class="link-title menu_hide">&nbsp;Industry/Profession/Expertise
-                        </span>
+                        <i class="fa fa-tachometer"></i> User Categories
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="{{action('ReportQueryController@index')}}">
-                        <i class="fa fa-tachometer"></i>
-                        <span class="link-title menu_hide">&nbsp;Reported Messages
-                        </span>
+                        <i class="fa fa-tachometer"></i> Reported Messages
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{action('ReportQueryController@reported_videos')}}">
-                        <i class="fa fa-tachometer"></i>
-                        <span class="link-title menu_hide">&nbsp;Reported Videos
-                        </span>
+                        <i class="fa fa-tachometer"></i> Reported Videos
                     </a>
                 </li>
             </ul>
@@ -89,8 +71,8 @@
                             data-toggle="dropdown">
                         <img src="{{asset('img/admin.jpg')}}"
                              class="admin_img2 img-thumbnail rounded-circle avatar-img"
-                             alt="avatar"> <strong>{{ Auth::user()->name }} </strong>
-                        <span class="fa fa-sort-down white_bg"></span>
+                             alt="avatar"> <strong>{{ auth()->user()->name }} </strong>
+                        <i class="fa fa-sort-down white_bg"></i>
                     </button>
                     <div class="dropdown-menu admire_admin">
                         <a class="dropdown-item" href="{{ route('logout') }}"
