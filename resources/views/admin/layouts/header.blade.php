@@ -8,22 +8,22 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link {{Request::is('admin_panel') ? 'active' : ''}}" href="{{route('admin_panel')}}">
+                <a class="nav-link {{Route::is('admin_panel') ? 'active' : ''}}" href="{{route('admin_panel')}}">
                     Dashboard
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{Request::is('pages.index') ? 'active' : ''}}" href="{{route('pages.index')}}">
+                <a class="nav-link {{Route::is('pages.*') ? 'active' : ''}}" href="{{route('pages.index')}}">
                     Pages
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{Request::is('users.index') ? 'active' : ''}}" href="{{route('users.index')}}">
+                <a class="nav-link {{Route::is('users.*') ? 'active' : ''}}" href="{{route('users.index')}}">
                     Users
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{Request::is('videos.index') ? 'active' : ''}}" href="{{route('videos.index')}}">
+                <a class="nav-link {{Route::is('videos.*') ? 'active' : ''}}" href="{{route('videos.index')}}">
 
                     Videos List
                 </a>
@@ -54,12 +54,12 @@
 {{--            </li>--}}
 
             <li class="nav-item">
-                <a class="nav-link" href="{{action('ReportQueryController@index')}}">
+                <a class="nav-link {{Route::is('report_query.index') ? 'active' : ''}}" href="{{route('reported_query_videos')}}">
                     Reported Messages
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{action('ReportQueryController@reported_videos')}}">
+                <a class="nav-link {{Route::is('reported_query_videos') ? 'active' : ''}}" href="{{route('reported_query_videos')}}">
                     Reported Videos
                 </a>
             </li>
