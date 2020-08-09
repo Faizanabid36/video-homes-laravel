@@ -18,6 +18,9 @@ class UserCategory extends Model {
     public function list() {
         return $this->hasMany( UserExtra::class, 'user_category_id' );
     }
+    public function parent() {
+        return $this->belongsTo( $this, 'id','parent_id' );
+    }
 
 
     public function scopeGetCategories( $query, $level1 = null, $level2 = null ) {

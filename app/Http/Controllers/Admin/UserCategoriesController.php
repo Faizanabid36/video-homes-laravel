@@ -71,7 +71,7 @@ class UserCategoriesController extends Controller
      */
     public function show($id)
     {
-        $usercategory = UserCategory::findOrFail($id);
+        $usercategory = UserCategory::with(['parent'])->findOrFail($id);
         return $usercategory;
         $parent_category = UserCategory::find($usercategory->parent_id) ?? 'N/A';
         return view('admin.user-categories.show', compact('usercategory','parent_category'));
