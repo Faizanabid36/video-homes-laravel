@@ -8,22 +8,22 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{route('admin_panel')}}">
+                <a class="nav-link {{Request::is('admin_panel') ? 'active' : ''}}" href="{{route('admin_panel')}}">
                     Dashboard
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{route('pages.index')}}">
+                <a class="nav-link {{Request::is('pages.index') ? 'active' : ''}}" href="{{route('pages.index')}}">
                     Pages
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{route('users.index')}}">
+                <a class="nav-link {{Request::is('users.index') ? 'active' : ''}}" href="{{route('users.index')}}">
                     Users
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{route('videos.index')}}">
+                <a class="nav-link {{Request::is('videos.index') ? 'active' : ''}}" href="{{route('videos.index')}}">
 
                     Videos List
                 </a>
