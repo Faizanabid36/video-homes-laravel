@@ -88,7 +88,7 @@
                                 data-quality="240p" title="240p" label="240p" res="240">
                         Your browser does not support HTML5 video.
                     </video>
-                    <div class="mb-5" style="margin-bottom: 50px !important;">
+                    <div class="my-2" style="margin-bottom: 50px !important;">
                         <h2 itemprop="title">{{$video->title}}</h2>
                         <p>{{ $video->description }}</p>
                         <p>Duration: {{gmdate("i:s", $video->duration)}}</p>
@@ -113,9 +113,6 @@
                                     Reject</label>
                             </div>
                         </form>
-                    </div>
-                    <div class="icons hidden">
-                        <span class="expend-player"><i class="fa fa-expand fa-fw"></i></span>
                     </div>
                 </div>
                 <div class="clear"></div>
