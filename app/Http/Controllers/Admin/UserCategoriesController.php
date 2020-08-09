@@ -72,8 +72,8 @@ class UserCategoriesController extends Controller
     public function show($id)
     {
         $usercategory = UserCategory::findOrFail($id);
-        $user_categories = UserCategory::whereNull( 'parent_id' )->get();
-        return view('admin.user-categories.show', compact('usercategory','user_categories'));
+        $parent_category = UserCategory::find($usercategory->parent_id);
+        return view('admin.user-categories.show', compact('usercategory','parent_category'));
     }
 
     /**
