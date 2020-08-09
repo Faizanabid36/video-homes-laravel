@@ -131,3 +131,5 @@ Route::put( 'is_play/{video}', 'MainController@is_played' )->name('is_played');
 
 
 
+
+Route::resource('admin/users', 'Admin\\UsersController');
