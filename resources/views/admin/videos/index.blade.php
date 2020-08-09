@@ -45,7 +45,7 @@
                                 @foreach($videos as $video)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td><img class="w-50"
+                                        <td width="30px"><img class="w-100"
                                                  src="{{asset('/storage/'.$video->thumbnail)}}" alt=""></td>
                                         <td>{{$video->title}}</td>
                                         <td>{{$video->description}}</td>
