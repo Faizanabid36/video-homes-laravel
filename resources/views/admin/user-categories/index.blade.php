@@ -38,7 +38,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->name }}</td><td>{{ $item->description }}</td>
-                                        <td>{{ $item->parent->name }}</td>
+                                        <td>{{ is_null($item->parent) ? "N/A" : $item->parent->name }}</td>
                                         <td>
                                             <a href="{{ url('/admin/user-categories/' . $item->id) }}" title="View UserCategory"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/admin/user-categories/' . $item->id . '/edit') }}" title="Edit UserCategory"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
