@@ -9,9 +9,9 @@
                 <div class="card">
                     <div class="card-header">Users</div>
                     <div class="card-body">
-                        <a href="{{ url('/admin/users/create') }}" class="btn btn-success btn-sm" title="Add New User">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Add New
-                        </a>
+{{--                        <a href="{{ url('/admin/users/create') }}" class="btn btn-success btn-sm" title="Add New User">--}}
+{{--                            <i class="fa fa-plus" aria-hidden="true"></i> Add New--}}
+{{--                        </a>--}}
 
                         <form method="GET" action="{{ url('/admin/users') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
                             <div class="input-group">
@@ -37,10 +37,21 @@
                                 @foreach($users as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->name }}</td><td>{{ $item->email }}</td><td>{{ $item->active }}</td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->username }}</td>
+                                        <td>{{ $item->email }}</td>
                                         <td>
-                                            <a href="{{ url('/admin/users/' . $item->id) }}" title="View User"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                                            <a href="{{ url('/admin/users/' . $item->id . '/edit') }}" title="Edit User"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                                            <form method="POST" action="{{ url('/admin/users/' . $user->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+                                                {{ method_field('PATCH') }}
+                                                {{ csrf_field() }}
+                                                <label><input name="active" type="radio" value="1" {{ (isset($user) && 1 == $user->active) ? 'checked' : '' }}> Active</label>
+                                                <label><input name="active" type="radio" value="0" @if (isset($user)) {{ (0 == $user->active) ? 'checked' : '' }} @else {{ 'checked' }} @endif> Inactive</label>
+                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete User" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                                            </form>
+                                            </td>
+                                        <td>
+{{--                                            <a href="{{ url('/admin/users/' . $item->id) }}" title="View User"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>--}}
+{{--                                            <a href="{{ url('/admin/users/' . $item->id . '/edit') }}" title="Edit User"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>--}}
 
                                             <form method="POST" action="{{ url('/admin/users' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}

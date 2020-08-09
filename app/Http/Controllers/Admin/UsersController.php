@@ -56,7 +56,7 @@ class UsersController extends Controller
 			'active' => 'required'
 		]);
         $requestData = $request->all();
-        
+
         User::create($requestData);
 
         return redirect('admin/users')->with('flash_message', 'User added!');
@@ -101,11 +101,11 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-			'name' => 'required|max:4',
+//			'name' => 'required|max:4',
 			'active' => 'required'
 		]);
         $requestData = $request->all();
-        
+
         $user = User::findOrFail($id);
         $user->update($requestData);
 
