@@ -48,7 +48,7 @@
 <div class="container-fluid">
     <div id="wrap">
         @include('admin.layouts.header')
-        @include('admin.layouts.sidebar')
+{{--        @include('admin.layouts.sidebar')--}}
 
         <div id="content" class="bg-container" style="min-height: 610px;">
             @yield('content')
