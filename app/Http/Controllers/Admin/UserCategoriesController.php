@@ -86,8 +86,8 @@ class UserCategoriesController extends Controller
     public function edit($id)
     {
         $usercategory = UserCategory::findOrFail($id);
-
-        return view('admin.user-categories.edit', compact('usercategory'));
+        $user_categories = UserCategory::whereNull( 'parent_id' )->get();
+        return view('admin.user-categories.edit', compact('usercategory','user_categories'));
     }
 
     /**
