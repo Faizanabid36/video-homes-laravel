@@ -18,11 +18,11 @@
 
 </head>
 <body>
-<div class="container-fluid bg-light">
+<div class="container-fluid bg-white">
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <nav class="navbar navbar-expand-lg navbar-light home-nav ">
+                <nav class="navbar navbar-expand-lg navbar-light navbar-header">
                     <a class="navbar-brand" href="{{url('/')}}">
                         <img src="{{asset('img/cropped-VideoHomes-3.png')}}"
                              class="logo" alt="VideoHomes Logo"/>
@@ -34,10 +34,11 @@
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ml-auto links-home pr-0">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item"><a href="{{route('home')}}" class="nav-link">HOME</a></li>
                             @auth
                                 @if (auth()->user()->isAdmin())
-                                    <li class="nav-item ">
+                                    <li class="nav-item">
                                         <a class="nav-link" href="{{route('admin_panel')}}">ADMIN PANEL</a>
                                     </li>
                                 @else

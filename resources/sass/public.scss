@@ -1,54 +1,35 @@
+//@import '~bootstrap-select/sass/variables';
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins';
 @import 'variables';
-//@import '~bootstrap-select/sass/variables';
-
-.sticky {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 10000 !important;
-}
-
-.home-nav {
-
-    // min-height: 150px;
-
-    // top: 0;
-
-    & .links-home {
-
-        padding: 0 40px;
-        font-size: 12px;
-        font-weight: 300;
-
-        & li a {
-            color: black !important;
-            margin-right: 15px;
-        }
-
-
-    }
-
-    & .logo {
+//.sticky {
+//    position: -webkit-sticky;
+//    position: sticky;
+//    top: 0;
+//    z-index: 10000 !important;
+//}
+//
+//Navigation Bar
+.navbar-header {
+    .logo {
         height: 4rem;
     }
-
-
 }
 
-// .header-wrapper{
-//   width: 1349px;
-//   height: 440px;
-//   z-index: 1;
+//Breadcrumbs
+.breadcrumb-item + .breadcrumb-item:before {
+    content: "&" !important;
+}
 
-// }
-
+//Home Page
 .video-background {
     background: #000;
     position: fixed;
-    top: 0; right: 0; bottom: 0; left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     z-index: -99;
 
     .video-foreground, iframe {
@@ -61,12 +42,23 @@
     }
 }
 
+//
+
+
+// .header-wrapper{
+//   width: 1349px;
+//   height: 440px;
+//   z-index: 1;
+
+// }
+
 
 .header-separator {
-    height:150px;
+    height: 150px;
+
     svg {
         fill: white;
-        top:-4.5rem;
+        top: -4.5rem;
     }
 }
 
@@ -132,29 +124,15 @@
 
 .iconBoxParent {
     margin-top: 50px;
-    z-index:999;
+    z-index: 999;
 
 
     & .card {
-        // width: 200px;
         border: 1px solid rgb(233, 217, 217);
-        text-align: center;
         padding-top: 20px;
 
-        & img {
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-
-    }
-
-    & img {
-        width: 131px;
-        height: 139px;
     }
 }
-
 
 
 //Directory
@@ -165,12 +143,9 @@ $theme-colors: (
 );
 
 .btn-primary {
-    //height: 44px;
 
     font-size: 14px !important;
     border-color: #0f7fa6 !important;
-
-    border-radius: 0 !important;
 }
 
 a {
@@ -483,32 +458,92 @@ label {
     height: 3px;
 }
 
+//Directory Single Vidoe page
 .video-list {
     overflow-y: auto;
     max-height: 500px;
 }
+
 #map {
     height: 400px; /* The height is 400 pixels */
     width: 100%; /* The width is the width of the web page */
 }
+
 .watermark_logo {
-    width:120px;
-    bottom:40px;
+    width: 120px;
+    bottom: 40px;
 }
-#my-video_html5 video{
-    width:100%!important;
+
+#my-video_html5 video {
+    width: 100% !important;
 }
+
 //Breadcrumbs
-.breadcrumb-item+.breadcrumb-item:before{
-    content:"&" !important;
+.breadcrumb-item + .breadcrumb-item:before {
+    content: "&" !important;
 }
-@include media-breakpoint-up(sm) {  }
-@include media-breakpoint-up(md) {  }
-@include media-breakpoint-up(lg) {  }
-@include media-breakpoint-up(xl) {  }
+
+@include media-breakpoint-up(sm) {
+}
+
+@include media-breakpoint-up(md) {
+}
+
+@include media-breakpoint-up(lg) {
+}
+
+@include media-breakpoint-up(xl) {
+}
+
+@include media-breakpoint-up(sm) {
+}
+
+@include media-breakpoint-up(md) {
+}
+
+@include media-breakpoint-up(lg) {
+}
+
+@include media-breakpoint-up(xl) {
+}
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+//@import "~bootstrap/scss/root";
+//@import "~bootstrap/scss/reboot";
+//@import "~bootstrap/scss/type";
+//@import "~bootstrap/scss/images";
+//@import "~bootstrap/scss/code";
+//@import "~bootstrap/scss/grid";
+//@import "~bootstrap/scss/tables";
+//@import "~bootstrap/scss/forms";
+//@import "~bootstrap/scss/buttons";
+//@import "~bootstrap/scss/transitions";
+//@import "~bootstrap/scss/dropdown";
+//@import "~bootstrap/scss/button-group";
+//@import "~bootstrap/scss/input-group";
+//@import "~bootstrap/scss/custom-forms";
+//@import "~bootstrap/scss/nav";
+//@import "~bootstrap/scss/navbar";
+//@import "~bootstrap/scss/card";
+//@import "~bootstrap/scss/breadcrumb";
+//@import "~bootstrap/scss/pagination";
+//@import "~bootstrap/scss/badge";
+//@import "~bootstrap/scss/jumbotron";
+//@import "~bootstrap/scss/alert";
+//@import "~bootstrap/scss/progress";
+//@import "~bootstrap/scss/media";
+//@import "~bootstrap/scss/list-group";
+//@import "~bootstrap/scss/close";
+//@import "~bootstrap/scss/toasts";
+//@import "~bootstrap/scss/modal";
+//@import "~bootstrap/scss/tooltip";
+//@import "~bootstrap/scss/popover";
+//@import "~bootstrap/scss/carousel";
+//@import "~bootstrap/scss/spinners";
+//@import "~bootstrap/scss/utilities";
+//@import "~bootstrap/scss/print";
+
 @import '~bootstrap-select/sass/bootstrap-select';
 @import '~font-awesome/css/font-awesome.css';
 @import '~jquery-ui/themes/base/all.css';
