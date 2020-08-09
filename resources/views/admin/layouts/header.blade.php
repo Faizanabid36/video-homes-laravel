@@ -1,38 +1,5 @@
 <div id="top">
-    <!-- .navbar -->
-    <nav class="navbar navbar-static-top">
-        <div class="container-fluid m-0">
-            <a class="navbar-brand float-left" href="{{url('/')}}">
-                <h4> VideoHomes</h4>
-            </a>
-            <div class="topnav dropdown-menu-right float-right">
-                <div class="btn-group">
-                    <div class="user-settings no-bg">
-                        <button type="button" class="btn btn-default no-bg micheal_btn"
-                                data-toggle="dropdown">
-                            <img src="{{asset('img/admin.jpg')}}"
-                                 class="admin_img2 img-thumbnail rounded-circle avatar-img"
-                                 alt="avatar"> <strong>{{ Auth::user()->name }} </strong>
-                            <span class="fa fa-sort-down white_bg"></span>
-                        </button>
-                        <div class="dropdown-menu admire_admin">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                <i class="fa fa-lock"></i> {{ __('Logout') }}
-                            </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                  style="display: none;">
-                                @csrf
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </nav>
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
         <a class="navbar-brand mr-auto mr-lg-0" href="#">{{env('APP_NAME')}}</a>
         <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
@@ -116,6 +83,29 @@
                     </a>
                 </li>
             </ul>
+            <div class="btn-group float-right">
+                <div class="user-settings no-bg">
+                    <button type="button" class="btn btn-default no-bg micheal_btn"
+                            data-toggle="dropdown">
+                        <img src="{{asset('img/admin.jpg')}}"
+                             class="admin_img2 img-thumbnail rounded-circle avatar-img"
+                             alt="avatar"> <strong>{{ Auth::user()->name }} </strong>
+                        <span class="fa fa-sort-down white_bg"></span>
+                    </button>
+                    <div class="dropdown-menu admire_admin">
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            <i class="fa fa-lock"></i> {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                              style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </nav>
 </div>
