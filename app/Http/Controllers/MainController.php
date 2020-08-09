@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AccountType;
 use App\Category;
+use App\Page;
 use App\User;
 use App\UserCategory;
 use App\UserExtra;
@@ -33,26 +34,40 @@ class MainController extends Controller {
         if ( request( 'category_id' ) ) {
             $videos = Category::approvedVideos()->find( request( 'category_id' ) );
         }
+
         return view( 'directory.index', compact( 'users', 'categories', 'industries', 'level1', 'video_categories', 'videos' ) );
     }
 
     public function directory_by_username( $username, $video_id = null ) {
-        if(request()->ajax()){
-            return ["isProcessed"=>Video::userVideos( $username, $video_id )->first()->processed];
+        if ( request()->ajax() ) {
+            return [ "isProcessed" => Video::userVideos( $username, $video_id )->first()->processed ];
         }
         $video = Video::userVideos( $username, $video_id )->firstOrFail();
 
         $views          = VideoView::videoViews( $video );
         $user           = $video->user;
         $related_videos = Video::userVideos( $username, $video->id, true )->get();
-        return view( !$video->processed ? 'directory.processing': 'directory.single', compact( 'user', 'video', 'related_videos', 'views' ) );
+
+        return view( ! $video->processed ? 'directory.processing' : 'directory.single', compact( 'user', 'video', 'related_videos', 'views' ) );
     }
 
     public function embed_video( $video_id ) {
         $video = Video::singleVideo( $video_id )->firstOrFail();
         VideoView::videoViews( $video, [ "from_website" => 0 ] );
-        return view( 'embed_video', compact(    'video' ) );
+
+        return view( 'embed_video', compact( 'video' ) );
     }
+
+    public function page( $slug ) {
+        $page = Page::viewPage( $slug )->firstOrFail();
+
+        return view( 'page', compact( 'page' ) );
+    }
+
+    public function is_played( Video $video ) {
+        return [ "success" => VideoView::videoViews( $video, [ "is_played" => 1 ] ) ];
+    }
+
 
 //    public function directory_by_user_video( $username ) {
 //        $video          = Video::whereHas( 'user', function ( $query ) use ( $username ) {

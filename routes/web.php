@@ -58,9 +58,7 @@ Route::group( [ 'middleware' => 'admin' ], function () {
         Route::resource('categories', 'Admin\\CategoriesController');
         Route::resource('pages', 'Admin\\PagesController');
         Route::resource('user-categories', 'Admin\\UserCategoriesController');
-
-
-        Route::resource( 'public_pages', 'PageController' );
+//        Route::resource( 'public_pages', 'PageController' );
         Route::get( 'create_user_categories', 'AdminController@create_user_categories' )->name( 'create_user_categories' );
 //        Route::post( 'add_user_category', 'AdminController@add_user_category' )->name( 'add_user_category' );
 //        Route::get( 'all_user_categories', 'AdminController@all_user_categories' )->name( 'all_user_categories' );
@@ -114,8 +112,9 @@ Route::get( 'reported_query_videos', 'ReportQueryController@reported_videos' );
 
 //Home
 Route::get( '/', 'MainController@index' )->name( 'home' );
+
 //Pages
-Route::get( '/page/{slug}', 'PageController@view' )->name( 'public.page' );
+Route::get( '/page/{slug}', 'MainController@page' )->name( 'public.page' );
 
 //Directory
 Route::get( '/directory/{level1?}/{level2?}', 'MainController@directory' )->name( 'directory' );
@@ -125,9 +124,7 @@ Route::get( '/u/{username}/{video_id?}', 'MainController@directory_by_username' 
 Route::get( '/embed/{video_id}', 'MainController@embed_video' )->name( 'embed_video' );
 
 //Video
-Route::put( 'is_play/{video}', function ( \App\Video $video ) {
-    return ["success"=>\App\VideoView::videoViews( $video, [ "is_played" => 1 ] )];
-} )->name('is_played');
+Route::put( 'is_play/{video}', 'MainController@is_played' )->name('is_played');
 
 
 
