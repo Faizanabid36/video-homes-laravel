@@ -44,8 +44,11 @@
                                             <form method="POST" id="status" action="{{ url('/admin/users/' . $item->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                                                 {{ method_field('PATCH') }}
                                                 {{ csrf_field() }}
+                                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+
                                                 <label class="btn btn-secondary {{ (isset($item) && 1 == $item->active) ? 'active' : '' }}"><input onchange="document.getElementById('status').submit();" name="active" type="radio" value="1" {{ (isset($item) && 1 == $item->active) ? 'checked' : '' }}> Active</label>
                                                 <label class="btn btn-secondary {{ (isset($item) && 1 == $item->active) ? 'active' : '' }}"><input onchange="document.getElementById('status').submit();" name="active" type="radio" value="0" @if (isset($item)) {{ (0 == $item->active) ? 'checked' : '' }} @else {{ 'checked' }} @endif> Inactive</label>
+                                                </div>
                                             </form>
                                             </td>
                                         <td>
