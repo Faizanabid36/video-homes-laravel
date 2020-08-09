@@ -25,7 +25,7 @@
                     </a>
                 </li>
                 <li class="">
-                    <a href="{{route('public_pages.index')}}">
+                    <a href="{{route('pages.index')}}">
                         <i class="fa fa-tachometer"></i>
                         <span class="link-title menu_hide">&nbsp;Pages
 
@@ -55,7 +55,7 @@
                 </li>
 
                 <li class="">
-                    <a href="{{route('category')}}">
+                    <a href="{{route('categories.index')}}">
                         <i class="fa fa-tachometer"></i>
                         <span class="link-title menu_hide">Video&nbsp;Categories
 
@@ -71,7 +71,7 @@
 {{--                    </a>--}}
 {{--                </li>--}}
                 <li class="">
-                    <a href="{{route('all_user_categories')}}">
+                    <a href="{{route('user-categories.index')}}">
                         <i class="fa fa-tachometer"></i>
                         <span class="link-title menu_hide">&nbsp;Industry/Profession/Expertise
                         </span>
