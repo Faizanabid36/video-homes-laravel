@@ -15,12 +15,12 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{route('pages.index')}}">
-                    <i class="fa fa-tachometer"></i> Pages
+                    Pages
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{route('users.index')}}">
-                    <i class="fa fa-tachometer"></i> Users
+                    Users
                 </a>
             </li>
             <li class="nav-item">
@@ -31,13 +31,13 @@
             </li>
 {{--            <li class="nav-item">--}}
 {{--                <a class="nav-link" href="{{route('admin.videos_list')}}">--}}
-{{--                    <i class="fa fa-tachometer"></i> Videos List--}}
+{{--                    Videos List--}}
 {{--                </a>--}}
 {{--            </li>--}}
 
 {{--            <li class="nav-item">--}}
 {{--                <a class="nav-link" href="{{route('categories.index')}}">--}}
-{{--                    <i class="fa fa-tachometer"></i> Video&nbsp;Categories--}}
+{{--                    Video&nbsp;Categories--}}
 {{--                </a>--}}
 {{--            </li>--}}
 
@@ -50,18 +50,18 @@
 {{--            --}}{{--                </li>--}}
 {{--            <li class="nav-item">--}}
 {{--                <a class="nav-link" href="{{route('user-categories.index')}}">--}}
-{{--                    <i class="fa fa-tachometer"></i> User Categories--}}
+{{--                    User Categories--}}
 {{--                </a>--}}
 {{--            </li>--}}
 
             <li class="nav-item">
                 <a class="nav-link" href="{{action('ReportQueryController@index')}}">
-                    <i class="fa fa-tachometer"></i> Reported Messages
+                    Reported Messages
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{action('ReportQueryController@reported_videos')}}">
-                    <i class="fa fa-tachometer"></i> Reported Videos
+                    Reported Videos
                 </a>
             </li>
             <li class="nav-item dropdown">
