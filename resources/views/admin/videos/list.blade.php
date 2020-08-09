@@ -42,7 +42,7 @@
                                 <tbody>
                                 @foreach ($videos as $video)
                                     <tr>
-                                        <td><img width="100" height="75"
+                                        <td><img class="w-50"
                                                  src="{{asset('/storage/'.$video->thumbnail)}}" alt=""></td>
                                         <td>{{$video->title}}</td>
                                         <td>{{$video->description}}</td>

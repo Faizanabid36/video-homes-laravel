@@ -106,14 +106,10 @@ class VideosController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-			'title' => 'required|max:4',
-			'description' => 'max:6'
+			'is_video_approved' => 'required'
 		]);
         $requestData = $request->all();
-                if ($request->hasFile('thumbnail')) {
-            $requestData['thumbnail'] = $request->file('thumbnail')
-                ->store('uploads', 'public');
-        }
+
 
         $video = Video::findOrFail($id);
         $video->update($requestData);

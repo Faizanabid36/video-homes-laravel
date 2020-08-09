@@ -24,16 +24,16 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{route('videos_for_approval')}}">
+                <a class="nav-link" href="{{route('videos.index')}}">
                     <i class="fa fa-tachometer"></i>
-                    <span class="link-title menu_hide">&nbsp;User's Videos</span>
+                    <span class="link-title menu_hide">&nbsp;Videos List</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('admin.videos_list')}}">
-                    <i class="fa fa-tachometer"></i> Videos List
-                </a>
-            </li>
+{{--            <li class="nav-item">--}}
+{{--                <a class="nav-link" href="{{route('admin.videos_list')}}">--}}
+{{--                    <i class="fa fa-tachometer"></i> Videos List--}}
+{{--                </a>--}}
+{{--            </li>--}}
 
             <li class="nav-item">
                 <a class="nav-link" href="{{route('categories.index')}}">

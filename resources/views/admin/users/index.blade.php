@@ -3,8 +3,6 @@
 @section('content')
     <div class="container">
         <div class="row">
-
-
             <div class="col">
                 <div class="card">
                     <div class="card-header">Users</div>
@@ -33,9 +31,10 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>Thumbnail</th>
                                     <th>Name</th>
+                                    <th>UserName</th>
                                     <th>Email</th>
-                                    <th>Active</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
@@ -43,6 +42,7 @@
                                 @foreach($users as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
+                                        <td>{{asset(is_null($item->avatar)?'images/blank.png':$item->avatar)}}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->username }}</td>
                                         <td>{{ $item->email }}</td>
@@ -70,7 +70,7 @@
                                             </form>
 
                                             <form method="POST" action="{{ url('/admin/users' . '/' . $item->id) }}"
-                                                  accept-charset="UTF-8" style="display:inline">
+                                                  accept-charset="UTF-8" class="d-inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
                                                 <button type="submit" class="btn btn-danger btn-sm" title="Delete User"

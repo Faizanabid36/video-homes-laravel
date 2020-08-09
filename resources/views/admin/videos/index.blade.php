@@ -9,9 +9,9 @@
                 <div class="card">
                     <div class="card-header">Videos</div>
                     <div class="card-body">
-                        <a href="{{ url('/admin/videos/create') }}" class="btn btn-success btn-sm" title="Add New Video">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Add New
-                        </a>
+{{--                        <a href="{{ url('/admin/videos/create') }}" class="btn btn-success btn-sm" title="Add New Video">--}}
+{{--                            <i class="fa fa-plus" aria-hidden="true"></i> Add New--}}
+{{--                        </a>--}}
 
                         <form method="GET" action="{{ url('/admin/videos') }}" accept-charset="UTF-8" class="form-inline my-2 my-lg-0 float-right" role="search">
                             <div class="input-group">
@@ -30,17 +30,32 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Thumbnail</th><th>Title</th><th>Description</th><th>Actions</th>
+                                        <th>#</th>
+                                        <th>Thumbnail</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Video Type</th>
+                                        <th>Duration</th>
+                                        <th>Size</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($videos as $item)
+                                @foreach($videos as $video)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->thumbnail }}</td><td>{{ $item->title }}</td><td>{{ $item->description }}</td>
+                                        <td><img class="w-50"
+                                                 src="{{asset('/storage/'.$video->thumbnail)}}" alt=""></td>
+                                        <td>{{$video->title}}</td>
+                                        <td>{{$video->description}}</td>
+                                        <td>{{$video->video_type}}</td>
+                                        <td>{{gmdate("i:s", $video->duration)}}</td>
+                                        <td>{{round((($video->size)/1024)/1024,2)}} MB</td>
+                                        <td>{{$video->is_video_approved ? "Approved" : "Rejected"}} </td>
                                         <td>
                                             <a href="{{ url('/admin/videos/' . $item->id) }}" title="View Video"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                                            <a href="{{ url('/admin/videos/' . $item->id . '/edit') }}" title="Edit Video"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+{{--                                            <a href="{{ url('/admin/videos/' . $item->id . '/edit') }}" title="Edit Video"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>--}}
 
                                             <form method="POST" action="{{ url('/admin/videos' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
