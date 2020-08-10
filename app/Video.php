@@ -49,7 +49,9 @@ class Video extends Model {
         return $query->whereHas( 'user', function ( $query ) use ( $username ) {
             $query->whereUsername( $username );
         } )->when(!auth()->check() || auth()->user()->username !== $username,function($q){
-            $q->whereProcessed( 1 )->whereIsVideoApproved( 1 );
+            $q->whereProcessed( 1 )->whereIsVideoApproved( 1 )->whereHas( 'user', function ( $query ) {
+                $query->whereActive( 1 );
+            } );
         })->when( $video_id, function ( $query ) use ( $video_id, $related ) {
             return $related ? $query->where( 'id', '!=', $video_id ) : $query->whereVideoId( $video_id );
 
