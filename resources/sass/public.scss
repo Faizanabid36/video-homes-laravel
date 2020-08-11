@@ -478,10 +478,10 @@ label {
     width: 100% !important;
 }
 
-////Breadcrumbs
-//.breadcrumb-item + .breadcrumb-item:before {
-//    content: "&" !important;
-//}
+//Breadcrumbs
+.breadcrumb-item + .breadcrumb-item:before {
+    content: "&" !important;
+}
 
 @include media-breakpoint-up(sm) {
 }
