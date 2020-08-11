@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Settings;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Http\Controllers\Controller;
 
 class SettingsController extends Controller
 {
@@ -63,7 +64,6 @@ class SettingsController extends Controller
     {
         //
         $settings = Settings::first();
-        dd($settings->toArray());
         return view( 'admin.settings.edit', compact( 'settings') );
     }
 
