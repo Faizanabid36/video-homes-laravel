@@ -564,7 +564,7 @@
                     lng: {{$user->user_extra->location_longitude}}
                 };
             var map = new google.maps.Map(
-                document.getElementById('map'), {zoom: 7, center: {lat:39.2802198,lng:-78.3090289}});
+                document.getElementById('map'), {zoom: 11, center: position});
             new google.maps.Marker({position: position, map: map});
             @endif
         }

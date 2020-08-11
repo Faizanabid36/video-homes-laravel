@@ -18,7 +18,7 @@
 
 </head>
 <body>
-<div class="container-fluid bg-white">
+<div class="container-fluid bg-white shadow-lg">
     <div class="container">
         <div class="row">
             <div class="col-12">
