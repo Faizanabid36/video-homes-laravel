@@ -64,11 +64,5 @@
     Your browser does not support HTML5 video.
 </video>
 <script src="{{ asset('js/public.js') }}"></script>
-<script>
-    {{--    Get iframe attributes --}}
-    {{--   $(window.frameElement).attr("width") --}}
-    {{--    window.frameElement.getAttribute("src") --}}
-
-</script>
 </body>
 </html>

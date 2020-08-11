@@ -74,15 +74,13 @@
         </div>
     </div>
 </div>
-@if(!Route::is('home'))
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                {{Breadcrumbs::render()}}
-            </div>
+<div class="container my-3">
+    <div class="row">
+        <div class="col">
+            {{Breadcrumbs::render()}}
         </div>
     </div>
-    @endif
+</div>
 @yield('content')
     <div class="container-fluid bg-dark ">
         <div class="row">
