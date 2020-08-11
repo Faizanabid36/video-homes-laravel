@@ -27,30 +27,12 @@
                     Videos List
                 </a>
             </li>
-{{--            <li class="nav-item">--}}
-{{--                <a class="nav-link" href="{{route('admin.videos_list')}}">--}}
-{{--                    Videos List--}}
-{{--                </a>--}}
-{{--            </li>--}}
 
             <li class="nav-item">
                 <a class="nav-link {{Route::is('categories.*') ? 'active' : ''}}" href="{{route('categories.index')}}">
                     Video Categories
                 </a>
             </li>
-
-{{--            --}}{{--                <li class="">--}}
-{{--            --}}{{--                    <a class="nav-link" href="{{route('user_tags')}}">--}}
-{{--            --}}{{--                        <i class="fa fa-tachometer"></i>--}}
-{{--            --}}{{--                        <span class="link-title menu_hide">&nbsp;Industry--}}
-{{--            --}}{{--                        </span>--}}
-{{--            --}}{{--                    </a>--}}
-{{--            --}}{{--                </li>--}}
-{{--            <li class="nav-item">--}}
-{{--                <a class="nav-link" href="{{route('user-categories.index')}}">--}}
-{{--                    User Categories--}}
-{{--                </a>--}}
-{{--            </li>--}}
 
             <li class="nav-item">
                 <a class="nav-link {{Route::is('report_query.index') ? 'active' : ''}}" href="{{route('reported_query_videos')}}">
@@ -75,9 +57,6 @@
                        onclick="event.preventDefault();                     document.getElementById('logout-form').submit();">
                         <i class="fa fa-lock"></i> {{ __('Logout') }}
                     </a>
-{{--                    <a class="dropdown-item" href="#">Another action</a>--}}
-{{--                    <div class="dropdown-divider"></div>--}}
-{{--                    <a class="dropdown-item" href="#">Something else here</a>--}}
                 </div>
             </li>
         </ul>
