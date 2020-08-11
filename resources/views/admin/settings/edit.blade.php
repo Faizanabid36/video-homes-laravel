@@ -1,5 +1,8 @@
 @extends('admin.layouts.app')
 
+@php
+    $settings = App\Settings::first();
+@endphp
 @section('content')
     <div class="container">
         <div class="row">
