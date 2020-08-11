@@ -59,9 +59,10 @@ class SettingsController extends Controller
      *
      * @return Factory|View
      */
-    public function edit(Settings $setting)
+    public function edit()
     {
         //
+        $setting = Settings::first();
         return view( 'admin.settings.edit', compact( 'setting') );
     }
 
