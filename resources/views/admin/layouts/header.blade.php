@@ -34,7 +34,7 @@
 {{--            </li>--}}
 
             <li class="nav-item">
-                <a class="nav-link {{Route::is('videos.*') ? 'active' : ''}}" href="{{route('categories.index')}}">
+                <a class="nav-link {{Route::is('categories.*') ? 'active' : ''}}" href="{{route('categories.index')}}">
                     Video Categories
                 </a>
             </li>
