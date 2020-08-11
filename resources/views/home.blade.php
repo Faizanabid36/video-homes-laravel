@@ -30,7 +30,7 @@
                             <div class="card-body px-1">
                                 <h5 class="card-title">Videographers</h5>
                                 <p class="card-text">A Platform for your business.</p>
-                                <a href="#" class="btn btn-primary">LEARN MORE</a>
+                                <button href="#" class="btn btn-primary">LEARN MORE</button>
                             </div>
                         </div>
                         <div class="card col-md-3 col-sm-12 shadow-lg p-1">
@@ -40,7 +40,7 @@
                             <div class="card-body px-1">
                                 <h5 class="card-title">Local Business Owners</h5>
                                 <p class="card-text">You have a story..let our Marketing Pros tell it!</p>
-                                <a href="#" class="btn btn-success">LEARN MORE</a>
+                                <button href="#" class="btn btn-success">LEARN MORE</button>
                             </div>
                         </div>
                         <div class="card col-md-3 col-sm-12 shadow-lg p-1">
@@ -51,7 +51,7 @@
                                 <h5 class="card-title">Real Estate Agents</h5>
                                 <p class="card-text">Finally a fully integrated solution for production and
                                     distribution that puts you in control.</p>
-                                <a href="#" class="btn btn-warning">LEARN MORE</a>
+                                <button href="#" class="btn btn-warning">LEARN MORE</button>
                             </div>
                         </div>
                         <div class="card col-md-3 col-sm-12 shadow-lg p-1">
@@ -62,7 +62,7 @@
                                 <h5 class="card-title">Writers and Content Producers</h5>
                                 <p class="card-text">Tap into our network of video pros and see what cool things you
                                     can accomplish.</p>
-                                <a href="#" class="btn btn-dark">LEARN MORE</a>
+                                <button href="#" class="btn btn-dark">LEARN MORE</button>
                             </div>
                         </div>
                     </div>

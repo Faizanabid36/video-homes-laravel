@@ -40,8 +40,8 @@ class UserCategoriesController extends Controller {
      */
     public function create() {
         $user_categories = UserCategory::whereNull( 'parent_id' )->get();
-
-        return view( 'admin.user-categories.create' . compact( 'user_categories' ) );
+        $user_sub_categories = UserCategory::whereIn( 'id',collect($user_categories)->pluck('id') )->get();
+        return view( 'admin.user-categories.create' . compact( 'user_categories','user_sub_categories' ) );
     }
 
     /**
@@ -55,8 +55,12 @@ class UserCategoriesController extends Controller {
         $this->validate( $request, [
             'name' => 'required|max:4'
         ] );
-        $requestData = $request->all();
+        if(request('parent_id_2')){
+            request('parent_id',request('parent_id_2'));
+        }
 
+        $requestData = $request->all();
+        unset($requestData['parent_id_2']);
         UserCategory::create( $requestData );
 
         return redirect( 'admin/user-categories' )->with( 'flash_message', 'UserCategory added!' );
@@ -85,8 +89,9 @@ class UserCategoriesController extends Controller {
     public function edit( $id ) {
         $usercategory    = UserCategory::findOrFail( $id );
         $user_categories = UserCategory::whereNull( 'parent_id' )->get();
+        $user_sub_categories = UserCategory::whereIn( 'id',collect($user_categories)->pluck('id') )->get();
 
-        return view( 'admin.user-categories.edit', compact( 'usercategory', 'user_categories' ) );
+        return view( 'admin.user-categories.edit', compact( 'usercategory', 'user_categories' ,'user_sub_categories') );
     }
 
     /**
@@ -101,7 +106,12 @@ class UserCategoriesController extends Controller {
         $this->validate( $request, [
             'name' => 'required|max:4'
         ] );
+        if(request('parent_id_2')){
+            request('parent_id',request('parent_id_2'));
+        }
+
         $requestData = $request->all();
+        unset($requestData['parent_id_2']);
 
         $usercategory = UserCategory::findOrFail( $id );
         $usercategory->update( $requestData );

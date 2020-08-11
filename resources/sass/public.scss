@@ -107,7 +107,25 @@ $theme-colors: (
     }
 }
 
+.btnCustom1 {
+    background: #03a9f4;
+    color: white;
+    padding: 18px 36px !important;
+    font-size: 13px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+}
 
+.btnCustom2 {
+    background: #4caf50;
+    color: white;
+    padding: 18px 36px !important;
+    font-size: 13px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 400;
+}
 
 .iconBoxParent {
     margin-top: 50px;

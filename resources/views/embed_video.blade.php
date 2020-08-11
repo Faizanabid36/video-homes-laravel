@@ -22,7 +22,7 @@
 <body>
 <video style="width: 100%; height: 100vh"
        poster="{{asset("storage/$video->thumbnail")}}"
-       preload="none" autoplay controls>
+       preload="none" autoplay controls loop>
     @if($video->{'8k'})
         <source src="{{asset("storage/".str_replace('240p','4320p',$video->stream_path))}}"
                 type="video/mp4" controls
