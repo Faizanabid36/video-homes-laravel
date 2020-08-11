@@ -35,10 +35,11 @@ try {
         $("." + $(this).attr("id")).removeClass("d-none");
     });
     if ($('#my-video_html5').length) {
-        $('#my-video_html5').mediaelementplayer({
+        let options = {
+            autoplay: false,
+            loop:false,
             pluginPath: 'https://cdnjs.com/libraries/mediaelement-plugins/',
             shimScriptAccess: 'always',
-            autoplay: true,
             features: ['playpause', 'current', 'progress', 'duration', 'speed', 'skipback', 'jumpforward', 'tracks', 'markers', 'volume', 'chromecast', 'contextmenu', 'flash', 'fullscreen', 'quality'],
             vastAdTagUrl: '',
             vastAdsType: '',
@@ -60,11 +61,16 @@ try {
                         /* pass */
                     }
                 }, false);
-                media.addEventListener('loadedmetadata', function(){
+                media.addEventListener('loadedmetadata', function () {
                     $(".mejs__controls").before("<img class='position-absolute watermark_logo' src='http://3.21.2.114/img/cropped-VideoHomes-3.png'/>")
-                },false);
+                }, false);
             },
-        });
+        };
+        if (window.frameElement) {
+            options.autoplay = !!window.frameElement.getAttribute('autoplay');
+            options.loop = !!window.frameElement.getAttribute('loop');
+        }
+        $('#my-video_html5').mediaelementplayer(options);
     }
     $(".share-social").click(function (e) {
         openShareWindow($(this).data('url'));
