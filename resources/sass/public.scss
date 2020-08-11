@@ -3,6 +3,11 @@
 @import '~bootstrap/scss/variables';
 @import '~bootstrap/scss/mixins';
 @import 'variables';
+$theme-colors: (
+    "primary": $primary,
+    "danger": #ff4136,
+    'info':#2196f3,
+);
 //.sticky {
 //    position: -webkit-sticky;
 //    position: sticky;
@@ -102,25 +107,7 @@
     }
 }
 
-.btnCustom1 {
-    background: #03a9f4;
-    color: white;
-    padding: 18px 36px !important;
-    font-size: 13px;
-    border: none;
-    border-radius: 10px;
-    font-weight: 600;
-}
 
-.btnCustom2 {
-    background: #4caf50;
-    color: white;
-    padding: 18px 36px !important;
-    font-size: 13px;
-    border: none;
-    border-radius: 10px;
-    font-weight: 400;
-}
 
 .iconBoxParent {
     margin-top: 50px;
@@ -137,19 +124,10 @@
 
 //Directory
 
-$theme-colors: (
-    "primary": #2393ba,
-    "danger": #ff4136
-);
 
-.btn-primary {
-
-    //font-size: 14px !important;
-    border-color: #0f7fa6 !important;
-}
 
 a {
-    color: #2393ba !important;
+    color:  $primary !important;
     text-decoration: none !important;
 }
 
