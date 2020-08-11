@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Settings;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class SettingsController extends Controller
 {
@@ -41,7 +43,8 @@ class SettingsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Settings  $settings
+     * @param Settings $settings
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Settings $settings)
@@ -52,20 +55,22 @@ class SettingsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Settings  $settings
-     * @return \Illuminate\Http\Response
+     * @param Settings  $setting
+     *
+     * @return Factory|View
      */
-    public function edit(Settings $settings)
+    public function edit(Settings $setting)
     {
         //
-        return view( 'admin.settings.edit', compact( 'settings') );
+        return view( 'admin.settings.edit', compact( 'setting') );
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Settings  $settings
+     * @param Settings $settings
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Settings $settings)
@@ -84,7 +89,8 @@ class SettingsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Settings  $settings
+     * @param Settings  $settings
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Settings $settings)
