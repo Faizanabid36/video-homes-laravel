@@ -5,19 +5,19 @@ use \App\UserCategory;
 use App\Video;
 use \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 
-// Home
-Breadcrumbs::for( 'home', function ( $trail ) {
-    $trail->push( 'Home', route( 'home' ) );
-} );
+//// Home
+//Breadcrumbs::for( 'home', function ( $trail ) {
+//    $trail->push( 'Home', route( 'home' ) );
+//} );
 
 Breadcrumbs::for( 'public.page', function ( $trail, $slug ) {
-    $trail->parent( 'home' );
+//    $trail->parent( 'home' );
     $trail->push( Page::viewPage( $slug )->first()->title, route( 'public.page', $slug ) );
 } );
 
 // Home > Blog > [Category]
 Breadcrumbs::for( 'directory', function ( $trail, $level1 = null, $level2 = null ) {
-    $trail->parent( 'home' );
+//    $trail->parent( 'home' );
     $trail->push( 'Directory', route( 'directory' ) );
     if ( $level1 ) {
         $trail->push( UserCategory::whereSlug( $level1 )->first()->name, route( 'directory', $level1 ) );
@@ -28,7 +28,7 @@ Breadcrumbs::for( 'directory', function ( $trail, $level1 = null, $level2 = null
 } );
 
 Breadcrumbs::for( 'directory_by_username', function ( $trail, $username, $video_id = null ) {
-    $trail->parent( 'home' );
+//    $trail->parent( 'home' );
     $trail->push( 'Directory', route( 'directory' ) );
     $video = Video::userVideos( $username, $video_id )->firstOrFail();
     $category = UserCategory::find( $video->user->user_extra->user_category_id );
