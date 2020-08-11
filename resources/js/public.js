@@ -37,7 +37,9 @@ try {
     if ($('#my-video_html5').length) {
         let options = {
             autoplay: false,
-            loop:false,
+            loop: false,
+            startVolume:5,
+            alwaysShowControls:true,
             pluginPath: 'https://cdnjs.com/libraries/mediaelement-plugins/',
             shimScriptAccess: 'always',
             features: ['playpause', 'current', 'progress', 'duration', 'speed', 'skipback', 'jumpforward', 'tracks', 'markers', 'volume', 'chromecast', 'contextmenu', 'flash', 'fullscreen', 'quality'],
@@ -52,13 +54,8 @@ try {
             adsPrerollAdSkipSeconds: 0,
             success: function (media) {
                 media.addEventListener('ended', function (e) {
-                    if ($('#related_video').length) {
-                        var url = $('#related_video').find('a').attr('href');
-                        if (url) {
-                            window.location.href = url;
-                        }
-                    } else {
-                        /* pass */
+                    if ($('#related_video').length && $('#related_video').find('a').attr('href')) {
+                        window.location.href = $('#related_video').find('a').attr('href');
                     }
                 }, false);
                 media.addEventListener('loadedmetadata', function () {
@@ -69,6 +66,12 @@ try {
         if (window.frameElement) {
             options.autoplay = !!window.frameElement.getAttribute('autoplay');
             options.loop = !!window.frameElement.getAttribute('loop');
+            if (!!window.frameElement.getAttribute('mute')) {
+                options.startVolume = 0;
+            }
+            if (options.autoplay && options.loop) {
+                options.alwaysShowControls = false;
+            }
         }
         $('#my-video_html5').mediaelementplayer(options);
     }
