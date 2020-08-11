@@ -62,9 +62,9 @@ class SettingsController extends Controller
     public function edit()
     {
         //
-        $setting = Settings::first();
-        dd($setting->toArray());
-        return view( 'admin.settings.edit', compact( 'setting') );
+        $settings = Settings::first();
+        dd($settings->toArray());
+        return view( 'admin.settings.edit', compact( 'settings') );
     }
 
     /**
