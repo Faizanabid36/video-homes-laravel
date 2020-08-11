@@ -63,7 +63,7 @@ class SettingsController extends Controller
     {
         //
         $setting = Settings::first();
-        dd($setting);
+        dd($setting->toArray());
         return view( 'admin.settings.edit', compact( 'setting') );
     }
 
