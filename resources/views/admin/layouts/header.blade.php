@@ -24,7 +24,6 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link {{Route::is('videos.*') ? 'active' : ''}}" href="{{route('videos.index')}}">
-
                     Videos List
                 </a>
             </li>
@@ -34,11 +33,11 @@
 {{--                </a>--}}
 {{--            </li>--}}
 
-{{--            <li class="nav-item">--}}
-{{--                <a class="nav-link" href="{{route('categories.index')}}">--}}
-{{--                    Video&nbsp;Categories--}}
-{{--                </a>--}}
-{{--            </li>--}}
+            <li class="nav-item">
+                <a class="nav-link {{Route::is('videos.*') ? 'active' : ''}}" href="{{route('categories.index')}}">
+                    Video Categories
+                </a>
+            </li>
 
 {{--            --}}{{--                <li class="">--}}
 {{--            --}}{{--                    <a class="nav-link" href="{{route('user_tags')}}">--}}
