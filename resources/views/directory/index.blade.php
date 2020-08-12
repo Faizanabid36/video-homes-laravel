@@ -419,7 +419,7 @@
 
             function initMap() {
                     @if(!empty($users))
-                let mapArea = document.getElementById('map'), i, map = new google.maps.Map(mapArea, {zoom: 7, center:
+                let mapArea = document.getElementById('map'), i, map = new google.maps.Map(mapArea, {zoom: 4, center:
                             new google.maps.LatLng(39.2802198,-78.3090289)
                     }),
                     bounds = new google.maps.LatLngBounds(), infowindow = new google.maps.InfoWindow();
@@ -443,7 +443,7 @@
                 @endforeach
                 // map.fitBounds(bounds);
                 var listener = google.maps.event.addListener(map, "idle", function () {
-                    map.setZoom(12);
+                    // map.setZoom(12);
                     google.maps.event.removeListener(listener);
                 });
                 @endif
