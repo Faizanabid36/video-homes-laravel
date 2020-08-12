@@ -40,7 +40,7 @@ class UserCategoriesController extends Controller {
      */
     public function create() {
         $user_categories = UserCategory::whereNull( 'parent_id' )->get();
-        $user_sub_categories = UserCategory::whereIn( 'id',collect($user_categories)->pluck('id') )->get();
+        $user_sub_categories = UserCategory::whereIn( 'parent_id',$user_categories->pluck('id') )->get();
         return view( 'admin.user-categories.create' . compact( 'user_categories','user_sub_categories' ) );
     }
 
@@ -89,7 +89,6 @@ class UserCategoriesController extends Controller {
     public function edit( $id ) {
         $usercategory    = UserCategory::findOrFail( $id );
         $user_categories = UserCategory::whereNull( 'parent_id' )->get();
-//        return $user_categories->pluck('id');
         $user_sub_categories = UserCategory::whereIn( 'parent_id',$user_categories->pluck('id') )->get();
 
         return view( 'admin.user-categories.edit', compact( 'usercategory', 'user_categories' ,'user_sub_categories') );
