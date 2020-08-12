@@ -23,8 +23,13 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link {{Route::is('user-categories.*') ? 'active' : ''}}" href="{{route('user-categories.index')}}">
+                    User Categories
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link {{Route::is('videos.*') ? 'active' : ''}}" href="{{route('videos.index')}}">
-                    Videos List
+                    Videos
                 </a>
             </li>
 
