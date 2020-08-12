@@ -437,7 +437,7 @@
                     return function () {
                         infowindow.setContent("{{$u['name']}}");
                         infowindow.open(map, marker);
-                        map.setZoom(12);
+                        // map.setZoom(12);
                     }
                 })(marker, i));
 
