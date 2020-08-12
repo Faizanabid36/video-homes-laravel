@@ -429,7 +429,7 @@
                         position: new google.maps.LatLng("{{$u['location_latitude']}}", "{{$u['location_longitude']}}"),
                         map: map
                     });
-                bounds.extend(marker.position);
+                // bounds.extend(marker.position);
                 i = {{$k}};
                 google.maps.event.addListener(marker, 'click', (function (marker, i) {
                     return function () {
