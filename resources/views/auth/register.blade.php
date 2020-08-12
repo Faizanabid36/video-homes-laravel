@@ -37,7 +37,7 @@
                                     data-live-search="true"
                                     title="Choose one of the following Profession and Expertise...">
                                 @foreach($user_category as $u)
-                                    <optgroup @if(!empty($u['children'] )) label="{{$u['name']}}" @endif>
+                                    <optgroup label="{{$u['name']}}">
                                         @if(!empty($u['children'] ))
                                             @foreach($u['children'] as $k => $u1)
                                                 @if (!empty($u1['children']))

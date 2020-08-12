@@ -54,10 +54,10 @@ class PagesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-			'title' => 'required|max:4'
+			'title' => 'required|min:4'
 		]);
         $requestData = $request->all();
-        
+
         Page::create($requestData);
 
         return redirect('admin/pages')->with('flash_message', 'Page added!');
@@ -102,10 +102,10 @@ class PagesController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-			'title' => 'required|max:4'
+			'title' => 'required|min:4'
 		]);
         $requestData = $request->all();
-        
+
         $page = Page::findOrFail($id);
         $page->update($requestData);
 

@@ -43,7 +43,7 @@ class PageController extends Controller
     public function update(PageValidationRequest $request,$page)
     {
         $request->merge(['slug'=>Str::slug($request->title)]);
-        Page::whereId($page)->update($request->except('_token','_method'));
+        $page->update($request->except('_token','_method'));
         return back()->withSuccess('Page Updated Successfully');
     }
 
