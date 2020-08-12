@@ -437,15 +437,16 @@
                     return function () {
                         infowindow.setContent("{{$u['name']}}");
                         infowindow.open(map, marker);
+                        map.setZoom(12);
                     }
                 })(marker, i));
 
                 @endforeach
                 // map.fitBounds(bounds);
-                var listener = google.maps.event.addListener(map, "idle", function () {
-                    // map.setZoom(12);
-                    google.maps.event.removeListener(listener);
-                });
+                // var listener = google.maps.event.addListener(map, "idle", function () {
+                //     // map.setZoom(12);
+                //     google.maps.event.removeListener(listener);
+                // });
                 @endif
             }
         </script>
