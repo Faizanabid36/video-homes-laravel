@@ -419,7 +419,9 @@
 
             function initMap() {
                     @if(!empty($users))
-                let mapArea = document.getElementById('map'), i, map = new google.maps.Map(mapArea, {zoom: 7, center: {lat:-78.3090289,lng:39.2802198}}),
+                let mapArea = document.getElementById('map'), i, map = new google.maps.Map(mapArea, {zoom: 7, center:
+                            new google.maps.LatLng(39.2802198,-78.3090289)
+                    }),
                     bounds = new google.maps.LatLngBounds(), infowindow = new google.maps.InfoWindow();
                 mapArea.style.width = "100%";
                 mapArea.style.height = "400px";
