@@ -441,7 +441,7 @@
                 })(marker, i));
 
                 @endforeach
-                map.fitBounds(bounds);
+                // map.fitBounds(bounds);
                 var listener = google.maps.event.addListener(map, "idle", function () {
                     map.setZoom(12);
                     google.maps.event.removeListener(listener);
