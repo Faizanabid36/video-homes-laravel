@@ -34,7 +34,7 @@ try {
         });
         $("." + $(this).attr("id")).removeClass("d-none");
     });
-    if ($('#my-video_html5').length) {
+    if ($('video').length) {
         let options = {
             autoplay: false,
             loop: false,
