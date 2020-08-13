@@ -82,7 +82,7 @@ class SettingsController extends Controller
             "title"=>"required|min:6|string",
             "description"=>"min:6|string",
             "display_title"=>"required|min:6|string",
-            "parallax_video"=>"parallax_video|min:6",
+            "parallax_video"=>"min:6",
         ]);
         $requestData = $request->all();
         dd($requestData);
