@@ -93,7 +93,6 @@ class SettingsController extends Controller
         }
 
 //        $d =$settings->update(["display_title"=>$requestData['display_title']]);
-        return ["esa"=>$id];
         $d = Settings::find($id)->update(["display_title"=>$requestData['display_title']]);
         dd($d);
         return back()->with( 'flash_message', 'Settings updated!' );
