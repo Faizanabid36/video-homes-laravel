@@ -37,10 +37,10 @@ class UserCategory extends Model {
     public static function boot() {
         parent::boot();
         static::creating(function($user_category){
-            $user_category->slug = \Str::slug(str_replace("&","-",$user_category));
+            $user_category->slug = \Str::slug(str_replace("&","-",$user_category->name));
         });
         static::updating(function($user_category){
-            $user_category->slug = \Str::slug(str_replace("&","-",$user_category));
+            $user_category->slug = \Str::slug(str_replace("&","-",$user_category->name));
         });
         static::deleting( function ( $user_category ) { // before delete() method call this
             $user_category->children()->each( function ( $child ) {
