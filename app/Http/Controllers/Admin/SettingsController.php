@@ -85,7 +85,7 @@ class SettingsController extends Controller
             "parallax_video"=>"parallax_video|min:6",
         ]);
         $requestData = $request->all();
-        dd($requestData)z
+        dd($requestData);
         if ($request->hasFile('thumbnail')) {
             $requestData['thumbnail'] = $request->file('thumbnail')
                                                 ->store('uploads', 'public');
