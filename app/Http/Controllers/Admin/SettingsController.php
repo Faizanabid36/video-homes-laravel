@@ -60,11 +60,11 @@ class SettingsController extends Controller
      *
      * @return Factory|View
      */
-    public function edit()
+    public function edit($settings)
     {
         //
-        $settings = Settings::first();
-        return view( 'admin.settings.edit' );
+//        $settings = Settings::first();
+        return view( 'admin.settings.edit',compact('settings') );
     }
 
     /**
@@ -91,7 +91,7 @@ class SettingsController extends Controller
                                                 ->store('uploads', 'public');
         }
         $settings->update(request()->all());
-        return redirect( 'admin/setting' )->with( 'flash_message', 'Settings updated!' );
+        return redirect( 'admin/setting/edit' )->with( 'flash_message', 'Settings updated!' );
     }
 
     /**
