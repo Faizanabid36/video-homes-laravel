@@ -78,7 +78,7 @@ class SettingsController extends Controller
     public function update(Request $request, Settings $settings)
     {
         //
-        $this->validate(request()->all(),[
+        $this->validate($request,[
             "title"=>"required|min:6|string",
             "description"=>"min:6|string",
             "display_title"=>"required|min:6|string",
