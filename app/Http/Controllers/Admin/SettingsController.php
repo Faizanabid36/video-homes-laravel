@@ -84,6 +84,12 @@ class SettingsController extends Controller
             "display_title"=>"required|min:6|string",
             "parallax_video"=>"parallax_video|min:6",
         ]);
+        $requestData = $request->all();
+        dd($requestData)z
+        if ($request->hasFile('thumbnail')) {
+            $requestData['thumbnail'] = $request->file('thumbnail')
+                                                ->store('uploads', 'public');
+        }
         $settings->update(request()->all());
         return redirect( 'admin/setting' )->with( 'flash_message', 'Settings updated!' );
     }

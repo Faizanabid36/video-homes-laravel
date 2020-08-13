@@ -60,7 +60,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{route('admin.profile')}}">Edit Profile</a>
-                    <a class="dropdown-item" href="{{route('settings.edit')}}">Edit Settings</a>
+                    <a class="dropdown-item" href="{{route('setting.edit')}}">Edit Settings</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault();                     document.getElementById('logout-form').submit();">

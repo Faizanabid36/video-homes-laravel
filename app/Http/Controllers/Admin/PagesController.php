@@ -105,11 +105,7 @@ class PagesController extends Controller
 			'title' => 'required|min:4'
 		]);
         $requestData = $request->all();
-        dd($requestData);
-        if ($request->hasFile('thumbnail')) {
-            $requestData['thumbnail'] = $request->file('thumbnail')
-                                                ->store('uploads', 'public');
-        }
+
         $page = Page::findOrFail($id);
         $page->update($requestData);
 
