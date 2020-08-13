@@ -86,12 +86,14 @@ class SettingsController extends Controller
             "box_4"=>"array",
 
         ]);
-        $requestData = $request->all();
-        dd($requestData);
-        if ($request->hasFile('thumbnail')) {
-            $requestData['thumbnail'] = $request->file('thumbnail')
+        if ($request->hasFile('box_1.file')) {
+            $requestData['box_1']['file'] = $request->file('box_1.file')
                                                 ->store('uploads', 'public');
         }
+        $requestData = $request->all();
+
+        dd($requestData);
+
         $settings->update(request()->all());
         return redirect( 'admin/setting/edit' )->with( 'flash_message', 'Settings updated!' );
     }
