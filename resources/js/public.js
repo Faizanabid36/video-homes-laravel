@@ -38,8 +38,8 @@ try {
         let options = {
             autoplay: false,
             loop: false,
-            startVolume:5,
-            alwaysShowControls:true,
+            startVolume: 5,
+            alwaysShowControls: true,
             pluginPath: 'https://cdnjs.com/libraries/mediaelement-plugins/',
             shimScriptAccess: 'always',
             features: ['playpause', 'current', 'progress', 'duration', 'speed', 'skipback', 'jumpforward', 'tracks', 'markers', 'volume', 'chromecast', 'contextmenu', 'flash', 'fullscreen', 'quality'],
@@ -96,5 +96,19 @@ try {
         }
     }
 
+    if ($('.tinymce').length) {
+        tinymce.init({
+            selector: '#tinymce',
+            plugins: [
+                "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                "searchreplace wordcount visualblocks visualchars code fullscreen",
+                "insertdatetime media nonbreaking save table contextmenu directionality",
+                "emoticons template paste textcolor"
+            ],
+            toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+            toolbar2: "print preview media | forecolor backcolor emoticons",
+            image_advtab: true,
+        });
+    }
 } catch (e) {
 }

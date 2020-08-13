@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{ config('app.name', 'VideoHome') }}</title>
 
     <!-- Scripts -->
@@ -33,7 +30,7 @@
     {{--    <link rel="stylesheet" href="{{asset('css/jquery.tagit.css')}}">--}}
     {{--    <link rel="stylesheet" href="{{asset('css/font-awesome-4.7.0/css/font-awesome.min.css')}}">--}}
     <link href="{{asset('css/public.css?version=')}}{{time()}}" rel="stylesheet">
-
+    <script src="https://cdn.tiny.cloud/1/rlsbsechuy5zwieakwp79flrto7ipmojgummzxwwjbbcbtye/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     @yield('style')
     @yield('stylesheets')
     <script>
