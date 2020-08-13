@@ -62,7 +62,7 @@ class SettingsController extends Controller
      */
     public function edit($id)
     {
-        $settings = Settings::find($id);
+        $settings = Settings::findOrFail($id);
         return view( 'admin.settings.edit',compact('settings') );
     }
 
