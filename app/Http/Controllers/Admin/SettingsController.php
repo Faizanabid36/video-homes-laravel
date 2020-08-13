@@ -74,7 +74,7 @@ class SettingsController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(Request $request, Settings $settings)
+    public function update(Request $request, $id)
     {
         //
         request()->validate([ "display_title"=>"required|min:6|string","box_1"=>"array","box_2"=>"array","box_3"=>"array","box_4"=>"array"]);
@@ -93,8 +93,8 @@ class SettingsController extends Controller
         }
 
 //        $d =$settings->update(["display_title"=>$requestData['display_title']]);
-        return $settings;
-        $d = Settings::find($settings->id)->update(["display_title"=>$requestData['display_title']]);
+        return ["esa"=>$id];
+        $d = Settings::find($id)->update(["display_title"=>$requestData['display_title']]);
         dd($d);
         return back()->with( 'flash_message', 'Settings updated!' );
     }
