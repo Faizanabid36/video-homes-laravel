@@ -77,25 +77,19 @@ class SettingsController extends Controller
     public function update(Request $request, Settings $settings)
     {
         //
-        $this->validate($request,[
-            "display_title"=>"required|min:6|string",
-        ]);
+        $this->validate($request,[ "display_title"=>"required|min:6|string"]);
         $requestData = $request->all();
         if ($request->hasFile('box_1.file')) {
-            $requestData['box_1']['file'] = $request->file('box_1.file')
-                                                ->store('uploads', 'public');
+            $requestData['box_1']['file'] = $request->file('box_1.file')->store('uploads', 'public');
         }
         if ($request->hasFile('box_2.file')) {
-            $requestData['box_2']['file'] = $request->file('box_2.file')
-                                                    ->store('uploads', 'public');
+            $requestData['box_2']['file'] = $request->file('box_2.file')->store('uploads', 'public');
         }
         if ($request->hasFile('box_3.file')) {
-            $requestData['box_3']['file'] = $request->file('box_3.file')
-                                                    ->store('uploads', 'public');
+            $requestData['box_3']['file'] = $request->file('box_3.file')->store('uploads', 'public');
         }
         if ($request->hasFile('box_4.file')) {
-            $requestData['box_4']['file'] = $request->file('box_4.file')
-                                                    ->store('uploads', 'public');
+            $requestData['box_4']['file'] = $request->file('box_4.file')->store('uploads', 'public');
         }
 
         $settings->update($requestData);
