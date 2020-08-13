@@ -93,9 +93,9 @@ class SettingsController extends Controller
         }
 
 //        $d =$settings->update(["display_title"=>$requestData['display_title']]);
-        $d = Settings::find($id)->update(["display_title"=>$requestData['display_title']]);
-        dd($d);
-        return back()->with( 'flash_message', 'Settings updated!' );
+        $d = Settings::find($id)->update($requestData);
+
+        return back()->with( 'flash_message', 'Settings updated! '.boolval($d) );
     }
 
     /**
