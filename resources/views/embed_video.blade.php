@@ -63,6 +63,6 @@
             data-quality="240p" title="240p" label="240p" res="240">
     Your browser does not support HTML5 video.
 </video>
-<script src="{{ asset('js/public.js') }}"></script>
+<script src="{{ asset('js/public.js?version=').time() }}"></script>
 </body>
 </html>
