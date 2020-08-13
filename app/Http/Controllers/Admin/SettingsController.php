@@ -102,7 +102,7 @@ class SettingsController extends Controller
 //        dd($requestData);
 
         $settings->update(request()->all());
-        return redirect( 'admin/settings/1edit' )->with( 'flash_message', 'Settings updated!' );
+        return redirect( 'admin/settings/1/edit' )->with( 'flash_message', 'Settings updated!' );
     }
 
     /**
