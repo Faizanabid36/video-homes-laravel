@@ -23,11 +23,11 @@ class CreateSettingsTable extends Migration
             $table->string('button_1_link')->nullable();
             $table->string('button_2')->nullable();
             $table->string('button_2_link')->nullable();
-            $table->text('box1')->nullable();
-            $table->text('box2')->nullable();
-            $table->text('box3')->nullable();
-            $table->text('box4')->nullable();
-            $table->text('parallax_video')->nullable();
+            $table->text('box_1')->nullable();
+            $table->text('box_2')->nullable();
+            $table->text('box_3')->nullable();
+            $table->text('box_4')->nullable();
+            $table->string('parallax_video')->nullable();
             $table->string('call_to_action_title')->nullable();
             $table->string('call_to_action')->nullable();
             $table->string('call_to_action_link')->nullable();

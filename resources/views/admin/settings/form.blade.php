@@ -138,7 +138,7 @@
 </div>
 <div class="form-group {{ $errors->has('parallax_video') ? 'has-error' : ''}}">
     <label for="parallax_video" class="control-label">{{ 'Parallax Video' }}</label>
-    <textarea class="form-control tinymce" name="parallax_video" id="parallax_video" >{{ isset($settings->parallax_video) ? $settings->parallax_video : ''}}</textarea>
+    <input class="form-control" name="call_to_action_title" type="text" id="parallax_video" value="{{ isset($settings->parallax_video) ? $settings->parallax_video : ''}}" >
     {!! $errors->first('parallax_video', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group {{ $errors->has('call_to_action_title') ? 'has-error' : ''}}">

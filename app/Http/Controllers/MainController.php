@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AccountType;
 use App\Category;
 use App\Page;
+use App\Settings;
 use App\User;
 use App\UserCategory;
 use App\UserExtra;
@@ -21,7 +22,8 @@ class MainController extends Controller {
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index() {
-        return view( 'home' );
+        $setting = Settings::first();
+        return view( 'home',compact('setting') );
     }
 
     public function directory( $level1 = null, $level2 = null ) {
