@@ -92,11 +92,8 @@ class SettingsController extends Controller
             $requestData['box_4']['file'] = $request->file('box_4.file')->store('uploads', 'public');
         }
 
-        try{
-            $settings->update($requestData);
-        } catch(\Exception $e){
-            die($e->getMessage());
-        }
+        $d =$settings->update($requestData);
+        dd($d);
         return back()->with( 'flash_message', 'Settings updated!' );
     }
 
