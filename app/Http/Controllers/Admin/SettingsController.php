@@ -73,7 +73,7 @@ class SettingsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param Settings $settings
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, Settings $settings)
     {
@@ -81,6 +81,7 @@ class SettingsController extends Controller
         $this->validate($request,[
             "display_title"=>"required|min:6|string",
         ]);
+        $requestData = $request->all();
         if ($request->hasFile('box_1.file')) {
             $requestData['box_1']['file'] = $request->file('box_1.file')
                                                 ->store('uploads', 'public');
@@ -97,9 +98,6 @@ class SettingsController extends Controller
             $requestData['box_4']['file'] = $request->file('box_4.file')
                                                     ->store('uploads', 'public');
         }
-        $requestData = $request->all();
-
-//        dd($requestData);
 
         $settings->update($requestData);
         return redirect( 'admin/settings/1/edit' )->with( 'flash_message', 'Settings updated!' );
