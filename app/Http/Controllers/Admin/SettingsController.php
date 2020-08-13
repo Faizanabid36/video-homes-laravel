@@ -92,7 +92,7 @@ class SettingsController extends Controller
             $requestData['box_4']['file'] = $request->file('box_4.file')->store('uploads', 'public');
         }
 
-        $d =$settings->update(collect($requestData)->except(['_token','_method']));
+        $d =$settings->update(collect($requestData)->except(['_token','_method'])->toArray());
         dd($d);
         return back()->with( 'flash_message', 'Settings updated!' );
     }
