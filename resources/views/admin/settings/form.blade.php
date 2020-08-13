@@ -118,7 +118,7 @@
 </div>
 <div class="form-group {{ $errors->has('parallax_video') ? 'has-error' : ''}}">
     <label for="parallax_video" class="control-label">{{ 'Parallax Video' }}</label>
-    <textarea class="form-control tinymce" name="parallax_video" id="parallax_video" value="{{ isset($settings->parallax_video) ? $settings->parallax_video : ''}}" ></textarea>
+    <textarea class="form-control tinymce" name="parallax_video" id="parallax_video" >{{ isset($settings->parallax_video) ? $settings->parallax_video : ''}}</textarea>
     {!! $errors->first('parallax_video', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group {{ $errors->has('call_to_action_title') ? 'has-error' : ''}}">
@@ -138,7 +138,7 @@
 </div>
 <div class="form-group {{ $errors->has('footer') ? 'has-error' : ''}}">
     <label for="footer" class="control-label">{{ 'Footer' }}</label>
-    <textarea class="form-control tinymce" name="footer" id="footer" value="{{ isset($settings->footer) ? $settings->footer : ''}}" >
+    <textarea class="form-control tinymce" name="footer" id="footer">{{ isset($settings->footer) ? $settings->footer : ''}}</textarea>
     {!! $errors->first('footer', '<p class="help-block">:message</p>') !!}
 </div>
 
