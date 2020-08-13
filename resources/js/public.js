@@ -59,7 +59,7 @@ try {
                     }
                 }, false);
                 media.addEventListener('loadedmetadata', function () {
-                    $(".mejs__controls").before("<img class='position-absolute watermark_logo' src='http://3.21.2.114/img/cropped-VideoHomes-3.png'/>")
+                    $(".mejs__controls").before(`<img class='position-absolute watermark_logo' src='${window.VIDEO_APP.video_url}/img/cropped-VideoHomes-3.png'/>`)
                 }, false);
             },
         };
