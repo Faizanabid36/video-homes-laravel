@@ -77,7 +77,7 @@ class SettingsController extends Controller
     public function update(Request $request, Settings $settings)
     {
         //
-        request()->validate([ "display_title"=>"required|min:6|string","box_1"=>"array",,"box_2"=>"array",,"box_3"=>"array",,"box_4"=>"array"]);
+        request()->validate([ "display_title"=>"required|min:6|string","box_1"=>"array","box_2"=>"array","box_3"=>"array","box_4"=>"array"]);
         $requestData = $request->all();
         if ($request->hasFile('box_1.file')) {
             $requestData['box_1']['file'] = $request->file('box_1.file')->store('uploads', 'public');
