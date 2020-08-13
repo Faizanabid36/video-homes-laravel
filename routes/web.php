@@ -60,7 +60,7 @@ Route::group( [ 'middleware' => 'admin' ], function () {
         Route::resource( 'user-categories', 'Admin\\UserCategoriesController' );
         Route::resource( 'videos', 'Admin\\VideosController' );
         Route::resource( 'users', 'Admin\\UsersController' );
-        Route::resource( 'setting', 'Admin\\SettingsController' );
+        Route::resource( 'settings', 'Admin\\SettingsController' );
         Route::view( 'profile', 'admin.users.profile' )->name( 'admin.profile' );
 ////        Route::resource( 'public_pages', 'PageController' );
 //        Route::get( 'create_user_categories', 'AdminController@create_user_categories' )->name( 'create_user_categories' );
