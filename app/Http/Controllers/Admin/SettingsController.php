@@ -62,6 +62,7 @@ class SettingsController extends Controller
      */
     public function edit($settings)
     {
+        return $settings;
         return view( 'admin.settings.edit',compact('settings') );
     }
 
