@@ -53,7 +53,7 @@ class UserCategoriesController extends Controller {
      */
     public function store( Request $request ) {
         $this->validate( $request, [
-            'name' => 'required|max:4'
+            'name' => 'required|min:4'
         ] );
         if(request('parent_id_2')){
             request('parent_id',request('parent_id_2'));
@@ -104,7 +104,7 @@ class UserCategoriesController extends Controller {
      */
     public function update( Request $request, $id ) {
         $this->validate( $request, [
-            'name' => 'required|max:4'
+            'name' => 'required|min:4'
         ] );
         if(request('parent_id_2')){
             request('parent_id',request('parent_id_2'));

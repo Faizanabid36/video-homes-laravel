@@ -35,10 +35,25 @@
     <input class="form-control" name="button_2_link" type="text" id="button_2_link" value="{{ isset($settings->button_2_link) ? $settings->button_2_link : ''}}" >
     {!! $errors->first('button_2_link', '<p class="help-block">:message</p>') !!}
 </div>
+<div class="form-group {{ $errors->has('box_1["title"]') ? 'has-error' : ''}}">
+    <label for='box_1["title"]' class="control-label">{{ 'First Card Title' }}</label>
+    <input class="form-control" name="box_1[title]" type="text" id='box_1["title"]' value="{{ isset($settings->box_1['title']) ? $settings->box_1['title'] : ''}}" >
+    {!! $errors->first('box_1["title"]', '<p class="help-block">:message</p>') !!}
+</div>
 <div class="form-group {{ $errors->has('box_1') ? 'has-error' : ''}}">
-    <label for="box_1" class="control-label">{{ 'First Card' }}</label>
-    <input class="form-control" name="box_1" type="text" id="box_1" value="{{ isset($settings->box_1) ? $settings->box_1 : ''}}" >
-    {!! $errors->first('box_1', '<p class="help-block">:message</p>') !!}
+    <label for="box_1" class="control-label">{{ 'First Card Icon' }}</label>
+    <input class="form-control" name="box_1[file]" type="file" id="box_1_file" >
+    {!! $errors->first('box_1[file]', '<p class="help-block">:message</p>') !!}
+</div>
+<div class="form-group {{ $errors->has('box_1["btn"]') ? 'has-error' : ''}}">
+    <label for='box_1["btn"]' class="control-label">{{ 'First Card Button Text' }}</label>
+    <input class="form-control" name="box_1[btn]" type="text" id='box_1["btn"]' value="{{ isset($settings->box_1["btn"]) ? $settings->box_1["btn"] : ''}}" >
+    {!! $errors->first('box_1["btn"]', '<p class="help-block">:message</p>') !!}
+</div>
+<div class="form-group {{ $errors->has('box_1["btn_link"]') ? 'has-error' : ''}}">
+    <label for='box_1["btn_link"]' class="control-label">{{ 'First Card Button Link' }}</label>
+    <input class="form-control" name="box_1[btn_link]" type="text" id='box_1["btn_link"]' value="{{ isset($settings->box_1["btn_link"]) ? $settings->box_1["btn_link"] : ''}}" >
+    {!! $errors->first('box_1["btn_link"]', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group {{ $errors->has('box_2') ? 'has-error' : ''}}">
     <label for="box_2" class="control-label">{{ 'Second Card' }}</label>

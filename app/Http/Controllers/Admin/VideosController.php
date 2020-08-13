@@ -53,8 +53,8 @@ class VideosController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-			'title' => 'required|max:4',
-			'description' => 'max:6'
+			'title' => 'required|min:4',
+			'description' => 'min:6'
 		]);
         $requestData = $request->all();
                 if ($request->hasFile('thumbnail')) {

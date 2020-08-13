@@ -51,11 +51,11 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-			'title' => 'required|max:4',
-			'description' => 'max:6'
+			'title' => 'required|min:4',
+			'description' => 'min:6'
 		]);
         $requestData = $request->all();
-        
+
         Category::create($requestData);
 
         return redirect('admin/categories')->with('flash_message', 'Category added!');
@@ -100,11 +100,11 @@ class CategoriesController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-			'title' => 'required|max:4',
-			'description' => 'max:6'
+			'title' => 'required|min:4',
+			'description' => 'min:6'
 		]);
         $requestData = $request->all();
-        
+
         $category = Category::findOrFail($id);
         $category->update($requestData);
 

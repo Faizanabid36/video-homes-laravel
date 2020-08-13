@@ -64,7 +64,7 @@ class SettingsController extends Controller
     {
         //
         $settings = Settings::first();
-        return view( 'admin.settings.edit', compact( 'settings') );
+        return view( 'admin.settings.edit' );
     }
 
     /**

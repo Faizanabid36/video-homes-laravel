@@ -52,7 +52,7 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-			'name' => 'required|max:4',
+			'name' => 'required|min:4',
 			'active' => 'required'
 		]);
         $requestData = $request->all();
@@ -101,7 +101,7 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-//			'name' => 'required|max:4',
+//			'name' => 'required|min:4',
 			'active' => 'required'
 		]);
         $requestData = $request->all();
