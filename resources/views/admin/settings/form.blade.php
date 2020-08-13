@@ -55,24 +55,70 @@
     <input class="form-control" name="box_1[btn_link]" type="text" id='box_1["btn_link"]' value="{{ isset($settings->box_1["btn_link"]) ? $settings->box_1["btn_link"] : ''}}" >
     {!! $errors->first('box_1["btn_link"]', '<p class="help-block">:message</p>') !!}
 </div>
+<div class="form-group {{ $errors->has('box_2["title"]') ? 'has-error' : ''}}">
+    <label for='box_2["title"]' class="control-label">{{ 'Second Card Title' }}</label>
+    <input class="form-control" name="box_2[title]" type="text" id='box_2["title"]' value="{{ isset($settings->box_2['title']) ? $settings->box_2['title'] : ''}}" >
+    {!! $errors->first('box_2["title"]', '<p class="help-block">:message</p>') !!}
+</div>
 <div class="form-group {{ $errors->has('box_2') ? 'has-error' : ''}}">
-    <label for="box_2" class="control-label">{{ 'Second Card' }}</label>
-    <input class="form-control" name="box_2" type="text" id="box_2" value="{{ isset($settings->box_2) ? $settings->box_2 : ''}}" >
-    {!! $errors->first('box_2', '<p class="help-block">:message</p>') !!}
+    <label for="box_2" class="control-label">{{ 'Second Card Icon' }}</label>
+    <input class="form-control" name="box_2[file]" type="file" id="box_2_file" >
+    {!! $errors->first('box_2[file]', '<p class="help-block">:message</p>') !!}
+</div>
+<div class="form-group {{ $errors->has('box_2["btn"]') ? 'has-error' : ''}}">
+    <label for='box_2["btn"]' class="control-label">{{ 'Second Card Button Text' }}</label>
+    <input class="form-control" name="box_2[btn]" type="text" id='box_2["btn"]' value="{{ isset($settings->box_2["btn"]) ? $settings->box_2["btn"] : ''}}" >
+    {!! $errors->first('box_2["btn"]', '<p class="help-block">:message</p>') !!}
+</div>
+<div class="form-group {{ $errors->has('box_2["btn_link"]') ? 'has-error' : ''}}">
+    <label for='box_2["btn_link"]' class="control-label">{{ 'Second Card Button Link' }}</label>
+    <input class="form-control" name="box_2[btn_link]" type="text" id='box_2["btn_link"]' value="{{ isset($settings->box_2["btn_link"]) ? $settings->box_2["btn_link"] : ''}}" >
+    {!! $errors->first('box_2["btn_link"]', '<p class="help-block">:message</p>') !!}
+</div>
+
+<div class="form-group {{ $errors->has('box_3["title"]') ? 'has-error' : ''}}">
+    <label for='box_3["title"]' class="control-label">{{ 'Third Card Title' }}</label>
+    <input class="form-control" name="box_3[title]" type="text" id='box_3["title"]' value="{{ isset($settings->box_3['title']) ? $settings->box_3['title'] : ''}}" >
+    {!! $errors->first('box_3["title"]', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group {{ $errors->has('box_3') ? 'has-error' : ''}}">
-    <label for="box_3" class="control-label">{{ 'Third Card' }}</label>
-    <input class="form-control" name="box_3" type="text" id="box_3" value="{{ isset($settings->box_3) ? $settings->box_3 : ''}}" >
-    {!! $errors->first('box_3', '<p class="help-block">:message</p>') !!}
+    <label for="box_3" class="control-label">{{ 'Third Card Icon' }}</label>
+    <input class="form-control" name="box_3[file]" type="file" id="box_3_file" >
+    {!! $errors->first('box_3[file]', '<p class="help-block">:message</p>') !!}
+</div>
+<div class="form-group {{ $errors->has('box_3["btn"]') ? 'has-error' : ''}}">
+    <label for='box_3["btn"]' class="control-label">{{ 'Third Card Button Text' }}</label>
+    <input class="form-control" name="box_3[btn]" type="text" id='box_3["btn"]' value="{{ isset($settings->box_3["btn"]) ? $settings->box_3["btn"] : ''}}" >
+    {!! $errors->first('box_3["btn"]', '<p class="help-block">:message</p>') !!}
+</div>
+<div class="form-group {{ $errors->has('box_3["btn_link"]') ? 'has-error' : ''}}">
+    <label for='box_3["btn_link"]' class="control-label">{{ 'Third Card Button Link' }}</label>
+    <input class="form-control" name="box_3[btn_link]" type="text" id='box_3["btn_link"]' value="{{ isset($settings->box_3["btn_link"]) ? $settings->box_3["btn_link"] : ''}}" >
+    {!! $errors->first('box_3["btn_link"]', '<p class="help-block">:message</p>') !!}
+</div>
+<div class="form-group {{ $errors->has('box_4["title"]') ? 'has-error' : ''}}">
+    <label for='box_4["title"]' class="control-label">{{ 'Forth Card Title' }}</label>
+    <input class="form-control" name="box_4[title]" type="text" id='box_4["title"]' value="{{ isset($settings->box_4['title']) ? $settings->box_4['title'] : ''}}" >
+    {!! $errors->first('box_4["title"]', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group {{ $errors->has('box_4') ? 'has-error' : ''}}">
-    <label for="box_4" class="control-label">{{ 'Forth Card' }}</label>
-    <input class="form-control" name="box_4" type="text" id="box_4" value="{{ isset($settings->box_4) ? $settings->box_4 : ''}}" >
-    {!! $errors->first('box_4', '<p class="help-block">:message</p>') !!}
+    <label for="box_4" class="control-label">{{ 'Forth Card Icon' }}</label>
+    <input class="form-control" name="box_4[file]" type="file" id="box_4_file" >
+    {!! $errors->first('box_4[file]', '<p class="help-block">:message</p>') !!}
+</div>
+<div class="form-group {{ $errors->has('box_4["btn"]') ? 'has-error' : ''}}">
+    <label for='box_4["btn"]' class="control-label">{{ 'Forth Card Button Text' }}</label>
+    <input class="form-control" name="box_4[btn]" type="text" id='box_4["btn"]' value="{{ isset($settings->box_4["btn"]) ? $settings->box_4["btn"] : ''}}" >
+    {!! $errors->first('box_4["btn"]', '<p class="help-block">:message</p>') !!}
+</div>
+<div class="form-group {{ $errors->has('box_4["btn_link"]') ? 'has-error' : ''}}">
+    <label for='box_4["btn_link"]' class="control-label">{{ 'Forth Card Button Link' }}</label>
+    <input class="form-control" name="box_4[btn_link]" type="text" id='box_4["btn_link"]' value="{{ isset($settings->box_4["btn_link"]) ? $settings->box_4["btn_link"] : ''}}" >
+    {!! $errors->first('box_4["btn_link"]', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group {{ $errors->has('parallax_video') ? 'has-error' : ''}}">
     <label for="parallax_video" class="control-label">{{ 'Parallax Video' }}</label>
-    <input class="form-control" name="parallax_video" type="text" id="parallax_video" value="{{ isset($settings->parallax_video) ? $settings->parallax_video : ''}}" >
+    <textarea class="form-control tinymce" name="parallax_video" id="parallax_video" value="{{ isset($settings->parallax_video) ? $settings->parallax_video : ''}}" ></textarea>
     {!! $errors->first('parallax_video', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group {{ $errors->has('call_to_action_title') ? 'has-error' : ''}}">
@@ -92,7 +138,7 @@
 </div>
 <div class="form-group {{ $errors->has('footer') ? 'has-error' : ''}}">
     <label for="footer" class="control-label">{{ 'Footer' }}</label>
-    <input class="form-control" name="footer" type="text" id="footer" value="{{ isset($settings->footer) ? $settings->footer : ''}}" >
+    <textarea class="form-control tinymce" name="footer" id="footer" value="{{ isset($settings->footer) ? $settings->footer : ''}}" >
     {!! $errors->first('footer', '<p class="help-block">:message</p>') !!}
 </div>
 
