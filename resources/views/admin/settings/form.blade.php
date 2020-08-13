@@ -45,6 +45,11 @@
     <input class="form-control" name="box_1[file]" type="file" id="box_1_file" >
     {!! $errors->first('box_1[file]', '<p class="help-block">:message</p>') !!}
 </div>
+<div class="form-group {{ $errors->has('box_1["description"]') ? 'has-error' : ''}}">
+    <label for='box_1["description"]' class="control-label">{{ 'First Card Description' }}</label>
+    <input class="form-control" name="box_1[description]" type="text" id='box_1["description"]' value="{{ isset($settings->box_1['description']) ? $settings->box_1['description'] : ''}}" >
+    {!! $errors->first('box_1["description"]', '<p class="help-block">:message</p>') !!}
+</div>
 <div class="form-group {{ $errors->has('box_1["btn"]') ? 'has-error' : ''}}">
     <label for='box_1["btn"]' class="control-label">{{ 'First Card Button Text' }}</label>
     <input class="form-control" name="box_1[btn]" type="text" id='box_1["btn"]' value="{{ isset($settings->box_1["btn"]) ? $settings->box_1["btn"] : ''}}" >
@@ -64,6 +69,11 @@
     <label for="box_2" class="control-label">{{ 'Second Card Icon' }}</label>
     <input class="form-control" name="box_2[file]" type="file" id="box_2_file" >
     {!! $errors->first('box_2[file]', '<p class="help-block">:message</p>') !!}
+</div>
+<div class="form-group {{ $errors->has('box_2["description"]') ? 'has-error' : ''}}">
+    <label for='box_2["description"]' class="control-label">{{ 'Second Card Description' }}</label>
+    <input class="form-control" name="box_2[description]" type="text" id='box_2["description"]' value="{{ isset($settings->box_2['description']) ? $settings->box_2['description'] : ''}}" >
+    {!! $errors->first('box_2["description"]', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group {{ $errors->has('box_2["btn"]') ? 'has-error' : ''}}">
     <label for='box_2["btn"]' class="control-label">{{ 'Second Card Button Text' }}</label>
@@ -86,6 +96,11 @@
     <input class="form-control" name="box_3[file]" type="file" id="box_3_file" >
     {!! $errors->first('box_3[file]', '<p class="help-block">:message</p>') !!}
 </div>
+<div class="form-group {{ $errors->has('box_3["description"]') ? 'has-error' : ''}}">
+    <label for='box_3["description"]' class="control-label">{{ 'Third Card Description' }}</label>
+    <input class="form-control" name="box_3[description]" type="text" id='box_3["description"]' value="{{ isset($settings->box_3['description']) ? $settings->box_3['description'] : ''}}" >
+    {!! $errors->first('box_3["description"]', '<p class="help-block">:message</p>') !!}
+</div>
 <div class="form-group {{ $errors->has('box_3["btn"]') ? 'has-error' : ''}}">
     <label for='box_3["btn"]' class="control-label">{{ 'Third Card Button Text' }}</label>
     <input class="form-control" name="box_3[btn]" type="text" id='box_3["btn"]' value="{{ isset($settings->box_3["btn"]) ? $settings->box_3["btn"] : ''}}" >
@@ -105,6 +120,11 @@
     <label for="box_4" class="control-label">{{ 'Forth Card Icon' }}</label>
     <input class="form-control" name="box_4[file]" type="file" id="box_4_file" >
     {!! $errors->first('box_4[file]', '<p class="help-block">:message</p>') !!}
+</div>
+<div class="form-group {{ $errors->has('box_4["description"]') ? 'has-error' : ''}}">
+    <label for='box_4["description"]' class="control-label">{{ 'Forth Card Description' }}</label>
+    <input class="form-control" name="box_4[description]" type="text" id='box_4["description"]' value="{{ isset($settings->box_4['description']) ? $settings->box_4['description'] : ''}}" >
+    {!! $errors->first('box_4["description"]', '<p class="help-block">:message</p>') !!}
 </div>
 <div class="form-group {{ $errors->has('box_4["btn"]') ? 'has-error' : ''}}">
     <label for='box_4["btn"]' class="control-label">{{ 'Forth Card Button Text' }}</label>
