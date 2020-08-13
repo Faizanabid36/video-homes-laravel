@@ -80,6 +80,10 @@ class SettingsController extends Controller
         //
         $this->validate($request,[
             "display_title"=>"required|min:6|string",
+            "box_1"=>"array",
+            "box_2"=>"array",
+            "box_3"=>"array",
+            "box_4"=>"array",
 
         ]);
         $requestData = $request->all();
