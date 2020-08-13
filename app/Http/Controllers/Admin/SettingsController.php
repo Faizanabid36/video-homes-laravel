@@ -92,7 +92,8 @@ class SettingsController extends Controller
             $requestData['box_4']['file'] = $request->file('box_4.file')->store('uploads', 'public');
         }
 
-        $d =$settings->update(["display_title"=>$requestData['display_title']]);
+//        $d =$settings->update(["display_title"=>$requestData['display_title']]);
+        $d = Settings::find($settings->id)->update(["display_title"=>$requestData['display_title']]);
         dd($d);
         return back()->with( 'flash_message', 'Settings updated!' );
     }
