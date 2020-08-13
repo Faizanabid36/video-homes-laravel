@@ -85,7 +85,7 @@
     <div class="container-fluid bg-dark ">
         <div class="row">
             <div class="col-12  border-primary text-white py-5 text-center" style="border-top: 5px solid;">
-                {{$footer}}
+                {!! $footer !!}
             </div>
         </div>
     </div>
