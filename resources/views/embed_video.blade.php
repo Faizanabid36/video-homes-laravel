@@ -7,6 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{$video->title}} - {{env('APP_NAME')}}</title>
     <link rel="stylesheet" href="{{asset('css/public.css')}}">
+    <style>
+        .mejs__container,.mejs__layer {
+            height:100vh!important;
+        }
+    </style>
     <script>
         window.VIDEO_APP = {
             base_url: '{{url('/')}}',
