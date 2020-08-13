@@ -80,10 +80,6 @@ class SettingsController extends Controller
         //
         $this->validate($request,[
             "display_title"=>"required|min:6|string",
-            "box_1"=>"array",
-            "box_2"=>"array",
-            "box_3"=>"array",
-            "box_4"=>"array",
         ]);
         if ($request->hasFile('box_1.file')) {
             $requestData['box_1']['file'] = $request->file('box_1.file')
