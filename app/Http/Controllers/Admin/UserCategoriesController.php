@@ -41,7 +41,7 @@ class UserCategoriesController extends Controller {
     public function create() {
         $user_categories = UserCategory::whereNull( 'parent_id' )->get();
         $user_sub_categories = UserCategory::whereIn( 'parent_id',$user_categories->pluck('id') )->get();
-        return view( 'admin.user-categories.create' . compact( 'user_categories','user_sub_categories' ) );
+        return view( 'admin.user-categories.create' , compact( 'user_categories','user_sub_categories' ) );
     }
 
     /**
