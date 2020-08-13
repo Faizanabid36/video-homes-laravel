@@ -17,8 +17,8 @@
 
                         <h4> {{$setting->display_title}}</h4>
                         <div class="header-button">
-                            <a href="{{$setting->button_1_link}}" class="btnCustom1"> {{$setting->button_1}}</a>
-                            <a href="{{$setting->button_2_link}}" class="btnCustom2"> {{$setting->button_2}}</a>
+                            <a href="{{$setting->button_1_link}}" class="btnCustom1 text-white"> {{$setting->button_1}}</a>
+                            <a href="{{$setting->button_2_link}}" class="btnCustom2 text-white"> {{$setting->button_2}}</a>
                         </div>
 
                     </div>
