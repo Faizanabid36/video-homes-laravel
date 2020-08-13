@@ -98,7 +98,7 @@ try {
 
     if ($('.tinymce').length) {
         tinymce.init({
-            selector: '#tinymce',
+            selector: '.tinymce',
             plugins: [
                 "advlist autolink lists link image charmap print preview hr anchor pagebreak",
                 "searchreplace wordcount visualblocks visualchars code fullscreen",
