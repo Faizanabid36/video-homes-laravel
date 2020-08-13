@@ -9,7 +9,6 @@ use App\UserRole;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use function foo\func;
 
 class AppServiceProvider extends ServiceProvider
 {

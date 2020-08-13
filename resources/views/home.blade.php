@@ -28,9 +28,9 @@
                                  src="{{asset('img/video-image-141px.jpeg')}}"
                                  alt="Card image cap"/>
                             <div class="card-body px-1">
-                                <h5 class="card-title">{{$setting->box_1->title}}</h5>
-                                <p class="card-text">{{$setting->box_1->description}}</p>
-                                <button href="{{$setting->box_1->btn_link}}" class="btn btn-primary">{{$setting->box_1->btn}}</button>
+                                <h5 class="card-title">{{$setting->box_1['title']}}</h5>
+                                <p class="card-text">{{$setting->box_1['description']}}</p>
+                                <button href="{{$setting->box_1['btn_link']}}" class="btn btn-primary">{{$setting->box_1['btn']}}</button>
                             </div>
                         </div>
                         <div class="card col-md-3 col-sm-12 shadow-lg p-1">
@@ -38,9 +38,9 @@
                                  src="{{asset('img/Index-Card-jpeg.jpg')}}"
                                  alt="Card image cap"/>
                             <div class="card-body px-1">
-                                <h5 class="card-title">{{$setting->box_2->title}}</h5>
-                                <p class="card-text">{{$setting->box_2->description}}</p>
-                                <button href="{{$setting->box_2->btn_link}}" class="btn btn-primary">{{$setting->box_2->btn}}</button>
+                                <h5 class="card-title">{{$setting->box_2['title']}}</h5>
+                                <p class="card-text">{{$setting->box_2['description']}}</p>
+                                <button href="{{$setting->box_2['btn_link']}}" class="btn btn-primary">{{$setting->box_2['btn']}}</button>
                             </div>
                         </div>
                         <div class="card col-md-3 col-sm-12 shadow-lg p-1">
@@ -48,9 +48,9 @@
                                  src="{{asset('img/House-Icon-Jpeg.jpg')}}"
                                  alt="Card image cap"/>
                             <div class="card-body px-1">
-                                <h5 class="card-title">{{$setting->box_3->title}}</h5>
-                                <p class="card-text">{{$setting->box_3->description}}</p>
-                                <button href="{{$setting->box_3->btn_link}}" class="btn btn-primary">{{$setting->box_3->btn}}</button>
+                                <h5 class="card-title">{{$setting->box_3['title']}}</h5>
+                                <p class="card-text">{{$setting->box_3['description']}}</p>
+                                <button href="{{$setting->box_3['btn_link']}}" class="btn btn-primary">{{$setting->box_3['btn']}}</button>
                             </div>
                         </div>
                         <div class="card col-md-3 col-sm-12 shadow-lg p-1">
@@ -58,9 +58,9 @@
                                  src="{{asset('img/Rss-icon-jpeg.jpg')}}"
                                  alt="Card image cap"/>
                             <div class="card-body px-1">
-                                <h5 class="card-title">{{$setting->box_4->title}}</h5>
-                                <p class="card-text">{{$setting->box_4->description}}</p>
-                                <button href="{{$setting->box_4->btn_link}}" class="btn btn-primary">{{$setting->box_4->btn}}</button>
+                                <h5 class="card-title">{{$setting->box_4['title']}}</h5>
+                                <p class="card-text">{{$setting->box_4['description']}}</p>
+                                <button href="{{$setting->box_4['btn_link']}}" class="btn btn-primary">{{$setting->box_4['btn']}}</button>
                             </div>
                         </div>
                     </div>
