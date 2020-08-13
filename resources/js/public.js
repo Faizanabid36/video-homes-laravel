@@ -73,7 +73,7 @@ try {
                 options.alwaysShowControls = false;
             }
         }
-        $('#my-video_html5').mediaelementplayer(options);
+        $('video').mediaelementplayer(options);
     }
     $(".share-social").click(function (e) {
         openShareWindow($(this).data('url'));
