@@ -15,10 +15,10 @@
                     </div>
                     <div class="header-content">
 
-                        <h4> Connecting Small Business Owners with Local Marketing Pros </h4>
+                        <h4> {{$setting->display_title}}</h4>
                         <div class="header-button">
-                            <button class="btnCustom1"> VIDEOGRAPHERS</button>
-                            <button class="btnCustom2"> BUSINESS OWNERS</button>
+                            <a href="{{$setting->button_1_link}}" class="btnCustom1"> {{$setting->button_1}}</a>
+                            <a href="{{$setting->button_2_link}}" class="btnCustom2"> {{$setting->button_2}}</a>
                         </div>
 
                     </div>
@@ -28,9 +28,9 @@
                                  src="{{asset('img/video-image-141px.jpeg')}}"
                                  alt="Card image cap"/>
                             <div class="card-body px-1">
-                                <h5 class="card-title">Videographers</h5>
-                                <p class="card-text">A Platform for your business.</p>
-                                <button href="#" class="btn btn-primary">LEARN MORE</button>
+                                <h5 class="card-title">{{$setting->box_1->title}}</h5>
+                                <p class="card-text">{{$setting->box_1->description}}</p>
+                                <button href="{{$setting->box_1->btn_link}}" class="btn btn-primary">{{$setting->box_1->btn}}</button>
                             </div>
                         </div>
                         <div class="card col-md-3 col-sm-12 shadow-lg p-1">
@@ -38,9 +38,9 @@
                                  src="{{asset('img/Index-Card-jpeg.jpg')}}"
                                  alt="Card image cap"/>
                             <div class="card-body px-1">
-                                <h5 class="card-title">Local Business Owners</h5>
-                                <p class="card-text">You have a story..let our Marketing Pros tell it!</p>
-                                <button href="#" class="btn btn-success">LEARN MORE</button>
+                                <h5 class="card-title">{{$setting->box_2->title}}</h5>
+                                <p class="card-text">{{$setting->box_2->description}}</p>
+                                <button href="{{$setting->box_2->btn_link}}" class="btn btn-primary">{{$setting->box_2->btn}}</button>
                             </div>
                         </div>
                         <div class="card col-md-3 col-sm-12 shadow-lg p-1">
@@ -48,10 +48,9 @@
                                  src="{{asset('img/House-Icon-Jpeg.jpg')}}"
                                  alt="Card image cap"/>
                             <div class="card-body px-1">
-                                <h5 class="card-title">Real Estate Agents</h5>
-                                <p class="card-text">Finally a fully integrated solution for production and
-                                    distribution that puts you in control.</p>
-                                <button href="#" class="btn btn-warning">LEARN MORE</button>
+                                <h5 class="card-title">{{$setting->box_3->title}}</h5>
+                                <p class="card-text">{{$setting->box_3->description}}</p>
+                                <button href="{{$setting->box_3->btn_link}}" class="btn btn-primary">{{$setting->box_3->btn}}</button>
                             </div>
                         </div>
                         <div class="card col-md-3 col-sm-12 shadow-lg p-1">
@@ -59,10 +58,9 @@
                                  src="{{asset('img/Rss-icon-jpeg.jpg')}}"
                                  alt="Card image cap"/>
                             <div class="card-body px-1">
-                                <h5 class="card-title">Writers and Content Producers</h5>
-                                <p class="card-text">Tap into our network of video pros and see what cool things you
-                                    can accomplish.</p>
-                                <button href="#" class="btn btn-dark">LEARN MORE</button>
+                                <h5 class="card-title">{{$setting->box_4->title}}</h5>
+                                <p class="card-text">{{$setting->box_4->description}}</p>
+                                <button href="{{$setting->box_4->btn_link}}" class="btn btn-primary">{{$setting->box_4->btn}}</button>
                             </div>
                         </div>
                     </div>
@@ -81,10 +79,10 @@
         <div class="container">
             <div class="row py-5">
                 <div class="col-md-6 text-sm-center text-md-left">
-                    <h3 class="text-white"><strong> Join Us.</strong> It will only take a minute </h3>
+                    <h3 class="text-white">{{$setting->call_to_action_title}}</h3>
                 </div>
                 <div class="col-md-6 text-sm-center text-md-right">
-                    <button class="btn btn-warning"> GET STARTED TODAY</button>
+                    <a href="{{$setting->call_to_action_link}}" class="btn btn-warning"> {{$setting->call_to_action}}</a>
                 </div>
             </div>
         </div>

@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
 
         Schema::defaultStringLength(191);
         if (! $this->app->runningInConsole()) {
-            $industries           = UserRole::where( 'role', '!=', 'admin' )->get();
+//            $industries           = UserRole::where( 'role', '!=', 'admin' )->get();
 //            $user_parent_category = UserCategory::whereNull( 'parent_id' )->get();
 //            $roles_assoc          = $user_parent_category->groupBy( 'role_id' );
 //
@@ -57,7 +57,8 @@ class AppServiceProvider extends ServiceProvider
 
             View::composer( 'layouts.public.app', function ( $view ) {
                 $pages = Page::whereIsPublic( 1 )->get();
-                $view->with( compact('pages') );
+                $footer = Settings::first()->footer;
+                $view->with( compact('pages','footer') );
             } );
         }
     }
