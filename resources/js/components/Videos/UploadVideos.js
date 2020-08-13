@@ -89,7 +89,7 @@ function MyDropzone(props) {
                             // ref={(ref) => this.upload = ref}
                             // style={{display: 'none'}}
                             // onChange={this.uploadFile}
-                            type="file" name="video" accept="video/*"
+                            type="file" name="video" accept="video/mp4,video/x-m4v,video/*"
                             // className="upload-video-file"
                         />
                     </Col>
