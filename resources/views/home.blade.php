@@ -1,6 +1,6 @@
 @extends('layouts.public.app',["title"=>"Home"])
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="video-background">
             <div class="video-foreground">
                 <iframe loop="1" autoplay="1" mute="1" src="{{$setting->parallax_video }}" frameborder="0" allowfullscreen></iframe>
@@ -10,6 +10,8 @@
                 </iframe>
             </div>
         </div>
+    </div>
+    <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="header-wrapper">
