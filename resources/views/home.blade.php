@@ -1,18 +1,18 @@
 @extends('layouts.public.app',["title"=>"Home"])
 @section('content')
     <div class="container">
+        <div class="video-background">
+            <div class="video-foreground">
+                <iframe loop="1" autoplay="1" mute="1" src="{{$setting->parallax_video }}" frameborder="0" allowfullscreen></iframe>
+                {{--                            <iframe type="text/html"--}}
+                {{--                                    src="https://www.youtube.com/embed/3iXYciBTQ0c?autoplay=1&cc_load_policy=1&enablejsapi=1&loop=1&color=white&controls=0&iv_load_policy=3&modestbranding=1&playsinline=1&rel=0&showinfo=0"--}}
+                {{--                                    frameborder="0" allowfullscreen>--}}
+                </iframe>
+            </div>
+        </div>
         <div class="row">
             <div class="col-12">
                 <div class="header-wrapper">
-                    <div class="video-background">
-                        <div class="video-foreground">
-                            <iframe loop="1" autoplay="1" mute="1" src="{{$setting->parallax_video }}" frameborder="0" allowfullscreen></iframe>
-{{--                            <iframe type="text/html"--}}
-{{--                                    src="https://www.youtube.com/embed/3iXYciBTQ0c?autoplay=1&cc_load_policy=1&enablejsapi=1&loop=1&color=white&controls=0&iv_load_policy=3&modestbranding=1&playsinline=1&rel=0&showinfo=0"--}}
-{{--                                    frameborder="0" allowfullscreen>--}}
-                            </iframe>
-                        </div>
-                    </div>
                     <div class="header-content">
 
                         <h4> {{$setting->display_title}}</h4>
