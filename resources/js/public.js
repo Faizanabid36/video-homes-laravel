@@ -2,8 +2,8 @@ try {
     window.axios = require('axios');
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
-
     require('jquery-ui');
+
     require('bootstrap');
     require('bootstrap-select');
     require('mediaelement');
@@ -63,9 +63,7 @@ try {
                 }, false);
             },
         };
-        console.log(window.frameElement);
         if (window.frameElement) {
-
             options.autoplay = !!window.frameElement.getAttribute('autoplay');
             options.loop = !!window.frameElement.getAttribute('loop');
             if (!!window.frameElement.getAttribute('mute')) {
@@ -113,14 +111,14 @@ try {
         });
     }
     let stars = $("#review .fa-star");
-    if (stars.length) {
+    if(stars.length){
         stars.removeClass("text-warning").eq($("input[name=rating]").val()).prevAll().addClass("text-warning")
-        stars.mouseenter(function (e) {
+        stars.mouseenter(function(e){
             stars.removeClass("text-warning");
             $(this).addClass("text-warning").prevAll().addClass("text-warning");
-        }).mouseleave(function () {
+        }).mouseleave(function() {
             stars.removeClass("text-warning").eq($("input[name=rating]").val()).prevAll().addClass("text-warning")
-        }).click(function (e) {
+        }).click(function(e){
             $("input[name=rating]").val($(this).data('value'));
         });
     }
