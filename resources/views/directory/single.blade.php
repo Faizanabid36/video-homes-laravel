@@ -571,7 +571,7 @@
             $(this).prevAll().addClass("text-warning");
         });
         $("#review .fa-star").click(function(e){
-            $([name="rating"]).val($(this).data('value'));
+            $("input[name=rating]").val($(this).data('value'));
         });
     </script>
     <script async defer
