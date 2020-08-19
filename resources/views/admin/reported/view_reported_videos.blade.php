@@ -48,10 +48,10 @@
                                         style="background-color: #ffc966 !important"
                                         @endif
                                     >
-                                        <td>{{ucfirst($query->name)}}</td>
-                                        <td>{{ucfirst($query->email)}}</td>
-                                        <td>{{ucfirst($query->message_body)}}</td>
-                                        <td>{{ucfirst($query->reported_on_video)}}</td>
+                                        <td>{{ucfirst($query->user->name)}}</td>
+                                        <td>{{ucfirst($query->user->email)}}</td>
+                                        <td>{{ucfirst($query->message)}}</td>
+                                        <td>{{ucfirst($query->video_id)}}</td>
                                         <td>{{$query->created_at->diffForHumans()}}</td>
                                         <td>
                                             <form action="{{route('report_query.update',$query->id)}}" method="POST">
