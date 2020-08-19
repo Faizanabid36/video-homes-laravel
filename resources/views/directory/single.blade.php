@@ -524,7 +524,7 @@
                                 <button type="submit" class="btn btn-primary"> Send</button>
                             </form>
                         @else
-                            <a href="{{route('login')}}" class="btn btn-info">Login to Contact {{$user->name}}</a>
+                            <a href="{{route('login')}}" class="btn btn-info text-white">Login to Contact {{$user->name}}</a>
                         @endif
                     </div>
                     <div class="tab-pane fade" id="report_message" role="tabpanel" aria-labelledby="report-tab">
@@ -545,7 +545,7 @@
                             <button type="submit" class="btn btn-primary"> Send</button>
                         </form>
                         @else
-                            <a href="{{route('login')}}" class="btn btn-info">Login to Report Video</a>
+                            <a href="{{route('login')}}" class="btn btn-info text-white">Login to Report Video</a>
                         @endif
 
 
