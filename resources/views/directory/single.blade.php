@@ -451,6 +451,8 @@
                                     </div>
                                 </div>
                             </div>
+                        @else
+                            <a href="{{route('login')}}" class="btn btn-info text-white">Login to Add Review</a>
                         @endif
                         <div class="row">
                             <div class="col-4 rating-star-field">
