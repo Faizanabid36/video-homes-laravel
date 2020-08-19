@@ -456,31 +456,31 @@
                             <div class="col-4 rating-star-field">
                                 <div class="d-flex align-items-center my-2">
                                     <span><i class="text-success fa fa-star"></i> 5 </span>
-                                    <div class="progress">
+                                    <div class="progress w-75 ml-3">
                                         <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center my-2">
                                     <span><i class="text-info fa fa-star"></i> 4 </span>
-                                    <div class="progress">
+                                    <div class="progress w-75 ml-3">
                                         <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                                 <div class="d-flex align-warning-center my-2">
                                     <span><i class="text-warning fa fa-star"></i> 3 </span>
-                                    <div class="progress">
+                                    <div class="progress w-75 ml-3">
                                         <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center my-2">
                                     <span><i class="text-danger fa fa-star"></i> 2 </span>
-                                    <div class="progress">
+                                    <div class="progress w-75 ml-3">
                                         <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center my-2">
                                     <span><i class="text-danger fa fa-star"></i> 1 </span>
-                                    <div class="progress">
+                                    <div class="progress w-75 ml-3">
                                         <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
