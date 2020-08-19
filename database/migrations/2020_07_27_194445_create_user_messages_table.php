@@ -15,12 +15,13 @@ class CreateUserMessagesTable extends Migration
     {
         Schema::create('user_messages', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->integer('contact_user_id');
+            $table->integer('reply_user_id')->nullable();
             $table->integer('video_id');
-            $table->string('name');
-            $table->string('email');
-            $table->string('phone');
             $table->text('message')->nullable();
+            $table->enum("type",['report','contact','rating']);
+            $table->boolean('is_resolved')->default(0);
+            $table->tinyInteger('rating')->default(0);
             $table->timestamps();
         });
     }

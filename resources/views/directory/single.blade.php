@@ -141,15 +141,17 @@
                                     Analytics
                                 </a>
                             @endif
-                            <button data-toggle="modal" data-target="#report"
-                                    class="btn btn-primary btn-report pull-right" onclick=""
-                                    data-rep="1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                     viewBox="0 0 24 24">
-                                    <path fill="currentColor"
-                                          d="M14.4,6L14,4H5V21H7V14H12.6L13,16H20V6H14.4Z"></path>
-                                </svg>
-                                <span>Report</span></button>
+                            @if(auth()->check() && ($video->user_id!=auth()->user()->id))
+                                <button data-toggle="modal" data-target="#report"
+                                        class="btn btn-primary btn-report pull-right" onclick=""
+                                        data-rep="1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                         viewBox="0 0 24 24">
+                                        <path fill="currentColor"
+                                              d="M14.4,6L14,4H5V21H7V14H12.6L13,16H20V6H14.4Z"></path>
+                                    </svg>
+                                    <span>Report</span></button>
+                            @endif
                             <div class="embed-video d-none">
                                 <div class="card w-100">
                                     <div class="card-body">
@@ -212,10 +214,10 @@
                                         {{$video->title}}
                                         <p>{!! $video->discription !!}</p>
                                         @if(!is_array($video->tags))
-                                        Tags: @foreach($video->tags as $tags)
-                                            {{--                                            <span class="badge badge-primary">{{str_replace(",",'</span><span class="badge badge-primary">',$video->tags)}}</span>--}}
-                                            <span class="badge badge-primary">{{$tags}}</span>
-                                        @endforeach
+                                            Tags: @foreach($video->tags as $tags)
+                                                {{--                                            <span class="badge badge-primary">{{str_replace(",",'</span><span class="badge badge-primary">',$video->tags)}}</span>--}}
+                                                <span class="badge badge-primary">{{$tags}}</span>
+                                            @endforeach
                                         @endif
                                         <br>
                                         Category: {{$video->category->name}}
@@ -226,47 +228,37 @@
 
 
                             </div>
-                            <div class="modal fade" id="report" tabindex="-1" role="dialog"
-                                 aria-labelledby="reportTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form method="POST" action="{{action('ReportQueryController@store')}}">
-                                                @csrf
-                                                <div class="form-group">
-                                                    <label for="contact_name">Contact Name</label>
-                                                    <input name="name" type="text" required class="form-control"
-                                                           id="contact_name" placeholder="">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="contact_email">Contact Email</label>
-                                                    <input name="email" type="email" required class="form-control"
-                                                           id="contact_email" placeholder="">
-                                                </div>
-                                                <input type="hidden" name="type" value="video">
-                                                <input type="hidden" name="reported_on_video" value="{{$video->title}}">
-                                                <div class="form-group">
-                                                    <label for="contact_message">Message Text</label>
-                                                    <textarea name="message_body" required class="form-control"
-                                                              id="contact_message" rows="3"></textarea>
-                                                </div>
-                                                <button class="btn btn-primary">Report Video</button>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                            </button>
+                            @if(auth()->check() && ($video->user_id!=auth()->id()))
+                                <div class="modal fade" id="report" tabindex="-1" role="dialog"
+                                     aria-labelledby="reportTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Report Video</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form method="POST" action="{{route('to_user')}}">
+                                                    @csrf
+                                                    <input type="hidden" name="type" value="report">
+                                                    <input type="hidden" name="video_id" value="{{$video->id}}">
+                                                    <input type="hidden" name="contact_user_id"
+                                                           value="{{auth()->id()}}">
+                                                    <div class="form-group">
+                                                        <label for="contact_message">Message Text</label>
+                                                        <textarea name="message" required class="form-control"
+                                                                  id="contact_message" rows="3"></textarea>
+                                                    </div>
+                                                    <button class="btn btn-primary">Report Video</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
+                            @endif
                         </div>
                     @else
                         <div>
@@ -416,69 +408,102 @@
                         <p>{!! $user->user_extra->bio !!}</p>
                     </div>
                     <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-                        <button class="btn btn-primary my-3"> Add Review</button>
+
+                        @if(auth()->check() && ($video->user_id!=auth()->id()))
+                            <button class="btn btn-primary my-3" data-toggle="modal" data-target="#review"> Add Review
+                            </button>
+                            <div class="modal fade" id="review" tabindex="-1" role="dialog"
+                                 aria-labelledby="reportTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Add Review</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="POST" action="{{route('to_user')}}">
+                                                @csrf
+                                                <input type="hidden" name="type" value="rating">
+                                                <input type="hidden" name="video_id" value="{{$video->id}}">
+                                                <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">
+
+                                                <div class="form-group">
+                                                    <label for="contact_message">Message Text</label>
+                                                    <textarea name="message" required class="form-control"
+                                                              id="contact_message" rows="3"></textarea>
+                                                    <div class="text-right">
+                                                        <input type="hidden" name="rating" value="1">
+                                                        <span class="float-right">
+                                                            <i class="text-warning fa fa-star"></i>
+                                                            <i class="text-warning fa fa-star"></i>
+                                                            <i class="text-warning fa fa-star"></i>
+                                                            <i class="text-warning fa fa-star"></i>
+                                                            <i class="text-warning fa fa-star"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                <button class="btn btn-primary">Add Review</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                         <div class="row">
                             <div class="col-4 rating-star-field">
                                 <div class="d-flex align-items-center my-2">
-                                    <span> 5 Stars  </span>
-                                    <span>
-        <div class="progress custom-progress">
-            <div class="progress-bar custom-progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0"
-                 aria-valuemax="100"></div>
-            </div>
-        </span>
-                                    <span> -0 0%   </span>
-                                </div>
-
-                                <div class="d-flex align-items-center my-2">
-                                    <span> 4 Stars  </span>
-                                    <span>
-        <div class="progress custom-progress">
-            <div class="progress-bar custom-progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0"
-                 aria-valuemax="100"></div>
-            </div>
-        </span>
-                                    <span> -0 0%   </span>
-                                </div>
-
-
-                                <div class="d-flex align-items-center my-2">
-                                    <span> 3 Stars  </span>
-                                    <span>
-        <div class="progress custom-progress">
-            <div class="progress-bar custom-progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0"
-                 aria-valuemax="100"></div>
-            </div>
-        </span>
-                                    <span> -0 0%   </span>
-                                </div>
-
-                                <div class="d-flex align-items-center my-2">
-                                    <span> 2 Stars  </span>
-                                    <span>
-        <div class="progress custom-progress">
-            <div class="progress-bar custom-progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0"
-                 aria-valuemax="100"></div>
-            </div>
-        </span>
-                                    <span> -0 0%   </span>
-                                </div>
-                            </div>
-                            <div class="col-8">
-                                <div id="circleProgress1" class="progressbar-js-circle  rounded p-3">
-                                    <svg viewBox="0 0 100 100" style="display: block; width: 100%;">
-                                        <path d="M 50,50 m 0,-48 a 48,48 0 1 1 0,96 a 48,48 0 1 1 0,-96" stroke="#eee"
-                                              stroke-width="4" fill-opacity="0"></path>
-                                        <path d="M 50,50 m 0,-48 a 48,48 0 1 1 0,96 a 48,48 0 1 1 0,-96"
-                                              stroke="rgb(159,162,179)" stroke-width="4" fill-opacity="0"
-                                              style="stroke-dasharray: 301.635, 301.635; stroke-dashoffset: 199.079;"></path>
-                                    </svg>
-                                    <div class="progressbar-text"
-                                         style="position: absolute; left: 11%; top: 38%; padding: 0px; margin: 0px; transform: translate(-50%, -50%); color: lightblue; font-size: 2rem;">
-                                        34
+                                    <span><i class="text-success fa fa-star"></i> 5 </span>
+                                    <div class="progress progress-striped">
+                                        <div class="progress-bar progress-bar-success" role="progressbar"
+                                             aria-valuenow="20"
+                                             aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                            <span class="sr-only">80%</span>
+                                        </div>
                                     </div>
                                 </div>
-
+                                <div class="d-flex align-items-center my-2">
+                                    <span><i class="text-info fa fa-star"></i> 4 </span>
+                                    <div class="progress progress-striped">
+                                        <div class="progress-bar progress-bar-success" role="progressbar"
+                                             aria-valuenow="20"
+                                             aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                            <span class="sr-only">80%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-warning-center my-2">
+                                    <span><i class="text-success fa fa-star"></i> 3 </span>
+                                    <div class="progress progress-striped">
+                                        <div class="progress-bar progress-bar-success" role="progressbar"
+                                             aria-valuenow="20"
+                                             aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                            <span class="sr-only">80%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center my-2">
+                                    <span><i class="text-danger fa fa-star"></i> 2 </span>
+                                    <div class="progress progress-striped">
+                                        <div class="progress-bar progress-bar-success" role="progressbar"
+                                             aria-valuenow="20"
+                                             aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                            <span class="sr-only">80%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center my-2">
+                                    <span><i class="text-danger fa fa-star"></i> 1 </span>
+                                    <div class="progress progress-striped">
+                                        <div class="progress-bar progress-bar-success" role="progressbar"
+                                             aria-valuenow="20"
+                                             aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                            <span class="sr-only">80%</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -486,26 +511,32 @@
                     <!-- Contact -->
                     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                         <h1 class="my-3 font-weight-bold"> Contact to {{$user->name}} </h1>
+                        @if(auth()->check() && ($video->user_id!=auth()->id()))
+                            <form method="POST" action="{{route('to_user')}}">
+                                @csrf
+                                <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">
+                                <input type="hidden" name="video_id" value="{{$video->id}}">
+                                <div class="form-group">
+                                    <label for="message">Message</label>
+                                    <textarea name="message" class="form-control" id="message" rows="3"
+                                              placeholder="Message here"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary"> Send</button>
+                            </form>
+                        @else
+                            <a href="{{route('login')}}" class="btn btn-info">Login to Contact {{$user->name}}</a>
+                        @endif
+                    </div>
+                    <div class="tab-pane fade" id="report_message" role="tabpanel" aria-labelledby="report-tab">
+                        <!-- .report. -->
 
-                        <form method="POST" action="{{route('user_message.store')}}">
+                        <h1 class="my-3 font-weight-bold"> Report Video</h1>
+                        @if(auth()->check() && ($video->user_id!=auth()->id())))
+                        <form method="POST" action="{{route('to_user')}}">
                             @csrf
-                            <input type="hidden" name="user_id" value="{{$video->user_id}}">
+                            <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">
                             <input type="hidden" name="video_id" value="{{$video->id}}">
-                            <div class="form-group">
-                                <label for="contact_name">Contact Name</label>
-                                <input required name="name" type="text" class="form-control" id="contact_name"
-                                       placeholder="Your Name">
-                            </div>
-                            <div class="form-group">
-                                <label for="contact_email">Contact Email</label>
-                                <input required name="email" type="email" class="form-control" id="contact_email"
-                                       placeholder="Email address">
-                            </div>
-                            <div class="form-group">
-                                <label for="contact_phone">Contact Phone</label>
-                                <input required name="phone" type="tel" class="form-control" id="contact_phone"
-                                       placeholder="Phone">
-                            </div>
+                            <input type="hidden" name="type" value="report">
                             <div class="form-group">
                                 <label for="message">Message</label>
                                 <textarea name="message" class="form-control" id="message" rows="3"
@@ -513,32 +544,9 @@
                             </div>
                             <button type="submit" class="btn btn-primary"> Send</button>
                         </form>
-                    </div>
-                    <div class="tab-pane fade" id="report_message" role="tabpanel" aria-labelledby="report-tab">
-                        <!-- .report. -->
-
-                        <h1 class="my-3 font-weight-bold"> Send message to moderator </h1>
-                        <form method="POST" action="{{action('ReportQueryController@store')}}">
-                            @csrf
-                            <div class="form-group">
-                                <label for="report_name">Contact Name</label>
-                                <input name="name" type="text" required class="form-control"
-                                       id="report_name" placeholder="">
-                            </div>
-                            <div class="form-group">
-                                <label for="report_email">Contact Email</label>
-                                <input name="email" type="email" required class="form-control"
-                                       id="report_email" placeholder="">
-                            </div>
-                            <input type="hidden" name="type" value="message">
-                            <input type="hidden" name="reported_on_user" value="{{$user->username}}">
-                            <div class="form-group">
-                                <label for="report_message">Message Text</label>
-                                <textarea name="message_body" required class="form-control"
-                                          id="report_message" rows="3"></textarea>
-                            </div>
-                            <button class="btn btn-primary"> Send Message</button>
-                        </form>
+                        @else
+                            <a href="{{route('login')}}" class="btn btn-info">Login to Report Video</a>
+                        @endif
 
 
                     </div>

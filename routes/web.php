@@ -50,6 +50,8 @@ Route::group( [ 'middleware' => 'auth' ], function () {
     Route::get( 'get_total_comments', 'CommentsController@countTotalComments' );
     Route::post( 'createVideoAction', 'VideoController@createVideoAction' )->name( 'createVideoAction' );
     Route::get( '/categories', 'CategoryController@index' );
+
+    Route::post('/to_user','UserMessageController@store')->name('to_user');
 } );
 
 Route::group( [ 'middleware' => 'admin' ], function () {
@@ -102,10 +104,10 @@ Route::group( [ 'middleware' => 'admin' ], function () {
     } );
 } );
 
-Route::resource( 'report_query', 'ReportQueryController' );
-Route::resource( 'user_message', 'UserMessageController' );
-
-Route::get( 'reported_query_videos', 'ReportQueryController@reported_videos' )->name( 'reported_query_videos' );
+//Route::resource( 'report_query', 'ReportQueryController' );
+//Route::resource( 'user_message', 'UserMessageController' );
+//
+//Route::get( 'reported_query_videos', 'ReportQueryController@reported_videos' )->name( 'reported_query_videos' );
 
 //Route::post( '/search_in_directory', 'MainController@search_in_directory' )->name( 'search_in_directory' );
 

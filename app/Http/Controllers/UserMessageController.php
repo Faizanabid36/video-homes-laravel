@@ -38,10 +38,8 @@ class UserMessageController extends Controller
     {
         //
         request()->validate([
-            "user_id"=>"required|integer|exists:users,id",
+            "contact_user_id"=>"required|integer|exists:users,id",
             "video_id"=>"required|integer|exists:videos,id",
-            "name"=>"required|min:3",
-            "phone"=>"required|integer",
         ]);
         UserMessage::create(request()->all());
         return back()->with(["message_sent"=>"Message Sent!"]);
