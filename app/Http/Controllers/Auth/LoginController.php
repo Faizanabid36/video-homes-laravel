@@ -45,8 +45,8 @@ class LoginController extends Controller {
             return redirect()->route( 'admin_panel' );
         }
 
-//        return redirect( $this->redirectTo );
-        return back();
+        return redirect( $this->redirectTo );
+//        return back();
 
     }
 }

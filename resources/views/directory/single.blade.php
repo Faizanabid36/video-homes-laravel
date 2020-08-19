@@ -436,11 +436,11 @@
                                                     <div class="text-right">
                                                         <input type="hidden" name="rating" value="1">
                                                         <span class="float-right">
-                                                            <i class="text-warning fa fa-star"></i>
-                                                            <i class="text-warning fa fa-star"></i>
-                                                            <i class="text-warning fa fa-star"></i>
-                                                            <i class="text-warning fa fa-star"></i>
-                                                            <i class="text-warning fa fa-star"></i>
+                                                            <i data-value="1" class="text-secondary fa fa-star"></i>
+                                                            <i data-value="2" class="text-secondary fa fa-star"></i>
+                                                            <i data-value="3" class="text-secondary fa fa-star"></i>
+                                                            <i data-value="4" class="text-secondary fa fa-star"></i>
+                                                            <i data-value="5" class="text-secondary fa fa-star"></i>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -459,31 +459,36 @@
                                 <div class="d-flex align-items-center my-2">
                                     <span><i class="text-success fa fa-star"></i> 5 </span>
                                     <div class="progress w-75 ml-3">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%"
+                                             aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center my-2">
                                     <span><i class="text-info fa fa-star"></i> 4 </span>
                                     <div class="progress w-75 ml-3">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: 50%"
+                                             aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                                 <div class="d-flex align-warning-center my-2">
                                     <span><i class="text-warning fa fa-star"></i> 3 </span>
                                     <div class="progress w-75 ml-3">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 75%"
+                                             aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center my-2">
                                     <span><i class="text-danger fa fa-star"></i> 2 </span>
                                     <div class="progress w-75 ml-3">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 100%"
+                                             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center my-2">
                                     <span><i class="text-danger fa fa-star"></i> 1 </span>
                                     <div class="progress w-75 ml-3">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 100%"
+                                             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                             </div>
@@ -506,7 +511,8 @@
                                 <button type="submit" class="btn btn-primary"> Send</button>
                             </form>
                         @else
-                            <a href="{{route('login')}}" class="btn btn-info text-white">Login to Contact {{$user->name}}</a>
+                            <a href="{{route('login')}}" class="btn btn-info text-white">Login to
+                                Contact {{$user->name}}</a>
                         @endif
                     </div>
                     <div class="tab-pane fade" id="report_message" role="tabpanel" aria-labelledby="report-tab">
@@ -559,7 +565,14 @@
             @endif
         }
 
-
+        $("#review .fa-star").hover(function(e){
+            $("#review .fa-star").removeClass("text-warning");
+            $(this).addClass("text-warning");
+            $(this).prevAll().addClass("text-warning");
+        });
+        $("#review .fa-star").click(function(e){
+            $([name="rating"]).val($(this).data('value');)
+        });
     </script>
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAm4Wvmd2nIeaFQCdhAsxbiSXgBsibDolc&callback=initMap">
