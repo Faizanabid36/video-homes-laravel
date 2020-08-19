@@ -569,7 +569,7 @@
             stars.removeClass("text-warning");
             $(this).addClass("text-warning").prevAll().addClass("text-warning");
         }).mouseleave(function() {
-            stars.removeClass("text-warning").eq($("input[name=rating]").val() - 1).prevAll().addClass("text-warning")
+            stars.removeClass("text-warning").eq($("input[name=rating]").val()).prevAll().addClass("text-warning")
         }).click(function(e){
             $("input[name=rating]").val($(this).data('value'));
         });
