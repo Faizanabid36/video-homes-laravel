@@ -564,16 +564,7 @@
             new google.maps.Marker({position: position, map: map});
             @endif
         }
-        let stars = $("#review .fa-star");
-        stars.removeClass("text-warning").eq($("input[name=rating]").val()).prevAll().addClass("text-warning")
-        stars.mouseenter(function(e){
-            stars.removeClass("text-warning");
-            $(this).addClass("text-warning").prevAll().addClass("text-warning");
-        }).mouseleave(function() {
-            stars.removeClass("text-warning").eq($("input[name=rating]").val()).prevAll().addClass("text-warning")
-        }).click(function(e){
-            $("input[name=rating]").val($(this).data('value'));
-        });
+
     </script>
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAm4Wvmd2nIeaFQCdhAsxbiSXgBsibDolc&callback=initMap">

@@ -2,8 +2,8 @@ try {
     window.axios = require('axios');
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
-    require('jquery-ui');
 
+    require('jquery-ui');
     require('bootstrap');
     require('bootstrap-select');
     require('mediaelement');
@@ -38,7 +38,7 @@ try {
         let options = {
             autoplay: false,
             loop: false,
-            startVolume: 5,
+            startVolume: 1,
             alwaysShowControls: true,
             pluginPath: 'https://cdnjs.com/libraries/mediaelement-plugins/',
             shimScriptAccess: 'always',
@@ -64,6 +64,7 @@ try {
             },
         };
         if (window.frameElement) {
+            console.log("Yes");
             options.autoplay = !!window.frameElement.getAttribute('autoplay');
             options.loop = !!window.frameElement.getAttribute('loop');
             if (!!window.frameElement.getAttribute('mute')) {
@@ -108,6 +109,18 @@ try {
             toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
             toolbar2: "print preview media | forecolor backcolor emoticons",
             image_advtab: true,
+        });
+    }
+    let stars = $("#review .fa-star");
+    if (stars.length) {
+        stars.removeClass("text-warning").eq($("input[name=rating]").val()).prevAll().addClass("text-warning")
+        stars.mouseenter(function (e) {
+            stars.removeClass("text-warning");
+            $(this).addClass("text-warning").prevAll().addClass("text-warning");
+        }).mouseleave(function () {
+            stars.removeClass("text-warning").eq($("input[name=rating]").val()).prevAll().addClass("text-warning")
+        }).click(function (e) {
+            $("input[name=rating]").val($(this).data('value'));
         });
     }
 } catch (e) {
