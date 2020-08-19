@@ -564,13 +564,13 @@
             new google.maps.Marker({position: position, map: map});
             @endif
         }
-
-        $("#review .fa-star").hover(function(e){
-            $("#review .fa-star").removeClass("text-warning");
-            $(this).addClass("text-warning");
-            $(this).prevAll().addClass("text-warning");
-        });
-        $("#review .fa-star").click(function(e){
+        let stars = $("#review .fa-star");
+        stars.mouseenter(function(e){
+            stars.removeClass("text-warning");
+            $(this).addClass("text-warning").prevAll().addClass("text-warning");
+        }).mouseleave(function() {
+            stars.removeClass("text-warning").eq($("input[name=rating]").val() - 1).prevAll().addClass("text-warning")
+        }).click(function(e){
             $("input[name=rating]").val($(this).data('value'));
         });
     </script>
