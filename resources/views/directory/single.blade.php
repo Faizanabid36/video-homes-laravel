@@ -519,7 +519,7 @@
                         <!-- .report. -->
 
                         <h1 class="my-3 font-weight-bold"> Report Video</h1>
-                        @if(auth()->check() && ($video->user_id!=auth()->id())))
+                        @if(auth()->check() && ($video->user_id!=auth()->id()))
                         <form method="POST" action="{{route('to_user')}}">
                             @csrf
                             <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">
