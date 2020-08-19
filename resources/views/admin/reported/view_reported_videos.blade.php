@@ -70,14 +70,14 @@
                                             </form>
                                         </td>
                                         <td>
-                                            <form action="{{route('report_query.destroy',$query->id)}}" method="POST">
+                                            <form action="{{route('user_message.destroy',$query->id)}}" method="POST">
                                                 @csrf
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <a href="{{route('report_query.destroy',$query->id)}}">
-                                                    <button class="btn btn-danger">
-                                                        Delete Query
-                                                    </button>
-                                                </a>
+                                                @method('delete')
+
+                                                <button type="submit" class="btn btn-danger">
+                                                    Delete Query
+                                                </button>
+
                                             </form>
                                         </td>
 
