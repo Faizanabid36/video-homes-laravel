@@ -63,8 +63,9 @@ try {
                 }, false);
             },
         };
+        console.log(window.frameElement);
         if (window.frameElement) {
-            console.log("Yes");
+
             options.autoplay = !!window.frameElement.getAttribute('autoplay');
             options.loop = !!window.frameElement.getAttribute('loop');
             if (!!window.frameElement.getAttribute('mute')) {
