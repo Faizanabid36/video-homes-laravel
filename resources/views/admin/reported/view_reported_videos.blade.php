@@ -75,7 +75,7 @@
                                                 @method('delete')
 
                                                 <button type="submit" class="btn btn-danger">
-                                                    Delete Query
+                                                    Delete
                                                 </button>
 
                                             </form>
