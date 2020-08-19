@@ -40,12 +40,6 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link {{Route::is('report_query.index') ? 'active' : ''}}"
-                   href="{{route('report_query.index')}}">
-                    Reported Messages
-                </a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link {{Route::is('reported_query_videos') ? 'active' : ''}}"
                    href="{{route('reported_query_videos')}}">
                     Reported Videos

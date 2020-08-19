@@ -3,11 +3,10 @@
     <div class="container-fluid">
         <div class="video-background">
             <div class="video-foreground">
-                <iframe loop="1" autoplay="1" mute="1" src="{{$setting->parallax_video }}" frameborder="0" allowfullscreen></iframe>
-                {{--                            <iframe type="text/html"--}}
-                {{--                                    src="https://www.youtube.com/embed/3iXYciBTQ0c?autoplay=1&cc_load_policy=1&enablejsapi=1&loop=1&color=white&controls=0&iv_load_policy=3&modestbranding=1&playsinline=1&rel=0&showinfo=0"--}}
-                {{--                                    frameborder="0" allowfullscreen>--}}
-{{--                </iframe>--}}
+                <iframe loop="1" autoplay="1" mute="1" src="{{$setting->parallax_video }}" frameborder="0"
+                        allowfullscreen>
+
+                </iframe>
             </div>
         </div>
     </div>
@@ -19,9 +18,11 @@
 
                         <h4> {{$setting->display_title}}</h4>
                         <div class="header-button">
-                            <a href="{{$setting->button_1_link}}" class="btnCustom1 text-white"> {{$setting->button_1}}</a>
+                            <a href="{{$setting->button_1_link}}"
+                               class="btnCustom1 text-white"> {{$setting->button_1}}</a>
 
-                            <a href="{{$setting->button_2_link}}" class="btnCustom2 text-white"> {{$setting->button_2}}</a>
+                            <a href="{{$setting->button_2_link}}"
+                               class="btnCustom2 text-white"> {{$setting->button_2}}</a>
                         </div>
 
                     </div>
@@ -33,7 +34,8 @@
                             <div class="card-body px-1">
                                 <h5 class="card-title">{{$setting->box_1['title']}}</h5>
                                 <p class="card-text">{{$setting->box_1['description']}}</p>
-                                <button href="{{$setting->box_1['btn_link']}}" class="btn btn-primary">{{$setting->box_1['btn']}}</button>
+                                <button href="{{$setting->box_1['btn_link']}}"
+                                        class="btn btn-primary">{{$setting->box_1['btn']}}</button>
                             </div>
                         </div>
                         <div class="card col-md-3 col-sm-12 shadow-lg p-1">
@@ -43,7 +45,8 @@
                             <div class="card-body px-1">
                                 <h5 class="card-title">{{$setting->box_2['title']}}</h5>
                                 <p class="card-text">{{$setting->box_2['description']}}</p>
-                                <button href="{{$setting->box_2['btn_link']}}" class="btn btn-primary">{{$setting->box_2['btn']}}</button>
+                                <button href="{{$setting->box_2['btn_link']}}"
+                                        class="btn btn-primary">{{$setting->box_2['btn']}}</button>
                             </div>
                         </div>
                         <div class="card col-md-3 col-sm-12 shadow-lg p-1">
@@ -53,7 +56,8 @@
                             <div class="card-body px-1">
                                 <h5 class="card-title">{{$setting->box_3['title']}}</h5>
                                 <p class="card-text">{{$setting->box_3['description']}}</p>
-                                <button href="{{$setting->box_3['btn_link']}}" class="btn btn-primary">{{$setting->box_3['btn']}}</button>
+                                <button href="{{$setting->box_3['btn_link']}}"
+                                        class="btn btn-primary">{{$setting->box_3['btn']}}</button>
                             </div>
                         </div>
                         <div class="card col-md-3 col-sm-12 shadow-lg p-1">
@@ -63,7 +67,8 @@
                             <div class="card-body px-1">
                                 <h5 class="card-title">{{$setting->box_4['title']}}</h5>
                                 <p class="card-text">{{$setting->box_4['description']}}</p>
-                                <button href="{{$setting->box_4['btn_link']}}" class="btn btn-primary">{{$setting->box_4['btn']}}</button>
+                                <button href="{{$setting->box_4['btn_link']}}"
+                                        class="btn btn-primary">{{$setting->box_4['btn']}}</button>
                             </div>
                         </div>
                     </div>
@@ -73,7 +78,8 @@
     </div>
     <div class="container-fluid p-0" style="margin-top:-100px;">
         <div class="header-separator position-relative bg-white">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none" class="position-absolute">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none"
+                 class="position-absolute">
                 <path class="bg-white" d="M737.9,94.7L0,0v100h1000V0L737.9,94.7z"/>
             </svg>
         </div>
@@ -85,7 +91,8 @@
                     <h3 class="text-white">{{$setting->call_to_action_title}}</h3>
                 </div>
                 <div class="col-md-6 text-sm-center text-md-right">
-                    <a href="{{$setting->call_to_action_link}}" class="btn btn-warning"> {{$setting->call_to_action}}</a>
+                    <a href="{{$setting->call_to_action_link}}"
+                       class="btn btn-warning"> {{$setting->call_to_action}}</a>
                 </div>
             </div>
         </div>

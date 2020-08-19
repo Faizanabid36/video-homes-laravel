@@ -107,7 +107,7 @@ Route::group( [ 'middleware' => 'admin' ], function () {
 //Route::resource( 'report_query', 'ReportQueryController' );
 //Route::resource( 'user_message', 'UserMessageController' );
 //
-//Route::get( 'reported_query_videos', 'ReportQueryController@reported_videos' )->name( 'reported_query_videos' );
+Route::get( 'reported_query_videos', 'ReportQueryController@reported_videos' )->name( 'reported_query_videos' );
 
 //Route::post( '/search_in_directory', 'MainController@search_in_directory' )->name( 'search_in_directory' );
 

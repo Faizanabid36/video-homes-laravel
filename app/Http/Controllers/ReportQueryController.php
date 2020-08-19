@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ReportQuery;
+use App\UserMessage;
 use Illuminate\Http\Request;
 
 class ReportQueryController extends Controller
@@ -15,7 +16,7 @@ class ReportQueryController extends Controller
     }
     public function reported_videos()
     {
-        $queries = ReportQuery::whereType('video')->paginate(10);
+        $queries = UserMessage::whereType('report')->paginate(10);
         return view('admin.reported.view_reported_videos', compact('queries'));
     }
 
