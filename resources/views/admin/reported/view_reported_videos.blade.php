@@ -54,21 +54,19 @@
                                         <td>{{ucfirst($query->video_id)}}</td>
                                         <td>{{$query->created_at->diffForHumans()}}</td>
                                         <td>
-                                            <form action="{{route('report_query.update',$query->id)}}" method="POST">
-                                                <a href="{{route('report_query.update',$query->id)}}">
-                                                    @csrf
-                                                    <input type="hidden" name="type" value="video">
-                                                    <input type="hidden" name="_method" value="PUT">
-                                                    @if($query->is_resolved!=0)
-                                                        <button class="btn btn-primary" disabled>
-                                                            Resolved
-                                                        </button>
-                                                    @else
-                                                        <button class="btn  btn-primary">
-                                                            Mark as Resolved
-                                                        </button>
-                                                    @endif
-                                                </a>
+                                            <form action="{{route('user_message.update',$query->id)}}" method="POST">
+                                                @csrf
+                                                @method('put')
+                                                @if($query->is_resolved!=0)
+                                                    <button class="btn btn-primary" disabled>
+                                                        Resolved
+                                                    </button>
+                                                @else
+                                                    <input type="hidden" name="is_resolved" value="1">
+                                                    <button type="submit" class="btn  btn-primary">
+                                                        Mark as Resolved
+                                                    </button>
+                                                @endif
                                             </form>
                                         </td>
                                         <td>
