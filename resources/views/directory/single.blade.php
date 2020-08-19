@@ -565,6 +565,7 @@
             @endif
         }
         let stars = $("#review .fa-star");
+        stars.removeClass("text-warning").eq($("input[name=rating]").val()).prevAll().addClass("text-warning")
         stars.mouseenter(function(e){
             stars.removeClass("text-warning");
             $(this).addClass("text-warning").prevAll().addClass("text-warning");
