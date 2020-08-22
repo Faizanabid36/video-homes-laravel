@@ -119,6 +119,10 @@ Route::group( [ 'middleware' => 'admin' ], function () {
 //
 
 //Home
+Route::get('{slug}',function($slug){
+    $page = \App\ReservedSlug::whereSlug($slug)->firstOrFail();
+    return route($page->name);
+});
 Route::get( '/', 'MainController@index' )->name( 'home' );
 
 //Pages

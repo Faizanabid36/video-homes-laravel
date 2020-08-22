@@ -16,6 +16,9 @@ class CreateReservedSlugsTable extends Migration
         Schema::create('reserved_slugs', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('slug');
+            $table->string('title');
+            $table->string('name');
         });
     }
 
