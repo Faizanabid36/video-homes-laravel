@@ -30,7 +30,7 @@ Breadcrumbs::for( 'directory', function ( $trail, $level1 = null, $level2 = null
 Breadcrumbs::for( 'directory_by_username', function ( $trail, $slug, $video_id = null ) {
 //    $trail->parent( 'home' );
     if ( Page::viewPage( $slug )->count() > 0 ){
-        $trail->push( Page::viewPage( $slug )->first()->title, route( 'public.page', $slug ) );
+        $trail->push( Page::viewPage( $slug )->first()->title, route( 'directory_by_username', $slug ) );
         return;
     }
     $trail->push( 'Directory', route( 'directory' ) );
@@ -47,8 +47,8 @@ Breadcrumbs::for( 'directory_by_username', function ( $trail, $slug, $video_id =
         $trail->push( $level1->name, route( 'directory', $level1->slug ) );
     }
 
-    $trail->push( $video->user->name, route( 'directory_by_username', $username ) );
+    $trail->push( $video->user->name, route( 'directory_by_username', $slug ) );
     if ( $video_id ) {
-        $trail->push( $video->title, route( 'directory_by_username', [ $username, $video_id ] ) );
+        $trail->push( $video->title, route( 'directory_by_username', [ $slug, $video_id ] ) );
     }
 } );
