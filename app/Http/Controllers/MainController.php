@@ -31,7 +31,7 @@ class MainController extends Controller {
     public function slug($page){
         $split = explode('/',$page);
         dd("Directory",$page,preg_match('/^directory\//m',$page));
-        if(preg_match('/^directory\//m',$page)){
+        if(preg_match('/^directory\/?/m',$page)){
 
             return redirect(route('directory', [$split[1] ?? null,$split[2] ?? null]));
         } elseif(preg_match('/^embed\//m',$page)){
