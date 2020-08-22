@@ -14,6 +14,8 @@ use App\UserTags;
 use App\Video;
 use App\VideoView;
 use Illuminate\Http\Request;
+use Illuminate\Routing\ControllerDispatcher;
+use Illuminate\Routing\Route;
 
 class MainController extends Controller {
     /**
@@ -29,11 +31,9 @@ class MainController extends Controller {
     public function slug($page){
         $split = explode('/',$page);
         if(preg_match('/^directory\//m',$page)){
-            $level1 = isset($split[1]) ? $split[1] : null;
-            $level2 = isset($split[2]) ? $split[2] : null;
-            return $this->directory($level1,$level2);
+            return redirect(route('directory', [$split[1] ?? null,$split[2] ?? null]));
         } elseif(preg_match('/^embed\//m',$page)){
-            return $this->embed($split[1]);
+            return redirect(route('embed_video', [$split[1] ?? null]));
         }
     }
 

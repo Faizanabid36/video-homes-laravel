@@ -125,11 +125,11 @@ Route::get('/{any}', 'MainController@slug')->where('any', '.*');
 Route::get( '/page/{slug}', 'MainController@page' )->name( 'pages' );
 
 //Directory
-//Route::get( '/directory/{level1?}/{level2?}', 'MainController@directory' )->name( 'directory' );
+Route::get( '/directory/{level1?}/{level2?}', 'MainController@directory' )->name( 'directory' );
 Route::get( '/u/{username}/{video_id?}', 'MainController@username' )->name( 'directory_by_username' );
 
 ///Embed Videos
-//Route::get( '/embed/{video_id}', 'MainController@embed' )->name( 'embed_video' );
+Route::get( '/embed/{video_id}', 'MainController@embed' )->name( 'embed_video' );
 
 //Video
 Route::put( 'is_play/{video}', 'MainController@isplay' )->name( 'is_played' );
