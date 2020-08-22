@@ -17,7 +17,7 @@ class IsUserNameMiddleware {
      */
     public function handle( $request, Closure $next ) {
 //        dd($request->route()->parameter( 'video_id' ) );
-        $video = Video::userVideos( $request->route()->parameter( 'username' ), $request->route()->parameter( 'video_id' ) );
+        $video = Video::userVideos( $request->route()->parameter( 'slug' ), $request->route()->parameter( 'video_id' ) );
         if ( $video->count() > 0 ) {
             return $next( $request );
         }
