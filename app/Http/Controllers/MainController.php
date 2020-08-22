@@ -26,8 +26,8 @@ class MainController extends Controller {
         return view( 'home',compact('setting') );
     }
 
-    public function slug(){
-
+    public function slug($page){
+        dd($page);
     }
 
 
