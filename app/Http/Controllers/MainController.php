@@ -27,7 +27,14 @@ class MainController extends Controller {
     }
 
     public function slug($page){
-        dd($page);
+        $split = explode('/',$page);
+        if(preg_match('/^directory\//m',$page)){
+            $level1 = isset($split[1]) ? $split[1] : null;
+            $level2 = isset($split[2]) ? $split[2] : null;
+            return $this->directory($level1,$level2);
+        } elseif(preg_match('/^embed\//m',$page)){
+            return $this->embed($split[1]);
+        }
     }
 
 
