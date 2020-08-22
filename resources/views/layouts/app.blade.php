@@ -8,35 +8,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Styles -->
-{{--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"--}}
-{{--          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">--}}
-
-{{--    <link rel="stylesheet" href="{{asset('css/jquery-ui.min.css')}}">--}}
-{{--    <link rel="stylesheet" href="{{asset('css/jquery.tagit.css')}}">--}}
-{{--    <link rel="stylesheet" href="{{asset('css/font-awesome-4.7.0/css/font-awesome.min.css')}}">--}}
-{{--    <link rel="stylesheet" href="{{asset('css/twemoji-awesome.css')}}">--}}
-{{--    <link rel="stylesheet" href="{{asset('css/lib/sweetalert2/dist/sweetalert2.min.css')}}">--}}
-{{--    <link rel="stylesheet" href="{{asset('css/lib/notifIt/notifIt/css/notifIt.min.css')}}">--}}
-{{--    <link rel="stylesheet" href="{{asset('css/style.css')}}" id="style-css">--}}
-{{--    <link rel="stylesheet" href="{{asset('css/custom.style.css')}}">--}}
-{{--    <link rel="stylesheet" href="{{asset('css/bootstrap-select.min.css')}}">--}}
-{{--    <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">--}}
-{{--    <link rel="stylesheet" type="text/css" href="{{asset('js/emoji/emojionearea/dist/emojionearea.min.css')}}"/>--}}
-{{--    <link rel="stylesheet" href="{{asset('css/mediaelementplayer.min.css')}}">--}}
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAm4Wvmd2nIeaFQCdhAsxbiSXgBsibDolc&libraries=places&callback=initMap"></script>
 
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAm4Wvmd2nIeaFQCdhAsxbiSXgBsibDolc&libraries=places"></script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-65576540-2"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'UA-65576540-2');
-    </script>
     <script>
         window.VIDEO_APP = {
             base_url: '{{url('/')}}',
