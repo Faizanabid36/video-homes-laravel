@@ -23,9 +23,7 @@ class IsPageMiddleware {
             $request->merge(compact('page'));
             return $next( $request );
         }
-        return app(IsUserNameMiddleware::class)->handle($request, function ($request) use ($next) {
-            return $next($request);
-        });
+        return route('directory_by_username',request()->route()->parameters());
 
     }
 }

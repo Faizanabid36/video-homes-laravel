@@ -15,8 +15,6 @@ class IsUserNameMiddleware {
      * @return mixed
      */
     public function handle( $request, Closure $next ) {
-//        dd($request->route()->parameter( 'video_id' ) );
-
         $video = Video::userVideos( $request->route()->parameter( 'slug' ), $request->route()->parameter( 'video_id' ) );
         if ( $video->count() > 0 ) {
             $video = $video->first();
