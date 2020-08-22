@@ -27,10 +27,15 @@ Breadcrumbs::for( 'directory', function ( $trail, $level1 = null, $level2 = null
     }
 } );
 
-Breadcrumbs::for( 'directory_by_username', function ( $trail, $username, $video_id = null ) {
+Breadcrumbs::for( 'directory_by_username', function ( $trail, $slug, $video_id = null ) {
 //    $trail->parent( 'home' );
+    if ( Page::viewPage( $slug )->count() > 0 ){
+        $trail->push( Page::viewPage( $slug )->first()->title, route( 'public.page', $slug ) );
+        return;
+    }
     $trail->push( 'Directory', route( 'directory' ) );
-    $video = Video::userVideos( $username, $video_id )->firstOrFail();
+
+    $video    = Video::userVideos( $slug, $video_id )->firstOrFail();
     $category = UserCategory::find( $video->user->user_extra->user_category_id );
     $level1   = $category;
     if ( $category->parent_id ) {
