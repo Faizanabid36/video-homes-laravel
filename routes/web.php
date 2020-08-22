@@ -120,7 +120,9 @@ Route::group( [ 'middleware' => 'admin' ], function () {
 
 //Home
 Route::get( '/', 'MainController@index' )->name( 'home' );
-Route::get('/{any}', 'MainController@slug')->where('any', '.*');
+Route::any( '(.*)', function( $page ){
+    dd($page);
+});
 //Pages
 Route::get( '/page/{slug}', 'MainController@page' )->name( 'pages' );
 

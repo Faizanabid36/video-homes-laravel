@@ -27,7 +27,7 @@ class MainController extends Controller {
     }
 
     public function slug(){
-            dd($argv);
+
     }
 
 
