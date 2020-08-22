@@ -25,9 +25,9 @@ class MainController extends Controller {
      */
     public function index() {
         $setting = Settings::first();
-        return view( 'home',compact('setting') );
-    }
 
+        return view( 'home', compact( 'setting' ) );
+    }
 
 
     public function directory( $level1 = null, $level2 = null ) {
@@ -65,7 +65,7 @@ class MainController extends Controller {
     }
 
     public function page( $slug ) {
-        return view( 'page', ["page"=>request('page')] );
+        return view( 'page', requst()->only( [ 'page' ] ) );
     }
 
     public function isplay( Video $video ) {
