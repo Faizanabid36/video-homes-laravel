@@ -71,7 +71,7 @@
                             @foreach($pages as $page)
                                 <li class="nav-item">
                                     <a class="nav-link"
-                                       href="{{route('public.page',$page->slug)}}">{{strtoupper($page->title)}}</a>
+                                       href="{{route('pages',$page->slug)}}">{{strtoupper($page->title)}}</a>
                                 </li>
                             @endforeach
                         </ul>

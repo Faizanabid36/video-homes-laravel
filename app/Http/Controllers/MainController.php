@@ -26,6 +26,12 @@ class MainController extends Controller {
         return view( 'home',compact('setting') );
     }
 
+    public function slug(){
+            dd($argv);
+    }
+
+
+
     public function directory( $level1 = null, $level2 = null ) {
 
         $industries       = UserCategory::getCategories();
@@ -40,7 +46,7 @@ class MainController extends Controller {
         return view( 'directory.index', compact( 'users', 'categories', 'industries', 'level1', 'video_categories', 'videos' ) );
     }
 
-    public function directory_by_username( $username, $video_id = null ) {
+    public function username( $username, $video_id = null ) {
         if ( request()->ajax() ) {
             return [ "isProcessed" => Video::userVideos( $username, $video_id )->first()->processed ];
         }
@@ -53,7 +59,7 @@ class MainController extends Controller {
         return view( ! $video->processed ? 'directory.processing' : 'directory.single', compact( 'user', 'video', 'related_videos', 'views' ) );
     }
 
-    public function embed_video( $video_id ) {
+    public function embed( $video_id ) {
         $video = Video::singleVideo( $video_id )->firstOrFail();
         VideoView::videoViews( $video, [ "from_website" => 0 ] );
 
@@ -66,7 +72,7 @@ class MainController extends Controller {
         return view( 'page', compact( 'page' ) );
     }
 
-    public function is_played( Video $video ) {
+    public function isplay( Video $video ) {
         return [ "success" => VideoView::videoViews( $video, [ "is_played" => 1 ] ) ];
     }
 

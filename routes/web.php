@@ -119,24 +119,20 @@ Route::group( [ 'middleware' => 'admin' ], function () {
 //
 
 //Home
-Route::get('{slug}',function($slug){
-    $page = \App\ReservedSlug::whereSlug($slug)->firstOrFail();
-    return route($page->name);
-});
 Route::get( '/', 'MainController@index' )->name( 'home' );
-
+Route::get('{slug}', 'MainController@slug');
 //Pages
-Route::get( '/page/{slug}', 'MainController@page' )->name( 'public.page' );
+Route::get( '/page/{slug}', 'MainController@page' )->name( 'pages' );
 
 //Directory
 Route::get( '/directory/{level1?}/{level2?}', 'MainController@directory' )->name( 'directory' );
-Route::get( '/u/{username}/{video_id?}', 'MainController@directory_by_username' )->name( 'directory_by_username' );
+Route::get( '/u/{username}/{video_id?}', 'MainController@username' )->name( 'directory_by_username' );
 
 ///Embed Videos
-Route::get( '/embed/{video_id}', 'MainController@embed_video' )->name( 'embed_video' );
+Route::get( '/embed/{video_id}', 'MainController@embed' )->name( 'embed_video' );
 
 //Video
-Route::put( 'is_play/{video}', 'MainController@is_played' )->name( 'is_played' );
+Route::put( 'is_play/{video}', 'MainController@isplay' )->name( 'is_played' );
 
 
-Route::resource( 'admin/users', 'Admin\\UsersController' );
+
