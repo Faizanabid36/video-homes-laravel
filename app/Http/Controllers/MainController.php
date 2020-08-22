@@ -65,7 +65,7 @@ class MainController extends Controller {
     }
 
     public function page( $slug ) {
-        return view( 'page', requst()->only( [ 'page' ] ) );
+        return view( 'page', request()->only( [ 'page' ] ) );
     }
 
     public function isplay( Video $video ) {
