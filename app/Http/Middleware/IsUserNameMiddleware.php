@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Page;
 use App\Video;
 use Closure;
 
@@ -18,6 +17,7 @@ class IsUserNameMiddleware {
     public function handle( $request, Closure $next ) {
 //        dd($request->route()->parameter( 'video_id' ) );
         $video = Video::userVideos( $request->route()->parameter( 'slug' ), $request->route()->parameter( 'video_id' ) );
+        dd($video->first()->toArray());
         if ( $video->count() > 0 ) {
             return $next( $request );
         }
