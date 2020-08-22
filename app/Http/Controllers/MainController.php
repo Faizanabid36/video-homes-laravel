@@ -28,17 +28,6 @@ class MainController extends Controller {
         return view( 'home',compact('setting') );
     }
 
-    public function slug($page){
-        $split = explode('/',$page);
-
-        if(preg_match('/^directory\/?/m',$page)){
-            //dd("Directory",$page,preg_match('/^directory\//m',$page));
-            return redirect(route('directory', [$split[1] ?? null,$split[2] ?? null]));
-        } elseif(preg_match('/^embed\//m',$page)){
-            return redirect(route('embed_video', [$split[1] ?? null]));
-        }
-    }
-
 
 
     public function directory( $level1 = null, $level2 = null ) {
@@ -76,9 +65,8 @@ class MainController extends Controller {
     }
 
     public function page( $slug ) {
-        $page = Page::viewPage( $slug )->firstOrFail();
 
-        return view( 'page', compact( 'page' ) );
+        return view( 'page', ["page"=>request('page')] );
     }
 
     public function isplay( Video $video ) {

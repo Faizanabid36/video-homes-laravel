@@ -128,7 +128,7 @@ Route::get( '/embed/{video_id}', 'MainController@embed' )->name( 'embed_video' )
 Route::put( 'is_play/{video}', 'MainController@isplay' )->name( 'is_played' );
 
 //Pages
-Route::get( '/{slug}', 'MainController@page' )->name( 'pages' );
+Route::get( '/{slug}', 'MainController@page' )->middleware(\App\Http\Middleware\IsPageMiddleware::class)->name( 'pages' );
 Route::get( '/{username}/{video_id?}', 'MainController@username' )->name( 'directory_by_username' );
 
 
