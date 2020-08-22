@@ -65,7 +65,6 @@ class MainController extends Controller {
     }
 
     public function page( $slug ) {
-        return request()->all();
         return view( 'page', ["page"=>request('page')] );
     }
 
