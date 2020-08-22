@@ -48,8 +48,8 @@ class MainController extends Controller {
         if ( request()->ajax() ) {
             return [ "isProcessed" => Video::userVideos( $username, $video_id )->first()->processed ];
         }
-        $video = Video::userVideos( $username, $video_id )->firstOrFail();
-
+//        $video = Video::userVideos( $username, $video_id )->firstOrFail();
+        $video = request('video');
         $views          = VideoView::videoViews( $video );
         $user           = $video->user;
         $related_videos = Video::userVideos( $username, $video->id, true )->get();
