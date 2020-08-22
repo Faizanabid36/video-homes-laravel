@@ -129,7 +129,7 @@ Route::put( 'is_play/{video}', 'MainController@isplay' )->name( 'is_played' );
 
 //Pages
 Route::get( '/{slug}', 'MainController@page' )->middleware(\App\Http\Middleware\IsPageMiddleware::class)->name( 'pages' );
-Route::get( '/{username}/{video_id?}', 'MainController@username' )->middleware(\App\Http\Middleware\IsUserNameMiddleware::class)->name( 'directory_by_username' );
+Route::get( '/{slug}/{video_id?}', 'MainController@username' )->middleware(\App\Http\Middleware\IsUserNameMiddleware::class)->name( 'directory_by_username' );
 
 
 
