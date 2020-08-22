@@ -16,11 +16,12 @@ class IsUserNameMiddleware {
      * @return mixed
      */
     public function handle( $request, Closure $next ) {
-        dd($request->route()->parameter( 'video_id' ) );
+//        dd($request->route()->parameter( 'video_id' ) );
         $video = Video::userVideos( $request->route()->parameter( 'username' ), $request->route()->parameter( 'video_id' ) );
         if ( $video->count() > 0 ) {
             return $next( $request );
         }
+        return abort( 404 );
 
     }
 }

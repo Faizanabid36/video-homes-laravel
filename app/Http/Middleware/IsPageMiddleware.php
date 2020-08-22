@@ -16,12 +16,14 @@ class IsPageMiddleware {
      */
     public function handle( $request, Closure $next ) {
         //dd( $request->route()->parameter( 'slug' ) );
+
         $page = Page::viewPage( $request->route()->parameter( 'slug' ) );
         if($page->count() > 0) {
             $page = $page->first();
             $request->merge(compact('page'));
             return $next( $request );
         }
+        return redirect()->route('directory_by_username',request()->route()->parameters());
 
     }
 }
