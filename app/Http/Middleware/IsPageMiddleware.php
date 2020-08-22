@@ -23,7 +23,7 @@ class IsPageMiddleware {
             $request->merge(compact('page'));
             return $next( $request );
         }
-
+        dd("Yes, page");
         return redirect()->route('directory_by_username',request()->route()->parameters());
 
     }
