@@ -44,9 +44,12 @@ class MainController extends Controller {
         return view( 'directory.index', compact( 'users', 'categories', 'industries', 'level1', 'video_categories', 'videos' ) );
     }
 
-    public function username( $username, $video_id = null ) {
+    public function page_or_username( $username, $video_id = null ) {
         if ( request()->ajax() ) {
             return [ "isProcessed" => Video::userVideos( $username, $video_id )->first()->processed ];
+        }
+        if(request('page')){
+            return view( 'page', request()->only( [ 'page' ] ) );
         }
 //        $video = Video::userVideos( $username, $video_id )->firstOrFail();
         $video = request('video');
