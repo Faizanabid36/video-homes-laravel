@@ -171,7 +171,7 @@
                                 <div class="card w-100">
                                     <div class="card-body">
                                         <div class="input-group mb-3">
-                                            <input type="text" value="{{url()->current()}}"
+                                            <input type="text" value="{{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"
                                                    class="form-control input-md copylink" readonly=""
                                             >
                                             <div class="input-group-prepend">
@@ -180,28 +180,28 @@
                                             </div>
                                         </div>
                                         <button
-                                            data-url="https://www.facebook.com/sharer/sharer.php?u={{url()->current()}}"
+                                            data-url="https://www.facebook.com/sharer/sharer.php?u={{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"
                                             class="btn btn-primary share-social"><i class="fa fa-facebook"></i>
                                         </button>
-                                        <button data-url="https://wa.me/?text={{url()->current()}}"
+                                        <button data-url="https://wa.me/?text={{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"
                                                 class="btn btn-primary share-social"><i class="fa fa-whatsapp"></i>
                                         </button>
-                                        <button data-url="https://twitter.com/intent/tweet?url={{url()->current()}}"
+                                        <button data-url="https://twitter.com/intent/tweet?url={{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"
                                                 class="btn btn-primary share-social"><i class="fa fa-twitter"></i>
                                         </button>
                                         <button
-                                            data-url="https://www.linkedin.com/shareArticle?mini=true&url={{url()->current()}}&title={{$video->title}}"
+                                            data-url="https://www.linkedin.com/shareArticle?mini=true&url={{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}&title={{$video->title}}"
                                             class="btn btn-primary share-social"><i class="fa fa-linkedin"></i>
                                         </button>
                                         <button
-                                            data-url="https://pinterest.com/pin/create/button/?url={{url()->current()}}&media={{asset("storage/$video->stream_path")}}"
+                                            data-url="https://pinterest.com/pin/create/button/?url={{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}&media={{asset("storage/$video->stream_path")}}"
                                             class="btn btn-primary share-social"><i class="fa fa-pinterest"></i>
                                         </button>
-                                        <button data-url="https://www.tumblr.com/share/link?url={{url()->current()}}"
+                                        <button data-url="https://www.tumblr.com/share/link?url={{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"
                                                 class="btn btn-primary share-social"><i
                                                 class="fa fa-tumblr"></i>
                                         </button>
-                                        <button data-url="https://www.reddit.com/submit?url={{url()->current()}}"
+                                        <button data-url="https://www.reddit.com/submit?url={{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"
                                                 class="btn btn-primary share-social"><i
                                                 class="fa fa-reddit"></i></button>
                                     </div>
