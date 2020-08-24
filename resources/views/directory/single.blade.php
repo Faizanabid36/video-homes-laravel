@@ -1,4 +1,4 @@
-@extends('layouts.public.app',["title"=>$video->title])
+@extends('layouts.public.app',["title"=>$video->title,"share_image"=>asset("storage/$video->thumbnail")])
 @section('header_script')
     window.VIDEO_APP.video_url = "{{route('is_played',$video->id)}}";
 @endsection
