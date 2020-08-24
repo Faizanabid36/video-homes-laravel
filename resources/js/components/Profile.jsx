@@ -55,10 +55,32 @@ class Profile extends React.Component {
         this.handleChangeInput = this.handleChangeInput.bind(this);
         this.onCrop = this.onCrop.bind(this);
         this.onClose = this.onClose.bind(this);
-        this.onBeforeFileLoad = this.onBeforeFileLoad.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
-        this.deleteAction = this.deleteAction.bind(this)
+        this.onBeforeFileLoad = this.onBeforeFileLoad.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.deleteAction = this.deleteAction.bind(this);
+        this.changePasswordAction = this.changePasswordAction.bind(this);
 
+    }
+
+    changePasswordAction(){
+        Swal.fire({
+            title: 'Change your Password',
+            input: 'text',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Change Password',
+            showLoaderOnConfirm: true,
+        }).then((result) => {
+            if (result.value) {
+                Swal.fire(
+                    'Changed!',
+                    'Your password has been changed.',
+                    'success'
+                )
+            }
+        })
     }
 
     handleSubmit(e) {
@@ -123,7 +145,7 @@ class Profile extends React.Component {
             if (result.value) {
                 Swal.fire(
                     'Deleted!',
-                    'Your file has been deleted.',
+                    'Your account has been deleted.',
                     'success'
                 )
             }
@@ -437,7 +459,7 @@ class Profile extends React.Component {
                             </svg>
                             Update</Button> &nbsp;
                         <Button variant='danger' onClick={e => this.deleteAction}>Delete Account</Button>
-                        <Button variant="warning" onClick={e => alert("Change Password")}>Change Password</Button>
+                        <Button variant="warning" onClick={e => this.changePasswordAction}>Change Password</Button>
                         {/*<SweetAlert*/}
                         {/*    show={this.state.confirm_delete}*/}
                         {/*    title="Delete"*/}
