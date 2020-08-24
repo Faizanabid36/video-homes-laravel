@@ -47,6 +47,8 @@
         "react-tagsinput": "^3.19.0",
         "semantic-ui-css": "^2.4.1",
         "semantic-ui-react": "^1.1.1",
+        "sweetalert2": "^9.17.1",
+        "sweetalert2-react": "^0.8.3",
         "tag-it": "^2.0.0"
     }
 }
