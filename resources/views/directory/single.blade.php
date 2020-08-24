@@ -39,9 +39,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h2 style="text-transform:uppercase">
-                    {{$user->name}}
-                </h2>
+                <h2 style="text-transform:uppercase">{{$user->name}}</h2>
                 @if(!$video->is_video_approved)
                     <div class="alert alert-warning">This page is not public yet, because your video is pending mode, it
                         needs admin approval.
@@ -244,7 +242,7 @@
                                 <div class="card w-100">
                                     <div class="card-body">
                                         {{$video->title}}
-                                        <p>{!! $video->discription !!}</p>
+                                        <p>{{$video->discription}}</p>
                                         @if(!is_array($video->tags))
                                             Tags: @foreach($video->tags as $tags)
                                                 {{--                                            <span class="badge badge-primary">{{str_replace(",",'</span><span class="badge badge-primary">',$video->tags)}}</span>--}}
