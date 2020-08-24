@@ -64,6 +64,26 @@ class Profile extends React.Component {
 
     }
 
+    deleteAction(e){
+        MySwal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'danger',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#82d600',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                MySwal.fire(
+                    'Deleted!',
+                    'Your account has been deleted.',
+                    'success'
+                )
+            }
+        })
+    }
+
     changePasswordAction(){
         MySwal.fire({
             title: 'Change your Password',
@@ -134,25 +154,7 @@ class Profile extends React.Component {
         this.setState({user});
     }
 
-    deleteAction(e){
-        MySwal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'danger',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#82d600',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.value) {
-                MySwal.fire(
-                    'Deleted!',
-                    'Your account has been deleted.',
-                    'success'
-                )
-            }
-        })
-    }
+
 
     defaultValue(key) {
         return this.state.user[key] || null;
