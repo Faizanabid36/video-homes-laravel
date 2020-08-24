@@ -72,8 +72,7 @@ class Profile extends React.Component {
         if (elem.target.files[0].size > 71680) {
             alert("File is too big!");
             elem.target.value = "";
-        }
-        ;
+        };
     }
 
     onClose() {
