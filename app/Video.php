@@ -62,7 +62,7 @@ class Video extends Model {
             } );
         } )->when( $video_id, function ( $query ) use ( $video_id, $related ) {
             return $related ? $query->where(function($q) use ($video_id){
-                return $q->where('video_id','!=', $video_id )->orWhere('slug','!=',$video_id);
+                return $q->where('id','!=', $video_id );
             })  : $query->where(function($q) use ($video_id){
                 return $q->whereVideoId( $video_id )->orWhere('slug',$video_id);
             });
