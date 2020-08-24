@@ -50,7 +50,7 @@ class HomeController extends Controller {
                 return $user->update( [ 'password' => Hash::make( request( 'newPassword1' ) ) ] );
             }
 
-            return false;
+            return abort(403);
         }
 
         if ( request( 'company_logo' ) && preg_match( "/data:\w+\/\w+;base64,.*/", request( 'company_logo' ) ) == 1 ) {
