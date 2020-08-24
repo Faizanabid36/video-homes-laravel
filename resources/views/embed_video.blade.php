@@ -5,11 +5,14 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta property="og:image" content="{{asset("storage/$video->thumbnail")}}"/>
+    <meta property="og:url" content="{{url()->current()}}"/>
+
     <title>{{$video->title}} - {{env('APP_NAME')}}</title>
     <link rel="stylesheet" href="{{asset('css/public.css')}}">
     <style>
-        .mejs__container,.mejs__layer {
-            height:100vh!important;
+        .mejs__container, .mejs__layer {
+            height: 100vh !important;
         }
     </style>
     <script>
