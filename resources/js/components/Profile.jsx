@@ -57,6 +57,7 @@ class Profile extends React.Component {
         this.onClose = this.onClose.bind(this);
         this.onBeforeFileLoad = this.onBeforeFileLoad.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.deleteAction = this.deleteAction.bind(this)
 
     }
 
