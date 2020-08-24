@@ -25,6 +25,11 @@ class Video extends Model {
             $video->setAttribute( 'disk', 'public' );
             $video->setAttribute( 'playlist_id', $playlist );
         } );
+        static::created( function ( $video ) {
+            $video->slug = \Str::slug( $video->video_id . " " . $video->title );
+            $video->save();
+        } );
+
 
         static::deleting( function ( $video ) {
             VideoView::whereVideoId( $video->id )->delete();
