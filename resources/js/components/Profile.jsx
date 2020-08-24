@@ -107,7 +107,7 @@ class Profile extends React.Component {
                 newPassword2: document.getElementById('newPassword2').value
             })
         }).then((result) => {
-            let v = result;
+            let v = result.value;
             console.log("yes",v);
             if (v && v.currentPassword && v.newPassword1 && v.newPassword2) {
                 axios.put('/edit_user_profile/' + this.state.user.id, {...v}).then(({data}) => {
