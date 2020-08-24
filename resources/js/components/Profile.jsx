@@ -419,6 +419,7 @@ class Profile extends React.Component {
                         <SweetAlert
                             show={this.state.confirm_delete}
                             title="Delete"
+                            icon='danger'
                             text="Are you sure?"
                             onConfirm={() => this.setState({confirm_delete: false})}
                         />
