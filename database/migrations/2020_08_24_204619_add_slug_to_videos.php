@@ -15,7 +15,7 @@ class AddSlugToVideos extends Migration
     {
         Schema::table('videos', function (Blueprint $table) {
             //
-            $table->string('100')->nullable();
+            $table->string('slug')->nullable();
         });
     }
 
