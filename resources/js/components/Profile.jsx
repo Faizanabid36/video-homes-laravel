@@ -69,7 +69,7 @@ class Profile extends React.Component {
         MySwal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
-            icon: 'danger',
+            icon: 'error',
             showCancelButton: true,
             confirmButtonColor: '#d33',
             cancelButtonColor: '#82d600',
