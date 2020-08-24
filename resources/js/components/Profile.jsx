@@ -64,7 +64,8 @@ class Profile extends React.Component {
 
     }
 
-    deleteAction(e){
+    deleteAction(){
+        console.log("yes")
         MySwal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -85,6 +86,7 @@ class Profile extends React.Component {
     }
 
     changePasswordAction(){
+        console.log("passwod");
         MySwal.fire({
             title: 'Change your Password',
             input: 'text',
@@ -462,8 +464,8 @@ class Profile extends React.Component {
                                 <polyline points="22 4 12 14.01 9 11.01"/>
                             </svg>
                             Update</Button> &nbsp;
-                        <Button variant='danger' onClick={e => this.deleteAction}>Delete Account</Button>
-                        <Button variant="warning" onClick={e => this.changePasswordAction}>Change Password</Button>
+                        <Button variant='danger' onClick={e => this.deleteAction()}>Delete Account</Button>
+                        <Button variant="warning" onClick={e => this.changePasswordAction()}>Change Password</Button>
                         {/*<SweetAlert*/}
                         {/*    show={this.state.confirm_delete}*/}
                         {/*    title="Delete"*/}
