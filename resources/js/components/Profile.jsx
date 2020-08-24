@@ -10,7 +10,8 @@ import GooglePlacesAutocomplete, { geocodeByAddress } from "react-google-places-
 import Avatar from 'react-avatar-edit';
 import InputMask from "react-input-mask";
 import { Editor } from '@tinymce/tinymce-react';
-import SweetAlert from 'sweetalert2-react';
+// import SweetAlert from 'sweetalert2-react';
+import Swal from 'sweetalert2'
 
 
 function UploadImage(props) {
@@ -107,6 +108,26 @@ class Profile extends React.Component {
         let {user} = this.state;
         user[key || e.target.name] = key ? e : e.target.value;
         this.setState({user});
+    }
+
+    deleteAction(e){
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'danger',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#82d600',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+            }
+        })
     }
 
     defaultValue(key) {
@@ -347,6 +368,7 @@ class Profile extends React.Component {
                         <Form.Label>About/Bio (Max 600 words)</Form.Label>
 
                         <Editor
+                            apiKey="rlsbsechuy5zwieakwp79flrto7ipmojgummzxwwjbbcbtye"
                             name="bio"
                             initialValue={this.defaultValue('bio')}
                             init={{
@@ -414,15 +436,15 @@ class Profile extends React.Component {
                                 <polyline points="22 4 12 14.01 9 11.01"/>
                             </svg>
                             Update</Button> &nbsp;
-                        <Button variant='danger' onClick={e => this.setState({confirm_delete: true})}>Delete the
-                            Account</Button>
-                        <SweetAlert
-                            show={this.state.confirm_delete}
-                            title="Delete"
-                            icon='danger'
-                            text="Are you sure?"
-                            onConfirm={() => this.setState({confirm_delete: false})}
-                        />
+                        <Button variant='danger' onClick={e => this.deleteAction}>Delete Account</Button>
+                        <Button variant="warning" onClick={e => alert("Change Password")}>Change Password</Button>
+                        {/*<SweetAlert*/}
+                        {/*    show={this.state.confirm_delete}*/}
+                        {/*    title="Delete"*/}
+                        {/*    icon='danger'*/}
+                        {/*    text="Are you sure?"*/}
+                        {/*    onConfirm={() => this.setState({confirm_delete: false})}*/}
+                        {/*/>*/}
                     </Col>
                 </Row>
             </Container>
