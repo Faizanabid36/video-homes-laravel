@@ -5,14 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-@yield('meta');
+    @yield('meta')
     <link href="{{asset('css/public.css?version=')}}{{time()}}" rel="stylesheet">
     @yield('style')
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-47773357-2"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
 
         gtag('config', 'UA-47773357-2');
@@ -43,7 +47,7 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
-{{--                            <li class="nav-item"><a href="{{route('home')}}" class="nav-link">HOME</a></li>--}}
+                            {{--                            <li class="nav-item"><a href="{{route('home')}}" class="nav-link">HOME</a></li>--}}
                             @auth
                                 @if (auth()->user()->isAdmin())
                                     <li class="nav-item">
@@ -90,14 +94,14 @@
     </div>
 </div>
 @yield('content')
-    <div class="container-fluid bg-dark ">
-        <div class="row">
-            <div class="col-12  border-primary text-white py-5 text-center" style="border-top: 5px solid;">
-                {!! $footer !!}
-            </div>
+<div class="container-fluid bg-dark ">
+    <div class="row">
+        <div class="col-12  border-primary text-white py-5 text-center" style="border-top: 5px solid;">
+            {!! $footer !!}
         </div>
     </div>
-    <script src="{{ asset('js/public.js?version=').time() }}"></script>
+</div>
+<script src="{{ asset('js/public.js?version=').time() }}"></script>
 @yield('script')
 </body>
 </html>
