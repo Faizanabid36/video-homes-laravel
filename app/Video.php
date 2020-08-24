@@ -54,16 +54,17 @@ class Video extends Model {
     }
 
     public function scopeUserVideos( $query, $username, $video_id = false, $related = false ) {
-        return $query->when( ! auth()->check() || auth()->user()->username !== $username, function ( $q ) {
+        return $query->whereHas( 'user', function ( $query ) use ( $username ) {
+            $query->whereUsername( $username );
+        } )->when( ! auth()->check() || auth()->user()->username !== $username, function ( $q ) {
             $q->whereProcessed( 1 )->whereIsVideoApproved( 1 )->whereHas( 'user', function ( $query ) {
                 $query->whereActive( 1 );
             } );
         } )->when( $video_id, function ( $query ) use ( $video_id, $related ) {
             return $related ? $query->where( 'video_id', '!=', $video_id )->orWhere('slug','!=',$video_id) : $query->whereVideoId( $video_id )->orWhere('slug',$video_id);
+
         } )->when( ! $video_id, function ( $query ) {
             $query->latest();
-        } )->whereHas( 'user', function ( $query ) use ( $username ) {
-            $query->whereUsername( $username );
         } )->take( 5 );
     }
 
