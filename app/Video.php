@@ -68,7 +68,9 @@ class Video extends Model {
     }
 
     public function scopeSingleVideo( $query, $video_id ) {
-        return $query->whereProcessed( 1 )->whereIsVideoApproved( 1 )->whereVideoId( $video_id );
+        return $query->whereProcessed( 1 )->whereIsVideoApproved( 1 )->where(function($q) use ($video_id){
+            return $q->whereVideoId( $video_id )->orWhereSlug($video_id);
+        });
     }
 
 }
