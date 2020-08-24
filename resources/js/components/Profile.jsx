@@ -12,6 +12,8 @@ import InputMask from "react-input-mask";
 import { Editor } from '@tinymce/tinymce-react';
 // import SweetAlert from 'sweetalert2-react';
 import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content';
+const MySwal = withReactContent(Swal);
 
 
 function UploadImage(props) {
@@ -63,7 +65,7 @@ class Profile extends React.Component {
     }
 
     changePasswordAction(){
-        Swal.fire({
+        MySwal.fire({
             title: 'Change your Password',
             input: 'text',
             inputAttributes: {
@@ -133,7 +135,7 @@ class Profile extends React.Component {
     }
 
     deleteAction(e){
-        Swal.fire({
+        MySwal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
             icon: 'danger',
@@ -143,7 +145,7 @@ class Profile extends React.Component {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.value) {
-                Swal.fire(
+                MySwal.fire(
                     'Deleted!',
                     'Your account has been deleted.',
                     'success'
