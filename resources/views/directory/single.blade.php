@@ -17,7 +17,7 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="player">
     <meta name="twitter:title" content="{{$video->title}}">
-    <meta name="twitter:site" content="{{url('/'}}">
+    <meta name="twitter:site" content="{{url('/')}}">
     <meta name="twitter:description" content="Author: {{$user->name}}" />
     <meta name="twitter:player" content="{{route('embed_video',$video->video_id)}}?track_url=twitter.com">
     <meta name="twitter:player:width" content="640">
