@@ -65,7 +65,6 @@ class Profile extends React.Component {
     }
 
     deleteAction(){
-        console.log("yes")
         MySwal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -76,33 +75,48 @@ class Profile extends React.Component {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.value) {
-                MySwal.fire(
-                    'Deleted!',
-                    'Your account has been deleted.',
-                    'success'
-                )
+               axios.post('delete_user_profile').then(({data})=>{
+                   console.log(data);
+                   MySwal.fire(
+                       'Deleted!',
+                       'Your account has been deleted.',
+                       'success'
+                   )
+               });
             }
         })
     }
 
     changePasswordAction(){
-        console.log("passwod");
         MySwal.fire({
-            title: 'Change your Password',
-            input: 'text',
-            inputAttributes: {
-                autocapitalize: 'off'
-            },
+            title: 'Change Password?',
+            focusConfirm: false,
+            html: `
+    <input class="swal2-input" id="currentPassword" type="password" placeholder="Enter your current password..." /><br />
+    <input class="swal2-input" id="newPassword1" type="password" placeholder="Enter your new password..." /><br />
+    <input class="swal2-input" id="newPassword2" type="password" placeholder="Confirm your new password..." />
+  `,
+            type: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Change Password',
-            showLoaderOnConfirm: true,
+            cancelButtonColor: 'grey',
+            confirmButtonText: 'Update!',
+            allowOutsideClick: false,
+            preConfirm: () => ({
+                currentPassword: document.getElementById('currentPassword').value,
+                newPassword1: document.getElementById('newPassword1').value,
+                newPassword2: document.getElementById('newPassword2').value
+            })
         }).then((result) => {
-            if (result.value) {
-                MySwal.fire(
-                    'Changed!',
-                    'Your password has been changed.',
-                    'success'
-                )
+            let v = result;
+            if (v && v.currentPassword && v.newPassword1 && v.newPassword2) {
+                axios.put('/edit_user_profile/' + this.state.user.id, {...v}).then(({data}) => {
+                    MySwal.fire(
+                        'Changed!',
+                        'Your password has been changed.',
+                        'success'
+                    )
+                }).catch(e => console.log)
+
             }
         })
     }

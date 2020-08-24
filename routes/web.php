@@ -33,6 +33,7 @@ Route::group( [ 'middleware' => 'auth' ], function () {
     Route::get( 'get_logged_user', 'HomeController@logged_user' );
 //    Route::post( 'edit_user_profile', 'HomeController@edit_user_profile1' );
     Route::put( 'edit_user_profile/{user}', 'HomeController@edit_user_profile' );
+    Route::delete( 'delete_user_profile/{user}', 'HomeController@delete_user_profile' );
     Route::post( 'search_to_block_user', 'HomeController@search_to_block_user' );
     Route::post( 'user_settings', 'HomeController@block_user' );
     //User Images
