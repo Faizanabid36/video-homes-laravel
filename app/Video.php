@@ -61,7 +61,11 @@ class Video extends Model {
                 $query->whereActive( 1 );
             } );
         } )->when( $video_id, function ( $query ) use ( $video_id, $related ) {
-            return $related ? $query->where( 'video_id', '!=', $video_id )->orWhere('slug','!=',$video_id) : $query->whereVideoId( $video_id )->orWhere('slug',$video_id);
+            return $related ? $query->where(function($q) use ($video_id){
+                return $q->where('video_id','!=', $video_id )->orWhere('slug','!=',$video_id);
+            })  : $query->where(function($q) use ($video_id){
+                return $q->whereVideoId( $video_id )->orWhere('slug',$video_id);
+            });
 
         } )->when( ! $video_id, function ( $query ) {
             $query->latest();
