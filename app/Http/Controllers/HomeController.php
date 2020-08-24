@@ -45,9 +45,12 @@ class HomeController extends Controller {
     }
 
     public function edit_user_profile( User $user ) {
-        if ( request( 'currentPassword' ) && Hash::check( request( 'confirmPassword' ), $user->password ) && ( request( 'newPassword1' ) === request( 'newPassword2' ) ) ) {
-            return $user->update( [ 'password' => Hash::make( request( 'newPassword1' ) ) ] );
+        if ( request( 'currentPassword' ) ) {
+            if ( Hash::check( request( 'confirmPassword' ), $user->password ) && ( request( 'newPassword1' ) === request( 'newPassword2' ) ) ) {
+                return $user->update( [ 'password' => Hash::make( request( 'newPassword1' ) ) ] );
+            }
 
+            return false;
         }
 
         if ( request( 'company_logo' ) && preg_match( "/data:\w+\/\w+;base64,.*/", request( 'company_logo' ) ) == 1 ) {
