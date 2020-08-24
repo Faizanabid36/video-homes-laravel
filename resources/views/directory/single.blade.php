@@ -3,7 +3,7 @@
 
     <link rel="image_src" href="{{asset("storage/$video->thumbnail")}}" />
     <meta property="og:title" content="{{$video->title}}" />
-    <meta property="og:description" content="Author: {{$user->name}}" />
+    <meta property="og:description" content="{{$video->description}}. Author: {{$user->name}}" />
     <meta property="og:url" content="{{asset("storage/".str_replace('240p','360p',$video->stream_path))}}" />
     <meta property="og:site_name" content="{{env('APP_NAME')}}" />
     <meta property="og:type" content="video.other" />
@@ -18,7 +18,7 @@
     <meta name="twitter:card" content="player">
     <meta name="twitter:title" content="{{$video->title}}">
     <meta name="twitter:site" content="{{url('/')}}">
-    <meta name="twitter:description" content="Author: {{$user->name}}" />
+    <meta name="twitter:description" content="{{$video->description}}. Author: {{$user->name}}" />
     <meta name="twitter:player" content="{{route('embed_video',$video->video_id)}}?track_url=twitter.com">
     <meta name="twitter:player:width" content="640">
     <meta name="twitter:player:height" content="360">
