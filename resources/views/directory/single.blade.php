@@ -242,7 +242,7 @@
                                 <div class="card w-100">
                                     <div class="card-body">
                                         {{$video->title}}
-                                        <p>{{$video->discription}}</p>
+                                        <p>{{$video->description}}</p>
                                         @if(!is_array($video->tags))
                                             Tags: @foreach($video->tags as $tags)
                                                 {{--                                            <span class="badge badge-primary">{{str_replace(",",'</span><span class="badge badge-primary">',$video->tags)}}</span>--}}
