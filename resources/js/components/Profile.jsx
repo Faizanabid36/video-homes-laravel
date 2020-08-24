@@ -76,7 +76,7 @@ class Profile extends React.Component {
             showLoaderOnConfirm: true,
         }).then((result) => {
             if (result.value) {
-                Swal.fire(
+                MySwal.fire(
                     'Changed!',
                     'Your password has been changed.',
                     'success'
