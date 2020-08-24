@@ -2,7 +2,6 @@
 @section('meta')
 
     <link rel="image_src" href="{{asset("storage/$video->thumbnail")}}" />
-    <meta property="fb:app_id" content="123211511142" />
     <meta property="og:title" content="{{$video->title}}" />
     <meta property="og:description" content="Author: {{$user->name}}" />
     <meta property="og:url" content="{{asset("storage/".str_replace('240p','360p',$video->stream_path))}}" />
