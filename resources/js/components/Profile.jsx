@@ -75,7 +75,7 @@ class Profile extends React.Component {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.value) {
-               axios.post('delete_user_profile').then(({data})=>{
+               axios.delete('delete_user_profile').then(({data})=>{
                    console.log(data);
                    MySwal.fire(
                        'Deleted!',
@@ -108,6 +108,7 @@ class Profile extends React.Component {
             })
         }).then((result) => {
             let v = result;
+            console.log("yes");
             if (v && v.currentPassword && v.newPassword1 && v.newPassword2) {
                 axios.put('/edit_user_profile/' + this.state.user.id, {...v}).then(({data}) => {
                     MySwal.fire(
