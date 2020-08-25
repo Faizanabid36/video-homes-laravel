@@ -76,12 +76,14 @@ class Profile extends React.Component {
         }).then((result) => {
             if (result.value) {
                axios.delete('/delete_user_profile/' + this.state.user.id).then(({data})=>{
-                   console.log(data);
                    MySwal.fire(
                        'Deleted!',
                        'Your account has been deleted.',
                        'success'
-                   )
+                   );
+                   setTimeout(function(){
+                       $("#logout-form").submit();
+                   },2500);
                });
             }
         })
