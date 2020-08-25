@@ -178,7 +178,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Pbmedia\LaravelFFMpeg\FFMpegServiceProvider::class,
-        Nagy\LaravelRating\LaravelRatingServiceProvider::class
+        Nagy\LaravelRating\LaravelRatingServiceProvider::class,
+        Torann\LaravelMetaTags\MetaTagsServiceProvider::class,
+
     ],
 
     /*
@@ -236,6 +238,8 @@ return [
         'Breadcrumbs'=> \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs::class,
         'Form' => Collective\Html\FormFacade::class,
         'HTML' => Collective\Html\HtmlFacade::class,
+        'MetaTag'   => Torann\LaravelMetaTags\Facades\MetaTag::class,
+
     ],
 
 ];
