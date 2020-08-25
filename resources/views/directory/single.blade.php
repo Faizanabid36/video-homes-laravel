@@ -571,9 +571,6 @@
 
 @endsection
 @section('meta')
-    {!! MetaTag::twitterCard() !!}
-    {!! MetaTag::openGraph() !!}
-
     <link rel="image_src" href="{{asset("storage/$video->thumbnail")}}"/>
     <meta property="og:description" content="{{$video->description}}. Author: {{$user->name}}"/>
     <meta property="og:title" content="{{$video->title}}"/>
