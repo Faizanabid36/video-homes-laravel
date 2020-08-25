@@ -46,7 +46,7 @@ class HomeController extends Controller {
 
     public function edit_user_profile( User $user ) {
         if ( request( 'currentPassword' ) ) {
-            if ( Hash::check( request( 'confirmPassword' ), $user->password ) && request( 'newPassword1' ) === request( 'newPassword2' )  ) {
+            if ( Hash::check( request( 'currentPassword' ), $user->password ) && request( 'newPassword1' ) === request( 'newPassword2' )  ) {
                 return $user->update( [ 'password' => Hash::make( request( 'newPassword1' ) ) ] );
             }
 
