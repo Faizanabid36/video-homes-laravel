@@ -75,7 +75,7 @@ class Profile extends React.Component {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.value) {
-               axios.delete('delete_user_profile').then(({data})=>{
+               axios.delete('/delete_user_profile/' + this.state.user.id).then(({data})=>{
                    console.log(data);
                    MySwal.fire(
                        'Deleted!',
@@ -125,7 +125,7 @@ class Profile extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         axios.put('/edit_user_profile/' + this.state.user.id, {...this.state.user}).then(({data}) => {
-            console.log(data);
+            console.log(data)
         }).catch(e => console.log)
     }
 
