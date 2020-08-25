@@ -1,40 +1,4 @@
 @extends('layouts.public.app',["title"=>$video->title])
-@section('meta')
-
-    <link rel="image_src" href="{{asset("storage/$video->thumbnail")}}" />
-    <meta property="og:title" content="{{$video->title}}" />
-    <meta property="og:description" content="{{$video->description}}. Author: {{$user->name}}" />
-    <meta property="og:url" content="{{asset("storage/".str_replace('240p','360p',$video->stream_path))}}" />
-    <meta property="og:site_name" content="{{env('APP_NAME')}}" />
-    <meta property="og:type" content="video.other" />
-    <meta property="og:video" content="{{asset("storage/".str_replace('240p','360p',$video->stream_path))}}" />
-    <meta property="og:video:type" content="video/mp4" />
-    <meta property="og:video:secure_url" content="https://www.wellcomemat.com/video/i60a689577a12tqv/5113-Durham-Rd-E-Columbia-MD-21044---MLS-Listing-ID-MDHW270146--WellcomeMat?track_url=facebook.com&video_id=i60a689577a12tqv&autoplay=true" />
-    <meta property="og:video:width" content="640" />
-    <meta property="og:video:height" content="360" />
-    <meta property="og:image" content="{{asset("storage/$video->thumbnail")}}">
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="player">
-    <meta name="twitter:title" content="{{$video->title}}">
-    <meta name="twitter:site" content="{{url('/')}}">
-    <meta name="twitter:description" content="{{$video->description}}. Author: {{$user->name}}" />
-    <meta name="twitter:player" content="{{route('embed_video',$video->video_id)}}?track_url=twitter.com">
-    <meta name="twitter:player:width" content="640">
-    <meta name="twitter:player:height" content="360">
-    <meta name="twitter:player:stream" content="{{route('embed_video',$video->video_id)}}?track_url=twitter.com">
-    <meta name="twitter:player:stream:content_type" content="video/mp4">
-    <meta name="twitter:image" content="{{asset("storage/$video->thumbnail")}}">
-
-    <!-- Others -->
-    <meta name="medium" content="video" />
-    <meta name="video_type" content="application/x-shockwave-flash" />
-    <link rel="video_src" href="{{asset("storage/".str_replace('240p','360p',$video->stream_path))}}" />
-    @endsection
-@section('header_script')
-    window.VIDEO_APP.video_url = "{{route('is_played',$video->id)}}";
-@endsection
-
 @section('content')
     <div class="container">
         <div class="row">
@@ -201,7 +165,8 @@
                                 <div class="card w-100">
                                     <div class="card-body">
                                         <div class="input-group mb-3">
-                                            <input type="text" value="{{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"
+                                            <input type="text"
+                                                   value="{{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"
                                                    class="form-control input-md copylink" readonly=""
                                             >
                                             <div class="input-group-prepend">
@@ -213,11 +178,13 @@
                                             data-url="https://www.facebook.com/sharer/sharer.php?u={{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"
                                             class="btn btn-primary share-social"><i class="fa fa-facebook"></i>
                                         </button>
-                                        <button data-url="https://wa.me/?text={{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"
-                                                class="btn btn-primary share-social"><i class="fa fa-whatsapp"></i>
+                                        <button
+                                            data-url="https://wa.me/?text={{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"
+                                            class="btn btn-primary share-social"><i class="fa fa-whatsapp"></i>
                                         </button>
-                                        <button data-url="https://twitter.com/intent/tweet?url={{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"
-                                                class="btn btn-primary share-social"><i class="fa fa-twitter"></i>
+                                        <button
+                                            data-url="https://twitter.com/intent/tweet?url={{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"
+                                            class="btn btn-primary share-social"><i class="fa fa-twitter"></i>
                                         </button>
                                         <button
                                             data-url="https://www.linkedin.com/shareArticle?mini=true&url={{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}&title={{$video->title}}"
@@ -227,12 +194,14 @@
                                             data-url="https://pinterest.com/pin/create/button/?url={{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}&media={{asset("storage/$video->stream_path")}}"
                                             class="btn btn-primary share-social"><i class="fa fa-pinterest"></i>
                                         </button>
-                                        <button data-url="https://www.tumblr.com/share/link?url={{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"
-                                                class="btn btn-primary share-social"><i
+                                        <button
+                                            data-url="https://www.tumblr.com/share/link?url={{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"
+                                            class="btn btn-primary share-social"><i
                                                 class="fa fa-tumblr"></i>
                                         </button>
-                                        <button data-url="https://www.reddit.com/submit?url={{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"
-                                                class="btn btn-primary share-social"><i
+                                        <button
+                                            data-url="https://www.reddit.com/submit?url={{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"
+                                            class="btn btn-primary share-social"><i
                                                 class="fa fa-reddit"></i></button>
                                     </div>
                                 </div>
@@ -550,18 +519,18 @@
 
                         <h1 class="my-3 font-weight-bold"> Report Video</h1>
                         @if(auth()->check() && ($video->user_id!=auth()->id()))
-                        <form method="POST" action="{{route('to_user')}}">
-                            @csrf
-                            <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">
-                            <input type="hidden" name="video_id" value="{{$video->id}}">
-                            <input type="hidden" name="type" value="report">
-                            <div class="form-group">
-                                <label for="message">Message</label>
-                                <textarea name="message" class="form-control" id="message" rows="3"
-                                          placeholder="Message here"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary"> Send</button>
-                        </form>
+                            <form method="POST" action="{{route('to_user')}}">
+                                @csrf
+                                <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">
+                                <input type="hidden" name="video_id" value="{{$video->id}}">
+                                <input type="hidden" name="type" value="report">
+                                <div class="form-group">
+                                    <label for="message">Message</label>
+                                    <textarea name="message" class="form-control" id="message" rows="3"
+                                              placeholder="Message here"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary"> Send</button>
+                            </form>
                         @else
                             <a href="{{route('login')}}" class="btn btn-info text-white">Login to Report Video</a>
                         @endif
@@ -600,4 +569,39 @@
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAm4Wvmd2nIeaFQCdhAsxbiSXgBsibDolc&libraries=places&callback=initMap">
     </script>
 
+@endsection
+@section('meta')
+    <link rel="image_src" href="{{asset("storage/$video->thumbnail")}}"/>
+    <meta property="og:title" content="{{$video->title}}"/>
+    <meta property="og:description" content="{{$video->description}}. Author: {{$user->name}}"/>
+    <meta property="og:url" content="{{asset("storage/".str_replace('240p','360p',$video->stream_path))}}"/>
+    <meta property="og:site_name" content="{{env('APP_NAME')}}"/>
+    <meta property="og:type" content="video.other"/>
+    <meta property="og:video" content="{{asset("storage/".str_replace('240p','360p',$video->stream_path))}}"/>
+    <meta property="og:video:type" content="video/mp4"/>
+    <meta property="og:video:secure_url"
+          content="{{asset("storage/".str_replace('240p','360p',$video->stream_path))}}"/>
+    <meta property="og:video:width" content="640"/>
+    <meta property="og:video:height" content="360"/>
+    <meta property="og:image" content="{{asset("storage/$video->thumbnail")}}">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="player">
+    <meta name="twitter:title" content="{{$video->title}}">
+    <meta name="twitter:site" content="{{url('/')}}">
+    <meta name="twitter:description" content="{{$video->description}}. Author: {{$user->name}}"/>
+    <meta name="twitter:player" content="{{route('embed_video',$video->video_id)}}?track_url=twitter.com">
+    <meta name="twitter:player:width" content="640">
+    <meta name="twitter:player:height" content="360">
+    <meta name="twitter:player:stream" content="{{route('embed_video',$video->video_id)}}?track_url=twitter.com">
+    <meta name="twitter:player:stream:content_type" content="video/mp4">
+    <meta name="twitter:image" content="{{asset("storage/$video->thumbnail")}}">
+
+    <!-- Others -->
+    <meta name="medium" content="video"/>
+    <meta name="video_type" content="application/x-shockwave-flash"/>
+    <link rel="video_src" href="{{asset("storage/".str_replace('240p','360p',$video->stream_path))}}"/>
+@endsection
+@section('header_script')
+    window.VIDEO_APP.video_url = "{{route('is_played',$video->id)}}";
 @endsection
