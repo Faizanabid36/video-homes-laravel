@@ -328,41 +328,65 @@
 
             </div>
             <div class="col-12 contactWidgets my-2 ">
-                <div class="d-flex">
-                    <div class="font-weight-bold "><i class='fa icon fa-id-card'></i> Name</div>
-                    <div> {{$user->name}}</div>
-                </div>
-                <hr/>
-                <div class="d-flex">
-                    <div class="font-weight-bold "><i class='fa icon fa-id-card'></i> Company Name</div>
-                    <div> {{$user->user_extra->company_name}}</div>
-                </div>
-                <hr/>
-                <div class="d-flex">
-                    <div class="font-weight-bold "><i class='fa icon fa-map-marker'></i> Address</div>
-                    <div> {{$user->user_extra->address}}</div>
-                </div>
-                <hr/>
-                <div class="d-flex">
-                    <div class="font-weight-bold "><i class='fa icon fa-phone'></i> Direct Phone</div>
-                    <div><a href="tel:{{$user->user_extra->direct_phone}}">{{$user->user_extra->direct_phone}}</a></div>
-                </div>
-                <hr/>
-                <div class="d-flex">
-                    <div class="font-weight-bold "><i class='fa icon fa-phone'></i> Office Phone</div>
-                    <div><a href="tel:{{$user->user_extra->office_phone}}">{{$user->user_extra->office_phone}}</a></div>
-                </div>
-                <hr/>
-                <div class="d-flex">
-                    <div class="font-weight-bold "><i class='fa icon fa-globe'></i> Website</div>
-                    <div><a href="{{$user->user_extra->website}}"> {{$user->user_extra->website}} </a></div>
-                </div>
-                <hr/>
-                <div class="d-flex">
-                    <div class="font-weight-bold "><i class='fa icon fa-globe'></i> License #</div>
-                    <div>{{$user->user_extra->license_no}} </div>
-                </div>
-                <hr/>
+                @if($user->name)
+                    <div class="d-flex">
+                        <div class="font-weight-bold "><i class='fa icon fa-id-card'></i> Name</div>
+                        <div> {{$user->name}}</div>
+                    </div>
+                    <hr/>
+                @endif
+                @if ($user->user_extra->bio)
+                    <div class="d-flex">
+                        <div class="font-weight-bold "><i class='fa icon fa-id-card'></i> Name</div>
+                        <div>
+                            {!! $user->user_extra->bio !!}
+                        </div>
+                    </div>
+                @endif
+                @if($user->user_extra->company_name)
+                    <div class="d-flex">
+                        <div class="font-weight-bold "><i class='fa icon fa-id-card'></i> Company Name</div>
+                        <div> {{$user->user_extra->company_name}}</div>
+                    </div>
+                    <hr/>
+                @endif
+                @if($user->user_extra->address)
+                    <div class="d-flex">
+                        <div class="font-weight-bold "><i class='fa icon fa-map-marker'></i> Address</div>
+                        <div> {{$user->user_extra->address}}</div>
+                    </div>
+                    <hr/>
+                @endif
+                @if($user->user_extra->direct_phone)
+                    <div class="d-flex">
+                        <div class="font-weight-bold "><i class='fa icon fa-phone'></i> Direct Phone</div>
+                        <div><a href="tel:{{$user->user_extra->direct_phone}}">{{$user->user_extra->direct_phone}}</a>
+                        </div>
+                    </div>
+                    <hr/>
+                @endif
+                @if($user->user_extra->office_phone)
+                    <div class="d-flex">
+                        <div class="font-weight-bold "><i class='fa icon fa-phone'></i> Office Phone</div>
+                        <div><a href="tel:{{$user->user_extra->office_phone}}">{{$user->user_extra->office_phone}}</a>
+                        </div>
+                    </div>
+                    <hr/>
+                @endif
+                @if($user->user_extra->website)
+                    <div class="d-flex">
+                        <div class="font-weight-bold "><i class='fa icon fa-globe'></i> Website</div>
+                        <div><a href="{{$user->user_extra->website}}"> {{$user->user_extra->website}} </a></div>
+                    </div>
+                    <hr/>
+                @endif
+                @if($user->user_extra->license_no)
+                    <div class="d-flex">
+                        <div class="font-weight-bold "><i class='fa icon fa-globe'></i> License #</div>
+                        <div>{{$user->user_extra->license_no}} </div>
+                    </div>
+                    <hr/>
+                @endif
             </div>
 
         </div>
@@ -571,19 +595,20 @@
     <link rel="image_src" href="{{asset("storage/$video->thumbnail")}}"/>
     <meta property="og:title" content="{{$video->title}}"/>
     <meta property="og:site_name" content="{{env('APP_NAME')}}"/>
-    <meta property="og:url" content="{{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"/>
+    <meta property="og:url"
+          content="{{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"/>
     <meta property="og:description" content="{{$video->description}}. Author: {{$user->name}}"/>
     <meta property="og:type" content="video.other"/>
     <meta property="og:image" content="{{asset("storage/$video->thumbnail")}}">
-{{--    <meta property="og:locale" content="en-us" />--}}
-{{--    <meta property="og:locale:alternate" content="en-us" />--}}
-{{--    <meta property="og:video" content="{{route('embed_video',$video->video_id)}}"/>--}}
-{{--    <meta property="og:video:type" content="video/mp4"/>--}}
-{{--    <meta property="og:video:secure_url"--}}
-{{--          content="{{route('embed_video',$video->video_id)}}"/>--}}
-{{--    <meta property="og:video:width" content="640"/>--}}
-{{--    <meta property="og:video:height" content="360"/>--}}
-{{--    <meta property="og:image:url" content="{{url()->current()}}">--}}
+    {{--    <meta property="og:locale" content="en-us" />--}}
+    {{--    <meta property="og:locale:alternate" content="en-us" />--}}
+    {{--    <meta property="og:video" content="{{route('embed_video',$video->video_id)}}"/>--}}
+    {{--    <meta property="og:video:type" content="video/mp4"/>--}}
+    {{--    <meta property="og:video:secure_url"--}}
+    {{--          content="{{route('embed_video',$video->video_id)}}"/>--}}
+    {{--    <meta property="og:video:width" content="640"/>--}}
+    {{--    <meta property="og:video:height" content="360"/>--}}
+    {{--    <meta property="og:image:url" content="{{url()->current()}}">--}}
 
     <!-- Twitter -->
     <meta name="twitter:card" content="player">
@@ -594,13 +619,13 @@
     <meta name="twitter:player" content="{{route('embed_video',$video->video_id)}}?track_url=twitter.com">
     <meta name="twitter:player:width" content="640">
     <meta name="twitter:player:height" content="360">
-{{--    <meta name="twitter:player:stream" content="{{route('embed_video',$video->video_id)}}?track_url=twitter.com">--}}
-{{--    <meta name="twitter:player:stream:content_type" content="video/mp4">--}}
+    {{--    <meta name="twitter:player:stream" content="{{route('embed_video',$video->video_id)}}?track_url=twitter.com">--}}
+    {{--    <meta name="twitter:player:stream:content_type" content="video/mp4">--}}
 
     <!-- Others -->
-{{--    <meta name="medium" content="video"/>--}}
-{{--    <meta name="video_type" content="application/x-shockwave-flash"/>--}}
-{{--    <link rel="video_src" href="{{asset("storage/".str_replace('240p','360p',$video->stream_path))}}"/>--}}
+    {{--    <meta name="medium" content="video"/>--}}
+    {{--    <meta name="video_type" content="application/x-shockwave-flash"/>--}}
+    {{--    <link rel="video_src" href="{{asset("storage/".str_replace('240p','360p',$video->stream_path))}}"/>--}}
 @endsection
 @section('header_script')
     window.VIDEO_APP.video_url = "{{route('is_played',$video->id)}}";
