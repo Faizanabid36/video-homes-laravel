@@ -63,8 +63,8 @@
                                    id="accept_terms"
                             >
                             By creating your account, you agree to our
-                            <a style=" text-decoration: underline;" href="#">Terms of use</a> &amp; <a
-                                href="#" style="text-decoration: underline;">Privacy Policy</a>
+                            <a style=" text-decoration: underline;" href="{{route('directory_by_username','terms-of-service')}}">Terms of use</a> &amp; <a
+                                href="{{route('directory_by_username','privacy-policy')}}" style="text-decoration: underline;">Privacy Policy</a>
                         </label>
                     </div>
                     <button class="btn btn-primary" type="submit">Sign Up!</button>
