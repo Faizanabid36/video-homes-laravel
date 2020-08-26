@@ -35,7 +35,7 @@
                                 <h5 class="card-title">{{$setting->box_1['title']}}</h5>
                                 <p class="card-text">{{$setting->box_1['description']}}</p>
                                 <a href="{{$setting->box_1['btn_link']}}"
-                                        class="btn btn-primary text-white">{{$setting->box_1['btn']}}</a>
+                                   class="btn btn-primary text-white">{{$setting->box_1['btn']}}</a>
                             </div>
                         </div>
                         <div class="card col-md-3 col-sm-12 shadow-lg p-1">
@@ -46,7 +46,7 @@
                                 <h5 class="card-title">{{$setting->box_2['title']}}</h5>
                                 <p class="card-text">{{$setting->box_2['description']}}</p>
                                 <a href="{{$setting->box_2['btn_link']}}"
-                                        class="btn btn-primary text-white">{{$setting->box_2['btn']}}</a>
+                                   class="btn btn-primary text-white">{{$setting->box_2['btn']}}</a>
                             </div>
                         </div>
                         <div class="card col-md-3 col-sm-12 shadow-lg p-1">
@@ -57,7 +57,7 @@
                                 <h5 class="card-title">{{$setting->box_3['title']}}</h5>
                                 <p class="card-text">{{$setting->box_3['description']}}</p>
                                 <a href="{{$setting->box_3['btn_link']}}"
-                                        class="btn btn-primary text-white">{{$setting->box_3['btn']}}</a>
+                                   class="btn btn-primary text-white">{{$setting->box_3['btn']}}</a>
                             </div>
                         </div>
                         <div class="card col-md-3 col-sm-12 shadow-lg p-1">
@@ -68,7 +68,7 @@
                                 <h5 class="card-title">{{$setting->box_4['title']}}</h5>
                                 <p class="card-text">{{$setting->box_4['description']}}</p>
                                 <a href="{{$setting->box_4['btn_link']}}"
-                                        class="btn btn-primary text-white">{{$setting->box_4['btn']}}</a>
+                                   class="btn btn-primary text-white">{{$setting->box_4['btn']}}</a>
                             </div>
                         </div>
                     </div>
@@ -104,28 +104,22 @@
                     <div class="text-center text-white">
                         <h1>Say Hello!</h1>
                         <p> Please contact us for more information.</p>
-                        <form class="form bg-white text-dark p-3">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">YOUR NAME(REQUIRED)</label>
-                                <input type="text" class="form-control" id="name" aria-describedby="name">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">YOUR EMAIL (REQUIRED)</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1"
-                                       aria-describedby="emailHelp">
-
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">SUBJECT</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlTextarea1">YOUR MESSAGE</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">SEND</button>
-                        </form>
+                        @if(auth()->check())
+                            <form class="form bg-white text-dark p-3" method="POST" action="{{route('to_user')}}">
+                                @csrf
+                                <input type="hidden" name="contact_user_id" value="1">
+                                <input type="hidden" name="video_id" value="0">
+                                <div class="form-group">
+                                    <label for="message">Message</label>
+                                    <textarea name="message" class="form-control" id="message" rows="3"
+                                              placeholder="Message here"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">SEND</button>
+                            </form>
+                        @else
+                            <a href="{{route('login')}}" class="btn btn-info text-white">Login to
+                                Contact Us</a>
+                        @endif
                     </div>
 
                 </div>
