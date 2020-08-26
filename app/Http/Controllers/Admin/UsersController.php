@@ -53,7 +53,6 @@ class UsersController extends Controller
     {
         $this->validate($request, [
 			'name' => 'required|min:4',
-			'active' => 'required'
 		]);
         $requestData = $request->all();
 
