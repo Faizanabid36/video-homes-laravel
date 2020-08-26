@@ -590,7 +590,7 @@
 
     <!-- Twitter -->
     <meta name="twitter:card" content="player">
-    <meta name="twitter:site" content="@{{ env('APP_NAME' }}">
+    <meta name="twitter:site" content="@@{{ env('APP_NAME' }}">
     <meta name="twitter:title" content="{{$video->title}}">
     <meta name="twitter:description" content="{{$video->description}}. Author: {{$user->name}}"/>
     <meta name="twitter:image" content="{{asset("storage/$video->thumbnail")}}">
