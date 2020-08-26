@@ -337,11 +337,12 @@
                 @endif
                 @if ($user->user_extra->bio)
                     <div class="d-flex">
-                        <div class="font-weight-bold "><i class='fa icon fa-id-card'></i> Name</div>
+                        <div class="font-weight-bold "><i class='fa icon fa-info'></i> Bio</div>
                         <div>
                             {!! $user->user_extra->bio !!}
                         </div>
                     </div>
+                        <hr/>
                 @endif
                 @if($user->user_extra->company_name)
                     <div class="d-flex">
