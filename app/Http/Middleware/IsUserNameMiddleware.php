@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Page;
+use App\User;
 use App\Video;
 use Closure;
 
@@ -23,10 +24,8 @@ class IsUserNameMiddleware {
             return $next( $request );
         }
 
-        $video = Video::userVideos( $request->route()->parameter( 'slug' ), $request->route()->parameter( 'video_id' ) );
-        if ( $video->count() > 0 ) {
-            $video = $video->first();
-            $request->merge(compact('video'));
+        $user = User::whereUsername($request->route()->parameter( 'slug' ));
+        if ( $user->count()) {
             return $next( $request );
         }
 

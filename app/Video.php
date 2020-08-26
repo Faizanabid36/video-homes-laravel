@@ -67,7 +67,7 @@ class Video extends Model {
 
         } )->when( ! $video_id, function ( $query ) {
             $query->latest();
-        } )->take( 5 );
+        } );
     }
 
     public function scopeSingleVideo( $query, $video_id ) {

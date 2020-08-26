@@ -51,8 +51,7 @@ class MainController extends Controller {
         if(request('page')){
             return view( 'page', request()->only( [ 'page' ] ) );
         }
-//        $video = Video::userVideos( $username, $video_id )->firstOrFail();
-        $video = request('video');
+        $video = Video::userVideos( $username, $video_id )->first();
         $views          = VideoView::videoViews( $video );
         $user           = $video->user;
         $related_videos = Video::userVideos( $username, $video->id, true )->get();

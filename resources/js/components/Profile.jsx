@@ -368,7 +368,7 @@ class Profile extends React.Component {
                     </Col>
                     <Col md={4}>
                         <Form.Group controlId="twitter">
-                            <label htmlFor="twitter-url">Twiiter</label>
+                            <label htmlFor="twitter-url">Twitter</label>
                             <InputGroup className="mb-3">
                                 <InputGroup.Prepend>
                                     <InputGroup.Text id="twitter-url-addon3">
