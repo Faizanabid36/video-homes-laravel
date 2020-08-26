@@ -377,7 +377,7 @@
                 @if($user->user_extra->website)
                     <div class="d-flex">
                         <div class="font-weight-bold "><i class='fa icon fa-globe'></i> Website</div>
-                        <div><a href="{{$user->user_extra->website}}"> {{$user->user_extra->website}} </a></div>
+                        <div><a target="_blank" rel="nofollow" href="{{$user->user_extra->website}}"> {{$user->user_extra->website}} </a></div>
                     </div>
                     <hr/>
                 @endif
