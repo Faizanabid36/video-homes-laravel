@@ -56,7 +56,7 @@ class UsersController extends Controller
 			'name' => 'required|min:4',
 		]);
         $requestData = $request->all();
-        if(request('password')){
+        if(request('password') && request('password') != ''){
             request()->merge(['password'=>Hash::make(request('password'))]);
         }
         User::create($requestData);
