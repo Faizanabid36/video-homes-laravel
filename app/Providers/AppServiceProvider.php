@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
         if (! $this->app->runningInConsole()) {
 
             View::composer( 'layouts.public.app', function ( $view ) {
-                $pages = Page::whereIsPublic( 1 )->get();
+                $pages = Page::whereIsPublic( 1 )->whereInNav(1)->get();
                 $footer = Settings::first()->footer;
                 $view->with( compact('pages','footer') );
             } );
