@@ -27,10 +27,10 @@
 <div class="form-group {{ $errors->has('in_nav') ? 'has-error' : ''}}">
     <label for="in_nav_group">Navbar</label>
     <div id="in_nav_group" class="btn-group" data-toggle="buttons">
-        <label class="btn btn-primary @if(isset($page) && $page->in_nav == 0) active @endif"> Yes
+        <label class="btn btn-primary @if(isset($page) && $page->in_nav == 0) active @endif"> No
             <input type="radio" name="in_nav" id="in_nav" value="0" autocomplete="off" @if(isset($page) && $page->in_nav == 0) checked @endif>
         </label>
-        <label class="btn btn-primary @if(isset($page) && $page->in_nav == 1) active @endif"> No
+        <label class="btn btn-primary @if(isset($page) && $page->in_nav == 1) active @endif"> Yes
             <input type="radio" name="in_nav" id="in_nav" value="1" autocomplete="off" @if(isset($page) && $page->in_nav == 1) checked @endif>
         </label>
     </div>
