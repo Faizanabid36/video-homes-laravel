@@ -34,6 +34,16 @@
     {!! $errors->first('in_nav', '<p class="help-block">:message</p>') !!}
 </div>
 
+<div class="form-group {{ $errors->has('is_public') ? 'has-error' : ''}}">
+    <label for="is_public" class="control-label">Off
+        <input class="form-control" type="radio" name="is_public" value="0" @if(isset($page->is_public)) checked @endif>
+    </label>
+    <label for="is_public" class="control-label">On
+        <input class="form-control" type="radio" name="is_public" value="1" @if(isset($page->is_public)) checked @endif>
+    </label>
+    {!! $errors->first('is_public', '<p class="help-block">:message</p>') !!}
+</div>
+
 
 
 <div class="form-group">
