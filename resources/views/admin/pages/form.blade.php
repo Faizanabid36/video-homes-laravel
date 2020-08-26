@@ -40,11 +40,11 @@
 <div class="form-group {{ $errors->has('is_public') ? 'has-error' : ''}}">
     <label for="is_public_group">Status</label>
     <div id="is_public_group" class="btn-group" data-toggle="buttons">
-        <label class="btn btn-primary @if(isset($page) && $page->is_public == 0) active @endif"> Public
-            <input type="radio" name="is_public" id="is_public" value="0" autocomplete="off" @if(isset($page) && $page->is_public == 0) checked @endif>
-        </label>
-        <label class="btn btn-primary @if(isset($page) && $page->is_public == 1) active @endif"> Private
+        <label class="btn btn-primary @if(isset($page) && $page->is_public == 1) active @endif"> Public
             <input type="radio" name="is_public" id="is_public" value="1" autocomplete="off" @if(isset($page) && $page->is_public == 1) checked @endif>
+        </label>
+        <label class="btn btn-primary @if(isset($page) && $page->is_public == 0) active @endif"> Private
+            <input type="radio" name="is_public" id="is_public" value="0" autocomplete="off" @if(isset($page) && $page->is_public == 0) checked @endif>
         </label>
     </div>
     {!! $errors->first('is_public', '<p class="help-block">:message</p>') !!}
