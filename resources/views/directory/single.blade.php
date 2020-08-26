@@ -11,7 +11,6 @@
                 @endif
             </div>
         </div>
-        <br/>
         <hr/>
         <div class="row">
             <div class="col-md-2 my-3">
