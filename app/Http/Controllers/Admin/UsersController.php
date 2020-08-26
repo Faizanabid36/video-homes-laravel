@@ -7,6 +7,7 @@ use App\Http\Requests;
 
 use App\User;
 use Illuminate\Http\Request;
+use phpseclib\Crypt\Hash;
 
 class UsersController extends Controller
 {
@@ -55,7 +56,9 @@ class UsersController extends Controller
 			'name' => 'required|min:4',
 		]);
         $requestData = $request->all();
-
+        if(request('password')){
+            request()->merge(['password'=>Hash::make(request('password'))]);
+        }
         User::create($requestData);
 
         return redirect('admin/users')->with('flash_message', 'User added!');
