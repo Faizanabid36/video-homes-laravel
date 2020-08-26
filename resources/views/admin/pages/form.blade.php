@@ -24,6 +24,17 @@
     {!! $errors->first('seo_description', '<p class="help-block">:message</p>') !!}
 </div>
 
+<div class="form-group {{ $errors->has('in_nav') ? 'has-error' : ''}}">
+    <label for="in_nav" class="control-label">Off
+        <input class="form-control" type="radio" name="in_nav" value="0">
+    </label>
+    <label for="in_nav" class="control-label">On
+        <input class="form-control" type="radio" name="in_nav" value="1">
+    </label>
+    {!! $errors->first('in_nav', '<p class="help-block">:message</p>') !!}
+</div>
+
+
 
 <div class="form-group">
     <input class="btn btn-primary" type="submit" value="{{ $formMode === 'edit' ? 'Update' : 'Create' }}">

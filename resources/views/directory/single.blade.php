@@ -546,9 +546,6 @@
 
 
     </div>  <!--parentContainer -->
-
-
-
 @endsection
 @section('script')
     <script>
@@ -571,6 +568,7 @@
 
 @endsection
 @section('meta')
+    <meta name="description" content="{{$video->description}}. Author: {{$user->name}}"/>
     <link rel="image_src" href="{{asset("storage/$video->thumbnail")}}"/>
     <meta property="og:title" content="{{$video->title}}"/>
     <meta property="og:site_name" content="{{env('APP_NAME')}}"/>
