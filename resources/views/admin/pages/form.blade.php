@@ -26,10 +26,10 @@
 
 <div class="form-group {{ $errors->has('in_nav') ? 'has-error' : ''}}">
     <label for="in_nav" class="control-label">Off
-        <input class="form-control" type="radio" name="in_nav" value="0">
+        <input class="form-control" type="radio" name="in_nav" value="0" @if(isset($page->in_nav)) checked @endif>
     </label>
     <label for="in_nav" class="control-label">On
-        <input class="form-control" type="radio" name="in_nav" value="1">
+        <input class="form-control" type="radio" name="in_nav" value="1" @if(isset($page->in_nav)) checked @endif>
     </label>
     {!! $errors->first('in_nav', '<p class="help-block">:message</p>') !!}
 </div>
