@@ -92,7 +92,7 @@
                 </div>
                 <div class="col-md-6 text-sm-center text-md-right">
                     <a href="{{$setting->call_to_action_link}}"
-                       class="btn btn-warning"> {{$setting->call_to_action}}</a>
+                       class="btn btn-warning text-white"> {{$setting->call_to_action}}</a>
                 </div>
             </div>
         </div>
