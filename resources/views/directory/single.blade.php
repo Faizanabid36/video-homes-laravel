@@ -43,7 +43,7 @@
                     <p id="caption">{{$user->user_extra->company_name}}</p>
                 </div>
             </div>
-            <div class="col-md-{{$related_videos ? 7 : 10}} player-video mt-0">
+            <div class="col-md-{{!empty($related_videos) ? 7 : 10}} player-video mt-0">
                 <div class="video-player pt_video_player " id="pt_video_player">
                     <span class="mejs__offscreen"></span>
                     @if($video)
@@ -266,7 +266,7 @@
                 </div>
                 <div class="clear"></div>
             </div>
-            @if($related_videos)
+            @if(!empty($related_videos))
                 <div class="col-md-3">
                     <div class="container m-0 p-0">
                         <div class="row">
