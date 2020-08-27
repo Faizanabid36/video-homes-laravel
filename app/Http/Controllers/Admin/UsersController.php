@@ -52,14 +52,15 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $this->validate(request(), [
 			'name' => 'required|min:4',
             'active' => 'required'
 		]);
-        $requestData = $request->all();
         if(request('password') && request('password') != ''){
             request()->merge(['password'=>Hash::make(request('password'))]);
         }
+        $requestData = request()->all();
+
         User::create($requestData);
 
         return redirect('admin/users')->with('flash_message', 'User added!');
@@ -107,7 +108,10 @@ class UsersController extends Controller
 //			'name' => 'required|min:4',
 //			'active' => 'required'
 		]);
-        $requestData = $request->all();
+        if(request('password') && request('password') != ''){
+            request()->merge(['password'=>Hash::make(request('password'))]);
+        }
+        $requestData = request()->all();
 
         $user = User::findOrFail($id);
         $user->update($requestData);

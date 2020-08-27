@@ -24,6 +24,7 @@ class MainController extends Controller {
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index() {
+
         $setting = Settings::first();
 
         return view( 'home', compact( 'setting' ) );
