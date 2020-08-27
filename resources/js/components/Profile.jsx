@@ -118,7 +118,9 @@ class Profile extends React.Component {
                         'Your password has been changed.',
                         'success'
                     )
-                }).catch(e => console.log)
+                }).catch(e => {
+                    console.log(e);
+                })
 
             }
         })
