@@ -13,6 +13,7 @@ import { Editor } from '@tinymce/tinymce-react';
 // import SweetAlert from 'sweetalert2-react';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content';
+
 const MySwal = withReactContent(Swal);
 
 
@@ -64,7 +65,7 @@ class Profile extends React.Component {
 
     }
 
-    deleteAction(){
+    deleteAction() {
         MySwal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -75,21 +76,24 @@ class Profile extends React.Component {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.value) {
-               axios.delete('/delete_user_profile/' + this.state.user.id).then(({data})=>{
-                   MySwal.fire(
-                       'Deleted!',
-                       'Your account has been deleted. You are going to log out soon.',
-                       'success'
-                   );
-                   setTimeout(function(){
-                       $("#logout-form").submit();
-                   },500);
-               });
+                axios.delete('/delete_user_profile/' + this.state.user.id).then(({data}) => {
+                    MySwal.fire({
+                        title: 'Deleted!',
+                        html: 'Your account has been deleted. You are going to log out soon.',
+                        icon: 'success',
+                        timer: 1000,
+                        timerProgressBar: true,
+                        onClose: () => {
+                            $("#logout-form").submit();
+                        }
+
+                    });
+                });
             }
         })
     }
 
-    changePasswordAction(){
+    changePasswordAction() {
         MySwal.fire({
             title: 'Change Password?',
             focusConfirm: false,
@@ -109,23 +113,21 @@ class Profile extends React.Component {
             })
         }).then((result) => {
             let v = result.value;
-            //console.log("yes",v);
             if (v && v.currentPassword && v.newPassword && v.confirmPassword) {
                 axios.put('/edit_user_profile/' + this.state.user.id, {...v}).then(({data}) => {
-                    // console.log(data);
-                    MySwal.fire(
-                        'Changed!',
-                        'Your password has been changed.',
-                        'success'
-                    )
+                    MySwal.fire({
+                        icon: 'success',
+                        title: 'Your password has been changed',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                 }).catch(({response}) => {
-                    let errormessage = "";
-                    Object.values(response.data.errors).map((v,k)=>{if(v){errormessage += v + " ";}});
-                    MySwal.fire(
-                        'Alert!',
-                        errormessage,
-                        'error'
-                    )
+                    MySwal.fire({
+                        icon: 'error',
+                        title: Object.values(response.data.errors).join(" "),
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                 })
 
             }
@@ -143,7 +145,8 @@ class Profile extends React.Component {
         if (elem.target.files[0].size > 71680) {
             alert("File is too big!");
             elem.target.value = "";
-        };
+        }
+        ;
     }
 
     onClose() {
@@ -180,7 +183,6 @@ class Profile extends React.Component {
         user[key || e.target.name] = key ? e : e.target.value;
         this.setState({user});
     }
-
 
 
     defaultValue(key) {
