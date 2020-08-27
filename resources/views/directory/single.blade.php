@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-12">
                 <h2 style="text-transform:uppercase">{{$user->name}}</h2>
-                @if(!$video->is_video_approved)
+                @if($video && !$video->is_video_approved)
                     <div class="alert alert-warning">This page is not public yet, because your video is pending mode, it
                         needs admin approval.
                     </div>
@@ -45,8 +45,8 @@
             </div>
             <div class="col-md-{{$related_videos->count() ? 7 : 10}} player-video mt-0">
                 <div class="video-player pt_video_player " id="pt_video_player">
-                    <span class="mejs__offscreen">Video Player</span>
-                    @if(!is_null($video))
+                    <span class="mejs__offscreen"></span>
+                    @if($video)
                         <video id="my-video_html5"
                                style="width: 100%; height: 451.872px; position: relative;"
                                poster="{{asset("storage/$video->thumbnail")}}"
