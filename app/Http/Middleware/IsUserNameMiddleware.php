@@ -26,6 +26,7 @@ class IsUserNameMiddleware {
 
         $user = User::whereUsername($request->route()->parameter( 'slug' ));
         if ( $user->count()) {
+            request()->merge(['username'=>$user->first()->username]);
             return $next( $request );
         }
 

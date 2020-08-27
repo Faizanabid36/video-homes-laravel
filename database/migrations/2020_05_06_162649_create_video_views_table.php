@@ -20,7 +20,7 @@ class CreateVideoViewsTable extends Migration
             $table->string("session_id");
             $table->string("url");
             $table->string("ip");
-            $table->string("agent");
+            $table->text("agent");
             $table->timestamps();
         });
     }

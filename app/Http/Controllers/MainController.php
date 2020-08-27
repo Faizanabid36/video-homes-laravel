@@ -52,11 +52,11 @@ class MainController extends Controller {
             return view( 'page', request()->only( [ 'page' ] ) );
         }
         $video = Video::userVideos( $username, $video_id )->first();
-        $views          = VideoView::videoViews( $video );
-        $user           = $video->user;
-        $related_videos = Video::userVideos( $username, $video->id, true )->get();
+        $views          = $video ? VideoView::videoViews( $video ) : 0;
+        $user           = request('username');
+        $related_videos = $views ? Video::userVideos( $username, $video->id, true )->get() : [];
 
-        return view( ! $video->processed ? 'directory.processing' : 'directory.single', compact( 'user', 'video', 'related_videos', 'views' ) );
+        return view( $video && ! $video->processed ? 'directory.processing' : 'directory.single', compact( 'user', 'video', 'related_videos', 'views' ) );
     }
 
     public function embed( $video_id ) {
