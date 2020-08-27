@@ -83,7 +83,11 @@ class HomeController extends Controller {
             'email_verified_at',
             'remember_token',
             'password',
-            "user_id"
+            "user_id",
+            "stripe_id",
+            "card_brand",
+            "card_last_four",
+            "trial_ends_at",
         ] ) );
 
     }
