@@ -112,17 +112,18 @@ class Profile extends React.Component {
             //console.log("yes",v);
             if (v && v.currentPassword && v.newPassword && v.confirmPassword) {
                 axios.put('/edit_user_profile/' + this.state.user.id, {...v}).then(({data}) => {
-                    console.log(data);
+                    // console.log(data);
                     MySwal.fire(
                         'Changed!',
                         'Your password has been changed.',
                         'success'
                     )
                 }).catch(({response}) => {
-                    console.log(response);
+                    let errormessage = "";
+                    Object.values(response.data.errors).map((v,k)=>{if(v){errormessage += v + " ";}});
                     MySwal.fire(
                         'Alert!',
-                        'Something went wrong.',
+                        errormessage,
                         'error'
                     )
                 })
