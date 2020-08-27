@@ -95,8 +95,8 @@ class Profile extends React.Component {
             focusConfirm: false,
             html: `
     <input class="swal2-input form-control" id="currentPassword" type="password" placeholder="Enter your current password..." /><br />
-    <input class="swal2-input form-control" id="newPassword1" type="password" placeholder="Enter your new password..." /><br />
-    <input class="swal2-input form-control" id="newPassword2" type="password" placeholder="Confirm your new password..." />
+    <input class="swal2-input form-control" id="newPassword" type="password" placeholder="Enter your new password..." /><br />
+    <input class="swal2-input form-control" id="confirmPassword" type="password" placeholder="Confirm your new password..." />
   `,
             type: 'warning',
             showCancelButton: true,
@@ -105,8 +105,8 @@ class Profile extends React.Component {
             allowOutsideClick: false,
             preConfirm: () => ({
                 currentPassword: document.getElementById('currentPassword').value,
-                newPassword1: document.getElementById('newPassword1').value,
-                newPassword2: document.getElementById('newPassword2').value
+                newPassword: document.getElementById('newPassword').value,
+                confirmPassword: document.getElementById('confirmPassword').value
             })
         }).then((result) => {
             let v = result.value;

@@ -49,10 +49,11 @@ class HomeController extends Controller {
 
             request()->validate( [
                 'currentPassword' => 'required|password',
-                'newPassword1'    => 'required|min:8',
-                'newPassword2'    => 'required|same:newPassword1',
+                'newPassword'     => 'required|min:8',
+                'confirmPassword' => 'required|same:newPassword',
             ] );
-            $user->password = Hash::make(request( 'newPassword1' ));
+            $user->password = Hash::make( request( 'newPassword' ) );
+
             return $user->save();
         }
 
