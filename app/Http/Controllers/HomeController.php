@@ -15,8 +15,6 @@ use App\BlockedUser;
 use App\Playlist;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
-use \Illuminate\Support\Facades\Validator;
-
 
 class HomeController extends Controller {
     /**
@@ -48,19 +46,14 @@ class HomeController extends Controller {
 
     public function edit_user_profile( User $user ) {
         if ( request( 'currentPassword' ) ) {
-            $validator = Validator::make(request()->all(), [
+
+            request()->validate( [
                 'currentPassword' => 'required|password',
                 'newPassword1'    => 'required|min:8',
                 'newPassword2'    => 'required|same:newPassword1',
-            ]);
-
-            if ($validator->passes()) {
-                $user->password = Hash::make(request( 'newPassword1' ));
-                $update = $user->save();
-                return response()->json( $update ? ['success'=>'Added new records.'] : ['error'=>"Something went wrong."]);
-            }
-            return response()->json(['error'=>$validator->errors()->all()]);
-
+            ] );
+            $user->password = Hash::make(request( 'newPassword1' ));
+            return $user->save();
         }
 
         if ( request( 'company_logo' ) && preg_match( "/data:\w+\/\w+;base64,.*/", request( 'company_logo' ) ) == 1 ) {
