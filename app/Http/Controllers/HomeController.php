@@ -46,11 +46,6 @@ class HomeController extends Controller {
 
     public function edit_user_profile( User $user ) {
         if ( request( 'currentPassword' ) ) {
-            dd(request()->validate( [
-                'currentPassword' => 'required|password',
-                'newPassword1'    => 'required|min:8',
-                'newPassword2'    => 'required|same:newPassword1',
-            ] ));
             request()->validate( [
                 'currentPassword' => 'required|password',
                 'newPassword1'    => 'required|min:8',
