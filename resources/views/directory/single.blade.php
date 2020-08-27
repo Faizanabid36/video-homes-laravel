@@ -631,5 +631,7 @@
     @endif
 @endsection
 @section('header_script')
+    @if($video)
     window.VIDEO_APP.video_url = "{{route('is_played',$video->id)}}";
+    @endif
 @endsection
