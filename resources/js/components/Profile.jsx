@@ -98,7 +98,6 @@ class Profile extends React.Component {
     <input class="swal2-input form-control" id="newPassword" type="password" placeholder="Enter your new password..." /><br />
     <input class="swal2-input form-control" id="confirmPassword" type="password" placeholder="Confirm your new password..." />
   `,
-            type: 'warning',
             showCancelButton: true,
             cancelButtonColor: 'grey',
             confirmButtonText: 'Update!',
@@ -110,8 +109,8 @@ class Profile extends React.Component {
             })
         }).then((result) => {
             let v = result.value;
-            console.log("yes",v);
-            if (v && v.currentPassword && v.newPassword1 && v.newPassword2) {
+            //console.log("yes",v);
+            if (v && v.currentPassword && v.newPassword && v.confirmPassword) {
                 axios.put('/edit_user_profile/' + this.state.user.id, {...v}).then(({data}) => {
                     console.log(data);
                     MySwal.fire(
