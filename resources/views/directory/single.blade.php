@@ -432,7 +432,7 @@
                     </div>
                     <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
 
-                        @if(auth()->check() && ($video->user_id!=auth()->id()))
+                        @if(auth()->check() && $video && ($video->user_id!=auth()->id()))
                             <button class="btn btn-primary my-3" data-toggle="modal" data-target="#review"> Add Review
                             </button>
                             <div class="modal fade" id="review" tabindex="-1" role="dialog"
@@ -521,7 +521,7 @@
                     <!-- Contact -->
                     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                         <h1 class="my-3 font-weight-bold"> Contact to {{$user->name}} </h1>
-                        @if(auth()->check() && ($video->user_id!=auth()->id()))
+                        @if(auth()->check() && $video && ($video->user_id!=auth()->id()))
                             <form method="POST" action="{{route('to_user')}}">
                                 @csrf
                                 <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">
@@ -542,7 +542,7 @@
                         <!-- .report. -->
 
                         <h1 class="my-3 font-weight-bold"> Report Video</h1>
-                        @if(auth()->check() && ($video->user_id!=auth()->id()))
+                        @if(auth()->check() && $video && ($video->user_id!=auth()->id()))
                             <form method="POST" action="{{route('to_user')}}">
                                 @csrf
                                 <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">
@@ -592,41 +592,43 @@
 
 @endsection
 @section('meta')
-    <meta name="description" content="{{$video->description}}. Author: {{$user->name}}"/>
-    <link rel="image_src" href="{{asset("storage/$video->thumbnail")}}"/>
-    <meta property="og:title" content="{{$video->title}}"/>
-    <meta property="og:site_name" content="{{env('APP_NAME')}}"/>
-    <meta property="og:url"
-          content="{{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"/>
-    <meta property="og:description" content="{{$video->description}}. Author: {{$user->name}}"/>
-    <meta property="og:type" content="video.other"/>
-    <meta property="og:image" content="{{asset("storage/$video->thumbnail")}}">
-    {{--    <meta property="og:locale" content="en-us" />--}}
-    {{--    <meta property="og:locale:alternate" content="en-us" />--}}
-    {{--    <meta property="og:video" content="{{route('embed_video',$video->video_id)}}"/>--}}
-    {{--    <meta property="og:video:type" content="video/mp4"/>--}}
-    {{--    <meta property="og:video:secure_url"--}}
-    {{--          content="{{route('embed_video',$video->video_id)}}"/>--}}
-    {{--    <meta property="og:video:width" content="640"/>--}}
-    {{--    <meta property="og:video:height" content="360"/>--}}
-    {{--    <meta property="og:image:url" content="{{url()->current()}}">--}}
+    @if($video)
+        <meta name="description" content="{{$video->description}}. Author: {{$user->name}}"/>
+        <link rel="image_src" href="{{asset("storage/$video->thumbnail")}}"/>
+        <meta property="og:title" content="{{$video->title}}"/>
+        <meta property="og:site_name" content="{{env('APP_NAME')}}"/>
+        <meta property="og:url"
+              content="{{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"/>
+        <meta property="og:description" content="{{$video->description}}. Author: {{$user->name}}"/>
+        <meta property="og:type" content="video.other"/>
+        <meta property="og:image" content="{{asset("storage/$video->thumbnail")}}">
+        {{--    <meta property="og:locale" content="en-us" />--}}
+        {{--    <meta property="og:locale:alternate" content="en-us" />--}}
+        {{--    <meta property="og:video" content="{{route('embed_video',$video->video_id)}}"/>--}}
+        {{--    <meta property="og:video:type" content="video/mp4"/>--}}
+        {{--    <meta property="og:video:secure_url"--}}
+        {{--          content="{{route('embed_video',$video->video_id)}}"/>--}}
+        {{--    <meta property="og:video:width" content="640"/>--}}
+        {{--    <meta property="og:video:height" content="360"/>--}}
+        {{--    <meta property="og:image:url" content="{{url()->current()}}">--}}
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="player">
-    <meta name="twitter:site" content="@@{{ env('APP_NAME' }}">
-    <meta name="twitter:title" content="{{$video->title}}">
-    <meta name="twitter:description" content="{{$video->description}}. Author: {{$user->name}}"/>
-    <meta name="twitter:image" content="{{asset("storage/$video->thumbnail")}}">
-    <meta name="twitter:player" content="{{route('embed_video',$video->video_id)}}?track_url=twitter.com">
-    <meta name="twitter:player:width" content="640">
-    <meta name="twitter:player:height" content="360">
-    {{--    <meta name="twitter:player:stream" content="{{route('embed_video',$video->video_id)}}?track_url=twitter.com">--}}
-    {{--    <meta name="twitter:player:stream:content_type" content="video/mp4">--}}
+        <!-- Twitter -->
+        <meta name="twitter:card" content="player">
+        <meta name="twitter:site" content="@@{{ env('APP_NAME' }}">
+        <meta name="twitter:title" content="{{$video->title}}">
+        <meta name="twitter:description" content="{{$video->description}}. Author: {{$user->name}}"/>
+        <meta name="twitter:image" content="{{asset("storage/$video->thumbnail")}}">
+        <meta name="twitter:player" content="{{route('embed_video',$video->video_id)}}?track_url=twitter.com">
+        <meta name="twitter:player:width" content="640">
+        <meta name="twitter:player:height" content="360">
+        {{--    <meta name="twitter:player:stream" content="{{route('embed_video',$video->video_id)}}?track_url=twitter.com">--}}
+        {{--    <meta name="twitter:player:stream:content_type" content="video/mp4">--}}
 
-    <!-- Others -->
-    {{--    <meta name="medium" content="video"/>--}}
-    {{--    <meta name="video_type" content="application/x-shockwave-flash"/>--}}
-    {{--    <link rel="video_src" href="{{asset("storage/".str_replace('240p','360p',$video->stream_path))}}"/>--}}
+        <!-- Others -->
+        {{--    <meta name="medium" content="video"/>--}}
+        {{--    <meta name="video_type" content="application/x-shockwave-flash"/>--}}
+        {{--    <link rel="video_src" href="{{asset("storage/".str_replace('240p','360p',$video->stream_path))}}"/>--}}
+    @endif
 @endsection
 @section('header_script')
     window.VIDEO_APP.video_url = "{{route('is_played',$video->id)}}";
