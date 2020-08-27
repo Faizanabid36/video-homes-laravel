@@ -118,8 +118,8 @@ class Profile extends React.Component {
                         'Your password has been changed.',
                         'success'
                     )
-                }).catch(e => {
-                    console.log(e);
+                }).catch(({response}) => {
+                    console.log(response);
                     MySwal.fire(
                         'Alert!',
                         'Something went wrong.',
