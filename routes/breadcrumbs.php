@@ -3,6 +3,7 @@
 use App\Page;
 use \App\UserCategory;
 use App\Video;
+use \App\User;
 use \DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 
 //// Home
@@ -29,14 +30,16 @@ Breadcrumbs::for( 'directory', function ( $trail, $level1 = null, $level2 = null
 
 Breadcrumbs::for( 'directory_by_username', function ( $trail, $slug, $video_id = null ) {
 //    $trail->parent( 'home' );
-    if ( Page::viewPage( $slug )->count() > 0 ){
+    if ( Page::viewPage( $slug )->count() > 0 ) {
         $trail->push( Page::viewPage( $slug )->first()->title, route( 'directory_by_username', $slug ) );
+
         return;
     }
     $trail->push( 'Directory', route( 'directory' ) );
 
-    $video    = Video::userVideos( $slug, $video_id )->firstOrFail();
-    $category = UserCategory::find( $video->user->user_extra->user_category_id );
+    $video    = Video::userVideos( $slug, $video_id )->first();
+    $user     = User::whereUsername( $slug )->first();
+    $category = UserCategory::find( $user->user_extra->user_category_id );
     $level1   = $category;
     if ( $category->parent_id ) {
         $level1 = UserCategory::find( $category->parent_id );
@@ -47,8 +50,8 @@ Breadcrumbs::for( 'directory_by_username', function ( $trail, $slug, $video_id =
         $trail->push( $level1->name, route( 'directory', $level1->slug ) );
     }
 
-    $trail->push( $video->user->name, route( 'directory_by_username', $slug ) );
-    if ( $video_id ) {
+    $trail->push( $user->name, route( 'directory_by_username', $slug ) );
+    if ( $video ) {
         $trail->push( $video->title, route( 'directory_by_username', [ $slug, $video_id ] ) );
     }
 } );
