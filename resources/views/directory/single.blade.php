@@ -1,4 +1,4 @@
-@extends('layouts.public.app',["title"=>$video->title])
+@extends('layouts.public.app',["title"=>$video ? $video->title : "No Video Uploaded By {$user->name}"])
 @section('content')
     <div class="container">
         <div class="row">
@@ -260,7 +260,7 @@
                         </div>
                     @else
                         <div>
-                            <h1 class="alert alert-info">No Video Uploaded By this User</h1>
+                            <h1 class="alert alert-info">No Video Uploaded By {{$user->name}}</h1>
                         </div>
                     @endif
                 </div>
