@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('container')
-    @if(auth()->user())
+
+    @if(!request('new'))
         <div class="container-fluid">
             <div class="row bg-light">
 
@@ -9,5 +10,9 @@
             </div>
         </div>
         <div id="container"></div>
+    @else
+        <div id="container2"></div>
     @endif
+
+
 @endsection

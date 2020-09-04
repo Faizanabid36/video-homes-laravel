@@ -19,9 +19,9 @@ function App() {
     </AppLayout>
 }
 
-if (document.getElementById('container')) {
+if (document.getElementById('container2')) {
     ReactDOM.render(
         <App/>,
-        document.getElementById('container'),
+        document.getElementById('container2'),
     );
 }
