@@ -48,8 +48,8 @@
                                                     <option value="{{$u1['id']}}">{{$u1['name']}}</option>
                                                 @endif
                                             @endforeach
-                                        @else
-                                            <option value="{{$u['id']}}">{{$u['name']}}</option>
+{{--                                        @else--}}
+{{--                                            <option value="{{$u['id']}}">{{$u['name']}}</option>--}}
                                         @endif
                                     </optgroup>
                                 @endforeach

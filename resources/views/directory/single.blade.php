@@ -218,7 +218,7 @@
                                             @endforeach
                                         @endif
                                         <br>
-                                        Category: {{$video->category->name}}
+                                        Category: {{$video->category->name || ''}}
                                         <br>
                                         Views: {{$views}}
                                     </div>

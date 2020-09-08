@@ -28,6 +28,8 @@
         "@fortawesome/react-fontawesome": "^0.1.11",
         "@tinymce/tinymce-react": "^3.6.0",
         "antd": "^4.6.2",
+        "antd-img-crop": "^3.10.0",
+        "antd-mask-input": "^0.1.13",
         "bootstrap": "^4.5.2",
         "bootstrap-daterangepicker": "^3.1.0",
         "bootstrap-select": "^1.13.18",
