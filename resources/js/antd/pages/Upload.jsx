@@ -43,10 +43,8 @@ class UploadPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            current: 0,
         };
-        this.next = this.next.bind(this);
-        this.prev = this.prev.bind(this);
+
         this.onUpload = this.onUpload.bind(this);
     }
     onUpload(info) {
@@ -69,38 +67,11 @@ class UploadPage extends Component {
             message.error(`${info.file.name} file upload failed.`);
         }
     }
-    next() {
-        const current = this.state.current + 1;
-        this.setState({current});
-    }
 
-    prev() {
-        const current = this.state.current - 1;
-        this.setState({current});
-    }
 
     render() {
 
-        const {current} = this.state;
-        let steps= [
-            {
-                status: "upload",
-                title: 'Upload',
-                description: "This is a description.",
-                subTitle: "This is a Sub description.",
-                content: (<Dragger accept={".mov,.mp4"} headers={{ 'X-CSRF-TOKEN':window.document.head.querySelector('meta[name="csrf-token"]').content}} name='video' action={`${window.VIDEO_APP.base_url}/upload-video`} onChange={this.onUpload}>
-                    <p className="ant-upload-drag-icon">
-                        <InboxOutlined/>
-                    </p>
-                    <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                    <p className="ant-upload-hint">
-                        Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-                        band files
-                    </p>
-                </Dragger>),
-                icon: <CloudUploadOutlined/>
-            },
-        ];
+
         return (
             <Content style={{padding: '20px 50px'}}>
                 <div className="site-layout-content">
@@ -109,30 +80,16 @@ class UploadPage extends Component {
                         onBack={() => null}
                         title="Upload Video"
                     >
-                        <Steps>
-                            {steps.map(item => (
-                                <Step status={item.status} description={item.description} key={item.title}
-                                      title={item.title} icon={item.icon}/>
-                            ))}
-                        </Steps>
-                        <div className="steps-content">{steps[current].content}</div>
-                        {/*<div className="steps-action">*/}
-                        {/*    {current < steps.length - 1 && (*/}
-                        {/*        <Button type="primary" onClick={() => this.next()}>*/}
-                        {/*            Next*/}
-                        {/*        </Button>*/}
-                        {/*    )}*/}
-                        {/*    {current === steps.length - 1 && (*/}
-                        {/*        <Button type="primary" onClick={() => message.success('Processing complete!')}>*/}
-                        {/*            Done*/}
-                        {/*        </Button>*/}
-                        {/*    )}*/}
-                        {/*    {current > 0 && (*/}
-                        {/*        <Button style={{margin: '0 8px'}} onClick={() => this.prev()}>*/}
-                        {/*            Previous*/}
-                        {/*        </Button>*/}
-                        {/*    )}*/}
-                        {/*</div>*/}
+                        <Dragger accept={".mov,.mp4,.wmv,.avi,.3gp,.flv"} headers={{ 'X-CSRF-TOKEN':window.document.head.querySelector('meta[name="csrf-token"]').content}} name='video' action={`${window.VIDEO_APP.base_url}/upload-video`} onChange={this.onUpload}>
+                            <p className="ant-upload-drag-icon">
+                                <InboxOutlined/>
+                            </p>
+                            <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                            {/*<p className="ant-upload-hint">*/}
+                            {/*    Support for a single or bulk upload. Strictly prohibit from uploading company data or other*/}
+                            {/*    band files*/}
+                            {/*</p>*/}
+                        </Dragger>
                     </PageHeader>
 
                 </div>

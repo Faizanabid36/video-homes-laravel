@@ -125,12 +125,14 @@ class Video extends Component {
                                         <Card.Meta
                                             avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
                                             title= {item.title}
-                                            description={`
-<span>${item.description}<br/></span>
-<span> Category: ${item.category.name}</span><br/>
-<span> Views: ${item.views}</span><br/>
-<span> Duration: ${Math.floor(item.duration / 60)}:${item.duration - Math.floor(item.duration / 60) * 60}</span>
-`}
+                                            description={[
+                                                <>
+                                                    <span>{item.description}<br/></span>
+                                                    <span> Category: {item.category.name}</span><br/>
+                                                    <span> Views: {item.views}</span><br/>
+                                                    <span> Duration: {Math.floor(item.duration / 60)}:{item.duration - Math.floor(item.duration / 60) * 60}</span>
+                                                </>
+                                            ]}
                                         />
                                     </Card>
                                 </Col>
