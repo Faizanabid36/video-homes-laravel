@@ -61,6 +61,7 @@ class UploadPage extends Component {
         }
         if (status === 'done') {
             // self.next();
+            console.log(info);
             message.success(`${info.file.name} file uploaded successfully.`);
         } else if (status === 'error') {
             // self.setState({current: 0});
