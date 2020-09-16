@@ -44,36 +44,17 @@ class UploadPage extends Component {
         super(props);
         this.state = {
             current: 0,
-            steps: [
-                {
-                    status: "upload",
-                    title: 'Upload',
-                    description: "This is a description.",
-                    subTitle: "This is a Sub description.",
-                    content: (<Dragger name='file' action={`${window.VIDEO_APP.base_url}/profile`} onChange={this.onChange}>
-                        <p className="ant-upload-drag-icon">
-                            <InboxOutlined/>
-                        </p>
-                        <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                        <p className="ant-upload-hint">
-                            Support for a single or bulk upload. Strictly prohibit from uploading company data or other
-                            band files
-                        </p>
-                    </Dragger>),
-                    icon: <CloudUploadOutlined/>
-                },
-            ],
         };
         this.next = this.next.bind(this);
         this.prev = this.prev.bind(this);
-        this.onChange = this.onChange.bind(this);
+        this.onUpload = this.onUpload.bind(this);
     }
-    onChange(info) {
+    onUpload(info) {
         const self = this;
         const {status} = info.file;
         console.log(status);
         if (status === 'uploading') {
-            self.setState({current: 1});
+            // self.setState({current: 1});
             console.log("I am uploading");
         }
         if (status !== 'uploading') {
@@ -100,15 +81,33 @@ class UploadPage extends Component {
 
     render() {
 
-        const {current,steps} = this.state;
-
+        const {current} = this.state;
+        let steps= [
+            {
+                status: "upload",
+                title: 'Upload',
+                description: "This is a description.",
+                subTitle: "This is a Sub description.",
+                content: (<Dragger accept={".mov,.mp4"} headers={{ 'X-CSRF-TOKEN':window.document.head.querySelector('meta[name="csrf-token"]').content}} name='video' action={`${window.VIDEO_APP.base_url}/upload-video`} onChange={this.onUpload}>
+                    <p className="ant-upload-drag-icon">
+                        <InboxOutlined/>
+                    </p>
+                    <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                    <p className="ant-upload-hint">
+                        Support for a single or bulk upload. Strictly prohibit from uploading company data or other
+                        band files
+                    </p>
+                </Dragger>),
+                icon: <CloudUploadOutlined/>
+            },
+        ];
         return (
             <Content style={{padding: '20px 50px'}}>
                 <div className="site-layout-content">
                     <PageHeader
                         className="site-page-header site-page-header-responsive"
                         onBack={() => null}
-                        title="Playlist"
+                        title="Upload Video"
                     >
                         <Steps>
                             {steps.map(item => (

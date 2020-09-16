@@ -23,8 +23,10 @@ import {
 } from 'antd';
 import MaskedInput from 'antd-mask-input'
 import ImgCrop from 'antd-img-crop';
+import GooglePlacesAutocomplete, { geocodeByAddress } from "react-google-places-autocomplete";
 
-import { UserOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import { UserOutlined, EllipsisOutlined, SettingOutlined,PlusOutlined,LoadingOutlined } from '@ant-design/icons';
+import { Editor } from "@tinymce/tinymce-react";
 
 const {Content} = Layout;
 const {Column, ColumnGroup} = Table;
@@ -94,17 +96,6 @@ function getBase64(img, callback) {
     reader.readAsDataURL(img);
 }
 
-function beforeUpload(file) {
-    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-    if (!isJpgOrPng) {
-        message.error('You can only upload JPG/PNG file!');
-    }
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) {
-        message.error('Image must smaller than 2MB!');
-    }
-    return isJpgOrPng && isLt2M;
-}
 class Profile extends Component {
     constructor(props) {
         super(...arguments);
@@ -124,6 +115,30 @@ class Profile extends Component {
         this.onFinish = this.onFinish.bind(this);
         this.onReset = this.onReset.bind(this);
         this.onFill = this.onFill.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.beforeUpload = this.beforeUpload.bind(this);
+        this.defaultValue = this.defaultValue.bind(this);
+        this.handleChangeInput = this.handleChangeInput.bind(this);
+    }
+    handleChangeInput(e, key = false) {
+        let {user} = this.state;
+        user[key || e.target.name] = key ? e : e.target.value;
+        this.setState({user});
+    }
+    defaultValue(key) {
+        return this.state.user[key] || null;
+    }
+    beforeUpload(file) {
+        const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+        if (!isJpgOrPng) {
+            message.error('You can only upload JPG/PNG file!');
+        }
+        const isLt2M = file.size / 1024 / 1024 < 2;
+        if (!isLt2M) {
+            message.error('Image must smaller than 2MB!');
+        }
+        return isJpgOrPng && isLt2M;
     }
     handleChange(info) {
         if (info.file.status === 'uploading') {
@@ -179,7 +194,13 @@ class Profile extends Component {
             const imgWindow = window.open(src);
             imgWindow.document.write(image.outerHTML);
         };
-
+        const { loading, imageUrl } = this.state;
+        const uploadButton = (
+            <div>
+                {loading ? <LoadingOutlined /> : <PlusOutlined />}
+                <div style={{ marginTop: 8 }}>Upload</div>
+            </div>
+        );
 
         return (
             <Content style={{padding: '20px 50px'}}>
@@ -191,98 +212,179 @@ class Profile extends Component {
                     >
                         <Form
                             ref={this.formRef} name="control-ref" onFinish={this.onFinish}
-
                             layout="vertical"
                         >
                             <Tabs defaultActiveKey="1" tabPosition="left" >
                                 <TabPane tab="Tab 1" key="1">
-                                    <Form.Item label="Field A" required rules={[
+                                    <Form.Item label="Full Name" required rules={[
                                         {
                                             required: true,
                                         },
                                     ]}>
-                                        <Input placeholder="input placeholder"/>
+                                        <Input placeholder="Full Name"/>
+                                    </Form.Item>
+
+                                    <Form.Item label="Company Name" required rules={[
+                                        {
+                                            required: true,
+                                        },
+                                    ]}>
+                                        <Input placeholder="Company Name"/>
+                                    </Form.Item>
+
+                                    <Form.Item label="Website" required>
+                                        <Input addonBefore="https://" placeholder="Website"/>
+                                    </Form.Item>
+                                    <Form.Item label="Facebook" required>
+                                        <Input addonBefore="https://www.facebook.com/" placeholder="Facebook"/>
+                                    </Form.Item>
+                                    <Form.Item label="Twitter" required>
+                                        <Input addonBefore="https://www.twiiter.com/" placeholder="Twitter"/>
+                                    </Form.Item>
+                                    <Form.Item label="Instagram" required>
+                                        <Input addonBefore="https://www.instagram.com/" placeholder="Instagram"/>
+                                    </Form.Item>
+                                    <Form.Item label="About/Bio">
+                                        <Editor
+                                            apiKey="rlsbsechuy5zwieakwp79flrto7ipmojgummzxwwjbbcbtye"
+                                            name="bio"
+                                            // initialValue={this.defaultValue('bio')}
+                                            init={{
+                                                height: 250,
+                                                menubar: false,
+                                                plugins: [
+                                                    'advlist autolink lists link image charmap print preview anchor',
+                                                    'searchreplace visualblocks code fullscreen',
+                                                    'insertdatetime media table paste code help wordcount'
+                                                ],
+                                                toolbar:
+                                                    'undo redo | formatselect | bold italic backcolor | \
+                                                    alignleft aligncenter alignright alignjustify | \
+                                                    bullist numlist outdent indent | removeformat | help'
+                                            }}
+                                            onEditorChange={(content, editor) => this.handleChangeInput(content, 'bio')}
+                                        />
+                                    </Form.Item>
+
+                                    <Form.Item label="License" required rules={[
+                                        {
+                                            required: true,
+                                        },
+                                    ]}>
+                                        <MaskedInput placeholder="License" mask="#######" name="license_no" size="7" />
                                     </Form.Item>
 
                                     <div style={{marginBottom: 16}}>
-                                        <Form.Item label="Field A" required rules={[
+                                        <Form.Item label="Personal URL" required rules={[
                                             {
                                                 required: true,
                                             },
                                         ]}>
-                                            <Input addonBefore="http://" defaultValue="mysite"/>
+                                            <Input placeholder="username" addonBefore={`${window.VIDEO_APP.base_url}/`} defaultValue="mysite"/>
                                         </Form.Item>
-                                        <Form.Item label="Field C" required rules={[
+                                        <Form.Item label="Direct Phone" required rules={[
                                             {
                                                 required: true,
                                             },
                                         ]}>
-                                            <MaskedInput mask="111-111-1111" name="card" size="20" />
+                                            <MaskedInput placeholder="Direct Phone" mask="111-111-1111" name="direct_phone" size="20" />
                                         </Form.Item>
-                                        <Form.Item label="Field C" required rules={[
+                                        <Form.Item label="Office Phone" required rules={[
                                             {
                                                 required: true,
                                             },
                                         ]}>
-                                            <AutoComplete
-                                                style={{
-                                                    width: 200,
+                                            <MaskedInput  placeholder="Office Phone" mask="111-111-1111" name="office_phone" size="20" />
+                                        </Form.Item>
+                                        <Form.Item label="Address" required rules={[
+                                            {
+                                                required: true,
+                                            },
+                                        ]}>
+                                            <GooglePlacesAutocomplete
+                                                // initialValue={this.defaultValue('address')}
+                                                autocompletionRequest={{
+                                                    componentRestrictions: {
+                                                        country: ['us'],
+                                                    }
                                                 }}
-                                                options={[
-                                                    {
-                                                        value: 'Burns Bay Road',
-                                                    },
-                                                    {
-                                                        value: 'Downing Street',
-                                                    },
-                                                    {
-                                                        value: 'Wall Street',
-                                                    },
-                                                ]}
-                                                placeholder="try to type `b`"
-                                                filterOption={(inputValue, option) =>
-                                                    option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-                                                }
+                                                onSelect={({description}) => {
+                                                    geocodeByAddress(description)
+                                                        .then((results) => {
+                                                            let {user} = this.state;
+                                                            user.address = description;
+                                                            user.location_latitude = results[0].geometry.location.lat();
+                                                            user.location_longitude = results[0].geometry.location.lng();
+                                                            this.setState({user});
+                                                        })
+                                                        .catch(error => console.error(error));
+                                                }}
+
+                                                inputClassName="ant-input"
                                             />
+
                                         </Form.Item>
-                                        <Form.Item label="Field C" required rules={[
-                                            {
-                                                required: true,
-                                            },
-                                        ]}>
-                                            <AutoComplete
-                                                dropdownClassName="certain-category-search-dropdown"
-                                                dropdownMatchSelectWidth={500}
-                                                style={{
-                                                    width: 250,
-                                                }}
-                                                options={[
-                                                    {
-                                                        label: renderTitle('Libraries'),
-                                                        options: [renderItem('AntDesign', 10000), renderItem('AntDesign UI', 10600)],
-                                                    },
-                                                    {
-                                                        label: renderTitle('Solutions'),
-                                                        options: [renderItem('AntDesign UI FAQ', 60100), renderItem('AntDesign FAQ', 30010)],
-                                                    },
-                                                    {
-                                                        label: renderTitle('Articles'),
-                                                        options: [renderItem('AntDesign design language', 100000)],
-                                                    },
-                                                ]}
-                                            >
-                                                <Input.Search size="large" placeholder="input here" />
-                                            </AutoComplete>
-                                        </Form.Item>
+
+                                        {/*<Form.Item label="Field C" required rules={[*/}
+                                        {/*    {*/}
+                                        {/*        required: true,*/}
+                                        {/*    },*/}
+                                        {/*]}>*/}
+                                        {/*    <AutoComplete*/}
+                                        {/*        style={{*/}
+                                        {/*            width: 200,*/}
+                                        {/*        }}*/}
+                                        {/*        options={[*/}
+                                        {/*            {*/}
+                                        {/*                value: 'Burns Bay Road',*/}
+                                        {/*            },*/}
+                                        {/*            {*/}
+                                        {/*                value: 'Downing Street',*/}
+                                        {/*            },*/}
+                                        {/*            {*/}
+                                        {/*                value: 'Wall Street',*/}
+                                        {/*            },*/}
+                                        {/*        ]}*/}
+                                        {/*        placeholder="try to type `b`"*/}
+                                        {/*        filterOption={(inputValue, option) =>*/}
+                                        {/*            option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1*/}
+                                        {/*        }*/}
+                                        {/*    />*/}
+                                        {/*    <AutoComplete*/}
+                                        {/*        dropdownClassName="certain-category-search-dropdown"*/}
+                                        {/*        dropdownMatchSelectWidth={500}*/}
+                                        {/*        style={{*/}
+                                        {/*            width: 250,*/}
+                                        {/*        }}*/}
+                                        {/*        options={[*/}
+                                        {/*            {*/}
+                                        {/*                label: renderTitle('Libraries'),*/}
+                                        {/*                options: [renderItem('AntDesign', 10000), renderItem('AntDesign UI', 10600)],*/}
+                                        {/*            },*/}
+                                        {/*            {*/}
+                                        {/*                label: renderTitle('Solutions'),*/}
+                                        {/*                options: [renderItem('AntDesign UI FAQ', 60100), renderItem('AntDesign FAQ', 30010)],*/}
+                                        {/*            },*/}
+                                        {/*            {*/}
+                                        {/*                label: renderTitle('Articles'),*/}
+                                        {/*                options: [renderItem('AntDesign design language', 100000)],*/}
+                                        {/*            },*/}
+                                        {/*        ]}*/}
+                                        {/*    >*/}
+                                        {/*        <Input.Search size="large" placeholder="input here" />*/}
+                                        {/*    </AutoComplete>*/}
+                                        {/*</Form.Item>*/}
                                         <ImgCrop rotate>
                                             <Upload
                                                 action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                                                 listType="picture-card"
-                                                fileList={this.state.fileList}
-                                                onChange={onChange}
-                                                onPreview={onPreview}
+                                                className="avatar-uploader"
+                                                showUploadList={false}
+                                                onChange={this.handleChange}
+                                                beforeUpload={this.beforeUpload}
                                             >
-                                                {this.state.fileList.length < 5 && '+ Upload'}
+                                                {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+
                                             </Upload>
                                         </ImgCrop>
                                     </div>

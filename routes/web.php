@@ -18,6 +18,7 @@ Auth::routes();
 //Auth User
 Route::group( [ 'middleware' => 'auth' ], function () {
     Route::view( '/dashboard', 'dashboard' )->name( 'dashboard' );
+    Route::resource( 'playlist', 'PlaylistController' );
     Route::post( 'delete_video', 'VideoController@delete_video' );
 
     Route::post( '/dashboard_statistics', 'DashboardController@dashboard_type' )->name( 'dashboard_type' );
@@ -29,7 +30,7 @@ Route::group( [ 'middleware' => 'auth' ], function () {
     Route::get( '/all_videos/{order}', 'VideoController@list_of_videos_by_order' );
     Route::get( 'edit_video/{video_id}', 'VideoController@edit_video' );
 
-    Route::resource( 'playlist', 'PlaylistController' );
+
     Route::get( 'get_logged_user', 'HomeController@logged_user' );
 //    Route::post( 'edit_user_profile', 'HomeController@edit_user_profile1' );
     Route::put( 'edit_user_profile/{user}', 'HomeController@edit_user_profile' );
@@ -41,9 +42,9 @@ Route::group( [ 'middleware' => 'auth' ], function () {
     Route::post( 'image-upload', 'ImageUploadController@imageUploadPost' );
     Route::post( 'update_company_logo', 'ImageUploadController@update_company_logo' );
 
-    Route::get( 'all_playlists', 'HomeController@get_playlist' );
-    Route::post( 'delete_playlist', 'HomeController@delete_playlist' );
-    Route::post( 'update_playlist', 'HomeController@update_playlist' );
+//    Route::get( 'all_playlists', 'HomeController@get_playlist' );
+//    Route::post( 'delete_playlist', 'HomeController@delete_playlist' );
+//    Route::post( 'update_playlist', 'HomeController@update_playlist' );
     Route::get( 'videos_likes', 'HomeController@update_likes' );
     Route::get( 'videos_dislikes', 'HomeController@update_dislikes' );
     Route::post( 'post_comment', 'CommentsController@store' )->name( 'post_comment' );

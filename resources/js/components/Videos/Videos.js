@@ -114,7 +114,7 @@ class Videos extends React.Component {
                               </span>
                             </span>
                                     <span className="three">
-                              <span> {item.views} Views </span>
+                                  <span> {item.views} Views </span>
                             </span>
 
                                     <span
