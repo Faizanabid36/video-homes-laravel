@@ -30,7 +30,7 @@ class EditVideo extends Component {
 
     componentDidMount() {
         let self = this;
-        axios.get(`edit_video/${props.match.params.id}`).then(({data}) => {
+        axios.get(`edit_video/${this.props.match.params.id}`).then(({data}) => {
             data.video.tags = data.video.tags ?? [];
             let index = data.video.thumbnail.match(/-(\d+).png/);
             if (index && index[1]) {
