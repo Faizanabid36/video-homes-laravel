@@ -12,10 +12,10 @@ class EditableTagGroup extends Component {
             editInputValue: '',
         };
         this.props = props;
-        this.handleClose =this.handleClose.bind(this);
-        this.showInput =this.showInput.bind(this);
-        this.handleInputChange =this.handleInputChange.bind(this);
-        this.handleInputConfirm =this.handleInputConfirm.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+        this.showInput = this.showInput.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleInputConfirm = this.handleInputConfirm.bind(this);
 
         this.handleEditInputChange =this.handleEditInputChange.bind(this);
         this.handleEditInputConfirm =this.handleEditInputConfirm.bind(this);

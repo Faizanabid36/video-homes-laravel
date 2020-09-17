@@ -25,6 +25,8 @@ class EditVideo extends Component {
             categories: [],
         };
         this.onChange = this.onChange.bind(this);
+        this.saveTags = this.saveTags.bind(this);
+        this.defaultValue = this.defaultValue.bind(this);
 
     }
 
