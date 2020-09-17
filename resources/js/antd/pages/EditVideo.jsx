@@ -15,7 +15,8 @@ class EditVideo extends Component {
         super(...arguments);
         this.state = {
             video: {},
-            current_tag: 0
+            current_tag: 0,
+            thumbnails:[],
         };
         this.onChange = this.onChange.bind(this);
 
