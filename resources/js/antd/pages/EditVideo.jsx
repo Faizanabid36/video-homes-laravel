@@ -54,7 +54,7 @@ class EditVideo extends Component {
         if (typeof key === 'string') {
             return this.state[key] ?? defaultValue
         }
-        let state = this.state;
+        let state = {...this.state};
         key.map(v => state = state[v]);
         return state ?? defaultValue;
     }
