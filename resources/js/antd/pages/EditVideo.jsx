@@ -65,7 +65,7 @@ class EditVideo extends Component {
                     >
                         <Form ref={this.formRef} name="control-ref" onFinish={this.onFinish} layout="vertical">
                             {Object.values(this.state.thumbnails).length > 0 && <Carousel slickGoTo={this.state.current_slide} afterChange={this.onChange}>
-                                {Object.values(this.state.thumbnails).map(v => <div style={contentStyle}>
+                                {Object.values(this.state.thumbnails).map((v,k) => <div key={k} style={contentStyle}>
                                     <Image src={window.VIDEO_APP.base_url + "/storage/" + v}/>
                                 </div>)}
                             </Carousel>
