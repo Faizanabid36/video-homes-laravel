@@ -15,7 +15,7 @@ class EditVideo extends Component {
         super(...arguments);
         this.state = {
             video: {},
-            current_tag: 0,
+            current_slide: 0,
             thumbnails:{},
             categories:[],
         };
@@ -34,8 +34,8 @@ class EditVideo extends Component {
             data.video.tags = data.video.tags ?? [];
             let index = data.video.thumbnail.match(/-(\d+).png/);
             if (index && index[1]) {
-                data.current_tag = index[1] - 1;
-                goTo(data.current_tag,false);
+                data.current_slide = index[1] - 1;
+                // goTo(data.current_tag,false);
             }
             self.setState({...data});
         })
@@ -67,7 +67,7 @@ class EditVideo extends Component {
                             layout="vertical"
                         >
 
-                            {Object.values(this.state.thumbnails).length > 0 && <Carousel afterChange={this.onChange}>
+                            {Object.values(this.state.thumbnails).length > 0 && <Carousel slickGoTo={this.state.current_slide} afterChange={this.onChange}>
                                 {Object.values(this.state.thumbnails).map(v => <div style={contentStyle}>
                                     <Image
                                         src={window.VIDEO_APP.base_url + "/storage/" + v}
