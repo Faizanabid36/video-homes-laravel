@@ -6,18 +6,18 @@ class EditableTagGroup extends Component {
     constructor(props){
         super(...arguments);
         this.state = {
-            tags: ['Unremovable', 'Tag 2', 'Tag 3'],
             inputVisible: false,
             inputValue: '',
             editInputIndex: -1,
             editInputValue: '',
         };
+        this.props = props;
     }
 
     handleClose(removedTag) {
-        const tags = this.state.tags.filter(tag => tag !== removedTag);
+        const tags = this.props.tags.filter(tag => tag !== removedTag);
         console.log(tags);
-        this.setState({ tags });
+        this.props.saveTags(tags);
     };
 
     showInput() {
@@ -30,13 +30,13 @@ class EditableTagGroup extends Component {
 
     handleInputConfirm ()  {
         const { inputValue } = this.state;
-        let { tags } = this.state;
+        let { tags } = this.props;
         if (inputValue && tags.indexOf(inputValue) === -1) {
             tags = [...tags, inputValue];
         }
         console.log(tags);
+        this.props.saveTags(tags);
         this.setState({
-            tags,
             inputVisible: false,
             inputValue: '',
         });
@@ -68,7 +68,8 @@ class EditableTagGroup extends Component {
     };
 
     render() {
-        const { tags, inputVisible, inputValue, editInputIndex, editInputValue } = this.state;
+        const {  inputVisible, inputValue, editInputIndex, editInputValue } = this.state;
+        const { tags } = this.props;
         return (
             <>
                 {tags.map((tag, index) => {
@@ -80,9 +81,9 @@ class EditableTagGroup extends Component {
                                 size="small"
                                 className="tag-input"
                                 value={editInputValue}
-                                onChange={this.handleEditInputChange}
-                                onBlur={this.handleEditInputConfirm}
-                                onPressEnter={this.handleEditInputConfirm}
+                                onChange={this.handleInputChange}
+                                onBlur={this.handleInputConfirm}
+                                onPressEnter={this.handleInputConfirm}
                             />
                         );
                     }

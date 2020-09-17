@@ -204,7 +204,7 @@ class VideoController extends Controller
     public function edit_video($video_id)
     {
         $video = Video::whereVideoId($video_id)->firstOrFail();
-        $categories = Category::all();
+        $categories = Category::selectRaw("id as value,name as label")->get();
         $thumbnails = [];
         for ($i = 1; $i <= 3; $i++) {
             $thumbnails[$i] = preg_replace('/(-)\d(\.png)/', "-$i$2", $video->thumbnail, 1);
