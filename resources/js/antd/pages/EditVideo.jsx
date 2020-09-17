@@ -110,7 +110,7 @@ class EditVideo extends Component {
                                         option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                     }
                                 >
-                                    {this.state.categories.map(e=><Select.Option value={e.id}>{e.name}</Select.Option>)}
+                                    {this.state.categories.map((e,k)=><Select.Option key={k} value={e.id}>{e.name}</Select.Option>)}
                                 </Select>}
                             </Form.Item>
                             <Button type='submit'>Update</Button>
