@@ -55,6 +55,7 @@ class EditVideo extends Component {
             textAlign: 'center',
             background: '#364d79',
         };
+        console.log(this.state.video);
         return (
             <Layout.Content style={{padding: '20px 50px'}}>
                 <div className="site-layout-content">
@@ -68,8 +69,7 @@ class EditVideo extends Component {
                                 {Object.values(this.state.thumbnails).map((v,k) => <div key={k} style={contentStyle}>
                                     <Image src={window.VIDEO_APP.base_url + "/storage/" + v}/>
                                 </div>)}
-                            </Carousel>
-                            }
+                            </Carousel>}
 
 
                             <Form.Item label="Title" required rules={[{required: true}]}>
@@ -84,14 +84,9 @@ class EditVideo extends Component {
                             </Form.Item>
                             <Form.Item label="Category">
                                 <AutoComplete key='id'
-                                              dropdownClassName="certain-category-search-dropdown"
-                                              dropdownMatchSelectWidth={500}
-                                              style={{
-                                                  width: 250,
-                                              }}
                                               options={this.state.categories}
                                 >
-                                    <Input.Search defaultValue={this.state.video.category_id} size="large"
+                                    <Input.Search defaultValue={this.state.video.category_id}
                                                   placeholder="input here"/>
                                 </AutoComplete>
                             </Form.Item>
