@@ -16,7 +16,7 @@ class EditVideo extends Component {
         this.state = {
             video: {},
             current_tag: 0,
-            thumbnails:[],
+            thumbnails:{},
         };
         this.onChange = this.onChange.bind(this);
 
@@ -66,7 +66,7 @@ class EditVideo extends Component {
                             layout="vertical"
                         >
 
-                            {this.state.thumbnails.length > 0 && <Carousel afterChange={this.onChange}>
+                            {Object.values(this.state.thumbnails).length > 0 && <Carousel afterChange={this.onChange}>
                                 {Object.values(this.state.thumbnails).map(v => <div style={contentStyle}>
                                     <Image
                                         src={window.VIDEO_APP.base_url + "/storage/" + v}
