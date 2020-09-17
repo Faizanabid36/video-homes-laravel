@@ -85,7 +85,7 @@ class EditVideo extends Component {
                                 <Input.TextArea defaultValue={this.state.video.description} placeholder="Description"/>
                             </Form.Item>
                             <Form.Item label="Tags" required rules={[{required: true}]}>
-                                <EditableTagGroup tags={this.state.video.tags} saveTags={this.saveTags}/>
+                                <EditableTagGroup tags={this.state.video.tags || []} saveTags={this.saveTags}/>
                             </Form.Item>
                             <Form.Item label="Category">
                                 <AutoComplete key='id'
