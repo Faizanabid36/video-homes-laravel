@@ -74,7 +74,7 @@ class EditableTagGroup extends Component {
         const { tags } = this.props;
         return (
             <>
-                {tags.map((tag, index) => {
+                {tags.length > 0 && tags.map((tag, index) => {
                     if (editInputIndex === index) {
                         return (
                             <Input
