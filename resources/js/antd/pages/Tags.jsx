@@ -12,6 +12,17 @@ class EditableTagGroup extends Component {
             editInputValue: '',
         };
         this.props = props;
+        this.handleClose =this.handleClose.bind(this);
+        this.showInput =this.showInput.bind(this);
+        this.handleInputChange =this.handleInputChange.bind(this);
+        this.handleInputConfirm =this.handleInputConfirm.bind(this);
+
+        this.handleEditInputChange =this.handleEditInputChange.bind(this);
+        this.handleEditInputConfirm =this.handleEditInputConfirm.bind(this);
+        this.saveInputRef =this.saveInputRef.bind(this);
+        this.saveEditInputRef =this.saveEditInputRef.bind(this);
+
+
     }
 
     handleClose(removedTag) {
@@ -19,15 +30,12 @@ class EditableTagGroup extends Component {
         console.log(tags);
         this.props.saveTags(tags);
     };
-
     showInput() {
         this.setState({ inputVisible: true }, () => this.input.focus());
     };
-
     handleInputChange (e){
         this.setState({ inputValue: e.target.value });
     };
-
     handleInputConfirm ()  {
         const { inputValue } = this.state;
         let { tags } = this.props;
@@ -40,6 +48,7 @@ class EditableTagGroup extends Component {
             inputVisible: false,
             inputValue: '',
         });
+
     };
 
     handleEditInputChange (e) {
