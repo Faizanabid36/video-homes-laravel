@@ -47,7 +47,9 @@ class EditableTagGroup extends Component {
     };
 
     handleEditInputConfirm() {
-        this.setState(({ tags, editInputIndex, editInputValue }) => {
+        let {tags} = this.props;
+        this.setState(({ editInputIndex, editInputValue }) => {
+
             const newTags = [...tags];
             newTags[editInputIndex] = editInputValue;
 

@@ -72,8 +72,8 @@ class EditVideo extends Component {
                             </Carousel>}
 
 
-                            <Form.Item label="Title" required rules={[{required: true}]}>
-                                <Input defaultValue={this.state.video.title} placeholder="Title"/>
+                            <Form.Item  label="Title" required rules={[{required: true}]}>
+                                <Input defaultValue={this.state.video.title} value={this.state.video.title} placeholder="Title"/>
                             </Form.Item>
 
                             <Form.Item label="Description" required rules={[{required: true}]}>
@@ -83,12 +83,10 @@ class EditVideo extends Component {
                                 <EditableTagGroup tags={this.state.video.tags || []} saveTags={this.saveTags}/>
                             </Form.Item>
                             <Form.Item label="Category">
-                                <AutoComplete key='id'
-                                              options={this.state.categories}
-                                >
-                                    <Input.Search defaultValue={this.state.video.category_id}
-                                                  placeholder="input here"/>
-                                </AutoComplete>
+                                <AutoComplete
+                                              filterOption={(inputValue, option) => option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
+                                              placeholder="input here"
+                                              options={this.state.categories} />
                             </Form.Item>
                         </Form>
                     </PageHeader>
