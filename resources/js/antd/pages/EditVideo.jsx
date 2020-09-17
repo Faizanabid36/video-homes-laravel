@@ -18,6 +18,7 @@ class EditVideo extends Component {
     constructor(props) {
         super(...arguments);
         this.state = {
+            enable:false,
             video: {},
             current_slide: 0,
             thumbnails: {},
@@ -41,7 +42,7 @@ class EditVideo extends Component {
                 data.current_slide = index[1] - 1;
                 // goTo(data.current_tag,false);
             }
-            self.setState({...data});
+            self.setState({...data,enable:true});
             console.log(this.state);
         })
     }
@@ -77,7 +78,7 @@ class EditVideo extends Component {
                         onBack={() => null}
                         title="Edit Video"
                     >
-                        <Form ref={this.formRef} name="control-ref" onFinish={this.onFinish} layout="vertical">
+                        {this.state.enable && <Form ref={this.formRef} name="control-ref" onFinish={this.onFinish} layout="vertical">
                             {Object.values(this.state.thumbnails).length > 0 &&
                             <Carousel slickGoTo={this.state.current_slide} afterChange={this.onChange}>
                                 {Object.values(this.state.thumbnails).map((v, k) => <div key={k} style={contentStyle}>
@@ -113,7 +114,7 @@ class EditVideo extends Component {
                                 </Select>}
                             </Form.Item>
                             <Button type='submit'>Update</Button>
-                        </Form>
+                        </Form>}
                     </PageHeader>
 
                 </div>
