@@ -17,6 +17,7 @@ class EditVideo extends Component {
             video: {},
             current_tag: 0,
             thumbnails:{},
+            categories:[],
         };
         this.onChange = this.onChange.bind(this);
 
