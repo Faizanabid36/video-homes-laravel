@@ -65,7 +65,7 @@ class Video extends Component {
                         </Row>
                         <Divider/>
                         <Row gutter={16}>
-                            {this.state.pendingVideos.length > 1 ? this.state.pendingVideos.map((item,k)=>{
+                            {this.state.approvedVideos.length > 1 ? this.state.pendingVideos.map((item,k)=>{
                                 return <Col span={8} key={k}>
                                     <Card
                                         style={{ width: 300 }}
@@ -105,7 +105,7 @@ class Video extends Component {
                         </Row>
                         <Divider/>
                         <Row gutter={16}>
-                            {this.state.approvedVideos.length > 1 ? this.state.approvedVideos.map((item,k)=>{
+                            {this.state.pendingVideos.length > 1 ? this.state.approvedVideos.map((item,k)=>{
                                 return <Col span={8} key={k}>
                                     <Card
                                         style={{ width: 300 }}

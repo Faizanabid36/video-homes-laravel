@@ -50,19 +50,19 @@ class UploadPage extends Component {
     onUpload(info) {
         const self = this;
         const {status} = info.file;
-        console.log(status);
+        //console.log(status);
         if (status === 'uploading') {
             // self.setState({current: 1});
             console.log("I am uploading");
         }
         if (status !== 'uploading') {
-
             console.log(info.file, info.fileList);
         }
         if (status === 'done') {
             // self.next();
             console.log(info);
-            message.success(`${info.file.name} file uploaded successfully.`);
+            message.success(info.file.response.message);
+            window.location.hash = "#/edit_video/"+info.file.response.video.video_id
         } else if (status === 'error') {
             // self.setState({current: 0});
             message.error(`${info.file.name} file upload failed.`);

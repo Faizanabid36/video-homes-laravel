@@ -66,3 +66,16 @@ div#-google-places-suggestions-container div:hover{
     background-color:#f0f0f0;
     cursor:pointer;
 }
+
+.site-tag-plus {
+    background: #fff;
+    border-style: dashed;
+}
+.edit-tag {
+    user-select: none;
+}
+.tag-input {
+    width: 78px;
+    margin-right: 8px;
+    vertical-align: top;
+}
