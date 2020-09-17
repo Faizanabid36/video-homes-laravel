@@ -38,6 +38,7 @@ class EditVideo extends Component {
                 // goTo(data.current_tag,false);
             }
             self.setState({...data});
+            console.log(this.state);
         })
     }
 
@@ -62,16 +63,10 @@ class EditVideo extends Component {
                         onBack={() => null}
                         title="Edit Video"
                     >
-                        <Form
-                            ref={this.formRef} name="control-ref" onFinish={this.onFinish}
-                            layout="vertical"
-                        >
-
+                        <Form ref={this.formRef} name="control-ref" onFinish={this.onFinish} layout="vertical">
                             {Object.values(this.state.thumbnails).length > 0 && <Carousel slickGoTo={this.state.current_slide} afterChange={this.onChange}>
                                 {Object.values(this.state.thumbnails).map(v => <div style={contentStyle}>
-                                    <Image
-                                        src={window.VIDEO_APP.base_url + "/storage/" + v}
-                                    />
+                                    <Image src={window.VIDEO_APP.base_url + "/storage/" + v}/>
                                 </div>)}
                             </Carousel>
                             }
