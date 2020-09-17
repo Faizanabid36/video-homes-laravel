@@ -5,19 +5,23 @@ import {
     Image,
     PageHeader,
     Layout,
-    Form, AutoComplete,
-    Carousel
+    Form, Select,
+    Carousel,
+    Button,
+
 } from 'antd';
 import EditableTagGroup from "./Tags";
+
 const {goTo} = Carousel;
+
 class EditVideo extends Component {
     constructor(props) {
         super(...arguments);
         this.state = {
             video: {},
             current_slide: 0,
-            thumbnails:{},
-            categories:[],
+            thumbnails: {},
+            categories: [],
         };
         this.onChange = this.onChange.bind(this);
 
@@ -46,6 +50,15 @@ class EditVideo extends Component {
         this.setState({tags});
     }
 
+    defaultValue(key,defaultValue = '') {
+        if (typeof key === 'string') {
+            return this.state[key] ?? defaultValue
+        }
+        let state = this.state;
+        key.map(v => state = state[v]);
+        return state ?? defaultValue;
+    }
+
     render() {
 
         const contentStyle = {
@@ -65,29 +78,41 @@ class EditVideo extends Component {
                         title="Edit Video"
                     >
                         <Form ref={this.formRef} name="control-ref" onFinish={this.onFinish} layout="vertical">
-                            {Object.values(this.state.thumbnails).length > 0 && <Carousel slickGoTo={this.state.current_slide} afterChange={this.onChange}>
-                                {Object.values(this.state.thumbnails).map((v,k) => <div key={k} style={contentStyle}>
+                            {Object.values(this.state.thumbnails).length > 0 &&
+                            <Carousel slickGoTo={this.state.current_slide} afterChange={this.onChange}>
+                                {Object.values(this.state.thumbnails).map((v, k) => <div key={k} style={contentStyle}>
                                     <Image src={window.VIDEO_APP.base_url + "/storage/" + v}/>
                                 </div>)}
                             </Carousel>}
 
 
-                            <Form.Item  label="Title" required rules={[{required: true}]}>
-                                <Input defaultValue={this.state.video.title} value={this.state.video.title} placeholder="Title"/>
+                            <Form.Item label="Title" required rules={[{required: true}]}>
+                                <Input defaultValue={this.defaultValue(["video","title"])} value={this.state.video.title}
+                                       placeholder="Title"/>
                             </Form.Item>
 
                             <Form.Item label="Description" required rules={[{required: true}]}>
-                                <Input.TextArea defaultValue={this.state.video.description} placeholder="Description"/>
+                                <Input.TextArea defaultValue={this.defaultValue(["video","description"])} placeholder="Description"/>
                             </Form.Item>
                             <Form.Item label="Tags" required rules={[{required: true}]}>
-                                <EditableTagGroup tags={this.state.video.tags || []} saveTags={this.saveTags}/>
+                                <EditableTagGroup tags={this.defaultValue(["video","tags",[]])} saveTags={this.saveTags}/>
                             </Form.Item>
                             <Form.Item label="Category">
-                                <AutoComplete
-                                              filterOption={(inputValue, option) => option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
-                                              placeholder="input here"
-                                              options={this.state.categories} />
+                                {this.state.categories.length && <Select
+                                    defaultValue={this.defaultValue(["video","category_id"])}
+                                    showSearch
+                                    style={{ width: 200 }}
+                                    placeholder="Select a Category"
+                                    optionFilterProp="children"
+                                    onChange={this.onChange}
+                                    filterOption={(input, option) =>
+                                        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                    }
+                                >
+                                    {this.state.categories.map(e=><Select.Option value={e.id}>{e.name}</Select.Option>)}
+                                </Select>}
                             </Form.Item>
+                            <Button type='submit'>Update</Button>
                         </Form>
                     </PageHeader>
 
