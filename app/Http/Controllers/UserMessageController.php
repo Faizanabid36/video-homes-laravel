@@ -19,13 +19,13 @@ class UserMessageController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $usermessagse = UserMessage::where('message', 'LIKE', "%$keyword%")
+            $usermessages = UserMessage::where('message', 'LIKE', "%$keyword%")
                                   ->latest()->paginate($perPage);
         } else {
-            $usermessagse = UserMessage::latest()->paginate($perPage);
+            $usermessages = UserMessage::latest()->paginate($perPage);
         }
 
-        return view('admin.user-messages.index', compact('usermessagse'));
+        return view('admin.user-messages.index', compact('usermessages'));
     }
 
     /**
