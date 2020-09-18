@@ -46,9 +46,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{Route::is('user_message.*') ? 'active' : ''}}"
-                   href="{{route('user_message')}}">
-                    Messages
+                <a class="nav-link {{Route::is('user_message.*') ? 'active' : ''}}" href="{{route('user_message.index')}}">
+                    User Messages
                 </a>
             </li>
             <li class="nav-item dropdown">

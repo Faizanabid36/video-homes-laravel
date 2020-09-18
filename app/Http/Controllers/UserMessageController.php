@@ -12,9 +12,20 @@ class UserMessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $keyword = $request->get('search');
+        $perPage = 25;
+
+        if (!empty($keyword)) {
+            $usermessagse = UserMessage::where('message', 'LIKE', "%$keyword%")
+                                  ->latest()->paginate($perPage);
+        } else {
+            $usermessagse = UserMessage::latest()->paginate($perPage);
+        }
+
+        return view('admin.user-messages.index', compact('usermessagse'));
     }
 
     /**
