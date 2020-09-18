@@ -79,3 +79,6 @@ div#-google-places-suggestions-container div:hover{
     margin-right: 8px;
     vertical-align: top;
 }
+.ant-spin-spinning{
+    width:100%;
+}

@@ -19,14 +19,17 @@ import {
     Avatar,
     notification,
     Progress,
-    Tabs, Col, Table, Form, Radio, Select,AutoComplete,Upload
+    message,Popconfirm,
+    Spin,
+    Tabs, Col, Table, Form, Radio, Select, AutoComplete, Upload
 } from 'antd';
 import MaskedInput from 'antd-mask-input'
 import ImgCrop from 'antd-img-crop';
 import GooglePlacesAutocomplete, { geocodeByAddress } from "react-google-places-autocomplete";
 
-import { UserOutlined, EllipsisOutlined, SettingOutlined,PlusOutlined,LoadingOutlined } from '@ant-design/icons';
+import { UserOutlined, EllipsisOutlined, SettingOutlined, PlusOutlined, LoadingOutlined } from '@ant-design/icons';
 import { Editor } from "@tinymce/tinymce-react";
+import axios from "axios";
 
 const {Content} = Layout;
 const {Column, ColumnGroup} = Table;
@@ -85,11 +88,12 @@ const renderItem = (title, count) => ({
         >
             {title}
             <span>
-        <UserOutlined /> {count}
+        <UserOutlined/> {count}
       </span>
         </div>
     ),
 });
+
 function getBase64(img, callback) {
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result));
@@ -100,8 +104,11 @@ class Profile extends Component {
     constructor(props) {
         super(...arguments);
         this.state = {
+            dataloading: false,
             loading: false,
-            fileList:[
+            user: {},
+            categories: [],
+            fileList: [
                 {
                     uid: '-1',
                     name: 'image.png',
@@ -121,14 +128,17 @@ class Profile extends Component {
         this.defaultValue = this.defaultValue.bind(this);
         this.handleChangeInput = this.handleChangeInput.bind(this);
     }
+
     handleChangeInput(e, key = false) {
         let {user} = this.state;
         user[key || e.target.name] = key ? e : e.target.value;
         this.setState({user});
     }
+
     defaultValue(key) {
-        return this.state.user[key] || null;
+        return this.state.user[key] || "";
     }
+
     beforeUpload(file) {
         const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
         if (!isJpgOrPng) {
@@ -140,24 +150,36 @@ class Profile extends Component {
         }
         return isJpgOrPng && isLt2M;
     }
-    handleChange(info) {
+
+    handleChange(info, key = false) {
+        console.log(info);
         if (info.file.status === 'uploading') {
-            this.setState({ loading: true });
+            console.log(info.file.status, info);
+            this.setState({loading: true});
             return;
         }
         if (info.file.status === 'done') {
+            console.log(info.file.status, info);
             // Get this url from response in real world.
-            getBase64(info.file.originFileObj, imageUrl =>
-                this.setState({
-                    imageUrl,
-                    loading: false,
-                }),
+            getBase64(info.file.originFileObj, imageUrl => {
+                    let {user} = this.state;
+                    if (user[key]) {
+                        user[key] = imageUrl;
+                        message.success(key.replace("_"," ")+" has been updated");
+                        this.setState({
+                            user,
+                            loading: false,
+                        })
+                    }
+                },
             );
         }
     };
-    onChange({ fileList }) {
+
+    onChange({fileList}) {
         this.setState({fileList});
     };
+
     onGenderChange() {
         this.formRef.current.setFieldsValue({
             note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`,
@@ -179,6 +201,15 @@ class Profile extends Component {
         });
     };
 
+    componentDidMount() {
+        axios.get('profile')
+            .then(({data}) => {
+                this.setState({...data, dataloading: true})
+            }).catch((err) => {
+            console.log(err)
+        })
+    }
+
     render() {
         const onPreview = async file => {
             let src = file.url;
@@ -194,11 +225,11 @@ class Profile extends Component {
             const imgWindow = window.open(src);
             imgWindow.document.write(image.outerHTML);
         };
-        const { loading, imageUrl } = this.state;
+        const {loading, imageUrl} = this.state;
         const uploadButton = (
             <div>
-                {loading ? <LoadingOutlined /> : <PlusOutlined />}
-                <div style={{ marginTop: 8 }}>Upload</div>
+                {loading ? <LoadingOutlined/> : <PlusOutlined/>}
+                <div style={{marginTop: 8}}>Upload</div>
             </div>
         );
 
@@ -210,18 +241,19 @@ class Profile extends Component {
                         onBack={() => null}
                         title="Profile"
                     >
-                        <Form
+                        <Spin spinning={!this.state.dataloading} tip={'Loading'} />
+                        {this.state.dataloading && <Form
                             ref={this.formRef} name="control-ref" onFinish={this.onFinish}
                             layout="vertical"
                         >
-                            <Tabs defaultActiveKey="1" tabPosition="left" >
-                                <TabPane tab="Tab 1" key="1">
+                            <Tabs defaultActiveKey="1" tabPosition="left">
+                                <TabPane tab="General" key="1">
                                     <Form.Item label="Full Name" required rules={[
                                         {
                                             required: true,
                                         },
                                     ]}>
-                                        <Input placeholder="Full Name"/>
+                                        <Input value={this.defaultValue('name')} placeholder="Full Name"/>
                                     </Form.Item>
 
                                     <Form.Item label="Company Name" required rules={[
@@ -229,26 +261,31 @@ class Profile extends Component {
                                             required: true,
                                         },
                                     ]}>
-                                        <Input placeholder="Company Name"/>
+                                        <Input value={this.defaultValue('company_name')}
+                                               value={this.state.user.company_name} placeholder="Company Name"/>
                                     </Form.Item>
 
-                                    <Form.Item label="Website" required>
-                                        <Input addonBefore="https://" placeholder="Website"/>
+                                    <Form.Item label="Personal URL" required>
+                                        <Input addonBefore={window.VIDEO_APP.base_url}
+                                               value={this.defaultValue('username')} placeholder="Personal URL"/>
                                     </Form.Item>
                                     <Form.Item label="Facebook" required>
-                                        <Input addonBefore="https://www.facebook.com/" placeholder="Facebook"/>
+                                        <Input addonBefore="https://www.facebook.com/"
+                                               value={this.defaultValue('facebook')} placeholder="Facebook"/>
                                     </Form.Item>
                                     <Form.Item label="Twitter" required>
-                                        <Input addonBefore="https://www.twiiter.com/" placeholder="Twitter"/>
+                                        <Input addonBefore="https://www.twiiter.com/"
+                                               value={this.defaultValue('youtube')} placeholder="Twitter"/>
                                     </Form.Item>
                                     <Form.Item label="Instagram" required>
-                                        <Input addonBefore="https://www.instagram.com/" placeholder="Instagram"/>
+                                        <Input addonBefore="https://www.instagram.com/"
+                                               value={this.defaultValue('instagram')} placeholder="Instagram"/>
                                     </Form.Item>
                                     <Form.Item label="About/Bio">
                                         <Editor
                                             apiKey="rlsbsechuy5zwieakwp79flrto7ipmojgummzxwwjbbcbtye"
                                             name="bio"
-                                            // initialValue={this.defaultValue('bio')}
+                                            initialValue={this.defaultValue('bio') || ''}
                                             init={{
                                                 height: 250,
                                                 menubar: false,
@@ -266,137 +303,141 @@ class Profile extends Component {
                                         />
                                     </Form.Item>
 
-                                    <Form.Item label="License" required rules={[
+                                    <Form.Item label="License" required rules={[{required: true,},]}>
+                                        <MaskedInput value={this.defaultValue('license_no')} placeholder="License"
+                                                     mask="#######" name="license_no" size="7"/>
+                                    </Form.Item>
+
+                                    <Form.Item label="Direct Phone" required rules={[
                                         {
                                             required: true,
                                         },
                                     ]}>
-                                        <MaskedInput placeholder="License" mask="#######" name="license_no" size="7" />
+                                        <MaskedInput value={this.defaultValue('direct_phone')}
+                                                     placeholder="Direct Phone" mask="111-111-1111"
+                                                     name="direct_phone" size="20"/>
                                     </Form.Item>
+                                    <Form.Item label="Office Phone" required rules={[
+                                        {
+                                            required: true,
+                                        },
+                                    ]}>
+                                        <MaskedInput value={this.defaultValue('office_phone')}
+                                                     placeholder="Office Phone" mask="111-111-1111"
+                                                     name="office_phone" size="20"/>
+                                    </Form.Item>
+                                    <Form.Item label="Address" required rules={[
+                                        {
+                                            required: true,
+                                        },
+                                    ]}>
+                                        <GooglePlacesAutocomplete
+                                            initialValue={this.defaultValue('address')}
+                                            autocompletionRequest={{
+                                                componentRestrictions: {
+                                                    country: ['us'],
+                                                }
+                                            }}
+                                            onSelect={({description}) => {
+                                                geocodeByAddress(description).then((results) => {
+                                                    let {user} = this.state;
+                                                    user.address = description;
+                                                    user.location_latitude = results[0].geometry.location.lat();
+                                                    user.location_longitude = results[0].geometry.location.lng();
+                                                    this.setState({user});
+                                                }).catch(error => console.error(error));
+                                            }}
 
-                                    <div style={{marginBottom: 16}}>
-                                        <Form.Item label="Personal URL" required rules={[
-                                            {
-                                                required: true,
-                                            },
-                                        ]}>
-                                            <Input placeholder="username" addonBefore={`${window.VIDEO_APP.base_url}/`} defaultValue="mysite"/>
-                                        </Form.Item>
-                                        <Form.Item label="Direct Phone" required rules={[
-                                            {
-                                                required: true,
-                                            },
-                                        ]}>
-                                            <MaskedInput placeholder="Direct Phone" mask="111-111-1111" name="direct_phone" size="20" />
-                                        </Form.Item>
-                                        <Form.Item label="Office Phone" required rules={[
-                                            {
-                                                required: true,
-                                            },
-                                        ]}>
-                                            <MaskedInput  placeholder="Office Phone" mask="111-111-1111" name="office_phone" size="20" />
-                                        </Form.Item>
-                                        <Form.Item label="Address" required rules={[
-                                            {
-                                                required: true,
-                                            },
-                                        ]}>
-                                            <GooglePlacesAutocomplete
-                                                // initialValue={this.defaultValue('address')}
-                                                autocompletionRequest={{
-                                                    componentRestrictions: {
-                                                        country: ['us'],
-                                                    }
-                                                }}
-                                                onSelect={({description}) => {
-                                                    geocodeByAddress(description)
-                                                        .then((results) => {
-                                                            let {user} = this.state;
-                                                            user.address = description;
-                                                            user.location_latitude = results[0].geometry.location.lat();
-                                                            user.location_longitude = results[0].geometry.location.lng();
-                                                            this.setState({user});
-                                                        })
-                                                        .catch(error => console.error(error));
-                                                }}
+                                            inputClassName="ant-input"
+                                        />
 
-                                                inputClassName="ant-input"
-                                            />
-
-                                        </Form.Item>
-
-                                        {/*<Form.Item label="Field C" required rules={[*/}
-                                        {/*    {*/}
-                                        {/*        required: true,*/}
-                                        {/*    },*/}
-                                        {/*]}>*/}
-                                        {/*    <AutoComplete*/}
-                                        {/*        style={{*/}
-                                        {/*            width: 200,*/}
-                                        {/*        }}*/}
-                                        {/*        options={[*/}
-                                        {/*            {*/}
-                                        {/*                value: 'Burns Bay Road',*/}
-                                        {/*            },*/}
-                                        {/*            {*/}
-                                        {/*                value: 'Downing Street',*/}
-                                        {/*            },*/}
-                                        {/*            {*/}
-                                        {/*                value: 'Wall Street',*/}
-                                        {/*            },*/}
-                                        {/*        ]}*/}
-                                        {/*        placeholder="try to type `b`"*/}
-                                        {/*        filterOption={(inputValue, option) =>*/}
-                                        {/*            option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1*/}
-                                        {/*        }*/}
-                                        {/*    />*/}
-                                        {/*    <AutoComplete*/}
-                                        {/*        dropdownClassName="certain-category-search-dropdown"*/}
-                                        {/*        dropdownMatchSelectWidth={500}*/}
-                                        {/*        style={{*/}
-                                        {/*            width: 250,*/}
-                                        {/*        }}*/}
-                                        {/*        options={[*/}
-                                        {/*            {*/}
-                                        {/*                label: renderTitle('Libraries'),*/}
-                                        {/*                options: [renderItem('AntDesign', 10000), renderItem('AntDesign UI', 10600)],*/}
-                                        {/*            },*/}
-                                        {/*            {*/}
-                                        {/*                label: renderTitle('Solutions'),*/}
-                                        {/*                options: [renderItem('AntDesign UI FAQ', 60100), renderItem('AntDesign FAQ', 30010)],*/}
-                                        {/*            },*/}
-                                        {/*            {*/}
-                                        {/*                label: renderTitle('Articles'),*/}
-                                        {/*                options: [renderItem('AntDesign design language', 100000)],*/}
-                                        {/*            },*/}
-                                        {/*        ]}*/}
-                                        {/*    >*/}
-                                        {/*        <Input.Search size="large" placeholder="input here" />*/}
-                                        {/*    </AutoComplete>*/}
-                                        {/*</Form.Item>*/}
-                                        <ImgCrop rotate>
+                                    </Form.Item>
+                                    <Form.Item label="Profession and Expertise">
+                                        {this.state.categories.length > 0 && <>
+                                            <Select showSearch name="category_id"
+                                                    placeholder="Choose one of the following Profession and Expertise...">
+                                                {this.state.categories.map((u, key) => u['children'].length > 0 &&
+                                                    <Select.OptGroup key={key} label={u['name']}>
+                                                        {u['children'].map((u1, k) => {
+                                                            return u1['children'].length > 0 ? u1['children'].map((u2, k) =>
+                                                                    <Select.Option key={key * 1000}
+                                                                                   selected={u2['id'] === this.defaultValue('user_category_id')}
+                                                                                   value={u2['id']}
+                                                                                   data-subtext={u1['name']}>{u2['name']}</Select.Option>) :
+                                                                <Select.Option key={key * 1000}
+                                                                               selected={u1['id'] === this.defaultValue('user_category_id')}
+                                                                               value={u1['id']}>{u1['name']}</Select.Option>;
+                                                        })}</Select.OptGroup>)}
+                                            </Select>
+                                        </>}
+                                    </Form.Item>
+                                    <Form.Item label="Profile">
+                                        <ImgCrop rotate zoom>
                                             <Upload
-                                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                                method={'PUT'}
+                                                headers={{'X-CSRF-TOKEN': window.document.head.querySelector('meta[name="csrf-token"]').content}}
+                                                action={`${window.VIDEO_APP.base_url}/profile/1`}
+                                                name='profile_picture'
                                                 listType="picture-card"
                                                 className="avatar-uploader"
                                                 showUploadList={false}
-                                                onChange={this.handleChange}
+                                                onChange={e => this.handleChange(e, "profile_picture")}
                                                 beforeUpload={this.beforeUpload}
                                             >
-                                                {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+                                                {this.defaultValue('profile_picture') ? <>
+                                                    <img src={this.defaultValue('profile_picture')} alt="avatar"
+                                                         style={{width: '100%'}}/>
+                                                </> : uploadButton}
 
                                             </Upload>
                                         </ImgCrop>
-                                    </div>
+
+
+                                    </Form.Item>
+                                    <Form.Item label="Company Logo">
+                                        <ImgCrop rotate zoom>
+                                            <Upload
+                                                headers={{'X-CSRF-TOKEN': window.document.head.querySelector('meta[name="csrf-token"]').content}}
+                                                action={`${window.VIDEO_APP.base_url}/profile`}
+                                                name='company_logo'
+                                                listType="picture-card"
+                                                className="avatar-uploader"
+                                                showUploadList={false}
+                                                onChange={e => this.handleChange(e, "company_logo")}
+                                                beforeUpload={this.beforeUpload}
+                                            >
+                                                {this.defaultValue('company_logo') ? <>
+                                                    <img src={this.defaultValue('company_logo')} alt="avatar"
+                                                         style={{width: '100%'}}/>
+                                                </> : uploadButton}
+
+                                            </Upload>
+                                        </ImgCrop>
+                                    </Form.Item>
                                 </TabPane>
-                                <TabPane tab="Tab 2" key="2">
+                                <TabPane tab="Change Password" key="2">
                                     Content of tab 2
                                 </TabPane>
-                                <TabPane tab="Tab 3" key="3">
-                                    Content of tab 3
+                                <TabPane tab="Delete account" key="3">
+                                    <Popconfirm
+                                        title="Are you sure delete this task?"
+                                        onConfirm={(e) =>{
+                                            console.log(e);
+                                            message.success('Deleted!');
+                                        }}
+                                        placement="right"
+                                        okText="Yes"
+                                        cancelText="No"
+                                    >
+                                    <Button danger onClick={e=>{
+                                        axios.delete("profile/1").then(({})=>{
+                                            $("#logout-form").submit();
+                                        })
+                                    }}>Delete Account</Button>
+                                    </Popconfirm>
                                 </TabPane>
                             </Tabs>
-                        </Form>
+                        </Form>}
                     </PageHeader>
 
                 </div>
