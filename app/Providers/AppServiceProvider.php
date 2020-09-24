@@ -7,6 +7,7 @@ use App\Settings;
 use App\UserCategory;
 use App\UserRole;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -32,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
 
         Schema::defaultStringLength(191);
         if (! $this->app->runningInConsole()) {
+            URL::forceScheme('https');
 
             View::composer( 'layouts.public.app', function ( $view ) {
                 $pages = Page::whereIsPublic( 1 )->whereInNav(1)->get();
