@@ -7,6 +7,7 @@ use App\Http\Requests;
 
 use App\User;
 use Illuminate\Http\Request;
+use phpseclib\Crypt\Hash;
 
 class UsersController extends Controller
 {
@@ -51,11 +52,14 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $this->validate(request(), [
 			'name' => 'required|min:4',
-			'active' => 'required'
+            'active' => 'required'
 		]);
-        $requestData = $request->all();
+        if(request('password') && request('password') != ''){
+            request()->merge(['password'=>Hash::make(request('password'))]);
+        }
+        $requestData = request()->all();
 
         User::create($requestData);
 
@@ -102,9 +106,12 @@ class UsersController extends Controller
     {
         $this->validate($request, [
 //			'name' => 'required|min:4',
-			'active' => 'required'
+//			'active' => 'required'
 		]);
-        $requestData = $request->all();
+        if(request('password') && request('password') != ''){
+            request()->merge(['password'=>Hash::make(request('password'))]);
+        }
+        $requestData = request()->all();
 
         $user = User::findOrFail($id);
         $user->update($requestData);

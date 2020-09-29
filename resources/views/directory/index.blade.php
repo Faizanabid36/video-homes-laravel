@@ -143,8 +143,8 @@
                                                             {{ucfirst($account_user['name'])}} </a>
                                                     </h2>
                                                     @if ($account_user['bio'] && $account_user['bio'] != '')
-                                                        <p class="card-text my-2">{!! substr($account_user['bio'],0,150) !!}
-                                                            @if (strlen($account_user['bio']) > 150)
+                                                        <p class="card-text my-2">{{substr(strip_tags($account_user['bio']),0,150)}}
+                                                            @if (strlen(strip_tags($account_user['bio'])) > 150)
                                                                 ...
                                                             @endif</p>
                                                     @endif

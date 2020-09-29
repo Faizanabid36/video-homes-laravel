@@ -22,9 +22,10 @@ class VideoController extends Controller
 {
 
 
-    public function upload_video(StoreVideoRequest $request)
+//    public function upload_video(StoreVideoRequest $request)
+    public function upload_video()
     {
-
+//        dd(request('video'));
         $file = \Str::random(16) . '.' . request()->video->getClientOriginalExtension();
         request()->video->storeAs('public/uploads/', $file);
         $path = 'uploads/' . $file;

@@ -12,9 +12,20 @@ class UserMessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $keyword = $request->get('search');
+        $perPage = 25;
+
+        if (!empty($keyword)) {
+            $usermessages = UserMessage::where('message', 'LIKE', "%$keyword%")
+                                  ->latest()->paginate($perPage);
+        } else {
+            $usermessages = UserMessage::latest()->paginate($perPage);
+        }
+
+        return view('admin.user-messages.index', compact('usermessages'));
     }
 
     /**
@@ -38,10 +49,8 @@ class UserMessageController extends Controller
     {
         //
         request()->validate([
-            "user_id"=>"required|integer|exists:users,id",
+            "contact_user_id"=>"required|integer|exists:users,id",
             "video_id"=>"required|integer|exists:videos,id",
-            "name"=>"required|min:3",
-            "phone"=>"required|integer",
         ]);
         UserMessage::create(request()->all());
         return back()->with(["message_sent"=>"Message Sent!"]);
@@ -90,5 +99,11 @@ class UserMessageController extends Controller
     public function destroy(UserMessage $userMessage)
     {
         //
+    }
+
+    public function reported_videos()
+    {
+        $queries = UserMessage::whereType('report')->paginate(10);
+        return view('admin.reported.view_reported_videos', compact('queries'));
     }
 }

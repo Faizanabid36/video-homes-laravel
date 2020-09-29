@@ -21,7 +21,8 @@
         "nagy/laravel-rating": "^1.4",
         "pbmedia/laravel-ffmpeg": "^6.0",
         "spatie/laravel-activitylog": "^3.14",
-        "spatie/laravel-analytics": "^3.9"
+        "spatie/laravel-analytics": "^3.9",
+        "torann/laravel-meta-tags": "^3.0"
     },
     "require-dev": {
         "appzcoder/crud-generator": "^3.2",

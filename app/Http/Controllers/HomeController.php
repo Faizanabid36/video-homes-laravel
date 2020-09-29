@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AccountType;
+use App\Jobs\DeleteVideos;
 use App\UserCategory;
 use App\Video;
 use App\VideoView;
@@ -13,6 +14,7 @@ use App\User;
 use App\BlockedUser;
 use App\Playlist;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller {
     /**
@@ -27,30 +29,51 @@ class HomeController extends Controller {
 
     public function logged_user() {
         $data = UserCategory::levelCategories();
+
         return [
-            'user' => collect( auth()->user()->user_extra )->merge( auth()->user() )->except( [ 'user_extra', 'user_id' ]),
-            'categories'=> $data
+            'user'       => collect( auth()->user()->user_extra )->merge( auth()->user() )->except( [
+                'user_extra',
+                'user_id'
+            ] ),
+            'categories' => $data
         ];
 
     }
 
+    public function delete_user_profile( User $user ) {
+        return [ "success" => $user->delete() ];
+    }
+
     public function edit_user_profile( User $user ) {
+        if ( request( 'currentPassword' ) ) {
+
+            request()->validate( [
+                'currentPassword' => 'required|password',
+                'newPassword'     => 'required|min:8',
+                'confirmPassword' => 'required|same:newPassword',
+            ] );
+            $user->password = Hash::make( request( 'newPassword' ) );
+
+            return $user->save();
+        }
+
         if ( request( 'company_logo' ) && preg_match( "/data:\w+\/\w+;base64,.*/", request( 'company_logo' ) ) == 1 ) {
             $image       = request( 'company_logo' );
-            $name        = ( time() * random_int(1,100000)) . '.' . explode( '/', explode( ':', substr( $image, 0, strpos( $image, ';' ) ) )[1] )[1];
+            $name        = ( time() * random_int( 1, 100000 ) ) . '.' . explode( '/', explode( ':', substr( $image, 0, strpos( $image, ';' ) ) )[1] )[1];
             $imageUpload = \Image::make( $image )->orientate()->encode();
             \Storage::disk( 'public' )->put( "uploads/images/$name", $imageUpload );
             request()->merge( [ 'company_logo' => asset( "storage/uploads/images/$name" ) ] );
         }
         if ( request( 'profile_picture' ) && preg_match( "/data:\w+\/\w+;base64,.*/", request( 'profile_picture' ) ) == 1 ) {
             $image       = request( 'profile_picture' );
-            $name        = (time() * random_int(1,100000)) . '.' . explode( '/', explode( ':', substr( $image, 0, strpos( $image, ';' ) ) )[1] )[1];
+            $name        = ( time() * random_int( 1, 100000 ) ) . '.' . explode( '/', explode( ':', substr( $image, 0, strpos( $image, ';' ) ) )[1] )[1];
             $imageUpload = \Image::make( $image )->orientate()->encode();
             \Storage::disk( 'public' )->put( "uploads/images/$name", $imageUpload );
             request()->merge( [ 'profile_picture' => asset( "storage/uploads/images/$name" ) ] );
         }
         $user->update( request()->only( [ 'username', 'name' ] ) );
-        return UserExtra::updateOrCreate( [ "user_id" => $user->id  ], request()->except( [
+
+        return UserExtra::updateOrCreate( [ "user_id" => $user->id ], request()->except( [
             'username',
             'name',
             'email',
@@ -62,7 +85,11 @@ class HomeController extends Controller {
             'email_verified_at',
             'remember_token',
             'password',
-            "user_id"
+            "user_id",
+            "stripe_id",
+            "card_brand",
+            "card_last_four",
+            "trial_ends_at",
         ] ) );
 
     }

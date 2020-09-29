@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AccountType;
 use App\Category;
 use App\Page;
+use App\Settings;
 use App\User;
 use App\UserCategory;
 use App\UserExtra;
@@ -13,6 +14,8 @@ use App\UserTags;
 use App\Video;
 use App\VideoView;
 use Illuminate\Http\Request;
+use Illuminate\Routing\ControllerDispatcher;
+use Illuminate\Routing\Route;
 
 class MainController extends Controller {
     /**
@@ -21,8 +24,12 @@ class MainController extends Controller {
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index() {
-        return view( 'home' );
+
+        $setting = Settings::first();
+
+        return view( 'home', compact( 'setting' ) );
     }
+
 
     public function directory( $level1 = null, $level2 = null ) {
 
@@ -38,20 +45,22 @@ class MainController extends Controller {
         return view( 'directory.index', compact( 'users', 'categories', 'industries', 'level1', 'video_categories', 'videos' ) );
     }
 
-    public function directory_by_username( $username, $video_id = null ) {
+    public function page_or_username( $username, $video_id = null ) {
         if ( request()->ajax() ) {
             return [ "isProcessed" => Video::userVideos( $username, $video_id )->first()->processed ];
         }
-        $video = Video::userVideos( $username, $video_id )->firstOrFail();
+        if(request('page')){
+            return view( 'page', request()->only( [ 'page' ] ) );
+        }
+        $video = Video::userVideos( $username, $video_id )->first();
+        $views          = $video ? VideoView::videoViews( $video ) : 0;
+        $user           = request('username');
+        $related_videos = $views ? Video::userVideos( $username, $video->id, true )->get() : [];
 
-        $views          = VideoView::videoViews( $video );
-        $user           = $video->user;
-        $related_videos = Video::userVideos( $username, $video->id, true )->get();
-
-        return view( ! $video->processed ? 'directory.processing' : 'directory.single', compact( 'user', 'video', 'related_videos', 'views' ) );
+        return view( $video && ! $video->processed ? 'directory.processing' : 'directory.single', compact( 'user', 'video', 'related_videos', 'views' ) );
     }
 
-    public function embed_video( $video_id ) {
+    public function embed( $video_id ) {
         $video = Video::singleVideo( $video_id )->firstOrFail();
         VideoView::videoViews( $video, [ "from_website" => 0 ] );
 
@@ -59,12 +68,10 @@ class MainController extends Controller {
     }
 
     public function page( $slug ) {
-        $page = Page::viewPage( $slug )->firstOrFail();
-
-        return view( 'page', compact( 'page' ) );
+        return view( 'page', request()->only( [ 'page' ] ) );
     }
 
-    public function is_played( Video $video ) {
+    public function isplay( Video $video ) {
         return [ "success" => VideoView::videoViews( $video, [ "is_played" => 1 ] ) ];
     }
 

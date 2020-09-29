@@ -37,7 +37,7 @@
                                     data-live-search="true"
                                     title="Choose one of the following Profession and Expertise...">
                                 @foreach($user_category as $u)
-                                    <optgroup label="{{$u['name']}}">
+                                    <optgroup @if(!empty($u['children'] )) label="{{$u['name']}}" @endif>
                                         @if(!empty($u['children'] ))
                                             @foreach($u['children'] as $k => $u1)
                                                 @if (!empty($u1['children']))
@@ -48,8 +48,8 @@
                                                     <option value="{{$u1['id']}}">{{$u1['name']}}</option>
                                                 @endif
                                             @endforeach
-                                        @else
-                                            <option value="{{$u['id']}}">{{$u['name']}}</option>
+{{--                                        @else--}}
+{{--                                            <option value="{{$u['id']}}">{{$u['name']}}</option>--}}
                                         @endif
                                     </optgroup>
                                 @endforeach
@@ -63,8 +63,8 @@
                                    id="accept_terms"
                             >
                             By creating your account, you agree to our
-                            <a style=" text-decoration: underline;" href="#">Terms of use</a> &amp; <a
-                                href="#" style="text-decoration: underline;">Privacy Policy</a>
+                            <a style=" text-decoration: underline;" href="{{route('directory_by_username','terms-of-service')}}">Terms of use</a> &amp; <a
+                                href="{{route('directory_by_username','privacy-policy')}}" style="text-decoration: underline;">Privacy Policy</a>
                         </label>
                     </div>
                     <button class="btn btn-primary" type="submit">Sign Up!</button>

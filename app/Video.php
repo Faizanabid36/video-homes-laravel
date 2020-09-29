@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Jobs\DeleteVideos;
 use Illuminate\Database\Eloquent\Model;
 use Nagy\LaravelRating\Traits\Rate\Rateable;
 
@@ -12,7 +13,7 @@ class Video extends Model {
     protected $dates = [ 'converted_for_streaming_at', ];
     protected $hidden = [];
     protected $with = [ 'user', 'comments' ];
-    protected $casts = [ 'processed' => 'boolean','tags'=>'array' ];
+    protected $casts = [ 'processed' => 'boolean', 'tags' => 'array' ];
 
 
     protected static function boot() {
@@ -25,7 +26,14 @@ class Video extends Model {
             $video->setAttribute( 'playlist_id', $playlist );
         } );
         static::created( function ( $video ) {
-            VideoLikesDislikes::create( [ 'video_id' => $video->id ] );
+            $video->slug = \Str::slug( $video->video_id . " " . $video->title );
+            $video->save();
+        } );
+
+
+        static::deleting( function ( $video ) {
+            VideoView::whereVideoId( $video->id )->delete();
+            DeleteVideos::dispatch( $video );
         } );
     }
 
@@ -48,20 +56,24 @@ class Video extends Model {
     public function scopeUserVideos( $query, $username, $video_id = false, $related = false ) {
         return $query->whereHas( 'user', function ( $query ) use ( $username ) {
             $query->whereUsername( $username );
-        } )->when(!auth()->check() || auth()->user()->username !== $username,function($q){
+        } )->when( ! auth()->check() || auth()->user()->username !== $username, function ( $q ) {
             $q->whereProcessed( 1 )->whereIsVideoApproved( 1 )->whereHas( 'user', function ( $query ) {
                 $query->whereActive( 1 );
             } );
-        })->when( $video_id, function ( $query ) use ( $video_id, $related ) {
-            return $related ? $query->where( 'id', '!=', $video_id ) : $query->whereVideoId( $video_id );
+        } )->when( $video_id, function ( $query ) use ( $video_id, $related ) {
+            return $related ? $query->where('id','!=', $video_id ) : $query->where(function($q) use ($video_id){
+                return $q->whereVideoId( $video_id )->orWhere('slug',$video_id);
+            });
 
         } )->when( ! $video_id, function ( $query ) {
             $query->latest();
-        } )->take( 5 );
+        } );
     }
 
-    public function scopeSingleVideo( $query, $video_id) {
-        return $query->whereProcessed( 1 )->whereIsVideoApproved( 1 )->whereVideoId($video_id);
+    public function scopeSingleVideo( $query, $video_id ) {
+        return $query->whereProcessed( 1 )->whereIsVideoApproved( 1 )->where(function($q) use ($video_id){
+            return $q->whereVideoId( $video_id )->orWhere('slug',$video_id);
+        });
     }
 
 }

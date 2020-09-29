@@ -10,6 +10,11 @@ import GooglePlacesAutocomplete, { geocodeByAddress } from "react-google-places-
 import Avatar from 'react-avatar-edit';
 import InputMask from "react-input-mask";
 import { Editor } from '@tinymce/tinymce-react';
+// import SweetAlert from 'sweetalert2-react';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content';
+
+const MySwal = withReactContent(Swal);
 
 
 function UploadImage(props) {
@@ -48,19 +53,91 @@ class Profile extends React.Component {
             tab: 'general',
             profile_preview: false,
             company_logo_preview: false,
+            confirm_delete: false
         };
         this.handleChangeInput = this.handleChangeInput.bind(this);
         this.onCrop = this.onCrop.bind(this);
         this.onClose = this.onClose.bind(this);
-        this.onBeforeFileLoad = this.onBeforeFileLoad.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
+        this.onBeforeFileLoad = this.onBeforeFileLoad.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.deleteAction = this.deleteAction.bind(this);
+        this.changePasswordAction = this.changePasswordAction.bind(this);
 
+    }
+
+    deleteAction() {
+        MySwal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'error',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#82d600',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                axios.delete('/delete_user_profile/' + this.state.user.id).then(({data}) => {
+                    MySwal.fire({
+                        title: 'Deleted!',
+                        html: 'Your account has been deleted. You are going to log out soon.',
+                        icon: 'success',
+                        timer: 1000,
+                        timerProgressBar: true,
+                        onClose: () => {
+                            $("#logout-form").submit();
+                        }
+
+                    });
+                });
+            }
+        })
+    }
+
+    changePasswordAction() {
+        MySwal.fire({
+            title: 'Change Password?',
+            focusConfirm: false,
+            html: `
+    <input class="swal2-input form-control" id="currentPassword" type="password" placeholder="Enter your current password..." /><br />
+    <input class="swal2-input form-control" id="newPassword" type="password" placeholder="Enter your new password..." /><br />
+    <input class="swal2-input form-control" id="confirmPassword" type="password" placeholder="Confirm your new password..." />
+  `,
+            showCancelButton: true,
+            cancelButtonColor: 'grey',
+            confirmButtonText: 'Update!',
+            allowOutsideClick: false,
+            preConfirm: () => ({
+                currentPassword: document.getElementById('currentPassword').value,
+                newPassword: document.getElementById('newPassword').value,
+                confirmPassword: document.getElementById('confirmPassword').value
+            })
+        }).then((result) => {
+            let v = result.value;
+            if (v && v.currentPassword && v.newPassword && v.confirmPassword) {
+                axios.put('/edit_user_profile/' + this.state.user.id, {...v}).then(({data}) => {
+                    MySwal.fire({
+                        icon: 'success',
+                        title: 'Your password has been changed',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }).catch(({response}) => {
+                    MySwal.fire({
+                        icon: 'error',
+                        title: Object.values(response.data.errors).join(" "),
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                })
+
+            }
+        })
     }
 
     handleSubmit(e) {
         e.preventDefault();
         axios.put('/edit_user_profile/' + this.state.user.id, {...this.state.user}).then(({data}) => {
-            console.log(data);
+            console.log(data)
         }).catch(e => console.log)
     }
 
@@ -68,7 +145,8 @@ class Profile extends React.Component {
         if (elem.target.files[0].size > 71680) {
             alert("File is too big!");
             elem.target.value = "";
-        };
+        }
+        ;
     }
 
     onClose() {
@@ -82,7 +160,7 @@ class Profile extends React.Component {
     componentDidMount() {
         axios.get('get_logged_user').then(({data}) => {
             console.log(data.categories);
-            this.setState({user: data.user, categories: data.categories},()=>{
+            this.setState({user: data.user, categories: data.categories}, () => {
                 $('.selectpicker').selectpicker();
             });
         });
@@ -105,6 +183,7 @@ class Profile extends React.Component {
         user[key || e.target.name] = key ? e : e.target.value;
         this.setState({user});
     }
+
 
     defaultValue(key) {
         return this.state.user[key] || null;
@@ -183,7 +262,7 @@ class Profile extends React.Component {
                             <InputGroup className="mb-3">
                                 <InputGroup.Prepend>
                                     <InputGroup.Text id="basic-addon3">
-                                        {window.VIDEO_APP.base_url}/u/
+                                        {window.VIDEO_APP.base_url}/
                                     </InputGroup.Text>
                                 </InputGroup.Prepend>
                                 <FormControl name='username' onChange={this.handleChangeInput}
@@ -197,7 +276,9 @@ class Profile extends React.Component {
                     <Col md={6}>
                         <Form.Group controlId="direct_phone">
                             <Form.Label>Direct Phone</Form.Label>
-                            <InputMask mask="999-999-9999" maskPlaceholder="-" name='direct_phone' className='form-control' onChange={this.handleChangeInput} value={this.defaultValue('direct_phone')} />
+                            <InputMask mask="999-999-9999" maskPlaceholder="-" name='direct_phone'
+                                       className='form-control' onChange={this.handleChangeInput}
+                                       value={this.defaultValue('direct_phone')}/>
 
                         </Form.Group>
                     </Col>
@@ -240,7 +321,9 @@ class Profile extends React.Component {
                     <Col md={6}>
                         <Form.Group controlId="office_phone">
                             <Form.Label>Office Phone</Form.Label>
-                            <InputMask mask="999-999-9999" maskPlaceholder="-" name='office_phone' className='form-control' onChange={this.handleChangeInput} value={this.defaultValue('office_phone')} />
+                            <InputMask mask="999-999-9999" maskPlaceholder="-" name='office_phone'
+                                       className='form-control' onChange={this.handleChangeInput}
+                                       value={this.defaultValue('office_phone')}/>
                         </Form.Group>
                     </Col>
                 </Row>
@@ -295,7 +378,7 @@ class Profile extends React.Component {
                     </Col>
                     <Col md={4}>
                         <Form.Group controlId="twitter">
-                            <label htmlFor="twitter-url">Twiiter</label>
+                            <label htmlFor="twitter-url">Twitter</label>
                             <InputGroup className="mb-3">
                                 <InputGroup.Prepend>
                                     <InputGroup.Text id="twitter-url-addon3">
@@ -321,10 +404,13 @@ class Profile extends React.Component {
                                     {this.state.categories.map(u => <optgroup key={u.id} label={u['name']}>
                                         {u['children'].length > 0 ? u['children'].map((u1, k) => {
                                             return u1['children'].length > 0 ? u1['children'].map((u2, k) =>
-                                                    <option selected={u2['id'] === this.defaultValue('user_category_id')} key={k} value={u2['id']}
+                                                    <option selected={u2['id'] === this.defaultValue('user_category_id')}
+                                                            key={k} value={u2['id']}
                                                             data-subtext={u1['name']}>{u2['name']}</option>) :
-                                                <option selected={u1['id'] === this.defaultValue('user_category_id')} key={k} value={u1['id']}>{u1['name']}</option>;
-                                        }) : <option selected={u['id'] === this.defaultValue('user_category_id')} key={u.id} value={u['id']}>{u['name']}</option>
+                                                <option selected={u1['id'] === this.defaultValue('user_category_id')}
+                                                        key={k} value={u1['id']}>{u1['name']}</option>;
+                                        }) : <option selected={u['id'] === this.defaultValue('user_category_id')}
+                                                     key={u.id} value={u['id']}>{u['name']}</option>
                                         }
                                     </optgroup>)}
                                 </select>
@@ -337,6 +423,7 @@ class Profile extends React.Component {
                         <Form.Label>About/Bio (Max 600 words)</Form.Label>
 
                         <Editor
+                            apiKey="rlsbsechuy5zwieakwp79flrto7ipmojgummzxwwjbbcbtye"
                             name="bio"
                             initialValue={this.defaultValue('bio')}
                             init={{
@@ -352,7 +439,7 @@ class Profile extends React.Component {
                                     alignleft aligncenter alignright alignjustify | \
                                     bullist numlist outdent indent | removeformat | help'
                             }}
-                            onEditorChange={(content, editor)=>this.handleChangeInput(content,'bio')}
+                            onEditorChange={(content, editor) => this.handleChangeInput(content, 'bio')}
                         />
                     </Form.Group>
                 </Col>
@@ -400,11 +487,19 @@ class Profile extends React.Component {
                                  viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                  strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
                                  className="feather feather-check-circle">
-                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22 4 12 14.01 9 11.01"/>
                             </svg>
                             Update</Button> &nbsp;
-                        <Button variant='danger' onClick={e => alert("Danger!!!!")}>Delete the Account</Button>
+                        <Button variant='danger' onClick={e => this.deleteAction()}>Delete Account</Button>
+                        <Button variant="warning" onClick={e => this.changePasswordAction()}>Change Password</Button>
+                        {/*<SweetAlert*/}
+                        {/*    show={this.state.confirm_delete}*/}
+                        {/*    title="Delete"*/}
+                        {/*    icon='danger'*/}
+                        {/*    text="Are you sure?"*/}
+                        {/*    onConfirm={() => this.setState({confirm_delete: false})}*/}
+                        {/*/>*/}
                     </Col>
                 </Row>
             </Container>

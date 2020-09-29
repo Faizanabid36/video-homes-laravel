@@ -34,12 +34,12 @@ try {
         });
         $("." + $(this).attr("id")).removeClass("d-none");
     });
-    if ($('#my-video_html5').length) {
+    if ($('video').length) {
         let options = {
             autoplay: false,
             loop: false,
-            startVolume:5,
-            alwaysShowControls:true,
+            startVolume: 1,
+            alwaysShowControls: true,
             pluginPath: 'https://cdnjs.com/libraries/mediaelement-plugins/',
             shimScriptAccess: 'always',
             features: ['playpause', 'current', 'progress', 'duration', 'speed', 'skipback', 'jumpforward', 'tracks', 'markers', 'volume', 'chromecast', 'contextmenu', 'flash', 'fullscreen', 'quality'],
@@ -59,7 +59,7 @@ try {
                     }
                 }, false);
                 media.addEventListener('loadedmetadata', function () {
-                    $(".mejs__controls").before("<img class='position-absolute watermark_logo' src='http://3.21.2.114/img/cropped-VideoHomes-3.png'/>")
+                    $(".mejs__controls").before(`<img class='position-absolute watermark_logo' src='${window.VIDEO_APP.base_url}/img/cropped-VideoHomes-3.png'/>`)
                 }, false);
             },
         };
@@ -73,7 +73,7 @@ try {
                 options.alwaysShowControls = false;
             }
         }
-        $('#my-video_html5').mediaelementplayer(options);
+        $('video').mediaelementplayer(options);
     }
     $(".share-social").click(function (e) {
         openShareWindow($(this).data('url'));
@@ -96,5 +96,31 @@ try {
         }
     }
 
+    if ($('.tinymce').length) {
+        tinymce.init({
+            selector: '.tinymce',
+            plugins: [
+                "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                "searchreplace wordcount visualblocks visualchars code fullscreen",
+                "insertdatetime media nonbreaking save table contextmenu directionality",
+                "emoticons template paste textcolor"
+            ],
+            toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+            toolbar2: "print preview media | forecolor backcolor emoticons",
+            image_advtab: true,
+        });
+    }
+    let stars = $("#review .fa-star");
+    if(stars.length){
+        stars.removeClass("text-warning").eq($("input[name=rating]").val()).prevAll().addClass("text-warning")
+        stars.mouseenter(function(e){
+            stars.removeClass("text-warning");
+            $(this).addClass("text-warning").prevAll().addClass("text-warning");
+        }).mouseleave(function() {
+            stars.removeClass("text-warning").eq($("input[name=rating]").val()).prevAll().addClass("text-warning")
+        }).click(function(e){
+            $("input[name=rating]").val($(this).data('value'));
+        });
+    }
 } catch (e) {
 }

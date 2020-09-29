@@ -1,23 +1,16 @@
-@extends('layouts.public.app',["title"=>$video->title])
-@section('header_script')
-    window.VIDEO_APP.video_url = "{{route('is_played',$video->id)}}";
-@endsection
-
+@extends('layouts.public.app',["title"=>$video ? $video->title : "No Video Uploaded By {$user->name}"])
 @section('content')
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h2 style="text-transform:uppercase">
-                    {{$user->name}}
-                </h2>
-                @if(!$video->is_video_approved)
+                <h2 style="text-transform:uppercase">{{$user->name}}</h2>
+                @if($video && !$video->is_video_approved)
                     <div class="alert alert-warning">This page is not public yet, because your video is pending mode, it
                         needs admin approval.
                     </div>
                 @endif
             </div>
         </div>
-        <br/>
         <hr/>
         <div class="row">
             <div class="col-md-2 my-3">
@@ -50,10 +43,10 @@
                     <p id="caption">{{$user->user_extra->company_name}}</p>
                 </div>
             </div>
-            <div class="col-md-{{$related_videos->count() ? 7 : 10}} player-video mt-0">
+            <div class="col-md-{{!empty($related_videos) ? 7 : 10}} player-video mt-0">
                 <div class="video-player pt_video_player " id="pt_video_player">
-                    <span class="mejs__offscreen">Video Player</span>
-                    @if(!is_null($video))
+                    <span class="mejs__offscreen"></span>
+                    @if($video)
                         <video id="my-video_html5"
                                style="width: 100%; height: 451.872px; position: relative;"
                                poster="{{asset("storage/$video->thumbnail")}}"
@@ -141,15 +134,17 @@
                                     Analytics
                                 </a>
                             @endif
-                            <button data-toggle="modal" data-target="#report"
-                                    class="btn btn-primary btn-report pull-right" onclick=""
-                                    data-rep="1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                     viewBox="0 0 24 24">
-                                    <path fill="currentColor"
-                                          d="M14.4,6L14,4H5V21H7V14H12.6L13,16H20V6H14.4Z"></path>
-                                </svg>
-                                <span>Report</span></button>
+                            @if(auth()->check() && ($video->user_id!=auth()->user()->id))
+                                <button data-toggle="modal" data-target="#report"
+                                        class="btn btn-primary btn-report pull-right" onclick=""
+                                        data-rep="1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                         viewBox="0 0 24 24">
+                                        <path fill="currentColor"
+                                              d="M14.4,6L14,4H5V21H7V14H12.6L13,16H20V6H14.4Z"></path>
+                                    </svg>
+                                    <span>Report</span></button>
+                            @endif
                             <div class="embed-video d-none">
                                 <div class="card w-100">
                                     <div class="card-body">
@@ -169,7 +164,8 @@
                                 <div class="card w-100">
                                     <div class="card-body">
                                         <div class="input-group mb-3">
-                                            <input type="text" value="{{url()->current()}}"
+                                            <input type="text"
+                                                   value="{{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"
                                                    class="form-control input-md copylink" readonly=""
                                             >
                                             <div class="input-group-prepend">
@@ -178,29 +174,33 @@
                                             </div>
                                         </div>
                                         <button
-                                            data-url="https://www.facebook.com/sharer/sharer.php?u={{url()->current()}}"
+                                            data-url="https://www.facebook.com/sharer/sharer.php?u={{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"
                                             class="btn btn-primary share-social"><i class="fa fa-facebook"></i>
                                         </button>
-                                        <button data-url="https://wa.me/?text={{url()->current()}}"
-                                                class="btn btn-primary share-social"><i class="fa fa-whatsapp"></i>
-                                        </button>
-                                        <button data-url="https://twitter.com/intent/tweet?url={{url()->current()}}"
-                                                class="btn btn-primary share-social"><i class="fa fa-twitter"></i>
+                                        <button
+                                            data-url="https://wa.me/?text={{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"
+                                            class="btn btn-primary share-social"><i class="fa fa-whatsapp"></i>
                                         </button>
                                         <button
-                                            data-url="https://www.linkedin.com/shareArticle?mini=true&url={{url()->current()}}&title={{$video->title}}"
+                                            data-url="https://twitter.com/intent/tweet?url={{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"
+                                            class="btn btn-primary share-social"><i class="fa fa-twitter"></i>
+                                        </button>
+                                        <button
+                                            data-url="https://www.linkedin.com/shareArticle?mini=true&url={{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}&title={{$video->title}}"
                                             class="btn btn-primary share-social"><i class="fa fa-linkedin"></i>
                                         </button>
                                         <button
-                                            data-url="https://pinterest.com/pin/create/button/?url={{url()->current()}}&media={{asset("storage/$video->stream_path")}}"
+                                            data-url="https://pinterest.com/pin/create/button/?url={{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}&media={{asset("storage/$video->stream_path")}}"
                                             class="btn btn-primary share-social"><i class="fa fa-pinterest"></i>
                                         </button>
-                                        <button data-url="https://www.tumblr.com/share/link?url={{url()->current()}}"
-                                                class="btn btn-primary share-social"><i
+                                        <button
+                                            data-url="https://www.tumblr.com/share/link?url={{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"
+                                            class="btn btn-primary share-social"><i
                                                 class="fa fa-tumblr"></i>
                                         </button>
-                                        <button data-url="https://www.reddit.com/submit?url={{url()->current()}}"
-                                                class="btn btn-primary share-social"><i
+                                        <button
+                                            data-url="https://www.reddit.com/submit?url={{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"
+                                            class="btn btn-primary share-social"><i
                                                 class="fa fa-reddit"></i></button>
                                     </div>
                                 </div>
@@ -210,15 +210,15 @@
                                 <div class="card w-100">
                                     <div class="card-body">
                                         {{$video->title}}
-                                        <p>{!! $video->discription !!}</p>
+                                        <p>{{$video->description}}</p>
                                         @if(!is_array($video->tags))
-                                        Tags: @foreach($video->tags as $tags)
-                                            {{--                                            <span class="badge badge-primary">{{str_replace(",",'</span><span class="badge badge-primary">',$video->tags)}}</span>--}}
-                                            <span class="badge badge-primary">{{$tags}}</span>
-                                        @endforeach
+                                            Tags: @foreach($video->tags as $tags)
+                                                {{--                                            <span class="badge badge-primary">{{str_replace(",",'</span><span class="badge badge-primary">',$video->tags)}}</span>--}}
+                                                <span class="badge badge-primary">{{$tags}}</span>
+                                            @endforeach
                                         @endif
                                         <br>
-                                        Category: {{$video->category->name}}
+                                        Category: {{$video->category->name ?? ''}}
                                         <br>
                                         Views: {{$views}}
                                     </div>
@@ -226,57 +226,47 @@
 
 
                             </div>
-                            <div class="modal fade" id="report" tabindex="-1" role="dialog"
-                                 aria-labelledby="reportTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form method="POST" action="{{action('ReportQueryController@store')}}">
-                                                @csrf
-                                                <div class="form-group">
-                                                    <label for="contact_name">Contact Name</label>
-                                                    <input name="name" type="text" required class="form-control"
-                                                           id="contact_name" placeholder="">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="contact_email">Contact Email</label>
-                                                    <input name="email" type="email" required class="form-control"
-                                                           id="contact_email" placeholder="">
-                                                </div>
-                                                <input type="hidden" name="type" value="video">
-                                                <input type="hidden" name="reported_on_video" value="{{$video->title}}">
-                                                <div class="form-group">
-                                                    <label for="contact_message">Message Text</label>
-                                                    <textarea name="message_body" required class="form-control"
-                                                              id="contact_message" rows="3"></textarea>
-                                                </div>
-                                                <button class="btn btn-primary">Report Video</button>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                            </button>
+                            @if(auth()->check() && ($video->user_id!=auth()->id()))
+                                <div class="modal fade" id="report" tabindex="-1" role="dialog"
+                                     aria-labelledby="reportTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Report Video</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form method="POST" action="{{route('to_user')}}">
+                                                    @csrf
+                                                    <input type="hidden" name="type" value="report">
+                                                    <input type="hidden" name="video_id" value="{{$video->id}}">
+                                                    <input type="hidden" name="contact_user_id"
+                                                           value="{{auth()->id()}}">
+                                                    <div class="form-group">
+                                                        <label for="contact_message">Message Text</label>
+                                                        <textarea name="message" required class="form-control"
+                                                                  id="contact_message" rows="3"></textarea>
+                                                    </div>
+                                                    <button class="btn btn-primary">Report Video</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
+                            @endif
                         </div>
                     @else
                         <div>
-                            <h1 class="alert alert-info">No Video Uploaded By this User</h1>
+                            <h1 class="alert alert-info">No Video Uploaded By {{$user->name}}</h1>
                         </div>
                     @endif
                 </div>
                 <div class="clear"></div>
             </div>
-            @if($related_videos->count())
+            @if(!empty($related_videos))
                 <div class="col-md-3">
                     <div class="container m-0 p-0">
                         <div class="row">
@@ -338,41 +328,66 @@
 
             </div>
             <div class="col-12 contactWidgets my-2 ">
-                <div class="d-flex">
-                    <div class="font-weight-bold "><i class='fa icon fa-id-card'></i> Name</div>
-                    <div> {{$user->name}}</div>
-                </div>
-                <hr/>
-                <div class="d-flex">
-                    <div class="font-weight-bold "><i class='fa icon fa-id-card'></i> Company Name</div>
-                    <div> {{$user->user_extra->company_name}}</div>
-                </div>
-                <hr/>
-                <div class="d-flex">
-                    <div class="font-weight-bold "><i class='fa icon fa-map-marker'></i> Address</div>
-                    <div> {{$user->user_extra->address}}</div>
-                </div>
-                <hr/>
-                <div class="d-flex">
-                    <div class="font-weight-bold "><i class='fa icon fa-phone'></i> Direct Phone</div>
-                    <div><a href="tel:{{$user->user_extra->direct_phone}}">{{$user->user_extra->direct_phone}}</a></div>
-                </div>
-                <hr/>
-                <div class="d-flex">
-                    <div class="font-weight-bold "><i class='fa icon fa-phone'></i> Office Phone</div>
-                    <div><a href="tel:{{$user->user_extra->office_phone}}">{{$user->user_extra->office_phone}}</a></div>
-                </div>
-                <hr/>
-                <div class="d-flex">
-                    <div class="font-weight-bold "><i class='fa icon fa-globe'></i> Website</div>
-                    <div><a href="{{$user->user_extra->website}}"> {{$user->user_extra->website}} </a></div>
-                </div>
-                <hr/>
-                <div class="d-flex">
-                    <div class="font-weight-bold "><i class='fa icon fa-globe'></i> License #</div>
-                    <div>{{$user->user_extra->license_no}} </div>
-                </div>
-                <hr/>
+                @if($user->name)
+                    <div class="d-flex">
+                        <div class="font-weight-bold "><i class='fa icon fa-id-card'></i> Name</div>
+                        <div> {{$user->name}}</div>
+                    </div>
+                    <hr/>
+                @endif
+                @if ($user->user_extra->bio)
+                    <div class="d-flex">
+                        <div class="font-weight-bold "><i class='fa icon fa-info'></i> Bio</div>
+                        <div>
+                            {!! $user->user_extra->bio !!}
+                        </div>
+                    </div>
+                        <hr/>
+                @endif
+                @if($user->user_extra->company_name)
+                    <div class="d-flex">
+                        <div class="font-weight-bold "><i class='fa icon fa-id-card'></i> Company Name</div>
+                        <div> {{$user->user_extra->company_name}}</div>
+                    </div>
+                    <hr/>
+                @endif
+                @if($user->user_extra->address)
+                    <div class="d-flex">
+                        <div class="font-weight-bold "><i class='fa icon fa-map-marker'></i> Address</div>
+                        <div> {{$user->user_extra->address}}</div>
+                    </div>
+                    <hr/>
+                @endif
+                @if($user->user_extra->direct_phone)
+                    <div class="d-flex">
+                        <div class="font-weight-bold "><i class='fa icon fa-phone'></i> Direct Phone</div>
+                        <div><a href="tel:{{$user->user_extra->direct_phone}}">{{$user->user_extra->direct_phone}}</a>
+                        </div>
+                    </div>
+                    <hr/>
+                @endif
+                @if($user->user_extra->office_phone)
+                    <div class="d-flex">
+                        <div class="font-weight-bold "><i class='fa icon fa-phone'></i> Office Phone</div>
+                        <div><a href="tel:{{$user->user_extra->office_phone}}">{{$user->user_extra->office_phone}}</a>
+                        </div>
+                    </div>
+                    <hr/>
+                @endif
+                @if($user->user_extra->website)
+                    <div class="d-flex">
+                        <div class="font-weight-bold "><i class='fa icon fa-globe'></i> Website</div>
+                        <div><a target="_blank" rel="nofollow" href="{{$user->user_extra->website}}"> {{$user->user_extra->website}} </a></div>
+                    </div>
+                    <hr/>
+                @endif
+                @if($user->user_extra->license_no)
+                    <div class="d-flex">
+                        <div class="font-weight-bold "><i class='fa icon fa-globe'></i> License #</div>
+                        <div>{{$user->user_extra->license_no}} </div>
+                    </div>
+                    <hr/>
+                @endif
             </div>
 
         </div>
@@ -416,69 +431,89 @@
                         <p>{!! $user->user_extra->bio !!}</p>
                     </div>
                     <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-                        <button class="btn btn-primary my-3"> Add Review</button>
+
+                        @if(auth()->check() && $video && ($video->user_id!=auth()->id()))
+                            <button class="btn btn-primary my-3" data-toggle="modal" data-target="#review"> Add Review
+                            </button>
+                            <div class="modal fade" id="review" tabindex="-1" role="dialog"
+                                 aria-labelledby="reportTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Add Review</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="POST" action="{{route('to_user')}}">
+                                                @csrf
+                                                <input type="hidden" name="type" value="rating">
+                                                <input type="hidden" name="video_id" value="{{$video->id}}">
+                                                <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">
+
+                                                <div class="form-group">
+                                                    <label for="contact_message">Message Text</label>
+                                                    <textarea name="message" required class="form-control"
+                                                              id="contact_message" rows="3"></textarea>
+                                                    <div class="text-right">
+                                                        <input type="hidden" name="rating" value="1">
+                                                        <span class="float-right">
+                                                            <i data-value="1" class="text-secondary fa fa-star"></i>
+                                                            <i data-value="2" class="text-secondary fa fa-star"></i>
+                                                            <i data-value="3" class="text-secondary fa fa-star"></i>
+                                                            <i data-value="4" class="text-secondary fa fa-star"></i>
+                                                            <i data-value="5" class="text-secondary fa fa-star"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                <button class="btn btn-primary">Add Review</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @else
+                            <a href="{{route('login')}}" class="btn btn-info text-white">Login to Add Review</a>
+                        @endif
                         <div class="row">
                             <div class="col-4 rating-star-field">
                                 <div class="d-flex align-items-center my-2">
-                                    <span> 5 Stars  </span>
-                                    <span>
-        <div class="progress custom-progress">
-            <div class="progress-bar custom-progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0"
-                 aria-valuemax="100"></div>
-            </div>
-        </span>
-                                    <span> -0 0%   </span>
-                                </div>
-
-                                <div class="d-flex align-items-center my-2">
-                                    <span> 4 Stars  </span>
-                                    <span>
-        <div class="progress custom-progress">
-            <div class="progress-bar custom-progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0"
-                 aria-valuemax="100"></div>
-            </div>
-        </span>
-                                    <span> -0 0%   </span>
-                                </div>
-
-
-                                <div class="d-flex align-items-center my-2">
-                                    <span> 3 Stars  </span>
-                                    <span>
-        <div class="progress custom-progress">
-            <div class="progress-bar custom-progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0"
-                 aria-valuemax="100"></div>
-            </div>
-        </span>
-                                    <span> -0 0%   </span>
-                                </div>
-
-                                <div class="d-flex align-items-center my-2">
-                                    <span> 2 Stars  </span>
-                                    <span>
-        <div class="progress custom-progress">
-            <div class="progress-bar custom-progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0"
-                 aria-valuemax="100"></div>
-            </div>
-        </span>
-                                    <span> -0 0%   </span>
-                                </div>
-                            </div>
-                            <div class="col-8">
-                                <div id="circleProgress1" class="progressbar-js-circle  rounded p-3">
-                                    <svg viewBox="0 0 100 100" style="display: block; width: 100%;">
-                                        <path d="M 50,50 m 0,-48 a 48,48 0 1 1 0,96 a 48,48 0 1 1 0,-96" stroke="#eee"
-                                              stroke-width="4" fill-opacity="0"></path>
-                                        <path d="M 50,50 m 0,-48 a 48,48 0 1 1 0,96 a 48,48 0 1 1 0,-96"
-                                              stroke="rgb(159,162,179)" stroke-width="4" fill-opacity="0"
-                                              style="stroke-dasharray: 301.635, 301.635; stroke-dashoffset: 199.079;"></path>
-                                    </svg>
-                                    <div class="progressbar-text"
-                                         style="position: absolute; left: 11%; top: 38%; padding: 0px; margin: 0px; transform: translate(-50%, -50%); color: lightblue; font-size: 2rem;">
-                                        34
+                                    <span><i class="text-success fa fa-star"></i> 5 </span>
+                                    <div class="progress w-75 ml-3">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%"
+                                             aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
-
+                                <div class="d-flex align-items-center my-2">
+                                    <span><i class="text-info fa fa-star"></i> 4 </span>
+                                    <div class="progress w-75 ml-3">
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: 50%"
+                                             aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-warning-center my-2">
+                                    <span><i class="text-warning fa fa-star"></i> 3 </span>
+                                    <div class="progress w-75 ml-3">
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 75%"
+                                             aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center my-2">
+                                    <span><i class="text-danger fa fa-star"></i> 2 </span>
+                                    <div class="progress w-75 ml-3">
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 100%"
+                                             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-center my-2">
+                                    <span><i class="text-danger fa fa-star"></i> 1 </span>
+                                    <div class="progress w-75 ml-3">
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 100%"
+                                             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -486,59 +521,43 @@
                     <!-- Contact -->
                     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                         <h1 class="my-3 font-weight-bold"> Contact to {{$user->name}} </h1>
-
-                        <form method="POST" action="{{route('user_message.store')}}">
-                            @csrf
-                            <input type="hidden" name="user_id" value="{{$video->user_id}}">
-                            <input type="hidden" name="video_id" value="{{$video->id}}">
-                            <div class="form-group">
-                                <label for="contact_name">Contact Name</label>
-                                <input required name="name" type="text" class="form-control" id="contact_name"
-                                       placeholder="Your Name">
-                            </div>
-                            <div class="form-group">
-                                <label for="contact_email">Contact Email</label>
-                                <input required name="email" type="email" class="form-control" id="contact_email"
-                                       placeholder="Email address">
-                            </div>
-                            <div class="form-group">
-                                <label for="contact_phone">Contact Phone</label>
-                                <input required name="phone" type="tel" class="form-control" id="contact_phone"
-                                       placeholder="Phone">
-                            </div>
-                            <div class="form-group">
-                                <label for="message">Message</label>
-                                <textarea name="message" class="form-control" id="message" rows="3"
-                                          placeholder="Message here"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary"> Send</button>
-                        </form>
+                        @if(auth()->check() && $video && ($video->user_id!=auth()->id()))
+                            <form method="POST" action="{{route('to_user')}}">
+                                @csrf
+                                <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">
+                                <input type="hidden" name="video_id" value="{{$video->id}}">
+                                <div class="form-group">
+                                    <label for="message">Message</label>
+                                    <textarea name="message" class="form-control" id="message" rows="3"
+                                              placeholder="Message here"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary"> Send</button>
+                            </form>
+                        @else
+                            <a href="{{route('login')}}" class="btn btn-info text-white">Login to
+                                Contact {{$user->name}}</a>
+                        @endif
                     </div>
                     <div class="tab-pane fade" id="report_message" role="tabpanel" aria-labelledby="report-tab">
                         <!-- .report. -->
 
-                        <h1 class="my-3 font-weight-bold"> Send message to moderator </h1>
-                        <form method="POST" action="{{action('ReportQueryController@store')}}">
-                            @csrf
-                            <div class="form-group">
-                                <label for="report_name">Contact Name</label>
-                                <input name="name" type="text" required class="form-control"
-                                       id="report_name" placeholder="">
-                            </div>
-                            <div class="form-group">
-                                <label for="report_email">Contact Email</label>
-                                <input name="email" type="email" required class="form-control"
-                                       id="report_email" placeholder="">
-                            </div>
-                            <input type="hidden" name="type" value="message">
-                            <input type="hidden" name="reported_on_user" value="{{$user->username}}">
-                            <div class="form-group">
-                                <label for="report_message">Message Text</label>
-                                <textarea name="message_body" required class="form-control"
-                                          id="report_message" rows="3"></textarea>
-                            </div>
-                            <button class="btn btn-primary"> Send Message</button>
-                        </form>
+                        <h1 class="my-3 font-weight-bold"> Report Video</h1>
+                        @if(auth()->check() && $video && ($video->user_id!=auth()->id()))
+                            <form method="POST" action="{{route('to_user')}}">
+                                @csrf
+                                <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">
+                                <input type="hidden" name="video_id" value="{{$video->id}}">
+                                <input type="hidden" name="type" value="report">
+                                <div class="form-group">
+                                    <label for="message">Message</label>
+                                    <textarea name="message" class="form-control" id="message" rows="3"
+                                              placeholder="Message here"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary"> Send</button>
+                            </form>
+                        @else
+                            <a href="{{route('login')}}" class="btn btn-info text-white">Login to Report Video</a>
+                        @endif
 
 
                     </div>
@@ -551,9 +570,6 @@
 
 
     </div>  <!--parentContainer -->
-
-
-
 @endsection
 @section('script')
     <script>
@@ -569,10 +585,53 @@
             @endif
         }
 
-
     </script>
     <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAm4Wvmd2nIeaFQCdhAsxbiSXgBsibDolc&callback=initMap">
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAm4Wvmd2nIeaFQCdhAsxbiSXgBsibDolc&libraries=places&callback=initMap">
     </script>
 
+@endsection
+@section('meta')
+    @if($video)
+        <meta name="description" content="{{$video->description}}. Author: {{$user->name}}"/>
+        <link rel="image_src" href="{{asset("storage/$video->thumbnail")}}"/>
+        <meta property="og:title" content="{{$video->title}}"/>
+        <meta property="og:site_name" content="{{env('APP_NAME')}}"/>
+        <meta property="og:url"
+              content="{{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"/>
+        <meta property="og:description" content="{{$video->description}}. Author: {{$user->name}}"/>
+        <meta property="og:type" content="video.other"/>
+        <meta property="og:image" content="{{asset("storage/$video->thumbnail")}}">
+        {{--    <meta property="og:locale" content="en-us" />--}}
+        {{--    <meta property="og:locale:alternate" content="en-us" />--}}
+        {{--    <meta property="og:video" content="{{route('embed_video',$video->video_id)}}"/>--}}
+        {{--    <meta property="og:video:type" content="video/mp4"/>--}}
+        {{--    <meta property="og:video:secure_url"--}}
+        {{--          content="{{route('embed_video',$video->video_id)}}"/>--}}
+        {{--    <meta property="og:video:width" content="640"/>--}}
+        {{--    <meta property="og:video:height" content="360"/>--}}
+        {{--    <meta property="og:image:url" content="{{url()->current()}}">--}}
+
+        <!-- Twitter -->
+        <meta name="twitter:card" content="player">
+        <meta name="twitter:site" content="@@{{ env('APP_NAME' }}">
+        <meta name="twitter:title" content="{{$video->title}}">
+        <meta name="twitter:description" content="{{$video->description}}. Author: {{$user->name}}"/>
+        <meta name="twitter:image" content="{{asset("storage/$video->thumbnail")}}">
+        <meta name="twitter:player" content="{{route('embed_video',$video->video_id)}}?track_url=twitter.com">
+        <meta name="twitter:player:width" content="640">
+        <meta name="twitter:player:height" content="360">
+        {{--    <meta name="twitter:player:stream" content="{{route('embed_video',$video->video_id)}}?track_url=twitter.com">--}}
+        {{--    <meta name="twitter:player:stream:content_type" content="video/mp4">--}}
+
+        <!-- Others -->
+        {{--    <meta name="medium" content="video"/>--}}
+        {{--    <meta name="video_type" content="application/x-shockwave-flash"/>--}}
+        {{--    <link rel="video_src" href="{{asset("storage/".str_replace('240p','360p',$video->stream_path))}}"/>--}}
+    @endif
+@endsection
+@section('header_script')
+    @if($video)
+    window.VIDEO_APP.video_url = "{{route('is_played',$video->id)}}";
+    @endif
 @endsection

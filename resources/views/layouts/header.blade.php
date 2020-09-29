@@ -47,46 +47,60 @@
               <span> <a href="#/upload-video" class="btn  cloud-upload  btn-primary"> <i
                           style="font-size:17px;" class="fa fa-cloud-upload" color="black"> </i> Upload Video  </a>
               </span>
-            <span class="dropdown nav-item dropdown-Custom  ">
-                   <button class="btn dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-
-                           <div>
-                               <img style="background-repeat: no-repeat;
-                                                              background-size: cover;
-                                                              border-radius: 100%;
-                                                              width: 45px;
-                                                              height: 43px;
-                                                              z-index: 16;
-                                                              position: absolute;
-                                                              top: -14px; "
-                                    src="{{auth()->user()->user_extra->profile_picture ?? asset('images/blank.png')}}"/>
-                           </div>
-
-
-                   </button>
-                    <span class="dropdowncontainer ">
-                        <div class="dowpdown-box">
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-                                <a class="dropdown-item" href="#/profile">
-                                    <i class="fa fa-user icons"></i></a>
-                                <a class="dropdown-item" href="#/upload-video">
-                                    <i class="fa fa-cloud-upload icons "></i>
-                                </a>
-                                <a class="dropdown-item" href="#/settings">
-                                    <i class="fa fa-cog icons"></i>
-                                </a>
-                                <a class="dropdown-item">
-                                    <i class="fa fa-times-circle icons"></i></a>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    <i class="fa fa-sign-out icons"></i>
+            <span>
+                <a class="btn btn-link" href="#/profile">
+                                    <i class="fa fa-user icons"></i>Profile
+                </a>
+            </span>
+            <span>
+                 <a class="btn btn-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="fa fa-sign-out icons"></i> Logout
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                         {{ csrf_field() }}
                                     </form>
                                 </a>
-                            </div>
-                        </div>
-                    </span>
             </span>
+
+{{--            <span class="dropdown nav-item dropdown-Custom  ">--}}
+{{--                   <button class="btn dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"--}}
+{{--                           aria-haspopup="true" aria-expanded="false">--}}
+
+{{--                           <div>--}}
+{{--                               <img style="background-repeat: no-repeat;--}}
+{{--                                                              background-size: cover;--}}
+{{--                                                              border-radius: 100%;--}}
+{{--                                                              width: 45px;--}}
+{{--                                                              height: 43px;--}}
+{{--                                                              z-index: 16;--}}
+{{--                                                              position: absolute;--}}
+{{--                                                              top: -14px; "--}}
+{{--                                    src="{{auth()->user()->user_extra->profile_picture ?? asset('images/blank.png')}}"/>--}}
+{{--                           </div>--}}
+
+
+{{--                   </button>--}}
+{{--                    <span class="dropdowncontainer ">--}}
+{{--                        <div class="dowpdown-box">--}}
+{{--                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--}}
+
+{{--                                <a class="dropdown-item" href="#/profile">--}}
+{{--                                    <i class="fa fa-user icons"></i></a>--}}
+{{--                                <a class="dropdown-item" href="#/upload-video">--}}
+{{--                                    <i class="fa fa-cloud-upload icons "></i>--}}
+{{--                                </a>--}}
+{{--                                <a class="dropdown-item" href="#/settings">--}}
+{{--                                    <i class="fa fa-cog icons"></i>--}}
+{{--                                </a>--}}
+{{--                                <a class="dropdown-item">--}}
+{{--                                    <i class="fa fa-times-circle icons"></i></a>--}}
+{{--                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">--}}
+{{--                                    <i class="fa fa-sign-out icons"></i>--}}
+{{--                                    <form id="logout-form" action="{{ route('logout') }}" method="POST">--}}
+{{--                                        {{ csrf_field() }}--}}
+{{--                                    </form>--}}
+{{--                                </a>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </span>--}}
+{{--            </span>--}}
         </div>

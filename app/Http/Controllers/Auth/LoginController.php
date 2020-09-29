@@ -46,6 +46,7 @@ class LoginController extends Controller {
         }
 
         return redirect( $this->redirectTo );
+//        return back();
 
     }
 }

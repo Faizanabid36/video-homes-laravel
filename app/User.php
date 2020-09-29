@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Jobs\DeleteVideos;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Nagy\LaravelRating\Traits\Rate\CanRate;
@@ -45,6 +46,11 @@ class User extends Authenticatable
             $playlist->name = 'Unlisted';
             $playlist->user_id = $user->id;
             $playlist->save();
+        });
+        static::deleting(function($user){
+            $user->user_extra()->delete();
+            Playlist::whereUserId( $user->id )->delete();
+            Video::whereUserId( $user->id )->delete();
         });
     }
 

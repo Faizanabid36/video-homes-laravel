@@ -46,7 +46,7 @@ export default class Playlist extends React.Component {
             // alert('You should have atleast one playlist');
             this.setState({showAlert:true , variant:'warning' , AlertMessage:'You should have atleast one playlist'}) ;
 
-            
+
             return;
         } else {
             axios.post('/delete_playlist', {id})
@@ -78,7 +78,7 @@ export default class Playlist extends React.Component {
                 if (this.state.added){
 
                     this.setState({showAlert:true, variant:'primary' , AlertMessage:'Setting Saved'}) ;
-                 
+
                 }
                 else
                     // alert('Some Error Occured')
@@ -108,15 +108,15 @@ export default class Playlist extends React.Component {
             <Row>
             <Col xs={12} className=" my-4 ">
                    <h1 className="float-left heading">PlayList <div className="borderBottom2"> </div> </h1>
-                        
-               </Col> 
+
+               </Col>
             </Row>
-            
+
             <div className=" ">
                 <div className="">
                     <div className="upload-head">
                      <Alerts data={{ show: this.state.showAlert , variant : this.state.variant , message: this.state.AlertMessage  , setAlertShow:this.showAlert  }} />
-                       
+
                         <div className="clear"></div>
                         <hr/>
                     </div>
@@ -136,7 +136,7 @@ export default class Playlist extends React.Component {
                                             <div className="video-desc"></div>
                                         </div>
                             </Col>
-                            
+
                             <Col xs={6} md={10} lg={9}>
                              <div key={id} id={`playlist${id}`} className="subscriptions-list">
                             <div className="author-list">
@@ -167,7 +167,7 @@ export default class Playlist extends React.Component {
                                                 name: item.name,
                                                 description: item.description,
                                                 id: item.id,
-                                              
+
                                             })
                                         }}
                                            title="Edit playlist" style={{width: '48px'}}>
@@ -182,7 +182,7 @@ export default class Playlist extends React.Component {
                                         <a onClick={(e) => {
                                             e.preventDefault();
                                             this.handleDelete(item.id, e)
-                                            
+
                                         }} title="Delete video">
                                             <svg className="feather-Delete m-0" xmlns="http://www.w3.org/2000/svg" width="36"
                                                  height="36"
@@ -196,21 +196,21 @@ export default class Playlist extends React.Component {
                                             </svg>
                                         </a>
                                     </div>
-                                   
-                                      
-                                   
 
-                                   
+
+
+
+
                                 </div>
                             </div>
-                           
+
                         </div>
-                        
+
                         </Col>
                         </Row>
-                        <hr /> 
+                        <hr />
                         </>
-                         
+
                     })}
                     {this.state.addPlaylist ? <div>
                         <div className='author-list'>
@@ -245,7 +245,7 @@ export default class Playlist extends React.Component {
                                                 <label> Name  </label>
                                                 <input onChange={(e) => {
                                                     this.setState({name: e.target.value})
-                                                    
+
                                                 }} name="name" type="text" placeholder="Enter Name"
                                                        defaultValue={this.state.name}
                                                        className="form-control input-md"/>
@@ -271,7 +271,7 @@ export default class Playlist extends React.Component {
                             <div className="video-wrapper" data-id="6" id="video-6">
                                 <div className="video-actions vid_stud_acts">
                                     <a onClick={this.handleSubmit} title="Update">
-                                        <svg xmlns="http://www.w3.org/2000/svg" 
+                                        <svg xmlns="http://www.w3.org/2000/svg"
                                         className="addplaylistIcon"
                                              viewBox="0 0 24 24">
                                             <path fill="currentColor"
@@ -305,7 +305,7 @@ export default class Playlist extends React.Component {
                                             <label> Name  </label>
                                                 <input onChange={(e) => {
                                                     this.setState({name: e.target.value})
-                                                   
+
                                                 }} name="name" type="text" placeholder="Enter Name"
                                                        defaultValue={this.state.name}
                                                        className="form-control input-md"/>
@@ -315,7 +315,7 @@ export default class Playlist extends React.Component {
                                             <label> Description  </label>
                                                 <input onChange={(e) => {
                                                     this.setState({description: e.target.value})
-                                                   
+
                                                 }} name="description" type="text" placeholder="Description"
                                                        defaultValue={this.state.description}
                                                        className="form-control input-md"/>

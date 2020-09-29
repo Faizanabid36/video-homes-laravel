@@ -60,10 +60,9 @@ class SettingsController extends Controller
      *
      * @return Factory|View
      */
-    public function edit($settings)
+    public function edit($id)
     {
-        //
-//        $settings = Settings::first();
+        $settings = Settings::findOrFail($id);
         return view( 'admin.settings.edit',compact('settings') );
     }
 
@@ -73,29 +72,29 @@ class SettingsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param Settings $settings
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(Request $request, Settings $settings)
+    public function update(Request $request, $id)
     {
         //
-        $this->validate($request,[
-            "display_title"=>"required|min:6|string",
-            "box_1"=>"array",
-            "box_2"=>"array",
-            "box_3"=>"array",
-            "box_4"=>"array",
-
-        ]);
-        if ($request->hasFile('box_1.file')) {
-            $requestData['box_1']['file'] = $request->file('box_1.file')
-                                                ->store('uploads', 'public');
-        }
+        request()->validate([ "display_title"=>"required|min:6|string","box_1"=>"array","box_2"=>"array","box_3"=>"array","box_4"=>"array"]);
         $requestData = $request->all();
+        if ($request->hasFile('box_1.file')) {
+            $requestData['box_1']['file'] = $request->file('box_1.file')->store('uploads', 'public');
+        }
+        if ($request->hasFile('box_2.file')) {
+            $requestData['box_2']['file'] = $request->file('box_2.file')->store('uploads', 'public');
+        }
+        if ($request->hasFile('box_3.file')) {
+            $requestData['box_3']['file'] = $request->file('box_3.file')->store('uploads', 'public');
+        }
+        if ($request->hasFile('box_4.file')) {
+            $requestData['box_4']['file'] = $request->file('box_4.file')->store('uploads', 'public');
+        }
 
-        dd($requestData);
+        $d = Settings::find($id)->update($requestData);
 
-        $settings->update(request()->all());
-        return redirect( 'admin/setting/edit' )->with( 'flash_message', 'Settings updated!' );
+        return back()->with( 'flash_message', 'Settings updated! '.boolval($d) );
     }
 
     /**

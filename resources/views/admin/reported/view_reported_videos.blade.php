@@ -48,38 +48,36 @@
                                         style="background-color: #ffc966 !important"
                                         @endif
                                     >
-                                        <td>{{ucfirst($query->name)}}</td>
-                                        <td>{{ucfirst($query->email)}}</td>
-                                        <td>{{ucfirst($query->message_body)}}</td>
-                                        <td>{{ucfirst($query->reported_on_video)}}</td>
+                                        <td>{{ucfirst($query->user->name)}}</td>
+                                        <td>{{ucfirst($query->user->email)}}</td>
+                                        <td>{{ucfirst($query->message)}}</td>
+                                        <td>{{ucfirst($query->video_id)}}</td>
                                         <td>{{$query->created_at->diffForHumans()}}</td>
                                         <td>
-                                            <form action="{{route('report_query.update',$query->id)}}" method="POST">
-                                                <a href="{{route('report_query.update',$query->id)}}">
-                                                    @csrf
-                                                    <input type="hidden" name="type" value="video">
-                                                    <input type="hidden" name="_method" value="PUT">
-                                                    @if($query->is_resolved!=0)
-                                                        <button class="btn btn-primary" disabled>
-                                                            Resolved
-                                                        </button>
-                                                    @else
-                                                        <button class="btn  btn-primary">
-                                                            Mark as Resolved
-                                                        </button>
-                                                    @endif
-                                                </a>
+                                            <form action="{{route('user_message.update',$query->id)}}" method="POST">
+                                                @csrf
+                                                @method('put')
+                                                @if($query->is_resolved!=0)
+                                                    <button class="btn btn-primary" disabled>
+                                                        Resolved
+                                                    </button>
+                                                @else
+                                                    <input type="hidden" name="is_resolved" value="1">
+                                                    <button type="submit" class="btn  btn-primary">
+                                                        Mark as Resolved
+                                                    </button>
+                                                @endif
                                             </form>
                                         </td>
                                         <td>
-                                            <form action="{{route('report_query.destroy',$query->id)}}" method="POST">
+                                            <form action="{{route('user_message.destroy',$query->id)}}" method="POST">
                                                 @csrf
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <a href="{{route('report_query.destroy',$query->id)}}">
-                                                    <button class="btn btn-danger">
-                                                        Delete Query
-                                                    </button>
-                                                </a>
+                                                @method('delete')
+
+                                                <button type="submit" class="btn btn-danger">
+                                                    Delete
+                                                </button>
+
                                             </form>
                                         </td>
 

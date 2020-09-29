@@ -5,11 +5,14 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta property="og:image" content="{{asset("storage/$video->thumbnail")}}"/>
+    <meta property="og:url" content="{{url()->current()}}"/>
+
     <title>{{$video->title}} - {{env('APP_NAME')}}</title>
+    <link rel="stylesheet" href="{{asset('css/public.css')}}">
     <style>
-        * {
-            padding: 0;
-            margin: 0;
+        .mejs__container, .mejs__layer {
+            height: 100vh !important;
         }
     </style>
     <script>
@@ -63,6 +66,6 @@
             data-quality="240p" title="240p" label="240p" res="240">
     Your browser does not support HTML5 video.
 </video>
-<script src="{{ asset('js/public.js') }}"></script>
+<script src="{{ asset('js/public.js?version=').time() }}"></script>
 </body>
 </html>

@@ -18,8 +18,6 @@ class CreateVideosTable extends Migration
             $table->string('title');
             $table->string('video_id');
             $table->text('description')->nullable();
-            $table->string('video_motion')->nullable();
-            $table->integer('is_proof_video')->nullable();
             $table->string('tags',255)->default("[]");
             $table->string('video_custom_id')->nullable();
             $table->string('external_link_url')->nullable();
