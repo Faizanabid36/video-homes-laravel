@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 //Auth User
 Route::group( [ 'middleware' => 'auth' ], function () {
+    Route::get('logged_in_user','HomeController@logged_in_user');
     Route::view( '/dashboard', 'dashboard' )->name( 'dashboard' );
     Route::resource( 'playlist', 'PlaylistController' );
     Route::resource('profile','ProfileController');
@@ -40,6 +41,8 @@ Route::group( [ 'middleware' => 'auth' ], function () {
     //Profile
     Route::get( 'get_logged_user', 'HomeController@logged_user' );
     Route::put( 'edit_user_profile/{user}', 'HomeController@edit_user_profile' );
+    Route::post( 'update_profile', 'HomeController@update_profile' );
+    Route::post( 'change_password', 'HomeController@change_password' );
     Route::delete( 'delete_user_profile/{user}', 'HomeController@delete_user_profile' );
     Route::get( 'image-upload', 'ImageUploadController@imageUpload' )->name( 'image.upload' );
     Route::post( 'image-upload', 'ImageUploadController@imageUploadPost' );

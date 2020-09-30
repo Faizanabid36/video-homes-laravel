@@ -1,34 +1,26 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import {
-    Input,
-    Image,
-    Card,
-    Drawer,
-    Divider,
-    PageHeader,
-    Menu,
-    Dropdown,
     Button,
-    Space,
-    Tag,
-    Typography,
-    Row,
+    Form,
+    Image,
+    Input,
     Layout,
-    Badge,
-    Avatar,
-    notification,
-    Progress,
-    message,Popconfirm,
+    message,
+    PageHeader,
+    Popconfirm,
+    Select,
     Spin,
-    Tabs, Col, Table, Form, Radio, Select, AutoComplete, Upload
+    Table,
+    Tabs,
+    Upload
 } from 'antd';
 import MaskedInput from 'antd-mask-input'
 import ImgCrop from 'antd-img-crop';
-import GooglePlacesAutocomplete, { geocodeByAddress } from "react-google-places-autocomplete";
+import GooglePlacesAutocomplete, {geocodeByAddress} from "react-google-places-autocomplete";
 
-import { UserOutlined, EllipsisOutlined, SettingOutlined, PlusOutlined, LoadingOutlined } from '@ant-design/icons';
-import { Editor } from "@tinymce/tinymce-react";
+import {LoadingOutlined, PlusOutlined, UserOutlined} from '@ant-design/icons';
+import {Editor} from "@tinymce/tinymce-react";
 import axios from "axios";
 
 const {Content} = Layout;
@@ -107,6 +99,9 @@ class Profile extends Component {
             dataloading: false,
             loading: false,
             user: {},
+            old_password: '',
+            new_password: '',
+            confirm_password: '',
             categories: [],
             fileList: [
                 {
@@ -126,7 +121,44 @@ class Profile extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.beforeUpload = this.beforeUpload.bind(this);
         this.defaultValue = this.defaultValue.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChangeInput = this.handleChangeInput.bind(this);
+        this.changePassword = this.changePassword.bind(this);
+    }
+
+    changePassword() {
+        let {old_password, new_password, confirm_password} = this.state
+        axios.post('change_password', {old_password, new_password, confirm_password})
+            .then((res) => {
+                console.log(res.data)
+                if (res.data.message)
+                    message.info(res.data.message)
+            })
+            .catch((err) => {
+                console.log(err.response)
+                if (err.response.data.errors.old_password)
+                    message.error(err.response.data.errors.old_password)
+                else if (err.response.data.errors.new_password)
+                    message.error(err.response.data.errors.new_password)
+                else if (err.response.data.errors.confirm_password)
+                    message.error(err.response.data.errors.confirm_password)
+            })
+    }
+
+    handleSubmit(e) {
+        let {user} = this.state
+        axios.post('update_profile', {user})
+            .then((res) => {
+                if (res.data.errors) {
+                    message.error(res.data.errors);
+                }
+                if (res.data.success)
+                    message.success(res.data.success)
+                console.log(res.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     handleChangeInput(e, key = false) {
@@ -204,6 +236,7 @@ class Profile extends Component {
     componentDidMount() {
         axios.get('profile')
             .then(({data}) => {
+                console.log(data)
                 this.setState({...data, dataloading: true})
             }).catch((err) => {
             console.log(err)
@@ -253,7 +286,10 @@ class Profile extends Component {
                                             required: true,
                                         },
                                     ]}>
-                                        <Input value={this.defaultValue('name')} placeholder="Full Name"/>
+                                        <Input value={this.defaultValue('name')}
+                                               name='name'
+                                               onChange={(e) => this.handleChangeInput(e)}
+                                               placeholder="Full Name"/>
                                     </Form.Item>
 
                                     <Form.Item label="Company Name" required rules={[
@@ -262,23 +298,33 @@ class Profile extends Component {
                                         },
                                     ]}>
                                         <Input value={this.defaultValue('company_name')}
-                                               value={this.state.user.company_name} placeholder="Company Name"/>
+                                               name='company_name'
+                                               onChange={(e) => this.handleChangeInput(e)}
+                                               placeholder="Company Name"/>
                                     </Form.Item>
 
                                     <Form.Item label="Personal URL" required>
                                         <Input addonBefore={window.VIDEO_APP.base_url}
+                                               name='username'
+                                               onChange={(e) => this.handleChangeInput(e)}
                                                value={this.defaultValue('username')} placeholder="Personal URL"/>
                                     </Form.Item>
                                     <Form.Item label="Facebook" required>
                                         <Input addonBefore="https://www.facebook.com/"
+                                               name='facebook'
+                                               onChange={(e) => this.handleChangeInput(e)}
                                                value={this.defaultValue('facebook')} placeholder="Facebook"/>
                                     </Form.Item>
-                                    <Form.Item label="Twitter" required>
-                                        <Input addonBefore="https://www.twiiter.com/"
-                                               value={this.defaultValue('youtube')} placeholder="Twitter"/>
+                                    <Form.Item label="Youtube" required>
+                                        <Input addonBefore="https://www.youtube.com/"
+                                               name='youtube'
+                                               onChange={(e) => this.handleChangeInput(e)}
+                                               value={this.defaultValue('youtube')} placeholder="Youtube"/>
                                     </Form.Item>
                                     <Form.Item label="Instagram" required>
                                         <Input addonBefore="https://www.instagram.com/"
+                                               name='instagram'
+                                               onChange={(e) => this.handleChangeInput(e)}
                                                value={this.defaultValue('instagram')} placeholder="Instagram"/>
                                     </Form.Item>
                                     <Form.Item label="About/Bio">
@@ -305,6 +351,7 @@ class Profile extends Component {
 
                                     <Form.Item label="License" required rules={[{required: true,},]}>
                                         <MaskedInput value={this.defaultValue('license_no')} placeholder="License"
+                                                     onChange={(e) => this.handleChangeInput(e)}
                                                      mask="#######" name="license_no" size="7"/>
                                     </Form.Item>
 
@@ -315,6 +362,7 @@ class Profile extends Component {
                                     ]}>
                                         <MaskedInput value={this.defaultValue('direct_phone')}
                                                      placeholder="Direct Phone" mask="111-111-1111"
+                                                     onChange={(e) => this.handleChangeInput(e)}
                                                      name="direct_phone" size="20"/>
                                     </Form.Item>
                                     <Form.Item label="Office Phone" required rules={[
@@ -324,6 +372,7 @@ class Profile extends Component {
                                     ]}>
                                         <MaskedInput value={this.defaultValue('office_phone')}
                                                      placeholder="Office Phone" mask="111-111-1111"
+                                                     onChange={(e) => this.handleChangeInput(e)}
                                                      name="office_phone" size="20"/>
                                     </Form.Item>
                                     <Form.Item label="Address" required rules={[
@@ -374,9 +423,9 @@ class Profile extends Component {
                                     <Form.Item label="Profile">
                                         <ImgCrop rotate zoom>
                                             <Upload
-                                                method={'PUT'}
+                                                // method={'PUT'}
                                                 headers={{'X-CSRF-TOKEN': window.document.head.querySelector('meta[name="csrf-token"]').content}}
-                                                action={`${window.VIDEO_APP.base_url}/profile/1`}
+                                                action={`${window.VIDEO_APP.base_url}/profile`}
                                                 name='profile_picture'
                                                 listType="picture-card"
                                                 className="avatar-uploader"
@@ -414,14 +463,54 @@ class Profile extends Component {
                                             </Upload>
                                         </ImgCrop>
                                     </Form.Item>
+                                    <Button onClick={(e) => {
+                                        this.handleSubmit()
+                                    }}>
+                                        Save
+                                    </Button>
                                 </TabPane>
                                 <TabPane tab="Change Password" key="2">
-                                    Content of tab 2
+                                    <Form.Item label="Old Password" required rules={[
+                                        {
+                                            required: true,
+                                        },
+                                    ]}>
+                                        <Input value={this.state.old_password}
+                                               name='old_password'
+                                               type="password"
+                                               onChange={(e) => this.setState({old_password: e.target.value})}
+                                               placeholder="Old Password"/>
+                                    </Form.Item>
+                                    <Form.Item label="New Password" required rules={[
+                                        {
+                                            required: true,
+                                        },
+                                    ]}>
+                                        <Input value={this.state.new_password}
+                                               name='new_password'
+                                               type="password"
+                                               onChange={(e) => this.setState({new_password: e.target.value})}
+                                               placeholder="New Password"/>
+                                    </Form.Item>
+                                    <Form.Item label="Confirm Password" required rules={[
+                                        {
+                                            required: true,
+                                        },
+                                    ]}>
+                                        <Input value={this.state.confirm_password}
+                                               name='confirm_password'
+                                               type="password"
+                                               onChange={(e) => this.setState({confirm_password: e.target.value})}
+                                               placeholder="Confirm Password"/>
+                                    </Form.Item>
+                                    <Button onClick={this.changePassword}>
+                                        Change Password
+                                    </Button>
                                 </TabPane>
                                 <TabPane tab="Delete account" key="3">
                                     <Popconfirm
                                         title="Are you sure delete this task?"
-                                        onConfirm={(e) =>{
+                                        onConfirm={(e) => {
                                             console.log(e);
                                             message.success('Deleted!');
                                         }}

@@ -18,13 +18,13 @@ class ProfileController extends Controller {
         //
         $data = UserCategory::levelCategories();
 
-        return response( [
-            'user'       => collect( auth()->user()->user_extra )->merge( auth()->user() )->except( [
+        return response([
+            'user' => collect(auth()->user()->user_extra)->merge(collect(auth()->user())->except(['avatara', 'company_logo'])->all())->except([
                 'user_extra',
                 'user_id'
-            ] ),
+            ]),
             'categories' => $data
-        ] );
+        ]);
     }
 
     /**
@@ -54,7 +54,6 @@ class ProfileController extends Controller {
         }
         if ( request( 'profile_picture' ) ) {
             $full_path = ( request()->file( 'profile_picture' ) )->store( $path, [ 'disk' => 'public' ] );
-
             return response( [ "status" => $user_extra->update( [ 'profile_picture' => asset( "storage/$full_path" ) ] ) ] );
         }
     }

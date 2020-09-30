@@ -1,35 +1,22 @@
 import React from 'react';
-import { BreakpointsProvider, ShowAt } from 'react-with-breakpoints';
-import {
-    Drawer,
-    Divider,
-    Menu,
-    Dropdown,
-    Button,
-    Space,
-    Layout,
-    Badge,
-    Avatar,
-    notification,
-    Progress,
-} from 'antd';
+import {BreakpointsProvider, ShowAt} from 'react-with-breakpoints';
+import {Avatar, Badge, Button, Divider, Drawer, Dropdown, Layout, Menu, notification, Progress, Space,} from 'antd';
 
 import {
-    LogoutOutlined,
-    DashboardOutlined,
-    VideoCameraOutlined,
-    ProfileOutlined,
-    FormatPainterOutlined,
     BellOutlined,
-    MailOutlined,
-    LineChartOutlined,
     CloudUploadOutlined,
+    DashboardOutlined,
+    FormatPainterOutlined,
+    LineChartOutlined,
+    LogoutOutlined,
     MenuFoldOutlined,
-    AppstoreOutlined,
+    ProfileOutlined,
     SettingOutlined,
-    LinkOutlined, UserOutlined, LaptopOutlined, NotificationOutlined
+    UserOutlined,
+    VideoCameraOutlined
 } from '@ant-design/icons';
-import { HashRouter as Router } from "react-router-dom";
+import {HashRouter as Router} from "react-router-dom";
+import axios from 'axios';
 
 
 import 'antd/dist/antd.css';
@@ -120,13 +107,25 @@ class App extends React.Component {
             collapsed: false,
             current: false,
             visible: false,
-            placement: 'left'
+            placement: 'left',
+            user: {},
+            dataloaded: false,
         };
         this.onCollapse = this.onCollapse.bind(this);
         this.showDrawer = this.showDrawer.bind(this);
         this.onClose = this.onClose.bind(this);
         this.profileMenu = this.profileMenu.bind(this);
         this.menuClick = this.menuClick.bind(this);
+    }
+
+    componentDidMount() {
+        axios.get('logged_in_user').then((res) => {
+            this.setState({user: res.data.user, dataloaded: true})
+            console.log('here', res.data.user.user_extra)
+        })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     showDrawer() {
@@ -225,7 +224,8 @@ class App extends React.Component {
                                 <SidebarMenu/>
                             </Sider>
                         </ShowAt>
-                        <Layout className="site-layout">
+                        {/*<Spin spinning={this.state.dataloading} tip={'Loading'}/>*/}
+                        {this.state.dataloaded && <Layout className="site-layout">
                             <Header className="header">
                                 <Space size={8} align="center">
                                     <ShowAt breakpoint={'small'}>
@@ -234,7 +234,9 @@ class App extends React.Component {
                                     <div className="logo">VideoHomes</div>
                                 </Space>
                                 <Space size={8} align="center" style={{float: "right"}}>
-                                    <Button type="primary" onClick={event => window.location.hash = "#/upload"}><CloudUploadOutlined/> Upload Video</Button>
+                                    <Button type="primary"
+                                            onClick={event => window.location.hash = "#/upload"}><CloudUploadOutlined/> Upload
+                                        Video</Button>
 
                                     <Dropdown overlay={this.notificationMenu()}>
                                         <Badge count={1} size={'md'}>
@@ -244,14 +246,14 @@ class App extends React.Component {
                                     <Dropdown overlay={this.profileMenu()}>
                                         <a onClick={(e) => e.preventDefault()}>
                                             <Avatar style={{marginTop: '-12px'}}
-                                                    src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/>
-                                            Essa
+                                                    src={this.state.user.user_extra.profile_picture}/>
+                                            {this.state.user.name}
                                         </a>
                                     </Dropdown>
                                 </Space>
                             </Header>
                             {this.props.children}
-                        </Layout>
+                        </Layout>}
                     </Layout></BreakpointsProvider></Router>
         );
     }

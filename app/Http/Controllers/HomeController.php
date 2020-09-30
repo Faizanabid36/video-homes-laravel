@@ -2,39 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use App\AccountType;
-use App\Jobs\DeleteVideos;
-use App\UserCategory;
-use App\Video;
-use App\VideoView;
-use App\VideoLikesDislikes;
-use Illuminate\Http\Request;
-use App\UserExtra;
-use App\User;
 use App\BlockedUser;
 use App\Playlist;
+use App\User;
+use App\UserCategory;
+use App\UserExtra;
+use App\Video;
+use App\VideoLikesDislikes;
+use App\VideoView;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 
-class HomeController extends Controller {
+class HomeController extends Controller
+{
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct() {
-        $this->middleware( 'auth' );
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function logged_in_user()
+    {
+        return ['user' => User::whereId(auth()->user()->id)->with('user_extra')->first()];
     }
 
 
-    public function logged_user() {
+    public function logged_user()
+    {
         $data = UserCategory::levelCategories();
 
         return [
-            'user'       => collect( auth()->user()->user_extra )->merge( auth()->user() )->except( [
+            'user' => collect(auth()->user()->user_extra)->merge(auth()->user())->except([
                 'user_extra',
                 'user_id'
-            ] ),
+            ]),
             'categories' => $data
         ];
 
@@ -90,96 +95,149 @@ class HomeController extends Controller {
             "card_brand",
             "card_last_four",
             "trial_ends_at",
-        ] ) );
+        ]));
 
     }
 
-    public function edit_user_profile1() {
-        $tab       = \request( 'tab' );
-        $user      = \request( 'user' );
-        $latitude  = \request( 'location_latitude' );
-        $longitude = \request( 'location_longitude' );
-        if ( $tab == 'general' ) {
-            $exists = User::whereUsername( $user['username'] )->where( 'id', '!=', auth()->user()->id )->first();
-            if ( ! is_null( $exists ) ) {
-                return [ 'message' => 'Username already taken' ];
-            }
-            if ( strlen( $user['bio'] ) > 600 ) {
-                return [ 'message' => 'Bio can consist of only 600 characters' ];
-            }
-            $result = User::whereId( $user['id'] )->update(
-                [
-                    'email'         => $user['email'],
-                    'name'          => $user['name'],
-                    'username'      => $user['username'],
-                    'role'          => $user['role'],
-                    'address'       => $user['address'],
-                    'phone'         => $user['phone'],
-                    'phone2'        => $user['phone2'],
-                    'liscense'      => $user['liscense'],
-                    'website_title' => $user['website_title'],
-                    'website_link'  => $user['website_link'],
-                    'bio'           => $user['bio'],
-                ]
-            );
-            UserExtra::whereUserId( $user['id'] )->update( [
-                'location_latitude'  => $latitude,
-                'location_longitude' => $longitude
-            ] );
-            AccountType::whereUserId( $user['id'] )->update( [
-                'role'              => $user['role'],
-                'sub_role_category' => \request( 'sub_role_cat' ),
-                'sub_role'          => \request( 'sub_role' )
-            ] );
-            $message = $result == 1 ? 'Profile Updated' : 'Could Not Update Profile';
+    public function update_profile(Request $request)
+    {
+        $user = \request('user');
+        $exists = User::whereUsername($user['username'])->where('id', '!=', auth()->user()->id)->first();
+        if (!is_null($exists))
+            return ['errors' => 'Username already taken'];
+        User::whereId($user['id'])->update(
+            [
+                'name' => $user['name'],
+                'username' => $user['username'],
+                'address' => $user['address'],
+                'liscense' => $user['license_no'],
+                'website_title' => $user['website_title'],
+                'website_link' => $user['website_link'],
+                'bio' => $user['bio'],
+            ]
+        );
+        UserExtra::whereUserId($user['id'])->update([
+            'bio' => $user['bio'],
+            'facebook' => $user['facebook'],
+            'instagram' => $user['instagram'],
+            'youtube' => $user['youtube'],
+            'location_latitude' => $user['location_latitude'],
+            'location_longitude' => $user['location_longitude'],
+            'direct_phone' => $user['direct_phone'],
+            'address' => $user['address'],
+            'office_phone' => $user['office_phone'],
+            'company_name' => $user['company_name'],
+            'license_no' => $user['license_no']
+        ]);
+        return ['success' => 'Successfully Updated'];
+    }
 
-            return compact( 'tab', 'message' );
-        } elseif ( $tab == 'delete-account' ) {
-            $password = \request( 'password' );
-            $User     = User::whereId( $user['id'] )->first();
-            if ( Hash::check( $password, $User['password'] ) ) {
-                $message = User::whereId( $user['id'] )->delete() == 1 ? 'Account Deleted' : 'Could Not Delete Account';
-
-                return compact( 'tab', 'message' );
-            }
-            $message = 'Incorrect Password Entered';
-
-            return compact( 'tab', 'message' );
-        } elseif ( $tab == 'change-password' ) {
-            $User     = User::whereId( $user['id'] )->first();
-            $password = \request( 'password' );
-            if ( Hash::check( $password, $User['password'] ) ) {
-                $message = User::whereId( $user['id'] )->update( [ 'password' => Hash::make( \request( 'new_password' ) ) ] ) ? 'Password Successfully Changed' : 'Could Not Change Password';
-
-                return compact( 'tab', 'message' );
-            }
-            $message = 'Incorrect Password Entered';
-
-            return compact( 'tab', 'message' );
+    public function change_password(Request $request)
+    {
+        $this->validate($request, [
+            'old_password' => 'required|password',
+            'new_password' => 'required|min:8',
+            'confirm_password' => 'required|same:new_password',
+        ]);
+        $User = User::whereId(auth()->user()->id)->first();
+        $password = \request('old_password');
+        if (\Hash::check($password, $User->password)) {
+            $message = User::whereId(auth()->user()->id)->update([
+                'password' => Hash::make(\request('new_password'))
+            ]) ? 'Password Successfully Changed' : 'Could Not Change Password';
+            return compact('message');
         }
+        $message = 'Incorrect Password Entered';
+        return compact('message');
     }
 
-    public function block_user() {
-        if ( \request( 'tab' ) == 'block-user' ) {
-            $user           = User::where( 'username', \request( 'selectedValue' ) )->with( 'blockedbyusers' )->first();
+//    public function edit_user_profile1()
+//    {
+//        $tab = \request('tab');
+//        $user = \request('user');
+//        $latitude = \request('location_latitude');
+//        $longitude = \request('location_longitude');
+//        if ($tab == 'general') {
+//            $exists = User::whereUsername($user['username'])->where('id', '!=', auth()->user()->id)->first();
+//            if (!is_null($exists)) {
+//                return ['message' => 'Username already taken'];
+//            }
+//            if (strlen($user['bio']) > 600) {
+//                return ['message' => 'Bio can consist of only 600 characters'];
+//            }
+//            $result = User::whereId($user['id'])->update(
+//                [
+//                    'email' => $user['email'],
+//                    'name' => $user['name'],
+//                    'username' => $user['username'],
+//                    'role' => $user['role'],
+//                    'address' => $user['address'],
+//                    'phone' => $user['phone'],
+//                    'phone2' => $user['phone2'],
+//                    'liscense' => $user['liscense'],
+//                    'website_title' => $user['website_title'],
+//                    'website_link' => $user['website_link'],
+//                    'bio' => $user['bio'],
+//                ]
+//            );
+//            UserExtra::whereUserId( $user['id'] )->update( [
+//                'location_latitude'  => $latitude,
+//                'location_longitude' => $longitude
+//            ] );
+//            AccountType::whereUserId( $user['id'] )->update( [
+//                'role'              => $user['role'],
+//                'sub_role_category' => \request( 'sub_role_cat' ),
+//                'sub_role'          => \request( 'sub_role' )
+//            ] );
+//            $message = $result == 1 ? 'Profile Updated' : 'Could Not Update Profile';
+//            return compact( 'tab', 'message' );
+//        } elseif ( $tab == 'delete-account' ) {
+//            $password = \request( 'password' );
+//            $User     = User::whereId( $user['id'] )->first();
+//            if ( Hash::check( $password, $User['password'] ) ) {
+//                $message = User::whereId( $user['id'] )->delete() == 1 ? 'Account Deleted' : 'Could Not Delete Account';
+//
+//                return compact( 'tab', 'message' );
+//            }
+//            $message = 'Incorrect Password Entered';
+//
+//            return compact( 'tab', 'message' );
+//        } elseif ( $tab == 'change-password' ) {
+//            $User     = User::whereId( $user['id'] )->first();
+//            $password = \request( 'password' );
+//            if ( Hash::check( $password, $User['password'] ) ) {
+//                $message = User::whereId( $user['id'] )->update( [ 'password' => Hash::make( \request( 'new_password' ) ) ] ) ? 'Password Successfully Changed' : 'Could Not Change Password';
+//
+//                return compact( 'tab', 'message' );
+//            }
+//            $message = 'Incorrect Password Entered';
+//
+//            return compact( 'tab', 'message' );
+//        }
+//    }
+
+    public function block_user()
+    {
+        if (\request('tab') == 'block-user') {
+            $user = User::where('username', \request('selectedValue'))->with('blockedbyusers')->first();
             $alreadyblocked = false;
-            if ( ! is_null( $user->blockedby ) ) {
-                foreach ( $user->blockedby as $blockedby ) {
-                    if ( $blockedby['blocked_user_id'] == $user['id'] && $blockedby['user_id'] == auth()->user()->id ) {
+            if (!is_null($user->blockedby)) {
+                foreach ($user->blockedby as $blockedby) {
+                    if ($blockedby['blocked_user_id'] == $user['id'] && $blockedby['user_id'] == auth()->user()->id) {
                         $alreadyblocked = true;
                     }
                 }
             }
             $blocked = null;
-            if ( ! $alreadyblocked ) {
-                $blocked = BlockedUser::create( [
-                    'user_id'         => auth()->user()->id,
+            if (!$alreadyblocked) {
+                $blocked = BlockedUser::create([
+                    'user_id' => auth()->user()->id,
                     'blocked_user_id' => $user['id'],
-                ] );
+                ]);
             }
-            $message = ! $alreadyblocked && ! is_null( $blocked ) ? 'User Blocked Successfully' : 'Could Not Block User';
+            $message = !$alreadyblocked && !is_null($blocked) ? 'User Blocked Successfully' : 'Could Not Block User';
 
-            return compact( 'message', 'user' );
+            return compact('message', 'user');
         } elseif ( \request( 'tab' ) == 'privacy-settings' ) {
             if ( ! is_null( \request( 'whoWatches' ) ) ) {
                 UserExtra::updateOrCreate( [ 'user_id' => auth()->user()->id ], [ 'who_watches' => \request( 'whoWatches' ) ] );

@@ -1,31 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
-import {
-    Image,
-    Card,
-    Drawer,
-    Divider,
-    PageHeader,
-    Menu,
-    Dropdown,
-    Button,
-    Space,
-    Tag,
-    Typography,
-    Row,
-    Layout,
-    Badge,
-    Empty,
-    Avatar,
-    notification,
-    Progress,
-    Tabs,
-    Col
-} from 'antd';
-import { CloudUploadOutlined, EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import {Avatar, Button, Card, Col, Divider, Empty, Image, Layout, PageHeader, Row} from 'antd';
+import {CloudUploadOutlined, EditOutlined, EllipsisOutlined, SettingOutlined} from '@ant-design/icons';
 import axios from "axios";
 
 const {Content} = Layout;
+
 class Video extends Component {
     constructor(props) {
         super(props);
@@ -65,10 +45,10 @@ class Video extends Component {
                         </Row>
                         <Divider/>
                         <Row gutter={16}>
-                            {this.state.approvedVideos.length > 1 ? this.state.pendingVideos.map((item,k)=>{
+                            {this.state.approvedVideos.length > 0 ? this.state.approvedVideos.map((item, k) => {
                                 return <Col span={8} key={k}>
                                     <Card
-                                        style={{ width: 300 }}
+                                        style={{width: 300}}
                                         cover={
                                             <Image
                                                 src={`${window.VIDEO_APP.base_url}/storage/${item.thumbnail}`}
@@ -83,14 +63,16 @@ class Video extends Component {
                                         ]}
                                     >
                                         <Card.Meta
-                                            avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                                            title= {item.title}
-                                            description={`
-<span>{item.description}<br/></span>
-<span> Category: {item.category.name}</span><br/>
-<span> Views: {item.views}</span><br/>
-<span> Duration: {Math.floor(item.duration / 60)}:{item.duration - Math.floor(item.duration / 60) * 60}</span>
-`}
+                                            avatar={<Avatar src={item.user.user_extra.profile_picture}/>}
+                                            title={item.title}
+                                            description={[
+                                                <>
+                                                    <span>{item.description}<br/></span>
+                                                    <span> Category: {item.category.name}</span><br/>
+                                                    <span> Views: {item.views}</span><br/>
+                                                    <span> Duration: {Math.floor(item.duration / 60)}:{item.duration - Math.floor(item.duration / 60) * 60}</span>
+                                                </>
+                                            ]}
                                         />
                                     </Card>
                                 </Col>
@@ -105,10 +87,11 @@ class Video extends Component {
                         </Row>
                         <Divider/>
                         <Row gutter={16}>
-                            {this.state.pendingVideos.length > 1 ? this.state.approvedVideos.map((item,k)=>{
+                            {this.state.pendingVideos.length > 0 ? this.state.pendingVideos.map((item, k) => {
+                                console.log(item)
                                 return <Col span={8} key={k}>
                                     <Card
-                                        style={{ width: 300 }}
+                                        style={{width: 300}}
                                         cover={
                                             <Image
                                                 src={`${window.VIDEO_APP.base_url}/storage/${item.thumbnail}`}
@@ -123,8 +106,8 @@ class Video extends Component {
                                         ]}
                                     >
                                         <Card.Meta
-                                            avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                                            title= {item.title}
+                                            avatar={<Avatar src={item.user.user_extra.profile_picture}/>}
+                                            title={item.title}
                                             description={[
                                                 <>
                                                     <span>{item.description}<br/></span>
