@@ -219,6 +219,10 @@ class Playlist extends Component {
                         className="site-page-header site-page-header-responsive"
                         onBack={() => window.location.hash = "#/"}
                         title={(this.state.action ? this.state.action + " " : "") + 'Playlist'}
+                        extra={[
+                            <Button type="primary"
+                                    onClick={e => this.setState({action: 'create'})}><CloudUploadOutlined/> Create</Button>,
+                        ]}
                     >
                         {this._render()}
                     </PageHeader>
