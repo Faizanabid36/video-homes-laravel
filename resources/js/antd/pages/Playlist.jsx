@@ -185,7 +185,7 @@ class Playlist extends Component {
                     </Form>
                 </>;
             default:
-                return this.state.playlists.length > 1 ? <Table dataSource={this.state.playlists}>
+                return this.state.playlists.length > 0 ? <Table dataSource={this.state.playlists}>
                     <Column title="Name" dataIndex="name" key="name"/>
                     <Column title="Description" dataIndex="description" key="description"/>
                     <Column
