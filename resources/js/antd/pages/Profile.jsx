@@ -113,11 +113,6 @@ class Profile extends Component {
             ]
         };
         this.formRef = React.createRef();
-        this.onGenderChange = this.onGenderChange.bind(this);
-        this.onFinish = this.onFinish.bind(this);
-        this.onReset = this.onReset.bind(this);
-        this.onFill = this.onFill.bind(this);
-        this.onChange = this.onChange.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.beforeUpload = this.beforeUpload.bind(this);
         this.defaultValue = this.defaultValue.bind(this);
@@ -209,30 +204,8 @@ class Profile extends Component {
         }
     };
 
-    onChange({fileList}) {
-        this.setState({fileList});
-    };
 
-    onGenderChange() {
-        this.formRef.current.setFieldsValue({
-            note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`,
-        });
-    };
 
-    onFinish() {
-        console.log(values);
-    };
-
-    onReset() {
-        this.formRef.current.resetFields();
-    };
-
-    onFill() {
-        this.formRef.current.setFieldsValue({
-            note: 'Hello world!',
-            gender: 'male',
-        });
-    };
 
     componentDidMount() {
         axios.get('profile')
@@ -245,20 +218,20 @@ class Profile extends Component {
     }
 
     render() {
-        const onPreview = async file => {
-            let src = file.url;
-            if (!src) {
-                src = await new Promise(resolve => {
-                    const reader = new FileReader();
-                    reader.readAsDataURL(file.originFileObj);
-                    reader.onload = () => resolve(reader.result);
-                });
-            }
-            const image = new Image();
-            image.src = src;
-            const imgWindow = window.open(src);
-            imgWindow.document.write(image.outerHTML);
-        };
+        // const onPreview = async file => {
+        //     let src = file.url;
+        //     if (!src) {
+        //         src = await new Promise(resolve => {
+        //             const reader = new FileReader();
+        //             reader.readAsDataURL(file.originFileObj);
+        //             reader.onload = () => resolve(reader.result);
+        //         });
+        //     }
+        //     const image = new Image();
+        //     image.src = src;
+        //     const imgWindow = window.open(src);
+        //     imgWindow.document.write(image.outerHTML);
+        // };
         const {loading, imageUrl} = this.state;
         const uploadButton = (
             <div>
