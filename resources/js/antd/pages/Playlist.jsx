@@ -159,7 +159,10 @@ class Playlist extends Component {
                     <Form
                         {...layout}
                         name="basic"
-                        initialValues={{remember: true}}
+                        initialValues={{
+                            name:this.state.playlists.find(i => i.id === this.state.id).name,
+                            description: this.state.playlists.find(i => i.id === this.state.id).description
+                        }}
                         onFinish={this.editPlaylist}
                         onFinishFailed={e => {
                             message.error("Something went wrong");
