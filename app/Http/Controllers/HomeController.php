@@ -46,13 +46,22 @@ class HomeController extends Controller {
         return [ "success" => $user->delete() ];
     }
 
-    public function edit_user_profile( User $user ) {
+    public function edit_user_profile(  ) {
+        $user = auth()->id();
         if ( request( 'currentPassword' ) ) {
 
             request()->validate( [
-                'currentPassword' => 'required|password',
-                'newPassword'     => 'required|min:8',
-                'confirmPassword' => 'required|same:newPassword',
+                'old_password'     => [
+                    'required',
+                    'password',
+                    function ( $attribute, $value, $fail ) {
+                        if ( ! Hash::check( $value, auth()->user()->password ) ) {
+                            $fail( 'Your password was not updated, since the provided current password does not match.' );
+                        }
+                    }
+                ],
+                'new_password'     => 'required|min:8',
+                'confirm_password' => 'required|same:new_password',
             ] );
             $user->password = Hash::make( request( 'newPassword' ) );
 
@@ -73,38 +82,41 @@ class HomeController extends Controller {
             \Storage::disk( 'public' )->put( "uploads/images/$name", $imageUpload );
             request()->merge( [ 'profile_picture' => asset( "storage/uploads/images/$name" ) ] );
         }
+
+        request()->validate( [
+            'username'         => 'unique:users,username,' . auth()->id(),
+            'name'             => 'required|min:4',
+            'company_name'     => 'required|min:4',
+            'user_category_id' => 'required',
+        ] );
         $user->update( request()->only( [ 'username', 'name' ] ) );
 
-        return UserExtra::updateOrCreate( [ "user_id" => $user->id ], request()->except( [
-            'username',
-            'name',
-            'email',
-            'id',
-            'active',
-            'role',
-            'updated_at',
-            'created_at',
-            'email_verified_at',
-            'remember_token',
-            'password',
-            "user_id",
-            "stripe_id",
-            "card_brand",
-            "card_last_four",
-            "trial_ends_at",
-        ] ) );
+        return UserExtra::updateOrCreate( [ "user_id" => $user->id ], request()->only(  [
+            'bio',
+            'facebook',
+            'instagram',
+            'youtube',
+            'location_latitude',
+            'location_longitude',
+            'direct_phone',
+            'address',
+            'office_phone',
+            'company_name',
+            'license_no',
+            'user_category_id'
+        ]  ) );
 
     }
 
     public function update_profile( Request $request ) {
         request()->validate( [
-            'username' => 'unique:users,username,'.auth()->id(),
-            'name'     => 'required|min:4'
+            'username'         => 'unique:users,username,' . auth()->id(),
+            'name'             => 'required|min:4',
+            'company_name'     => 'required|min:4',
+            'user_category_id' => 'required',
         ] );
 
-
         $user = auth()->user();
-
         $user->update( request()->only( [ 'name', 'username' ] ) );
         $user->user_extra()->update( request()->only(
             [
@@ -122,7 +134,7 @@ class HomeController extends Controller {
                 'user_category_id'
             ] ) );
 
-        return [ 'success' => 'Successfully Updated' ];
+        return response( [ 'success' => 'Successfully Updated' ] );
     }
 
     public function change_password( Request $request ) {

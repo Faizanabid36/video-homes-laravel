@@ -128,7 +128,7 @@ class Profile extends Component {
 
     changePassword() {
         let {old_password, new_password, confirm_password} = this.state
-        axios.post('change_password', {old_password, new_password, confirm_password})
+        axios.put('profile/1', {old_password, new_password, confirm_password})
             .then((res) => {
                 console.log(res.data)
                 if (res.data.message)
@@ -147,7 +147,7 @@ class Profile extends Component {
 
     handleSubmit(e) {
         let {user} = this.state
-        axios.post('update_profile', {...user})
+        axios.put('profile/1', {...user})
             .then((res) => {
                 if (res.data.errors) {
                     message.error(res.data.errors);
@@ -293,11 +293,7 @@ class Profile extends Component {
                                                placeholder="Full Name"/>
                                     </Form.Item>
 
-                                    <Form.Item label="Company Name" required rules={[
-                                        {
-                                            required: true,
-                                        },
-                                    ]}>
+                                    <Form.Item label="Company Name" required rules={[{required: true}]}>
                                         <Input value={this.defaultValue('company_name')}
                                                name='company_name'
                                                onChange={(e) => this.handleChangeInput(e)}
