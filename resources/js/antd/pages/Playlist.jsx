@@ -72,7 +72,7 @@ class Playlist extends Component {
     }
 
     editPlaylist(e) {
-        let {name, description} = this.state;
+        let {name, description, id} = this.state;
 
         axios.put('/playlist/' + id, {name, description})
             .then(({data}) => {
@@ -171,11 +171,11 @@ class Playlist extends Component {
                             rules={[{required: true, message: 'Please input playlist name!'}]}
                         >
                             <Input onChange={e => this.setState({name: e.target.value})}
-                                   defaultValue={this.state.playlists.find(i => i.id === this.state.editId).name}/>
+                                   defaultValue={this.state.playlists.find(i => i.id === this.state.id).name}/>
                         </Form.Item>
                         <Form.Item label='Description' name='description'>
                             <Input.TextArea onChange={e => this.setState({description: e.target.value})} rows={4}
-                                            defaultValue={this.state.playlists.find(i => i.id === this.state.editId).description}/>
+                                            defaultValue={this.state.playlists.find(i => i.id === this.state.id).description}/>
                         </Form.Item>
                         <Form.Item>
                             <Button type="primary" htmlType="submit">
@@ -196,7 +196,7 @@ class Playlist extends Component {
                                 <Button type="primary"
                                         onClick={e => this.setState({
                                             action: 'edit',
-                                            editId: text.id
+                                            id: text.id
                                         })}><CloudUploadOutlined/> Edit</Button>
                                 <Button type="primary"
                                         onClick={e => this.deletePlaylist(text.id)}><CloudUploadOutlined/> Delete</Button>
