@@ -98,7 +98,7 @@ class HomeController extends Controller {
 
     public function update_profile( Request $request ) {
         request()->validate( [
-            'username' => 'unique:users',
+            'username' => 'unique:users,username,'.auth()->id(),
             'name'     => 'required|min:4'
         ] );
 
@@ -118,7 +118,8 @@ class HomeController extends Controller {
                 'address',
                 'office_phone',
                 'company_name',
-                'license_no'
+                'license_no',
+                'user_category_id'
             ] ) );
 
         return [ 'success' => 'Successfully Updated' ];

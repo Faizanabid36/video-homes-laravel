@@ -404,18 +404,18 @@ class Profile extends Component {
                                     </Form.Item>
                                     <Form.Item label="Profession and Expertise">
                                         {this.state.categories.length > 0 && <>
-                                            <Select showSearch name="category_id"
+                                            <Select defaultValue={this.defaultValue('user_category_id')} showSearch name="user_category_id"
+                                                    onChange={e=>this.handleChangeInput(e,'user_category_id')}
                                                     placeholder="Choose one of the following Profession and Expertise...">
                                                 {this.state.categories.map((u, key) => u['children'].length > 0 &&
                                                     <Select.OptGroup key={key} label={u['name']}>
                                                         {u['children'].map((u1, k) => {
                                                             return u1['children'].length > 0 ? u1['children'].map((u2, k) =>
                                                                     <Select.Option key={key * 1000}
-                                                                                   selected={u2['id'] === this.defaultValue('user_category_id')}
                                                                                    value={u2['id']}
                                                                                    data-subtext={u1['name']}>{u2['name']}</Select.Option>) :
                                                                 <Select.Option key={key * 1000}
-                                                                               selected={u1['id'] === this.defaultValue('user_category_id')}
+
                                                                                value={u1['id']}>{u1['name']}</Select.Option>;
                                                         })}</Select.OptGroup>)}
                                             </Select>
