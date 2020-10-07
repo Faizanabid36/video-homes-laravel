@@ -306,6 +306,13 @@ class Profile extends Component {
                                                onChange={(e) => this.handleChangeInput(e)}
                                                value={this.defaultValue('username')} placeholder="Personal URL"/>
                                     </Form.Item>
+
+                                    <Form.Item label="Website URL" required>
+                                        <Input addonBefore='https://'
+                                               name='website'
+                                               onChange={(e) => this.handleChangeInput(e)}
+                                               value={this.defaultValue('website')} placeholder="Website URL"/>
+                                    </Form.Item>
                                     <Form.Item label="Facebook" required>
                                         <Input addonBefore="https://www.facebook.com/"
                                                name='facebook'
