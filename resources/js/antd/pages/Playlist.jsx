@@ -27,32 +27,7 @@ import axios from "axios";
 
 const {Content} = Layout;
 const {Column, ColumnGroup} = Table;
-const data = [
-    {
-        key: '1',
-        firstName: 'John',
-        lastName: 'Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '2',
-        firstName: 'Jim',
-        lastName: 'Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        tags: ['loser'],
-    },
-    {
-        key: '3',
-        firstName: 'Joe',
-        lastName: 'Black',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-];
+
 
 class Playlist extends Component {
 
@@ -61,19 +36,9 @@ class Playlist extends Component {
         this.state = {
             action: null,
             playlists: [{}],
-            message: null,
-            deleted: 0,
-            mainPage: true,
-            addPlaylist: false,
-            editPlaylist: false,
-            description: '',
-            name: '',
-            id: -1,
-            added: 0,
-            purpose: '',
-            showAlert: false,
-            AlertMessage: '',
-            Alertvariant: '',
+            name:'',
+            description:'',
+            id:'',
         }
         this.editPlaylist = this.editPlaylist.bind(this);
         this.deletePlaylist = this.deletePlaylist.bind(this);
@@ -124,6 +89,9 @@ class Playlist extends Component {
             .catch((err) => {
                 message.error(err);
             })
+    }
+    componentDidMount() {
+        this.getPlaylist();
     }
 
     createPlaylist() {
