@@ -171,11 +171,11 @@ class Playlist extends Component {
                             rules={[{required: true, message: 'Please input playlist name!'}]}
                         >
                             <Input onChange={e => this.setState({name: e.target.value})}
-                                   defaultValue={this.state.name}/>
+                                   defaultValue={this.state.playlists.find(i => i.id === this.state.editId).name}/>
                         </Form.Item>
                         <Form.Item label='Description' name='description'>
                             <Input.TextArea onChange={e => this.setState({description: e.target.value})} rows={4}
-                                            defaultValue={this.state.description}/>
+                                            defaultValue={this.state.playlists.find(i => i.id === this.state.editId).description}/>
                         </Form.Item>
                         <Form.Item>
                             <Button type="primary" htmlType="submit">
