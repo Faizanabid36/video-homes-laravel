@@ -34,7 +34,7 @@ class Playlist extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            action: null,
+            action: false,
             playlists: [{}],
             name:'',
             description:'',
@@ -173,7 +173,7 @@ class Playlist extends Component {
                             <Input onChange={e => this.setState({name: e.target.value})}
                                    defaultValue={this.state.name}/>
                         </Form.Item>
-                        <Form.Item label={'Description'} name='description'>
+                        <Form.Item label='Description' name='description'>
                             <Input.TextArea onChange={e => this.setState({description: e.target.value})} rows={4}
                                             defaultValue={this.state.description}/>
                         </Form.Item>
@@ -184,7 +184,7 @@ class Playlist extends Component {
                         </Form.Item>
                     </Form>
                 </>;
-            case "default":
+            default:
                 return this.state.playlists.length > 1 ? <Table dataSource={this.state.playlists}>
                     <Column title="Name" dataIndex="name" key="name"/>
                     <Column title="Description" dataIndex="description" key="description"/>
