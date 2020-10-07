@@ -192,12 +192,10 @@ class Profile extends Component {
         }
         let self = this;
         if (info.file.status === 'done') {
-            console.log(info.file.status, info);
             // Get this url from response in real world.
             getBase64(info.file.originFileObj, imageUrl => {
 
                     let {user} = self.state;
-                console.log("yes",imageUrl,user);
                     if (user[key]) {
                         user[key] = imageUrl;
                         message.success(key.replace("_"," ")+" has been updated");
