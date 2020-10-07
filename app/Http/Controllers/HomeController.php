@@ -97,14 +97,14 @@ class HomeController extends Controller {
     }
 
     public function update_profile( Request $request ) {
-        $validator = Validator::make( request()->all(), [
+        request()->validate( [
             'username' => 'unique:users',
+            'name'     => 'required|min:4'
         ] );
-        if ( $validator->fails() ) {
-            return [ 'errors' => 'Username already taken' ];
-        }
+
 
         $user = auth()->user();
+
         $user->update( request()->only( [ 'name', 'username' ] ) );
         $user->user_extra()->update( request()->only(
             [
@@ -138,9 +138,10 @@ class HomeController extends Controller {
             'new_password'     => 'required|min:8',
             'confirm_password' => 'required|same:new_password',
         ] );
-        $message = auth()->user()->fill( [
+        $user    = auth()->user();
+        $message = $user->update( [
             'password' => Hash::make( \request( 'new_password' ) )
-        ] ) ? 'Password Successfully Changed' : 'Could Not Change Password';
+        ] ) ? 'Password Successfully Changed' : 'Something went wrong';
 
         return compact( 'message' );
     }

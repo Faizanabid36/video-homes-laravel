@@ -147,7 +147,7 @@ class Profile extends Component {
 
     handleSubmit(e) {
         let {user} = this.state
-        axios.post('update_profile', {user})
+        axios.post('update_profile', {...user})
             .then((res) => {
                 if (res.data.errors) {
                     message.error(res.data.errors);
