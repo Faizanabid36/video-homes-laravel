@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
-import {Avatar, Button, Card, Col, Divider, Empty, Image, Layout, PageHeader, Row} from 'antd';
-import {CloudUploadOutlined, EditOutlined, EllipsisOutlined, SettingOutlined} from '@ant-design/icons';
+import {Popconfirm, message ,Avatar, Button, Card, Col, Divider, Empty, Image, Layout, PageHeader, Row} from 'antd';
+import {DeleteOutlined,PlayCircleOutlined,CloudUploadOutlined, EditOutlined, EllipsisOutlined, SettingOutlined} from '@ant-design/icons';
 import axios from "axios";
 
 const {Content} = Layout;
@@ -14,15 +14,20 @@ class Video extends Component {
             approvedVideos: [],
             pendingVideos: [],
         }
+        this.loadData = this.loadData.bind(this);
+
     };
-    componentDidMount() {
-        axios.get('/all_videos')
+    loadData(){
+        axios.get('/video')
             .then((res) => {
                 this.setState({...res.data})
             })
             .catch((err) => {
                 console.log(err)
             })
+    }
+    componentDidMount() {
+        this.loadData();
     }
     render() {
         return (
@@ -88,7 +93,6 @@ class Video extends Component {
                         <Divider/>
                         <Row gutter={16}>
                             {this.state.pendingVideos.length > 0 ? this.state.pendingVideos.map((item, k) => {
-                                console.log(item)
                                 return <Col span={8} key={k}>
                                     <Card
                                         style={{width: 300}}
@@ -100,9 +104,29 @@ class Video extends Component {
 
                                         }
                                         actions={[
-                                            <SettingOutlined key="setting" />,
-                                            <EditOutlined key="edit" />,
-                                            <EllipsisOutlined key="ellipsis" />,
+                                            <PlayCircleOutlined onClick={e=>{
+                                                location.href = `${window.VIDEO_APP.base_url}/${item.user.username}/${item.video_id}`;
+                                            }} key='play' />,
+                                            <EditOutlined key="edit" onClick={e=>{
+                                                location.hash = `#edit_video/${item.video_id}`;
+                                            }} />,
+                                            <Popconfirm
+    title="Are you sure delete this task?"
+    onConfirm={(e) =>{
+        axios.delete(`video/${item.id}`).then(({data})=>{
+            message.success('Deleted');
+            this.loadData();
+        }).catch(error => message.error(error))
+        
+      }}
+    onCancel={(e) =>{
+        console.log(e);
+        message.error('Click on No');
+      }}
+    okText="Yes"
+    cancelText="No"
+  >
+                                            <DeleteOutlined key="delete" /></Popconfirm>,
                                         ]}
                                     >
                                         <Card.Meta

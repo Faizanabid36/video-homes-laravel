@@ -41,10 +41,7 @@ const {Dragger} = Upload;
 
 class UploadPage extends Component {
     constructor(props) {
-        super(props);
-        this.state = {
-        };
-
+        super(...arguments);
         this.onUpload = this.onUpload.bind(this);
     }
     onUpload(info) {
@@ -81,15 +78,11 @@ class UploadPage extends Component {
                         onBack={() => null}
                         title="Upload Video"
                     >
-                        <Dragger accept={".mov,.mp4,.wmv,.avi,.3gp,.flv"} headers={{ 'X-CSRF-TOKEN':window.document.head.querySelector('meta[name="csrf-token"]').content}} name='video' action={`${window.VIDEO_APP.base_url}/upload-video`} onChange={this.onUpload}>
+                        <Dragger accept={".mov,.mp4,.wmv,.avi,.3gp,.flv"} headers={{ 'X-CSRF-TOKEN':window.document.head.querySelector('meta[name="csrf-token"]').content}} name='video' action={`${window.VIDEO_APP.base_url}/video`} onChange={this.onUpload}>
                             <p className="ant-upload-drag-icon">
                                 <InboxOutlined/>
                             </p>
                             <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                            {/*<p className="ant-upload-hint">*/}
-                            {/*    Support for a single or bulk upload. Strictly prohibit from uploading company data or other*/}
-                            {/*    band files*/}
-                            {/*</p>*/}
                         </Dragger>
                     </PageHeader>
 

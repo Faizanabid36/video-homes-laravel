@@ -88,7 +88,7 @@ class EditableTagGroup extends Component {
                         return (
                             <Input
                                 ref={this.saveEditInputRef}
-                                key={tag}
+                                key={index}
                                 size="small"
                                 className="tag-input"
                                 value={editInputValue}
