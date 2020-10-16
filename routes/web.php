@@ -39,9 +39,9 @@ Route::group(
 		// Route::get( 'video_is_played/{id}', 'HomeController@video_is_played' )->name( 'video_is_played' );
 
 		// Dashboard
-		Route::get( '/dashboard_statistics', 'DashboardController@dashboard_type' )->name( 'dashboard_type' );
+		Route::post( '/dashboard_statistics', 'DashboardController@dashboard_type' )->name( 'dashboard_type' );
 		// Analytics
-		Route::get( '/get_all_statistics', 'DashboardController@get_all_statistics' );
+		Route::post( '/get_all_statistics', 'DashboardController@get_all_statistics' );
 
 		// Profile
 		Route::get( 'get_logged_user', 'HomeController@logged_user' );
