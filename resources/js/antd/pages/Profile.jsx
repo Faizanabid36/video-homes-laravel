@@ -113,11 +113,6 @@ class Profile extends Component {
             ]
         };
         this.formRef = React.createRef();
-        this.onGenderChange = this.onGenderChange.bind(this);
-        this.onFinish = this.onFinish.bind(this);
-        this.onReset = this.onReset.bind(this);
-        this.onFill = this.onFill.bind(this);
-        this.onChange = this.onChange.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.beforeUpload = this.beforeUpload.bind(this);
         this.defaultValue = this.defaultValue.bind(this);
@@ -128,7 +123,7 @@ class Profile extends Component {
 
     changePassword() {
         let {old_password, new_password, confirm_password} = this.state
-        axios.post('change_password', {old_password, new_password, confirm_password})
+        axios.put('profile/1', {old_password, new_password, confirm_password})
             .then((res) => {
                 console.log(res.data)
                 if (res.data.message)
@@ -147,7 +142,7 @@ class Profile extends Component {
 
     handleSubmit(e) {
         let {user} = this.state
-        axios.post('update_profile', {user})
+        axios.put('profile/1', {...user})
             .then((res) => {
                 if (res.data.errors) {
                     message.error(res.data.errors);
@@ -190,15 +185,16 @@ class Profile extends Component {
             this.setState({loading: true});
             return;
         }
+        let self = this;
         if (info.file.status === 'done') {
-            console.log(info.file.status, info);
             // Get this url from response in real world.
             getBase64(info.file.originFileObj, imageUrl => {
-                    let {user} = this.state;
+
+                    let {user} = self.state;
                     if (user[key]) {
                         user[key] = imageUrl;
                         message.success(key.replace("_"," ")+" has been updated");
-                        this.setState({
+                        self.setState({
                             user,
                             loading: false,
                         })
@@ -208,30 +204,8 @@ class Profile extends Component {
         }
     };
 
-    onChange({fileList}) {
-        this.setState({fileList});
-    };
 
-    onGenderChange() {
-        this.formRef.current.setFieldsValue({
-            note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`,
-        });
-    };
 
-    onFinish() {
-        console.log(values);
-    };
-
-    onReset() {
-        this.formRef.current.resetFields();
-    };
-
-    onFill() {
-        this.formRef.current.setFieldsValue({
-            note: 'Hello world!',
-            gender: 'male',
-        });
-    };
 
     componentDidMount() {
         axios.get('profile')
@@ -244,20 +218,20 @@ class Profile extends Component {
     }
 
     render() {
-        const onPreview = async file => {
-            let src = file.url;
-            if (!src) {
-                src = await new Promise(resolve => {
-                    const reader = new FileReader();
-                    reader.readAsDataURL(file.originFileObj);
-                    reader.onload = () => resolve(reader.result);
-                });
-            }
-            const image = new Image();
-            image.src = src;
-            const imgWindow = window.open(src);
-            imgWindow.document.write(image.outerHTML);
-        };
+        // const onPreview = async file => {
+        //     let src = file.url;
+        //     if (!src) {
+        //         src = await new Promise(resolve => {
+        //             const reader = new FileReader();
+        //             reader.readAsDataURL(file.originFileObj);
+        //             reader.onload = () => resolve(reader.result);
+        //         });
+        //     }
+        //     const image = new Image();
+        //     image.src = src;
+        //     const imgWindow = window.open(src);
+        //     imgWindow.document.write(image.outerHTML);
+        // };
         const {loading, imageUrl} = this.state;
         const uploadButton = (
             <div>
@@ -292,11 +266,7 @@ class Profile extends Component {
                                                placeholder="Full Name"/>
                                     </Form.Item>
 
-                                    <Form.Item label="Company Name" required rules={[
-                                        {
-                                            required: true,
-                                        },
-                                    ]}>
+                                    <Form.Item label="Company Name" required rules={[{required: true}]}>
                                         <Input value={this.defaultValue('company_name')}
                                                name='company_name'
                                                onChange={(e) => this.handleChangeInput(e)}
@@ -308,6 +278,13 @@ class Profile extends Component {
                                                name='username'
                                                onChange={(e) => this.handleChangeInput(e)}
                                                value={this.defaultValue('username')} placeholder="Personal URL"/>
+                                    </Form.Item>
+
+                                    <Form.Item label="Website URL" required>
+                                        <Input addonBefore='https://'
+                                               name='website'
+                                               onChange={(e) => this.handleChangeInput(e)}
+                                               value={this.defaultValue('website')} placeholder="Website URL"/>
                                     </Form.Item>
                                     <Form.Item label="Facebook" required>
                                         <Input addonBefore="https://www.facebook.com/"
@@ -403,18 +380,18 @@ class Profile extends Component {
                                     </Form.Item>
                                     <Form.Item label="Profession and Expertise">
                                         {this.state.categories.length > 0 && <>
-                                            <Select showSearch name="category_id"
+                                            <Select defaultValue={this.defaultValue('user_category_id')} showSearch name="user_category_id"
+                                                    onChange={e=>this.handleChangeInput(e,'user_category_id')}
                                                     placeholder="Choose one of the following Profession and Expertise...">
                                                 {this.state.categories.map((u, key) => u['children'].length > 0 &&
                                                     <Select.OptGroup key={key} label={u['name']}>
                                                         {u['children'].map((u1, k) => {
                                                             return u1['children'].length > 0 ? u1['children'].map((u2, k) =>
                                                                     <Select.Option key={key * 1000}
-                                                                                   selected={u2['id'] === this.defaultValue('user_category_id')}
                                                                                    value={u2['id']}
                                                                                    data-subtext={u1['name']}>{u2['name']}</Select.Option>) :
                                                                 <Select.Option key={key * 1000}
-                                                                               selected={u1['id'] === this.defaultValue('user_category_id')}
+
                                                                                value={u1['id']}>{u1['name']}</Select.Option>;
                                                         })}</Select.OptGroup>)}
                                             </Select>

@@ -25,32 +25,36 @@ class EditVideo extends Component {
             categories: [],
         };
         this.onChange = this.onChange.bind(this);
-        this.saveTags = this.saveTags.bind(this);
+        this.onUpdate = this.onUpdate.bind(this);
         this.defaultValue = this.defaultValue.bind(this);
+        console.log("yes edit video")
+    }   
 
+
+    onChange(e,key) {
+        let {video} = this.state;
+        video[key] = e.target ?  e.target.value : e;
+        this.setState({video});
+                    
     }
-
-
-    onChange(a, b, c) {
-        console.log(a, b, c);
+    onUpdate(){
+        let self = this;
+        axios.put(`video/${this.props.match.params.id}`,{...this.state.video}).then(({data})=>{
+            console.log(data);
+        })
     }
 
     componentDidMount() {
         let self = this;
-        axios.get(`edit_video/${this.props.match.params.id}`).then(({data}) => {
+        axios.get(`video/${this.props.match.params.id}`).then(({data}) => {
             data.video.tags = data.video.tags ?? [];
             let index = data.video.thumbnail.match(/-(\d+).png/);
             if (index && index[1]) {
                 data.current_slide = index[1] - 1;
-                // goTo(data.current_tag,false);
             }
             self.setState({...data,enable:true});
-            console.log(this.state);
+            
         })
-    }
-
-    saveTags(tags) {
-        this.setState({tags});
     }
 
     defaultValue(key,defaultValue = '') {
@@ -71,7 +75,6 @@ class EditVideo extends Component {
             textAlign: 'center',
             background: '#364d79',
         };
-        console.log(this.state.video);
         return (
             <Layout.Content style={{padding: '20px 50px'}}>
                 <div className="site-layout-content">
@@ -80,9 +83,9 @@ class EditVideo extends Component {
                         onBack={() => null}
                         title="Edit Video"
                     >
-                        {this.state.enable && <Form ref={this.formRef} name="control-ref" onFinish={this.onFinish} layout="vertical">
+                        {this.state.enable && <Form ref={this.formRef} name="control-ref" layout="vertical">
                             {Object.values(this.state.thumbnails).length > 0 &&
-                            <Carousel slickGoTo={this.state.current_slide} afterChange={this.onChange}>
+                            <Carousel slickGoTo={this.state.current_slide} afterChange={e=>this.onChange(e,'thumbnails')}>
                                 {Object.values(this.state.thumbnails).map((v, k) => <div key={k} style={contentStyle}>
                                     <Image src={window.VIDEO_APP.base_url + "/storage/" + v}/>
                                 </div>)}
@@ -90,24 +93,24 @@ class EditVideo extends Component {
 
 
                             <Form.Item label="Title" required rules={[{required: true}]}>
-                                <Input defaultValue={this.defaultValue(["video","title"])} value={this.state.video.title}
+                                <Input onChange={e=>this.onChange(e,'title')} defaultValue={this.defaultValue(["video","title"])}
                                        placeholder="Title"/>
                             </Form.Item>
 
                             <Form.Item label="Description" required rules={[{required: true}]}>
-                                <Input.TextArea defaultValue={this.defaultValue(["video","description"])} placeholder="Description"/>
+                                <Input.TextArea autoSize={true} onChange={e=>this.onChange(e,'description')} defaultValue={this.defaultValue(["video","description"])} placeholder="Description"/>
                             </Form.Item>
                             <Form.Item label="Tags" required rules={[{required: true}]}>
-                                <EditableTagGroup tags={this.defaultValue(["video","tags",[]])} saveTags={this.saveTags}/>
+                                <EditableTagGroup tags={this.defaultValue(["video","tags"],[])} saveTags={e=>this.onChange(e,'tags')}/>
                             </Form.Item>
                             <Form.Item label="Category">
                                 {this.state.categories.length && <Select
                                     defaultValue={this.defaultValue(["video","category_id"])}
                                     showSearch
-                                    style={{ width: 200 }}
+                                    
                                     placeholder="Select a Category"
                                     optionFilterProp="children"
-                                    onChange={this.onChange}
+                                    onChange={e=>this.onChange(e,'category_id')}
                                     filterOption={(input, option) =>
                                         option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                     }
@@ -115,7 +118,7 @@ class EditVideo extends Component {
                                     {this.state.categories.map((e,k)=><Select.Option key={k} value={e.id}>{e.name}</Select.Option>)}
                                 </Select>}
                             </Form.Item>
-                            <Button type='submit'>Update</Button>
+                            <Button onClick={this.onUpdate}>Update</Button>
                         </Form>}
                     </PageHeader>
 

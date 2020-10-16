@@ -17,7 +17,7 @@ function App() {
         <Route path="/analytics" exact component={Analytics}/>
         <Route path="/profile" exact component={Profile}/>
         <Route path="/upload" exact component={UploadPage}/>
-        <Route path="/edit_video/:id" exact component={EditVideo}/>
+        <Route path="/edit_video/:id" component={EditVideo}/>
     </AppLayout>
 }
 

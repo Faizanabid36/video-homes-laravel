@@ -12,34 +12,31 @@ use App\VideoLikesDislikes;
 use App\VideoView;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
-class HomeController extends Controller
-{
+class HomeController extends Controller {
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
+    public function __construct() {
+        $this->middleware( 'auth' );
     }
 
-    public function logged_in_user()
-    {
-        return ['user' => User::whereId(auth()->user()->id)->with('user_extra')->first()];
+    public function logged_in_user() {
+        return [ 'user' => User::whereId( auth()->user()->id )->with( 'user_extra' )->first() ];
     }
 
 
-    public function logged_user()
-    {
+    public function logged_user() {
         $data = UserCategory::levelCategories();
 
         return [
-            'user' => collect(auth()->user()->user_extra)->merge(auth()->user())->except([
+            'user'       => collect( auth()->user()->user_extra )->merge( auth()->user() )->except( [
                 'user_extra',
                 'user_id'
-            ]),
+            ] ),
             'categories' => $data
         ];
 
@@ -49,13 +46,22 @@ class HomeController extends Controller
         return [ "success" => $user->delete() ];
     }
 
-    public function edit_user_profile( User $user ) {
+    public function edit_user_profile(  ) {
+        $user = auth()->id();
         if ( request( 'currentPassword' ) ) {
 
             request()->validate( [
-                'currentPassword' => 'required|password',
-                'newPassword'     => 'required|min:8',
-                'confirmPassword' => 'required|same:newPassword',
+                'old_password'     => [
+                    'required',
+                    'password',
+                    function ( $attribute, $value, $fail ) {
+                        if ( ! Hash::check( $value, auth()->user()->password ) ) {
+                            $fail( 'Your password was not updated, since the provided current password does not match.' );
+                        }
+                    }
+                ],
+                'new_password'     => 'required|min:8',
+                'confirm_password' => 'required|same:new_password',
             ] );
             $user->password = Hash::make( request( 'newPassword' ) );
 
@@ -76,79 +82,81 @@ class HomeController extends Controller
             \Storage::disk( 'public' )->put( "uploads/images/$name", $imageUpload );
             request()->merge( [ 'profile_picture' => asset( "storage/uploads/images/$name" ) ] );
         }
+
+        request()->validate( [
+            'username'         => 'unique:users,username,' . auth()->id(),
+            'name'             => 'required|min:4',
+            'company_name'     => 'required|min:4',
+            'user_category_id' => 'required',
+        ] );
         $user->update( request()->only( [ 'username', 'name' ] ) );
 
-        return UserExtra::updateOrCreate( [ "user_id" => $user->id ], request()->except( [
-            'username',
-            'name',
-            'email',
-            'id',
-            'active',
-            'role',
-            'updated_at',
-            'created_at',
-            'email_verified_at',
-            'remember_token',
-            'password',
-            "user_id",
-            "stripe_id",
-            "card_brand",
-            "card_last_four",
-            "trial_ends_at",
-        ]));
+        return UserExtra::updateOrCreate( [ "user_id" => $user->id ], request()->only(  [
+            'bio',
+            'facebook',
+            'instagram',
+            'youtube',
+            'location_latitude',
+            'location_longitude',
+            'direct_phone',
+            'address',
+            'office_phone',
+            'company_name',
+            'license_no',
+            'user_category_id'
+        ]  ) );
 
     }
 
-    public function update_profile(Request $request)
-    {
-        $user = \request('user');
-        $exists = User::whereUsername($user['username'])->where('id', '!=', auth()->user()->id)->first();
-        if (!is_null($exists))
-            return ['errors' => 'Username already taken'];
-        User::whereId($user['id'])->update(
+    public function update_profile( Request $request ) {
+        request()->validate( [
+            'username'         => 'unique:users,username,' . auth()->id(),
+            'name'             => 'required|min:4',
+            'company_name'     => 'required|min:4',
+            'user_category_id' => 'required',
+        ] );
+
+        $user = auth()->user();
+        $user->update( request()->only( [ 'name', 'username' ] ) );
+        $user->user_extra()->update( request()->only(
             [
-                'name' => $user['name'],
-                'username' => $user['username'],
-                'address' => $user['address'],
-                'liscense' => $user['license_no'],
-                'website_title' => $user['website_title'],
-                'website_link' => $user['website_link'],
-                'bio' => $user['bio'],
-            ]
-        );
-        UserExtra::whereUserId($user['id'])->update([
-            'bio' => $user['bio'],
-            'facebook' => $user['facebook'],
-            'instagram' => $user['instagram'],
-            'youtube' => $user['youtube'],
-            'location_latitude' => $user['location_latitude'],
-            'location_longitude' => $user['location_longitude'],
-            'direct_phone' => $user['direct_phone'],
-            'address' => $user['address'],
-            'office_phone' => $user['office_phone'],
-            'company_name' => $user['company_name'],
-            'license_no' => $user['license_no']
-        ]);
-        return ['success' => 'Successfully Updated'];
+                'bio',
+                'facebook',
+                'instagram',
+                'youtube',
+                'location_latitude',
+                'location_longitude',
+                'direct_phone',
+                'address',
+                'office_phone',
+                'company_name',
+                'license_no',
+                'user_category_id'
+            ] ) );
+
+        return response( [ 'success' => 'Successfully Updated' ] );
     }
 
-    public function change_password(Request $request)
-    {
-        $this->validate($request, [
-            'old_password' => 'required|password',
-            'new_password' => 'required|min:8',
+    public function change_password( Request $request ) {
+        $request->validate( [
+            'old_password'     => [
+                'required',
+                'password',
+                function ( $attribute, $value, $fail ) {
+                    if ( ! Hash::check( $value, auth()->user()->password ) ) {
+                        $fail( 'Your password was not updated, since the provided current password does not match.' );
+                    }
+                }
+            ],
+            'new_password'     => 'required|min:8',
             'confirm_password' => 'required|same:new_password',
-        ]);
-        $User = User::whereId(auth()->user()->id)->first();
-        $password = \request('old_password');
-        if (\Hash::check($password, $User->password)) {
-            $message = User::whereId(auth()->user()->id)->update([
-                'password' => Hash::make(\request('new_password'))
-            ]) ? 'Password Successfully Changed' : 'Could Not Change Password';
-            return compact('message');
-        }
-        $message = 'Incorrect Password Entered';
-        return compact('message');
+        ] );
+        $user    = auth()->user();
+        $message = $user->update( [
+            'password' => Hash::make( \request( 'new_password' ) )
+        ] ) ? 'Password Successfully Changed' : 'Something went wrong';
+
+        return compact( 'message' );
     }
 
 //    public function edit_user_profile1()
@@ -216,28 +224,27 @@ class HomeController extends Controller
 //        }
 //    }
 
-    public function block_user()
-    {
-        if (\request('tab') == 'block-user') {
-            $user = User::where('username', \request('selectedValue'))->with('blockedbyusers')->first();
+    public function block_user() {
+        if ( \request( 'tab' ) == 'block-user' ) {
+            $user           = User::where( 'username', \request( 'selectedValue' ) )->with( 'blockedbyusers' )->first();
             $alreadyblocked = false;
-            if (!is_null($user->blockedby)) {
-                foreach ($user->blockedby as $blockedby) {
-                    if ($blockedby['blocked_user_id'] == $user['id'] && $blockedby['user_id'] == auth()->user()->id) {
+            if ( ! is_null( $user->blockedby ) ) {
+                foreach ( $user->blockedby as $blockedby ) {
+                    if ( $blockedby['blocked_user_id'] == $user['id'] && $blockedby['user_id'] == auth()->user()->id ) {
                         $alreadyblocked = true;
                     }
                 }
             }
             $blocked = null;
-            if (!$alreadyblocked) {
-                $blocked = BlockedUser::create([
-                    'user_id' => auth()->user()->id,
+            if ( ! $alreadyblocked ) {
+                $blocked = BlockedUser::create( [
+                    'user_id'         => auth()->user()->id,
                     'blocked_user_id' => $user['id'],
-                ]);
+                ] );
             }
-            $message = !$alreadyblocked && !is_null($blocked) ? 'User Blocked Successfully' : 'Could Not Block User';
+            $message = ! $alreadyblocked && ! is_null( $blocked ) ? 'User Blocked Successfully' : 'Could Not Block User';
 
-            return compact('message', 'user');
+            return compact( 'message', 'user' );
         } elseif ( \request( 'tab' ) == 'privacy-settings' ) {
             if ( ! is_null( \request( 'whoWatches' ) ) ) {
                 UserExtra::updateOrCreate( [ 'user_id' => auth()->user()->id ], [ 'who_watches' => \request( 'whoWatches' ) ] );

@@ -1,44 +1,49 @@
+<<<<<<< HEAD
 import React, {Component} from 'react';
 
 import {Button, Empty, Layout, PageHeader, Space, Table} from 'antd';
 import {CloudUploadOutlined} from '@ant-design/icons';
+=======
+import React, { Component } from 'react';
+
+import {
+    Image,
+    Card,
+    Drawer,
+    Divider,
+    PageHeader,
+    Menu,
+    Dropdown,
+    Button,
+    Space,
+    Tag,
+    Typography,
+    Row,
+    Layout,
+    Badge,
+    Avatar,
+    notification,
+    message,
+    Progress,
+    Tabs, Col, Table, Empty,
+    Form, Input
+} from 'antd';
+import { CloudUploadOutlined, EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+>>>>>>> b4684fa6c05180c10cd3f0e275e413038fabd0ce
 import axios from "axios";
 
 const {Content} = Layout;
 const {Column, ColumnGroup} = Table;
-const data = [
-    {
-        key: '1',
-        firstName: 'John',
-        lastName: 'Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '2',
-        firstName: 'Jim',
-        lastName: 'Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        tags: ['loser'],
-    },
-    {
-        key: '3',
-        firstName: 'Joe',
-        lastName: 'Black',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-];
+
 
 class Playlist extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            action: false,
             playlists: [{}],
+<<<<<<< HEAD
             message: null,
             deleted: 0,
             mainPage: true,
@@ -61,11 +66,17 @@ class Playlist extends Component {
                 dataIndex: 'description',
                 key: 'description',
             }]
+=======
+            name:'',
+            description:'',
+            id:'',
+>>>>>>> b4684fa6c05180c10cd3f0e275e413038fabd0ce
         }
         this.editPlaylist = this.editPlaylist.bind(this);
         this.deletePlaylist = this.deletePlaylist.bind(this);
         this.getPlaylist = this.getPlaylist.bind(this);
         this.createPlaylist = this.createPlaylist.bind(this);
+        this._render = this._render.bind(this);
     }
 
     componentDidMount() {
@@ -84,7 +95,12 @@ class Playlist extends Component {
     }
 
     deletePlaylist(id, e) {
+<<<<<<< HEAD
         axios.delete('playlist/' + id)
+=======
+
+        axios.delete('/playlist/' + id)
+>>>>>>> b4684fa6c05180c10cd3f0e275e413038fabd0ce
             .then((res) => {
                 console.log(res);
                 this.setState({deleted: res.data.deleted})
@@ -97,45 +113,143 @@ class Playlist extends Component {
     }
 
     editPlaylist(e) {
-        let {name, description, purpose, id} = this.state;
+        let {name, description, id} = this.state;
 
-        axios.put('/playlist/'+id, {name, description, purpose, id})
-            .then((res) => {
-                this.setState({added: res.data.added, mainPage: true, addPlaylist: false, editPlaylist: false,})
+        axios.put('/playlist/' + id, {name, description})
+            .then(({data}) => {
                 this.getPlaylist()
-                if (this.state.added) {
+                this.setState({action: null})
+                if (data.status) {
+                    message.success(data.message);
+                } else {
+                    message.error(data.message);
+                }
 
-                    this.setState({showAlert: true, variant: 'primary', AlertMessage: 'Setting Saved'});
-
-                } else
-                    // alert('Some Error Occured')
-                    this.setState({showAlert: true, variant: 'danger', AlertMessage: 'Some Error Occured'});
 
             })
             .catch((err) => {
-                console.log(err)
+                message.error(err);
             })
+    }
+    componentDidMount() {
+        this.getPlaylist();
     }
 
     createPlaylist() {
-        let {name, description, purpose, id} = this.state;
+        let {name, description} = this.state;
 
-        axios.post('/playlist/', {name, description, purpose, id})
-            .then((res) => {
-                this.setState({added: res.data.added, mainPage: true, addPlaylist: false, editPlaylist: false,})
+        axios.post('/playlist/', {name, description})
+            .then(({data}) => {
                 this.getPlaylist()
-                if (this.state.added) {
+                this.setState({action: null})
+                if (data.status) {
+                    message.success(data.message);
+                } else {
+                    message.error(data.message);
+                }
 
-                    this.setState({showAlert: true, variant: 'primary', AlertMessage: 'Setting Saved'});
-
-                } else
-                    // alert('Some Error Occured')
-                    this.setState({showAlert: true, variant: 'danger', AlertMessage: 'Some Error Occured'});
 
             })
             .catch((err) => {
-                console.log(err)
+                message.error(err);
             })
+    }
+
+    _render() {
+        const layout = {
+            labelCol: {
+                span: 8,
+            },
+            wrapperCol: {
+                span: 16,
+            },
+        };
+        switch (this.state.action) {
+
+            case "create":
+                return <>
+                    <Form
+                        {...layout}
+                        name="basic"
+                        initialValues={{remember: true}}
+                        onFinish={this.createPlaylist}
+                        onFinishFailed={e => {
+                            message.error("Something went wrong");
+                        }}
+                    >
+                        <Form.Item
+                            label="Name"
+                            name="name"
+                            rules={[{required: true, message: 'Please input your username!'}]}
+                            onChange={e => this.setState({name: e.target.value})}
+                        >
+                            <Input/>
+                        </Form.Item>
+                        <Form.Item label={'Description'} name='description'>
+                            <Input.TextArea onChange={e => this.setState({description: e.target.value})} rows={4}/>
+                        </Form.Item>
+                        <Form.Item>
+                            <Button type="primary" htmlType="submit">
+                                Submit
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                </>;
+            case "edit":
+                return <>
+                    <Form
+                        {...layout}
+                        name="basic"
+                        initialValues={{
+                            name:this.state.playlists.find(i => i.id === this.state.id).name,
+                            description: this.state.playlists.find(i => i.id === this.state.id).description
+                        }}
+                        onFinish={this.editPlaylist}
+                        onFinishFailed={e => {
+                            message.error("Something went wrong");
+                        }}
+                    >
+                        <Form.Item
+                            label="Name"
+                            name="name"
+                            rules={[{required: true, message: 'Please input playlist name!'}]}
+                        >
+                            <Input onChange={e => this.setState({name: e.target.value})}
+                                   defaultValue={this.state.playlists.find(i => i.id === this.state.id).name}/>
+                        </Form.Item>
+                        <Form.Item label='Description' name='description'>
+                            <Input.TextArea onChange={e => this.setState({description: e.target.value})} rows={4}
+                                            defaultValue={this.state.playlists.find(i => i.id === this.state.id).description}/>
+                        </Form.Item>
+                        <Form.Item>
+                            <Button type="primary" htmlType="submit">
+                                Submit
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                </>;
+            default:
+                return this.state.playlists.length > 0 ? <Table dataSource={this.state.playlists}>
+                    <Column title="Name" dataIndex="name" key="name"/>
+                    <Column title="Description" dataIndex="description" key="description"/>
+                    <Column
+                        title="Action"
+                        key="action"
+                        render={(text, record) => (
+                            <Space size="middle" key={text.id}>
+                                <Button type="primary"
+                                        onClick={e => this.setState({
+                                            action: 'edit',
+                                            id: text.id
+                                        })}><CloudUploadOutlined/> Edit</Button>
+                                <Button type="primary"
+                                        onClick={e => this.deletePlaylist(text.id)}><CloudUploadOutlined/> Delete</Button>
+                            </Space>
+                        )}
+                    />
+                </Table> : <Empty description={"No Playlist found"}><Button type="primary"
+                                                                            onClick={e => this.setState({action: 'create'})}><CloudUploadOutlined/> Create</Button></Empty>;
+        }
     }
 
     render() {
@@ -145,8 +259,13 @@ class Playlist extends Component {
                     <PageHeader
                         className="site-page-header site-page-header-responsive"
                         onBack={() => window.location.hash = "#/"}
-                        title="Playlist"
+                        title={(this.state.action ? this.state.action + " " : "") + 'Playlist'}
+                        extra={[
+                            <Button type="primary"
+                                    onClick={e => this.setState({action: 'create'})}><CloudUploadOutlined/> Create</Button>,
+                        ]}
                     >
+<<<<<<< HEAD
                         {this.state.playlists.length > 0 ?
                             <Table dataSource={this.state.playlists}>
                                 <Column title="Name" dataIndex="name" key="name"/>
@@ -167,6 +286,9 @@ class Playlist extends Component {
                                 />
                             </Table> : <Empty description={"No Playlist found"}><Button type="primary"
                                                                                         onClick={this.createPlaylist}><CloudUploadOutlined/> Create</Button></Empty>}
+=======
+                        {this._render()}
+>>>>>>> b4684fa6c05180c10cd3f0e275e413038fabd0ce
                     </PageHeader>
 
                 </div>
