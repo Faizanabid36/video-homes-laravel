@@ -1,53 +1,54 @@
-import React, { Component } from 'react';
-import { Line, Pie,Bar } from '@ant-design/charts';
-import {
-    Drawer,
-    Divider,
-    PageHeader,
-    Menu,
-    Dropdown,
-    Button,
-    Space,
-    Tag,
-    Typography,
-    Table,
-    Row, Col,
-    Layout,
-    Badge,
-    Avatar,
-    notification,
-    Progress,
-    Tabs,
-    Card
-} from 'antd';
+import React, {Component} from 'react';
+import {Bar, Line, Pie} from '@ant-design/charts';
+import {Card, Col, Layout, Row} from 'antd';
+import axios from "axios";
 
 const {Content} = Layout;
 
 class Dashboard extends Component {
+    constructor() {
+        super();
+        this.state = {
+            lineChart: [],
+            barData: []
+        }
+    }
+
+    componentDidMount() {
+        axios.get('get_dashboard_statistics')
+            .then((res) => {
+                console.log(res.data.lineChart)
+                this.setState({...res.data})
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
     render() {
         const data = [
             {
-                type: '分类一',
+                type: 'A',
                 value: 27,
             },
             {
-                type: '分类二',
+                type: 'B',
                 value: 25,
             },
             {
-                type: '分类三',
+                type: 'C',
                 value: 18,
             },
             {
-                type: '分类四',
+                type: 'D',
                 value: 15,
             },
             {
-                type: '分类五',
+                type: 'E',
                 value: 10,
             },
             {
-                type: '其它',
+                type: 'F',
                 value: 5,
             },
         ];
@@ -103,63 +104,51 @@ class Dashboard extends Component {
             <Content style={{padding: '20px 50px'}}>
                 <div className="site-layout-content">
                     <div className="site-card-wrapper">
+                        {/*<Row gutter={16}>*/}
+                        {/*    <Col span={24}>*/}
+                        {/*        <Table dataSource={dataSource} columns={columns} />*/}
+                        {/*    </Col>*/}
+                        {/*</Row>*/}
                         <Row gutter={16}>
-                            <Col span={24}>
-                                <Table dataSource={dataSource} columns={columns} />
-                            </Col>
-                        </Row>
-                        <Row gutter={16}>
-                            <Col span={8}>
-                                <Card title="Card title" bordered={false}>
+                            <Col span={12}>
+                                <Card title="Traffic Source" bordered={false}>
                                     <Pie style={{width: "100%", height: "400px"}} {...config}/>
                                 </Card>
                             </Col>
-                            <Col span={8}>
-                                <Card title="Card title" bordered={false}>
-                                    <Line style={{width: "100%", height: "400px"}}  {...{
-                                        data:[
-                                        {year: '1991', value: 3},
-                                          {year:'1992', value:4},
-                                          {year:'1993', value:3.5},
-                                          {year:'1994', value:5},
-                                          {year:'1995', value:4.9},
-                                          {year:'1996', value:6},
-                                          {year:'1997', value:7},
-                                          {year:'1998', value:9},
-                                          {year:'1999', value:13},
-                                              ],
-                                              title:{
-                                              visible:true,
-                                              text : 'Line chart with data points' ,
-                                          },
-                                              xField:'year',
-                                              yField:'value',
-                                          }}/>
+                            <Col span={12}>
+                                <Card title="Player Impressions" bordered={false}>
+                                    <Pie style={{width: "100%", height: "400px"}} {...config}/>
                                 </Card>
                             </Col>
-                            <Col span={8}>
+                            <Col span={12}>
+                                <Card title="Card title" bordered={false}>
+                                    <Line style={{width: "100%", height: "400px"}}  {...{
+                                        data: this.state.lineChart,
+                                        title: {
+                                            visible: true,
+                                            text: 'Line chart with data points',
+                                        },
+                                        xField: 'date',
+                                        yField: 'views',
+                                    }}/>
+                                </Card>
+                            </Col>
+                            <Col span={12}>
                                 <Card title="Card title" bordered={false}>
                                     <Bar style={{width: "100%", height: "400px"}}  {...{
-                                        data:[
-                                            { 地区: '华东', 销售额: 1.442 },
-                                    { 地区: '中南', 销售额: 2.0929999948 },
-                                    { 地区: '东北', 销售额: 3.469000001 },
-                                    { 地区: '华北', 销售额: 4.017000004 },
-                                    { 地区: '西南', 销售额: 5.508000002 },
-                                    { 地区: '西北', 销售额: 2.5959999998 },
-                                        ],
+                                        data: this.state.barData,
                                         title: {
-                                        visible: true,
-                                        text: '基础条形图',
-                                    },
+                                            visible: true,
+                                            text: '基础条形图',
+                                        },
                                         forceFit: true,
 
-                                        xField: '销售额',
-                                        yField: '地区',
+                                        xField: 'views_count',
+                                        yField: 'original_name',
                                         label: {
-                                        visible: true,
-                                        formatter: (v) => Math.round(v / 10000) + '万',
-                                    },
+                                            visible: true,
+                                            formatter: (v) => Math.round(v / 10000) + '万',
+                                        },
                                     }}/>
                                 </Card>
                             </Col>

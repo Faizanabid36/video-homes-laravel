@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use App\Comment;
 use App\Jobs\ConvertVideoForStreaming;
 use App\Video;
-use App\VideoAction;
-use App\VideoView;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -17,46 +14,18 @@ class VideosController extends Controller {
 	/**
 	 * Display a listing of the resource.
 	 *
-	 * @return \Illuminate\Http\Response
+	 * @return array
 	 */
 	public function index() {
 
-		$Videos = Video::where( 'user_id', auth()->id() )->where( 'processed', 1 )->latest()->with( array( 'user', 'category' ) )->get();
+        $Videos = Video::where('user_id', auth()->id())->where('processed', 1)->latest()
+            ->with(array('user', 'category'))->withCount('views')->get();
 
-		$videos = $Videos->groupBy( 'is_video_approved' );
-
-		$pendingVideos  = array();
-		$approvedVideos = array();
-		if ( isset( $videos[0] ) ) {
-			$pendingVideos = collect( $videos[0] )->map(
-				function ( $video ) {
-					$v     = VideoView::getTotalVideoViews( $video );
-					$views = ! is_null( $v ) ? $v : 0;
-					return collect( $video )->merge(
-						array(
-							'views'   => $views,
-							'daysAgo' => $video->created_at->diffForHumans(),
-						)
-					);
-				}
-			);
-		}
-		if ( isset( $videos[1] ) ) {
-			$approvedVideos = collect( $videos[1] )->map(
-				function ( $video ) {
-					$v     = VideoView::getTotalVideoViews( $video );
-					$views = ! is_null( $v ) ? $v : 0;
-					return collect( $video )->merge(
-						array(
-							'views'   => $views,
-							'daysAgo' => $video->created_at->diffForHumans(),
-						)
-					);
-				}
-			);
-		}
-		return compact( 'approvedVideos', 'pendingVideos' );
-	}
+        $videos = $Videos->groupBy('is_video_approved');
+        $pendingVideos = isset($videos[0]) ? $videos[0] : [];
+        $approvedVideos = isset($videos[1]) ? $videos[1] : [];
+        return compact('approvedVideos', 'pendingVideos');
+    }
 
 	/**
 	 * Show the form for creating a new resource.
@@ -138,7 +107,7 @@ class VideosController extends Controller {
 	 * Display the specified resource.
 	 *
 	 * @param  int $id
-	 * @return \Illuminate\Http\Response
+	 * @return array
 	 */
 	public function show( $id ) {
 		$video      = Video::whereVideoId( $id )->without( array( 'user', 'comments' ) )->firstOrFail();
@@ -167,18 +136,19 @@ class VideosController extends Controller {
 	 *
 	 * @param  \Illuminate\Http\Request $request
 	 * @param  int                      $id
-	 * @return \Illuminate\Http\Response
+	 * @return array
 	 */
 	public function update( $id ) {
 		$video = Video::whereVideoId( $id )->firstOrFail();
-		return array( 'status' => $video->update( request( array( 'description', 'title', 'thumbnail', 'video_type', 'tags', 'category_id' ) ) ) );
+		return array( 'status' => $video
+            ->update( request( array( 'description', 'title', 'thumbnail', 'video_type', 'tags', 'category_id' ) ) ) );
 	}
 
 	/**
 	 * Remove the specified resource from storage.
 	 *
 	 * @param  int $id
-	 * @return \Illuminate\Http\Response
+	 * @return int[]
 	 */
 	public function destroy( $id ) {
 		Video::whereUserId( auth()->id() )->find( $id )->delete();

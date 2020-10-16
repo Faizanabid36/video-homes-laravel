@@ -1,17 +1,14 @@
 import React from 'react';
-import {Button, Card} from 'react-bootstrap';
-import {Tabs, Tab , Col ,Container ,Row} from 'react-bootstrap' ;
+import {Button, Card, Col, Container, Row, Tab, Tabs} from 'react-bootstrap';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {
-    faEye,
-    faComment
-} from "@fortawesome/free-solid-svg-icons";
+import {faComment, faEye} from "@fortawesome/free-solid-svg-icons";
 // import DatePicker from "react-datepicker";
 // import "react-datepicker/dist/react-datepicker.css";
 import ViewsChart from "./Analytics/ViewsChart";
 
 import 'bootstrap-daterangepicker/daterangepicker.css';
 
+import DatePicker from "react-datepicker";
 import DateRangePicker from 'react-bootstrap-daterangepicker';
 
 class Analytics extends React.Component {
@@ -67,8 +64,8 @@ class Analytics extends React.Component {
                 <Tab eventKey="Indiviual-Videos" title="Individual Videos">
                     <hr/>
                     <div className="row ">
-                        {/* <div className="col-md-3">
-                            
+                        <div className="col-md-3">
+
                             <DatePicker
                                 className="form-control"
                                 selected={this.state.startDate}
@@ -76,9 +73,9 @@ class Analytics extends React.Component {
                                 maxDate={new Date()}
                                 placeholderText="Select a date before 5 days in the future"
                             />
-                        </div> */}
-                        {/* <div className="col-md-3">
-                           
+                        </div>
+                        <div className="col-md-3">
+
                             <DatePicker
                                 className="form-control"
                                 selected={this.state.endDate}
@@ -91,15 +88,16 @@ class Analytics extends React.Component {
                             <Button className="btn btn-primary" onClick={this.handleChangeInput}>
                                 Get Statistics
                             </Button>
-                        </div> */}
+                        </div>
                         <div className="col-12">
- <DateRangePicker className="customDatePicker" startDate={this.state.startDate} onApply={this.handleChangeInput} endDate={this.state.endDate}>
-        <button className="btn btn-primary">Select Range</button>
-      </DateRangePicker>
-      </div>
+                            <DateRangePicker className="customDatePicker" startDate={this.state.startDate}
+                                             onApply={this.handleChangeInput} endDate={this.state.endDate}>
+                                <button className="btn btn-primary">Select Range</button>
+                            </DateRangePicker>
+                        </div>
                     </div>
                     <hr/>
-                    
+
                     <Row>
                         {this.state.videosWithViews.length  ?      this.state.videosWithViews.map((item,id)=>{
                             return <Col md={3 } lg={3} sm={6} xs={12}>
@@ -125,10 +123,10 @@ class Analytics extends React.Component {
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
-                                </Col>
-                        }) :  <h2 className="Novideos"> No Videos Found  </h2> };  
-                       
-                   </Row>
+                            </Col>
+                        }) : <h2 className="Novideos"> No Videos Found </h2>};
+
+                    </Row>
                 </Tab>
 
             </Tabs>
@@ -136,7 +134,7 @@ class Analytics extends React.Component {
 
             </Row>
         </Container>
-        
+
         )
     }
 

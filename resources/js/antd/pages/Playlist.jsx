@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-import React, {Component} from 'react';
-
-import {Button, Empty, Layout, PageHeader, Space, Table} from 'antd';
-import {CloudUploadOutlined} from '@ant-design/icons';
-=======
 import React, { Component } from 'react';
 
 import {
@@ -29,7 +23,6 @@ import {
     Form, Input
 } from 'antd';
 import { CloudUploadOutlined, EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
->>>>>>> b4684fa6c05180c10cd3f0e275e413038fabd0ce
 import axios from "axios";
 
 const {Content} = Layout;
@@ -43,34 +36,9 @@ class Playlist extends Component {
         this.state = {
             action: false,
             playlists: [{}],
-<<<<<<< HEAD
-            message: null,
-            deleted: 0,
-            mainPage: true,
-            addPlaylist: false,
-            editPlaylist: false,
-            description: '',
-            name: '',
-            id: -1,
-            added: 0,
-            purpose: '',
-            showAlert: false,
-            AlertMessage: '',
-            Alertvariant: '',
-            columns: [{
-                title: 'Name',
-                dataIndex: 'name',
-                key: 'name',
-            }, {
-                title: 'Description',
-                dataIndex: 'description',
-                key: 'description',
-            }]
-=======
             name:'',
             description:'',
             id:'',
->>>>>>> b4684fa6c05180c10cd3f0e275e413038fabd0ce
         }
         this.editPlaylist = this.editPlaylist.bind(this);
         this.deletePlaylist = this.deletePlaylist.bind(this);
@@ -95,12 +63,8 @@ class Playlist extends Component {
     }
 
     deletePlaylist(id, e) {
-<<<<<<< HEAD
-        axios.delete('playlist/' + id)
-=======
 
         axios.delete('/playlist/' + id)
->>>>>>> b4684fa6c05180c10cd3f0e275e413038fabd0ce
             .then((res) => {
                 console.log(res);
                 this.setState({deleted: res.data.deleted})
@@ -265,30 +229,7 @@ class Playlist extends Component {
                                     onClick={e => this.setState({action: 'create'})}><CloudUploadOutlined/> Create</Button>,
                         ]}
                     >
-<<<<<<< HEAD
-                        {this.state.playlists.length > 0 ?
-                            <Table dataSource={this.state.playlists}>
-                                <Column title="Name" dataIndex="name" key="name"/>
-                                <Column title="Description" dataIndex="description" key="description"/>
-                                <Column
-                                    title="Action"
-                                    key="action"
-                                    render={(text, record) => (
-                                        <Space size="middle">
-                                            <Button type="primary"
-                                                    onClick={this.editPlaylist}><CloudUploadOutlined/> Edit</Button>
-                                            <Button type="primary"
-                                                    onClick={() => {
-                                                        this.deletePlaylist(text.id)
-                                                    }}><CloudUploadOutlined/> Delete</Button>
-                                        </Space>
-                                    )}
-                                />
-                            </Table> : <Empty description={"No Playlist found"}><Button type="primary"
-                                                                                        onClick={this.createPlaylist}><CloudUploadOutlined/> Create</Button></Empty>}
-=======
                         {this._render()}
->>>>>>> b4684fa6c05180c10cd3f0e275e413038fabd0ce
                     </PageHeader>
 
                 </div>

@@ -67,7 +67,6 @@ class RegisterController extends Controller {
             'name'        => [ 'string', 'max:255' ],
             'email'       => [ 'required', 'string', 'email', 'max:255', 'unique:users' ],
             'password'    => [ 'required', 'string', 'min:8', 'confirmed' ],
-            'category_id' => [ 'required', 'exists:user_categories,id' ]
         ] );
     }
 
@@ -87,6 +86,7 @@ class RegisterController extends Controller {
         $usersetting                   = new UserExtra();
         $usersetting->user_id          = $user->id;
         $usersetting->user_category_id = $data['category_id'];
+        $usersetting->profile_picture = asset('');
         $usersetting->save();
 
         return $user;

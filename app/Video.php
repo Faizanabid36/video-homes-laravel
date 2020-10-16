@@ -56,26 +56,41 @@ class Video extends Model {
 	}
 
 	public function video_actions() {
-		return $this->hasMany( VideoAction::class, 'video_id', 'id' );
-	}
+        return $this->hasMany(VideoAction::class, 'video_id', 'id');
+    }
 
-	public function category() {
-		return $this->belongsTo( Category::class, 'category_id' );
-	}
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 
-	public function comments() {
-		return $this->hasMany( Comment::class, 'video_id', 'id' );
-	}
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'video_id', 'id');
+    }
 
-	public function scopeUserVideos( $query, $username, $video_id = false, $related = false ) {
-		return $query->whereHas(
-			'user',
-			function ( $query ) use ( $username ) {
-				$query->whereUsername( $username );
-			}
-		)->when(
-			! auth()->check() || auth()->user()->username !== $username,
-			function ( $q ) {
+    public function views()
+    {
+        return $this->hasMany(VideoView::class, 'video_id', 'id');
+    }
+    public function scopeMostWatchedVideos($q){
+        return $q->whereUserId(auth()->user()->id)
+            ->withCount('views')
+            ->whereIsVideoApproved(1)
+            ->whereProcessed(1)
+            ->orderBy('views_count','DESC');
+    }
+
+    public function scopeUserVideos($query, $username, $video_id = false, $related = false)
+    {
+        return $query->whereHas(
+            'user',
+            function ($query) use ($username) {
+                $query->whereUsername($username);
+            }
+        )->when(
+            !auth()->check() || auth()->user()->username !== $username,
+            function ($q) {
 				$q->whereProcessed( 1 )->whereIsVideoApproved( 1 )->whereHas(
 					'user',
 					function ( $query ) {

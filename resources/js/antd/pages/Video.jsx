@@ -1,7 +1,14 @@
 import React, {Component} from 'react';
 
-import {Popconfirm, message ,Avatar, Button, Card, Col, Divider, Empty, Image, Layout, PageHeader, Row} from 'antd';
-import {DeleteOutlined,PlayCircleOutlined,CloudUploadOutlined, EditOutlined, EllipsisOutlined, SettingOutlined} from '@ant-design/icons';
+import {Avatar, Button, Card, Col, Divider, Empty, Image, Layout, message, PageHeader, Popconfirm, Row} from 'antd';
+import {
+    CloudUploadOutlined,
+    DeleteOutlined,
+    EditOutlined,
+    EllipsisOutlined,
+    PlayCircleOutlined,
+    SettingOutlined
+} from '@ant-design/icons';
 import axios from "axios";
 
 const {Content} = Layout;
@@ -20,6 +27,7 @@ class Video extends Component {
     loadData(){
         axios.get('/video')
             .then((res) => {
+                console.log(res.data)
                 this.setState({...res.data})
             })
             .catch((err) => {
@@ -74,7 +82,7 @@ class Video extends Component {
                                                 <>
                                                     <span>{item.description}<br/></span>
                                                     <span> Category: {item.category.name}</span><br/>
-                                                    <span> Views: {item.views}</span><br/>
+                                                    <span> Views: {item.views_count}</span><br/>
                                                     <span> Duration: {Math.floor(item.duration / 60)}:{item.duration - Math.floor(item.duration / 60) * 60}</span>
                                                 </>
                                             ]}
@@ -82,7 +90,6 @@ class Video extends Component {
                                     </Card>
                                 </Col>
                             }) : <Col span={24}><Empty description={"No Video found"}><Button type="primary" onClick={event => window.location.hash = "#/upload"}><CloudUploadOutlined/> Upload Video</Button></Empty></Col>}
-
                         </Row>
                         <Divider/>
                         <Row gutter={16}>
@@ -104,29 +111,29 @@ class Video extends Component {
 
                                         }
                                         actions={[
-                                            <PlayCircleOutlined onClick={e=>{
+                                            <PlayCircleOutlined onClick={e => {
                                                 location.href = `${window.VIDEO_APP.base_url}/${item.user.username}/${item.video_id}`;
-                                            }} key='play' />,
-                                            <EditOutlined key="edit" onClick={e=>{
+                                            }} key='play'/>,
+                                            <EditOutlined key="edit" onClick={e => {
                                                 location.hash = `#edit_video/${item.video_id}`;
-                                            }} />,
+                                            }}/>,
                                             <Popconfirm
-    title="Are you sure delete this task?"
-    onConfirm={(e) =>{
-        axios.delete(`video/${item.id}`).then(({data})=>{
-            message.success('Deleted');
-            this.loadData();
-        }).catch(error => message.error(error))
-        
-      }}
-    onCancel={(e) =>{
-        console.log(e);
-        message.error('Click on No');
-      }}
-    okText="Yes"
-    cancelText="No"
-  >
-                                            <DeleteOutlined key="delete" /></Popconfirm>,
+                                                title="Are you sure delete this task?"
+                                                onConfirm={(e) => {
+                                                    axios.delete(`video/${item.id}`).then(({data}) => {
+                                                        message.success('Deleted');
+                                                        this.loadData();
+                                                    }).catch(error => message.error(error))
+
+                                                }}
+                                                onCancel={(e) => {
+                                                    console.log(e);
+                                                    message.error('Click on No');
+                                                }}
+                                                okText="Yes"
+                                                cancelText="No"
+                                            >
+                                                <DeleteOutlined key="delete"/></Popconfirm>,
                                         ]}
                                     >
                                         <Card.Meta
@@ -136,7 +143,7 @@ class Video extends Component {
                                                 <>
                                                     <span>{item.description}<br/></span>
                                                     <span> Category: {item.category.name}</span><br/>
-                                                    <span> Views: {item.views}</span><br/>
+                                                    <span> Views: {item.views_count}</span><br/>
                                                     <span> Duration: {Math.floor(item.duration / 60)}:{item.duration - Math.floor(item.duration / 60) * 60}</span>
                                                 </>
                                             ]}

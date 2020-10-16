@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class VideoView extends Model
@@ -37,20 +38,36 @@ class VideoView extends Model
         return self::where('video_id', $video->id)->where('video_slug', $video->video_id)->count();
     }
 
-    public static function getMostViewed()
+    public static function getMostViewed($videoName = null)
     {
-        return self::select(array('video_views.video_id', \DB::raw('COUNT(video_id) as views')))
+        return self::selectRaw('video_views.video_id,COUNT(video_id) as views')
             ->orderBy(\DB::raw('COUNT(video_id)'), 'desc')
-            ->groupBy('video_id')->get();
+            ->groupBy('video_id');
+
     }
 
-    public static function getViewsByDays($video, $time)
+    public static function getLineChartData()
     {
-        return self::select(array('video_views.video_id', \DB::raw('COUNT(video_id) as views')))
+        return self::select('video_user', 'video_id', 'created_at')
+            ->where('video_user', auth()->user()->id)
+            ->get()
+            ->groupBy(function ($date) {
+                return Carbon::parse($date->created_at)->format('Y-m-d');
+            })->toArray();
+    }
+
+    public function getViewsByDays($video, $time)
+    {
+        return $this->select(array('video_views.video_id', \DB::raw('COUNT(video_id) as views')))
             ->where('video_id', $video->id)
             ->where('created_at', '<=', \Carbon\Carbon::parse($time[1]))
             ->where('created_at', '>=', \Carbon\Carbon::parse($time[0]))
             ->orderBy(\DB::raw('COUNT(video_id)'), 'desc')
             ->groupBy('video_id')->first();
+    }
+
+    public function video()
+    {
+        return $this->belongsTo(Video::class, 'video_id', 'id');
     }
 }
