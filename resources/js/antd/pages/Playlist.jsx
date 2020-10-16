@@ -1,26 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
-import {
-    Image,
-    Card,
-    Drawer,
-    Divider,
-    PageHeader,
-    Menu,
-    Dropdown,
-    Button,
-    Space,
-    Tag,
-    Typography,
-    Row,
-    Layout,
-    Badge,
-    Avatar,
-    notification,
-    Progress,
-    Tabs, Col, Table, Empty
-} from 'antd';
-import { CloudUploadOutlined, EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import {Button, Empty, Layout, PageHeader, Space, Table} from 'antd';
+import {CloudUploadOutlined} from '@ant-design/icons';
 import axios from "axios";
 
 const {Content} = Layout;
@@ -71,6 +52,15 @@ class Playlist extends Component {
             showAlert: false,
             AlertMessage: '',
             Alertvariant: '',
+            columns: [{
+                title: 'Name',
+                dataIndex: 'name',
+                key: 'name',
+            }, {
+                title: 'Description',
+                dataIndex: 'description',
+                key: 'description',
+            }]
         }
         this.editPlaylist = this.editPlaylist.bind(this);
         this.deletePlaylist = this.deletePlaylist.bind(this);
@@ -78,10 +68,15 @@ class Playlist extends Component {
         this.createPlaylist = this.createPlaylist.bind(this);
     }
 
+    componentDidMount() {
+        this.getPlaylist();
+    }
+
     getPlaylist() {
         axios.get('/playlist')
             .then((res) => {
                 this.setState({playlists: res.data})
+                console.log(this.state.playlists)
             })
             .catch((err) => {
                 console.log(err)
@@ -89,8 +84,7 @@ class Playlist extends Component {
     }
 
     deletePlaylist(id, e) {
-
-        axios.delete('/playlist/'+id)
+        axios.delete('playlist/' + id)
             .then((res) => {
                 console.log(res);
                 this.setState({deleted: res.data.deleted})
@@ -153,23 +147,26 @@ class Playlist extends Component {
                         onBack={() => window.location.hash = "#/"}
                         title="Playlist"
                     >
-                        {this.state.playlists.length > 1 ? <Table dataSource={this.state.playlists}>
-                            <Column title="Name" dataIndex="name" key="name"/>
-                            <Column title="Description" dataIndex="description" key="description"/>
-                            <Column
-                                title="Action"
-                                key="action"
-                                render={(text, record) => (
-                                    <Space size="middle">
-                                        <Button type="primary"
-                                                onClick={this.editPlaylist}><CloudUploadOutlined/> Edit</Button>
-                                        <Button type="primary"
-                                                onClick={this.deletePlaylist}><CloudUploadOutlined/> Delete</Button>
-                                    </Space>
-                                )}
-                            />
-                        </Table> : <Empty description={"No Playlist found"}><Button type="primary"
-                                                                                    onClick={this.createPlaylist}><CloudUploadOutlined/> Create</Button></Empty>}
+                        {this.state.playlists.length > 0 ?
+                            <Table dataSource={this.state.playlists}>
+                                <Column title="Name" dataIndex="name" key="name"/>
+                                <Column title="Description" dataIndex="description" key="description"/>
+                                <Column
+                                    title="Action"
+                                    key="action"
+                                    render={(text, record) => (
+                                        <Space size="middle">
+                                            <Button type="primary"
+                                                    onClick={this.editPlaylist}><CloudUploadOutlined/> Edit</Button>
+                                            <Button type="primary"
+                                                    onClick={() => {
+                                                        this.deletePlaylist(text.id)
+                                                    }}><CloudUploadOutlined/> Delete</Button>
+                                        </Space>
+                                    )}
+                                />
+                            </Table> : <Empty description={"No Playlist found"}><Button type="primary"
+                                                                                        onClick={this.createPlaylist}><CloudUploadOutlined/> Create</Button></Empty>}
                     </PageHeader>
 
                 </div>
