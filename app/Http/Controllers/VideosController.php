@@ -5,18 +5,21 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Jobs\ConvertVideoForStreaming;
 use App\Video;
+use App\VideoView;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class VideosController extends Controller {
+class VideosController extends Controller
+{
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return array
-	 */
-	public function index() {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return array
+     */
+    public function index()
+    {
 
         $Videos = Video::where('user_id', auth()->id())->where('processed', 1)->latest()
             ->with(array('user', 'category'))->withCount('views')->get();
@@ -27,81 +30,98 @@ class VideosController extends Controller {
         return compact('approvedVideos', 'pendingVideos');
     }
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function create() {
+    public function video_with_views()
+    {
+        $endDate = \request('endDate');
+        $startDate = \request('startDate');
+        $videos = Video::whereUserId(auth()->user()->id)->whereProcessed(1)->whereIsVideoApproved(1)->get();
+        $videos_table_data = collect($videos)->map(function ($d) use ($startDate, $endDate) {
+            $views = VideoView::whereVideoId($d->id)
+                ->where('created_at', '>=', \Carbon\Carbon::parse($startDate))
+                ->where('created_at', '<=', \Carbon\Carbon::parse($endDate))
+                ->count();
+            return ['key' => $d->id, 'title' => $d->title, 'views_count' => $views];
+        });
+        return compact('videos_table_data');
+    }
 
-	}
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request $request
-	 * @return \Illuminate\Http\Response
-	 */
-	public function store( Request $request ) {
-		$file = \Str::random( 16 ) . '.' . request()->video->getClientOriginalExtension();
-				request()->video->storeAs( 'public/uploads/', $file );
-				$path        = 'uploads/' . $file;
-				$media       = \FFMpeg::open( $path );
-				$videostream = $media->getStreams()->videos()->first();
-				$angle       = getVideoRotation( $videostream );
-				Log::info( "Rotation: $angle" );
-				$dimension     = $videostream->getDimensions();
-				$newThumbnails = generateThumbnailsFromVideo( $media, $path, $angle );
-				$video         = Video::create(
-					array(
-						'thumbnail'     => $newThumbnails[1],
-						'original_name' => request()->video->getClientOriginalName(),
-						'video_path'    => $path,
-						'title'         => request()->video->getClientOriginalName(),
-						'duration'      => $media->getDurationInSeconds(),
-						'size'          => request()->video->getSize(),
-						'category_id'   => 1,
-						'video_type'    => 'Public',
-						'width'         => $dimension->getWidth(),
-						'stream_path'   => getCleanFileName( $path, '_240p_converted.mp4' ),
-					)
-				);
+    }
 
-				ConvertVideoForStreaming::dispatch(
-					$video,
-					320,
-					240,
-					array(
-						'converted_for_streaming_at' => Carbon::now(),
-						'processed'                  => true,
-					),
-					$angle
-				);
-		if ( $video->width >= 640 ) {
-			ConvertVideoForStreaming::dispatch( $video, 640, 360, array( '360p' => 1 ), $angle );
-		}
-		if ( $video->width >= 854 ) {
-			ConvertVideoForStreaming::dispatch( $video, 854, 480, array( '480p' => 1 ), $angle, 1000 );
-		}
-		if ( $video->width >= 1280 ) {
-			ConvertVideoForStreaming::dispatch( $video, 1280, 720, array( '720p' => 1 ), $angle, 1000 );
-		}
-		if ( $video->width >= 1920 ) {
-			ConvertVideoForStreaming::dispatch( $video, 1920, 1080, array( '1080p' => 1 ), $angle, 2000 );
-		}
-		if ( $video->width >= 2560 ) {
-			ConvertVideoForStreaming::dispatch( $video, 2560, 1440, array( '1440p' => 1 ), $angle, 2000 );
-		}
-		if ( $video->width >= 3840 ) {
-			ConvertVideoForStreaming::dispatch( $video, 3840, 2160, array( '4k' => 1 ), $angle, 2000 );
-		}
-		if ( $video->width >= 7680 ) {
-			ConvertVideoForStreaming::dispatch( $video, 7680, 4320, array( '8k' => 1 ), $angle, 2000 );
-		}
-				$message = 'Video is uploading... in background';
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $file = \Str::random(16) . '.' . request()->video->getClientOriginalExtension();
+        request()->video->storeAs('public/uploads/', $file);
+        $path = 'uploads/' . $file;
+        $media = \FFMpeg::open($path);
+        $videostream = $media->getStreams()->videos()->first();
+        $angle = getVideoRotation($videostream);
+        Log::info("Rotation: $angle");
+        $dimension = $videostream->getDimensions();
+        $newThumbnails = generateThumbnailsFromVideo($media, $path, $angle);
+        $video = Video::create(
+            array(
+                'thumbnail' => $newThumbnails[1],
+                'original_name' => request()->video->getClientOriginalName(),
+                'video_path' => $path,
+                'title' => request()->video->getClientOriginalName(),
+                'duration' => $media->getDurationInSeconds(),
+                'size' => request()->video->getSize(),
+                'category_id' => 1,
+                'video_type' => 'Public',
+                'width' => $dimension->getWidth(),
+                'stream_path' => getCleanFileName($path, '_240p_converted.mp4'),
+            )
+        );
 
-				return compact( 'message', 'video' );
-	}
+        ConvertVideoForStreaming::dispatch(
+            $video,
+            320,
+            240,
+            array(
+                'converted_for_streaming_at' => Carbon::now(),
+                'processed' => true,
+            ),
+            $angle
+        );
+        if ($video->width >= 640) {
+            ConvertVideoForStreaming::dispatch($video, 640, 360, array('360p' => 1), $angle);
+        }
+        if ($video->width >= 854) {
+            ConvertVideoForStreaming::dispatch($video, 854, 480, array('480p' => 1), $angle, 1000);
+        }
+        if ($video->width >= 1280) {
+            ConvertVideoForStreaming::dispatch($video, 1280, 720, array('720p' => 1), $angle, 1000);
+        }
+        if ($video->width >= 1920) {
+            ConvertVideoForStreaming::dispatch($video, 1920, 1080, array('1080p' => 1), $angle, 2000);
+        }
+        if ($video->width >= 2560) {
+            ConvertVideoForStreaming::dispatch($video, 2560, 1440, array('1440p' => 1), $angle, 2000);
+        }
+        if ($video->width >= 3840) {
+            ConvertVideoForStreaming::dispatch($video, 3840, 2160, array('4k' => 1), $angle, 2000);
+        }
+        if ($video->width >= 7680) {
+            ConvertVideoForStreaming::dispatch($video, 7680, 4320, array('8k' => 1), $angle, 2000);
+        }
+        $message = 'Video is uploading... in background';
+
+        return compact('message', 'video');
+    }
 
 	/**
 	 * Display the specified resource.

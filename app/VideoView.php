@@ -24,13 +24,25 @@ class VideoView extends Model
         ],$update);
 
 
-        self::updateOrCreate([ 'video_id' => $video->id, 'ip' => request()->ip() ], $postsViews);
+        self::updateOrCreate(['video_id' => $video->id, 'ip' => request()->ip()], $postsViews);
         return self::whereVideoId($video->id)->count();
     }
 
     public static function getTotalViews()
     {
         return self::all()->count();
+    }
+
+    public static function getLineChartDataWitinRange($startDate, $endDate)
+    {
+        return self::select('video_user', 'video_id', 'created_at')
+            ->where('video_user', auth()->user()->id)
+            ->where('created_at', '>=', \Carbon\Carbon::parse($startDate))
+            ->where('created_at', '<=', \Carbon\Carbon::parse($endDate))
+            ->get()
+            ->groupBy(function ($date) {
+                return Carbon::parse($date->created_at)->format('Y-m-d');
+            })->toArray();
     }
 
     public static function getTotalVideoViews($video)
@@ -46,19 +58,34 @@ class VideoView extends Model
 
     }
 
+    public function scopeLoadedOrViewed($q)
+    {
+        return $q->select('is_played', \DB::raw('count(*) as views'))
+            ->where('video_user', auth()->user()->id)
+            ->groupBy('is_played');
+    }
+
+    public function scopeViewsSource($q)
+    {
+        return $q->select('from_website', \DB::raw('count(*) as views'))
+            ->where('video_user', auth()->user()->id)
+            ->groupBy('from_website');
+    }
+
     public static function getLineChartData()
     {
         return self::select('video_user', 'video_id', 'created_at')
             ->where('video_user', auth()->user()->id)
+            ->where('created_at', '>=', now()->subDay(7))
             ->get()
             ->groupBy(function ($date) {
                 return Carbon::parse($date->created_at)->format('Y-m-d');
             })->toArray();
     }
 
-    public function getViewsByDays($video, $time)
+    public static function getViewsByDays($video, $time)
     {
-        return $this->select(array('video_views.video_id', \DB::raw('COUNT(video_id) as views')))
+        return self::select(array('video_views.video_id', \DB::raw('COUNT(video_id) as views')))
             ->where('video_id', $video->id)
             ->where('created_at', '<=', \Carbon\Carbon::parse($time[1]))
             ->where('created_at', '>=', \Carbon\Carbon::parse($time[0]))

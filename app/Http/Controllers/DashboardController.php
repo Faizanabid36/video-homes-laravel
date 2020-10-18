@@ -28,7 +28,7 @@ class DashboardController extends Controller
         return compact('videosWithViews');
     }
 
-    public function get_all_statistics()
+    public function statistics()
     {
         $endDate = \request('endDate');
         $startDate = \request('startDate');
@@ -77,56 +77,31 @@ class DashboardController extends Controller
         return compact('chartData', 'doughnutData', 'fromPage');
     }
 
+    public function get_all_statistics()
+    {
+        $endDate = \request('endDate');
+        $startDate = \request('startDate');
+        $videoId = \request('id');
+    }
+
     public function get_dashboard_statistics()
     {
-//        $endDate = \request('endDate');
-//        $startDate = \request('startDate');
         $videoswithDate = VideoView::getLineChartData();
         $lineChart = [];
-        foreach ($videoswithDate as $key => $value) {
+        foreach ($videoswithDate as $key => $value)
             $lineChart[] = (object)['date' => $key, 'views' => count($value)];
-        }
-        $mostWatchedVideos = Video::mostWatchedVideos()
-            ->get();
-        $barData = collect($mostWatchedVideos)->map(function ($v){
-           return collect($v)->only('original_name','views_count');
+
+        $barData = collect(Video::mostWatchedVideos()->take(5)->get())->map(function ($v) {
+            return collect($v)->only('original_name', 'views_count');
         });
-        return compact('lineChart','barData');
-        $views = [];
-        $labels = [];
-        ksort($videoswithDate);
-        foreach ($videoswithDate as $key => $values) {
-            $labels[] = $key;
-            $views[] = count($values);
-        }
-        $chartData = dashboardChart($labels, 'number of views', $views, false);
-        $loadData = VideoView::select('is_played', \DB::raw('count(*) as views'))
-            ->where('video_user', auth()->user()->id)
-            ->groupBy('is_played')
-            ->get();
-        $totalLoads = 0;
-        $totalViews = 0;
-        foreach ($loadData as $key) {
-            if ($key->is_played == 0)
-                $totalLoads += $key->views;
-            else
-                $totalViews += $key->views;
-        }
-        $pageData = VideoView::select('from_website', \DB::raw('count(*) as views'))
-            ->where('video_user', auth()->user()->id)
-            ->groupBy('from_website')
-            ->get();
-        $fromWebsite = 0;
-        $outsideWebsite = 0;
-        foreach ($pageData as $key) {
-            if ($key->from_website == 0)
-                $outsideWebsite += $key->views;
-            else
-                $fromWebsite += $key->views;
-        }
-        $doughnutData = dashboardChart(['loads', 'views'], 'Player Impressions', [$totalLoads, $totalViews], true);
-        $fromPage = dashboardChart(['From Videohomes.com', 'From Videohomes Video Pages'], 'Traffic Source', [$fromWebsite, $outsideWebsite], true);
-        return compact('chartData', 'doughnutData', 'fromPage');
+        $loadedOrViewed = collect(VideoView::loadedOrViewed()->get())->map(function ($data) {
+            return ['type' => $data->is_played == 0 ? 'loaded' : 'played', 'count' => $data->views];
+        });
+        $viewsSource = collect(VideoView::viewsSource()->get())->map(function ($d) {
+            return ['source' => $d->from_website == 0 ? 'From Videohomes Video Pages' : 'From Videohomes.com', 'views' => $d->views];
+        });
+
+        return compact('lineChart', 'barData', 'loadedOrViewed', 'viewsSource');
     }
 
 }

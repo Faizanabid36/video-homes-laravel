@@ -5,7 +5,7 @@ import AppLayout from './layout/index';
 import Dashboard from './pages/Dashboard';
 import Video from './pages/Video';
 import Playlist from './pages/Playlist';
-import Analytics from './pages/Dashboard';
+import Analytics from './pages/Analytics';
 import Profile from './pages/Profile';
 import UploadPage from './pages/Upload';
 import EditVideo from './pages/EditVideo';

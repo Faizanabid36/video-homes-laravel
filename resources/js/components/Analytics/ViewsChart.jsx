@@ -2,14 +2,6 @@ import React from 'react'
 // import { Chart } from 'chart.js'
 import { Line,Doughnut } from 'react-chartjs-2';
 import axios from "axios";
-import DatePicker from "react-datepicker";
-import {Button, Tab} from "react-bootstrap";
-import 'bootstrap-daterangepicker/daterangepicker.css';
-
-import DateRangePicker from 'react-bootstrap-daterangepicker';
-
-// select count(view) views,date from abc where date between 1-1-2020
-// and 11-1-2020 group by date having by views > 0 order by date asc
 
 
 export default class ViewsChart extends React.Component {
@@ -98,9 +90,9 @@ export default class ViewsChart extends React.Component {
                         </Button>
                     </div> */}
                     <div className="col-12">
-                    <DateRangePicker startDate={this.state.startDate} onApply={this.handleChangeInput} endDate={this.state.endDate}>
-        <button className="btn btn-primary">Select Range</button>
-      </DateRangePicker>
+      {/*              <DateRangePicker startDate={this.state.startDate} onApply={this.handleChangeInput} endDate={this.state.endDate}>*/}
+      {/*  <button className="btn btn-primary">Select Range</button>*/}
+      {/*</DateRangePicker>*/}
       </div>
                     <hr/>
                 </div>

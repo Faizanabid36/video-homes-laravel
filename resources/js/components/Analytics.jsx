@@ -2,14 +2,8 @@ import React from 'react';
 import {Button, Card, Col, Container, Row, Tab, Tabs} from 'react-bootstrap';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faComment, faEye} from "@fortawesome/free-solid-svg-icons";
-// import DatePicker from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
+
 import ViewsChart from "./Analytics/ViewsChart";
-
-import 'bootstrap-daterangepicker/daterangepicker.css';
-
-import DatePicker from "react-datepicker";
-import DateRangePicker from 'react-bootstrap-daterangepicker';
 
 class Analytics extends React.Component {
     constructor(props) {
@@ -66,23 +60,23 @@ class Analytics extends React.Component {
                     <div className="row ">
                         <div className="col-md-3">
 
-                            <DatePicker
-                                className="form-control"
-                                selected={this.state.startDate}
-                                onChange={date => this.setState({startDate: date})}
-                                maxDate={new Date()}
-                                placeholderText="Select a date before 5 days in the future"
-                            />
+                            {/*<DatePicker*/}
+                            {/*    className="form-control"*/}
+                            {/*    selected={this.state.startDate}*/}
+                            {/*    onChange={date => this.setState({startDate: date})}*/}
+                            {/*    maxDate={new Date()}*/}
+                            {/*    placeholderText="Select a date before 5 days in the future"*/}
+                            {/*/>*/}
                         </div>
                         <div className="col-md-3">
 
-                            <DatePicker
-                                className="form-control"
-                                selected={this.state.endDate}
-                                onChange={date => this.setState({endDate: date})}
-                                maxDate={new Date()}
-                                placeholderText="Select a date before 5 days in the future"
-                            />
+                            {/*<DatePicker*/}
+                            {/*    className="form-control"*/}
+                            {/*    selected={this.state.endDate}*/}
+                            {/*    onChange={date => this.setState({endDate: date})}*/}
+                            {/*    maxDate={new Date()}*/}
+                            {/*    placeholderText="Select a date before 5 days in the future"*/}
+                            {/*/>*/}
                         </div>
                         <div className="col-md-3">
                             <Button className="btn btn-primary" onClick={this.handleChangeInput}>
@@ -90,10 +84,10 @@ class Analytics extends React.Component {
                             </Button>
                         </div>
                         <div className="col-12">
-                            <DateRangePicker className="customDatePicker" startDate={this.state.startDate}
-                                             onApply={this.handleChangeInput} endDate={this.state.endDate}>
-                                <button className="btn btn-primary">Select Range</button>
-                            </DateRangePicker>
+                            {/*<DateRangePicker className="customDatePicker" startDate={this.state.startDate}*/}
+                            {/*                 onApply={this.handleChangeInput} endDate={this.state.endDate}>*/}
+                            {/*    <button className="btn btn-primary">Select Range</button>*/}
+                            {/*</DateRangePicker>*/}
                         </div>
                     </div>
                     <hr/>

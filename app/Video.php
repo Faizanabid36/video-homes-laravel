@@ -113,15 +113,27 @@ class Video extends Model {
 			function ( $query ) {
 				$query->latest();
 			}
-		);
-	}
+        );
+    }
 
-	public function scopeSingleVideo( $query, $video_id ) {
-		return $query->whereProcessed( 1 )->whereIsVideoApproved( 1 )->where(
-			function( $q ) use ( $video_id ) {
-				return $q->whereVideoId( $video_id )->orWhere( 'slug', $video_id );
-			}
-		);
-	}
+    public function scopeSingleVideo($query, $video_id)
+    {
+        return $query->whereProcessed(1)->whereIsVideoApproved(1)->where(
+            function ($q) use ($video_id) {
+                return $q->whereVideoId($video_id)->orWhere('slug', $video_id);
+            }
+        );
+    }
+
+    public function scopeMostWatchedVideosWithinRange($q, $startDate, $endDate)
+    {
+        return $q->whereUserId(auth()->user()->id)
+            ->withCount('views')
+            ->whereIsVideoApproved(1)
+            ->whereProcessed(1)
+            ->where('created_at', '>=', \Carbon\Carbon::parse($startDate))
+            ->where('created_at', '<=', \Carbon\Carbon::parse($endDate))
+            ->orderBy('views_count', 'DESC');
+    }
 
 }

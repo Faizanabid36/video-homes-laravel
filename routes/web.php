@@ -19,26 +19,27 @@ Auth::routes();
 Route::group(
 	array( 'middleware' => 'auth' ),
 	function () {
-		// Dashboard Page
-		Route::view( '/dashboard', 'dashboard' )->name( 'dashboard' );
+        // Dashboard Page
+        Route::view('/dashboard', 'dashboard')->name('dashboard');
 
-		Route::get( 'logged_in_user', 'HomeController@logged_in_user' );
-		// Playlist Pages
-		Route::resource( 'playlist', 'PlaylistController' );
-		// Profile Pages
-		Route::resource( 'profile', 'ProfileController' );
+        Route::get('logged_in_user', 'HomeController@logged_in_user');
+        // Playlist Pages
+        Route::resource('playlist', 'PlaylistController');
+        // Profile Pages
+        Route::resource('profile', 'ProfileController');
 
-		Route::resource( 'video', 'VideosController' );
-		// Video
-		// Route::get( '/all_videos', 'VideoController@list_of_videos' );
-		// Route::get( '/all_videos/{order}', 'VideoController@list_of_videos_by_order' );
-		// Route::post( 'delete_video', 'VideoController@delete_video' );
-		// Route::post( '/upload-video', 'VideoController@upload_video' );
-		// Route::put( '/update-video/{video}', 'VideoController@update_video' );
-		// Route::get( 'edit_video/{video_id}', 'VideoController@edit_video' );
-		// Route::get( 'video_is_played/{id}', 'HomeController@video_is_played' )->name( 'video_is_played' );
+        Route::resource('video', 'VideosController');
+        Route::post('video_with_views', 'VideosController@video_with_views');
+        // Video
+        // Route::get( '/all_videos', 'VideoController@list_of_videos' );
+        // Route::get( '/all_videos/{order}', 'VideoController@list_of_videos_by_order' );
+        // Route::post( 'delete_video', 'VideoController@delete_video' );
+        // Route::post( '/upload-video', 'VideoController@upload_video' );
+        // Route::put( '/update-video/{video}', 'VideoController@update_video' );
+        // Route::get( 'edit_video/{video_id}', 'VideoController@edit_video' );
+        // Route::get( 'video_is_played/{id}', 'HomeController@video_is_played' )->name( 'video_is_played' );
 
-		// Dashboard
+        // Dashboard
 		Route::post( '/dashboard_statistics', 'DashboardController@dashboard_type' )->name( 'dashboard_type' );
 		// Analytics
 		Route::post( '/get_all_statistics', 'DashboardController@get_all_statistics' );

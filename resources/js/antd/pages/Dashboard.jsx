@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Bar, Line, Pie} from '@ant-design/charts';
-import {Card, Col, Layout, Row} from 'antd';
+import {Card, Col, Layout, Row, Table} from 'antd';
 import axios from "axios";
 
 const {Content} = Layout;
@@ -10,62 +10,63 @@ class Dashboard extends Component {
         super();
         this.state = {
             lineChart: [],
-            barData: []
+            barData: [],
+            loadedOrViewed: [],
+            viewsSource: [],
+            visible: false,
         }
+        this.viewData = this.viewData.bind(this)
     }
 
     componentDidMount() {
         axios.get('get_dashboard_statistics')
             .then((res) => {
-                console.log(res.data.lineChart)
-                this.setState({...res.data})
+                this.setState({...res.data}, () => {
+                    this.setState({visible: true})
+                })
             })
             .catch((err) => {
                 console.log(err)
             })
     }
 
+    viewData(e) {
+        alert('e')
+        console.log(e)
+    }
+
     render() {
-        const data = [
-            {
-                type: 'A',
-                value: 27,
-            },
-            {
-                type: 'B',
-                value: 25,
-            },
-            {
-                type: 'C',
-                value: 18,
-            },
-            {
-                type: 'D',
-                value: 15,
-            },
-            {
-                type: 'E',
-                value: 10,
-            },
-            {
-                type: 'F',
-                value: 5,
-            },
-        ];
-        const config = {
+        let {viewsSource, loadedOrViewed} = this.state
+        const configVideoSource = {
             forceFit: true,
             title: {
                 visible: true,
-                text: '环图',
+                text: 'Views Source',
             },
             description: {
                 visible: true,
-                text: '环图的外半径决定环图的大小，而内半径决定环图的厚度。',
+                text: 'Views Source',
             },
             radius: 0.8,
             padding: 'auto',
-            data,
-            angleField: 'value',
+            data: viewsSource,
+            angleField: 'views',
+            colorField: 'source',
+        };
+        const configLoadedOrViewed = {
+            forceFit: true,
+            title: {
+                visible: true,
+                text: 'Views Source',
+            },
+            description: {
+                visible: true,
+                text: 'Views Source',
+            },
+            radius: 0.8,
+            padding: 'auto',
+            data: loadedOrViewed,
+            angleField: 'count',
             colorField: 'type',
         };
         const dataSource = [
@@ -99,29 +100,38 @@ class Dashboard extends Component {
                 dataIndex: 'address',
                 key: 'address',
             },
+
         ];
         return (
-            <Content style={{padding: '20px 50px'}}>
+            this.state.visible ? <Content style={{padding: '20px 50px'}}>
                 <div className="site-layout-content">
                     <div className="site-card-wrapper">
-                        {/*<Row gutter={16}>*/}
-                        {/*    <Col span={24}>*/}
-                        {/*        <Table dataSource={dataSource} columns={columns} />*/}
-                        {/*    </Col>*/}
-                        {/*</Row>*/}
+                        <Row gutter={16}>
+                            <Col span={24}>
+                                <Table
+                                    onRow={(record) => {
+                                        return {
+                                            onClick: () => {
+                                                console.log(record)
+                                            }
+                                        }
+                                    }}
+                                    dataSource={dataSource} columns={columns}/>
+                            </Col>
+                        </Row>
                         <Row gutter={16}>
                             <Col span={12}>
                                 <Card title="Traffic Source" bordered={false}>
-                                    <Pie style={{width: "100%", height: "400px"}} {...config}/>
+                                    <Pie style={{width: "100%", height: "400px"}} {...configVideoSource}/>
                                 </Card>
                             </Col>
                             <Col span={12}>
                                 <Card title="Player Impressions" bordered={false}>
-                                    <Pie style={{width: "100%", height: "400px"}} {...config}/>
+                                    <Pie style={{width: "100%", height: "400px"}} {...configLoadedOrViewed}/>
                                 </Card>
                             </Col>
                             <Col span={12}>
-                                <Card title="Card title" bordered={false}>
+                                <Card title="Views within 7 Days" bordered={false}>
                                     <Line style={{width: "100%", height: "400px"}}  {...{
                                         data: this.state.lineChart,
                                         title: {
@@ -134,7 +144,7 @@ class Dashboard extends Component {
                                 </Card>
                             </Col>
                             <Col span={12}>
-                                <Card title="Card title" bordered={false}>
+                                <Card title="Top 5 Most Watched Videos" bordered={false}>
                                     <Bar style={{width: "100%", height: "400px"}}  {...{
                                         data: this.state.barData,
                                         title: {
@@ -154,24 +164,8 @@ class Dashboard extends Component {
                             </Col>
                         </Row>
                     </div>
-
-
-                    {/*<PageHeader*/}
-                    {/*    className="site-page-header site-page-header-responsive"*/}
-                    {/*    // onBack={() => null}*/}
-                    {/*    title="Title"*/}
-                    {/*    subTitle="This is a subtitle"*/}
-                    {/*    extra={[*/}
-                    {/*        <Button key="1" type="primary">*/}
-                    {/*            Primary*/}
-                    {/*        </Button>,*/}
-                    {/*    ]}*/}
-                    {/*>*/}
-                    {/*    <Pie {...config}/>*/}
-                    {/*</PageHeader>*/}
-
                 </div>
-            </Content>
+            </Content> : ''
         );
     }
 }
