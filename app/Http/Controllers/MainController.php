@@ -66,6 +66,11 @@ class MainController extends Controller {
 
         return view( 'embed_video', compact( 'video' ) );
     }
+    public function watch_from_admin(Request $request)
+    {
+        $video = Video::whereProcessed(1)->whereVideoId($request->get('v'))->firstOrFail();
+        return view('embed_video', compact('video'));
+    }
 
     public function page( $slug ) {
         return view( 'page', request()->only( [ 'page' ] ) );

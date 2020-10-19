@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests;
-
+use App\Jobs\ConvertVideoForStreaming;
 use App\Video;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class VideosController extends Controller
 {
@@ -52,19 +53,66 @@ class VideosController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-			'title' => 'required|min:4',
-			'description' => 'min:6'
-		]);
-        $requestData = $request->all();
-                if ($request->hasFile('thumbnail')) {
-            $requestData['thumbnail'] = $request->file('thumbnail')
-                ->store('uploads', 'public');
+//        ini_set('max_execution_time', '300');
+        $file = \Str::random(16) . '.' . request()->video->getClientOriginalExtension();
+        request()->video->storeAs('public/uploads/', $file);
+        $path = 'uploads/' . $file;
+        $media = \FFMpeg::open($path);
+        $videostream = $media->getStreams()->videos()->first();
+        $angle = getVideoRotation($videostream);
+        Log::info("Rotation: $angle");
+        $dimension = $videostream->getDimensions();
+        $newThumbnails = generateThumbnailsFromVideo($media, $path, $angle);
+        $video = Video::create(
+            array(
+                'thumbnail' => $newThumbnails[1],
+                'original_name' => request()->video->getClientOriginalName(),
+                'video_path' => $path,
+                'title' => request()->video->getClientOriginalName(),
+                'duration' => $media->getDurationInSeconds(),
+                'size' => request()->video->getSize(),
+                'category_id' => 1,
+                'video_type' => 'Public',
+                'width' => $dimension->getWidth(),
+                'stream_path' => getCleanFileName($path, '_240p_converted.mp4'),
+            )
+        );
+
+        ConvertVideoForStreaming::dispatch(
+            $video,
+            320,
+            240,
+            array(
+                'converted_for_streaming_at' => Carbon::now(),
+                'processed' => true,
+            ),
+            $angle
+        );
+        if ($video->width >= 640) {
+            ConvertVideoForStreaming::dispatch($video, 640, 360, array('360p' => 1), $angle);
         }
+        if ($video->width >= 854) {
+            ConvertVideoForStreaming::dispatch($video, 854, 480, array('480p' => 1), $angle, 1000);
+        }
+        if ($video->width >= 1280) {
+            ConvertVideoForStreaming::dispatch($video, 1280, 720, array('720p' => 1), $angle, 1000);
+        }
+        if ($video->width >= 1920) {
+            ConvertVideoForStreaming::dispatch($video, 1920, 1080, array('1080p' => 1), $angle, 2000);
+        }
+        if ($video->width >= 2560) {
+            ConvertVideoForStreaming::dispatch($video, 2560, 1440, array('1440p' => 1), $angle, 2000);
+        }
+        if ($video->width >= 3840) {
+            ConvertVideoForStreaming::dispatch($video, 3840, 2160, array('4k' => 1), $angle, 2000);
+        }
+        if ($video->width >= 7680) {
+            ConvertVideoForStreaming::dispatch($video, 7680, 4320, array('8k' => 1), $angle, 2000);
+        }
+        $message = 'Video is uploading... in background';
 
-        Video::create($requestData);
-
-        return redirect('admin/videos')->with('flash_message', 'Video added!');
+//        return compact('message', 'video');
+        return back()->withMessage('Video Has Been Uploaded');
     }
 
     /**
@@ -120,7 +168,7 @@ class VideosController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
@@ -130,4 +178,10 @@ class VideosController extends Controller
 
         return redirect('admin/videos')->with('flash_message', 'Video deleted!');
     }
+
+    public function upload()
+    {
+        return view('admin.videos.uploads.upload_video');
+    }
+
 }

@@ -50,6 +50,11 @@
                     User Messages
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link {{Route::is('admin_uploads.*') ? 'active' : ''}}" href="{{route('admin_uploads.upload')}}">
+                    Upload Video
+                </a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">

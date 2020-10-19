@@ -79,21 +79,24 @@ Route::group(
 	function () {
 		Route::prefix( 'admin' )->group(
 			function () {
-				Route::view( '/', 'admin.home' )->name( 'admin_panel' );
-				Route::resource( 'categories', 'Admin\\CategoriesController' );
-				Route::resource( 'pages', 'Admin\\PagesController' );
-				Route::resource( 'user-categories', 'Admin\\UserCategoriesController' );
-				Route::resource( 'videos', 'Admin\\VideosController' );
-				Route::resource( 'users', 'Admin\\UsersController' );
-				Route::resource( 'settings', 'Admin\\SettingsController' );
-				Route::view( 'profile', 'admin.users.profile' )->name( 'admin.profile' );
-				Route::resource( 'user_message', 'UserMessageController' );
-				Route::get( 'reported_query_videos', 'UserMessageController@reported_videos' )->name( 'reported_query_videos' );
-
-			}
+                Route::view('/', 'admin.home')->name('admin_panel');
+                Route::resource('categories', 'Admin\\CategoriesController');
+                Route::resource('pages', 'Admin\\PagesController');
+                Route::resource('user-categories', 'Admin\\UserCategoriesController');
+                Route::resource('videos', 'Admin\\VideosController');
+                Route::resource('users', 'Admin\\UsersController');
+                Route::resource('settings', 'Admin\\SettingsController');
+                Route::view('profile', 'admin.users.profile')->name('admin.profile');
+                Route::resource('user_message', 'UserMessageController');
+                Route::get('reported_query_videos', 'UserMessageController@reported_videos')->name('reported_query_videos');
+                Route::get('admin_uploads', 'Admin\\VideosController@upload')->name('admin_uploads.upload');
+                Route::post('admin_uploads', 'Admin\\VideosController@store')->name('admin_uploads.store');
+            }
 		);
 	}
 );
+
+Route::get('watch', 'MainController@watch_from_admin')->name('admin_uploads.watch');
 
 
 // Home
@@ -108,7 +111,6 @@ Route::put( 'is_play/{video}', 'MainController@isplay' )->name( 'is_played' );
 // Pages
 Route::get( '/{slug}/{video_id?}', 'MainController@page_or_username' )->middleware( \App\Http\Middleware\IsUserNameMiddleware::class )->name( 'directory_by_username' );
 // Route::get( '/{slug}', 'MainController@page' )->middleware(\App\Http\Middleware\IsPageMiddleware::class)->name( 'pages' );
-
 
 
 
