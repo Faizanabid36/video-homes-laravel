@@ -28,62 +28,6 @@ class DashboardController extends Controller
         return compact('videosWithViews');
     }
 
-    public function statistics()
-    {
-        $endDate = \request('endDate');
-        $startDate = \request('startDate');
-        $videoswithDate = VideoView::select('video_user', 'video_id', 'created_at')
-            ->where('video_user', auth()->user()->id)
-            ->where('created_at', '>=', \Carbon\Carbon::parse($startDate))
-            ->where('created_at', '<=', \Carbon\Carbon::parse($endDate))
-            ->get()
-            ->groupBy(function ($date) {
-                return Carbon::parse($date->created_at)->format('Y-m-d');
-            })->toArray();
-        $views = [];
-        $labels = [];
-        ksort($videoswithDate);
-        foreach ($videoswithDate as $key => $values) {
-            $labels[] = $key;
-            $views[] = count($values);
-        }
-        $chartData = dashboardChart($labels, 'number of views', $views, false);
-        $loadData = VideoView::select('is_played', \DB::raw('count(*) as views'))
-            ->where('video_user', auth()->user()->id)
-            ->groupBy('is_played')
-            ->get();
-        $totalLoads = 0;
-        $totalViews = 0;
-        foreach ($loadData as $key) {
-            if ($key->is_played == 0)
-                $totalLoads += $key->views;
-            else
-                $totalViews += $key->views;
-        }
-        $pageData = VideoView::select('from_website', \DB::raw('count(*) as views'))
-            ->where('video_user', auth()->user()->id)
-            ->groupBy('from_website')
-            ->get();
-        $fromWebsite = 0;
-        $outsideWebsite = 0;
-        foreach ($pageData as $key) {
-            if ($key->from_website == 0)
-                $outsideWebsite += $key->views;
-            else
-                $fromWebsite += $key->views;
-        }
-        $doughnutData = dashboardChart(['loads', 'views'], 'Player Impressions', [$totalLoads, $totalViews], true);
-        $fromPage = dashboardChart(['From Videohomes.com', 'From Videohomes Video Pages'], 'Traffic Source', [$fromWebsite, $outsideWebsite], true);
-        return compact('chartData', 'doughnutData', 'fromPage');
-    }
-
-    public function get_all_statistics()
-    {
-        $endDate = \request('endDate');
-        $startDate = \request('startDate');
-        $videoId = \request('id');
-    }
-
     public function get_dashboard_statistics()
     {
         $videoswithDate = VideoView::getLineChartData();

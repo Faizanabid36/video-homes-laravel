@@ -43,7 +43,6 @@ Route::group(
         // Dashboard
 		Route::post( '/dashboard_statistics', 'DashboardController@dashboard_type' )->name( 'dashboard_type' );
 		// Analytics
-		Route::post( '/get_all_statistics', 'DashboardController@get_all_statistics' );
 		Route::get( '/get_dashboard_statistics', 'DashboardController@get_dashboard_statistics' );
 
 		// Profile
