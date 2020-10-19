@@ -1,38 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
-import {
-
-    Upload, message,
-    Image,
-    Card,
-    Drawer,
-    Divider,
-    PageHeader,
-    Menu,
-    Dropdown,
-    Button,
-    Space,
-    Tag,
-    Typography,
-    Row,
-    Layout,
-    Badge,
-    Avatar,
-    notification,
-    Progress,
-    Tabs, Col, Table, Steps
-} from 'antd';
-import {
-    CloudUploadOutlined as InboxOutlined,
-    CloudUploadOutlined,
-    UserOutlined,
-    SolutionOutlined,
-    LoadingOutlined,
-    SmileOutlined,
-    EditOutlined,
-    EllipsisOutlined,
-    SettingOutlined
-} from '@ant-design/icons';
+import {Layout, message, PageHeader, Steps, Upload} from 'antd';
+import {CloudUploadOutlined as InboxOutlined} from '@ant-design/icons';
 
 const {Content} = Layout;
 const {Step} = Steps;

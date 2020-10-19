@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { Tag, Input, Tooltip } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import React, {Component} from 'react';
+import {Input, Tag, Tooltip} from 'antd';
+import {PlusOutlined} from '@ant-design/icons';
 
 class EditableTagGroup extends Component {
-    constructor(props){
+    constructor(props) {
         super(...arguments);
         this.state = {
             inputVisible: false,

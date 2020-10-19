@@ -1,28 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
-import {
-    Image,
-    Card,
-    Drawer,
-    Divider,
-    PageHeader,
-    Menu,
-    Dropdown,
-    Button,
-    Space,
-    Tag,
-    Typography,
-    Row,
-    Layout,
-    Badge,
-    Avatar,
-    notification,
-    message,
-    Progress,
-    Tabs, Col, Table, Empty,
-    Form, Input
-} from 'antd';
-import { CloudUploadOutlined, EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import {Button, Empty, Form, Input, Layout, message, PageHeader, Space, Table} from 'antd';
+import {CloudUploadOutlined} from '@ant-design/icons';
 import axios from "axios";
 
 const {Content} = Layout;

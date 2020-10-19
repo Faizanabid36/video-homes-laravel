@@ -1,20 +1,6 @@
 import React, {Component} from 'react';
 
-import {
-    Button,
-    Form,
-    Image,
-    Input,
-    Layout,
-    message,
-    PageHeader,
-    Popconfirm,
-    Select,
-    Spin,
-    Table,
-    Tabs,
-    Upload
-} from 'antd';
+import {Button, Form, Input, Layout, message, PageHeader, Popconfirm, Select, Spin, Table, Tabs, Upload} from 'antd';
 import MaskedInput from 'antd-mask-input'
 import ImgCrop from 'antd-img-crop';
 import GooglePlacesAutocomplete, {geocodeByAddress} from "react-google-places-autocomplete";

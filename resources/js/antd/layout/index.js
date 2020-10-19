@@ -89,9 +89,9 @@ class SidebarMenu extends React.Component {
             <Menu.Item key="playlist" icon={<ProfileOutlined/>}>
                 Playlists
             </Menu.Item>
-            <Menu.Item key="custom-design" icon={<FormatPainterOutlined/>}>
-                Custom Design
-            </Menu.Item>
+            {/*<Menu.Item key="custom-design" icon={<FormatPainterOutlined/>}>*/}
+            {/*    Custom Design*/}
+            {/*</Menu.Item>*/}
             <Menu.Item key="analytics" icon={<LineChartOutlined/>}>
                 Analytics
             </Menu.Item>

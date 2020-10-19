@@ -1,15 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
-import {
-    Input,
-    Image,
-    PageHeader,
-    Layout,
-    Form, Select,
-    Carousel,
-    Button,
-
-} from 'antd';
+import {Button, Carousel, Form, Image, Input, Layout, PageHeader, Select,} from 'antd';
 import EditableTagGroup from "./Tags";
 
 const {goTo} = Carousel;
@@ -28,14 +19,14 @@ class EditVideo extends Component {
         this.onUpdate = this.onUpdate.bind(this);
         this.defaultValue = this.defaultValue.bind(this);
         console.log("yes edit video")
-    }   
+    }
 
 
     onChange(e,key) {
         let {video} = this.state;
         video[key] = e.target ?  e.target.value : e;
         this.setState({video});
-                    
+
     }
     onUpdate(){
         let self = this;
@@ -53,7 +44,7 @@ class EditVideo extends Component {
                 data.current_slide = index[1] - 1;
             }
             self.setState({...data,enable:true});
-            
+
         })
     }
 
@@ -107,7 +98,7 @@ class EditVideo extends Component {
                                 {this.state.categories.length && <Select
                                     defaultValue={this.defaultValue(["video","category_id"])}
                                     showSearch
-                                    
+
                                     placeholder="Select a Category"
                                     optionFilterProp="children"
                                     onChange={e=>this.onChange(e,'category_id')}

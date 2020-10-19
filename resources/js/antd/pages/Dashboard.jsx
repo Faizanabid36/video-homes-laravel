@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Bar, Line, Pie} from '@ant-design/charts';
-import {Card, Col, Layout, Row, Table} from 'antd';
+import {Card, Col, Layout, Row} from 'antd';
 import axios from "axios";
 
 const {Content} = Layout;
