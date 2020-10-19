@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {Bar, Line, Pie} from '@ant-design/charts';
-import {Button, Card, Col, DatePicker, Layout, Row, Space, Table} from 'antd';
+import {Line, Pie} from '@ant-design/charts';
+import {Card, Col, DatePicker, Layout, Modal, Row, Space, Table} from 'antd';
 import axios from "axios";
 
 const {Content} = Layout;
@@ -16,48 +16,55 @@ class Dashboard extends Component {
             barData: [],
             loadedOrViewed: [],
             viewsSource: [],
-            visible: false,
+            visibleContent: false,
             endDate: new Date(),
             startDate: startDate,
             videos_table_data: [],
+            visible: false,
         }
-        this.getChartData = this.getChartData.bind(this)
+        this.handleCancelModal = this.handleCancelModal.bind(this)
         this.handleChangeInput = this.handleChangeInput.bind(this)
+        this.handleOkModal = this.handleOkModal.bind(this)
+        this.getModalData = this.getModalData.bind(this)
         this.onChangeDate = this.onChangeDate.bind(this)
         this.onOk = this.onOk.bind(this)
     }
 
     componentDidMount() {
-        axios.get('get_dashboard_statistics')
+
+        let {startDate, endDate} = this.state
+        axios.post('video_with_views', {startDate, endDate})
             .then((res) => {
+                this.setState({...res.data}, () => {
+                    this.setState({visibleContent: true})
+                })
+            })
+    }
+
+    getModalData(e) {
+        const video_id = e.key;
+        let {startDate, endDate} = this.state
+        axios.post('video_chart_data', {startDate, endDate, video_id})
+            .then((res) => {
+                console.log(res.data)
                 this.setState({...res.data}, () => {
                     this.setState({visible: true})
                 })
             })
-            .catch((err) => {
-                console.log(err)
-            })
-        let {startDate, endDate} = this.state
-        axios.post('video_with_views', {startDate, endDate})
-            .then((res) => {
-                this.setState({...res.data})
-            })
     }
 
-    getChartData() {
-        let {startDate, endDate} = this.state
-        axios.post('get_all_statistics', {startDate, endDate})
-            .then((res) => {
-                this.setState({...res.data})
-                this.setState({
-                        chartData: [...this.state.chartData]
-                    }
-                )
-                console.log('post state', this.state)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+    handleOkModal(e) {
+        console.log(e);
+        this.setState({
+            visible: false,
+        });
+    }
+
+    handleCancelModal(e) {
+        console.log(e);
+        this.setState({
+            visible: false,
+        });
     }
 
     async handleChangeInput(startDate, endDate, label) {
@@ -82,7 +89,6 @@ class Dashboard extends Component {
                 console.log(err)
             })
     }
-
     render() {
         const {RangePicker} = DatePicker;
         let {viewsSource, loadedOrViewed} = this.state
@@ -130,19 +136,13 @@ class Dashboard extends Component {
                 title: 'Views Count',
                 dataIndex: 'views_count',
                 key: 'views_count',
-            },
-            {
-                title: 'Address',
-                dataIndex: 'address',
-                key: 'address',
-            },
-
+            }
         ];
         return (
-            this.state.visible ? <Content style={{padding: '20px 50px'}}>
+            this.state.visibleContent ? <Content style={{padding: '20px 50px'}}>
                 <div className="site-layout-content">
                     <div className="site-card-wrapper">
-                        <Space direction="vertical" size={12}>
+                        <Space direction="vertical" size={16}>
                             <RangePicker
                                 showTime={{format: 'HH:mm'}}
                                 format="YYYY-MM-DD HH:mm"
@@ -150,36 +150,25 @@ class Dashboard extends Component {
                                 onOk={this.onOk}
                             />
                         </Space>
-                        {/*<DateRangePicker startDate={this.state.startDate} onCallback={this.handleChangeInput}*/}
-                        {/*                 endDate={this.state.endDate}>*/}
-                        {/*    <button className="btn btn-primary">Select Date Range</button>*/}
-                        {/*</DateRangePicker>*/}
-                        <Button onClick={() => this.getChartData()}>Get Data</Button>
+                    </div>
+                    <Modal
+                        width={800}
+                        title="Video Details"
+                        visible={this.state.visible}
+                        onOk={this.handleOkModal}
+                        onCancel={this.handleCancelModal}>
                         <Row gutter={16}>
-                            <Col span={24}>
-                                <Table
-                                    onRow={(record) => {
-                                        return {
-                                            onClick: () => {
-                                                console.log(record)
-                                            }
-                                        }
-                                    }}
-                                    dataSource={dataSource} columns={columns}/>
-                            </Col>
-                        </Row>
-                        <Row gutter={16}>
-                            <Col span={12}>
+                            <Col span={16}>
                                 <Card title="Traffic Source" bordered={false}>
                                     <Pie style={{width: "100%", height: "400px"}} {...configVideoSource}/>
                                 </Card>
                             </Col>
-                            <Col span={12}>
+                            <Col span={16}>
                                 <Card title="Player Impressions" bordered={false}>
                                     <Pie style={{width: "100%", height: "400px"}} {...configLoadedOrViewed}/>
                                 </Card>
                             </Col>
-                            <Col span={12}>
+                            <Col span={16}>
                                 <Card title="Views within 7 Days" bordered={false}>
                                     <Line style={{width: "100%", height: "400px"}}  {...{
                                         data: this.state.lineChart,
@@ -192,27 +181,24 @@ class Dashboard extends Component {
                                     }}/>
                                 </Card>
                             </Col>
-                            <Col span={12}>
-                                <Card title="Top 5 Most Watched Videos" bordered={false}>
-                                    <Bar style={{width: "100%", height: "400px"}}  {...{
-                                        data: this.state.barData,
-                                        title: {
-                                            visible: true,
-                                            text: '基础条形图',
-                                        },
-                                        forceFit: true,
-
-                                        xField: 'views_count',
-                                        yField: 'original_name',
-                                        label: {
-                                            visible: true,
-                                            formatter: (v) => Math.round(v / 10000) + '万',
-                                        },
-                                    }}/>
-                                </Card>
-                            </Col>
                         </Row>
-                    </div>
+                    </Modal>
+                    <Row gutter={16}>
+                        <Col span={24}>
+                            <Table
+                                style={{cursor: 'pointer'}}
+                                onRow={(record) => {
+                                    return {
+                                        onClick: () => {
+                                            console.log('here')
+                                            this.getModalData(record)
+                                        }
+                                    }
+                                }}
+                                dataSource={dataSource} columns={columns}/>
+                        </Col>
+                    </Row>
+
                 </div>
             </Content> : ''
         );

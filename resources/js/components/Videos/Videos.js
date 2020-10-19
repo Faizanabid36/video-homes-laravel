@@ -24,7 +24,7 @@ class Videos extends React.Component {
     };
 
     changeFilter(filter) {
-        axios.get('/all_videos/' + filter)
+        axios.get('/video/' + filter)
             .then((res) => {
                 this.setState({...res.data})
             })
@@ -34,7 +34,7 @@ class Videos extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('/all_videos')
+        axios.get('/video')
             .then((res) => {
                 this.setState({...res.data})
             })

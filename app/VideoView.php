@@ -33,12 +33,15 @@ class VideoView extends Model
         return self::all()->count();
     }
 
-    public static function getLineChartDataWitinRange($startDate, $endDate)
+    public static function getLineChartDataWitinRange($startDate, $endDate, $video_id)
     {
         return self::select('video_user', 'video_id', 'created_at')
             ->where('video_user', auth()->user()->id)
             ->where('created_at', '>=', \Carbon\Carbon::parse($startDate))
             ->where('created_at', '<=', \Carbon\Carbon::parse($endDate))
+            ->when($video_id, function ($q) use ($video_id) {
+                return $q->where('video_id', $video_id);
+            })
             ->get()
             ->groupBy(function ($date) {
                 return Carbon::parse($date->created_at)->format('Y-m-d');
@@ -58,21 +61,27 @@ class VideoView extends Model
 
     }
 
-    public function scopeLoadedOrViewed($q)
+    public function scopeLoadedOrViewed($q, $video_id = null)
     {
         return $q->select('is_played', \DB::raw('count(*) as views'))
             ->where('video_user', auth()->user()->id)
+            ->when($video_id, function ($q) use ($video_id) {
+                return $q->where('video_id', $video_id);
+            })
             ->groupBy('is_played');
     }
 
-    public function scopeViewsSource($q)
+    public function scopeViewsSource($q, $video_id = null)
     {
         return $q->select('from_website', \DB::raw('count(*) as views'))
             ->where('video_user', auth()->user()->id)
+            ->when($video_id, function ($q) use ($video_id) {
+                return $q->where('video_id', $video_id);
+            })
             ->groupBy('from_website');
     }
 
-    public static function getLineChartData()
+    public static function getLineChartData($video_id = null)
     {
         return self::select('video_user', 'video_id', 'created_at')
             ->where('video_user', auth()->user()->id)

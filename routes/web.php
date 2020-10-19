@@ -30,6 +30,7 @@ Route::group(
 
         Route::resource('video', 'VideosController');
         Route::post('video_with_views', 'VideosController@video_with_views');
+        Route::post('video_chart_data', 'DashboardController@single_video_statistics');
         // Video
         // Route::get( '/all_videos', 'VideoController@list_of_videos' );
         // Route::get( '/all_videos/{order}', 'VideoController@list_of_videos_by_order' );
