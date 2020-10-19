@@ -6,7 +6,6 @@ import {
     BellOutlined,
     CloudUploadOutlined,
     DashboardOutlined,
-    FormatPainterOutlined,
     LineChartOutlined,
     LogoutOutlined,
     MenuFoldOutlined,
@@ -116,6 +115,7 @@ class App extends React.Component {
         this.onClose = this.onClose.bind(this);
         this.profileMenu = this.profileMenu.bind(this);
         this.menuClick = this.menuClick.bind(this);
+        this.logOut = this.logOut.bind(this);
     }
 
     componentDidMount() {
@@ -126,6 +126,14 @@ class App extends React.Component {
             .catch((err) => {
                 console.log(err)
             })
+    }
+
+    logOut() {
+        axios.post('logout')
+            .then((res) => {
+                window.location.reload()
+            })
+            .catch((err)=>{console.log(err)})
     }
 
     showDrawer() {
@@ -162,7 +170,7 @@ class App extends React.Component {
                 Setting
             </Menu.Item>
             <Divider style={{margin: "3px 0"}}/>
-            <Menu.Item key="logout" icon={<LogoutOutlined/>}>
+            <Menu.Item onClick={this.logOut} key="logout" icon={<LogoutOutlined/>}>
                 Logout
             </Menu.Item>
         </Menu>
