@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('container')
 
-    @if(!request('new'))
+    @if(request('old'))
         <div class="container-fluid">
             <div class="row bg-light">
 
