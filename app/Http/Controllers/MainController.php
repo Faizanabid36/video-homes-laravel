@@ -60,7 +60,7 @@ class MainController extends Controller
             $ratings = $ratingsUser->groupBy('rating');
             for ($x = 1; $x <= 5; $x++) {
                 $ratings[$x] = isset($ratings[$x]) ? $ratings[$x]->count() : 0;
-                $rating[$x] = ($ratings[$x] / $total_ratings) * 100;
+                $rating[$x] = ($ratings[$x] / $total_ratings == 0 ? 1 : $total_ratings) * 100;
             }
         }
 
