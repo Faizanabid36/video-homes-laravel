@@ -53,23 +53,28 @@ class MainController extends Controller
         $views = $video ? VideoView::videoViews($video) : 0;
         $user = request('username');
         $related_videos = $views ? Video::userVideos($username, $video->id, true)->get() : [];
-        $ratings = UserMessage::userRating($user->id)->get();
-        $total_ratings = $ratings->count();
-        $ratings = $ratings->groupBy('rating');
+        $ratingsUser = UserMessage::userRating($user->id)->get();
+        $total_ratings = 0;
+        if (!is_null($ratingsUser)) {
+            $total_ratings = $ratingsUser->count();
+            $ratings = $ratingsUser->groupBy('rating');
+        }
         for ($x = 1; $x <= 5; $x++) {
             $ratings[$x] = isset($ratings[$x]) ? $ratings[$x]->count() : 0;
             $rating[$x] = ($ratings[$x] / $total_ratings) * 100;
         }
+        $ratings = [];
         $all_ratings = UserMessage::userRating($user->id)->get();
-        $ratings = collect($all_ratings)->map(function ($rate) {
-            return [
-                'name' => collect($rate->user)->get('name'),
-                'video_title' => collect($rate->video)->get('title'),
-                'review' => $rate->message,
-                'rating' => $rate->rating,
-                'time' => $rate->created_at->diffForHumans(),
-            ];
-        });
+        if (!is_null($all_ratings))
+            $ratings = collect($all_ratings)->map(function ($rate) {
+                return [
+                    'name' => collect($rate->user)->get('name'),
+                    'video_title' => collect($rate->video)->get('title'),
+                    'review' => $rate->message,
+                    'rating' => $rate->rating,
+                    'time' => $rate->created_at->diffForHumans(),
+                ];
+            });
         return view($video && !$video->processed ? 'directory.processing' : 'directory.single', compact('ratings', 'user', 'rating', 'video', 'related_videos', 'views'));
     }
 
