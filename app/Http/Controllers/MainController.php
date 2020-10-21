@@ -54,15 +54,16 @@ class MainController extends Controller
         $user = request('username');
         $related_videos = $views ? Video::userVideos($username, $video->id, true)->get() : [];
         $ratingsUser = UserMessage::userRating($user->id)->get();
-        $total_ratings = 0;
+        $total_ratings = $ratings[1] = $ratings[2] = $ratings[3] = $ratings[4] = $ratings[5] = 0;
         if (!is_null($ratingsUser)) {
             $total_ratings = $ratingsUser->count();
             $ratings = $ratingsUser->groupBy('rating');
+            for ($x = 1; $x <= 5; $x++) {
+                $ratings[$x] = isset($ratings[$x]) ? $ratings[$x]->count() : 0;
+                $rating[$x] = ($ratings[$x] / $total_ratings) * 100;
+            }
         }
-        for ($x = 1; $x <= 5; $x++) {
-            $ratings[$x] = isset($ratings[$x]) ? $ratings[$x]->count() : 0;
-            $rating[$x] = ($ratings[$x] / $total_ratings) * 100;
-        }
+
         $ratings = [];
         $all_ratings = UserMessage::userRating($user->id)->get();
         if (!is_null($all_ratings))
