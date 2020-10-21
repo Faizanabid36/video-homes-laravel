@@ -55,6 +55,12 @@ class VideosController extends Controller
         return view('admin.videos.my_videos', compact('videos'));
     }
 
+    public function edit_my_video(Request $request, $id)
+    {
+        $video = Video::whereId($id)->whereUserId(auth()->user()->id)->firstOrFail();
+        return view('admin.videos.edit_my_video', compact('video'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -203,6 +209,16 @@ class VideosController extends Controller
     public function upload()
     {
         return view('admin.videos.uploads.upload_video');
+    }
+
+    public function update_my_video(Request $request, $id)
+    {
+        $this->validate($request, [
+            'title' => 'required|max:64',
+            'description' => 'required|max:500'
+        ]);
+        Video::whereId($id)->whereUserId(auth()->user()->id)->update($request->except('_token'));
+        return back()->withSuccess('Updated Successfully');
     }
 
 }

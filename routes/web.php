@@ -92,6 +92,8 @@ Route::group(
                 Route::get('admin_uploads', 'Admin\\VideosController@upload')->name('admin_uploads.upload');
                 Route::post('admin_uploads', 'Admin\\VideosController@store')->name('admin_uploads.store');
                 Route::get('/my_videos', 'Admin\\VideosController@my_videos')->name('admin.my_videos');
+                Route::get('/my_video/edit/{id}', 'Admin\\VideosController@edit_my_video')->name('admin.my_video.edit');
+                Route::post('/my_video/edit/{id}', 'Admin\\VideosController@update_my_video')->name('admin.update_my_video');
             }
 		);
 	}

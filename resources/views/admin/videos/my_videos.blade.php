@@ -9,23 +9,6 @@
                 <div class="card">
                     <div class="card-header">Videos</div>
                     <div class="card-body">
-                        {{--                        <a href="{{ url('/admin/videos/create') }}" class="btn btn-success btn-sm" title="Add New Video">--}}
-                        {{--                            <i class="fa fa-plus" aria-hidden="true"></i> Add New--}}
-                        {{--                        </a>--}}
-
-                        {{--                        <form method="GET" action="{{ url('/admin/my_videos') }}" accept-charset="UTF-8"--}}
-                        {{--                              class="form-inline my-2 my-lg-0 float-right" role="search">--}}
-                        {{--                            <div class="input-group">--}}
-                        {{--                                <input type="text" class="form-control" name="search" placeholder="Search..."--}}
-                        {{--                                       value="{{ request('search') }}">--}}
-                        {{--                                <span class="input-group-append">--}}
-                        {{--                                    <button class="btn btn-secondary" type="submit">--}}
-                        {{--                                        <i class="fa fa-search"></i>--}}
-                        {{--                                    </button>--}}
-                        {{--                                </span>--}}
-                        {{--                            </div>--}}
-                        {{--                        </form>--}}
-
                         <br/>
                         <br/>
                         <div class="table-responsive">
@@ -62,6 +45,11 @@
                                                 <button id="{{route('admin_uploads.watch','v='.$video->video_id)}}"
                                                         class="btn btn-info btn-sm">
                                                     <i class="fa fa-eye" aria-hidden="true"></i> View Embed Code
+                                                </button>
+                                            </a>
+                                            <a href="{{route('admin.my_video.edit',$video->id)}}">
+                                                <button class="btn btn-info btn-sm">
+                                                    <i class="fa fa-edit" aria-hidden="true"></i> Edit
                                                 </button>
                                             </a>
                                             <form method="POST" action="{{ url('/admin/videos' . '/' . $video->id) }}"
