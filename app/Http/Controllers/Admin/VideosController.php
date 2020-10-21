@@ -25,13 +25,34 @@ class VideosController extends Controller
             $videos = Video::where('thumbnail', 'LIKE', "%$keyword%")
                 ->orWhere('title', 'LIKE', "%$keyword%")
                 ->orWhere('description', 'LIKE', "%$keyword%")
-                ->orWhere('user_id', 'LIKE', "%$keyword%")
-                ->latest()->paginate($perPage);
+                ->orWhere('user_id', 'LIKE', "%$keyword%")->
+                latest()->paginate($perPage);
         } else {
-            $videos = Video::latest()->paginate($perPage);
+            $videos = Video::whereHas('user', function ($q) {
+                return $q->where('role', '!=', 1);
+            })->latest()->paginate($perPage);
         }
-
         return view('admin.videos.index', compact('videos'));
+    }
+
+    public function my_videos(Request $request)
+    {
+        $keyword = $request->get('search');
+        $perPage = 25;
+
+        if (!empty($keyword)) {
+            $videos = Video::where('thumbnail', 'LIKE', "%$keyword%")
+                ->orWhere('title', 'LIKE', "%$keyword%")
+                ->orWhere('description', 'LIKE', "%$keyword%")
+                ->orWhere('user_id', 'LIKE', "%$keyword%")->whereHas('user', function ($q) {
+                    return $q->whereRole(1);
+                })->latest()->paginate($perPage);
+        } else {
+            $videos = Video::whereHas('user', function ($q) {
+                return $q->whereRole(1);
+            })->latest()->paginate($perPage);
+        }
+        return view('admin.videos.my_videos', compact('videos'));
     }
 
     /**

@@ -91,6 +91,7 @@ Route::group(
                 Route::get('reported_query_videos', 'UserMessageController@reported_videos')->name('reported_query_videos');
                 Route::get('admin_uploads', 'Admin\\VideosController@upload')->name('admin_uploads.upload');
                 Route::post('admin_uploads', 'Admin\\VideosController@store')->name('admin_uploads.store');
+                Route::get('/my_videos', 'Admin\\VideosController@my_videos')->name('admin.my_videos');
             }
 		);
 	}

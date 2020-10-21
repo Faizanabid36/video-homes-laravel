@@ -55,6 +55,11 @@
                     Upload Video
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link {{Route::is('admin.my_videos*') ? 'active' : ''}}" href="{{route('admin.my_videos')}}">
+                    My Videos
+                </a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
