@@ -78,6 +78,11 @@ class User extends Authenticatable
         return $this->hasOne(UserExtra::class, 'user_id', 'id');
     }
 
+    public function videos()
+    {
+        return $this->hasMany(Video::class,'user_id','id');
+    }
+
     public function isAdmin() {
         return $this->role === 1;
     }

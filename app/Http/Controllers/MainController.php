@@ -2,62 +2,75 @@
 
 namespace App\Http\Controllers;
 
-use App\AccountType;
 use App\Category;
-use App\Page;
 use App\Settings;
-use App\User;
 use App\UserCategory;
-use App\UserExtra;
-use App\UserRole;
-use App\UserTags;
+use App\UserMessage;
 use App\Video;
 use App\VideoView;
 use Illuminate\Http\Request;
-use Illuminate\Routing\ControllerDispatcher;
-use Illuminate\Routing\Route;
 
-class MainController extends Controller {
+class MainController extends Controller
+{
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index() {
+    public function index()
+    {
 
         $setting = Settings::first();
 
-        return view( 'home', compact( 'setting' ) );
+        return view('home', compact('setting'));
     }
 
 
-    public function directory( $level1 = null, $level2 = null ) {
+    public function directory($level1 = null, $level2 = null)
+    {
 
-        $industries       = UserCategory::getCategories();
-        $categories       = UserCategory::getCategories( $level1, $level2 );
+        $industries = UserCategory::getCategories();
+        $categories = UserCategory::getCategories($level1, $level2);
         $video_categories = Category::all();
-        $users            = collect( grabUsers( $categories ) );
-        $videos           = [];
-        if ( request( 'category_id' ) ) {
-            $videos = Category::approvedVideos()->find( request( 'category_id' ) );
+        $users = collect(grabUsers($categories));
+        $videos = [];
+        if (request('category_id')) {
+            $videos = Category::approvedVideos()->find(request('category_id'));
         }
 
-        return view( 'directory.index', compact( 'users', 'categories', 'industries', 'level1', 'video_categories', 'videos' ) );
+        return view('directory.index', compact('users', 'categories', 'industries', 'level1', 'video_categories', 'videos'));
     }
 
-    public function page_or_username( $username, $video_id = null ) {
-        if ( request()->ajax() ) {
-            return [ "isProcessed" => Video::userVideos( $username, $video_id )->first()->processed ];
+    public function page_or_username($username, $video_id = null)
+    {
+        if (request()->ajax()) {
+            return ["isProcessed" => Video::userVideos($username, $video_id)->first()->processed];
         }
-        if(request('page')){
-            return view( 'page', request()->only( [ 'page' ] ) );
+        if (request('page')) {
+            return view('page', request()->only(['page']));
         }
-        $video = Video::userVideos( $username, $video_id )->first();
-        $views          = $video ? VideoView::videoViews( $video ) : 0;
-        $user           = request('username');
-        $related_videos = $views ? Video::userVideos( $username, $video->id, true )->get() : [];
-
-        return view( $video && ! $video->processed ? 'directory.processing' : 'directory.single', compact( 'user', 'video', 'related_videos', 'views' ) );
+        $video = Video::userVideos($username, $video_id)->first();
+        $views = $video ? VideoView::videoViews($video) : 0;
+        $user = request('username');
+        $related_videos = $views ? Video::userVideos($username, $video->id, true)->get() : [];
+        $ratings = UserMessage::userRating($user->id)->get();
+        $total_ratings = $ratings->count();
+        $ratings = $ratings->groupBy('rating');
+        for ($x = 1; $x <= 5; $x++) {
+            $ratings[$x] = isset($ratings[$x]) ? $ratings[$x]->count() : 0;
+            $rating[$x] = ($ratings[$x] / $total_ratings) * 100;
+        }
+        $all_ratings = UserMessage::userRating($user->id)->get();
+        $ratings = collect($all_ratings)->map(function ($rate) {
+            return [
+                'name' => collect($rate->user)->get('name'),
+                'video_title' => collect($rate->video)->get('title'),
+                'review' => $rate->message,
+                'rating' => $rate->rating,
+                'time' => $rate->created_at->diffForHumans(),
+            ];
+        });
+        return view($video && !$video->processed ? 'directory.processing' : 'directory.single', compact('ratings', 'user', 'rating', 'video', 'related_videos', 'views'));
     }
 
     public function embed( $video_id ) {

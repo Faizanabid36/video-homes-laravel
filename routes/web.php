@@ -20,6 +20,9 @@ Route::group(
 	array( 'middleware' => 'auth' ),
 	function () {
         // Dashboard Page
+
+        Route::post('to_user', 'UserMessageController@store')->name('to_user');
+
         Route::view('/dashboard', 'dashboard')->name('dashboard');
 
         Route::get('logged_in_user', 'HomeController@logged_in_user');
@@ -69,8 +72,7 @@ Route::group(
 		Route::get( 'get_total_comments', 'CommentsController@countTotalComments' );
 		Route::post( 'createVideoAction', 'VideoController@createVideoAction' )->name( 'createVideoAction' );
 		Route::get( '/categories', 'CategoryController@index' );
-
-		Route::post( '/to_user', 'UserMessageController@store' )->name( 'to_user' );
+		Route::get('my_ratings','UserMessageController@my_ratings')->name('my_ratings');
 	}
 );
 

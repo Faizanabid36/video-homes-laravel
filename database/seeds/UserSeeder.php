@@ -24,8 +24,8 @@ class UserSeeder extends Seeder
                 'username' => 'admin123'
             ]
         ];
-        foreach ($user as $u)
-            User::create($u);
-        \App\AccountType::create(['user_id'=>1,'role'=>1]);
+//        foreach ($user as $u)
+//            User::create($u);
+//        \App\AccountType::create(['user_id'=>1,'role'=>1]);
     }
 }

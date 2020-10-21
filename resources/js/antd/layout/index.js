@@ -12,7 +12,9 @@ import {
     ProfileOutlined,
     SettingOutlined,
     UserOutlined,
-    VideoCameraOutlined
+    VideoCameraOutlined,
+    StarOutlined,
+    MessageOutlined
 } from '@ant-design/icons';
 import {HashRouter as Router} from "react-router-dom";
 import axios from 'axios';
@@ -93,6 +95,13 @@ class SidebarMenu extends React.Component {
             {/*</Menu.Item>*/}
             <Menu.Item key="analytics" icon={<LineChartOutlined/>}>
                 Analytics
+            </Menu.Item>
+
+            <Menu.Item key="messages" icon={<MessageOutlined/>}>
+                Messages
+            </Menu.Item>
+            <Menu.Item key="ratings" icon={<StarOutlined/>}>
+                Rating
             </Menu.Item>
         </Menu>
     }

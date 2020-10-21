@@ -47,19 +47,33 @@ class UserMessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
         request()->validate([
-            "contact_user_id"=>"required|integer|exists:users,id",
-            "video_id"=>"required|integer|exists:videos,id",
+            "contact_user_id" => "required|exists:users,id",
+            "video_id" => "required|exists:videos,id",
         ]);
         UserMessage::create(request()->all());
-        return back()->with(["message_sent"=>"Message Sent!"]);
+        return back()->with(["message_sent" => "Message Sent!"]);
+    }
+
+    public function my_ratings(Request $request)
+    {
+        $all_ratings = UserMessage::userRating(auth()->user()->id)->get();
+        $ratings = collect($all_ratings)->map(function ($rate) {
+            return [
+                'name' => collect($rate->user)->get('name'),
+                'video_title' => collect($rate->video)->get('title'),
+                'review' => $rate->message,
+                'rating' => $rate->rating,
+                'time' => $rate->created_at->diffForHumans(),
+            ];
+        });
+        return compact('ratings');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\UserMessage  $userMessage
+     * @param \App\UserMessage $userMessage
      * @return \Illuminate\Http\Response
      */
     public function show(UserMessage $userMessage)

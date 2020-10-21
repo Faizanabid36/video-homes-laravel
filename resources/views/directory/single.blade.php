@@ -451,13 +451,14 @@
                                                 <input type="hidden" name="type" value="rating">
                                                 <input type="hidden" name="video_id" value="{{$video->id}}">
                                                 <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">
+                                                <input type="hidden" name="reply_user_id" value="{{$video->user_id}}">
 
                                                 <div class="form-group">
                                                     <label for="contact_message">Message Text</label>
                                                     <textarea name="message" required class="form-control"
                                                               id="contact_message" rows="3"></textarea>
                                                     <div class="text-right">
-                                                        <input type="hidden" name="rating" value="1">
+                                                        <input type="hidden" id="rating_input" name="rating" value="1">
                                                         <span class="float-right">
                                                             <i data-value="1" class="text-secondary fa fa-star"></i>
                                                             <i data-value="2" class="text-secondary fa fa-star"></i>
@@ -479,88 +480,118 @@
                         @endif
                         <div class="row">
                             <div class="col-4 rating-star-field">
+                                {{--                                @for($x=1;$x<6;$x++)--}}
+                                {{--                                    <div class="d-flex align-items-center my-2">--}}
+                                {{--                                        <span><i class="text-success fa fa-star"></i> {{$x}} </span>--}}
+                                {{--                                        <div class="progress w-75 ml-3">--}}
+                                {{--                                            <div class="progress-bar--}}
+                                {{--                                            @if($rating[$x]>25)--}}
+                                {{--                                                'bg-success'--}}
+                                {{--                                            @else--}}
+                                {{--                                                'bg-info'--}}
+                                {{--                                            @endif--}}
+                                {{--                                                bg-success" role="progressbar" style="width: {{$rating[$x]}}%"--}}
+                                {{--                                                 aria-valuenow="{{$rating[$x]}}" aria-valuemin="0"--}}
+                                {{--                                                 aria-valuemax="100"></div>--}}
+                                {{--                                        </div>--}}
+                                {{--                                    </div>--}}
+                                {{--                                @endfor--}}
                                 <div class="d-flex align-items-center my-2">
                                     <span><i class="text-success fa fa-star"></i> 5 </span>
                                     <div class="progress w-75 ml-3">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%"
-                                             aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-success" role="progressbar"
+                                             style="width: {{$rating[5]}}%"
+                                             aria-valuenow="{{$rating[5]}}" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center my-2">
                                     <span><i class="text-info fa fa-star"></i> 4 </span>
                                     <div class="progress w-75 ml-3">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 50%"
-                                             aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-info" role="progressbar"
+                                             style="width: {{$rating[4]}}%"
+                                             aria-valuenow="{{$rating[4]}}" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                                 <div class="d-flex align-warning-center my-2">
                                     <span><i class="text-warning fa fa-star"></i> 3 </span>
                                     <div class="progress w-75 ml-3">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 75%"
-                                             aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-warning" role="progressbar"
+                                             style="width: {{$rating[3]}}%"
+                                             aria-valuenow="{{$rating[3]}}" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center my-2">
                                     <span><i class="text-danger fa fa-star"></i> 2 </span>
                                     <div class="progress w-75 ml-3">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 100%"
-                                             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-danger" role="progressbar"
+                                             style="width: {{$rating[2]}}%"
+                                             aria-valuenow="{{$rating[2]}}" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-center my-2">
                                     <span><i class="text-danger fa fa-star"></i> 1 </span>
                                     <div class="progress w-75 ml-3">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 100%"
-                                             aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-danger" role="progressbar"
+                                             style="width: {{$rating[1]}}%"
+                                             aria-valuenow="{{$rating[1]}}" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                             </div>
+{{--                            <div>--}}
+{{--                                @foreach($ratings as $ratin)--}}
+{{--                                    <h4><i>{{$ratin['name']}}</i></h4>--}}
+{{--                                    <p>{{$ratin['review']}}<br>--}}
+{{--                                    {{$ratin['rating']}}<br>--}}
+{{--                                    {{\Carbon\Carbon::parse($ratin['time'])->diffForHumans()}}</p>--}}
+{{--                                @endforeach--}}
+{{--                            </div>--}}
                         </div>
                     </div>
-                    <!-- reviews end -->
-                    <!-- Contact -->
-                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                        <h1 class="my-3 font-weight-bold"> Contact to {{$user->name}} </h1>
-                        @if(auth()->check() && $video && ($video->user_id!=auth()->id()))
-                            <form method="POST" action="{{route('to_user')}}">
-                                @csrf
-                                <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">
-                                <input type="hidden" name="video_id" value="{{$video->id}}">
-                                <div class="form-group">
-                                    <label for="message">Message</label>
-                                    <textarea name="message" class="form-control" id="message" rows="3"
-                                              placeholder="Message here"></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary"> Send</button>
-                            </form>
-                        @else
-                            <a href="{{route('login')}}" class="btn btn-info text-white">Login to
-                                Contact {{$user->name}}</a>
-                        @endif
-                    </div>
-                    <div class="tab-pane fade" id="report_message" role="tabpanel" aria-labelledby="report-tab">
-                        <!-- .report. -->
+                        <!-- reviews end -->
+                        <!-- Contact -->
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                            <h1 class="my-3 font-weight-bold"> Contact to {{$user->name}} </h1>
+                            @if(auth()->check() && $video && ($video->user_id!=auth()->id()))
+                                <form method="POST" action="{{route('to_user')}}">
+                                    @csrf
+                                    <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">
+                                    <input type="hidden" name="video_id" value="{{$video->id}}">
+                                    <input type="hidden" name="type" value="message">
+                                    <div class="form-group">
+                                        <label for="message">Message</label>
+                                        <textarea name="message" class="form-control" id="message" rows="3"
+                                                  placeholder="Message here"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary"> Send</button>
+                                </form>
+                            @else
+                                <a href="{{route('login')}}" class="btn btn-info text-white">Login to
+                                    Contact {{$user->name}}</a>
+                            @endif
+                        </div>
+                        <div class="tab-pane fade" id="report_message" role="tabpanel" aria-labelledby="report-tab">
+                            <!-- .report. -->
 
-                        <h1 class="my-3 font-weight-bold"> Report Video</h1>
-                        @if(auth()->check() && $video && ($video->user_id!=auth()->id()))
-                            <form method="POST" action="{{route('to_user')}}">
-                                @csrf
-                                <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">
-                                <input type="hidden" name="video_id" value="{{$video->id}}">
-                                <input type="hidden" name="type" value="report">
-                                <div class="form-group">
-                                    <label for="message">Message</label>
-                                    <textarea name="message" class="form-control" id="message" rows="3"
-                                              placeholder="Message here"></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary"> Send</button>
-                            </form>
-                        @else
-                            <a href="{{route('login')}}" class="btn btn-info text-white">Login to Report Video</a>
-                        @endif
+                            <h1 class="my-3 font-weight-bold"> Report Video</h1>
+                            @if(auth()->check() && $video && ($video->user_id!=auth()->id()))
+                                <form method="POST" action="{{route('to_user')}}">
+                                    @csrf
+                                    <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">
+                                    <input type="hidden" name="video_id" value="{{$video->id}}">
+                                    <input type="hidden" name="type" value="report">
+                                    <div class="form-group">
+                                        <label for="message">Message</label>
+                                        <textarea name="message" class="form-control" id="message" rows="3"
+                                                  placeholder="Message here"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary"> Send</button>
+                                </form>
+                            @else
+                                <a href="{{route('login')}}" class="btn btn-info text-white">Login to Report Video</a>
+                            @endif
 
 
-                    </div>
+                        </div>
                 </div>
 
             </div>
