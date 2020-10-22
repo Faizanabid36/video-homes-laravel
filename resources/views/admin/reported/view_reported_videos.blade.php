@@ -28,24 +28,26 @@
                     <div class="">
                         <div class="table-responsive m-t-35">
                             <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Message</th>
-                                    <th>Reported Videos</th>
-                                    <th>Receiving Time</th>
-                                    <th>Mark as Resolved</th>
-                                    <th>Delete Query</th>
-                                </tr>
-                                </thead>
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Message</th>
+                                            <th>Reported Videos</th>
+                                            <th>Receiving Time</th>
+                                            <th>Mark as Resolved</th>
+                                            <th>Delete Query</th>
+                                        </tr>
+                                    </thead>
                                 <tbody>
-                                @foreach ($queries as $query)
+
+
+                                @foreach ($reported_queries as $query)
                                     <tr
-                                        @if($query->is_resolved!=0)
-                                        style="background-color: #00cc99 !important"
-                                        @else
+                                        @if($query->is_resolved==0)
                                         style="background-color: #ffc966 !important"
+                                        @else
+                                        style="background-color: #00cc99 !important"
                                         @endif
                                     >
                                         <td>{{ucfirst($query->user->name)}}</td>
@@ -54,7 +56,8 @@
                                         <td>{{ucfirst($query->video_id)}}</td>
                                         <td>{{$query->created_at->diffForHumans()}}</td>
                                         <td>
-                                            <form action="{{route('user_message.update',$query->id)}}" method="POST">
+                                            <form action="{{route('user_message.update',$query->id)}}"
+                                                  method="POST">
                                                 @csrf
                                                 @method('put')
                                                 @if($query->is_resolved!=0)
@@ -80,13 +83,12 @@
 
                                             </form>
                                         </td>
-
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
                         </div>
-                        {{$queries->links()}}
+                        {{$reported_queries->links()}}
                     </div>
                 </div>
             </div>

@@ -70,6 +70,13 @@ class UserMessageController extends Controller
         return compact('ratings');
     }
 
+    public function reported_videos()
+    {
+        $reported_queries = UserMessage::whereType('report')
+            ->paginate(10);
+        return view('admin.reported.view_reported_videos', compact('reported_queries'));
+    }
+
     /**
      * Display the specified resource.
      *
@@ -115,9 +122,4 @@ class UserMessageController extends Controller
         //
     }
 
-    public function reported_videos()
-    {
-        $queries = UserMessage::whereType('report')->paginate(10);
-        return view('admin.reported.view_reported_videos', compact('queries'));
-    }
 }
