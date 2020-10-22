@@ -22,9 +22,6 @@
         <div class="inner bg-light lter bg-container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="bg-white">
-                        Reported Videos
-                    </div>
                     <div class="">
                         <div class="table-responsive m-t-35">
                             <table class="table">
@@ -76,7 +73,7 @@
                                             <form action="{{route('user_message.destroy',$query->id)}}" method="POST">
                                                 @csrf
                                                 @method('delete')
-
+                                                <input type="hidden" name="id" value="{{$query->id}}">
                                                 <button type="submit" class="btn btn-danger">
                                                     Delete
                                                 </button>

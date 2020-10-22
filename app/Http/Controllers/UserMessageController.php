@@ -108,7 +108,8 @@ class UserMessageController extends Controller
      */
     public function update(Request $request, UserMessage $userMessage)
     {
-        //
+        $userMessage->update($request->only('is_resolved'));
+        return back()->withSuccess('Resolved');
     }
 
     /**
@@ -119,7 +120,8 @@ class UserMessageController extends Controller
      */
     public function destroy(UserMessage $userMessage)
     {
-        //
+        $userMessage->delete();
+        return back()->withSuccess('Deleted');
     }
 
 }
