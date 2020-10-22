@@ -537,14 +537,55 @@
                                     </div>
                                 </div>
                             </div>
-{{--                            <div>--}}
-{{--                                @foreach($ratings as $ratin)--}}
-{{--                                    <h4><i>{{$ratin['name']}}</i></h4>--}}
-{{--                                    <p>{{$ratin['review']}}<br>--}}
-{{--                                    {{$ratin['rating']}}<br>--}}
-{{--                                    {{\Carbon\Carbon::parse($ratin['time'])->diffForHumans()}}</p>--}}
-{{--                                @endforeach--}}
-{{--                            </div>--}}
+                            <div class="col-8">
+                                <div class="container-fluid px-0 mx-auto">
+                                    <div class="row justify-content-center mx-0 mx-md-auto">
+                                        <div class="col-lg-10 col-md-11 px-1 px-sm-2">
+                                            <div class="card border-0 px-3">
+                                                <!-- top row -->
+                                                @if(count($ratings)>0)
+                                                    @foreach($ratings as $ratin)
+                                                        <div class="review">
+                                                            <div class="row d-flex">
+                                                                <div class="profile-pic">
+                                                                    <img
+                                                                        style="border-radius: 50%"
+                                                                        src="{{$ratin['avatar']}}" width="60px"
+                                                                        height="60px">
+                                                                </div>
+                                                                <div class="d-flex flex-column pl-3">
+                                                                    <h4>{{$ratin['name']}}</h4>
+                                                                    <p class="grey-text">{{\Carbon\Carbon::parse($ratin['time'])->diffForHumans()}}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row pb-3">
+                                                                @for($x=1;$x<=$ratin['rating'] ;$x++)
+                                                                    <div style="color: #4CAF50;font-size: 10px;"
+                                                                         class="fa fa-star green-dot my-auto rating-dot"></div>
+
+                                                                @endfor
+                                                                <div class="green-text">
+                                                                    <h5 class="mb-0 pl-3">
+                                                                        {{$ratin['review']}}
+                                                                    </h5>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+                                                    @endforeach
+                                                @else
+                                                    <div class="text-center">
+                                                        <h3>
+                                                            No one has left a review yet.
+                                                        </h3>
+                                                    </div>
+                                                @endif
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                         <!-- reviews end -->
