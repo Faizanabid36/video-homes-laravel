@@ -31,7 +31,7 @@ class EditVideo extends Component {
     }
     onUpdate(){
         let self = this;
-        axios.put(`video/${this.props.match.params.id}`, {...this.state.video}).then(({data}) => {
+        axios.put(`video/${this.props.match.params.id}`, {...this.state.video}).then((res) => {
             if (res.data.message)
                 message.success(res.data.message)
         }).catch((err) => {
