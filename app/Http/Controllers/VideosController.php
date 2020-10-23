@@ -159,9 +159,9 @@ class VideosController extends Controller
 	 * @return array
 	 */
 	public function update( $id ) {
-		$video = Video::whereVideoId( $id )->firstOrFail();
-		return array( 'status' => $video
-            ->update( request( array( 'description', 'title', 'thumbnail', 'video_type', 'tags', 'category_id' ) ) ) );
+        $video = Video::whereVideoId($id)->firstOrFail();
+        $video->update(request(array('description', 'video_location', 'title', 'thumbnail', 'video_type', 'tags', 'category_id')));
+		return array('message' => $video ? 'Information Updated' : 'Error Updating');
 	}
 
 	/**

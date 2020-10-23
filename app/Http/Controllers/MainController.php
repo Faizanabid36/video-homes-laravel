@@ -28,16 +28,24 @@ class MainController extends Controller
 
     public function directory($level1 = null, $level2 = null)
     {
-
         $industries = UserCategory::getCategories();
         $categories = UserCategory::getCategories($level1, $level2);
         $video_categories = Category::all();
         $users = collect(grabUsers($categories));
+        if (\request('sort') && 'oldest_to_newest' == \request('sort')) {
+            $users = $users->sortBy(function ($user) {
+                return $user['created_at'];
+            })->values();
+        }
+        if (\request('sort') && 'alphabetically' == \request('sort')) {
+            $users = $users->sortBy(function ($user) {
+                return $user['name'];
+            })->values();
+        }
         $videos = [];
         if (request('category_id')) {
             $videos = Category::approvedVideos()->find(request('category_id'));
         }
-
         return view('directory.index', compact('users', 'categories', 'industries', 'level1', 'video_categories', 'videos'));
     }
 
@@ -49,10 +57,10 @@ class MainController extends Controller
         if (request('page')) {
             return view('page', request()->only(['page']));
         }
-        $video = Video::userVideos($username, $video_id)->first();
+        $video = Video::userVideos($username, $video_id)->where('video_type', 'Public')->first();
         $views = $video ? VideoView::videoViews($video) : 0;
         $user = request('username');
-        $related_videos = $views ? Video::userVideos($username, $video->id, true)->get() : [];
+        $related_videos = $views ? Video::userVideos($username, $video->id, true)->where('video_type', 'Public')->get() : [];
         $ratingsUser = UserMessage::userRating($user->id)->get();
         $total_ratings = $ratings[1] = $ratings[2] = $ratings[3] = $ratings[4] = $ratings[5] = 0;
         if (!is_null($ratingsUser)) {
@@ -64,7 +72,6 @@ class MainController extends Controller
                 $rating[$x] = ($ratings[$x] / $total_ratings) * 100;
             }
         }
-
 
         $ratings = [];
         $all_ratings = UserMessage::userRating($user->id)->get();

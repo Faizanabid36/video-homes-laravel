@@ -65,7 +65,7 @@
         </div>
 
         <!-- 3rd row -->
-        @if(!request('category_id'))
+            @if(!request('category_id'))
             @if(count($users)>0)
                 <div class="row mt-3 px-1">
                     @if(!empty($categories) )
@@ -88,31 +88,34 @@
                     <div class="col-12">
                         <div class="float-left">
                             <h6 class="my-3">Found<span class="h-8"> {{count($users)}} </span>listings </h6>
-                            {{--                        <div class="dropdown">--}}
-                            {{--                            <button class="btn btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown"--}}
-                            {{--                                    aria-haspopup="true" aria-expanded="false">--}}
-                            {{--                                Sort By--}}
-                            {{--                            </button>--}}
-                            {{--                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--}}
-                            {{--                                <a class="dropdown-item" href="#">Date</a>--}}
-                            {{--                                <a class="dropdown-item" href="#"> New to Old</a>--}}
-                            {{--                                <a class="dropdown-item" href="#">Alpahabet</a>--}}
-                            {{--                            </div>--}}
-                            {{--                        </div>--}}
+                            <div class="dropdown">
+                                <button class="btn btn-primary" type="button"
+                                        id="dropdownMenuButton" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                    Sort By
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="?sort=oldest_to_newest">Oldest To Newest</a>
+                                    <a class="dropdown-item" href="?sort=newest_to_oldest"> Newest to Oldest</a>
+                                    <a class="dropdown-item" href="?sort=alphabetically">Alphabetically</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="float-right">
                             <ul class="nav Custom-nav2 nav-pills mb-3" id="pills-tab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home"
                                        role="tab"
-                                       aria-controls="pills-home" aria-selected="true"><i
-                                            class="fa fa-list icon"></i></a>
+                                       aria-controls="pills-home" aria-selected="true">
+                                        <i class="fa fa-list icon"></i>
+                                    </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile"
                                        role="tab"
-                                       aria-controls="pills-profile" aria-selected="false"><i
-                                            class="fa fa-th-large icon"></i></a>
+                                       aria-controls="pills-profile" aria-selected="false">
+                                        <i class="fa fa-th-large icon"></i>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -168,7 +171,6 @@
                                                                 href="tel:{{$account_user['office_phone']}}">{{$account_user['office_phone']}}</a>
                                                         </p>
                                                     @endif
-
                                                 </div>
                                             </div>
                                         </div>
@@ -204,7 +206,8 @@
                                                             <p class="card-text my-2">{!! substr($account_user['bio'],0,150) !!}
                                                                 @if (strlen($account_user['bio']) > 150)
                                                                     ...
-                                                                @endif</p>
+                                                                @endif
+                                                            </p>
                                                         @endif
                                                         @if ($account_user['address'] && $account_user['address'] != '')
                                                             <p class="card-text my-2">
@@ -248,17 +251,17 @@
                     <div class="col-12">
                         <div class="float-left">
                             <h6 class="my-3">Found<span class="h-8"> {{count($videos->videos)}} </span>videos </h6>
-                            {{--                        <div class="dropdown">--}}
-                            {{--                            <button class="btn btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown"--}}
-                            {{--                                    aria-haspopup="true" aria-expanded="false">--}}
-                            {{--                                Sort By--}}
-                            {{--                            </button>--}}
-                            {{--                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--}}
-                            {{--                                <a class="dropdown-item" href="#">Date</a>--}}
-                            {{--                                <a class="dropdown-item" href="#"> New to Old</a>--}}
-                            {{--                                <a class="dropdown-item" href="#">Alpahabet</a>--}}
-                            {{--                            </div>--}}
-                            {{--                        </div>--}}
+                            {{--                                                    <div class="dropdown">--}}
+                            {{--                                                        <button class="btn btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown"--}}
+                            {{--                                                                aria-haspopup="true" aria-expanded="false">--}}
+                            {{--                                                            Sort By--}}
+                            {{--                                                        </button>--}}
+                            {{--                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--}}
+                            {{--                                                            <a class="dropdown-item" href="#">Date</a>--}}
+                            {{--                                                            <a class="dropdown-item" href="#"> New to Old</a>--}}
+                            {{--                                                            <a class="dropdown-item" href="#">Alpahabet</a>--}}
+                            {{--                                                        </div>--}}
+                            {{--                                                    </div>--}}
                         </div>
                         <div class="float-right">
                             <ul class="nav Custom-nav2 nav-pills mb-3" id="pills-tab" role="tablist">

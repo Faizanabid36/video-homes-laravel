@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 
-import {Button, Carousel, Form, Image, Input, Layout, PageHeader, Select,} from 'antd';
+import {Button, Carousel, Form, Image, Input, Layout, message, PageHeader, Select,} from 'antd';
 import EditableTagGroup from "./Tags";
+import GooglePlacesAutocomplete, {geocodeByAddress} from "react-google-places-autocomplete";
 
 const {goTo} = Carousel;
 
@@ -30,8 +31,16 @@ class EditVideo extends Component {
     }
     onUpdate(){
         let self = this;
-        axios.put(`video/${this.props.match.params.id}`,{...this.state.video}).then(({data})=>{
-            console.log(data);
+        axios.put(`video/${this.props.match.params.id}`, {...this.state.video}).then(({data}) => {
+            if (res.data.message)
+                message.success(res.data.message)
+        }).catch((err) => {
+            if (err.response.data.errors.old_password)
+                message.error(err.response.data.errors.old_password)
+            else if (err.response.data.errors.new_password)
+                message.error(err.response.data.errors.new_password)
+            else if (err.response.data.errors.confirm_password)
+                message.error(err.response.data.errors.confirm_password)
         })
     }
 
@@ -84,24 +93,51 @@ class EditVideo extends Component {
 
 
                             <Form.Item label="Title" required rules={[{required: true}]}>
-                                <Input onChange={e=>this.onChange(e,'title')} defaultValue={this.defaultValue(["video","title"])}
+                                <Input onChange={e => this.onChange(e, 'title')}
+                                       defaultValue={this.defaultValue(["video", "title"])}
                                        placeholder="Title"/>
                             </Form.Item>
 
                             <Form.Item label="Description" required rules={[{required: true}]}>
-                                <Input.TextArea autoSize={true} onChange={e=>this.onChange(e,'description')} defaultValue={this.defaultValue(["video","description"])} placeholder="Description"/>
+                                <Input.TextArea autoSize={true} onChange={e => this.onChange(e, 'description')}
+                                                defaultValue={this.defaultValue(["video", "description"])}
+                                                placeholder="Description"/>
+                            </Form.Item>
+                            <Form.Item label="Address" required rules={[
+                                {
+                                    required: true,
+                                },
+                            ]}>
+                                <GooglePlacesAutocomplete
+                                    initialValue={this.state.video.video_location}
+                                    autocompletionRequest={{
+                                        componentRestrictions: {
+                                            country: ['us'],
+                                        }
+                                    }}
+                                    onSelect={({description}) => {
+                                        geocodeByAddress(description).then((results) => {
+                                            let {video} = this.state;
+                                            video.video_location = description;
+                                            this.setState({video});
+                                        }).catch(error => console.error(error));
+                                    }}
+
+                                    inputClassName="ant-input"
+                                />
                             </Form.Item>
                             <Form.Item label="Tags" required rules={[{required: true}]}>
-                                <EditableTagGroup tags={this.defaultValue(["video","tags"],[])} saveTags={e=>this.onChange(e,'tags')}/>
+                                <EditableTagGroup tags={this.defaultValue(["video", "tags"], [])}
+                                                  saveTags={e => this.onChange(e, 'tags')}/>
                             </Form.Item>
                             <Form.Item label="Category">
                                 {this.state.categories.length && <Select
-                                    defaultValue={this.defaultValue(["video","category_id"])}
+                                    defaultValue={this.defaultValue(["video", "category_id"])}
                                     showSearch
 
                                     placeholder="Select a Category"
                                     optionFilterProp="children"
-                                    onChange={e=>this.onChange(e,'category_id')}
+                                    onChange={e => this.onChange(e, 'category_id')}
                                     filterOption={(input, option) =>
                                         option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                     }

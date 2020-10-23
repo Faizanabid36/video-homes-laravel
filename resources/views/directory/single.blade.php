@@ -454,9 +454,9 @@
                                                 <input type="hidden" name="reply_user_id" value="{{$video->user_id}}">
 
                                                 <div class="form-group">
-                                                    <label for="contact_message">Message Text</label>
+                                                    <label for="contact_message2">Message Text</label>
                                                     <textarea name="message" required class="form-control"
-                                                              id="contact_message" rows="3"></textarea>
+                                                              id="contact_message2" rows="3"></textarea>
                                                     <div class="text-right">
                                                         <input type="hidden" id="rating_input" name="rating" value="1">
                                                         <span class="float-right">
@@ -480,22 +480,6 @@
                         @endif
                         <div class="row">
                             <div class="col-4 rating-star-field">
-                                {{--                                @for($x=1;$x<6;$x++)--}}
-                                {{--                                    <div class="d-flex align-items-center my-2">--}}
-                                {{--                                        <span><i class="text-success fa fa-star"></i> {{$x}} </span>--}}
-                                {{--                                        <div class="progress w-75 ml-3">--}}
-                                {{--                                            <div class="progress-bar--}}
-                                {{--                                            @if($rating[$x]>25)--}}
-                                {{--                                                'bg-success'--}}
-                                {{--                                            @else--}}
-                                {{--                                                'bg-info'--}}
-                                {{--                                            @endif--}}
-                                {{--                                                bg-success" role="progressbar" style="width: {{$rating[$x]}}%"--}}
-                                {{--                                                 aria-valuenow="{{$rating[$x]}}" aria-valuemin="0"--}}
-                                {{--                                                 aria-valuemax="100"></div>--}}
-                                {{--                                        </div>--}}
-                                {{--                                    </div>--}}
-                                {{--                                @endfor--}}
                                 <div class="d-flex align-items-center my-2">
                                     <span><i class="text-success fa fa-star"></i> 5 </span>
                                     <div class="progress w-75 ml-3">
@@ -599,8 +583,8 @@
                                     <input type="hidden" name="video_id" value="{{$video->id}}">
                                     <input type="hidden" name="type" value="message">
                                     <div class="form-group">
-                                        <label for="message">Message</label>
-                                        <textarea name="message" class="form-control" id="message" rows="3"
+                                        <label for="message2">Message</label>
+                                        <textarea name="message" class="form-control" id="message2" rows="3"
                                                   placeholder="Message here"></textarea>
                                     </div>
                                     <button type="submit" class="btn btn-primary"> Send</button>
