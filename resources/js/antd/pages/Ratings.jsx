@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 
-import {Button, Empty, Layout, Space, Table} from 'antd';
-import {CloudUploadOutlined} from '@ant-design/icons';
+import {Empty, Layout, Table} from 'antd';
 import axios from "axios";
 
 const {Content} = Layout;
@@ -37,9 +36,7 @@ class Ratings extends Component {
                 <Column title="Stars left" dataIndex="rating" key="rating"/>
                 <Column title="Time" dataIndex="time" key="time"/>
 
-            </Table> : <Empty description={"No Rating Found found"}>
-                <Button type="primary"
-                        onClick={e => this.setState({action: 'create'})}><CloudUploadOutlined/> Create</Button></Empty>
+            </Table> : <Empty description={"No One Has Left A Rating"}></Empty>
         );
     }
 }

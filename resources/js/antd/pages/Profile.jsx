@@ -111,7 +111,6 @@ class Profile extends Component {
         let {old_password, new_password, confirm_password} = this.state
         axios.put('profile/1', {old_password, new_password, confirm_password})
             .then((res) => {
-                console.log(res.data)
                 if (res.data.message)
                     message.info(res.data.message)
             })
@@ -130,15 +129,19 @@ class Profile extends Component {
         let {user} = this.state
         axios.put('profile/1', {...user})
             .then((res) => {
-                if (res.data.errors) {
-                    message.error(res.data.errors);
-                }
-                if (res.data.success)
-                    message.success(res.data.success)
+                if (res.data.message)
+                    message.success(res.data.message)
                 console.log(res.data)
             })
             .catch((err) => {
-                console.log(err)
+                if (err.response.data.errors.username)
+                    message.error(err.response.data.errors.username)
+                else if (err.response.data.errors.name)
+                    message.error(err.response.data.errors.name)
+                else if (err.response.data.errors.company_name)
+                    message.error(err.response.data.errors.company_name)
+                else if (err.response.data.errors.user_category_id)
+                    message.error(err.response.data.errors.user_category_id)
             })
     }
 

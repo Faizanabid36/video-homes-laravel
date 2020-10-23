@@ -15,8 +15,7 @@ class ProfileController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-				$data = UserCategory::levelCategories();
-
+        $data = UserCategory::levelCategories();
 		return response(
 			array(
 				'user'       => collect( auth()->user()->user_extra )->merge( collect( auth()->user() )->except( array( 'avatara', 'company_logo' ) )->all() )->except(
@@ -84,33 +83,31 @@ class ProfileController extends Controller {
 	 *
 	 * @param User $user
 	 *
-	 * @return \Illuminate\Http\Response
-	 */
+	 * @return string[]
+     */
 	public function update( $id ) {
 
-		$user = auth()->user();
-		if ( request( 'currentPassword' ) ) {
+        $user = auth()->user();
+        if (request('old_password')) {
 
-			request()->validate(
-				array(
-					'old_password'     => array(
-						'required',
-						'password',
-						function ( $attribute, $value, $fail ) {
-							if ( ! Hash::check( $value, auth()->user()->password ) ) {
-								$fail( 'Your password was not updated, since the provided current password does not match.' );
-							}
-						},
-					),
-					'new_password'     => 'required|min:8',
-					'confirm_password' => 'required|same:new_password',
-				)
-			);
-			$user->password = Hash::make( request( 'newPassword' ) );
+            request()->validate(
+                array(
+                    'old_password' => array(
+                        'required',
+                        'password',
+                        function ($attribute, $value, $fail) {
 
-			return $user->save();
-		}
+                        },
+                    ),
+                    'new_password'     => 'required|min:8',
+                    'confirm_password' => 'required|same:new_password',
+                )
+            );
+            $user->password = Hash::make( request( 'new_password' ) );
 
+            $user->save();
+            return ['message'=>'Password Changed'];
+        }
 		request()->validate(
 			array(
 				'username'         => 'unique:users,username,' . auth()->id(),
@@ -121,7 +118,7 @@ class ProfileController extends Controller {
 		);
 		$user->update( request()->only( array( 'username', 'name' ) ) );
 
-		return UserExtra::updateOrCreate(
+		UserExtra::updateOrCreate(
 			array( 'user_id' => $user->id ),
 			request()->only(
 				array(
@@ -140,6 +137,7 @@ class ProfileController extends Controller {
 				)
 			)
 		);
+        return ['message'=>'Profile Updated'];
 	}
 
 	/**

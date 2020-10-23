@@ -235,7 +235,9 @@ class App extends React.Component {
                                    onCollapse={this.onCollapse}>
                                 <div className="ant-drawer-header">
                                     <div className="ant-drawer-title">
-                                        VideoHomes
+                                        <a href={window.VIDEO_APP.base_url}>
+                                            VideoHomes
+                                        </a>
                                     </div>
                                 </div>
                                 <SidebarMenu/>
