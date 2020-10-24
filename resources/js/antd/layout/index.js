@@ -244,7 +244,12 @@ class App extends React.Component {
                                     <div className="ant-drawer-title">
                                         Space Used {this.state.user.uploaded_videos_space}.GB out of 3.GB
                                     </div>
-                                    <Progress percent={this.state.user.space_used} showInfo={false}/>
+                                    <Progress strokeColor={{
+                                        from: '#108ee9',
+                                        to: '#87d068',
+                                    }}
+                                              status={'active'}
+                                              percent={this.state.user.space_used} showInfo={false}/>
                                 </div>
                                 <SidebarMenu/>
                             </Sider>
