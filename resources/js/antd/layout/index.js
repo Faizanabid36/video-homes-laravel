@@ -242,7 +242,7 @@ class App extends React.Component {
                                 </div>
                                 <div className="ant-drawer-header">
                                     <div className="ant-drawer-title">
-                                        Space Used {this.state.user.uploaded_videos_space}.GB out of 3.GB
+                                        Used {this.state.user.uploaded_videos_space}.GB/3.GB
                                     </div>
                                     <Progress strokeColor={{
                                         from: '#108ee9',
