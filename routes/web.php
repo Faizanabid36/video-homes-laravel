@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Route::get('used_space',function (){
+//    return auth()->user()->videos->sum('size');
+//});
+
 
 Auth::routes();
 // Auth User
@@ -116,8 +120,6 @@ Route::put( 'is_play/{video}', 'MainController@isplay' )->name( 'is_played' );
 // Pages
 Route::get( '/{slug}/{video_id?}', 'MainController@page_or_username' )->middleware( \App\Http\Middleware\IsUserNameMiddleware::class )->name( 'directory_by_username' );
 // Route::get( '/{slug}', 'MainController@page' )->middleware(\App\Http\Middleware\IsPageMiddleware::class)->name( 'pages' );
-
-
 
 
 

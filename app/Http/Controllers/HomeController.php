@@ -12,7 +12,6 @@ use App\VideoLikesDislikes;
 use App\VideoView;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller {
     /**
@@ -25,7 +24,11 @@ class HomeController extends Controller {
     }
 
     public function logged_in_user() {
-        return [ 'user' => User::whereId( auth()->user()->id )->with( 'user_extra' )->first() ];
+        $user = User::whereId(auth()->user()->id)->with(['user_extra'])->first();
+        $user = collect($user)->merge(['space_used' => round($user->videos->sum('size') / 3221225472, 3),
+            'uploaded_videos_space' => round($user->videos->sum('size') / (1024 * 1024 * 1024), 3)
+        ]);
+        return ['user' => $user];
     }
 
 

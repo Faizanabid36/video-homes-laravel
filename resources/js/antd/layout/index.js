@@ -240,6 +240,12 @@ class App extends React.Component {
                                         </a>
                                     </div>
                                 </div>
+                                <div className="ant-drawer-header">
+                                    <div className="ant-drawer-title">
+                                        Space Used {this.state.user.uploaded_videos_space}.GB out of 3.GB
+                                    </div>
+                                    <Progress percent={this.state.user.space_used} showInfo={false}/>
+                                </div>
                                 <SidebarMenu/>
                             </Sider>
                         </ShowAt>
