@@ -60,7 +60,10 @@ class MainController extends Controller
         $video = Video::userVideos($username, $video_id)->where('video_type', 'Public')->first();
         $views = $video ? VideoView::videoViews($video) : 0;
         $user = request('username');
-        $related_videos = $views ? Video::userVideos($username, $video->id, true)->where('video_type', 'Public')->get() : [];
+        if ($user->user_extra->display_suggested_videos == 'enabled')
+            $related_videos = $views ? Video::userVideos($username, $video->id, true)->where('video_type', 'Public')->get() : [];
+        else
+            $related_videos = [];
         $ratingsUser = UserMessage::userRating($user->id)->get();
         $total_ratings = $ratings[1] = $ratings[2] = $ratings[3] = $ratings[4] = $ratings[5] = 0;
         if (!is_null($ratingsUser)) {
@@ -86,7 +89,6 @@ class MainController extends Controller
                     'avatar' => is_null($rate->user->user_extra->profile_picture) ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMgrxYAqZF6-kdFuLQesPwdAyonhn93LsxvKXax0vzbCCGd_wQ&usqp=CAU' : $rate->user->user_extra->profile_picture,
                 ];
             });
-//        return compact('ratings');
         return view($video && !$video->processed ? 'directory.processing' : 'directory.single', compact('ratings', 'user', 'rating', 'video', 'related_videos', 'views'));
     }
 

@@ -81,7 +81,7 @@ class VideosController extends Controller
                 'duration' => $media->getDurationInSeconds(),
                 'size' => request()->video->getSize(),
                 'category_id' => 1,
-                'video_type' => 'Public',
+                'video_type' => ucfirst(auth()->user()->user_extra->default_video_state),
                 'width' => $dimension->getWidth(),
                 'stream_path' => getCleanFileName($path, '_240p_converted.mp4'),
             )

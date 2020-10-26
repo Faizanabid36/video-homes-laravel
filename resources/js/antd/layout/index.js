@@ -14,7 +14,7 @@ import {
     UserOutlined,
     VideoCameraOutlined,
     StarOutlined,
-    MessageOutlined
+    MessageOutlined,
 } from '@ant-design/icons';
 import {HashRouter as Router} from "react-router-dom";
 import axios from 'axios';
@@ -102,6 +102,9 @@ class SidebarMenu extends React.Component {
             </Menu.Item>
             <Menu.Item key="ratings" icon={<StarOutlined/>}>
                 Rating
+            </Menu.Item>
+            <Menu.Item key="global_videos_settings" icon={<SettingOutlined/>}>
+                Global Video Setting
             </Menu.Item>
         </Menu>
     }
@@ -242,7 +245,7 @@ class App extends React.Component {
                                 </div>
                                 <div className="ant-drawer-header">
                                     <div className="ant-drawer-title">
-                                        Used {this.state.user.uploaded_videos_space}.GB/3.GB
+                                        Used {this.state.user.uploaded_videos_space} GB/3 GB
                                     </div>
                                     <Progress strokeColor={{
                                         from: '#108ee9',

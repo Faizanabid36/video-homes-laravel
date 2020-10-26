@@ -1,14 +1,7 @@
 import React, {Component} from 'react';
 
 import {Avatar, Button, Card, Col, Divider, Empty, Image, Layout, message, PageHeader, Popconfirm, Row} from 'antd';
-import {
-    CloudUploadOutlined,
-    DeleteOutlined,
-    EditOutlined,
-    EllipsisOutlined,
-    PlayCircleOutlined,
-    SettingOutlined
-} from '@ant-design/icons';
+import {CloudUploadOutlined, DeleteOutlined, EditOutlined, PlayCircleOutlined,} from '@ant-design/icons';
 import axios from "axios";
 
 const {Content} = Layout;
@@ -22,9 +15,11 @@ class Video extends Component {
             pendingVideos: [],
         }
         this.loadData = this.loadData.bind(this);
+        this.deleteVideo = this.deleteVideo.bind(this);
 
     };
-    loadData(){
+
+    loadData() {
         axios.get('/video')
             .then((res) => {
                 console.log(res.data)
@@ -34,9 +29,21 @@ class Video extends Component {
                 console.log(err)
             })
     }
+
+    deleteVideo(id) {
+        axios.delete('video/' + id)
+            .then((res) => {
+                console.log(res.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
     componentDidMount() {
         this.loadData();
     }
+
     render() {
         return (
             <Content style={{padding: '20px 50px'}}>
@@ -70,9 +77,27 @@ class Video extends Component {
 
                                         }
                                         actions={[
-                                            <SettingOutlined key="setting" />,
-                                            <EditOutlined key="edit" />,
-                                            <EllipsisOutlined key="ellipsis" />,
+                                            <PlayCircleOutlined onClick={
+                                                () => {
+                                                    window.location = window.VIDEO_APP.base_url + '/' + item.user.username + '/' + item.video_id
+                                                }
+                                            } key="play"/>,
+                                            <EditOutlined key='edit' onClick={
+                                                () => {
+                                                    window.location = window.VIDEO_APP.base_url + '/dashboard#/edit_video/' + item.video_id
+                                                }
+                                            } key="edit"/>,
+                                            <Popconfirm
+                                                title="Are you sure delete this video?"
+                                                onConfirm={() => this.deleteVideo(item.id)}
+                                                onCancel={() => {
+                                                    console.log('Cancelled')
+                                                }}
+                                                okText="Yes"
+                                                cancelText="No"
+                                            >
+                                                <DeleteOutlined key="ellipsis"/>
+                                            </Popconfirm>
                                         ]}
                                     >
                                         <Card.Meta

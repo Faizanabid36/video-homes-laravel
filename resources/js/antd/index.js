@@ -10,6 +10,8 @@ import Profile from './pages/Profile';
 import UploadPage from './pages/Upload';
 import EditVideo from './pages/EditVideo';
 import Ratings from "./pages/Ratings";
+import GlobalVideoSettings from "./pages/GlobalVideoSettings";
+
 function App() {
     return <AppLayout>
         <Route path="/" exact component={Dashboard}/>
@@ -21,6 +23,7 @@ function App() {
         <Route path="/messages" exact component={UploadPage}/>
         <Route path="/ratings" exact component={Ratings}/>
         <Route path="/edit_video/:id" component={EditVideo}/>
+        <Route path="/global_videos_settings" component={GlobalVideoSettings}/>
     </AppLayout>
 }
 

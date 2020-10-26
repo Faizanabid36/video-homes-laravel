@@ -80,12 +80,15 @@ class EditVideo extends Component {
                 <div className="site-layout-content">
                     <PageHeader
                         className="site-page-header site-page-header-responsive"
-                        onBack={() => null}
+                        onBack={() => {
+                            null
+                        }}
                         title="Edit Video"
                     >
                         {this.state.enable && <Form ref={this.formRef} name="control-ref" layout="vertical">
                             {Object.values(this.state.thumbnails).length > 0 &&
-                            <Carousel slickGoTo={this.state.current_slide} afterChange={e=>this.onChange(e,'thumbnails')}>
+                            <Carousel slickGoTo={this.state.current_slide}
+                                      afterChange={e => this.onChange(e, 'thumbnails')}>
                                 {Object.values(this.state.thumbnails).map((v, k) => <div key={k} style={contentStyle}>
                                     <Image src={window.VIDEO_APP.base_url + "/storage/" + v}/>
                                 </div>)}

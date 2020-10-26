@@ -25,7 +25,11 @@ Route::group(
 	function () {
         // Dashboard Page
 
+
+
         Route::post('to_user', 'UserMessageController@store')->name('to_user');
+
+        Route::post('update_video_global_settings', 'ProfileController@update_video_global_settings')->name('update_video_global_settings');
 
         Route::view('/dashboard', 'dashboard')->name('dashboard');
 

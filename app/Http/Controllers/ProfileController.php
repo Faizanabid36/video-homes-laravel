@@ -99,58 +99,73 @@ class ProfileController extends Controller {
 
                         },
                     ),
-                    'new_password'     => 'required|min:8',
+                    'new_password' => 'required|min:8',
                     'confirm_password' => 'required|same:new_password',
                 )
             );
-            $user->password = Hash::make( request( 'new_password' ) );
+            $user->password = Hash::make(request('new_password'));
 
             $user->save();
-            return ['message'=>'Password Changed'];
+            return ['message' => 'Password Changed'];
         }
-		request()->validate(
-			array(
-				'username'         => 'unique:users,username,' . auth()->id(),
-				'name'             => 'required|min:4',
-				'company_name'     => 'required|min:4',
-				'user_category_id' => 'required',
-			)
-		);
-		$user->update( request()->only( array( 'username', 'name' ) ) );
+        request()->validate(
+            array(
+                'username' => 'unique:users,username,' . auth()->id(),
+                'name' => 'required|min:4',
+                'company_name' => 'required|min:4',
+                'user_category_id' => 'required',
+            )
+        );
+        $user->update(request()->only(array('username', 'name')));
 
-		UserExtra::updateOrCreate(
-			array( 'user_id' => $user->id ),
-			request()->only(
-				array(
-					'bio',
-					'facebook',
-					'instagram',
-					'youtube',
-					'location_latitude',
-					'location_longitude',
-					'direct_phone',
-					'address',
-					'office_phone',
-					'company_name',
-					'license_no',
-					'user_category_id',
-				)
-			)
-		);
-        return ['message'=>'Profile Updated'];
-	}
+        UserExtra::updateOrCreate(
+            array('user_id' => $user->id),
+            request()->only(
+                array(
+                    'bio',
+                    'facebook',
+                    'instagram',
+                    'youtube',
+                    'location_latitude',
+                    'location_longitude',
+                    'direct_phone',
+                    'address',
+                    'office_phone',
+                    'company_name',
+                    'license_no',
+                    'user_category_id',
+                )
+            )
+        );
+        return ['message' => 'Profile Updated'];
+    }
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param User $user
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function destroy( $id ) {
-				$user = auth()->user();
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param User $user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $user = auth()->user();
 
-		return response( array( 'success' => $user->delete() ) );
-	}
+        return response(array('success' => $user->delete()));
+    }
+
+    public function update_video_global_settings(Request $request)
+    {
+        UserExtra::whereUserId(auth()->user()->id)->update($request->only(
+            [
+                'share_buttons',
+                'default_video_state',
+                'display_suggested_videos',
+                'distribution_type'
+            ]
+        ));
+        $message= 'Settings Updated';
+        return compact('message');
+    }
 
 }
