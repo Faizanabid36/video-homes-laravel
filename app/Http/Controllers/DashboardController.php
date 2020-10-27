@@ -54,6 +54,7 @@ class DashboardController extends Controller
         $startDate = \request('startDate');
         $video_id = \request('video_id');
         $videoswithDate = VideoView::getLineChartDataWitinRange($startDate, $endDate, $video_id);
+        $lineChart=[];
         foreach ($videoswithDate as $key => $value)
             $lineChart[] = (object)['date' => $key, 'views' => count($value)];
         $barData = collect(Video::mostWatchedVideos($video_id)->take(5)->get())->map(function ($v) {
