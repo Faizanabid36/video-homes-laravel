@@ -16,7 +16,7 @@ class VideoView extends Model
         $postsViews = array_merge([
             'video_id' => $video->id,
             'video_slug' => $video->video_id,
-            'url' => url(),
+            'url' => url()->current(),
             'session_id' => request()->session()->getId(),
             'ip' => request()->ip(),
             'agent' => request()->header('User-Agent'),
