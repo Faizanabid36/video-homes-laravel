@@ -171,6 +171,7 @@ class VideosController extends Controller
 	 * @return int[]
 	 */
 	public function destroy( $id ) {
+
 		Video::whereUserId( auth()->id() )->find( $id )->delete();
 		return array( 'success' => 1 );
 	}
