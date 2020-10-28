@@ -29,7 +29,7 @@ function App() {
 
 function App2(){
     return <AppLayout>
-        <Route path="/" exact component={Dashboard}/>
+        <Route path="/" component={Dashboard}/>
     </AppLayout>;
 }
 
