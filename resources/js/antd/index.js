@@ -39,7 +39,7 @@ function App2(){
 
 if (document.getElementById('container2')) {
     ReactDOM.render(
-        <App2/>,
+        <App/>,
         document.getElementById('container2'),
     );
 }
