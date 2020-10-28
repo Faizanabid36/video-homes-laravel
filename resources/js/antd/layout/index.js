@@ -9,12 +9,12 @@ import {
     LineChartOutlined,
     LogoutOutlined,
     MenuFoldOutlined,
+    MessageOutlined,
     ProfileOutlined,
     SettingOutlined,
+    StarOutlined,
     UserOutlined,
     VideoCameraOutlined,
-    StarOutlined,
-    MessageOutlined,
 } from '@ant-design/icons';
 import {HashRouter as Router} from "react-router-dom";
 import axios from 'axios';
@@ -257,7 +257,6 @@ class App extends React.Component {
                                 <SidebarMenu/>
                             </Sider>
                         </ShowAt>
-                        {/*<Spin spinning={this.state.dataloading} tip={'Loading'}/>*/}
                         {this.state.dataloaded && <Layout className="site-layout">
                             <Header className="header">
                                 <Space size={8} align="center">
