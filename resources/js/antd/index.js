@@ -27,9 +27,15 @@ function App() {
     </AppLayout>
 }
 
+function App2(){
+    return <AppLayout>
+        <Route path="/" exact component={Dashboard}/>
+    </AppLayout>;
+}
+
 if (document.getElementById('container2')) {
     ReactDOM.render(
-        <App/>,
+        <App2/>,
         document.getElementById('container2'),
     );
 }
