@@ -198,7 +198,6 @@ class Dashboard extends Component {
                                 dataSource={dataSource} columns={columns}/>
                         </Col>
                     </Row>
-
                 </div>
             </Content> : ''
         );

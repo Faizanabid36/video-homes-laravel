@@ -190,8 +190,11 @@ class Playlist extends Component {
                             </Space>
                         )}
                     />
-                </Table> : <Empty description={"No Playlist found"}><Button type="primary"
-                                                                            onClick={e => this.setState({action: 'create'})}><CloudUploadOutlined/> Create</Button></Empty>;
+                </Table> : <Empty description={"No Playlist found"}>
+                    <Button type="primary" onClick={e => this.setState({action: 'create'})}>
+                        <CloudUploadOutlined/> Create
+                    </Button>
+                </Empty>;
         }
     }
 
@@ -210,7 +213,6 @@ class Playlist extends Component {
                     >
                         {this._render()}
                     </PageHeader>
-
                 </div>
             </Content>
         );

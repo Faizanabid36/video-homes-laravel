@@ -151,7 +151,6 @@ class EditVideo extends Component {
                             <Button onClick={this.onUpdate}>Update</Button>
                         </Form>}
                     </PageHeader>
-
                 </div>
             </Layout.Content>
         );

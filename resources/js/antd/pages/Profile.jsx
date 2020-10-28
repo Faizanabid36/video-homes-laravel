@@ -494,7 +494,6 @@ class Profile extends Component {
                             </Tabs>
                         </Form>}
                     </PageHeader>
-
                 </div>
             </Content>
         );

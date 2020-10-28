@@ -178,7 +178,6 @@ class Video extends Component {
                             }) : <Col span={24}><Empty description={"No Pending Video found"} /></Col>}
                         </Row>
                     </PageHeader>
-
                 </div>
             </Content>
         );

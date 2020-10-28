@@ -287,7 +287,9 @@ class App extends React.Component {
                             </Header>
                             {this.props.children}
                         </Layout>}
-                    </Layout></BreakpointsProvider></Router>
+                    </Layout>
+                </BreakpointsProvider>
+            </Router>
         );
     }
 }

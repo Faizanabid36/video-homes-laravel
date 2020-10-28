@@ -36,7 +36,9 @@ class Ratings extends Component {
                 <Column title="Stars left" dataIndex="rating" key="rating"/>
                 <Column title="Time" dataIndex="time" key="time"/>
 
-            </Table> : <Empty description={"No One Has Left A Rating"}></Empty>
+            </Table> : <Empty description={"No One Has Left A Rating"}>
+
+            </Empty>
         );
     }
 }
