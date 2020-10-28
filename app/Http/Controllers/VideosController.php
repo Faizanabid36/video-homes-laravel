@@ -93,7 +93,7 @@ class VideosController extends Controller
             240,
             array(
                 'converted_for_streaming_at' => Carbon::now(),
-                'processed' => true,
+                'processed' => 1,
             ),
             $angle
         );
