@@ -43,7 +43,7 @@ class ConvertVideoForStreaming implements ShouldQueue {
 //        $lowBitrateFormat->setInitialParameters(array('-acodec', 'copy'));
 
         $video = \FFMpeg::open($this->video->video_path);
-        Log::info("Essa Outside Angle", [$this->angle, $video]);
+        Log::info("Essa Outside Angle", [$this->angle, $this->video->video_path, $video]);
         if ($this->angle) {
             Log::info("Essa Inside Angle", [$this->angle]);
             $video->filters()->rotate($this->angle);
