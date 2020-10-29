@@ -51,7 +51,7 @@ class UserMessageController extends Controller
             "contact_user_id" => "required|exists:users,id",
             "video_id" => "required|exists:videos,id",
         ]);
-        UserMessage::create(request()->all());
+        UserMessage::create(request()->except('_token'));
         return back()->with(["message_sent" => "Message Sent!"]);
     }
 

@@ -4,7 +4,6 @@ namespace App\Jobs;
 
 use App\Video;
 use FFMpeg\Coordinate\Dimension;
-use FFMpeg\Filters\Video\ExtractMultipleFramesFilter;
 use FFMpeg\Filters\Video\RotateFilter;
 use FFMpeg\Format\Video\X264;
 use Illuminate\Bus\Queueable;
@@ -40,26 +39,29 @@ class ConvertVideoForStreaming implements ShouldQueue {
      */
     public function handle() {
         // create a video format...
-        $lowBitrateFormat = ( new X264( 'aac', 'libx264' ) )->setKiloBitrate( 1000 );
+        $lowBitrateFormat = (new X264('aac', 'libx264'))->setKiloBitrate(1000);
 //        $lowBitrateFormat->setInitialParameters(array('-acodec', 'copy'));
 
-        $video = \FFMpeg::open( $this->video->video_path );
-        Log::info(  "Essa Outside Angle",[$this->angle]);
-        if ( $this->angle ) {
-            Log::info("Essa Inside Angle",[$this->angle]);
-            $video->filters()->rotate( $this->angle );
+        $video = \FFMpeg::open($this->video->video_path);
+        Log::info("Essa Outside Angle", [$this->angle]);
+        if ($this->angle) {
+            Log::info("Essa Inside Angle", [$this->angle]);
+            $video->filters()->rotate($this->angle);
         }
-        $video->filters()->pad( new Dimension( $this->width, $this->height ) );
+        $video->filters()->pad(new Dimension($this->width, $this->height));
 
-        $video->export()->inFormat( $lowBitrateFormat )->save( getCleanFileName( $this->video->video_path, "_{$this->height}p_converted.mp4" ) );
+        $video->export()->inFormat($lowBitrateFormat)->save(getCleanFileName($this->video->video_path, "_{$this->height}p_converted.mp4"));
 
         // update the database so we know the convertion is done!
-        Log::info( 'This is some useful information.', [
-            'file_path' => $this->video->stream_path . "_{$this->height}p_converted.mp4",
-            'update'    => $this->update
-        ] );
+        Log::info('This is some useful information.', [
+            'file_path' => $this->video->stream_path . "_{$this->height}p_converted.mp4"
+        ]);
+        Log::info('CHECKING UPDATE VARIABLE ON VIDEO', [
+            'title' => $this->video->title,
+            'update' => $this->update
+        ]);
 
-        $this->video->update( $this->update );
+        $this->video->update($this->update);
     }
 
     private function getAngle( $angle ) {

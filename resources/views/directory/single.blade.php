@@ -582,7 +582,8 @@
                                     @csrf
                                     <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">
                                     <input type="hidden" name="video_id" value="{{$video->id}}">
-                                    <input type="hidden" name="type" value="message">
+                                    <input type="hidden" name="reply_user_id" value="{{$video->user_id}}">
+                                    <input type="hidden" name="type" value="contact">
                                     <div class="form-group">
                                         <label for="message2">Message</label>
                                         <textarea name="message" class="form-control" id="message2" rows="3"

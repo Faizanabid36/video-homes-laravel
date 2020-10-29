@@ -28,6 +28,7 @@ class HomeController extends Controller {
         $user = collect($user)->merge(['space_used' => round($user->videos->sum('size') / 3221225472, 3),
             'uploaded_videos_space' => round($user->videos->sum('size') / (1024 * 1024 * 1024), 3)
         ]);
+        $notifications = [];
         return ['user' => $user];
     }
 
