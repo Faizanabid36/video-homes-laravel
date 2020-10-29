@@ -28,6 +28,16 @@ function App() {
     </AppLayout>
 }
 
+// function Dashboard2(){
+//     return "Hello";
+// }
+
+function App2(){
+    return <AppLayout>
+        <Route path="/" component={Dashboard}/>
+    </AppLayout>;
+}
+
 if (document.getElementById('container2')) {
     ReactDOM.render(
         <App/>,
