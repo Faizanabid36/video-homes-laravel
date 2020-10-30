@@ -28,6 +28,9 @@ Route::group(
 
 
         Route::post('to_user', 'UserMessageController@store')->name('to_user');
+        Route::post('my_messages', 'UserMessageController@my_messages');
+        Route::post('send_message', 'UserMessageController@send_message');
+//        Route::get('read_message/{id}', 'UserMessageController@read_message');
 
         Route::post('update_video_global_settings', 'ProfileController@update_video_global_settings')->name('update_video_global_settings');
 

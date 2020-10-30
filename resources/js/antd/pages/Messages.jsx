@@ -1,18 +1,18 @@
 import React from "react";
-import {Button, Card, Form, Input, Layout, PageHeader} from 'antd';
+import {Button, Card, Form, Input, Layout, PageHeader, Spin} from 'antd';
 import {SendOutlined} from '@ant-design/icons';
 
 const {Content} = Layout;
 
 export default class Messages extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            messages: [
-                {message: 'Hi Josh', timestamp: 'Tuesday'},
-                {message: 'How are you?', timestamp: 'Wednesday'}
-            ],
-            inputText: ''
+            messages: [],
+            inputText: '',
+            dataloading: false,
+            from_id: 0,
+            to_id: 0,
         }
         this.onChange = this.onChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -20,9 +20,19 @@ export default class Messages extends React.Component {
 
     async handleSubmit(e) {
         await e.preventDefault();
-        let nextMessages = await this.state.messages.concat([{message: this.state.inputText, timestamp: 'Thursday'}]);
-        let nextInputText = await '';
-        await this.setState({messages: nextMessages, inputText: nextInputText});
+        let {inputText, from_id, to_id} = this.state;
+        await axios.post('send_message', {inputText, from_id, to_id})
+            .then(async (res) => {
+                console.log(res.data)
+                let nextMessages = await this.state.messages.concat([{
+                    message: this.state.inputText,
+                    timestamp: res.data.timestamp
+                }]);
+                await this.setState({messages: nextMessages, inputText: ''});
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
 
@@ -30,11 +40,27 @@ export default class Messages extends React.Component {
         await this.setState({inputText: e.target.value});
     }
 
+    componentDidMount() {
+        console.log(this.props.match.params.id)
+        let message_id = this.props.match.params.id
+        axios.post('my_messages', {message_id})
+            .then((res) => {
+                console.log(res)
+                this.setState({...res.data}, () => {
+                    this.setState({dataloading: true})
+                })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
     render() {
         return (
             <Content style={{padding: '20px 50px'}}>
                 <div className="site-layout-content">
-                    <PageHeader
+                    <Spin spinning={!this.state.dataloading} tip={'Loading'}/>
+                    {this.state.dataloading && <PageHeader
                         className="site-page-header site-page-header-responsive"
                         title="Message History">
 
@@ -64,7 +90,7 @@ export default class Messages extends React.Component {
                                         icon={<SendOutlined/>}>Send</Button>
                             </Form.Item>
                         </Form>
-                    </PageHeader>
+                    </PageHeader>}
                 </div>
             </Content>
         );

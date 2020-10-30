@@ -202,42 +202,34 @@ class GlobalVideoSettings extends Component {
                             layout="vertical"
                         >
                             <Form.Item name="default_video_state" label="Default Video State">
-                                <Radio.Group>
-                                    <Radio defaultChecked={this.state.user.default_video_state == 'public'}
-                                           onChange={(e) => this.handleChangeInput(e, 'default_video_state')}
+                                <Radio.Group defaultValue={this.state.user.default_video_state}>
+                                    <Radio onChange={(e) => this.handleChangeInput(e, 'default_video_state')}
                                            value="public">Active</Radio>
-                                    <Radio defaultChecked={this.state.user.default_video_state == 'private'}
-                                           onChange={(e) => this.handleChangeInput(e, 'default_video_state')}
+                                    <Radio onChange={(e) => this.handleChangeInput(e, 'default_video_state')}
                                            value="private">Inactive</Radio>
                                 </Radio.Group>
                             </Form.Item>
                             <Form.Item name="share_buttons" label="Share Button">
-                                <Radio.Group>
-                                    <Radio defaultChecked={this.state.user.share_buttons == 'enabled'}
-                                           onChange={(e) => this.handleChangeInput(e, 'share_buttons')}
+                                <Radio.Group defaultValue={this.state.user.share_buttons}>
+                                    <Radio onChange={(e) => this.handleChangeInput(e, 'share_buttons')}
                                            value="enabled">Enabled</Radio>
-                                    <Radio defaultChecked={this.state.user.share_buttons == 'disabled'}
-                                           onChange={(e) => this.handleChangeInput(e, 'share_buttons')}
+                                    <Radio onChange={(e) => this.handleChangeInput(e, 'share_buttons')}
                                            value="disabled">Disabled</Radio>
                                 </Radio.Group>
                             </Form.Item>
                             <Form.Item name="display_suggested_videos" label="Up Next / Suggested Videos">
-                                <Radio.Group>
-                                    <Radio defaultChecked={this.state.user.display_suggested_videos == 'enabled'}
-                                           onChange={(e) => this.handleChangeInput(e, 'display_suggested_videos')}
+                                <Radio.Group defaultValue={this.state.user.display_suggested_videos}>
+                                    <Radio onChange={(e) => this.handleChangeInput(e, 'display_suggested_videos')}
                                            value="enabled">Enabled</Radio>
-                                    <Radio defaultChecked={this.state.user.display_suggested_videos == 'disabled'}
-                                           onChange={(e) => this.handleChangeInput(e, 'display_suggested_videos')}
+                                    <Radio onChange={(e) => this.handleChangeInput(e, 'display_suggested_videos')}
                                            value="disabled">Disabled</Radio>
                                 </Radio.Group>
                             </Form.Item>
                             <Form.Item name="distribution_type" label="Video distribution Type">
-                                <Radio.Group>
-                                    <Radio defaultChecked={this.state.user.distribution_type == 'uploaded'}
-                                           onChange={(e) => this.handleChangeInput(e, 'distribution_type')}
+                                <Radio.Group defaultValue={this.state.user.distribution_type}>
+                                    <Radio onChange={(e) => this.handleChangeInput(e, 'distribution_type')}
                                            value="uploaded">Uploaded</Radio>
-                                    <Radio defaultChecked={this.state.user.distribution_type == 'embedded'}
-                                           onChange={(e) => this.handleChangeInput(e, 'distribution_type')}
+                                    <Radio onChange={(e) => this.handleChangeInput(e, 'distribution_type')}
                                            value="embedded">Embedded</Radio>
                                 </Radio.Group>
                             </Form.Item>

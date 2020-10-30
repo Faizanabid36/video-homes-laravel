@@ -72,6 +72,15 @@ class SidebarMenu extends React.Component {
         this.setState({current: e.key}, () => {
             window.location.hash = "#/" + (e.key === "dashboard" ? "" : e.key);
         })
+        // axios.get('read_message/' + e.key)
+        //     .then((res) => {
+        //         this.setState({current: e.key}, () => {
+        //             window.location.hash = "#/" + (e.key === "dashboard" ? "" : e.key);
+        //         })
+        //     }).catch((err) => {
+        //     console.log(err)
+        // })
+
     }
 
     render() {
@@ -121,6 +130,7 @@ class App extends React.Component {
             placement: 'left',
             user: {},
             dataloaded: false,
+            notifications: []
         };
         this.onCollapse = this.onCollapse.bind(this);
         this.showDrawer = this.showDrawer.bind(this);
@@ -132,7 +142,7 @@ class App extends React.Component {
 
     componentDidMount() {
         axios.get('logged_in_user').then((res) => {
-            this.setState({user: res.data.user, dataloaded: true})
+            this.setState({user: res.data.user, notifications: res.data.notifications, dataloaded: true})
             console.log('here', res.data.user.user_extra)
         })
             .catch((err) => {
@@ -157,7 +167,7 @@ class App extends React.Component {
     menuClick(e) {
         console.log(e.key);
         this.setState({current: e.key}, () => {
-            window.location.hash = "#/" + (e.key === "dashboard" ? "" : e.key);
+            window.location.hash = "#/" + (e.key === "dashboard" ? "" : "messages/" + e.key);
         })
     }
 
@@ -189,27 +199,21 @@ class App extends React.Component {
     }
 
     notificationMenu() {
-        // return <Tabs defaultActiveKey="1" onChange={callback}>
-        //     <TabPane tab="Tab 1" key="1">
-        //         Content of Tab Pane 1
-        //     </TabPane>
-        //     <TabPane tab="Tab 2" key="2">
-        //         Content of Tab Pane 2
-        //     </TabPane>
-        //     <TabPane tab="Tab 3" key="3">
-        //         Content of Tab Pane 3
-        //     </TabPane>
-        // </Tabs>;
         return <Menu onClick={this.menuClick}>
-            <Menu.Item key="1" icon={<UserOutlined/>}>
-                1st menu item
-            </Menu.Item>
-            <Menu.Item key="2" icon={<UserOutlined/>}>
-                2nd menu item
-            </Menu.Item>
-            <Menu.Item key="3" icon={<UserOutlined/>}>
-                3rd menu item
-            </Menu.Item>
+            {this.state.notifications.map((item, i) => {
+                return <Menu.Item key={item.id} icon={<UserOutlined/>}>
+                    {item.message}
+                </Menu.Item>
+            })}
+            {/*<Menu.Item key="1" icon={<UserOutlined/>}>*/}
+            {/*    1st menu item*/}
+            {/*</Menu.Item>*/}
+            {/*<Menu.Item key="2" icon={<UserOutlined/>}>*/}
+            {/*    2nd menu item*/}
+            {/*</Menu.Item>*/}
+            {/*<Menu.Item key="3" icon={<UserOutlined/>}>*/}
+            {/*    3rd menu item*/}
+            {/*</Menu.Item>*/}
         </Menu>;
     }
 
@@ -271,7 +275,7 @@ class App extends React.Component {
                                         Video</Button>
 
                                     <Dropdown overlay={this.notificationMenu()}>
-                                        <Badge count={1} size={'md'}>
+                                        <Badge count={this.state.notifications.length} size={'md'}>
                                             <BellOutlined style={{fontSize: "20px"}} onClick={e => e.preventDefault()}/>
                                         </Badge>
                                     </Dropdown>

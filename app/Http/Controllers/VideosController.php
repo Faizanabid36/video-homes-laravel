@@ -130,16 +130,16 @@ class VideosController extends Controller
 	 * @return array
 	 */
 	public function show( $id ) {
-		$video      = Video::whereVideoId( $id )->without( array( 'user', 'comments' ) )->firstOrFail();
-		$categories = Category::orderBy( 'name', 'ASC' )->get();
-		$thumbnails = array();
-		for ( $i = 1; $i <= 3; $i++ ) {
-			$thumbnails[ $i ] = preg_replace( '/(-)\d(\.png)/', "-$i$2", $video->thumbnail, 1 );
-		}
-		$video->username = auth()->user()->username;
-
-		return compact( 'video', 'thumbnails', 'categories' );
-	}
+        $video = Video::whereVideoId($id)->without(array('user', 'comments'))->firstOrFail();
+        $categories = Category::orderBy('name', 'ASC')->get();
+        $thumbnails = array();
+        for ($i = 1; $i <= 3; $i++) {
+            $thumbnails[$i] = preg_replace('/(-)\d(\.png)/', "-$i$2", $video->thumbnail, 1);
+        }
+        $video->username = auth()->user()->username;
+        $user = auth()->user();
+        return compact('video', 'thumbnails', 'categories', 'user');
+    }
 
 	/**
 	 * Show the form for editing the specified resource.

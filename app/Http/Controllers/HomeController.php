@@ -7,29 +7,33 @@ use App\Playlist;
 use App\User;
 use App\UserCategory;
 use App\UserExtra;
+use App\UserMessage;
 use App\Video;
 use App\VideoLikesDislikes;
 use App\VideoView;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class HomeController extends Controller {
+class HomeController extends Controller
+{
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct() {
-        $this->middleware( 'auth' );
+    public function __construct()
+    {
+        $this->middleware('auth');
     }
 
-    public function logged_in_user() {
+    public function logged_in_user()
+    {
         $user = User::whereId(auth()->user()->id)->with(['user_extra'])->first();
         $user = collect($user)->merge(['space_used' => round($user->videos->sum('size') / 3221225472, 3),
             'uploaded_videos_space' => round($user->videos->sum('size') / (1024 * 1024 * 1024), 3)
         ]);
-        $notifications = [];
-        return ['user' => $user];
+        $notifications = UserMessage::whereReplyUserId(auth()->user()->id)->whereType('contact')->whereNull('read_at')->get();
+        return ['user' => $user, 'notifications' => $notifications];
     }
 
 
@@ -68,7 +72,6 @@ class HomeController extends Controller {
                 'confirm_password' => 'required|same:new_password',
             ] );
             $user->password = Hash::make( request( 'newPassword' ) );
-
             return $user->save();
         }
 

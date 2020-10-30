@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import {Button, Carousel, Form, Image, Input, Layout, message, PageHeader, Select,} from 'antd';
+import {Button, Carousel, Form, Image, Input, Layout, message, PageHeader, Select,Radio} from 'antd';
 import EditableTagGroup from "./Tags";
 import GooglePlacesAutocomplete, {geocodeByAddress} from "react-google-places-autocomplete";
 
@@ -15,6 +15,7 @@ class EditVideo extends Component {
             current_slide: 0,
             thumbnails: {},
             categories: [],
+            user:{},
         };
         this.onChange = this.onChange.bind(this);
         this.onUpdate = this.onUpdate.bind(this);
@@ -52,6 +53,7 @@ class EditVideo extends Component {
             if (index && index[1]) {
                 data.current_slide = index[1] - 1;
             }
+            console.log(data)
             self.setState({...data,enable:true});
 
         })
@@ -105,6 +107,14 @@ class EditVideo extends Component {
                                 <Input.TextArea autoSize={true} onChange={e => this.onChange(e, 'description')}
                                                 defaultValue={this.defaultValue(["video", "description"])}
                                                 placeholder="Description"/>
+                            </Form.Item>
+                            <Form.Item name="default_video_state" label="Default Video State">
+                                <Radio.Group defaultValue={this.state.video.video_type}>
+                                    <Radio onChange={(e) => this.onChange(e, 'video_type')}
+                                           value="Public">Public</Radio>
+                                    <Radio onChange={(e) => this.onChange(e, 'video_type')}
+                                           value="Private">Private</Radio>
+                                </Radio.Group>
                             </Form.Item>
                             <Form.Item label="Address" required rules={[
                                 {

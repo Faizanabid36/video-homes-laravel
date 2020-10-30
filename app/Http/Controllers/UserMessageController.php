@@ -115,13 +115,39 @@ class UserMessageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\UserMessage  $userMessage
+     * @param \App\UserMessage $userMessage
      * @return \Illuminate\Http\Response
      */
     public function destroy(UserMessage $userMessage)
     {
         $userMessage->delete();
         return back()->withSuccess('Deleted');
+    }
+
+
+    public function my_messages(Request $request)
+    {
+        $message = UserMessage::whereId($request->message_id)->firstOrFail();
+        $from_id = $message->contact_user_id;
+        $to_id = $message->reply_user_id;
+        $messages = UserMessage::whereType('contact')->where('contact_user_id', $from_id)->orWhere('reply_user_id', $to_id)
+            ->where('contact_user_id', $to_id)->orWhere('reply_user_id', $from_id)->get();
+        $messages = collect($messages)->map(function ($message) {
+            return ['message' => $message->message, 'timestamp' => $message->created_at->diffForHumans()];
+        });
+        return compact('messages', 'from_id', 'to_id');
+    }
+
+    public function send_message(Request $request)
+    {
+        $sent_message = UserMessage::create([
+            'message' => $request->inputText,
+            'reply_user_id' => $request->from_id,
+            'contact_user_id' => $request->to_id,
+            'type' => 'contact',
+            'video_id' => -1,
+        ]);
+        return ['message' => $sent_message->message, 'timestamp' => $sent_message->created_at->diffForHumans()];
     }
 
 }
