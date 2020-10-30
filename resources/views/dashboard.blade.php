@@ -10,8 +10,12 @@
             </div>
         </div>
         <div id="container"></div>
+    @elseif(request('check'))
+        <div id="container3"></div>
     @else
         <div id="container2"></div>
     @endif
+
+   
 
 @endsection
