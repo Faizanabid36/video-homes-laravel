@@ -43,7 +43,7 @@ class DashboardController extends Controller
             return ['type' => $data->is_played == 0 ? 'loaded' : 'played', 'count' => $data->views];
         });
         $viewsSource = collect(VideoView::viewsSource()->get())->map(function ($d) {
-            return ['source' => $d->from_website == 0 ? 'From Videohomes Video Pages' : 'From Videohomes.com', 'views' => $d->views];
+            return ['source' => $d->from_website == 0 ? 'From Video Pages' : 'From Videohomes.com', 'views' => $d->views];
         });
 
         return compact('lineChart', 'barData', 'loadedOrViewed', 'viewsSource');
@@ -65,7 +65,7 @@ class DashboardController extends Controller
             return ['type' => $data->is_played == 0 ? 'loaded' : 'played', 'count' => $data->views];
         });
         $viewsSource = collect(VideoView::viewsSource($video_id)->get())->map(function ($d) {
-            return ['source' => $d->from_website == 0 ? 'From Videohomes Video Pages' : 'From Videohomes.com', 'views' => $d->views];
+            return ['source' => $d->from_website == 0 ? 'From Video Pages' : 'From Videohomes.com', 'views' => $d->views];
         });
         return ['lineChart' => $lineChart, 'loadedOrViewed' => $loadedOrViewed, 'viewsSource' => $viewsSource];
     }
