@@ -174,7 +174,7 @@ class App extends React.Component {
     avatarClick(e) {
         console.log(e.key);
         this.setState({current: e.key}, () => {
-            window.location.hash = "#/" + (e.key === "dashboard" ? "" : "/" + e.key);
+            window.location.hash = "#/" + (e.key === "profile" ? "profile" : "/" + e.key);
         })
     }
 
