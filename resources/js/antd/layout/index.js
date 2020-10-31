@@ -137,6 +137,7 @@ class App extends React.Component {
         this.onClose = this.onClose.bind(this);
         this.profileMenu = this.profileMenu.bind(this);
         this.menuClick = this.menuClick.bind(this);
+        this.avatarClick = this.avatarClick.bind(this);
         this.logOut = this.logOut.bind(this);
     }
 
@@ -170,6 +171,12 @@ class App extends React.Component {
             window.location.hash = "#/" + (e.key === "dashboard" ? "" : "messages/" + e.key);
         })
     }
+    avatarClick(e) {
+        console.log(e.key);
+        this.setState({current: e.key}, () => {
+            window.location.hash = "#/" + (e.key === "dashboard" ? "" : "/" + e.key);
+        })
+    }
 
 
     onClose() {
@@ -184,7 +191,7 @@ class App extends React.Component {
     }
 
     profileMenu() {
-        return <Menu onClick={this.menuClick}>
+        return <Menu onClick={this.avatarClick}>
             <Menu.Item key="profile" icon={<UserOutlined/>}>
                 Edit Profile
             </Menu.Item>
