@@ -31,6 +31,7 @@ class DashboardController extends Controller
     public function get_dashboard_statistics()
     {
         $videoswithDate = VideoView::getLineChartData();
+
         $lineChart = [];
         foreach ($videoswithDate as $key => $value)
             $lineChart[] = (object)['date' => $key, 'views' => count($value)];

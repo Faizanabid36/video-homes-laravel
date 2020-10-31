@@ -103,7 +103,7 @@ class Dashboard extends Component {
                                         data: this.state.barData,
                                         title: {
                                             visible: true,
-                                            text: '基础条形图',
+                                            text: 'Basic bar chart',
                                         },
                                         forceFit: true,
 
@@ -111,7 +111,7 @@ class Dashboard extends Component {
                                         yField: 'original_name',
                                         label: {
                                             visible: true,
-                                            formatter: (v) => Math.round(v / 10000) + '万',
+                                            formatter: (v) => Math.round(v / 10000) + '10000',
                                         },
                                     }}/>
                                 </Card>
