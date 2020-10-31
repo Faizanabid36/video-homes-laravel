@@ -127,9 +127,11 @@ class UserMessageController extends Controller
 
     public function my_messages(Request $request)
     {
-        $message = UserMessage::whereId($request->message_id)->firstOrFail();
-        $from_id = $message->contact_user_id;
-        $to_id = $message->reply_user_id;
+        $message = UserMessage::whereId($request->message_id)->first();
+       if(!empty($message)){
+           $from_id = $message->contact_user_id;
+           $to_id = $message->reply_user_id;
+       }
         $messages=[];
         $messages = UserMessage::whereType('contact')->where('contact_user_id', $from_id)->orWhere('reply_user_id', $to_id)
             ->where('contact_user_id', $to_id)->orWhere('reply_user_id', $from_id)->get();
