@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Route} from "react-router-dom";
 import AppLayout from './layout/index';
-import Dashboard from './pages/Dashboard';
+// import Dashboard from './pages/Dashboard';
 import Video from './pages/Video';
 import Playlist from './pages/Playlist';
 import Analytics from './pages/Analytics';
@@ -15,7 +15,8 @@ import GlobalVideoSettings from "./pages/GlobalVideoSettings";
 
 function App() {
     return <AppLayout>
-        <Route path="/" exact component={Dashboard}/>
+        {/*<Route path="/" exact component={Dashboard}/>*/}
+        <Route path="/" exact component={Video}/>
         <Route path="/video" exact component={Video}/>
         <Route path="/playlist" exact component={Playlist}/>
         <Route path="/analytics" exact component={Analytics}/>
