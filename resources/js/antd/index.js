@@ -11,7 +11,7 @@ import AppLayout from './layout/index';
 // import EditVideo from './pages/EditVideo';
 // import Ratings from "./pages/Ratings";
 import Messages from "./pages/Messages";
-// import GlobalVideoSettings from "./pages/GlobalVideoSettings";
+import GlobalVideoSettings from "./pages/GlobalVideoSettings";
 
 function App() {
     return <AppLayout>
@@ -25,7 +25,7 @@ function App() {
         {/*<Route path="/messages/:id" exact component={Messages}/>*/}
         {/*<Route path="/ratings" exact component={Ratings}/>*/}
         {/*<Route path="/edit_video/:id" component={EditVideo}/>*/}
-        {/*<Route path="/global_videos_settings" component={GlobalVideoSettings}/>*/}
+        <Route path="/global_videos_settings" component={GlobalVideoSettings}/>
     </AppLayout>
 }
 
