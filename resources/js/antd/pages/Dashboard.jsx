@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Pie} from '@ant-design/charts';
+// import {Pie} from '@ant-design/charts';
 import {Card, Col, Layout, Row} from 'antd';
 import axios from "axios";
 import {Doughnut, HorizontalBar, Line} from 'react-chartjs-2';

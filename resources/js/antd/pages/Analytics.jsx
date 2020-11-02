@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {Line, Pie} from '@ant-design/charts';
+// import {Pie} from '@ant-design/charts';
 import {Card, Col, DatePicker, Layout, Modal, Row, Space, Table} from 'antd';
 import axios from "axios";
+import {Doughnut, HorizontalBar, Line} from 'react-chartjs-2';
 
 const {Content} = Layout;
 
@@ -160,25 +161,32 @@ class Dashboard extends Component {
                         <Row gutter={16}>
                             <Col span={16}>
                                 <Card title="Traffic Source" bordered={false}>
-                                    <Pie style={{width: "100%", height: "400px"}} {...configVideoSource}/>
+                                    <Doughnut
+                                        data={this.state.viewsSource}
+                                    />
+                                    {/*<Pie style={{width: "100%", height: "400px"}} {...configVideoSource}/>*/}
                                 </Card>
                             </Col>
                             <Col span={16}>
                                 <Card title="Player Impressions" bordered={false}>
-                                    <Pie style={{width: "100%", height: "400px"}} {...configLoadedOrViewed}/>
+                                    <Doughnut
+                                        data={this.state.loadedOrViewed}
+                                    />
+                                    {/*<Pie style={{width: "100%", height: "400px"}} {...configLoadedOrViewed}/>*/}
                                 </Card>
                             </Col>
                             <Col span={16}>
                                 <Card title="Views within 7 Days" bordered={false}>
-                                    <Line style={{width: "100%", height: "400px"}}  {...{
-                                        data: this.state.lineChart,
-                                        title: {
-                                            visible: true,
-                                            text: 'Line chart with data points',
-                                        },
-                                        xField: 'date',
-                                        yField: 'views',
-                                    }}/>
+                                    {/*<Line style={{width: "100%", height: "400px"}}  {...{*/}
+                                    {/*    data: this.state.lineChart,*/}
+                                    {/*    title: {*/}
+                                    {/*        visible: true,*/}
+                                    {/*        text: 'Line chart with data points',*/}
+                                    {/*    },*/}
+                                    {/*    xField: 'date',*/}
+                                    {/*    yField: 'views',*/}
+                                    {/*}}/>*/}
+                                    <Line data={this.state.lineChart}/>
                                 </Card>
                             </Col>
                         </Row>
