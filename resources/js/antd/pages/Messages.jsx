@@ -76,10 +76,10 @@ export default class Messages extends React.Component {
                             console.log(this.state.user_id + "and" + message.contact_user_id)
                             return <Card type="inner" key={index}>
                                 <h5
-                                    className={this.state.user_id != message.contact_user_id ? 'pull-left' : 'pull-right'}>
+                                    className={this.state.user_id !== message.contact_user_id ? 'pull-left' : 'pull-right'}>
                                     {message.message}<br/>
                                     <small
-                                        className={this.state.user_id != message.contact_user_id ? '' : 'pull-right'}>
+                                        className={this.state.user_id !== message.contact_user_id ? '' : 'pull-right'}>
                                         {moment(message.created_at).fromNow()}</small>
                                 </h5>
                             </Card>
