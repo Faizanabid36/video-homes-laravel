@@ -36,8 +36,8 @@ class DashboardController extends Controller
         $lineChart = dashboardChart(array_keys($videoswithDate), 'Views in 7 Days', $lineChartCount ? $lineChartCount : 0);
         $BAR = Video::mostWatchedVideos()->take(5)->get();
 
-        $barchartLabels = [];
-        $barchartCount = [];
+        $barchartLabels = $barchartCount = [];
+
         foreach ($BAR as $data) {
             $barchartLabels[] = $data->title;
             $barchartCount[] = $data->views_count;
@@ -45,8 +45,7 @@ class DashboardController extends Controller
         $barData = dashboardChart($barchartLabels, 'Top 5 Most Watched Videos', $barchartCount);
         $isplayed = [];
         $isplayed = VideoView::loadedOrViewed()->get();
-        $timesPlayed = 0;
-        $timesLoaded = 0;
+        $timesPlayed = $timesLoaded = 0;
         foreach ($isplayed as $data) {
             $data->is_played != 1 ? $timesLoaded = $data->views > 0 ? $data->views : 0 : $timesPlayed = $data->views > 0 ? $data->views : 0;
         }
@@ -56,8 +55,7 @@ class DashboardController extends Controller
         foreach ($views_source as $data) {
             $data->is_played != 1 ? $timesLoaded = $data->views > 0 ? $data->views : 0 : $timesPlayed = $data->views > 0 ? $data->views : 0;
         }
-        $videoPages = 0;
-        $videoHomes = 0;
+        $videoHomes = $videoPages = 0;
         foreach ($views_source as $data) {
             $data->from_website == 0 ? $videoPages = $data->views > 0 ? $data->views : 0 : $videoHomes = $data->views > 0 ? $data->views : 0;
         }

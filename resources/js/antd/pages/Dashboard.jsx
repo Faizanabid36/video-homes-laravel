@@ -80,7 +80,6 @@ class Dashboard extends Component {
                                     <Doughnut
                                         data={this.state.viewsSource}
                                     />
-                                    {/*<Pie style={{width: "100%", height: "400px"}} {...configVideoSource}/>*/}
                                 </Card>
                             </Col>
                             <Col span={12}>
@@ -88,41 +87,16 @@ class Dashboard extends Component {
                                     <Doughnut
                                         data={this.state.loadedOrViewed}
                                     />
-                                    {/*<Pie style={{width: "100%", height: "400px"}} {...configLoadedOrViewed}/>*/}
                                 </Card>
                             </Col>
                             <Col span={12}>
                                 <Card title="Views within 7 Days" bordered={false}>
-                                    {/*<Line style={{width: "100%", height: "400px"}}  {...{*/}
-                                    {/*    data: this.state.lineChart,*/}
-                                    {/*    title: {*/}
-                                    {/*        visible: true,*/}
-                                    {/*        text: 'Line chart with data points',*/}
-                                    {/*    },*/}
-                                    {/*    xField: 'date',*/}
-                                    {/*    yField: 'views',*/}
-                                    {/*}}/>*/}
                                     <Line data={this.state.lineChart}/>
                                 </Card>
                             </Col>
                             <Col span={12}>
                                 <Card title="Top 5 Most Watched Videos" bordered={false}>
                                     <HorizontalBar data={this.state.barData}/>
-                                    {/*<Bar style={{width: "100%", height: "400px"}}  {...{*/}
-                                    {/*    data: this.state.barData,*/}
-                                    {/*    title: {*/}
-                                    {/*        visible: true,*/}
-                                    {/*        text: 'Basic bar chart',*/}
-                                    {/*    },*/}
-                                    {/*    forceFit: true,*/}
-
-                                    {/*    xField: 'views_count',*/}
-                                    {/*    yField: 'original_name',*/}
-                                    {/*    label: {*/}
-                                    {/*        visible: true,*/}
-                                    {/*        formatter: (v) => Math.round(v / 10000) + '10000',*/}
-                                    {/*    },*/}
-                                    {/*}}/>*/}
                                 </Card>
                             </Col>
                         </Row>
