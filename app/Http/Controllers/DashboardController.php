@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\Video;
 use App\VideoView;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -32,19 +31,37 @@ class DashboardController extends Controller
     {
         $videoswithDate = VideoView::getLineChartData();
 
-        $lineChart = [];
         foreach ($videoswithDate as $key => $value)
-            $lineChart[] = (object)['date' => $key, 'views' => count($value)];
+            $lineChartCount[] = count($value);
+        $lineChart = dashboardChart(array_keys($videoswithDate), 'Views in 7 Days', $lineChartCount ? $lineChartCount : 0);
+        $BAR = Video::mostWatchedVideos()->take(5)->get();
 
-        $barData = collect(Video::mostWatchedVideos()->take(5)->get())->map(function ($v) {
-            return collect($v)->only('original_name', 'views_count');
-        });
-        $loadedOrViewed = collect(VideoView::loadedOrViewed()->get())->map(function ($data) {
-            return ['type' => $data->is_played == 0 ? 'loaded' : 'played', 'count' => $data->views];
-        });
-        $viewsSource = collect(VideoView::viewsSource()->get())->map(function ($d) {
-            return ['source' => $d->from_website == 0 ? 'From Video Pages' : 'From Videohomes.com', 'views' => $d->views];
-        });
+        $barchartLabels = [];
+        $barchartCount = [];
+        foreach ($BAR as $data) {
+            $barchartLabels[] = $data->title;
+            $barchartCount[] = $data->views_count;
+        }
+        $barData = dashboardChart($barchartLabels, 'Top 5 Most Watched Videos', $barchartCount);
+        $isplayed = [];
+        $isplayed = VideoView::loadedOrViewed()->get();
+        $timesPlayed = 0;
+        $timesLoaded = 0;
+        foreach ($isplayed as $data) {
+            $data->is_played != 1 ? $timesLoaded = $data->views > 0 ? $data->views : 0 : $timesPlayed = $data->views > 0 ? $data->views : 0;
+        }
+        $loadedOrViewed = dashboardChart(['played', 'loaded'], 'Played or Loaded', [$timesPlayed, $timesLoaded], true);
+
+        $views_source = VideoView::viewsSource()->get();
+        foreach ($views_source as $data) {
+            $data->is_played != 1 ? $timesLoaded = $data->views > 0 ? $data->views : 0 : $timesPlayed = $data->views > 0 ? $data->views : 0;
+        }
+        $videoPages = 0;
+        $videoHomes = 0;
+        foreach ($views_source as $data) {
+            $data->from_website == 0 ? $videoPages = $data->views > 0 ? $data->views : 0 : $videoHomes = $data->views > 0 ? $data->views : 0;
+        }
+        $viewsSource = dashboardChart(['videohomes.com', 'videohomes pages'], 'Views Source', [$videoHomes, $videoPages], true);
 
         return compact('lineChart', 'barData', 'loadedOrViewed', 'viewsSource');
     }

@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {Bar, Line, Pie} from '@ant-design/charts';
+import {Pie} from '@ant-design/charts';
 import {Card, Col, Layout, Row} from 'antd';
 import axios from "axios";
+import {Doughnut, HorizontalBar, Line} from 'react-chartjs-2';
 
 const {Content} = Layout;
 
@@ -9,9 +10,9 @@ class Dashboard extends Component {
     constructor() {
         super();
         this.state = {
-            lineChart: [],
+            lineChart: {},
             barData: [],
-            loadedOrViewed: [],
+            loadedOrViewed: {},
             viewsSource: [],
             visible: false,
         }
@@ -76,44 +77,52 @@ class Dashboard extends Component {
                         <Row gutter={16}>
                             <Col span={12}>
                                 <Card title="Traffic Source" bordered={false}>
-                                    <Pie style={{width: "100%", height: "400px"}} {...configVideoSource}/>
+                                    <Doughnut
+                                        data={this.state.viewsSource}
+                                    />
+                                    {/*<Pie style={{width: "100%", height: "400px"}} {...configVideoSource}/>*/}
                                 </Card>
                             </Col>
                             <Col span={12}>
                                 <Card title="Player Impressions" bordered={false}>
-                                    <Pie style={{width: "100%", height: "400px"}} {...configLoadedOrViewed}/>
+                                    <Doughnut
+                                        data={this.state.loadedOrViewed}
+                                    />
+                                    {/*<Pie style={{width: "100%", height: "400px"}} {...configLoadedOrViewed}/>*/}
                                 </Card>
                             </Col>
                             <Col span={12}>
                                 <Card title="Views within 7 Days" bordered={false}>
-                                    <Line style={{width: "100%", height: "400px"}}  {...{
-                                        data: this.state.lineChart,
-                                        title: {
-                                            visible: true,
-                                            text: 'Line chart with data points',
-                                        },
-                                        xField: 'date',
-                                        yField: 'views',
-                                    }}/>
+                                    {/*<Line style={{width: "100%", height: "400px"}}  {...{*/}
+                                    {/*    data: this.state.lineChart,*/}
+                                    {/*    title: {*/}
+                                    {/*        visible: true,*/}
+                                    {/*        text: 'Line chart with data points',*/}
+                                    {/*    },*/}
+                                    {/*    xField: 'date',*/}
+                                    {/*    yField: 'views',*/}
+                                    {/*}}/>*/}
+                                    <Line data={this.state.lineChart}/>
                                 </Card>
                             </Col>
                             <Col span={12}>
                                 <Card title="Top 5 Most Watched Videos" bordered={false}>
-                                    <Bar style={{width: "100%", height: "400px"}}  {...{
-                                        data: this.state.barData,
-                                        title: {
-                                            visible: true,
-                                            text: 'Basic bar chart',
-                                        },
-                                        forceFit: true,
+                                    <HorizontalBar data={this.state.barData}/>
+                                    {/*<Bar style={{width: "100%", height: "400px"}}  {...{*/}
+                                    {/*    data: this.state.barData,*/}
+                                    {/*    title: {*/}
+                                    {/*        visible: true,*/}
+                                    {/*        text: 'Basic bar chart',*/}
+                                    {/*    },*/}
+                                    {/*    forceFit: true,*/}
 
-                                        xField: 'views_count',
-                                        yField: 'original_name',
-                                        label: {
-                                            visible: true,
-                                            formatter: (v) => Math.round(v / 10000) + '10000',
-                                        },
-                                    }}/>
+                                    {/*    xField: 'views_count',*/}
+                                    {/*    yField: 'original_name',*/}
+                                    {/*    label: {*/}
+                                    {/*        visible: true,*/}
+                                    {/*        formatter: (v) => Math.round(v / 10000) + '10000',*/}
+                                    {/*    },*/}
+                                    {/*}}/>*/}
                                 </Card>
                             </Col>
                         </Row>
