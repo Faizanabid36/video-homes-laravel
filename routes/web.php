@@ -29,6 +29,7 @@ Route::group(
 
         Route::post('to_user', 'UserMessageController@store')->name('to_user');
         Route::post('my_messages', 'UserMessageController@my_messages');
+        Route::get('my_messages_list', 'UserMessageController@my_messages_list');
         Route::post('send_message', 'UserMessageController@send_message');
 //        Route::get('read_message/{id}', 'UserMessageController@read_message');
 

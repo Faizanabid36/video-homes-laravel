@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\UserMessage;
+use Chatify\Http\Models\Message;
 use Illuminate\Http\Request;
 
 class UserMessageController extends Controller
@@ -125,34 +126,59 @@ class UserMessageController extends Controller
     }
 
 
-    public function my_messages(Request $request)
-    {
-        $message = UserMessage::whereId($request->message_id)->first();
-        $from_id =0;
-        $to_id =0;
-       if(!empty($message)){
-           $from_id = $message->contact_user_id;
-           $to_id = $message->reply_user_id;
-       }
-        $messages=[];
-        $messages = UserMessage::whereType('contact')->where('contact_user_id', $from_id)->orWhere('reply_user_id', $to_id)
-            ->where('contact_user_id', $to_id)->orWhere('reply_user_id', $from_id)->get();
-        $messages = collect($messages)->map(function ($message) {
-            return ['message' => $message->message, 'timestamp' => $message->created_at->diffForHumans()];
-        });
-        return compact('messages', 'from_id', 'to_id');
-    }
 
     public function send_message(Request $request)
     {
         $sent_message = UserMessage::create([
             'message' => $request->inputText,
-            'reply_user_id' => $request->from_id,
-            'contact_user_id' => $request->to_id,
+            'reply_user_id' => $request->to_id,
+            'contact_user_id' => auth()->user()->id,
             'type' => 'contact',
             'video_id' => -1,
         ]);
-        return ['message' => $sent_message->message, 'timestamp' => $sent_message->created_at->diffForHumans()];
+        return ['message' => $sent_message, 'user_id' => auth()->user()->id];
+    }
+
+    public function my_messages(Request $request)
+    {
+        $message = UserMessage::whereId($request->message_id)->first();
+        $from_id = 0;
+        $to_id = 0;
+        if (!empty($message)) {
+            $from_id = $message->contact_user_id;
+            $to_id = $message->reply_user_id;
+        }
+        $to_id == auth()->user()->id ? $to_id = $from_id : '';
+        $messages = [];
+        $messages = UserMessage::whereType('contact')->where('contact_user_id', $from_id)->orWhere('reply_user_id', $to_id)
+            ->where('contact_user_id', $to_id)->orWhere('reply_user_id', $from_id)->get();
+        $messageIds = collect($messages)->map(function ($message) {
+            return $message->id;
+        });
+        UserMessage::whereIn('id', $messageIds)->update(['read_at' => now()]);
+        $user_id = auth()->user()->id;
+        return compact('messages', 'to_id', 'user_id');
+    }
+
+    public function my_messages_list()
+    {
+        $messages = [];
+        $fromMe = UserMessage::whereType('contact')->whereContactUserId(auth()->user()->id)->distinct('reply_user_id')->pluck('reply_user_id')->first();
+        $usersList[] = $fromMe;
+        $toMe = UserMessage::whereType('contact')->whereReplyUserId(auth()->user()->id)->distinct('contact_user_id')->pluck('contact_user_id')->first();
+        $usersList[] = $toMe;
+        foreach (array_unique($usersList) as $u) {
+            if (!is_null($u))
+                $messages[] = UserMessage::latest()
+                    ->whereContactUserId(auth()->user()->id)->whereReplyUserId($u)
+                    ->orWhere('contact_user_id', $u)->whereReplyUserId(auth()->user()->id)
+                    ->first();
+        }
+        $messages = collect($messages)->filter(function ($value, $key) {
+            return $value != null;
+        })->values();
+        $user_id = auth()->user()->id;
+        return compact('messages', 'user_id');
     }
 
 }

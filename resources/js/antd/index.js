@@ -11,11 +11,13 @@ import UploadPage from './pages/Upload';
 import EditVideo from './pages/EditVideo';
 import Ratings from "./pages/Ratings";
 import Messages from "./pages/Messages";
+import MessagesList from "./pages/MessagesList";
 import GlobalVideoSettings from "./pages/GlobalVideoSettings";
 
 function App() {
     return <AppLayout>
         <Route path="/" exact component={Dashboard}/>
+        <Route path="/messages" exact component={MessagesList}/>
         <Route path="/messages/:id" exact component={Messages}/>
         <Route path="/video" exact component={Video}/>
         <Route path="/playlist" exact component={Playlist}/>
