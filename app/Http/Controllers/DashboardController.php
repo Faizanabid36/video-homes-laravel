@@ -30,20 +30,20 @@ class DashboardController extends Controller
     public function get_dashboard_statistics()
     {
         $videoswithDate = VideoView::getLineChartData();
+        $barchartLabels = $barchartCount = $isplayed = $lineChartCount = [];
 
         foreach ($videoswithDate as $key => $value)
             $lineChartCount[] = count($value);
         $lineChart = dashboardChart(array_keys($videoswithDate), 'Views in 7 Days', $lineChartCount ? $lineChartCount : 0);
         $BAR = Video::mostWatchedVideos()->take(5)->get();
 
-        $barchartLabels = $barchartCount = [];
+        $barchartLabels = $barchartCount = $isplayed = $lineChartCount = [];
 
         foreach ($BAR as $data) {
             $barchartLabels[] = $data->title;
             $barchartCount[] = $data->views_count;
         }
         $barData = dashboardChart($barchartLabels, 'Top 5 Most Watched Videos', $barchartCount);
-        $isplayed = [];
         $isplayed = VideoView::loadedOrViewed()->get();
         $timesPlayed = $timesLoaded = 0;
         foreach ($isplayed as $data) {
@@ -69,13 +69,12 @@ class DashboardController extends Controller
         $endDate = \request('endDate');
         $startDate = \request('startDate');
         $video_id = \request('video_id');
+        $isplayed = $lineChartCount = [];
         $videoswithDate = VideoView::getLineChartDataWitinRange($startDate, $endDate, $video_id);
         foreach ($videoswithDate as $key => $value)
             $lineChartCount[] = count($value);
         $lineChart = dashboardChart(array_keys($videoswithDate), 'Views', $lineChartCount ? $lineChartCount : 0);
 
-
-        $isplayed = [];
         $isplayed = VideoView::loadedOrViewed($video_id)->get();
         $timesPlayed = $timesLoaded = 0;
         foreach ($isplayed as $data) {
