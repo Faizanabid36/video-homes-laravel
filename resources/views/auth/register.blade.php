@@ -78,7 +78,7 @@
                                 @endif
                             </div>
                         </div>
-                    {!! NoCaptcha::renderJs() !!}
+
                     <button class="btn btn-primary" type="submit">Sign Up!</button>
                     <div class="new-here text-center">
                         Already have an account? <a class="dec" href="{{route('login')}}">Sign in</a>
@@ -89,6 +89,7 @@
     </div>
 @endsection
 @section('script')
+    {!! NoCaptcha::renderJs() !!}
     <script>
         (function () {
             $('.selectpicker').selectpicker();
