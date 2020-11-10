@@ -67,6 +67,18 @@
                                 href="{{route('directory_by_username','privacy-policy')}}" style="text-decoration: underline;">Privacy Policy</a>
                         </label>
                     </div>
+                        <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Captcha</label>
+                            <div class="col-md-6 pull-center">
+                                {!! app('captcha')->display() !!}
+                                @if ($errors->has('g-recaptcha-response'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                    {!! NoCaptcha::renderJs() !!}
                     <button class="btn btn-primary" type="submit">Sign Up!</button>
                     <div class="new-here text-center">
                         Already have an account? <a class="dec" href="{{route('login')}}">Sign in</a>
