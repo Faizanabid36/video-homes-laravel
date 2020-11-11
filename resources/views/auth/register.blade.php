@@ -89,7 +89,7 @@
     </div>
 @endsection
 @section('script')
-    {!! Anhskohbo\NoCaptcha\Facades\NoCaptcha::renderJs() !!}
+{{--    {!! Anhskohbo\NoCaptcha\Facades\NoCaptcha::renderJs() !!}--}}
     <script>
         (function () {
             $('.selectpicker').selectpicker();
