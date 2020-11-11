@@ -180,6 +180,7 @@ return [
         Pbmedia\LaravelFFMpeg\FFMpegServiceProvider::class,
         Nagy\LaravelRating\LaravelRatingServiceProvider::class,
         Torann\LaravelMetaTags\MetaTagsServiceProvider::class,
+        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
 
     ],
 

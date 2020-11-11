@@ -37,8 +37,13 @@ class MainController extends Controller
                 return $user['created_at'];
             })->values();
         }
-        if (\request('sort') && 'alphabetically' == \request('sort')) {
+        elseif (\request('sort') && 'alphabetically' == \request('sort')) {
             $users = $users->sortBy(function ($user) {
+                return $user['name'];
+            })->values();
+        }
+        else{
+            $users = $users->sortByDesc(function ($user) {
                 return $user['name'];
             })->values();
         }
