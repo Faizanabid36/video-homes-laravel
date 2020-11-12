@@ -33,6 +33,8 @@
                                         <th>#</th>
                                         <th>Thumbnail</th>
                                         <th>Title</th>
+                                        <th>User</th>
+                                        <th>Profile Picture</th>
                                         <th>Description</th>
                                         <th>Video Type</th>
                                         <th>Duration</th>
@@ -45,9 +47,11 @@
                                 @foreach($videos as $video)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td width="30px"><img class="w-100"
+                                        <td width="30px"><img class="w-100 rounded"
                                                  src="{{asset('/storage/'.$video->thumbnail)}}" alt=""></td>
                                         <td>{{$video->title}}</td>
+                                        <td>{{$video->user->name}}</td>
+                                        <td><img class="w-100 rounded" src="{{$video->user->user_extra->profile_picture}}" alt=""></td>
                                         <td>{{$video->description}}</td>
                                         <td>{{$video->video_type}}</td>
                                         <td>{{gmdate("i:s", $video->duration)}}</td>

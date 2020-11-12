@@ -67,6 +67,7 @@ class RegisterController extends Controller {
             'name'        => [ 'string', 'max:255' ],
             'email'       => [ 'required', 'string', 'email', 'max:255', 'unique:users' ],
             'password'    => [ 'required', 'string', 'min:8', 'confirmed' ],
+            'g-recaptcha-response'    => [ 'required'],
         ] );
     }
 
@@ -86,8 +87,7 @@ class RegisterController extends Controller {
         $usersetting                   = new UserExtra();
         $usersetting->user_id          = $user->id;
         $usersetting->user_category_id = $data['category_id'];
-       // $usersetting->user_category_id = 1;
-        $usersetting->profile_picture = asset('');
+        $usersetting->profile_picture = asset('images/blank.png');
         $usersetting->save();
 
         return $user;
