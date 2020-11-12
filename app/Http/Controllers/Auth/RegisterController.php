@@ -86,6 +86,8 @@ class RegisterController extends Controller {
         $usersetting                   = new UserExtra();
         $usersetting->user_id          = $user->id;
         $usersetting->user_category_id = $data['category_id'];
+       // $usersetting->user_category_id = 1;
+        
         $usersetting->profile_picture = asset('');
         $usersetting->save();
 

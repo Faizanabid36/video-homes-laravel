@@ -24,9 +24,6 @@ Route::group(
 	array( 'middleware' => 'auth' ),
 	function () {
         // Dashboard Page
-
-
-
         Route::post('to_user', 'UserMessageController@store')->name('to_user');
         Route::post('my_messages', 'UserMessageController@my_messages');
         Route::get('my_messages_list', 'UserMessageController@my_messages_list');
