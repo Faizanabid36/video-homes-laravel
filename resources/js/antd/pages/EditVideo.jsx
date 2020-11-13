@@ -29,6 +29,7 @@ class EditVideo extends Component {
         let {video} = this.state;
         video[key] = e.target ?  e.target.value : e;
         this.setState({video});
+        console.log(this.state.video)
 
     }
     onUpdate(){

@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 // Auth User
+
+ Route::get( 'playlist/watch','MainController@playlist_videos')->name( 'playlist_videos' );
 Route::group(
 	array( 'middleware' => 'auth' ),
 	function () {
@@ -112,7 +114,6 @@ Route::group(
 
 Route::get('watch', 'MainController@watch_from_admin')->name('admin_uploads.watch');
 
-
 // Home
 Route::get( '/', 'MainController@index' )->name( 'home' );
 // Directory
@@ -126,10 +127,6 @@ Route::put( 'is_play/{video}', 'MainController@isplay' )->name( 'is_played' );
 Route::get( '/{slug}/{video_id?}', 'MainController@page_or_username' )->middleware( \App\Http\Middleware\IsUserNameMiddleware::class )->name( 'directory_by_username' );
 // Route::get( '/{slug}', 'MainController@page' )->middleware(\App\Http\Middleware\IsPageMiddleware::class)->name( 'pages' );
 
-Route::get( '/playlist/Watch/{video_id}',function()
-{
-       
-} )->name( 'video_playlist' );
 
 
 

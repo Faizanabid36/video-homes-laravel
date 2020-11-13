@@ -82,23 +82,23 @@
                                     src="{{asset("storage/".str_replace('240p','720p',$video->stream_path))}}"
                                     type="video/mp4"
                                     data-quality="720p" title="720p" label="720p" res="720">
-                                @endif
-                                @if($video->{'480p'})
-                                    <source
-                                        src="{{asset("storage/".str_replace('240p','480p',$video->stream_path))}}"
-                                        type="video/mp4"
-                                        data-quality="480p" title="480p" label="480p" res="480">
-                                @endif
+                            @endif
+                            @if($video->{'480p'})
+                                <source
+                                    src="{{asset("storage/".str_replace('240p','480p',$video->stream_path))}}"
+                                    type="video/mp4"
+                                    data-quality="480p" title="480p" label="480p" res="480">
+                            @endif
 
-                                @if($video->{'360p'})
-                                    <source
-                                        src="{{asset("storage/".str_replace('240p','360p',$video->stream_path))}}"
-                                        type="video/mp4"
-                                        data-quality="360p" title="360p" label="360p" res="360">
-                                @endif
-                                <source src="{{asset("storage/$video->stream_path")}}" type="video/mp4"
-                                        data-quality="240p" title="240p" label="240p" res="240">
-                                Your browser does not support HTML5 video.
+                            @if($video->{'360p'})
+                                <source
+                                    src="{{asset("storage/".str_replace('240p','360p',$video->stream_path))}}"
+                                    type="video/mp4"
+                                    data-quality="360p" title="360p" label="360p" res="360">
+                            @endif
+                            <source src="{{asset("storage/$video->stream_path")}}" type="video/mp4"
+                                    data-quality="240p" title="240p" label="240p" res="240">
+                            Your browser does not support HTML5 video.
                         </video>
 
                         <div class="video-options pt_mn_wtch_opts pt-4">
@@ -106,12 +106,7 @@
                                 <i class="fa fa-info text-black"></i>
                                 More info
                             </button>
-                            @if($user->user_extra->share_buttons=='enabled')
-                                <button class="btn btn-primary btn-share" id="share-video">
-                                    <i class="fa fa-share-alt text-white"></i>
-                                    Share
-                                </button>
-                            @endif
+
                             <button class="btn btn-info btn-share text-white" id="embed-video">
                                 <i class="fa fa-code"></i>
                                 Embed
@@ -163,48 +158,48 @@
                                 </div>
                             </div>
                             <div class="share-video d-none">
-                                <div class="card w-100">
-                                    <div class="card-body">
-                                        <div class="input-group mb-3">
-                                            <input type="text"
-                                                   value="@if($user->user_extra->	distribution_type=='embedded'){{route('embed_video',$video->video_id)}}@else {{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}} @endif"
-                                                   class="form-control input-md copylink" readonly="">
-                                            <div class="input-group-prepend">
-                                                <button class="btn btn-primary copylink"><i class="fa fa-link"> Copy</i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <button
-                                            data-url="https://www.facebook.com/sharer/sharer.php?u=@if($user->user_extra->	distribution_type=='embedded'){{route('embed_video',$video->video_id)}}@else {{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}} @endif"
-                                            class="btn btn-primary share-social"><i class="fa fa-facebook"></i>
-                                        </button>
-                                        <button
-                                            data-url="https://wa.me/?text={{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"
-                                            class="btn btn-primary share-social"><i class="fa fa-whatsapp"></i>
-                                        </button>
-                                        <button
-                                            data-url="https://twitter.com/intent/tweet?url=@if($user->user_extra->	distribution_type=='embedded'){{route('embed_video',$video->video_id)}}@else {{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}} @endif"
-                                            class="btn btn-primary share-social"><i class="fa fa-twitter"></i>
-                                        </button>
-                                        <button
-                                            data-url="https://www.linkedin.com/shareArticle?mini=true&url=@if($user->user_extra->	distribution_type=='embedded'){{route('embed_video',$video->video_id)}}@else {{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}} @endif&title={{$video->title}}"
-                                            class="btn btn-primary share-social"><i class="fa fa-linkedin"></i>
-                                        </button>
-                                        <button
-                                            data-url="https://pinterest.com/pin/create/button/?url=@if($user->user_extra->	distribution_type=='embedded'){{route('embed_video',$video->video_id)}}@else {{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}} @endif"
-                                            class="btn btn-primary share-social"><i class="fa fa-pinterest"></i>
-                                        </button>
-                                        <button
-                                            data-url="https://www.tumblr.com/share/link?url=@if($user->user_extra->	distribution_type=='embedded'){{route('embed_video',$video->video_id)}}@else {{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}} @endif"
-                                            class="btn btn-primary share-social"><i
-                                                class="fa fa-tumblr"></i>
-                                        </button>
-                                        <button
-                                            data-url="https://www.reddit.com/submit?url=@if($user->user_extra->	distribution_type=='embedded'){{route('embed_video',$video->video_id)}}@else {{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}} @endif"
-                                            class="btn btn-primary share-social"><i
-                                                class="fa fa-reddit"></i></button>
-                                    </div>
-                                </div>
+{{--                                <div class="card w-100">--}}
+{{--                                    <div class="card-body">--}}
+{{--                                        <div class="input-group mb-3">--}}
+{{--                                            <input type="text"--}}
+{{--                                                   value="@if($user->user_extra->distribution_type=='embedded'){{route('embed_video',$video->video_id)}}@else {{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}} @endif"--}}
+{{--                                                   class="form-control input-md copylink" readonly="">--}}
+{{--                                            <div class="input-group-prepend">--}}
+{{--                                                <button class="btn btn-primary copylink"><i class="fa fa-link"> Copy</i>--}}
+{{--                                                </button>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <button--}}
+{{--                                            data-url="https://www.facebook.com/sharer/sharer.php?u=@if($user->user_extra->	distribution_type=='embedded'){{route('embed_video',$video->video_id)}}@else {{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}} @endif"--}}
+{{--                                            class="btn btn-primary share-social"><i class="fa fa-facebook"></i>--}}
+{{--                                        </button>--}}
+{{--                                        <button--}}
+{{--                                            data-url="https://wa.me/?text={{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"--}}
+{{--                                            class="btn btn-primary share-social"><i class="fa fa-whatsapp"></i>--}}
+{{--                                        </button>--}}
+{{--                                        <button--}}
+{{--                                            data-url="https://twitter.com/intent/tweet?url=@if($user->user_extra->	distribution_type=='embedded'){{route('embed_video',$video->video_id)}}@else {{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}} @endif"--}}
+{{--                                            class="btn btn-primary share-social"><i class="fa fa-twitter"></i>--}}
+{{--                                        </button>--}}
+{{--                                        <button--}}
+{{--                                            data-url="https://www.linkedin.com/shareArticle?mini=true&url=@if($user->user_extra->	distribution_type=='embedded'){{route('embed_video',$video->video_id)}}@else {{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}} @endif&title={{$video->title}}"--}}
+{{--                                            class="btn btn-primary share-social"><i class="fa fa-linkedin"></i>--}}
+{{--                                        </button>--}}
+{{--                                        <button--}}
+{{--                                            data-url="https://pinterest.com/pin/create/button/?url=@if($user->user_extra->	distribution_type=='embedded'){{route('embed_video',$video->video_id)}}@else {{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}} @endif"--}}
+{{--                                            class="btn btn-primary share-social"><i class="fa fa-pinterest"></i>--}}
+{{--                                        </button>--}}
+{{--                                        <button--}}
+{{--                                            data-url="https://www.tumblr.com/share/link?url=@if($user->user_extra->	distribution_type=='embedded'){{route('embed_video',$video->video_id)}}@else {{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}} @endif"--}}
+{{--                                            class="btn btn-primary share-social"><i--}}
+{{--                                                class="fa fa-tumblr"></i>--}}
+{{--                                        </button>--}}
+{{--                                        <button--}}
+{{--                                            data-url="https://www.reddit.com/submit?url=@if($user->user_extra->	distribution_type=='embedded'){{route('embed_video',$video->video_id)}}@else {{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}} @endif"--}}
+{{--                                            class="btn btn-primary share-social"><i--}}
+{{--                                                class="fa fa-reddit"></i></button>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
 
                             </div>
                             <div class="info-video d-none">
@@ -346,7 +341,7 @@
                             {!! $user->user_extra->bio !!}
                         </div>
                     </div>
-                        <hr/>
+                    <hr/>
                 @endif
                 @if($user->user_extra->company_name)
                     <div class="d-flex">
@@ -576,52 +571,52 @@
                             </div>
                         </div>
                     </div>
-                        <!-- reviews end -->
-                        <!-- Contact -->
-                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                            <h1 class="my-3 font-weight-bold"> Contact to {{$user->name}} </h1>
-                            @if(auth()->check() && $video && ($video->user_id!=auth()->id()))
-                                <form method="POST" action="{{route('to_user')}}">
-                                    @csrf
-                                    <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">
-                                    <input type="hidden" name="video_id" value="{{$video->id}}">
-                                    <input type="hidden" name="reply_user_id" value="{{$video->user_id}}">
-                                    <input type="hidden" name="type" value="contact">
-                                    <div class="form-group">
-                                        <label for="message2">Message</label>
-                                        <textarea name="message" class="form-control" id="message2" rows="3"
-                                                  placeholder="Message here"></textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary"> Send</button>
-                                </form>
-                            @else
-                                <a href="{{route('login')}}" class="btn btn-info text-white">Login to
-                                    Contact {{$user->name}}</a>
-                            @endif
-                        </div>
-                        <div class="tab-pane fade" id="report_message" role="tabpanel" aria-labelledby="report-tab">
-                            <!-- .report. -->
+                    <!-- reviews end -->
+                    <!-- Contact -->
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                        <h1 class="my-3 font-weight-bold"> Contact to {{$user->name}} </h1>
+                        @if(auth()->check() && $video && ($video->user_id!=auth()->id()))
+                            <form method="POST" action="{{route('to_user')}}">
+                                @csrf
+                                <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">
+                                <input type="hidden" name="video_id" value="{{$video->id}}">
+                                <input type="hidden" name="reply_user_id" value="{{$video->user_id}}">
+                                <input type="hidden" name="type" value="contact">
+                                <div class="form-group">
+                                    <label for="message2">Message</label>
+                                    <textarea name="message" class="form-control" id="message2" rows="3"
+                                              placeholder="Message here"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary"> Send</button>
+                            </form>
+                        @else
+                            <a href="{{route('login')}}" class="btn btn-info text-white">Login to
+                                Contact {{$user->name}}</a>
+                        @endif
+                    </div>
+                    <div class="tab-pane fade" id="report_message" role="tabpanel" aria-labelledby="report-tab">
+                        <!-- .report. -->
 
-                            <h1 class="my-3 font-weight-bold"> Report Video</h1>
-                            @if(auth()->check() && $video && ($video->user_id!=auth()->id()))
-                                <form method="POST" action="{{route('to_user')}}">
-                                    @csrf
-                                    <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">
-                                    <input type="hidden" name="video_id" value="{{$video->id}}">
-                                    <input type="hidden" name="type" value="report">
-                                    <div class="form-group">
-                                        <label for="message">Message</label>
-                                        <textarea name="message" class="form-control" id="message" rows="3"
-                                                  placeholder="Message here"></textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary"> Send</button>
-                                </form>
-                            @else
-                                <a href="{{route('login')}}" class="btn btn-info text-white">Login to Report Video</a>
-                            @endif
+                        <h1 class="my-3 font-weight-bold"> Report Video</h1>
+                        @if(auth()->check() && $video && ($video->user_id!=auth()->id()))
+                            <form method="POST" action="{{route('to_user')}}">
+                                @csrf
+                                <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">
+                                <input type="hidden" name="video_id" value="{{$video->id}}">
+                                <input type="hidden" name="type" value="report">
+                                <div class="form-group">
+                                    <label for="message">Message</label>
+                                    <textarea name="message" class="form-control" id="message" rows="3"
+                                              placeholder="Message here"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary"> Send</button>
+                            </form>
+                        @else
+                            <a href="{{route('login')}}" class="btn btn-info text-white">Login to Report Video</a>
+                        @endif
 
 
-                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -658,8 +653,6 @@
         <link rel="image_src" href="{{asset("storage/$video->thumbnail")}}"/>
         <meta property="og:title" content="{{$video->title}}"/>
         <meta property="og:site_name" content="{{env('APP_NAME')}}"/>
-        <meta property="og:url"
-              content="{{route('directory_by_username',[request('slug'),request('video_id',$video->video_id)])}}"/>
         <meta property="og:description" content="{{$video->description}}. Author: {{$user->name}}"/>
         <meta property="og:type" content="video.other"/>
         <meta property="og:image" content="{{asset("storage/$video->thumbnail")}}">
@@ -693,6 +686,6 @@
 @endsection
 @section('header_script')
     @if($video)
-    window.VIDEO_APP.video_url = "{{route('is_played',$video->id)}}";
+        window.VIDEO_APP.video_url = "{{route('is_played',$video->id)}}";
     @endif
 @endsection
