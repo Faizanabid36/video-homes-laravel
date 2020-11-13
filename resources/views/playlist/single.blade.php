@@ -285,7 +285,7 @@
                         <div class="row video-list">
                             @foreach($related_videos as $related_video)
                                 <div class="col-12 m-0 p-0 my-2" id="related_video">
-                                    <a href="{{route('directory_by_username',[$user->username,$related_video->video_id])}}">
+                                    <a href="{{route('playlist_videos').'?v='.$related_video->video_id}}">
                                         <div class="p-2 shadow-lg bg-white rounded video-thumb overlay"
                                              style="background-image: url({{asset('storage/'.$related_video->thumbnail)}});background-size: cover;height:200px;">
                                             <div class='play_hover_btn'
