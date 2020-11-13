@@ -89,7 +89,6 @@ class RegisterController extends Controller {
         $usersetting->user_category_id = $data['category_id'];
         $usersetting->profile_picture = asset('images/blank.png');
         $usersetting->save();
-
         return $user;
     }
 }

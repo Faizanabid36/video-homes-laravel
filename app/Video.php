@@ -55,6 +55,10 @@ class Video extends Model {
 		return $this->belongsTo( User::class, 'user_id', 'id' );
 	}
 
+	public function playlist() {
+		return $this->belongsTo( 'App\Playlist', 'playlist_id', 'id' );
+	}
+
 	public function video_actions() {
         return $this->hasMany(VideoAction::class, 'video_id', 'id');
     }

@@ -62,7 +62,7 @@ class MainController extends Controller
         if (request('page')) {
             return view('page', request()->only(['page']));
         }
-        $video = Video::userVideos($username, $video_id)->where('video_type', 'Public')->first();
+        $video = Video::userVideos($username, $video_id)->where('video_type', 'Public')->with('playlist')->first();
         $views = $video ? VideoView::videoViews($video) : 0;
         $user = request('username');
         if ($user->user_extra->display_suggested_videos == 'enabled')

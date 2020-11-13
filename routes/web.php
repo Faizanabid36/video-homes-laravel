@@ -126,6 +126,10 @@ Route::put( 'is_play/{video}', 'MainController@isplay' )->name( 'is_played' );
 Route::get( '/{slug}/{video_id?}', 'MainController@page_or_username' )->middleware( \App\Http\Middleware\IsUserNameMiddleware::class )->name( 'directory_by_username' );
 // Route::get( '/{slug}', 'MainController@page' )->middleware(\App\Http\Middleware\IsPageMiddleware::class)->name( 'pages' );
 
+Route::get( '/playlist/Watch/{video_id}',function()
+{
+       
+} )->name( 'video_playlist' );
 
 
 

@@ -6,6 +6,7 @@ use App\Category;
 use App\Jobs\ConvertVideoForStreaming;
 use App\Video;
 use App\VideoView;
+use App\Playlist;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -132,13 +133,15 @@ class VideosController extends Controller
 	public function show( $id ) {
         $video = Video::whereVideoId($id)->without(array('user', 'comments'))->firstOrFail();
         $categories = Category::orderBy('name', 'ASC')->get();
+        $playlists=Playlist::whereUserId(auth()->user()->id)->get();
         $thumbnails = array();
         for ($i = 1; $i <= 3; $i++) {
             $thumbnails[$i] = preg_replace('/(-)\d(\.png)/', "-$i$2", $video->thumbnail, 1);
         }
         $video->username = auth()->user()->username;
         $user = auth()->user();
-        return compact('video', 'thumbnails', 'categories', 'user');
+       // return compact('video', 'thumbnails', 'categories', 'user');
+        return compact('video', 'thumbnails', 'categories', 'user','playlists');
     }
 
 	/**

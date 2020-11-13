@@ -222,6 +222,9 @@
                                         Category: {{$video->category->name ?? ''}}
                                         <br>
                                         Views: {{$views}}
+                                        <br>
+                                        Playlist: <a href="{{route('video_playlist',$video->id)}}"> {{$video->playlist->name}}</a>
+                                        <br>
                                     </div>
                                 </div>
 

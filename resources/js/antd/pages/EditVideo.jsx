@@ -15,6 +15,7 @@ class EditVideo extends Component {
             current_slide: 0,
             thumbnails: {},
             categories: [],
+            playlists:[],
             user:{},
         };
         this.onChange = this.onChange.bind(this);
@@ -158,6 +159,23 @@ class EditVideo extends Component {
                                     {this.state.categories.map((e,k)=><Select.Option key={k} value={e.id}>{e.name}</Select.Option>)}
                                 </Select>}
                             </Form.Item>
+
+                            <Form.Item label="Playlist">
+                                {this.state.playlists.length && <Select
+                                    defaultValue={this.defaultValue(["video", "playlist_id"])}
+                                    showSearch
+
+                                    placeholder="Select a Playlist"
+                                    optionFilterProp="children"
+                                    onChange={e => this.onChange(e, 'playlist_id')}
+                                    filterOption={(input, option) =>
+                                        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                    }
+                                >
+                                    {this.state.playlists.map((e,k)=><Select.Option key={k} value={e.id}>{e.name}</Select.Option>)}
+                                </Select>}
+                            </Form.Item>
+
                             <Button onClick={this.onUpdate}>Update</Button>
                         </Form>}
                     </PageHeader>

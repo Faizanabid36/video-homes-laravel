@@ -7,6 +7,9 @@ export default function EditVideo(props) {
     const [state, setState] = useState(false);
     const [tags, setTags] = useState([]);
     const [categories, setCategories] = useState(false);
+   //Playlist
+    const [playlists, setplaylists] = useState(false);
+    //
     const [manualupload, setManualupload] = useState(false);
     const [thumbnails, setThumbnails] = useState(false);
     const [index, setIndex] = useState(0);
@@ -49,7 +52,10 @@ export default function EditVideo(props) {
                 setIndex(index[1] - 1);
             }
             setThumbnails(data.thumbnails);
-            setCategories(data.categories)
+            setCategories(data.categories);
+            //
+            setplaylists(data.playlists);
+            //
         })
     }, []);
 
@@ -109,6 +115,19 @@ export default function EditVideo(props) {
                         {categories.map((v, k) => <option key={k} value={v.id}>{v.name}</option>)}
                     </Form.Control>
                 </Form.Group>}
+
+
+                {playlists && <Form.Group controlId="playlist">
+                    <Form.Label>Playlist</Form.Label>
+                    <Form.Control as="select" size={'md'} custom defaultValue={state.playlist_id} onChange={e => {
+                        state.playlist_id = e.target.value;
+                        setState(state);
+                    }}>
+                        {playlists.map((v, k) => <option key={k} value={v.id}>{v.name}</option>)}
+                    </Form.Control>
+                </Form.Group>}
+
+
                 <Button variant="primary" onClick={onUpdate}>
                     Update and Preview Video
                 </Button>
