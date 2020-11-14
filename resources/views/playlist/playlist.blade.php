@@ -412,7 +412,12 @@
                 <div class="tab-content p-3 card">
                     @if(isset($user->user_extra->address))
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <div id="map"></div>
+                            <!-- <div id="map">
+                            
+                            </div> -->
+                            @if(!is_null($video->video_location))
+                            <div style="width: 100%"><iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q={{$video->video_location}}&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe></div>
+                            @endif
                         </div>
                     @endif
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -618,17 +623,17 @@
 @endsection
 @section('script')
     <script>
-        function initMap() {
-                @if(!is_null($user->user_extra->location_latitude) && !is_null($user->user_extra->location_longitude))
-            let position = {
-                    lat: {{$user->user_extra->location_latitude}},
-                    lng: {{$user->user_extra->location_longitude}}
-                };
-            var map = new google.maps.Map(
-                document.getElementById('map'), {zoom: 11, center: position});
-            new google.maps.Marker({position: position, map: map});
-            @endif
-        }
+        // function initMap() {
+        //         @if(!is_null($user->user_extra->location_latitude) && !is_null($user->user_extra->location_longitude))
+        //     let position = {
+        //             lat: {{$user->user_extra->location_latitude}},
+        //             lng: {{$user->user_extra->location_longitude}}
+        //         };
+        //     var map = new google.maps.Map(
+        //         document.getElementById('map'), {zoom: 11, center: position});
+        //     new google.maps.Marker({position: position, map: map});
+        //     @endif
+        // }
 
     </script>
     <script async defer

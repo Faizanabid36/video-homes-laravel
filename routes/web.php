@@ -22,9 +22,9 @@ Auth::routes();
 // Auth User
 
  Route::get( 'playlist/watch/{id}','MainController@playlist_videos')->name( 'playlist_videos' );
- Route::get( 'playlist/watch/','MainController@playlist_videos')->name( 'playlist' );
+ Route::get( 'playlist/watch','MainController@playlist_videos')->name( 'playlist' );
 Route::group(
-	array( 'middleware' => 'auth' ),        
+	array( 'middleware' => 'auth' ),
 	function () {
         // Dashboard Page
         Route::post('to_user', 'UserMessageController@store')->name('to_user');
