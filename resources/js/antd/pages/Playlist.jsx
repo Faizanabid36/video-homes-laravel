@@ -81,7 +81,7 @@ class Playlist extends Component {
     createPlaylist() {
         let {name, description} = this.state;
 
-        axios.post('/playlist/', {name, description})
+        axios.post(window.VIDEO_APP.base_url+'/playlist/', {name, description})
             .then(({data}) => {
                 this.getPlaylist()
                 this.setState({action: null})
