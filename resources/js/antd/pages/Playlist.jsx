@@ -80,12 +80,12 @@ class Playlist extends Component {
 
     createPlaylist() {
         let {name, description} = this.state;
-
+        console.log([{name, description}])
         axios.post(window.VIDEO_APP.base_url+'/playlist/', {name, description})
             .then(({data}) => {
-                this.getPlaylist()
-                console.log(data)
-                this.setState({action: null})
+                this.getPlaylist();
+
+                this.setState({action: null});
                 if (data.status) {
                     message.success(data.message);
                 } else {
@@ -135,7 +135,7 @@ class Playlist extends Component {
                         </Form.Item>
                         <Form.Item>
 
-                            <Button onClick={this.createPlaylist} type="primary" htmlType="submit">
+                            <Button type="primary" htmlType="submit">
                                 Submit
                             </Button>
                         </Form.Item>
