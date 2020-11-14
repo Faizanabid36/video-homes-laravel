@@ -23,6 +23,7 @@ class PlaylistController extends Controller
             'name' => 'required',
         ])) {
             dd(request()->all());
+            dd('here');
             request()->merge(['user_id' => auth()->user()->id]);
             $status = Playlist::create(request(['name', 'description','user_id']));
 
