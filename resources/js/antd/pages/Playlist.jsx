@@ -81,16 +81,16 @@ class Playlist extends Component {
     createPlaylist() {
         let {name, description} = this.state;
         console.log([{name, description}])
-        axios.post(window.VIDEO_APP.base_url+'/playlist/', {name, description})
+        axios.post(window.VIDEO_APP.base_url+'/playlist', {name, description})
             .then(({data}) => {
-                console.log('here')
-                // this.getPlaylist();
-                // this.setState({action: null});
-                // if (data.status) {
-                //     message.success(data.message);
-                // } else {
-                //     message.error(data.message);
-                // }
+                console.log('data',data)
+                this.getPlaylist();
+                this.setState({action: null});
+                if (data.status) {
+                    message.success(data.message);
+                } else {
+                    message.error(data.message);
+                }
 
             })
             .catch((err) => {
