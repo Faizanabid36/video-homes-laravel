@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h2 style="text-transform:uppercase">{{$video->title}}</h2>
+                <h2 style="text-transform:uppercase">{{$user->name}}</h2>
                 @if($video && !$video->is_video_approved)
                     <div class="alert alert-warning">This page is not public yet, because your video is pending mode, it
                         needs admin approval.
@@ -13,7 +13,7 @@
         </div>
         <hr/>
         <div class="row">
-            <div class="col-md-3 my-3">
+            <div class="col-md-2 my-3">
                 <img
                     class="w-100"
                     src='{{$user->user_extra->profile_picture ?? 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMgrxYAqZF6-kdFuLQesPwdAyonhn93LsxvKXax0vzbCCGd_wQ&usqp=CAU' }}'
@@ -43,7 +43,7 @@
                     <p id="caption">{{$user->user_extra->company_name}}</p>
                 </div>
             </div>
-            <div class="col-md-{{!empty($related_videos) ? 9 : 10}} player-video mt-0">
+            <div class="col-md-{{!empty($related_videos) ? 7 : 10}} player-video mt-0">
                 <div class="video-player pt_video_player " id="pt_video_player">
                     <span class="mejs__offscreen"></span>
                     @if($video)
@@ -265,7 +265,51 @@
                 </div>
                 <div class="clear"></div>
             </div>
-          
+            @if(!empty($related_videos))
+                <div class="col-md-3">
+                    <div class="container m-0 p-0">
+                        <div class="row">
+                            <div class="col-12 m-0 p-0">
+                                <div class="next-video">
+                                    <div class="next-text pull-left pt_mn_wtch_nxttxt">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24">
+                                            <path fill="currentColor"
+                                                  d="M16,18H18V6H16M6,18L14.5,12L6,6V18Z"></path>
+                                        </svg>
+                                        <span>Up Next</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row video-list">
+                            @foreach($related_videos as $related_video)
+                                <div class="col-12 m-0 p-0 my-2" id="related_video">
+                                    <a href="{{route('playlist').'?v='.$related_video->video_id}}">
+                                        <div class="p-2 shadow-lg bg-white rounded video-thumb overlay"
+                                             style="background-image: url({{asset('storage/'.$related_video->thumbnail)}});background-size: cover;height:200px;">
+                                            <div class='play_hover_btn'
+                                                 style="top: 50%;left: 50%;position: absolute;transform: translate(-50%, -50%);">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"
+                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                     class="text-white feather feather-play-circle">
+                                                    <circle cx="12" cy="12" r="10"></circle>
+                                                    <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                                                </svg>
+                                            </div>
+                                            <span style="text-shadow: 1px 1px 2px #000;"
+                                                  class="text-light font-weight-light">{{ucfirst($related_video->title)}}</span>
+                                            <span style="text-shadow: 1px 1px 2px #000;"
+                                                  class="text-light font-weight-light video-duration">{{gmdate('i:s', $related_video->duration)}}</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
 
 
@@ -350,20 +394,20 @@
         <div class="row">
             <div class="col-12">
 
-                <ul class="nav nav-tabs" role="tablist">
+                <ul class="nav nav-tabs" role=" tablist">
                     @if(isset($user->user_extra->address))
                         <li class="nav-item" role="presentation">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
                                aria-controls="home" aria-selected="true">Map</a>
                         </li>
                     @endif
-                  
+                   
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab"
                            aria-controls="reviews" aria-selected="false">Reviews</a>
                     </li>
-                  
-                    
+                   
+                   
                 </ul>
                 <div class="tab-content p-3 card">
                     @if(isset($user->user_extra->address))

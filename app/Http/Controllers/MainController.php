@@ -95,10 +95,21 @@ class MainController extends Controller
         return view($video && !$video->processed ? 'directory.processing' : 'directory.single', compact('ratings', 'user', 'rating', 'video', 'related_videos', 'views'));
     }
 
-    public function playlist_videos(Request $request)
+    public function playlist_videos(Request $request,$playlist_id=null)
     {
 
-        $video = Video::whereVideoId($request->get('v'))->firstOrFail();
+        //$video = Video::whereVideoId($request->get('v'))->firstOrFail();
+        if ($request->get('v'))
+        {
+            
+            $video = Video::whereVideoId($request->get('v'))->firstOrFail();
+        }
+        else{
+           
+            $video = Video::wherePlaylistId($playlist_id)->firstOrFail();
+        }
+        
+
 //        $video = Video::userVideos($username, $video_id)->where('video_type', 'Public')->with('playlist')->first();
         $views = $video ? VideoView::videoViews($video) : 0;
         $related_videos =[];
@@ -130,8 +141,15 @@ class MainController extends Controller
                     'avatar' => is_null($rate->user->user_extra->profile_picture) ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMgrxYAqZF6-kdFuLQesPwdAyonhn93LsxvKXax0vzbCCGd_wQ&usqp=CAU' : $rate->user->user_extra->profile_picture,
                 ];
             });
-        return view($video && !$video->processed ? 'directory.processing' : 'playlist.single', compact('ratings', 'user', 'rating', 'video', 'related_videos', 'views'));
-    }
+            if ($request->get('v'))
+        {
+            return view($video && !$video->processed ? 'directory.processing' : 'playlist.single', compact('ratings', 'user', 'rating', 'video', 'related_videos', 'views'));
+  
+           
+        }
+        return view($video && !$video->processed ? 'directory.processing' : 'playlist.playlist', compact('ratings', 'user', 'rating', 'video', 'related_videos', 'views'));
+   
+         }
 
     public function embed($video_id)
     {

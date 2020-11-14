@@ -25,10 +25,10 @@ class Video extends Model
         static::creating(
             function ($video) {
                 $playlist = Playlist::firstOrCreate(
-                    ['user_id' => auth()->user()->id()],
+                    ['user_id' => auth()->id()],
                     [
                         'name' => 'Unlisted',
-                        'user_id' => auth()->user()->id()
+                        'user_id' => auth()->id()
                     ]
                 );
                 $playlist = $playlist->id;

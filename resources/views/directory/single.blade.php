@@ -223,7 +223,7 @@
                                         <br>
                                         Views: {{$views}}
                                         <br>
-                                        Playlist: <a href="{{route('playlist_videos').'?v='.$video->video_id}}"> {{$video->playlist->name}}</a>
+                                        Playlist: <a href="{{route('playlist_videos',$video->playlist_id)}}"> {{$video->playlist->name}}</a>
                                         <br>
                                     </div>
                                 </div>
@@ -406,24 +406,24 @@
                                aria-controls="home" aria-selected="true">Map</a>
                         </li>
                     @endif
-                    @if(isset($user->user_extra->bio))
+                    <!-- @if(isset($user->user_extra->bio))
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                                aria-controls="profile" aria-selected="false">Bio</a>
                         </li>
-                    @endif
+                    @endif -->
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab"
                            aria-controls="reviews" aria-selected="false">Reviews</a>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    <!-- <li class="nav-item" role="presentation">
                         <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
                            aria-controls="contact" aria-selected="false">Contact</a>
                     </li>
                     <li class="nav-item" role="Report">
                         <a class="nav-link" id="contact-tab" data-toggle="tab" href="#report_message" role="tab"
                            aria-controls="report_message" aria-selected="false">Report</a>
-                    </li>
+                    </li> -->
                 </ul>
                 <div class="tab-content p-3 card">
                     @if(isset($user->user_extra->address))

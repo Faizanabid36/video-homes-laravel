@@ -33075,9 +33075,9 @@ try {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\video-homes-laravel\resources\js\public.js */"./resources/js/public.js");
-__webpack_require__(/*! C:\xampp\htdocs\video-homes-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\video-homes-laravel\resources\sass\public.scss */"./resources/sass/public.scss");
+__webpack_require__(/*! C:\Users\HP\Desktop\Office Work\video-homes-laravel\resources\js\public.js */"./resources/js/public.js");
+__webpack_require__(/*! C:\Users\HP\Desktop\Office Work\video-homes-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\Users\HP\Desktop\Office Work\video-homes-laravel\resources\sass\public.scss */"./resources/sass/public.scss");
 
 
 /***/ })
