@@ -224,6 +224,9 @@
                                         Views: {{$views}}
                                         <br>
                                         Playlist: <a href="{{route('playlist_videos',$video->playlist_id)}}"> {{$video->playlist->name}}</a>
+                                      <br>
+                                       <a href="{{route('playlist').'?v='.$video->video_id}}">Single Page</a>
+
                                         <br>
                                     </div>
                                 </div>
