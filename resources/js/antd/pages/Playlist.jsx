@@ -84,6 +84,7 @@ class Playlist extends Component {
         axios.post(window.VIDEO_APP.base_url+'/playlist/', {name, description})
             .then(({data}) => {
                 this.getPlaylist()
+                console.log(data)
                 this.setState({action: null})
                 if (data.status) {
                     message.success(data.message);
