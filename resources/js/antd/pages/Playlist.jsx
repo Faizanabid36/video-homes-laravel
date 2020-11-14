@@ -133,7 +133,8 @@ class Playlist extends Component {
                             <Input.TextArea onChange={e => this.setState({description: e.target.value})} rows={4}/>
                         </Form.Item>
                         <Form.Item>
-                            <Button type="primary" htmlType="submit">
+
+                            <Button onClick={this.createPlaylist} type="primary" htmlType="submit">
                                 Submit
                             </Button>
                         </Form.Item>
