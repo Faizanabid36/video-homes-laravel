@@ -20,6 +20,8 @@ class PlaylistController extends Controller
     public function store(Request $request)
     {
         dd('here');
+
+
         if (request()->validate([
             'name' => 'required',
         ])) {
