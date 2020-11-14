@@ -124,7 +124,7 @@ class Playlist extends Component {
                         <Form.Item
                             label="Name"
                             name="name"
-                            rules={[{required: true, message: 'Please input your username!'}]}
+                            rules={[{message: 'Please input your username!'}]}
                             onChange={e => this.setState({name: e.target.value})}
                         >
                             <Input/>
