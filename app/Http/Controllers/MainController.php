@@ -31,6 +31,7 @@ class MainController extends Controller
         $industries = UserCategory::getCategories();
         $categories = UserCategory::getCategories($level1, $level2);
         $video_categories = Category::all();
+        dd('here');
         $users = collect(grabUsers($categories));
         if (\request('sort') && 'oldest_to_newest' == \request('sort')) {
             $users = $users->sortBy(function ($user) {
@@ -101,14 +102,14 @@ class MainController extends Controller
         //$video = Video::whereVideoId($request->get('v'))->firstOrFail();
         if ($request->get('v'))
         {
-            
+
             $video = Video::whereVideoId($request->get('v'))->firstOrFail();
         }
         else{
-           
+
             $video = Video::wherePlaylistId($playlist_id)->firstOrFail();
         }
-        
+
 
 //        $video = Video::userVideos($username, $video_id)->where('video_type', 'Public')->with('playlist')->first();
         $views = $video ? VideoView::videoViews($video) : 0;
@@ -144,11 +145,11 @@ class MainController extends Controller
             if ($request->get('v'))
         {
             return view($video && !$video->processed ? 'directory.processing' : 'playlist.single', compact('ratings', 'user', 'rating', 'video', 'related_videos', 'views'));
-  
-           
+
+
         }
         return view($video && !$video->processed ? 'directory.processing' : 'playlist.playlist', compact('ratings', 'user', 'rating', 'video', 'related_videos', 'views'));
-   
+
          }
 
     public function embed($video_id)
