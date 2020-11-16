@@ -24,6 +24,7 @@ class Authenticate extends Middleware
             return redirect()->route('login');
         }
         if(!auth()->user()->isActive()){
+            dd('inactive');
             return redirect()->route('login')->withErrors(['active' => 'Your Account has been suspended.']);
         }
 
