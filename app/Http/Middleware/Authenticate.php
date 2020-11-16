@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Closure;
+use Illuminate\Support\Facades\Auth;
+
 class Authenticate extends Middleware
 {
     /**
@@ -24,7 +26,7 @@ class Authenticate extends Middleware
             return redirect()->route('login');
         }
         if(!auth()->user()->isActive()){
-            dd('inactive');
+            Auth::logout();
             return redirect()->route('login')->withErrors(['active' => 'Your Account has been suspended.']);
         }
 
