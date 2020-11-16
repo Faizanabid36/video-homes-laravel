@@ -101,11 +101,11 @@ class MainController extends Controller
         //$video = Video::whereVideoId($request->get('v'))->firstOrFail();
         if ($request->get('v'))
         {
-            
+
             $video = Video::whereVideoId($request->get('v'))->firstOrFail();
         }
         else{
-           
+
             $video = Video::wherePlaylistId($playlist_id)->firstOrFail();
         }
 //        $video = Video::userVideos($username, $video_id)->where('video_type', 'Public')->with('playlist')->first();
