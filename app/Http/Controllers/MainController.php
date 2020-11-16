@@ -31,7 +31,6 @@ class MainController extends Controller
         $industries = UserCategory::getCategories();
         $categories = UserCategory::getCategories($level1, $level2);
         $video_categories = Category::all();
-        dd('here');
         $users = collect(grabUsers($categories));
         if (\request('sort') && 'oldest_to_newest' == \request('sort')) {
             $users = $users->sortBy(function ($user) {
