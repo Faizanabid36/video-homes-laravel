@@ -21,10 +21,10 @@ class Authenticate extends Middleware
 
     public function handle( $request, Closure $next , ...$guards) {
         if(!auth()->user()){
-            return redirect( 'login' );
+            return redirect()->route('login');
         }
         if(!auth()->user()->isActive()){
-            return redirect('login')->withErrors(['active' => 'Your Account has been suspended.']);
+            return redirect()->route('login')->withErrors(['active' => 'Your Account has been suspended.']);
         }
 
         if ( auth()->user()->isUser() ) {
