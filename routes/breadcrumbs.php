@@ -21,10 +21,10 @@ Breadcrumbs::for( 'directory', function ( $trail, $level1 = null, $level2 = null
 //    $trail->parent( 'home' );
     $trail->push( 'Directory', route( 'directory' ) );
     if ( $level1 ) {
-        $trail->push( UserCategory::whereSlug( $level1 )->first()->name, route( 'directory', $level1 ) );
+        $trail->push( UserCategory::whereSlug( $level1 )->firstOrFail()->name, route( 'directory', $level1 ) );
     }
     if ( $level2 ) {
-        $trail->push( UserCategory::whereSlug( $level2 )->first()->name, route( 'directory', [ $level1, $level2 ] ) );
+        $trail->push( UserCategory::whereSlug( $level2 )->firstOrFail()->name, route( 'directory', [ $level1, $level2 ] ) );
     }
 } );
 
