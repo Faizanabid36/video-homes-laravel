@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h2 style="text-transform:uppercase">{{$user->name}}</h2>
+                <h2 style="text-transform:uppercase">{{$video->title}}</h2>
                 @if($video && !$video->is_video_approved)
                     <div class="alert alert-warning">This page is not public yet, because your video is pending mode, it
                         needs admin approval.
@@ -218,7 +218,7 @@
                                         <br>
                                         Views: {{$views}}
                                         <br>
-                                        Playlist: <a href="{{route('playlist_videos',$video->playlist_id)}}"> {{$video->playlist->name}}</a>
+                                        Playlist: <a href="{{route('playlist_videos',$video->playlist_id).'?v='.$video->video_id}}"> {{$video->playlist->name}}</a>
                                         <br>
                                         <a href="{{route('playlist').'?v='.$video->video_id}}">Single Page</a>
                                         <br>
@@ -287,7 +287,7 @@
                         <div class="row video-list">
                             @foreach($related_videos as $related_video)
                                 <div class="col-12 m-0 p-0 my-2" id="related_video">
-                                    <a href="{{route('playlist').'?v='.$related_video->video_id}}">
+                                    <a href="{{route('playlist_videos',$related_video->playlist_id).'?v='.$related_video->video_id}}">
                                         <div class="p-2 shadow-lg bg-white rounded video-thumb overlay"
                                              style="background-image: url({{asset('storage/'.$related_video->thumbnail)}});background-size: cover;height:200px;">
                                             <div class='play_hover_btn'

@@ -108,12 +108,14 @@ class MainController extends Controller
            
             $video = Video::wherePlaylistId($playlist_id)->firstOrFail();
         }
-        
-
 //        $video = Video::userVideos($username, $video_id)->where('video_type', 'Public')->with('playlist')->first();
         $views = $video ? VideoView::videoViews($video) : 0;
         $related_videos =[];
-        $related_videos = Video::wherePlaylistId($video->playlist_id)->whereUserId($video->user_id)->where('id', '!=', $video->id)->get();
+        if (auth()->user()&& (auth()->id()==$video->user_id))
+            $related_videos = Video::wherePlaylistId($video->playlist_id)->whereUserId($video->user_id)->where('id', '!=', $video->id)->get();
+        else
+            $related_videos = Video::wherePlaylistId($video->playlist_id)->whereIsVideoApproved(true)->whereUserId($video->user_id)->where('id', '!=', $video->id)->get();
+    
         $user = $video->user;
         $username = $user->username;
         $ratingsUser = UserMessage::userRating($user->id)->get();
@@ -143,12 +145,12 @@ class MainController extends Controller
             });
             if ($request->get('v'))
         {
-            return view($video && !$video->processed ? 'directory.processing' : 'playlist.single', compact('ratings', 'user', 'rating', 'video', 'related_videos', 'views'));
-  
-           
+            if($playlist_id)
+                return view($video && !$video->processed ? 'directory.processing' : 'playlist.playlist', compact('ratings', 'user', 'rating', 'video', 'related_videos', 'views'));
+            else
+                return view($video && !$video->processed ? 'directory.processing' : 'playlist.single', compact('ratings', 'user', 'rating', 'video', 'related_videos', 'views'));  
         }
         return view($video && !$video->processed ? 'directory.processing' : 'playlist.playlist', compact('ratings', 'user', 'rating', 'video', 'related_videos', 'views'));
-   
          }
 
     public function embed($video_id)
