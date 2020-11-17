@@ -16,3 +16,4 @@ require('./bootstrap');
 // require('./components/Index');
 require('./antd/index');
 
+require('./antd2/index');
