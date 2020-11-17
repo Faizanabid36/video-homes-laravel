@@ -21,8 +21,9 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 // Auth User
 
- Route::get( 'playlist/watch/{id}','MainController@playlist_videos')->name( 'playlist_videos' );
- Route::get( 'playlist/watch','MainController@playlist_videos')->name( 'playlist' );
+
+Route::get( 'playlist/watch/{id}','MainController@playlist_videos')->name( 'playlist_videos' );
+Route::get( 'playlist/watch','MainController@playlist_videos')->name( 'playlist' );
 Route::group(
 	array( 'middleware' => 'auth' ),
 	function () {

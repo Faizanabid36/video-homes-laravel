@@ -82,23 +82,23 @@
                                     src="{{asset("storage/".str_replace('240p','720p',$video->stream_path))}}"
                                     type="video/mp4"
                                     data-quality="720p" title="720p" label="720p" res="720">
-                                @endif
-                                @if($video->{'480p'})
-                                    <source
-                                        src="{{asset("storage/".str_replace('240p','480p',$video->stream_path))}}"
-                                        type="video/mp4"
-                                        data-quality="480p" title="480p" label="480p" res="480">
-                                @endif
+                            @endif
+                            @if($video->{'480p'})
+                                <source
+                                    src="{{asset("storage/".str_replace('240p','480p',$video->stream_path))}}"
+                                    type="video/mp4"
+                                    data-quality="480p" title="480p" label="480p" res="480">
+                            @endif
 
-                                @if($video->{'360p'})
-                                    <source
-                                        src="{{asset("storage/".str_replace('240p','360p',$video->stream_path))}}"
-                                        type="video/mp4"
-                                        data-quality="360p" title="360p" label="360p" res="360">
-                                @endif
-                                <source src="{{asset("storage/$video->stream_path")}}" type="video/mp4"
-                                        data-quality="240p" title="240p" label="240p" res="240">
-                                Your browser does not support HTML5 video.
+                            @if($video->{'360p'})
+                                <source
+                                    src="{{asset("storage/".str_replace('240p','360p',$video->stream_path))}}"
+                                    type="video/mp4"
+                                    data-quality="360p" title="360p" label="360p" res="360">
+                            @endif
+                            <source src="{{asset("storage/$video->stream_path")}}" type="video/mp4"
+                                    data-quality="240p" title="240p" label="240p" res="240">
+                            Your browser does not support HTML5 video.
                         </video>
 
                         <div class="video-options pt_mn_wtch_opts pt-4">
@@ -223,9 +223,10 @@
                                         <br>
                                         Views: {{$views}}
                                         <br>
-                                        Playlist: <a href="{{route('playlist_videos',$video->playlist_id).'?v='.$video->video_id}}"> {{$video->playlist->name}}</a>
-                                      <br>
-                                       <a href="{{route('playlist').'?v='.$video->video_id}}">Single Page</a>
+                                        Playlist: <a
+                                            href="{{route('playlist_videos',$video->playlist_id).'?v='.$video->video_id}}"> {{$video->playlist->name}}</a>
+                                        <br>
+                                        <a href="{{route('playlist').'?v='.$video->video_id}}">Single Page</a>
 
                                         <br>
                                     </div>
@@ -349,7 +350,7 @@
                             {!! $user->user_extra->bio !!}
                         </div>
                     </div>
-                        <hr/>
+                    <hr/>
                 @endif
                 @if($user->user_extra->company_name)
                     <div class="d-flex">
@@ -384,7 +385,8 @@
                 @if($user->user_extra->website)
                     <div class="d-flex">
                         <div class="font-weight-bold "><i class='fa icon fa-globe'></i> Website</div>
-                        <div><a target="_blank" rel="nofollow" href="{{$user->user_extra->website}}"> {{$user->user_extra->website}} </a></div>
+                        <div><a target="_blank" rel="nofollow"
+                                href="{{$user->user_extra->website}}"> {{$user->user_extra->website}} </a></div>
                     </div>
                     <hr/>
                 @endif
@@ -409,24 +411,24 @@
                                aria-controls="home" aria-selected="true">Map</a>
                         </li>
                     @endif
-                    <!-- @if(isset($user->user_extra->bio))
+                    @if(isset($user->user_extra->bio))
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                                aria-controls="profile" aria-selected="false">Bio</a>
                         </li>
-                    @endif -->
+                    @endif
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab"
                            aria-controls="reviews" aria-selected="false">Reviews</a>
                     </li>
-                    <!-- <li class="nav-item" role="presentation">
+                    <li class="nav-item" role="presentation">
                         <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
                            aria-controls="contact" aria-selected="false">Contact</a>
                     </li>
                     <li class="nav-item" role="Report">
                         <a class="nav-link" id="contact-tab" data-toggle="tab" href="#report_message" role="tab"
                            aria-controls="report_message" aria-selected="false">Report</a>
-                    </li> -->
+                    </li>
                 </ul>
                 <div class="tab-content p-3 card">
                     @if(isset($user->user_extra->address))
@@ -579,52 +581,52 @@
                             </div>
                         </div>
                     </div>
-                        <!-- reviews end -->
-                        <!-- Contact -->
-                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                            <h1 class="my-3 font-weight-bold"> Contact to {{$user->name}} </h1>
-                            @if(auth()->check() && $video && ($video->user_id!=auth()->id()))
-                                <form method="POST" action="{{route('to_user')}}">
-                                    @csrf
-                                    <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">
-                                    <input type="hidden" name="video_id" value="{{$video->id}}">
-                                    <input type="hidden" name="reply_user_id" value="{{$video->user_id}}">
-                                    <input type="hidden" name="type" value="contact">
-                                    <div class="form-group">
-                                        <label for="message2">Message</label>
-                                        <textarea name="message" class="form-control" id="message2" rows="3"
-                                                  placeholder="Message here"></textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary"> Send</button>
-                                </form>
-                            @else
-                                <a href="{{route('login')}}" class="btn btn-info text-white">Login to
-                                    Contact {{$user->name}}</a>
-                            @endif
-                        </div>
-                        <div class="tab-pane fade" id="report_message" role="tabpanel" aria-labelledby="report-tab">
-                            <!-- .report. -->
+                    <!-- reviews end -->
+                    <!-- Contact -->
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                        <h1 class="my-3 font-weight-bold"> Contact to {{$user->name}} </h1>
+                        @if(auth()->check() && $video && ($video->user_id!=auth()->id()))
+                            <form method="POST" action="{{route('to_user')}}">
+                                @csrf
+                                <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">
+                                <input type="hidden" name="video_id" value="{{$video->id}}">
+                                <input type="hidden" name="reply_user_id" value="{{$video->user_id}}">
+                                <input type="hidden" name="type" value="contact">
+                                <div class="form-group">
+                                    <label for="message2">Message</label>
+                                    <textarea name="message" class="form-control" id="message2" rows="3"
+                                              placeholder="Message here"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary"> Send</button>
+                            </form>
+                        @else
+                            <a href="{{route('login')}}" class="btn btn-info text-white">Login to
+                                Contact {{$user->name}}</a>
+                        @endif
+                    </div>
+                    <div class="tab-pane fade" id="report_message" role="tabpanel" aria-labelledby="report-tab">
+                        <!-- .report. -->
 
-                            <h1 class="my-3 font-weight-bold"> Report Video</h1>
-                            @if(auth()->check() && $video && ($video->user_id!=auth()->id()))
-                                <form method="POST" action="{{route('to_user')}}">
-                                    @csrf
-                                    <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">
-                                    <input type="hidden" name="video_id" value="{{$video->id}}">
-                                    <input type="hidden" name="type" value="report">
-                                    <div class="form-group">
-                                        <label for="message">Message</label>
-                                        <textarea name="message" class="form-control" id="message" rows="3"
-                                                  placeholder="Message here"></textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary"> Send</button>
-                                </form>
-                            @else
-                                <a href="{{route('login')}}" class="btn btn-info text-white">Login to Report Video</a>
-                            @endif
+                        <h1 class="my-3 font-weight-bold"> Report Video</h1>
+                        @if(auth()->check() && $video && ($video->user_id!=auth()->id()))
+                            <form method="POST" action="{{route('to_user')}}">
+                                @csrf
+                                <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">
+                                <input type="hidden" name="video_id" value="{{$video->id}}">
+                                <input type="hidden" name="type" value="report">
+                                <div class="form-group">
+                                    <label for="message">Message</label>
+                                    <textarea name="message" class="form-control" id="message" rows="3"
+                                              placeholder="Message here"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary"> Send</button>
+                            </form>
+                        @else
+                            <a href="{{route('login')}}" class="btn btn-info text-white">Login to Report Video</a>
+                        @endif
 
 
-                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -696,6 +698,6 @@
 @endsection
 @section('header_script')
     @if($video)
-    window.VIDEO_APP.video_url = "{{route('is_played',$video->id)}}";
+        window.VIDEO_APP.video_url = "{{route('is_played',$video->id)}}";
     @endif
 @endsection

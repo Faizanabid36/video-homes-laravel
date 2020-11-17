@@ -9,7 +9,7 @@ use Nagy\LaravelRating\Traits\Rate\CanRate;
 
 class User extends Authenticatable
 {
-    use Notifiable,CanRate;
+    use Notifiable, CanRate;
 
     protected $with = ['user_extra'];
 
@@ -47,10 +47,12 @@ class User extends Authenticatable
             $playlist->user_id = $user->id;
             $playlist->save();
         });
-        static::deleting(function($user){
+        static::deleting(function ($user) {
             $user->user_extra()->delete();
-            Playlist::whereUserId( $user->id )->delete();
-            Video::whereUserId( $user->id )->delete();
+            Playlist::whereUserId($user->id)->delete();
+            Video::whereUserId($user->id)->delete();
+            UserMessage::where('reply_user_id', $user->id)->delete();
+            UserMessage::where('contact_user_id', $user->id)->delete();
         });
     }
 
@@ -63,6 +65,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(BlockedUser::class, 'blocked_user_id', 'id');
     }
+
     public function account_types()
     {
         return $this->hasOne(AccountType::class, 'user_id');
@@ -80,17 +83,31 @@ class User extends Authenticatable
 
     public function videos()
     {
-        return $this->hasMany(Video::class,'user_id','id');
+        return $this->hasMany(Video::class, 'user_id', 'id');
     }
 
-    public function isAdmin() {
+    public function isAdmin()
+    {
         return $this->role === 1;
     }
 
-    public function isUser() {
+    public function to_me_messages()
+    {
+        return $this->hasMany(UserMessage::class, 'contact_user_id');
+    }
+
+    public function from_me_messages()
+    {
+        return $this->hasMany(UserMessage::class, 'reply_user_id');
+    }
+
+    public function isUser()
+    {
         return $this->role > 1;
     }
-    public function isActive(){
+
+    public function isActive()
+    {
         return $this->active === 1;
     }
 }

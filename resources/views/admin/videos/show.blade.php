@@ -74,7 +74,7 @@
                                     class="btn btn-sm btn-{{ (isset($video) && 0 == $video->is_video_approved) ? 'info' : 'secondary' }}"><input
                                         onchange="document.getElementById('status').submit();"
                                         name="is_video_approved" type="radio"
-                                        value="0" @if (isset($video)) {{ (0 == $video->is_video_approved) ? 'checked' : '' }} @else {{ 'checked' }} @endif>
+                                        value="2" @if (isset($video)) {{ (0 == $video->is_video_approved) ? 'checked' : '' }} @else {{ 'checked' }} @endif>
                                     Reject</label>
                             </div>
                         </form>

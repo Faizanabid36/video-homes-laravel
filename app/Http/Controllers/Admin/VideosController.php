@@ -185,7 +185,6 @@ class VideosController extends Controller
 		]);
         $requestData = $request->all();
 
-
         $video = Video::findOrFail($id);
         $video->update($requestData);
 
