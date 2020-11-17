@@ -15,5 +15,3 @@ require('./bootstrap');
 // require('./components/Auth/Login');
 // require('./components/Index');
 require('./antd/index');
-
-require('./antd2/index');
