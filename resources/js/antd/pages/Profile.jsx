@@ -387,7 +387,7 @@ class Profile extends Component {
                                         </>}
                                     </Form.Item>
                                     <Form.Item label="Profile">
-                                    <ImgCrop rotate zoom minZoom={0.1} cropperProps={{step:0.1}}>
+                                    <ImgCrop modalTitle='Profile Picture' aspect={4 / 3} rotate zoom minZoom={0.1} cropperProps={{step:0.1}}>
                                             <Upload
                                                 headers={{'X-CSRF-TOKEN': window.document.head.querySelector('meta[name="csrf-token"]').content}}
                                                 action={`${window.VIDEO_APP.base_url}/profile`}
@@ -409,7 +409,7 @@ class Profile extends Component {
 
                                     </Form.Item>
                                     <Form.Item label="Company Logo">
-                                        <ImgCrop rotate zoom minZoom={0.1} cropperProps={{step:0.1}}>
+                                        <ImgCrop modalTitle='Company Logo' aspect={4 / 3} rotate zoom minZoom={0.1} cropperProps={{step:0.1}}>
                                             <Upload
                                                 headers={{'X-CSRF-TOKEN': window.document.head.querySelector('meta[name="csrf-token"]').content}}
                                                 action={`${window.VIDEO_APP.base_url}/profile`}
