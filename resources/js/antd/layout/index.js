@@ -174,7 +174,7 @@ class App extends React.Component {
     avatarClick(e) {
         console.log(e.key);
         this.setState({current: e.key}, () => {
-            window.location.hash = "#/" + (e.key === "profile" ? "profile" : "/" + e.key);
+            window.location.hash = "#/" + (e.key === "profile" ? "profile" : e.key);
         })
     }
 
@@ -195,8 +195,8 @@ class App extends React.Component {
             <Menu.Item key="profile" icon={<UserOutlined/>}>
                 Edit Profile
             </Menu.Item>
-            <Menu.Item key="setting" disabled icon={<SettingOutlined/>}>
-                Setting
+            <Menu.Item key="global_videos_settings" icon={<SettingOutlined/>}>
+                Global Settings
             </Menu.Item>
             <Divider style={{margin: "3px 0"}}/>
             <Menu.Item onClick={this.logOut} key="logout" icon={<LogoutOutlined/>}>
