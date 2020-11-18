@@ -640,14 +640,22 @@
 @section('script')
     <script>
         function initMap() {
-                @if(isset($video) && !is_null($video->latitude) && !is_null($video->longitude))
-            let position = {
-                    lat: {{$video->latitude}},
-                    lng: {{$video->longitude}}
-                };
-            var map = new google.maps.Map(
-                document.getElementById('map'), {zoom: 11, center: position});
-            new google.maps.Marker({position: position, map: map});
+                @if(isset($video) &&!is_null($video->latitude) && !is_null($video->longitude))
+                let position = {
+                        lat: {{$video_latitude}},
+                        lng: {{$videolongitude}}
+                    };
+                var map = new google.maps.Map(
+                    document.getElementById('map'), {zoom: 11, center: position});
+                new google.maps.Marker({position: position, map: map});
+                @else
+                let position = {
+                        lat: {{$user->user_extra->location_latitude}},
+                        lng: {{$user->user_extra->location_longitude}}
+                    };
+                var map = new google.maps.Map(
+                    document.getElementById('map'), {zoom: 11, center: position});
+                new google.maps.Marker({position: position, map: map});
             @endif
         }
 
