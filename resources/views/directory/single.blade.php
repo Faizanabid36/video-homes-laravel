@@ -640,6 +640,7 @@
 @section('script')
     <script>
         function initMap() {
+                {{dd($video->latitude)}}
                 @if(!is_null($video->latitude) && !is_null($video->longitude))
             let position = {
                     lat: {{$video->latitude}},
