@@ -124,58 +124,62 @@ class VideosController extends Controller
         return compact('message', 'video');
     }
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int $id
-	 * @return array
-	 */
-	public function show( $id ) {
+    /**
+     * Display the specified resource.
+     *
+     * @param int $id
+     * @return array
+     */
+    public function show($id)
+    {
         $video = Video::whereVideoId($id)->without(array('user', 'comments'))->firstOrFail();
         $categories = Category::orderBy('name', 'ASC')->get();
-        $playlists=Playlist::whereUserId(auth()->user()->id)->get();
+        $playlists = Playlist::whereUserId(auth()->user()->id)->get();
         $thumbnails = array();
         for ($i = 1; $i <= 3; $i++) {
             $thumbnails[$i] = preg_replace('/(-)\d(\.png)/', "-$i$2", $video->thumbnail, 1);
         }
         $video->username = auth()->user()->username;
         $user = auth()->user();
-       // return compact('video', 'thumbnails', 'categories', 'user');
-        return compact('video', 'thumbnails', 'categories', 'user','playlists');
+        // return compact('video', 'thumbnails', 'categories', 'user');
+        return compact('video', 'thumbnails', 'categories', 'user', 'playlists');
     }
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit( $id ) {
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
 
-	}
+    }
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request $request
-	 * @param  int                      $id
-	 * @return array
-	 */
-	public function update( $id ) {
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @return array
+     */
+    public function update($id)
+    {
         $video = Video::whereVideoId($id)->firstOrFail();
-        $video->update(request(array('description', 'video_location', 'title', 'thumbnail', 'video_type', 'tags', 'category_id','playlist_id')));
-		return array('message' => $video ? 'Information Updated' : 'Error Updating');
-	}
+        $video->update(request(array('description', 'video_location', 'latitude', 'longitude', 'title', 'thumbnail', 'video_type', 'tags', 'category_id', 'playlist_id')));
+        return array('message' => $video ? 'Information Updated' : 'Error Updating');
+    }
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int $id
-	 * @return int[]
-	 */
-	public function destroy( $id ) {
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     * @return int[]
+     */
+    public function destroy($id)
+    {
 
-		Video::whereUserId( auth()->id() )->find( $id )->delete();
-		return array( 'success' => 1 );
-	}
+        Video::whereUserId(auth()->id())->find($id)->delete();
+        return array('success' => 1);
+    }
 }

@@ -8,6 +8,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">UserCategory {{ $usercategory->id }}</div>
+
                     <div class="card-body">
 
                         <a href="{{ url('/admin/user-categories') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
@@ -27,7 +28,7 @@
                                     <tr>
                                         <th>ID</th><td>{{ $usercategory->id }}</td>
                                     </tr>
-                                    <tr><th> Name </th><td> {{ $usercategory->name }} </td></tr><tr><th> Description </th><td> {{ $usercategory->description }} </td></tr><tr><th> Parent Id </th><td> {{ $usercategory->parent->name }} </td></tr>
+                                    <tr><th> Name </th><td> {{ $usercategory->name }} </td></tr><tr><th> Description </th><td> {{ $usercategory->description }} </td></tr><tr><th> Parent Id </th><td> {{ $usercategory->parent->name??'' }} </td></tr>
                                 </tbody>
                             </table>
                         </div>

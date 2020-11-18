@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import {Button, Carousel, Form, Image, Input, Layout, message, PageHeader, Select,Radio} from 'antd';
+import {Button, Carousel, Form, Image, Input, Layout, message, PageHeader, Select, Radio} from 'antd';
 import EditableTagGroup from "./Tags";
 import GooglePlacesAutocomplete, {geocodeByAddress} from "react-google-places-autocomplete";
 
@@ -10,13 +10,13 @@ class EditVideo extends Component {
     constructor(props) {
         super(...arguments);
         this.state = {
-            enable:false,
+            enable: false,
             video: {},
             current_slide: 0,
             thumbnails: {},
             categories: [],
-            playlists:[],
-            user:{},
+            playlists: [],
+            user: {},
         };
         this.onChange = this.onChange.bind(this);
         this.onUpdate = this.onUpdate.bind(this);
@@ -25,14 +25,15 @@ class EditVideo extends Component {
     }
 
 
-    onChange(e,key) {
+    onChange(e, key) {
         let {video} = this.state;
-        video[key] = e.target ?  e.target.value : e;
+        video[key] = e.target ? e.target.value : e;
         this.setState({video});
         console.log(this.state.video)
 
     }
-    onUpdate(){
+
+    onUpdate() {
         let self = this;
         axios.put(`video/${this.props.match.params.id}`, {...this.state.video}).then((res) => {
             if (res.data.message)
@@ -56,12 +57,12 @@ class EditVideo extends Component {
                 data.current_slide = index[1] - 1;
             }
             console.log(data)
-            self.setState({...data,enable:true});
+            self.setState({...data, enable: true});
 
         })
     }
 
-    defaultValue(key,defaultValue = '') {
+    defaultValue(key, defaultValue = '') {
         if (typeof key === 'string') {
             return this.state[key] ?? defaultValue
         }
@@ -132,8 +133,11 @@ class EditVideo extends Component {
                                     }}
                                     onSelect={({description}) => {
                                         geocodeByAddress(description).then((results) => {
+                                            console.log(results[0].geometry)
                                             let {video} = this.state;
                                             video.video_location = description;
+                                            video.latitude = results[0].geometry.location.lat();
+                                            video.longitude = results[0].geometry.location.lng();
                                             this.setState({video});
                                         }).catch(error => console.error(error));
                                     }}
@@ -157,7 +161,8 @@ class EditVideo extends Component {
                                         option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                     }
                                 >
-                                    {this.state.categories.map((e,k)=><Select.Option key={k} value={e.id}>{e.name}</Select.Option>)}
+                                    {this.state.categories.map((e, k) => <Select.Option key={k}
+                                                                                        value={e.id}>{e.name}</Select.Option>)}
                                 </Select>}
                             </Form.Item>
 
@@ -173,7 +178,8 @@ class EditVideo extends Component {
                                         option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                     }
                                 >
-                                    {this.state.playlists.map((e,k)=><Select.Option key={k} value={e.id}>{e.name}</Select.Option>)}
+                                    {this.state.playlists.map((e, k) => <Select.Option key={k}
+                                                                                       value={e.id}>{e.name}</Select.Option>)}
                                 </Select>}
                             </Form.Item>
 

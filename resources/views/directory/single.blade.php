@@ -640,10 +640,10 @@
 @section('script')
     <script>
         function initMap() {
-                @if(!is_null($user->user_extra->location_latitude) && !is_null($user->user_extra->location_longitude))
+                @if(!is_null($video->latitude) && !is_null($video->longitude))
             let position = {
-                    lat: {{$user->user_extra->location_latitude}},
-                    lng: {{$user->user_extra->location_longitude}}
+                    lat: {{$video->latitude}},
+                    lng: {{$video->longitude}}
                 };
             var map = new google.maps.Map(
                 document.getElementById('map'), {zoom: 11, center: position});
