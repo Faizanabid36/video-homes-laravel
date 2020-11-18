@@ -212,7 +212,7 @@
                                     <div class="card-body">
                                         {{$video->title}}
                                         <p>{{$video->description}}</p>
-                                        @if(!is_array($video->tags))
+                                        @if(is_array($video->tags))
                                             Tags: @foreach($video->tags as $tags)
                                                 {{--                                            <span class="badge badge-primary">{{str_replace(",",'</span><span class="badge badge-primary">',$video->tags)}}</span>--}}
                                                 <span class="badge badge-primary">{{$tags}}</span>
@@ -222,7 +222,6 @@
                                         Category: {{$video->category->name ?? ''}}
                                         <br>
                                         Views: {{$views}}
-                                        <br>
                                         Playlist: <a
                                             href="{{route('playlist_videos',$video->playlist_id).'?v='.$video->video_id}}"> {{$video->playlist->name}}</a>
                                         <br>
@@ -642,8 +641,8 @@
         function initMap() {
                 @if(isset($video) &&!is_null($video->latitude) && !is_null($video->longitude))
                 let position = {
-                        lat: {{$video_latitude}},
-                        lng: {{$videolongitude}}
+                        lat: {{$video->latitude}},
+                        lng: {{$video->longitude}}
                     };
                 var map = new google.maps.Map(
                     document.getElementById('map'), {zoom: 11, center: position});
