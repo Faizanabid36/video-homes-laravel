@@ -115,7 +115,7 @@ class EditVideo extends Component {
         const settings = {
             nextArrow: <SampleNextArrow />,
             prevArrow: <SamplePrevArrow />
-        }
+        };
         return (
             <Layout.Content style={{padding: '20px 50px'}}>
                 <div className="site-layout-content">
