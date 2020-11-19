@@ -13,6 +13,7 @@ import Ratings from "./pages/Ratings";
 import Messages from "./pages/Messages";
 import MessagesList from "./pages/MessagesList";
 import GlobalVideoSettings from "./pages/GlobalVideoSettings";
+import './styles/arrow.css';
 
 function App() {
     return <AppLayout>
@@ -35,7 +36,7 @@ function App() {
 //     return "Hello";
 // }
 
-function App2(){
+function App2() {
     return <AppLayout>
         <Route path="/" component={Dashboard}/>
     </AppLayout>;
