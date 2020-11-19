@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import {Button, Carousel, Form, Image, Input, Layout, message, PageHeader, Select, Radio} from 'antd';
 import EditableTagGroup from "./Tags";
 import GooglePlacesAutocomplete, {geocodeByAddress} from "react-google-places-autocomplete";
+import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 
 const {goTo} = Carousel;
 
@@ -81,9 +82,16 @@ class EditVideo extends Component {
             return (
                 <div
                     className={className}
-                    style={{ ...style, display: 'block', background: 'red' }}
+                    style={{
+                        ...style,
+                        color: 'black',
+                        fontSize: '15px',
+                        lineHeight: '1.5715'
+                    }}
                     onClick={onClick}
-                />
+                >
+                    <RightOutlined />
+                </div>
             )
         };
 
@@ -92,9 +100,16 @@ class EditVideo extends Component {
             return (
                 <div
                     className={className}
-                    style={{ ...style, display: 'block', background: 'green' }}
+                    style={{
+                        ...style,
+                        color: 'black',
+                        fontSize: '15px',
+                        lineHeight: '1.5715'
+                    }}
                     onClick={onClick}
-                />
+                >
+                    <LeftOutlined />
+                </div>
             )
         };
         const settings = {
