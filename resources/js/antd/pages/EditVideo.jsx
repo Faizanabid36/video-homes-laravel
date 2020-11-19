@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 import {Button, Carousel, Form, Image, Input, Layout, message, PageHeader, Select, Radio} from 'antd';
 import EditableTagGroup from "./Tags";
 import GooglePlacesAutocomplete, {geocodeByAddress} from "react-google-places-autocomplete";
-import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 
 const {goTo} = Carousel;
 
