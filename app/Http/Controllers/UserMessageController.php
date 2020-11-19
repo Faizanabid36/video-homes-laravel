@@ -44,7 +44,7 @@ class UserMessageController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -97,7 +97,7 @@ class UserMessageController extends Controller
      */
     public function edit(UserMessage $userMessage)
     {
-        //
+        dd($userMessage);
     }
 
     /**

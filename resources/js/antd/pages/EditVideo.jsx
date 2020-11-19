@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import {Button, Carousel, Form, Image, Input, Layout, message, PageHeader, Select, Radio} from 'antd';
 import EditableTagGroup from "./Tags";
 import GooglePlacesAutocomplete, {geocodeByAddress} from "react-google-places-autocomplete";
+import Icon from "@ant-design/icons/es";
 
 const {goTo} = Carousel;
 
@@ -21,16 +22,12 @@ class EditVideo extends Component {
         this.onChange = this.onChange.bind(this);
         this.onUpdate = this.onUpdate.bind(this);
         this.defaultValue = this.defaultValue.bind(this);
-        console.log("yes edit video")
     }
-
 
     onChange(e, key) {
         let {video} = this.state;
         video[key] = e.target ? e.target.value : e;
         this.setState({video});
-        console.log(this.state.video)
-
     }
 
     onUpdate() {
@@ -92,12 +89,17 @@ class EditVideo extends Component {
                     >
                         {this.state.enable && <Form ref={this.formRef} name="control-ref" layout="vertical">
                             {Object.values(this.state.thumbnails).length > 0 &&
-                            <Carousel slickGoTo={this.state.current_slide}
-                                      afterChange={e => this.onChange(e, 'thumbnails')}>
-                                {Object.values(this.state.thumbnails).map((v, k) => <div key={k} style={contentStyle}>
-                                    <Image src={window.VIDEO_APP.base_url + "/storage/" + v}/>
-                                </div>)}
-                            </Carousel>}
+                            <div>
+                                <Icon type="left-circle" onClick={this.previous}/>
+                                <Carousel slickGoTo={this.state.current_slide}
+                                          afterChange={e => this.onChange(e, 'thumbnails')}>
+                                    {Object.values(this.state.thumbnails).map((v, k) => <div key={k}
+                                                                                             style={contentStyle}>
+                                        <Image src={window.VIDEO_APP.base_url + "/storage/" + v}/>
+                                    </div>)}
+                                </Carousel>
+                                <Icon type="right-circle" onClick={this.next}/>
+                            </div>}
 
 
                             <Form.Item label="Title" required rules={[{required: true}]}>

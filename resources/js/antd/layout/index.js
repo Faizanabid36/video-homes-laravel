@@ -207,11 +207,11 @@ class App extends React.Component {
 
     notificationMenu() {
         return <Menu onClick={this.menuClick}>
-            {this.state.notifications.map((item, i) => {
+            {this.state.notifications >0?this.state.notifications.map((item, i) => {
                 return <Menu.Item key={item.id} icon={<UserOutlined/>}>
                     {item.message}
                 </Menu.Item>
-            })}
+            }):<div className={'p-2'}>Nothing to display</div>}
             {/*<Menu.Item key="1" icon={<UserOutlined/>}>*/}
             {/*    1st menu item*/}
             {/*</Menu.Item>*/}

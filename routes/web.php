@@ -102,13 +102,14 @@ Route::group(
                 Route::resource('users', 'Admin\\UsersController');
                 Route::resource('settings', 'Admin\\SettingsController');
                 Route::view('profile', 'admin.users.profile')->name('admin.profile');
-                Route::resource('user_message', 'UserMessageController');
+                Route::resource('user-message', 'UserMessageController');
                 Route::get('admin_uploads', 'Admin\\VideosController@upload')->name('admin_uploads.upload');
                 Route::post('admin_uploads', 'Admin\\VideosController@store')->name('admin_uploads.store');
                 Route::get('/my_videos', 'Admin\\VideosController@my_videos')->name('admin.my_videos');
                 Route::get('/my_video/edit/{id}', 'Admin\\VideosController@edit_my_video')->name('admin.my_video.edit');
                 Route::post('/my_video/edit/{id}', 'Admin\\VideosController@update_my_video')->name('admin.update_my_video');
                 Route::get('reported_query_videos', 'UserMessageController@reported_videos')->name('reported_query_videos');
+                Route::get('reviews','Admin\\ReviewController@index')->name('admin.reviews');
             }
 		);
 	}
