@@ -90,7 +90,7 @@ class EditVideo extends Component {
                     }}
                     onClick={onClick}
                 >
-                    <RightOutlined />
+                    {/*<RightOutlined />*/}
                 </div>
             )
         };
@@ -108,7 +108,7 @@ class EditVideo extends Component {
                     }}
                     onClick={onClick}
                 >
-                    <LeftOutlined />
+                    {/*<LeftOutlined />*/}
                 </div>
             )
         };
