@@ -76,6 +76,31 @@ class EditVideo extends Component {
             textAlign: 'center',
             background: '#364d79',
         };
+        const SampleNextArrow = props => {
+            const { className, style, onClick } = props
+            return (
+                <div
+                    className={className}
+                    style={{ ...style, display: 'block', background: 'red' }}
+                    onClick={onClick}
+                />
+            )
+        };
+
+        const SamplePrevArrow = props => {
+            const { className, style, onClick } = props
+            return (
+                <div
+                    className={className}
+                    style={{ ...style, display: 'block', background: 'green' }}
+                    onClick={onClick}
+                />
+            )
+        };
+        const settings = {
+            nextArrow: <SampleNextArrow />,
+            prevArrow: <SamplePrevArrow />
+        }
         return (
             <Layout.Content style={{padding: '20px 50px'}}>
                 <div className="site-layout-content">
@@ -90,7 +115,7 @@ class EditVideo extends Component {
                             {Object.values(this.state.thumbnails).length > 0 &&
                             <div>
                                 {/*<Icon type="left-circle" onClick={this.previous}/>*/}
-                                <Carousel arrows
+                                <Carousel arrows {...settings}
                                           slickGoTo={this.state.current_slide}
                                           afterChange={e => this.onChange(e, 'thumbnails')}>
                                     {Object.values(this.state.thumbnails).map((v, k) => <div key={k}
