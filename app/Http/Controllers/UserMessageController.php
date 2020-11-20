@@ -170,10 +170,9 @@ class UserMessageController extends Controller
         $messages = [];
         $usersList=[];
         $fromMe = UserMessage::whereType('contact')
-            ->whereContactUserId(auth()->user()->id)->distinct('reply_user_id')->pluck('reply_user_id')->first();
-        dd($fromMe);
+            ->whereContactUserId(auth()->user()->id)->distinct('reply_user_id')->pluck('reply_user_id');
         array_push($usersList,$fromMe);
-        $toMe = UserMessage::whereType('contact')->whereReplyUserId(auth()->user()->id)->distinct('contact_user_id')->pluck('contact_user_id')->first();
+        $toMe = UserMessage::whereType('contact')->whereReplyUserId(auth()->user()->id)->distinct('contact_user_id')->pluck('contact_user_id');
         array_push($usersList,$toMe);
         dd($usersList);
         foreach (array_unique($usersList) as $u) {
