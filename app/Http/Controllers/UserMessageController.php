@@ -174,19 +174,20 @@ class UserMessageController extends Controller
         $usersList=$fromMe;
         $toMe = UserMessage::whereType('contact')->whereReplyUserId(auth()->user()->id)->distinct('contact_user_id')->pluck('contact_user_id')->toArray();
         $usersList=$toMe;
-//        dd($usersList);
         foreach (array_unique($usersList) as $u) {
-            if (!is_null($u))
+            if (!is_null($u)){
                 $messages[] = UserMessage::latest()
                     ->whereContactUserId(auth()->user()->id)->whereReplyUserId($u)
                     ->orWhere('contact_user_id', $u)->whereReplyUserId(auth()->user()->id)
                     ->first();
+            }
         }
         $messages = collect($messages)->filter(function ($value, $key) {
             return $value != null;
         })->values();
         $user_id = auth()->user()->id;
-        return compact('messages', 'user_id');
+        $user = auth()->user();
+        return compact('messages', 'user_id','user');
     }
 
 }

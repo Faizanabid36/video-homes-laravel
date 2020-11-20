@@ -11,6 +11,7 @@ export default class MessagesList extends React.Component {
             messages: [],
             user_id: -1,
             dataloading: false,
+            user:[]
         }
     }
 
@@ -43,7 +44,7 @@ export default class MessagesList extends React.Component {
                             return <Card type="inner" key={index} onClick={() => {
                                 window.location.hash = '#/messages/' + message.id
                             }}>
-                                <h3>{message.user.name}</h3>
+                                <h3>{message.user.id === this.state.user_id ?message.receiver.name:message.user.name}</h3>
                                 <h5>{message.user.id === this.state.user_id ? 'You: ' : ''}{message.message}<br/>
                                     <small>{moment(message.created_at).fromNow()}</small>
                                 </h5>

@@ -14,6 +14,10 @@ class UserMessage extends Model
     {
         return $this->belongsTo(User::class, 'contact_user_id');
     }
+    public function receiver()
+    {
+        return $this->belongsTo(User::class,'reply_user_id');
+    }
 
     public function video()
     {
