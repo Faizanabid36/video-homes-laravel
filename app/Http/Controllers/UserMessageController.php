@@ -143,7 +143,6 @@ class UserMessageController extends Controller
         $message = UserMessage::whereId($request->message_id)->first();
         $from_id = 0;
         $to_id = 0;
-        dd($message);
         if (!empty($message)) {
             $from_id = $message->contact_user_id;
             $to_id = $message->reply_user_id;
