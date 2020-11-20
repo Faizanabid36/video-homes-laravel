@@ -174,7 +174,7 @@ class UserMessageController extends Controller
         $usersList=$fromMe;
         $toMe = UserMessage::whereType('contact')->whereReplyUserId(auth()->user()->id)->distinct('contact_user_id')->pluck('contact_user_id')->toArray();
         $usersList=$toMe;
-        dd($usersList);
+//        dd($usersList);
         foreach (array_unique($usersList) as $u) {
             if (!is_null($u))
                 $messages[] = UserMessage::latest()
