@@ -21,7 +21,7 @@ class UserMessageController extends Controller
 
         if (!empty($keyword)) {
             $usermessages = UserMessage::where('message', 'LIKE', "%$keyword%")
-                                  ->latest()->paginate($perPage);
+                ->latest()->paginate($perPage);
         } else {
             $usermessages = UserMessage::latest()->paginate($perPage);
         }
@@ -43,7 +43,7 @@ class UserMessageController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
@@ -92,7 +92,7 @@ class UserMessageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\UserMessage  $userMessage
+     * @param \App\UserMessage $userMessage
      * @return \Illuminate\Http\Response
      */
     public function edit(UserMessage $userMessage)
@@ -103,8 +103,8 @@ class UserMessageController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\UserMessage  $userMessage
+     * @param \Illuminate\Http\Request $request
+     * @param \App\UserMessage $userMessage
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, UserMessage $userMessage)
@@ -124,7 +124,6 @@ class UserMessageController extends Controller
         $userMessage->delete();
         return back()->withSuccess('Deleted');
     }
-
 
 
     public function send_message(Request $request)
@@ -150,6 +149,7 @@ class UserMessageController extends Controller
         }
         $to_id == auth()->user()->id ? $to_id = $from_id : '';
         $messages = [];
+        dd([$from_id, $to_id]);
         $messages = UserMessage::whereType('contact')->where('contact_user_id', $from_id)->where('reply_user_id', $to_id)
             ->orWhere('contact_user_id', $to_id)->orWhere('reply_user_id', $from_id)->get();
         dd($messages);
