@@ -8,7 +8,7 @@ class UserMessage extends Model
 {
     //
     protected $guarded = [];
-    protected $with = ['user','video'];
+    protected $with = ['user','video','receiver'];
 
     public function user()
     {
