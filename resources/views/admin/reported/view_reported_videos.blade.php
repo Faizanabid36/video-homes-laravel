@@ -53,7 +53,7 @@
                                         <td>{{ucfirst($query->video_id)}}</td>
                                         <td>{{$query->created_at->diffForHumans()}}</td>
                                         <td>
-                                            <form action="{{route('user_messages.update',$query->id)}}"
+                                            <form action="{{route('user-message.update',$query->id)}}"
                                                   method="POST">
                                                 @csrf
                                                 @method('put')
@@ -70,7 +70,7 @@
                                             </form>
                                         </td>
                                         <td>
-                                            <form action="{{route('user_messages.destroy',$query->id)}}" method="POST">
+                                            <form action="{{route('user-message.destroy',$query->id)}}" method="POST">
                                                 @csrf
                                                 @method('delete')
                                                 <input type="hidden" name="id" value="{{$query->id}}">

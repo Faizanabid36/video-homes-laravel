@@ -156,7 +156,9 @@ class App extends React.Component {
             .then((res) => {
                 window.location.reload()
             })
-            .catch((err)=>{console.log(err)})
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     showDrawer() {
@@ -171,6 +173,7 @@ class App extends React.Component {
             window.location.hash = "#/" + (e.key === "dashboard" ? "" : "messages/" + e.key);
         })
     }
+
     avatarClick(e) {
         console.log(e.key);
         this.setState({current: e.key}, () => {
@@ -207,11 +210,11 @@ class App extends React.Component {
 
     notificationMenu() {
         return <Menu onClick={this.menuClick}>
-            {this.state.notifications.length >0?this.state.notifications.map((item, i) => {
+            {this.state.notifications.map((item, i) => {
                 return <Menu.Item key={item.id} icon={<UserOutlined/>}>
                     {item.message}
                 </Menu.Item>
-            }):<div className={'p-2'}>Nothing to display</div>}
+            })}
             {/*<Menu.Item key="1" icon={<UserOutlined/>}>*/}
             {/*    1st menu item*/}
             {/*</Menu.Item>*/}
