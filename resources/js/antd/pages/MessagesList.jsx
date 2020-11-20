@@ -34,7 +34,14 @@ export default class MessagesList extends React.Component {
                     <Spin spinning={!this.state.dataloading} tip={'Loading'}/>
                     {this.state.dataloading && <PageHeader
                         className="site-page-header site-page-header-responsive"
-                        title="Messages">
+                        onBack={() => window.location.hash = "#/"}
+                        title="Messages"
+                        // extra={[
+                        //     <Button key="1" type="primary">
+                        //         Primary
+                        //     </Button>,
+                        // ]}
+                    >
 
                         <ul style={{
                             listStyle: 'none',

@@ -120,10 +120,13 @@ class EditVideo extends Component {
                 <div className="site-layout-content">
                     <PageHeader
                         className="site-page-header site-page-header-responsive"
-                        onBack={() => {
-                            null
-                        }}
-                        title="Edit Video"
+                        onBack={() => window.location.hash = "#/"}
+                        title=" Edit Video"
+                        // extra={[
+                        //     <Button key="1" type="primary">
+                        //         Primary
+                        //     </Button>,
+                        // ]}
                     >
                         {this.state.enable && <Form ref={this.formRef} name="control-ref" layout="vertical">
                             {Object.values(this.state.thumbnails).length > 0 &&

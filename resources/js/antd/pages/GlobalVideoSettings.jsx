@@ -192,8 +192,13 @@ class GlobalVideoSettings extends Component {
                 <div className="site-layout-content">
                     <PageHeader
                         className="site-page-header site-page-header-responsive"
-                        onBack={() => null}
+                        onBack={() => window.location.hash = "#/"}
                         title="Global Video Settings"
+                        // extra={[
+                        //     <Button key="1" type="primary">
+                        //         Primary
+                        //     </Button>,
+                        // ]}
                     >
                         <Spin spinning={!this.state.dataloading} tip={'Loading'}/>
                         {this.state.dataloading &&
