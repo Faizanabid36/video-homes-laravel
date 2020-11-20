@@ -49,6 +49,8 @@ class Video extends Model
             function ($video) {
                 VideoView::whereVideoId($video->id)->delete();
                 DeleteVideos::dispatch($video);
+                Comment::whereVideoId($video->id)->delete();
+                UserMessage::whereVideoId($video->id)->delete();
             }
         );
     }

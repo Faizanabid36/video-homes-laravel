@@ -251,7 +251,7 @@
                                                     <input type="hidden" name="type" value="report">
                                                     <input type="hidden" name="video_id" value="{{$video->id}}">
                                                     <input type="hidden" name="contact_user_id"
-                                                           value="{{auth()->id()}}">
+                                                           value="{{auth()->user()->id}}">
                                                     <div class="form-group">
                                                         <label for="contact_message">Message Text</label>
                                                         <textarea name="message" required class="form-control"
@@ -439,7 +439,6 @@
                         <p>{!! $user->user_extra->bio !!}</p>
                     </div>
                     <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-
                         @if(auth()->check() && $video && ($video->user_id!=auth()->id()))
                             <button class="btn btn-primary my-3" data-toggle="modal" data-target="#review"> Add Review
                             </button>
@@ -458,7 +457,7 @@
                                                 @csrf
                                                 <input type="hidden" name="type" value="rating">
                                                 <input type="hidden" name="video_id" value="{{$video->id}}">
-                                                <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">
+                                                <input type="hidden" name="contact_user_id" value="{{auth()->user()->id}}">
                                                 <input type="hidden" name="reply_user_id" value="{{$video->user_id}}">
 
                                                 <div class="form-group">
