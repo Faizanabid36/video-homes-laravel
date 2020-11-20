@@ -213,7 +213,6 @@ class EditVideo extends Component {
                             <Form.Item label="Playlist">
                                 {this.state.playlists.length && <Select
                                     defaultValue={this.defaultValue(["video", "playlist_id"])}
-                                    showSearch
 
                                     placeholder="Select a Playlist"
                                     optionFilterProp="children"
