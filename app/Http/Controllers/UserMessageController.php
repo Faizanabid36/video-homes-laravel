@@ -148,10 +148,15 @@ class UserMessageController extends Controller
             $from_id = $message->contact_user_id;
             $to_id = $message->reply_user_id;
         }
-        $to_id == auth()->user()->id ? $to_id = $from_id : '';
+        if(auth()->user()->id == $to_id)
+        {
+            $temp = $to_id;
+            $to_id = $from_id;
+            $from_id = $temp;
+        }
         $messages = [];
-        $messages = UserMessage::whereType('contact')->where('contact_user_id', $from_id)->orWhere('reply_user_id', $to_id)
-            ->where('contact_user_id', $to_id)->orWhere('reply_user_id', $from_id)->get();
+        $messages = UserMessage::whereType('contact')->where('contact_user_id', $from_id)->where('reply_user_id', $to_id)
+            ->orWhere('contact_user_id', $to_id)->where('reply_user_id', $from_id)->get();
         $messageIds = collect($messages)->map(function ($message) {
             return $message->id;
         });
