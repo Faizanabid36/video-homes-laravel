@@ -31,15 +31,13 @@ class Video extends Component {
     }
 
     deleteVideo(id) {
-        let el = document.getElementById(`video-card-${id}`)
-        console.log(el)
-        // axios.delete('video/' + id)
-        //     .then((res) => {
-        //         document.getElementById(`video-card-${id}`).remove()
-        //     })
-        //     .catch((err) => {
-        //         console.log(err)
-        //     })
+        axios.delete('video/' + id)
+            .then((res) => {
+                let el = document.getElementById(`video-card-${id}`).remove()
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     componentDidMount() {
