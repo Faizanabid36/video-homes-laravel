@@ -33,7 +33,7 @@ class Video extends Component {
     deleteVideo(id) {
         axios.delete('video/' + id)
             .then((res) => {
-                document.getElementsById(`video-card-${id}`).remove()
+                document.getElementById(`video-card-${id}`).remove()
             })
             .catch((err) => {
                 console.log(err)
