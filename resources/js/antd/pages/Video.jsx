@@ -52,11 +52,6 @@ class Video extends Component {
                         className="site-page-header site-page-header-responsive"
                         onBack={() => window.location.hash = "#/"}
                         title="Video"
-                        // extra={[
-                        //     <Button key="1" type="primary">
-                        //         Primary
-                        //     </Button>,
-                        // ]}
                     >
                         <Row gutter={16}>
                             <Col span={24}>
@@ -68,6 +63,7 @@ class Video extends Component {
                             {this.state.approvedVideos.length > 0 ? this.state.approvedVideos.map((item, k) => {
                                 return <Col span={8} key={k}>
                                     <Card
+                                        id={'video-card-' + k}
                                         style={{width: 300}}
                                         cover={
                                             <Image
@@ -114,7 +110,9 @@ class Video extends Component {
                                         />
                                     </Card>
                                 </Col>
-                            }) : <Col span={24}><Empty description={"No Video found"}><Button type="primary" onClick={event => window.location.hash = "#/upload"}><CloudUploadOutlined/> Upload Video</Button></Empty></Col>}
+                            }) : <Col span={24}><Empty description={"No Video found"}><Button type="primary"
+                                                                                              onClick={event => window.location.hash = "#/upload"}><CloudUploadOutlined/> Upload
+                                Video</Button></Empty></Col>}
                         </Row>
                         <Divider/>
                         <Row gutter={16}>
@@ -175,7 +173,7 @@ class Video extends Component {
                                         />
                                     </Card>
                                 </Col>
-                            }) : <Col span={24}><Empty description={"No Pending Video found"} /></Col>}
+                            }) : <Col span={24}><Empty description={"No Pending Video found"}/></Col>}
                         </Row>
                     </PageHeader>
                 </div>
