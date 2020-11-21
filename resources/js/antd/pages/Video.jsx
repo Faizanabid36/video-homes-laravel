@@ -61,9 +61,8 @@ class Video extends Component {
                         <Divider/>
                         <Row gutter={16}>
                             {this.state.approvedVideos.length > 0 ? this.state.approvedVideos.map((item, k) => {
-                                return <Col span={8} key={k}>
+                                return <Col id={'video-card-' + k} span={8} key={k}>
                                     <Card
-                                        id={'video-card-' + k}
                                         style={{width: 300}}
                                         cover={
                                             <Image
