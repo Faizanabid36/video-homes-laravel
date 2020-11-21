@@ -31,13 +31,15 @@ class Video extends Component {
     }
 
     deleteVideo(id) {
-        axios.delete('video/' + id)
-            .then((res) => {
-                document.getElementById(`video-card-${id}`).remove()
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+        let el = document.getElementById(`video-card-${id}`)
+        console.log(el)
+        // axios.delete('video/' + id)
+        //     .then((res) => {
+        //         document.getElementById(`video-card-${id}`).remove()
+        //     })
+        //     .catch((err) => {
+        //         console.log(err)
+        //     })
     }
 
     componentDidMount() {
@@ -61,7 +63,7 @@ class Video extends Component {
                         <Divider/>
                         <Row gutter={16}>
                             {this.state.approvedVideos.length > 0 ? this.state.approvedVideos.map((item, k) => {
-                                return <Col id={'video-card-' + k} span={8} key={k}>
+                                return <Col id={'video-card-' + item.id} span={8} key={k}>
                                     <Card
                                         style={{width: 300}}
                                         cover={
