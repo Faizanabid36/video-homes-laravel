@@ -265,7 +265,7 @@
                 </div>
                 <div class="clear"></div>
             </div>
-          
+
         </div>
 
 
@@ -357,20 +357,24 @@
                                aria-controls="home" aria-selected="true">Map</a>
                         </li>
                     @endif
-                  
+
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab"
-                           aria-controls="reviews" aria-selected="false">Reviews</a>
+                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                           aria-controls="contact" aria-selected="false">Review</a>
                     </li>
-                  
-                    
+
+
                 </ul>
                 <div class="tab-content p-3 card">
                     @if(isset($user->user_extra->address))
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <!-- <div id="map"></div> -->
                             @if(!is_null($video->video_location))
-                            <div style="width: 100%"><iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q={{$video->video_location}}&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe></div>
+                                <div style="width: 100%">
+                                    <iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0"
+                                            marginwidth="0"
+                                            src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q={{$video->video_location}}&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+                                </div>
                             @endif
                         </div>
                     @endif
@@ -522,7 +526,7 @@
                     <!-- reviews end -->
                     <!-- Contact -->
                     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                        <h1 class="my-3 font-weight-bold"> Contact to {{$user->name}} </h1>
+                        <h1 class="my-3 font-weight-bold"> Review for {{$user->name}} </h1>
                         @if(auth()->check() && $video && ($video->user_id!=auth()->id()))
                             <form method="POST" action="{{route('to_user')}}">
                                 @csrf

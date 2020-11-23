@@ -225,7 +225,7 @@
                                         Playlist: <a
                                             href="{{route('playlist_videos',$video->playlist_id).'?v='.$video->video_id}}"> {{$video->playlist->name}}</a>
                                         <br>
-                                        <a href="{{route('playlist').'?v='.$video->video_id}}">Single Page</a>
+                                        <a href="{{route('playlist').'?v='.$video->video_id}}">Single Video Page</a>
 
                                         <br>
                                     </div>
@@ -416,13 +416,13 @@
                                aria-controls="profile" aria-selected="false">Bio</a>
                         </li>
                     @endif
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab"
-                           aria-controls="reviews" aria-selected="false">Reviews</a>
-                    </li>
+{{--                    <li class="nav-item" role="presentation">--}}
+{{--                        <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab"--}}
+{{--                           aria-controls="reviews" aria-selected="false">Reviews</a>--}}
+{{--                    </li>--}}
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
-                           aria-controls="contact" aria-selected="false">Contact</a>
+                           aria-controls="contact" aria-selected="false">Review</a>
                     </li>
                     <li class="nav-item" role="Report">
                         <a class="nav-link" id="contact-tab" data-toggle="tab" href="#report_message" role="tab"
@@ -438,152 +438,152 @@
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <p>{!! $user->user_extra->bio !!}</p>
                     </div>
-                    <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+{{--                    <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">--}}
 
-                        @if(auth()->check() && $video && ($video->user_id!=auth()->id()))
-                            <button class="btn btn-primary my-3" data-toggle="modal" data-target="#review"> Add Review
-                            </button>
-                            <div class="modal fade" id="review" tabindex="-1" role="dialog"
-                                 aria-labelledby="reportTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLongTitle">Add Review</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form method="POST" action="{{route('to_user')}}">
-                                                @csrf
-                                                <input type="hidden" name="type" value="rating">
-                                                <input type="hidden" name="video_id" value="{{$video->id}}">
-                                                <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">
-                                                <input type="hidden" name="reply_user_id" value="{{$video->user_id}}">
+{{--                        @if(auth()->check() && $video && ($video->user_id!=auth()->id()))--}}
+{{--                            <button class="btn btn-primary my-3" data-toggle="modal" data-target="#review"> Add Review--}}
+{{--                            </button>--}}
+{{--                            <div class="modal fade" id="review" tabindex="-1" role="dialog"--}}
+{{--                                 aria-labelledby="reportTitle" aria-hidden="true">--}}
+{{--                                <div class="modal-dialog modal-dialog-centered" role="document">--}}
+{{--                                    <div class="modal-content">--}}
+{{--                                        <div class="modal-header">--}}
+{{--                                            <h5 class="modal-title" id="exampleModalLongTitle">Add Review</h5>--}}
+{{--                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
+{{--                                                <span aria-hidden="true">&times;</span>--}}
+{{--                                            </button>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="modal-body">--}}
+{{--                                            <form method="POST" action="{{route('to_user')}}">--}}
+{{--                                                @csrf--}}
+{{--                                                <input type="hidden" name="type" value="rating">--}}
+{{--                                                <input type="hidden" name="video_id" value="{{$video->id}}">--}}
+{{--                                                <input type="hidden" name="contact_user_id" value="{{auth()->id()}}">--}}
+{{--                                                <input type="hidden" name="reply_user_id" value="{{$video->user_id}}">--}}
 
-                                                <div class="form-group">
-                                                    <label for="contact_message2">Message Text</label>
-                                                    <textarea name="message" required class="form-control"
-                                                              id="contact_message2" rows="3"></textarea>
-                                                    <div class="text-right">
-                                                        <input type="hidden" id="rating_input" name="rating" value="1">
-                                                        <span class="float-right">
-                                                            <i data-value="1" class="text-secondary fa fa-star"></i>
-                                                            <i data-value="2" class="text-secondary fa fa-star"></i>
-                                                            <i data-value="3" class="text-secondary fa fa-star"></i>
-                                                            <i data-value="4" class="text-secondary fa fa-star"></i>
-                                                            <i data-value="5" class="text-secondary fa fa-star"></i>
-                                                        </span>
-                                                    </div>
-                                                </div>
+{{--                                                <div class="form-group">--}}
+{{--                                                    <label for="contact_message2">Message Text</label>--}}
+{{--                                                    <textarea name="message" required class="form-control"--}}
+{{--                                                              id="contact_message2" rows="3"></textarea>--}}
+{{--                                                    <div class="text-right">--}}
+{{--                                                        <input type="hidden" id="rating_input" name="rating" value="1">--}}
+{{--                                                        <span class="float-right">--}}
+{{--                                                            <i data-value="1" class="text-secondary fa fa-star"></i>--}}
+{{--                                                            <i data-value="2" class="text-secondary fa fa-star"></i>--}}
+{{--                                                            <i data-value="3" class="text-secondary fa fa-star"></i>--}}
+{{--                                                            <i data-value="4" class="text-secondary fa fa-star"></i>--}}
+{{--                                                            <i data-value="5" class="text-secondary fa fa-star"></i>--}}
+{{--                                                        </span>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
 
-                                                <button class="btn btn-primary">Add Review</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @else
-                            <a href="{{route('login')}}" class="btn btn-info text-white">Login to Add Review</a>
-                        @endif
-                        <div class="row">
-                            <div class="col-4 rating-star-field">
-                                <div class="d-flex align-items-center my-2">
-                                    <span><i class="text-success fa fa-star"></i> 5 </span>
-                                    <div class="progress w-75 ml-3">
-                                        <div class="progress-bar bg-success" role="progressbar"
-                                             style="width: {{$rating[5]}}%"
-                                             aria-valuenow="{{$rating[5]}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center my-2">
-                                    <span><i class="text-info fa fa-star"></i> 4 </span>
-                                    <div class="progress w-75 ml-3">
-                                        <div class="progress-bar bg-info" role="progressbar"
-                                             style="width: {{$rating[4]}}%"
-                                             aria-valuenow="{{$rating[4]}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-warning-center my-2">
-                                    <span><i class="text-warning fa fa-star"></i> 3 </span>
-                                    <div class="progress w-75 ml-3">
-                                        <div class="progress-bar bg-warning" role="progressbar"
-                                             style="width: {{$rating[3]}}%"
-                                             aria-valuenow="{{$rating[3]}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center my-2">
-                                    <span><i class="text-danger fa fa-star"></i> 2 </span>
-                                    <div class="progress w-75 ml-3">
-                                        <div class="progress-bar bg-danger" role="progressbar"
-                                             style="width: {{$rating[2]}}%"
-                                             aria-valuenow="{{$rating[2]}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center my-2">
-                                    <span><i class="text-danger fa fa-star"></i> 1 </span>
-                                    <div class="progress w-75 ml-3">
-                                        <div class="progress-bar bg-danger" role="progressbar"
-                                             style="width: {{$rating[1]}}%"
-                                             aria-valuenow="{{$rating[1]}}" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-8">
-                                <div class="container-fluid px-0 mx-auto">
-                                    <div class="row justify-content-center mx-0 mx-md-auto">
-                                        <div class="col-lg-10 col-md-11 px-1 px-sm-2">
-                                            <div class="card border-0 px-3">
-                                                <!-- top row -->
-                                                @if(count($ratings)>0)
-                                                    @foreach($ratings as $ratin)
-                                                        <div class="review">
-                                                            <div class="row d-flex">
-                                                                <div class="profile-pic">
-                                                                    <img
-                                                                        style="border-radius: 50%"
-                                                                        src="{{$ratin['avatar']}}" width="60px"
-                                                                        height="60px">
-                                                                </div>
-                                                                <div class="d-flex flex-column pl-3">
-                                                                    <h4>{{$ratin['name']}}</h4>
-                                                                    <p class="grey-text">{{\Carbon\Carbon::parse($ratin['time'])->diffForHumans()}}</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row pb-3">
-                                                                @for($x=1;$x<=$ratin['rating'] ;$x++)
-                                                                    <div style="color: #4CAF50;font-size: 10px;"
-                                                                         class="fa fa-star green-dot my-auto rating-dot"></div>
+{{--                                                <button class="btn btn-primary">Add Review</button>--}}
+{{--                                            </form>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        @else--}}
+{{--                            <a href="{{route('login')}}" class="btn btn-info text-white">Login to Add Review</a>--}}
+{{--                        @endif--}}
+{{--                        <div class="row">--}}
+{{--                            <div class="col-4 rating-star-field">--}}
+{{--                                <div class="d-flex align-items-center my-2">--}}
+{{--                                    <span><i class="text-success fa fa-star"></i> 5 </span>--}}
+{{--                                    <div class="progress w-75 ml-3">--}}
+{{--                                        <div class="progress-bar bg-success" role="progressbar"--}}
+{{--                                             style="width: {{$rating[5]}}%"--}}
+{{--                                             aria-valuenow="{{$rating[5]}}" aria-valuemin="0" aria-valuemax="100"></div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="d-flex align-items-center my-2">--}}
+{{--                                    <span><i class="text-info fa fa-star"></i> 4 </span>--}}
+{{--                                    <div class="progress w-75 ml-3">--}}
+{{--                                        <div class="progress-bar bg-info" role="progressbar"--}}
+{{--                                             style="width: {{$rating[4]}}%"--}}
+{{--                                             aria-valuenow="{{$rating[4]}}" aria-valuemin="0" aria-valuemax="100"></div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="d-flex align-warning-center my-2">--}}
+{{--                                    <span><i class="text-warning fa fa-star"></i> 3 </span>--}}
+{{--                                    <div class="progress w-75 ml-3">--}}
+{{--                                        <div class="progress-bar bg-warning" role="progressbar"--}}
+{{--                                             style="width: {{$rating[3]}}%"--}}
+{{--                                             aria-valuenow="{{$rating[3]}}" aria-valuemin="0" aria-valuemax="100"></div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="d-flex align-items-center my-2">--}}
+{{--                                    <span><i class="text-danger fa fa-star"></i> 2 </span>--}}
+{{--                                    <div class="progress w-75 ml-3">--}}
+{{--                                        <div class="progress-bar bg-danger" role="progressbar"--}}
+{{--                                             style="width: {{$rating[2]}}%"--}}
+{{--                                             aria-valuenow="{{$rating[2]}}" aria-valuemin="0" aria-valuemax="100"></div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="d-flex align-items-center my-2">--}}
+{{--                                    <span><i class="text-danger fa fa-star"></i> 1 </span>--}}
+{{--                                    <div class="progress w-75 ml-3">--}}
+{{--                                        <div class="progress-bar bg-danger" role="progressbar"--}}
+{{--                                             style="width: {{$rating[1]}}%"--}}
+{{--                                             aria-valuenow="{{$rating[1]}}" aria-valuemin="0" aria-valuemax="100"></div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="col-8">--}}
+{{--                                <div class="container-fluid px-0 mx-auto">--}}
+{{--                                    <div class="row justify-content-center mx-0 mx-md-auto">--}}
+{{--                                        <div class="col-lg-10 col-md-11 px-1 px-sm-2">--}}
+{{--                                            <div class="card border-0 px-3">--}}
+{{--                                                <!-- top row -->--}}
+{{--                                                @if(count($ratings)>0)--}}
+{{--                                                    @foreach($ratings as $ratin)--}}
+{{--                                                        <div class="review">--}}
+{{--                                                            <div class="row d-flex">--}}
+{{--                                                                <div class="profile-pic">--}}
+{{--                                                                    <img--}}
+{{--                                                                        style="border-radius: 50%"--}}
+{{--                                                                        src="{{$ratin['avatar']}}" width="60px"--}}
+{{--                                                                        height="60px">--}}
+{{--                                                                </div>--}}
+{{--                                                                <div class="d-flex flex-column pl-3">--}}
+{{--                                                                    <h4>{{$ratin['name']}}</h4>--}}
+{{--                                                                    <p class="grey-text">{{\Carbon\Carbon::parse($ratin['time'])->diffForHumans()}}</p>--}}
+{{--                                                                </div>--}}
+{{--                                                            </div>--}}
+{{--                                                            <div class="row pb-3">--}}
+{{--                                                                @for($x=1;$x<=$ratin['rating'] ;$x++)--}}
+{{--                                                                    <div style="color: #4CAF50;font-size: 10px;"--}}
+{{--                                                                         class="fa fa-star green-dot my-auto rating-dot"></div>--}}
 
-                                                                @endfor
-                                                                <div class="green-text">
-                                                                    <h5 class="mb-0 pl-3">
-                                                                        {{$ratin['review']}}
-                                                                    </h5>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <hr>
-                                                    @endforeach
-                                                @else
-                                                    <div class="text-center">
-                                                        <h3>
-                                                            No one has left a review yet.
-                                                        </h3>
-                                                    </div>
-                                                @endif
+{{--                                                                @endfor--}}
+{{--                                                                <div class="green-text">--}}
+{{--                                                                    <h5 class="mb-0 pl-3">--}}
+{{--                                                                        {{$ratin['review']}}--}}
+{{--                                                                    </h5>--}}
+{{--                                                                </div>--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                        <hr>--}}
+{{--                                                    @endforeach--}}
+{{--                                                @else--}}
+{{--                                                    <div class="text-center">--}}
+{{--                                                        <h3>--}}
+{{--                                                            No one has left a review yet.--}}
+{{--                                                        </h3>--}}
+{{--                                                    </div>--}}
+{{--                                                @endif--}}
 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                     <!-- reviews end -->
                     <!-- Contact -->
                     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                        <h1 class="my-3 font-weight-bold"> Contact to {{$user->name}} </h1>
+                        <h1 class="my-3 font-weight-bold"> Review for {{$user->name}} </h1>
                         @if(auth()->check() && $video && ($video->user_id!=auth()->id()))
                             <form method="POST" action="{{route('to_user')}}">
                                 @csrf
