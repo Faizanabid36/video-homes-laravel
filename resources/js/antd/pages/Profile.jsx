@@ -182,7 +182,7 @@ class Profile extends Component {
                     let {user} = self.state;
                     if (user[key]) {
                         user[key] = imageUrl;
-                        message.success(key.replace("_"," ")+" has been updated");
+                        message.success(key.replace("_", " ") + " has been updated");
                         self.setState({
                             user,
                             loading: false,
@@ -192,8 +192,6 @@ class Profile extends Component {
             );
         }
     };
-
-
 
 
     componentDidMount() {
@@ -237,7 +235,7 @@ class Profile extends Component {
                         onBack={() => null}
                         title="Profile"
                     >
-                        <Spin spinning={!this.state.dataloading} tip={'Loading'} />
+                        <Spin spinning={!this.state.dataloading} tip={'Loading'}/>
                         {this.state.dataloading && <Form
                             ref={this.formRef} name="control-ref" onFinish={this.onFinish}
                             layout="vertical"
@@ -369,8 +367,9 @@ class Profile extends Component {
                                     </Form.Item>
                                     <Form.Item label="Profession and Expertise">
                                         {this.state.categories.length > 0 && <>
-                                            <Select defaultValue={this.defaultValue('user_category_id')} showSearch name="user_category_id"
-                                                    onChange={e=>this.handleChangeInput(e,'user_category_id')}
+                                            <Select defaultValue={this.defaultValue('user_category_id')} showSearch
+                                                    name="user_category_id"
+                                                    onChange={e => this.handleChangeInput(e, 'user_category_id')}
                                                     placeholder="Choose one of the following Profession and Expertise...">
                                                 {this.state.categories.map((u, key) => u['children'].length > 0 &&
                                                     <Select.OptGroup key={key} label={u['name']}>
@@ -387,7 +386,7 @@ class Profile extends Component {
                                         </>}
                                     </Form.Item>
                                     <Form.Item label="Profile">
-                                    <ImgCrop modalTitle='Profile Picture' rotate zoom  minZoom={0.1} cropperProps={{step:0.1,minZoom:0.1}}>
+                                        <ImgCrop modalTitle='Profile Picture' rotate zoom grid>
                                             <Upload
                                                 headers={{'X-CSRF-TOKEN': window.document.head.querySelector('meta[name="csrf-token"]').content}}
                                                 action={`${window.VIDEO_APP.base_url}/profile`}
@@ -409,7 +408,7 @@ class Profile extends Component {
 
                                     </Form.Item>
                                     <Form.Item label="Company Logo">
-                                        <ImgCrop modalTitle='Company Logo' rotate zoom minZoom={0.1} cropperProps={{step:0.1,minZoom:0.1}}>
+                                        <ImgCrop modalTitle='Company Logo' rotate zoom grid>
                                             <Upload
                                                 headers={{'X-CSRF-TOKEN': window.document.head.querySelector('meta[name="csrf-token"]').content}}
                                                 action={`${window.VIDEO_APP.base_url}/profile`}
@@ -483,11 +482,11 @@ class Profile extends Component {
                                         okText="Yes"
                                         cancelText="No"
                                     >
-                                    <Button danger onClick={e=>{
-                                        axios.delete("profile/1").then(({})=>{
-                                            $("#logout-form").submit();
-                                        })
-                                    }}>Delete Account</Button>
+                                        <Button danger onClick={e => {
+                                            axios.delete("profile/1").then(({}) => {
+                                                $("#logout-form").submit();
+                                            })
+                                        }}>Delete Account</Button>
                                     </Popconfirm>
                                 </TabPane>
                             </Tabs>
