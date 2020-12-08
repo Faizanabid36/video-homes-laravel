@@ -110,7 +110,7 @@ const ImgCrop = forwardRef((props, ref) => {
     shape,
     grid,
     quality,
-
+    aspectNew,
     zoom,
     rotate,
     minZoom,
@@ -327,7 +327,7 @@ const ImgCrop = forwardRef((props, ref) => {
           <EasyCrop
             ref={ref}
             src={src}
-            aspect={aspect}
+            aspect={xVal / yVal}
             shape={shape}
             grid={grid}
             hasZoom={hasZoom}
@@ -433,7 +433,7 @@ ImgCrop.propTypes = {
   minZoom: t.number,
   maxZoom: t.number,
   fillColor: t.string,
-  aspect: t.bool,
+  aspectNew: t.bool,
 
   modalTitle: t.string,
   modalWidth: t.oneOfType([t.number, t.string]),
