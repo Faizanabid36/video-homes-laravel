@@ -6,6 +6,7 @@ import Modal from 'antd/es/modal';
 import Slider from 'antd/es/slider';
 import './Crop.css';
 
+
 const pkg = 'antd-img-crop';
 const noop = () => {};
 
@@ -36,6 +37,7 @@ const EasyCrop = forwardRef((props, ref) => {
 
     cropperProps,
   } = props;
+
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [cropSize, setCropSize] = useState({ width: 0, height: 0 });
 
