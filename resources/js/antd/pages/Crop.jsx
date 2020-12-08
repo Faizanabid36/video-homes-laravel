@@ -345,7 +345,7 @@ const ImgCrop = forwardRef((props, ref) => {
           {aspectNew && (
             <div className={`${pkg}-control zoom`}>
               <button onClick={subXVal}>
-                X Axies －
+                X－
               </button>
               <Slider
                 min={1}
@@ -355,14 +355,14 @@ const ImgCrop = forwardRef((props, ref) => {
                 onChange={setXVal}
               />
               <button onClick={addXVal}>
-                ＋
+                ＋X
               </button>
             </div>
           )}
           {aspectNew && (
             <div className={`${pkg}-control zoom`}>
               <button onClick={subYVal}>
-                Y Axies －
+                Y－
               </button>
               <Slider
                 min={1}
@@ -372,7 +372,7 @@ const ImgCrop = forwardRef((props, ref) => {
                 onChange={setYVal}
               />
               <button onClick={addYVal}>
-                ＋
+                ＋Y
               </button>
             </div>
           )}
