@@ -20,7 +20,7 @@ const ROTATE_STEP = 1;
 const EasyCrop = forwardRef((props, ref) => {
   const {
     src,
-    aspectNew,
+    aspect,
     shape,
     grid,
 
