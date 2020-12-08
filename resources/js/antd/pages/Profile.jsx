@@ -82,6 +82,8 @@ class Profile extends Component {
     constructor(props) {
         super(...arguments);
         this.state = {
+            x:1,
+            y:2,
             dataloading: false,
             loading: false,
             user: {},
@@ -386,7 +388,7 @@ class Profile extends Component {
                                         </>}
                                     </Form.Item>
                                     <Form.Item label="Profile">
-                                        <ImgCrop modalTitle='Profile Picture' rotate zoom minZoom={0.1} cropperProps={{step:0.1,minZoom:0.1}}>
+                                        <ImgCrop modalTitle='Profile Picture' rotate aspect={this.state.x / this.state.y} zoom minZoom={0.1} cropperProps={{step:0.1,minZoom:0.1}}>
                                             <Upload
                                                 headers={{'X-CSRF-TOKEN': window.document.head.querySelector('meta[name="csrf-token"]').content}}
                                                 action={`${window.VIDEO_APP.base_url}/profile`}
@@ -403,12 +405,30 @@ class Profile extends Component {
                                                 </> : uploadButton}
 
                                             </Upload>
+                                            <Form.Item Label="X Axies">
+                                            <Slider
+            min={0}
+            max={1}
+            onChange={x=>this.setState({x})}
+            defaultValue={1}
+            step={0.01}
+          />
+                                            </Form.Item>
+                                            <Form.Item Label="Y Axies">
+                                            <Slider
+            min={0}
+            max={1}
+            onChange={y=>this.setState({y})}
+            defaultValue={2}
+            step={0.01}
+          />
+                                            </Form.Item>
                                         </ImgCrop>
 
 
                                     </Form.Item>
                                     <Form.Item label="Company Logo">
-                                        <ImgCrop modalTitle='Company Logo' rotate zoom minZoom={0.1} cropperProps={{step:0.1,minZoom:0.1}}>
+                                        <ImgCrop modalTitle='Company Logo' rotate aspect={this.state.x / this.state.y} zoom minZoom={0.1} cropperProps={{step:0.1,minZoom:0.1}}>
                                             <Upload
                                                 headers={{'X-CSRF-TOKEN': window.document.head.querySelector('meta[name="csrf-token"]').content}}
                                                 action={`${window.VIDEO_APP.base_url}/profile`}
@@ -425,6 +445,24 @@ class Profile extends Component {
                                                 </> : uploadButton}
 
                                             </Upload>
+                                            <Form.Item Label="X Axies">
+                                            <Slider
+            min={0}
+            max={1}
+            onChange={x=>this.setState({x})}
+            defaultValue={1}
+            step={0.01}
+          />
+                                            </Form.Item>
+                                            <Form.Item Label="Y Axies">
+                                            <Slider
+            min={0}
+            max={1}
+            onChange={y=>this.setState({y})}
+            defaultValue={2}
+            step={0.01}
+          />
+                                            </Form.Item>
                                         </ImgCrop>
                                     </Form.Item>
                                     <Button onClick={(e) => {
