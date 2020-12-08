@@ -200,13 +200,13 @@ const ImgCrop = forwardRef((props, ref) => {
     if(xVal < 11) setXVal(xVal - 1);
   }, [xVal]);
   const addXVal = useCallback(() => {
-    if(xVal > 1) setXVal(xVal + 1);
+    if(xVal > 0) setXVal(xVal + 1);
   }, [xVal]);
   const subYVal = useCallback(() => {
     if(yVal < 11) setYVal(yVal - 1);
   }, [yVal]);
   const addYVal = useCallback(() => {
-    if(yVal > 1) setYVal(yVal + 1);
+    if(yVal > 0) setYVal(yVal + 1);
   }, [yVal]);
 
   const subZoomVal = useCallback(() => {
@@ -311,7 +311,7 @@ const ImgCrop = forwardRef((props, ref) => {
       quality
     );
   }, [hasRotate, onClose, quality, rotateVal]);
-
+console.log(xVal / yVal);
   const renderComponent = (titleOfModal) => (
     <>
       {renderUpload()}
