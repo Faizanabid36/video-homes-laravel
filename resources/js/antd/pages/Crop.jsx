@@ -135,7 +135,7 @@ const ImgCrop = forwardRef((props, ref) => {
 
   const [src, setSrc] = useState('');
   const [xVal, setXVal] = useState(1);
-  const [yVal, setYVal] = useState(1);
+  const [yVal, setYVal] = useState(2);
   const [zoomVal, setZoomVal] = useState(1);
   const [rotateVal, setRotateVal] = useState(0);
 

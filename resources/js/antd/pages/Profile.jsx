@@ -405,24 +405,7 @@ class Profile extends Component {
                                                 </> : uploadButton}
 
                                             </Upload>
-                                            <Form.Item Label="X Axies">
-                                            <Slider
-            min={0}
-            max={1}
-            onChange={x=>this.setState({x})}
-            defaultValue={1}
-            step={0.01}
-          />
-                                            </Form.Item>
-                                            <Form.Item Label="Y Axies">
-                                            <Slider
-            min={0}
-            max={1}
-            onChange={y=>this.setState({y})}
-            defaultValue={2}
-            step={0.01}
-          />
-                                            </Form.Item>
+
                                         </ImgCrop>
 
 
