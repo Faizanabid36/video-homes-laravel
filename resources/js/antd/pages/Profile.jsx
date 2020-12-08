@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import {Slider, Button, Form, Input, Layout, message, PageHeader, Popconfirm, Select, Spin, Table, Tabs, Upload} from 'antd';
 import MaskedInput from 'antd-mask-input'
-import ImgCrop from 'antd-img-crop';
+import ImgCrop from './Crop';
 import GooglePlacesAutocomplete, {geocodeByAddress} from "react-google-places-autocomplete";
 
 import {LoadingOutlined, PlusOutlined, UserOutlined} from '@ant-design/icons';
@@ -388,7 +388,7 @@ class Profile extends Component {
                                         </>}
                                     </Form.Item>
                                     <Form.Item label="Profile">
-                                        <ImgCrop modalTitle='Profile Picture' rotate aspect={this.state.x / this.state.y} zoom minZoom={0.1} cropperProps={{step:0.1,minZoom:0.1}}>
+                                        <ImgCrop modalTitle='Profile Picture' rotate aspectNew zoom minZoom={0.1} cropperProps={{step:0.1,minZoom:0.1}}>
                                             <Upload
                                                 headers={{'X-CSRF-TOKEN': window.document.head.querySelector('meta[name="csrf-token"]').content}}
                                                 action={`${window.VIDEO_APP.base_url}/profile`}
@@ -428,7 +428,7 @@ class Profile extends Component {
 
                                     </Form.Item>
                                     <Form.Item label="Company Logo">
-                                        <ImgCrop modalTitle='Company Logo' rotate aspect={this.state.x / this.state.y} zoom minZoom={0.1} cropperProps={{step:0.1,minZoom:0.1}}>
+                                        <ImgCrop modalTitle='Company Logo' rotate aspectNew zoom minZoom={0.1} cropperProps={{step:0.1,minZoom:0.1}}>
                                             <Upload
                                                 headers={{'X-CSRF-TOKEN': window.document.head.querySelector('meta[name="csrf-token"]').content}}
                                                 action={`${window.VIDEO_APP.base_url}/profile`}
