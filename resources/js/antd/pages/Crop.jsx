@@ -349,8 +349,8 @@ console.log(xVal / yVal);
               </button>
               <Slider
                 min={1}
-                max={10}
-                step={0.1}
+                max={6}
+                
                 value={xVal}
                 onChange={setXVal}
               />
@@ -366,8 +366,7 @@ console.log(xVal / yVal);
               </button>
               <Slider
                 min={1}
-                max={10}
-                step={0.1}
+                max={6}
                 value={yVal}
                 onChange={setYVal}
               />
