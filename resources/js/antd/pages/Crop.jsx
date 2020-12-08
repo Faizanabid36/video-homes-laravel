@@ -37,7 +37,7 @@ const EasyCrop = forwardRef((props, ref) => {
 
     cropperProps,
   } = props;
-
+console.log(aspect,"props");
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [cropSize, setCropSize] = useState({ width: 0, height: 0 });
 
@@ -311,7 +311,6 @@ const ImgCrop = forwardRef((props, ref) => {
       quality
     );
   }, [hasRotate, onClose, quality, rotateVal]);
-console.log(xVal / yVal);
   const renderComponent = (titleOfModal) => (
     <>
       {renderUpload()}
