@@ -68,7 +68,7 @@ class VideosController extends Controller
         request()->video->storeAs('public/uploads/', $file);
         $path = 'public/uploads/' . $file;
         $media = \FFMpeg::open($path);
-        $videostream = $media->getStreams()->videos()->first();
+        $videostream = $media->getStreams()->first();
         $angle = getVideoRotation($videostream);
         Log::info("Rotation: $angle");
         $dimension = $videostream->getDimensions();

@@ -57,10 +57,17 @@ class ProfileController extends Controller
 
             return response(array('status' => $user_extra->update(array('company_logo' => asset("storage/$full_path")))));
         }
+
         if (request('profile_picture')) {
             dd($request->all());
-            Image::make(\request('newFile'))
-                ->save(public_path('/images/resized_image/' . $filename));
+            $image = request( 'profile_picture' );
+            $name  = time() . '.' . explode( '/', explode( ':', substr( $image, 0, strpos( $image, ';' ) ) )[1] )[1];
+            \Image::make( $image )->save( public_path( "form_assets/images/" ) . $name );
+//            Image::make(\request('newFile'))
+//                ->save(public_path('/images/resized_image/' . $filename));
+
+
+
             $full_path = (request()->file('profile_picture'))->store($path, array('disk' => 'public'));
             return response(array('status' => $user_extra->update(array('profile_picture' => asset("storage/$full_path")))));
         }
