@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Video;
+use Exception;
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Filters\Video\RotateFilter;
 use FFMpeg\Format\Video\X264;
@@ -56,8 +57,14 @@ class ConvertVideoForStreaming implements ShouldQueue {
 				'file_path' => $this->video->stream_path . "_{$this->height}p_converted.mp4",
 			)
 		);
-
-		$video->export()->inFormat( $lowBitrateFormat )->save( getCleanFileName( $this->video->video_path, "_{$this->height}p_converted.mp4" ) );
+		try {
+			$video->export()->inFormat( $lowBitrateFormat )->save( getCleanFileName( $this->video->video_path, "_{$this->height}p_converted.mp4" ) );
+		} catch ( Exception $e ) {
+			Log::error(
+				$e->getMessage(),
+				$e
+			);
+		}
 
 		Log::info(
 			'CHECKING UPDATE VARIABLE ON VIDEO',
