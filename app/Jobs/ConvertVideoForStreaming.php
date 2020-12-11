@@ -61,8 +61,8 @@ class ConvertVideoForStreaming implements ShouldQueue {
 			$video->export()->inFormat( $lowBitrateFormat )->save( getCleanFileName( $this->video->video_path, "_{$this->height}p_converted.mp4" ) );
 		} catch ( Exception $e ) {
 			Log::error(
-				$e->getMessage(),
-				$e
+				'JOB Export Error!!!!!!!!',
+				$e->getMessage()
 			);
 		}
 
