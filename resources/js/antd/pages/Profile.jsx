@@ -101,7 +101,6 @@ class Profile extends Component {
             crop: {
                 unit: '%',
                 width: 30,
-                aspect: 16 / 9,
             },
             x: 1,
             y: 2,
