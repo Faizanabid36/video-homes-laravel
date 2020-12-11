@@ -6,265 +6,280 @@ use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Format\Video\X264;
 
 if ( ! function_exists( 'dashboardChart' ) ) {
-    function dashboardChart($labels, $label, $data, $showBorder = false)
-    {
-        $Data = [];
-        $Data['labels'] = $labels;
-        $datasets['data'] = $data;
-        $datasets['label'] = $label;
-        if ($showBorder) {
-            $datasets['backgroundColor'] = [
-                'rgb(255, 102, 102)',
-                'rgb(209, 71, 163)'
-            ];
-            $datasets['borderColor'] = [
-                'rgb(255, 102, 102)',
-                'rgb(209, 71, 163)'
-            ];
-            $datasets['borderWidth'] = 2;
-        }
-        $Data['datasets'] = [ $datasets ];
+	function dashboardChart( $labels, $label, $data, $showBorder = false ) {
+		$Data              = array();
+		$Data['labels']    = $labels;
+		$datasets['data']  = $data;
+		$datasets['label'] = $label;
+		if ( $showBorder ) {
+			$datasets['backgroundColor'] = array(
+				'rgb(255, 102, 102)',
+				'rgb(209, 71, 163)',
+			);
+			$datasets['borderColor']     = array(
+				'rgb(255, 102, 102)',
+				'rgb(209, 71, 163)',
+			);
+			$datasets['borderWidth']     = 2;
+		}
+		$Data['datasets'] = array( $datasets );
 
-        return $Data;
-    }
+		return $Data;
+	}
 }
 
 if ( ! function_exists( 'saveVideoByResolution' ) ) {
-    function saveVideoByResolution( $path, $width, $height, $bitrate = '500' ) {
-        // set the quality
-        $savePath         = getCleanFileName( $path, "_${height}p_converted.mp4" );
-        $video            = \FFMpeg::open( $path );
-        $lowBitrateFormat = ( new X264( 'aac', 'libx264' ) )->setKiloBitrate( $bitrate );
-        $video
-            ->addFilter( function ( $filters ) use ( $width, $height ) {
-                $filters->resize( new Dimension( $width, $height ) );
-            } )
-            ->export()
-            ->inFormat( $lowBitrateFormat );
-        $video->save( $savePath );
+	function saveVideoByResolution( $path, $width, $height, $bitrate = '500' ) {
+		// set the quality
+		$savePath         = getCleanFileName( $path, "_${height}p_converted.mp4" );
+		$video            = \FFMpeg::open( $path );
+		$lowBitrateFormat = ( new X264( 'aac', 'libx264' ) )->setKiloBitrate( $bitrate );
+		$video
+			->addFilter(
+				function ( $filters ) use ( $width, $height ) {
+					$filters->resize( new Dimension( $width, $height ) );
+				}
+			)
+			->export()
+			->inFormat( $lowBitrateFormat );
+		$video->save( $savePath );
 
-        return $savePath;
-    }
+		return $savePath;
+	}
 }
-//libmp3lame
+// libmp3lame
 if ( ! function_exists( 'saveVideoStream' ) ) {
-    function saveVideoStream( $path, $width, $height, $bitrate = '500' ) {
-        // set the quality
-        $savePath         = getCleanFileName( $path, "_${height}p_converted.mp4" );
-        $video            = \FFMpeg::open( $path );
-        $lowBitrateFormat = ( new X264( 'aac', 'libx264' ) )->setKiloBitrate( $bitrate );
-        $video
-            ->addFilter( function ( $filters ) use ( $width, $height ) {
-                $filters->resize( new Dimension( $width, $height ) );
-            } )
-            ->export()
-            ->inFormat( $lowBitrateFormat );
-        $video->save( $savePath );
+	function saveVideoStream( $path, $width, $height, $bitrate = '500' ) {
+		// set the quality
+		$savePath         = getCleanFileName( $path, "_${height}p_converted.mp4" );
+		$video            = \FFMpeg::open( $path );
+		$lowBitrateFormat = ( new X264( 'aac', 'libx264' ) )->setKiloBitrate( $bitrate );
+		$video
+			->addFilter(
+				function ( $filters ) use ( $width, $height ) {
+					$filters->resize( new Dimension( $width, $height ) );
+				}
+			)
+			->export()
+			->inFormat( $lowBitrateFormat );
+		$video->save( $savePath );
 
-        return $savePath;
-    }
+		return $savePath;
+	}
 }
 
 if ( ! function_exists( 'getCleanFileName' ) ) {
-    function getCleanFileName( $filename, $suffix = '.mp4' ): string {
-        return preg_replace( '/\.[^.\s]{3,4}$/', $suffix, $filename );
-    }
+	function getCleanFileName( $filename, $suffix = '.mp4' ): string {
+		return preg_replace( '/\.[^.\s]{3,4}$/', $suffix, $filename );
+	}
 }
 if ( ! function_exists( 'generateThumbnailsFromVideo' ) ) {
-    function generateThumbnailsFromVideo( $media, $path, $angle, $thumbnail_shots = 3 ) {
-        $thumbnail_shots = $media->getDurationInSeconds() >= $thumbnail_shots ? $thumbnail_shots : 1;
-        $divide_result   = (int) floor( $media->getDurationInSeconds() / $thumbnail_shots );
-        $seconds         = $divide_result;
-        $newThumbnail    = [];
+	function generateThumbnailsFromVideo( $media, $path, $angle, $thumbnail_shots = 3 ) {
+		$thumbnail_shots = $media->getDurationInSeconds() >= $thumbnail_shots ? $thumbnail_shots : 1;
+		$divide_result   = (int) floor( $media->getDurationInSeconds() / $thumbnail_shots );
+		$seconds         = $divide_result;
+		$newThumbnail    = array();
 
-        for ( $i = 1; $i <= $thumbnail_shots; $i ++ ) {
+		for ( $i = 1; $i <= $thumbnail_shots; $i ++ ) {
+			$media              = \FFMpeg::open( $path );
+			$newThumbnail[ $i ] = str_replace( '.' . request()->video->getClientOriginalExtension(), "-$i.png", str_replace( 'public/', '', $path ) );
 
-            $newThumbnail[ $i ] = str_replace( "." . request()->video->getClientOriginalExtension(), "-$i.png", str_replace("public/","",$path) );
+			try {
+				$media->getFrameFromSeconds( $seconds )->export()->toDisk( 'public' )->save( $newThumbnail[ $i ] );
+				if ( $angle ) {
+					$imageUpdate = storage_path( "app/public/${newThumbnail[ $i ]}" );
+					imagepng( imagerotate( imagecreatefrompng( $imageUpdate ), $angle, 0 ), $imageUpdate );
+				}
+			} catch ( Exception $e ) {
 
-            try {
-                $media->getFrameFromSeconds( $seconds )->export()->toDisk('public')->save( $newThumbnail[ $i ] );
-                if ( $angle ) {
-                    $imageUpdate = storage_path( "app/public/${newThumbnail[ $i ]}" );
-                    imagepng( imagerotate( imagecreatefrompng( $imageUpdate ), $angle, 0 ), $imageUpdate );
-                }
-            } catch (Exception $e ) {
+			}
 
-            }
+			$seconds += $divide_result;
+		}
 
-
-            $seconds += $divide_result;
-        }
-
-        return $newThumbnail;
-    }
-
+		return $newThumbnail;
+	}
 }
 function getVideoRotation( $videostream ) {
-    if ( ! $videostream instanceof FFMpeg\FFProbe\DataMapping\Stream ) {
-        return false;
-    }
-    if ( ! $videostream->has( 'tags' ) ) {
-        return false;
-    }
-    $tags = $videostream->get( 'tags' );
-    if ( ! isset( $tags['rotate'] ) || $tags['rotate'] == 0 ) {
-        return false;
-    }
+	if ( ! $videostream instanceof FFMpeg\FFProbe\DataMapping\Stream ) {
+		return false;
+	}
+	if ( ! $videostream->has( 'tags' ) ) {
+		return false;
+	}
+	$tags = $videostream->get( 'tags' );
+	if ( ! isset( $tags['rotate'] ) || $tags['rotate'] == 0 ) {
+		return false;
+	}
 
-// do the rotation correction
-    return $tags['rotate'];
+	// do the rotation correction
+	return $tags['rotate'];
 }
 
 
 function sortVideosInOrder( $order, $videos ) {
-    switch ( $order ) {
-        case 'created_at':
-            return collect( $videos )->map( function ( $video ) {
-                $v     = VideoView::getTotalVideoViews( $video );
-                $views = ! is_null( $v ) ? $v : 0;
+	switch ( $order ) {
+		case 'created_at':
+			return collect( $videos )->map(
+				function ( $video ) {
+					$v     = VideoView::getTotalVideoViews( $video );
+					$views = ! is_null( $v ) ? $v : 0;
 
-                return collect( $video )->merge( [
-                    'views'   => $views,
-                    'daysAgo' => $video->created_at->diffForHumans()
-                ] );
-            } )->sortBy( 'created_at' )->values();
-            break;
-        case 'views':
-            return collect( $videos )->map( function ( $video ) {
-                $v     = VideoView::getTotalVideoViews( $video );
-                $views = ! is_null( $v ) ? $v : 0;
+					return collect( $video )->merge(
+						array(
+							'views'   => $views,
+							'daysAgo' => $video->created_at->diffForHumans(),
+						)
+					);
+				}
+			)->sortBy( 'created_at' )->values();
+			break;
+		case 'views':
+			return collect( $videos )->map(
+				function ( $video ) {
+					$v     = VideoView::getTotalVideoViews( $video );
+					$views = ! is_null( $v ) ? $v : 0;
 
-                return collect( $video )->merge( [
-                    'views'   => $views,
-                    'daysAgo' => $video->created_at->diffForHumans()
-                ] );
-            } )->sortByDesc( 'views' )->values();
-            break;
-        case 'title':
-            return collect( $videos )->map( function ( $video ) {
-                $v     = VideoView::getTotalVideoViews( $video );
-                $views = ! is_null( $v ) ? $v : 0;
+					return collect( $video )->merge(
+						array(
+							'views'   => $views,
+							'daysAgo' => $video->created_at->diffForHumans(),
+						)
+					);
+				}
+			)->sortByDesc( 'views' )->values();
+			break;
+		case 'title':
+			return collect( $videos )->map(
+				function ( $video ) {
+					$v     = VideoView::getTotalVideoViews( $video );
+					$views = ! is_null( $v ) ? $v : 0;
 
-                return collect( $video )->merge( [
-                    'views'   => $views,
-                    'daysAgo' => $video->created_at->diffForHumans()
-                ] );
-            } )->sortBy( 'title' )->values();
-            break;
-        default:
-            return collect( $videos )->map( function ( $video ) {
-                $v     = VideoView::getTotalVideoViews( $video );
-                $views = ! is_null( $v ) ? $v : 0;
+					return collect( $video )->merge(
+						array(
+							'views'   => $views,
+							'daysAgo' => $video->created_at->diffForHumans(),
+						)
+					);
+				}
+			)->sortBy( 'title' )->values();
+			break;
+		default:
+			return collect( $videos )->map(
+				function ( $video ) {
+					$v     = VideoView::getTotalVideoViews( $video );
+					$views = ! is_null( $v ) ? $v : 0;
 
-                return collect( $video )->merge( [
-                    'views'   => $views,
-                    'daysAgo' => $video->created_at->diffForHumans()
-                ] );
-            } );
-            break;
-    }
+					return collect( $video )->merge(
+						array(
+							'views'   => $views,
+							'daysAgo' => $video->created_at->diffForHumans(),
+						)
+					);
+				}
+			);
+			break;
+	}
 }
 
 function level_generator( $albums, $key ) {
-    $rv = array();
-    foreach ( $albums as &$album ) {
+	$rv = array();
+	foreach ( $albums as &$album ) {
 
-        if ( is_null( $album[ $key ] ) ) {
-            // no parentId -> entry in the root array
-            $rv[] = &$album;
-        } else {
-            $pid = $album[ $key ];
-            if ( ! isset( $albums[ $pid ] ) ) {
-                echo 'orphant album: ', $album['id'], "\n";
-            } else {
-                if ( ! isset( $albums[ $pid ]['children'] ) ) {
-                    $albums[ $pid ]['children'] = array();
-                }
-                $albums[ $pid ]['children'][] = &$album;
-            }
-        }
-    }
+		if ( is_null( $album[ $key ] ) ) {
+			// no parentId -> entry in the root array
+			$rv[] = &$album;
+		} else {
+			$pid = $album[ $key ];
+			if ( ! isset( $albums[ $pid ] ) ) {
+				echo 'orphant album: ', $album['id'], "\n";
+			} else {
+				if ( ! isset( $albums[ $pid ]['children'] ) ) {
+					$albums[ $pid ]['children'] = array();
+				}
+				$albums[ $pid ]['children'][] = &$album;
+			}
+		}
+	}
 
-    return $rv;
+	return $rv;
 }
 
 function convertToTree( $flat, $idField = 'id', $parentIdField = 'parent_id', $childNodesField = 'childNodes' ) {
-    $indexed = array();
-    // first pass - get the array indexed by the primary id
-    foreach ( $flat as $row ) {
-        $indexed[ $row[ $idField ] ]                     = $row;
-        $indexed[ $row[ $idField ] ][ $childNodesField ] = array();
-    }
+	$indexed = array();
+	// first pass - get the array indexed by the primary id
+	foreach ( $flat as $row ) {
+		$indexed[ $row[ $idField ] ]                     = $row;
+		$indexed[ $row[ $idField ] ][ $childNodesField ] = array();
+	}
 
-    //second pass
-    $root = null;
-    foreach ( $indexed as $id => $row ) {
-        $indexed[ $row[ $parentIdField ] ][ $childNodesField ][ $id ] =& $indexed[ $id ];
-        if ( ! $row[ $parentIdField ] ) {
-            $root = $id;
-        }
-    }
+	// second pass
+	$root = null;
+	foreach ( $indexed as $id => $row ) {
+		$indexed[ $row[ $parentIdField ] ][ $childNodesField ][ $id ] =& $indexed[ $id ];
+		if ( ! $row[ $parentIdField ] ) {
+			$root = $id;
+		}
+	}
 
-    return array_values( array( $root => $indexed[ $root ] ) );
+	return array_values( array( $root => $indexed[ $root ] ) );
 }
 
 function buildTree( array &$elements, $parentId = null ) {
-    $branch = array();
+	$branch = array();
 
-    foreach ( $elements as $element ) {
-        if ( $element['parent_id'] == $parentId ) {
-            $children = buildTree( $elements, $element['id'] );
-            if ( $children ) {
-                $element['childNodes'] = $children;
-            }
-            $branch[ $element['id'] ] = $element;
-            unset( $elements[ $element['id'] ] );
-        }
-    }
+	foreach ( $elements as $element ) {
+		if ( $element['parent_id'] == $parentId ) {
+			$children = buildTree( $elements, $element['id'] );
+			if ( $children ) {
+				$element['childNodes'] = $children;
+			}
+			$branch[ $element['id'] ] = $element;
+			unset( $elements[ $element['id'] ] );
+		}
+	}
 
-    return $branch;
+	return $branch;
 }
 
-$data = [];
+$data = array();
 function grabUsers( $categories, $forceClear = false ) {
-    global $data;
+	global $data;
 
-    if ( $forceClear ) {
-        $categories = [ $categories ];
-        $data       = [];
-    }
+	if ( $forceClear ) {
+		$categories = array( $categories );
+		$data       = array();
+	}
 
-    foreach ( $categories as $val ) {
-        if ( isset( $val['list'] ) && ! empty( $val['list'] ) ) {
-            foreach ( $val['list'] as $user ) {
-                $user = is_array( $user ) ? $user : $user->toArray();
-                if ( $user['user_id'] ) {
-                    $data[ $user['user_id']['id'] ] = collect( $user['user_id'] )->merge( collect( $user )->except( 'user_id' ) )->toArray();
-                }
+	foreach ( $categories as $val ) {
+		if ( isset( $val['list'] ) && ! empty( $val['list'] ) ) {
+			foreach ( $val['list'] as $user ) {
+				$user = is_array( $user ) ? $user : $user->toArray();
+				if ( $user['user_id'] ) {
+					$data[ $user['user_id']['id'] ] = collect( $user['user_id'] )->merge( collect( $user )->except( 'user_id' ) )->toArray();
+				}
+			}
+		}
+		if ( isset( $val['children'] ) && ! empty( $val['children'] ) ) {
+			grabUsers( $val['children'] );
+		}
+	}
 
-
-            }
-        }
-        if ( isset( $val['children'] ) && ! empty( $val['children'] ) ) {
-            grabUsers( $val['children'] );
-        }
-    }
-
-    return $data ? array_values( $data ) : [];
+	return $data ? array_values( $data ) : array();
 }
 
 function userMerger( $categories ) {
-    $d = [];
+	$d = array();
 
-    if ( count( $categories['list'] ) > 0 ) {
-        foreach ( $categories['list'] as $user ) {
-            $user = is_array( $user ) ? $user : $user->toArray();
-            if ( isset( $user['user_id'] ) && ! is_null( $user['user_id'] ) ) {
-                $d[ $user['user_id']['id'] ] = collect( $user['user_id'] )->merge( collect( $user )->except( 'user_id' ) )->toArray();
-            }
-        }
-    }
+	if ( count( $categories['list'] ) > 0 ) {
+		foreach ( $categories['list'] as $user ) {
+			$user = is_array( $user ) ? $user : $user->toArray();
+			if ( isset( $user['user_id'] ) && ! is_null( $user['user_id'] ) ) {
+				$d[ $user['user_id']['id'] ] = collect( $user['user_id'] )->merge( collect( $user )->except( 'user_id' ) )->toArray();
+			}
+		}
+	}
 
-    return $d ? array_values( $d ) : [];
+	return $d ? array_values( $d ) : array();
 }
 

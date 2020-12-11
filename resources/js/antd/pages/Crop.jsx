@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useMemo, useRef, forwardRef } from 'react';
 import t from 'prop-types';
-import Cropper from 'react-easy-crop';
+import Cropper from './Cropper/index';
 import LocaleReceiver from 'antd/es/locale-provider/LocaleReceiver';
 import Modal from 'antd/es/modal';
 import Slider from 'antd/es/slider';
@@ -37,7 +37,7 @@ const EasyCrop = forwardRef((props, ref) => {
 
     cropperProps,
   } = props;
-console.log(aspect,"props");
+// console.log(aspect,"props");
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [cropSize, setCropSize] = useState({ width: 0, height: 0 });
 
@@ -348,7 +348,7 @@ const ImgCrop = forwardRef((props, ref) => {
               </button>
               <Slider
                 min={1}
-                max={6}
+                max={16}
                 
                 value={xVal}
                 onChange={setXVal}
@@ -365,7 +365,7 @@ const ImgCrop = forwardRef((props, ref) => {
               </button>
               <Slider
                 min={1}
-                max={6}
+                max={16}
                 value={yVal}
                 onChange={setYVal}
               />
