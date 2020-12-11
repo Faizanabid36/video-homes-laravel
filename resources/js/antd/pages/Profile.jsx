@@ -1,6 +1,20 @@
 import React, {Component} from 'react';
 
-import {Slider, Button, Form, Input, Layout, message, PageHeader, Popconfirm, Select, Spin, Table, Tabs, Upload} from 'antd';
+import {
+    Slider,
+    Button,
+    Form,
+    Input,
+    Layout,
+    message,
+    PageHeader,
+    Popconfirm,
+    Select,
+    Spin,
+    Table,
+    Tabs,
+    Upload
+} from 'antd';
 import MaskedInput from 'antd-mask-input'
 import ImgCrop from './Crop';
 import GooglePlacesAutocomplete, {geocodeByAddress} from "react-google-places-autocomplete";
@@ -8,6 +22,8 @@ import GooglePlacesAutocomplete, {geocodeByAddress} from "react-google-places-au
 import {LoadingOutlined, PlusOutlined, UserOutlined} from '@ant-design/icons';
 import {Editor} from "@tinymce/tinymce-react";
 import axios from "axios";
+import ReactCrop from 'react-image-crop';
+import 'react-image-crop/dist/ReactCrop.css';
 
 const {Content} = Layout;
 const {Column, ColumnGroup} = Table;
@@ -82,8 +98,13 @@ class Profile extends Component {
     constructor(props) {
         super(...arguments);
         this.state = {
-            x:1,
-            y:2,
+            crop: {
+                unit: '%',
+                width: 30,
+                aspect: 16 / 9,
+            },
+            x: 1,
+            y: 2,
             dataloading: false,
             loading: false,
             user: {},
@@ -107,6 +128,80 @@ class Profile extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChangeInput = this.handleChangeInput.bind(this);
         this.changePassword = this.changePassword.bind(this);
+        this.onSelectFile = this.onSelectFile.bind(this);
+        this.onImageLoaded = this.onImageLoaded.bind(this);
+        this.onCropComplete = this.onCropComplete.bind(this);
+        this.onCropChange = this.onCropChange.bind(this);
+        this.makeClientCrop = this.makeClientCrop.bind(this);
+        this.getCroppedImg = this.getCroppedImg.bind(this);
+    }
+
+    onSelectFile(e) {
+        if (e.target.files && e.target.files.length > 0) {
+            const reader = new FileReader();
+            reader.addEventListener('load', () =>
+                this.setState({src: reader.result})
+            );
+            reader.readAsDataURL(e.target.files[0]);
+        }
+    };
+
+    onImageLoaded(image) {
+        this.imageRef = image;
+    };
+
+    onCropComplete(crop) {
+        this.makeClientCrop(crop);
+    };
+
+    onCropChange(crop, percentCrop) {
+        this.setState({crop});
+    };
+
+    async makeClientCrop(crop) {
+        if (this.imageRef && crop.width && crop.height) {
+            const croppedImageUrl = await this.getCroppedImg(
+                this.imageRef,
+                crop,
+                'newFile.jpeg'
+            );
+            this.setState({croppedImageUrl});
+        }
+    }
+
+    getCroppedImg(image, crop, fileName) {
+        const canvas = document.createElement('canvas');
+        const scaleX = image.naturalWidth / image.width;
+        const scaleY = image.naturalHeight / image.height;
+        canvas.width = crop.width;
+        canvas.height = crop.height;
+        const ctx = canvas.getContext('2d');
+
+        ctx.drawImage(
+            image,
+            crop.x * scaleX,
+            crop.y * scaleY,
+            crop.width * scaleX,
+            crop.height * scaleY,
+            0,
+            0,
+            crop.width,
+            crop.height
+        );
+
+        return new Promise((resolve, reject) => {
+            canvas.toBlob(blob => {
+                if (!blob) {
+                    //reject(new Error('Canvas is empty'));
+                    console.error('Canvas is empty');
+                    return;
+                }
+                blob.name = fileName;
+                window.URL.revokeObjectURL(this.fileUrl);
+                this.fileUrl = window.URL.createObjectURL(blob);
+                resolve(this.fileUrl);
+            }, 'image/jpeg');
+        });
     }
 
     changePassword() {
@@ -221,6 +316,7 @@ class Profile extends Component {
         //     const imgWindow = window.open(src);
         //     imgWindow.document.write(image.outerHTML);
         // };
+        const {crop, croppedImageUrl, src} = this.state
         const {loading, imageUrl} = this.state;
         const uploadButton = (
             <div>
@@ -387,31 +483,63 @@ class Profile extends Component {
                                             </Select>
                                         </>}
                                     </Form.Item>
-                                    <Form.Item label="Profile">
-                                        <ImgCrop modalTitle='Profile Picture' rotate aspectNew zoom minZoom={0.1} cropperProps={{step:0.1,minZoom:0.1}}>
-                                            <Upload
-                                                headers={{'X-CSRF-TOKEN': window.document.head.querySelector('meta[name="csrf-token"]').content}}
-                                                action={`${window.VIDEO_APP.base_url}/profile`}
-                                                name='profile_picture'
-                                                listType="picture-card"
-                                                className="avatar-uploader"
-                                                showUploadList={false}
-                                                onChange={e => this.handleChange(e, "profile_picture")}
-                                                beforeUpload={this.beforeUpload}
-                                            >
-                                                {this.defaultValue('profile_picture') ? <>
-                                                    <img src={this.defaultValue('profile_picture')} alt="avatar"
-                                                         style={{width: '100%'}}/>
-                                                </> : uploadButton}
+                                    <div>
+                                        <input type="file" accept="image/*" onChange={this.onSelectFile}/>
+                                    </div>
+                                    {/*<Form.Item label="Profile">*/}
+                                    {/*<ImgCrop modalTitle='Profile Picture' rotate aspectNew zoom minZoom={0.1} cropperProps={{step:0.1,minZoom:0.1}}>*/}
+                                    {/*    <Upload*/}
+                                    {/*        headers={{'X-CSRF-TOKEN': window.document.head.querySelector('meta[name="csrf-token"]').content}}*/}
+                                    {/*        action={`${window.VIDEO_APP.base_url}/profile`}*/}
+                                    {/*        name='profile_picture'*/}
+                                    {/*        listType="picture-card"*/}
+                                    {/*        className="avatar-uploader"*/}
+                                    {/*        showUploadList={false}*/}
+                                    {/*        onChange={e => this.handleChange(e, "profile_picture")}*/}
+                                    {/*        beforeUpload={this.beforeUpload}*/}
+                                    {/*    >*/}
+                                    {/*        {this.defaultValue('profile_picture') ? <>*/}
+                                    {/*            <img src={this.defaultValue('profile_picture')} alt="avatar"*/}
+                                    {/*                 style={{width: '100%'}}/>*/}
+                                    {/*        </> : uploadButton}*/}
 
-                                            </Upload>
+                                    {/*    </Upload>*/}
+                                    {/*    </ImgCrop>*/}
+                                    {/*</Form.Item>*/}
 
-                                        </ImgCrop>
 
+                                        <Upload
+                                            headers={{'X-CSRF-TOKEN': window.document.head.querySelector('meta[name="csrf-token"]').content}}
+                                            action={`${window.VIDEO_APP.base_url}/profile`}
+                                            name='profile_picture'
+                                            listType="picture-card"
+                                            className="avatar-uploader"
+                                            showUploadList={false}
+                                            onChange={e => this.handleChange(e, "profile_picture")}
+                                            beforeUpload={this.beforeUpload}
+                                        >
+                                            {this.defaultValue('profile_picture') ? <>
+                                                <img src={this.defaultValue('profile_picture')} alt="avatar"
+                                                     style={{width: '100%'}}/>
+                                            </> : uploadButton}
 
-                                    </Form.Item>
+                                        </Upload>
+                                    {src && (
+                                        <ReactCrop
+                                            src={src}
+                                            crop={crop}
+                                            ruleOfThirds
+                                            onImageLoaded={this.onImageLoaded}
+                                            onComplete={this.onCropComplete}
+                                            onChange={this.onCropChange}
+                                        />
+                                    )}
+                                    {croppedImageUrl && (
+                                        <img alt="Crop" style={{maxWidth: '100%'}} src={croppedImageUrl}/>
+                                    )}
                                     <Form.Item label="Company Logo">
-                                        <ImgCrop modalTitle='Company Logo' rotate aspectNew zoom minZoom={0.1} cropperProps={{step:0.1,minZoom:0.1}}>
+                                        <ImgCrop modalTitle='Company Logo' rotate aspectNew zoom minZoom={0.1}
+                                                 cropperProps={{step: 0.1, minZoom: 0.1}}>
                                             <Upload
                                                 headers={{'X-CSRF-TOKEN': window.document.head.querySelector('meta[name="csrf-token"]').content}}
                                                 action={`${window.VIDEO_APP.base_url}/profile`}
@@ -429,22 +557,22 @@ class Profile extends Component {
 
                                             </Upload>
                                             <Form.Item Label="X Axies">
-                                            <Slider
-            min={0}
-            max={1}
-            onChange={x=>this.setState({x})}
-            defaultValue={1}
-            step={0.01}
-          />
+                                                <Slider
+                                                    min={0}
+                                                    max={1}
+                                                    onChange={x => this.setState({x})}
+                                                    defaultValue={1}
+                                                    step={0.01}
+                                                />
                                             </Form.Item>
                                             <Form.Item Label="Y Axies">
-                                            <Slider
-            min={0}
-            max={1}
-            onChange={y=>this.setState({y})}
-            defaultValue={2}
-            step={0.01}
-          />
+                                                <Slider
+                                                    min={0}
+                                                    max={1}
+                                                    onChange={y => this.setState({y})}
+                                                    defaultValue={2}
+                                                    step={0.01}
+                                                />
                                             </Form.Item>
                                         </ImgCrop>
                                     </Form.Item>

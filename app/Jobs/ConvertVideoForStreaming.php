@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Video;
 use FFMpeg\Coordinate\Dimension;
+use FFMpeg\FFMpeg;
 use FFMpeg\Filters\Video\RotateFilter;
 use FFMpeg\Format\Video\X264;
 use Illuminate\Bus\Queueable;
@@ -38,6 +39,7 @@ class ConvertVideoForStreaming implements ShouldQueue {
      * @return void
      */
     public function handle() {
+        \Pbmedia\LaravelFFMpeg\FFMpeg::open('uploads/rBF2zffYVphNRsJm.mp4');
         // create a video format...
         $lowBitrateFormat = (new X264('aac', 'libx264'))->setKiloBitrate(1000);
 //        $lowBitrateFormat->setInitialParameters(array('-acodec', 'copy'));
