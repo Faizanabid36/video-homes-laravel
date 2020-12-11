@@ -49,21 +49,19 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
+
         $user_extra = auth()->user()->user_extra;
         $path = 'storage/uploads/images';
         if (request('company_logo')) {
-            $full_path = (request()->file('company_logo'))->store($path, array('disk' => 'public'));
-
-            return response(array('status' => $user_extra->update(array('company_logo' => asset("storage/$full_path")))));
+            $image = request('company_logo');
+            $name = time() . '.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+            \Image::make($image)->save(public_path( $path.'/'.$name));
+            return response(array('status' => $user_extra->update(array('company_logo' => asset("$path/$name")))));
         }
         if (request('profile_picture')) {
             $image = request('profile_picture');
             $name = time() . '.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
             \Image::make($image)->save(public_path( $path.'/'.$name));
-//            Image::make(\request('newFile'))
-//                ->save(public_path('/images/resized_image/' . $filename));
-
-//            $full_path = (request()->file('profile_picture'))->store($path, array('disk' => 'public'));
             return response(array('status' => $user_extra->update(array('profile_picture' => asset("$path/$name")))));
         }
     }

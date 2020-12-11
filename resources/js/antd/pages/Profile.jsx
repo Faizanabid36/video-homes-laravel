@@ -101,10 +101,15 @@ class Profile extends Component {
         this.state = {
             crop: {
                 unit: '%',
-                width: 30,
+                width: 100,
+                height: 100,
             },
+            src:null,
+            src2:null,
             x: 1,
             y: 2,
+            modalVisible: false,
+            modalVisible2: false,
             dataloading: false,
             loading: false,
             user: {},
@@ -129,6 +134,7 @@ class Profile extends Component {
         this.handleChangeInput = this.handleChangeInput.bind(this);
         this.changePassword = this.changePassword.bind(this);
         this.onSelectFile = this.onSelectFile.bind(this);
+        this.onSelectFile2 = this.onSelectFile2.bind(this);
         this.onImageLoaded = this.onImageLoaded.bind(this);
         this.onCropComplete = this.onCropComplete.bind(this);
         this.onCropChange = this.onCropChange.bind(this);
@@ -136,7 +142,9 @@ class Profile extends Component {
         this.getCroppedImg = this.getCroppedImg.bind(this);
         this.showModal = this.showModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
+        this.hideModal2 = this.hideModal2.bind(this);
         this.handleUpdateImage = this.handleUpdateImage.bind(this);
+        this.handleUpdateImage2 = this.handleUpdateImage2.bind(this);
     }
 
     showModal() {
@@ -150,12 +158,26 @@ class Profile extends Component {
             modalVisible: false,
         });
     };
+    hideModal2() {
+        this.setState({
+            modalVisible: false,
+        });
+    };
 
     onSelectFile(e) {
         if (e.target.files && e.target.files.length > 0) {
             const reader = new FileReader();
             reader.addEventListener('load', () =>
                 this.setState({modalVisible: true, src: reader.result})
+            );
+            reader.readAsDataURL(e.target.files[0]);
+        }
+    };
+    onSelectFile2(e) {
+        if (e.target.files && e.target.files.length > 0) {
+            const reader = new FileReader();
+            reader.addEventListener('load', () =>
+                this.setState({modalVisible2: true, src2: reader.result})
             );
             reader.readAsDataURL(e.target.files[0]);
         }
@@ -329,6 +351,31 @@ class Profile extends Component {
             reader.readAsDataURL(file);
         })
     }
+    handleUpdateImage2(e) {
+        let {croppedImageUrl} = this.state;
+        let filename = 'asdsad';
+        fetch(croppedImageUrl).then(res => res.blob()).then(blob => {
+            const file = new File([blob], filename, blob)
+            let reader = new FileReader();
+            reader.onload = async (e) => {
+                console.log(e.target)
+                await this.setState({
+                    newFile: e.target.result
+                }, () => {
+                    let {newFile} = this.state;
+                    let company_logo = newFile;
+                    axios.post(`${window.VIDEO_APP.base_url}/profile`, {company_logo})
+                        .then((res) => {
+                            this.setState({...res.data});
+                            this.setState({'modalVisible2':false});
+                        }).catch((err) => {
+                        console.log(err)
+                    })
+                })
+            };
+            reader.readAsDataURL(file);
+        })
+    }
 
     componentDidMount() {
         axios.get('profile')
@@ -355,7 +402,7 @@ class Profile extends Component {
         //     const imgWindow = window.open(src);
         //     imgWindow.document.write(image.outerHTML);
         // };
-        const {crop, croppedImageUrl, src} = this.state
+        const {crop, croppedImageUrl, src,src2} = this.state
         const {loading, imageUrl} = this.state;
         const uploadButton = (
             <div>
@@ -525,33 +572,11 @@ class Profile extends Component {
                                     <div>
                                         <input type="file" accept="image/*" onChange={this.onSelectFile}/>
                                     </div>
-                                    {/*<Form.Item label="Profile">*/}
-                                    {/*<ImgCrop modalTitle='Profile Picture' rotate aspectNew zoom minZoom={0.1} cropperProps={{step:0.1,minZoom:0.1}}>*/}
-                                    {/*    <Upload*/}
-                                    {/*        headers={{'X-CSRF-TOKEN': window.document.head.querySelector('meta[name="csrf-token"]').content}}*/}
-                                    {/*        action={`${window.VIDEO_APP.base_url}/profile`}*/}
-                                    {/*        name='profile_picture'*/}
-                                    {/*        listType="picture-card"*/}
-                                    {/*        className="avatar-uploader"*/}
-                                    {/*        showUploadList={false}*/}
-                                    {/*        onChange={e => this.handleChange(e, "profile_picture")}*/}
-                                    {/*        beforeUpload={this.beforeUpload}*/}
-                                    {/*    >*/}
-                                    {/*        {this.defaultValue('profile_picture') ? <>*/}
-                                    {/*            <img src={this.defaultValue('profile_picture')} alt="avatar"*/}
-                                    {/*                 style={{width: '100%'}}/>*/}
-                                    {/*        </> : uploadButton}*/}
-                                    {/*    </Upload>*/}
-                                    {/*    </ImgCrop>*/}
-                                    {/*</Form.Item>*/}
-                                    <Button type="primary" onClick={this.showModal}>
-                                        Modal
-                                    </Button>
                                     <Modal
-                                        title="Modal"
+                                        title="Profile Picture"
                                         visible={this.state.modalVisible}
                                         onOk={this.handleUpdateImage}
-                                        onCancel={this.hideModal}
+                                        onCancel={()=>{this.setState({modalVisible:false})}}
                                         okText="Upload"
                                         cancelText="Cancel"
                                     >
@@ -566,48 +591,30 @@ class Profile extends Component {
                                             />
                                         )}
                                     </Modal>
-                                    {croppedImageUrl && (
-                                        <img alt="Crop" style={{maxWidth: '100%'}} src={croppedImageUrl}/>
-                                    )}
-                                    <Form.Item label="Company Logo">
-                                        <ImgCrop modalTitle='Company Logo' rotate aspectNew zoom minZoom={0.1}
-                                                 cropperProps={{step: 0.1, minZoom: 0.1}}>
-                                            <Upload
-                                                headers={{'X-CSRF-TOKEN': window.document.head.querySelector('meta[name="csrf-token"]').content}}
-                                                action={`${window.VIDEO_APP.base_url}/profile`}
-                                                name='company_logo'
-                                                listType="picture-card"
-                                                className="avatar-uploader"
-                                                showUploadList={false}
-                                                onChange={e => this.handleChange(e, "company_logo")}
-                                                beforeUpload={this.beforeUpload}
-                                            >
-                                                {this.defaultValue('company_logo') ? <>
-                                                    <img src={this.defaultValue('company_logo')} alt="avatar"
-                                                         style={{width: '100%'}}/>
-                                                </> : uploadButton}
-
-                                            </Upload>
-                                            <Form.Item Label="X Axies">
-                                                <Slider
-                                                    min={0}
-                                                    max={1}
-                                                    onChange={x => this.setState({x})}
-                                                    defaultValue={1}
-                                                    step={0.01}
+                                    <div>
+                                        <input type="file" accept="image/*" onChange={this.onSelectFile2}/>
+                                    </div>
+                                    <Modal
+                                        title="Company Logo"
+                                        visible={this.state.modalVisible2}
+                                        onOk={this.handleUpdateImage2}
+                                        onCancel={()=>{this.setState({modalVisible2:false})}}
+                                        okText="Upload"
+                                        cancelText="Cancel"
+                                    >
+                                        {src2 && (
+                                            <div>
+                                                <ReactCrop
+                                                    src={src2}
+                                                    crop={crop}
+                                                    ruleOfThirds
+                                                    onImageLoaded={this.onImageLoaded}
+                                                    onComplete={this.onCropComplete}
+                                                    onChange={this.onCropChange}
                                                 />
-                                            </Form.Item>
-                                            <Form.Item Label="Y Axies">
-                                                <Slider
-                                                    min={0}
-                                                    max={1}
-                                                    onChange={y => this.setState({y})}
-                                                    defaultValue={2}
-                                                    step={0.01}
-                                                />
-                                            </Form.Item>
-                                        </ImgCrop>
-                                    </Form.Item>
+                                            </div>
+                                        )}
+                                    </Modal>
                                     <Button onClick={(e) => {
                                         this.handleSubmit()
                                     }}>

@@ -77,6 +77,7 @@ if ( ! function_exists( 'generateThumbnailsFromVideo' ) ) {
         $seconds         = $divide_result;
         $newThumbnail    = [];
         $media = \FFMpeg::open($path);
+        dd($media->getDurationInSeconds());
         for ( $i = 1; $i <= $thumbnail_shots; $i ++ ) {
             $newThumbnail[ $i ] = str_replace( "." . request()->video->getClientOriginalExtension(), "-$i.png", $path );
             $media->getFrameFromSeconds( $seconds )->export()->save( $newThumbnail[ $i ] );
