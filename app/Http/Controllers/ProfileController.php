@@ -61,7 +61,7 @@ class ProfileController extends Controller
         if (request('profile_picture')) {
             $image = request('profile_picture');
             $name = time() . '.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
-            \Image::make($image)->save(storage_path($path . '/' . $name));
+            \Image::make($image)->save(public_path( $name));
 //            Image::make(\request('newFile'))
 //                ->save(public_path('/images/resized_image/' . $filename));
 
