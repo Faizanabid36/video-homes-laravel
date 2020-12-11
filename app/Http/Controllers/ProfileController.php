@@ -7,85 +7,96 @@ use App\UserCategory;
 use App\UserExtra;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
 
-class ProfileController extends Controller {
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function index() {
-        $data = UserCategory::levelCategories();
-		return response(
-			array(
-				'user'       => collect( auth()->user()->user_extra )->merge( collect( auth()->user() )->except( array( 'avatara', 'company_logo' ) )->all() )->except(
-					array(
-						'user_extra',
-						'user_id',
-					)
-				),
-				'categories' => $data,
-			)
-		);
-	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function create() {
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param Request $request
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function store( Request $request ) {
-				$user_extra = auth()->user()->user_extra;
-		$path               = 'uploads/images';
-		if ( request( 'company_logo' ) ) {
-			$full_path = ( request()->file( 'company_logo' ) )->store( $path, array( 'disk' => 'public' ) );
-
-			return response( array( 'status' => $user_extra->update( array( 'company_logo' => asset( "storage/$full_path" ) ) ) ) );
-		}
-		if ( request( 'profile_picture' ) ) {
-			$full_path = ( request()->file( 'profile_picture' ) )->store( $path, array( 'disk' => 'public' ) );
-			return response( array( 'status' => $user_extra->update( array( 'profile_picture' => asset( "storage/$full_path" ) ) ) ) );
-		}
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param int $id
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function show( $id ) {
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param int $id
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit( $id ) {
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param User $user
-	 *
-	 * @return string[]
+class ProfileController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-	public function update( $id ) {
+    public function index()
+    {
+        $data = UserCategory::levelCategories();
+        return response(
+            array(
+                'user' => collect(auth()->user()->user_extra)->merge(collect(auth()->user())->except(array('avatara', 'company_logo'))->all())->except(
+                    array(
+                        'user_extra',
+                        'user_id',
+                    )
+                ),
+                'categories' => $data,
+            )
+        );
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $user_extra = auth()->user()->user_extra;
+        $path = 'uploads/images';
+        if (request('company_logo')) {
+            $full_path = (request()->file('company_logo'))->store($path, array('disk' => 'public'));
+
+            return response(array('status' => $user_extra->update(array('company_logo' => asset("storage/$full_path")))));
+        }
+        if (request('profile_picture')) {
+            dd($request->all());
+            Image::make(\request('newFile'))
+                ->save(public_path('/images/resized_image/' . $filename));
+            $full_path = (request()->file('profile_picture'))->store($path, array('disk' => 'public'));
+            return response(array('status' => $user_extra->update(array('profile_picture' => asset("storage/$full_path")))));
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param User $user
+     *
+     * @return string[]
+     */
+    public function update($id)
+    {
 
         $user = auth()->user();
         if (request('old_password')) {
@@ -164,7 +175,7 @@ class ProfileController extends Controller {
                 'distribution_type'
             ]
         ));
-        $message= 'Settings Updated';
+        $message = 'Settings Updated';
         return compact('message');
     }
 

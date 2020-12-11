@@ -66,7 +66,7 @@ class VideosController extends Controller
     {
         $file = \Str::random(16) . '.' . request()->video->getClientOriginalExtension();
         request()->video->storeAs('public/uploads/', $file);
-        $path = 'uploads/' . $file;
+        $path = 'public/uploads/' . $file;
         $media = \FFMpeg::open($path);
         $videostream = $media->getStreams()->videos()->first();
         $angle = getVideoRotation($videostream);

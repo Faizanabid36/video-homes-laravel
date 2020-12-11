@@ -24,6 +24,7 @@ import {Editor} from "@tinymce/tinymce-react";
 import axios from "axios";
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
+import Modal from "antd/es/modal";
 
 const {Content} = Layout;
 const {Column, ColumnGroup} = Table;
@@ -133,13 +134,28 @@ class Profile extends Component {
         this.onCropChange = this.onCropChange.bind(this);
         this.makeClientCrop = this.makeClientCrop.bind(this);
         this.getCroppedImg = this.getCroppedImg.bind(this);
+        this.showModal = this.showModal.bind(this);
+        this.hideModal = this.hideModal.bind(this);
+        this.handleUpdateImage = this.handleUpdateImage.bind(this);
     }
+
+    showModal() {
+        this.setState({
+            modalVisible: true,
+        });
+    };
+
+    hideModal() {
+        this.setState({
+            modalVisible: false,
+        });
+    };
 
     onSelectFile(e) {
         if (e.target.files && e.target.files.length > 0) {
             const reader = new FileReader();
             reader.addEventListener('load', () =>
-                this.setState({src: reader.result})
+                this.setState({modalVisible: true, src: reader.result})
             );
             reader.readAsDataURL(e.target.files[0]);
         }
@@ -274,7 +290,6 @@ class Profile extends Component {
         if (info.file.status === 'done') {
             // Get this url from response in real world.
             getBase64(info.file.originFileObj, imageUrl => {
-
                     let {user} = self.state;
                     if (user[key]) {
                         user[key] = imageUrl;
@@ -289,6 +304,31 @@ class Profile extends Component {
         }
     };
 
+    handleUpdateImage(e) {
+        let {croppedImageUrl} = this.state;
+        let filename = 'asdsad';
+        fetch(croppedImageUrl).then(res => res.blob()).then(blob => {
+            const file = new File([blob], filename, blob)
+            let reader = new FileReader();
+            reader.onload = async (e) => {
+                console.log(e.target)
+                await this.setState({
+                    newFile: e.target.result
+                }, () => {
+                    let {newFile} = this.state
+                    let profile_picture = newFile
+                    axios.post(`${window.VIDEO_APP.base_url}/profile`, {profile_picture})
+                        .then((res) => {
+                            this.setState({...res.data});
+                            this.setState({'modalVisible':false});
+                        }).catch((err) => {
+                        console.log(err)
+                    })
+                })
+            };
+            reader.readAsDataURL(file);
+        })
+    }
 
     componentDidMount() {
         axios.get('profile')
@@ -501,38 +541,31 @@ class Profile extends Component {
                                     {/*            <img src={this.defaultValue('profile_picture')} alt="avatar"*/}
                                     {/*                 style={{width: '100%'}}/>*/}
                                     {/*        </> : uploadButton}*/}
-
                                     {/*    </Upload>*/}
                                     {/*    </ImgCrop>*/}
                                     {/*</Form.Item>*/}
-
-
-                                        <Upload
-                                            headers={{'X-CSRF-TOKEN': window.document.head.querySelector('meta[name="csrf-token"]').content}}
-                                            action={`${window.VIDEO_APP.base_url}/profile`}
-                                            name='profile_picture'
-                                            listType="picture-card"
-                                            className="avatar-uploader"
-                                            showUploadList={false}
-                                            onChange={e => this.handleChange(e, "profile_picture")}
-                                            beforeUpload={this.beforeUpload}
-                                        >
-                                            {this.defaultValue('profile_picture') ? <>
-                                                <img src={this.defaultValue('profile_picture')} alt="avatar"
-                                                     style={{width: '100%'}}/>
-                                            </> : uploadButton}
-
-                                        </Upload>
-                                    {src && (
-                                        <ReactCrop
-                                            src={src}
-                                            crop={crop}
-                                            ruleOfThirds
-                                            onImageLoaded={this.onImageLoaded}
-                                            onComplete={this.onCropComplete}
-                                            onChange={this.onCropChange}
-                                        />
-                                    )}
+                                    <Button type="primary" onClick={this.showModal}>
+                                        Modal
+                                    </Button>
+                                    <Modal
+                                        title="Modal"
+                                        visible={this.state.modalVisible}
+                                        onOk={this.handleUpdateImage}
+                                        onCancel={this.hideModal}
+                                        okText="Upload"
+                                        cancelText="Cancel"
+                                    >
+                                        {src && (
+                                            <ReactCrop
+                                                src={src}
+                                                crop={crop}
+                                                ruleOfThirds
+                                                onImageLoaded={this.onImageLoaded}
+                                                onComplete={this.onCropComplete}
+                                                onChange={this.onCropChange}
+                                            />
+                                        )}
+                                    </Modal>
                                     {croppedImageUrl && (
                                         <img alt="Crop" style={{maxWidth: '100%'}} src={croppedImageUrl}/>
                                     )}

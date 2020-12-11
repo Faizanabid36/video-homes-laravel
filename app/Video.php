@@ -47,10 +47,16 @@ class Video extends Model
 
         static::deleting(
             function ($video) {
-                VideoView::whereVideoId($video->id)->delete();
+                if (VideoView::whereVideoId($video->id)->count())
+                    VideoView::whereVideoId($video->id)->delete();
+
+                if (Comment::whereVideoId($video->id)->count())
+                    Comment::whereVideoId($video->id)->delete();
+
+                if (UserMessage::whereVideoId($video->id)->count())
+                    UserMessage::whereVideoId($video->id)->delete();
+
                 DeleteVideos::dispatch($video);
-                Comment::whereVideoId($video->id)->delete();
-                UserMessage::whereVideoId($video->id)->delete();
             }
         );
     }
