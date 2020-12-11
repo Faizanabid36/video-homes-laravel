@@ -76,11 +76,12 @@ if ( ! function_exists( 'generateThumbnailsFromVideo' ) ) {
         $divide_result   = (int) floor( $media->getDurationInSeconds() / $thumbnail_shots );
         $seconds         = $divide_result;
         $newThumbnail    = [];
-        $media = \FFMpeg::open($path);
+        $media_opener = (new \ProtoneMedia\LaravelFFMpeg\MediaOpener)->open($path);
 //        dd($media->getFrameFromSeconds(2));
         for ( $i = 1; $i <= $thumbnail_shots; $i ++ ) {
             $newThumbnail[ $i ] = str_replace( "." . request()->video->getClientOriginalExtension(), "-$i.png", $path );
-            $media->getFrameFromSeconds( $seconds )->export()->save( $newThumbnail[ $i ] );
+
+            $media_opener->getFrameFromSeconds( $seconds )->export()->save( $newThumbnail[ $i ] );
             if ( $angle ) {
                 $imageUpdate = storage_path( "app/public/${newThumbnail[ $i ]}" );
                 imagepng( imagerotate( imagecreatefrompng( $imageUpdate ), $angle, 0 ), $imageUpdate );
