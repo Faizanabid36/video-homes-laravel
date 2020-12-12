@@ -70,7 +70,6 @@ class ConvertVideoForStreaming implements ShouldQueue {
 			->inFormat( new \ProtoneMedia\LaravelFFMpeg\FFMpeg\CopyFormat() )
 			->addFilter(
 				function ( VideoFilters $filters ) use ( $width, $height ) {
-
 					$filters->resize( new Dimension( $width, $height ) );
 				}
 			)
