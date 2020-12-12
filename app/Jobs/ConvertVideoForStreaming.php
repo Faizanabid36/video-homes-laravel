@@ -59,6 +59,8 @@ class ConvertVideoForStreaming implements ShouldQueue {
 			)
 		);
 		try {
+			$width  = $this->width;
+			$height = $this->height;
 			$video->export()
 			->onProgress(
 				function ( $percentage, $remaining, $rate ) {
@@ -67,8 +69,9 @@ class ConvertVideoForStreaming implements ShouldQueue {
 			)
 			->inFormat( new \ProtoneMedia\LaravelFFMpeg\FFMpeg\CopyFormat() )
 			->addFilter(
-				function ( VideoFilters $filters ) {
-					$filters->resize( new Dimension( $this->width, $this->height ) );
+				function ( VideoFilters $filters ) use ( $width, $height ) {
+
+					$filters->resize( new Dimension( $width, $height ) );
 				}
 			)
 			->addFilter( array( '-movflags', '+faststart' ) )
