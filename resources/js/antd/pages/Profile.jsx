@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import {
     Slider,
@@ -17,77 +17,18 @@ import {
 } from 'antd';
 import MaskedInput from 'antd-mask-input'
 import ImgCrop from './Crop';
-import GooglePlacesAutocomplete, {geocodeByAddress} from "react-google-places-autocomplete";
+import GooglePlacesAutocomplete, { geocodeByAddress } from "react-google-places-autocomplete";
 
-import {LoadingOutlined, PlusOutlined, UserOutlined} from '@ant-design/icons';
-import {Editor} from "@tinymce/tinymce-react";
+import { LoadingOutlined, PlusOutlined, UserOutlined } from '@ant-design/icons';
+import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 import Modal from "antd/es/modal";
 
-const {Content} = Layout;
-const {Column, ColumnGroup} = Table;
-const {TabPane} = Tabs;
-
-const data = [
-    {
-        key: '1',
-        firstName: 'John',
-        lastName: 'Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '2',
-        firstName: 'Jim',
-        lastName: 'Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        tags: ['loser'],
-    },
-    {
-        key: '3',
-        firstName: 'Joe',
-        lastName: 'Black',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-];
-const renderTitle = title => (
-    <span>
-    {title}
-        <a
-            style={{
-                float: 'right',
-            }}
-            href="https://www.google.com/search?q=antd"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-      more
-    </a>
-  </span>
-);
-
-const renderItem = (title, count) => ({
-    value: title,
-    label: (
-        <div
-            style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-            }}
-        >
-            {title}
-            <span>
-        <UserOutlined/> {count}
-      </span>
-        </div>
-    ),
-});
+const { Content } = Layout;
+const { Column, ColumnGroup } = Table;
+const { TabPane } = Tabs;
 
 function getBase64(img, callback) {
     const reader = new FileReader();
@@ -99,17 +40,10 @@ class Profile extends Component {
     constructor(props) {
         super(...arguments);
         this.state = {
-            crop: {
-                unit: '%',
-                width: 100,
-                height: 100,
-            },
-            src:null,
-            src2:null,
+            
             x: 1,
             y: 2,
-            modalVisible: false,
-            modalVisible2: false,
+            
             dataloading: false,
             loading: false,
             user: {},
@@ -117,58 +51,27 @@ class Profile extends Component {
             new_password: '',
             confirm_password: '',
             categories: [],
-            fileList: [
-                {
-                    uid: '-1',
-                    name: 'image.png',
-                    status: 'done',
-                    url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-                },
-            ]
+           
         };
         this.formRef = React.createRef();
-        this.handleChange = this.handleChange.bind(this);
+        
         this.beforeUpload = this.beforeUpload.bind(this);
         this.defaultValue = this.defaultValue.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChangeInput = this.handleChangeInput.bind(this);
         this.changePassword = this.changePassword.bind(this);
-        this.onSelectFile = this.onSelectFile.bind(this);
-        this.onSelectFile2 = this.onSelectFile2.bind(this);
-        this.onImageLoaded = this.onImageLoaded.bind(this);
-        this.onCropComplete = this.onCropComplete.bind(this);
-        this.onCropChange = this.onCropChange.bind(this);
-        this.makeClientCrop = this.makeClientCrop.bind(this);
-        this.getCroppedImg = this.getCroppedImg.bind(this);
-        this.showModal = this.showModal.bind(this);
-        this.hideModal = this.hideModal.bind(this);
-        this.hideModal2 = this.hideModal2.bind(this);
+        
         this.handleUpdateImage = this.handleUpdateImage.bind(this);
-        this.handleUpdateImage2 = this.handleUpdateImage2.bind(this);
+        
     }
 
-    showModal() {
-        this.setState({
-            modalVisible: true,
-        });
-    };
-
-    hideModal() {
-        this.setState({
-            modalVisible: false,
-        });
-    };
-    hideModal2() {
-        this.setState({
-            modalVisible: false,
-        });
-    };
+    
 
     onSelectFile(e) {
         if (e.target.files && e.target.files.length > 0) {
             const reader = new FileReader();
             reader.addEventListener('load', () =>
-                this.setState({modalVisible: true, src: reader.result})
+                this.setState({ modalVisible: true, src: reader.result })
             );
             reader.readAsDataURL(e.target.files[0]);
         }
@@ -177,73 +80,16 @@ class Profile extends Component {
         if (e.target.files && e.target.files.length > 0) {
             const reader = new FileReader();
             reader.addEventListener('load', () =>
-                this.setState({modalVisible2: true, src2: reader.result})
+                this.setState({ modalVisible2: true, src2: reader.result })
             );
             reader.readAsDataURL(e.target.files[0]);
         }
     };
 
-    onImageLoaded(image) {
-        this.imageRef = image;
-    };
-
-    onCropComplete(crop) {
-        this.makeClientCrop(crop);
-    };
-
-    onCropChange(crop, percentCrop) {
-        this.setState({crop});
-    };
-
-    async makeClientCrop(crop) {
-        if (this.imageRef && crop.width && crop.height) {
-            const croppedImageUrl = await this.getCroppedImg(
-                this.imageRef,
-                crop,
-                'newFile.jpeg'
-            );
-            this.setState({croppedImageUrl});
-        }
-    }
-
-    getCroppedImg(image, crop, fileName) {
-        const canvas = document.createElement('canvas');
-        const scaleX = image.naturalWidth / image.width;
-        const scaleY = image.naturalHeight / image.height;
-        canvas.width = crop.width;
-        canvas.height = crop.height;
-        const ctx = canvas.getContext('2d');
-
-        ctx.drawImage(
-            image,
-            crop.x * scaleX,
-            crop.y * scaleY,
-            crop.width * scaleX,
-            crop.height * scaleY,
-            0,
-            0,
-            crop.width,
-            crop.height
-        );
-
-        return new Promise((resolve, reject) => {
-            canvas.toBlob(blob => {
-                if (!blob) {
-                    //reject(new Error('Canvas is empty'));
-                    console.error('Canvas is empty');
-                    return;
-                }
-                blob.name = fileName;
-                window.URL.revokeObjectURL(this.fileUrl);
-                this.fileUrl = window.URL.createObjectURL(blob);
-                resolve(this.fileUrl);
-            }, 'image/jpeg');
-        });
-    }
-
+    
     changePassword() {
-        let {old_password, new_password, confirm_password} = this.state
-        axios.put('profile/1', {old_password, new_password, confirm_password})
+        let { old_password, new_password, confirm_password } = this.state
+        axios.put('profile/1', { old_password, new_password, confirm_password })
             .then((res) => {
                 if (res.data.message)
                     message.info(res.data.message)
@@ -260,8 +106,8 @@ class Profile extends Component {
     }
 
     handleSubmit(e) {
-        let {user} = this.state
-        axios.put('profile/1', {...user})
+        let { user } = this.state
+        axios.put('profile/1', { ...user })
             .then((res) => {
                 if (res.data.message)
                     message.success(res.data.message)
@@ -280,9 +126,9 @@ class Profile extends Component {
     }
 
     handleChangeInput(e, key = false) {
-        let {user} = this.state;
+        let { user } = this.state;
         user[key || e.target.name] = key ? e : e.target.value;
-        this.setState({user});
+        this.setState({ user });
     }
 
     defaultValue(key) {
@@ -301,90 +147,28 @@ class Profile extends Component {
         return isJpgOrPng && isLt2M;
     }
 
-    handleChange(info, key = false) {
-        console.log(info);
-        if (info.file.status === 'uploading') {
-            console.log(info.file.status, info);
-            this.setState({loading: true});
-            return;
-        }
-        let self = this;
-        if (info.file.status === 'done') {
-            // Get this url from response in real world.
-            getBase64(info.file.originFileObj, imageUrl => {
-                    let {user} = self.state;
-                    if (user[key]) {
-                        user[key] = imageUrl;
-                        message.success(key.replace("_", " ") + " has been updated");
-                        self.setState({
-                            user,
-                            loading: false,
-                        })
-                    }
-                },
-            );
-        }
-    };
-
-    handleUpdateImage(e) {
-        let {croppedImageUrl} = this.state;
-        let filename = 'asdsad';
-        fetch(croppedImageUrl).then(res => res.blob()).then(blob => {
-            const file = new File([blob], filename, blob)
-            let reader = new FileReader();
-            reader.onload = async (e) => {
-                console.log(e.target)
-                await this.setState({
-                    newFile: e.target.result
-                }, () => {
-                    let {newFile} = this.state
-                    let profile_picture = newFile
-                    axios.post(`${window.VIDEO_APP.base_url}/profile`, {profile_picture})
-                        .then((res) => {
-                            this.setState({...res.data});
-                            this.setState({'modalVisible':false});
-                        }).catch((err) => {
-                        console.log(err)
-                    })
-                })
-            };
-            reader.readAsDataURL(file);
-        })
+    
+    handleUpdateImage(data,variable_name= "profile_picture") {
+        let params = {};
+        params[variable_name] = data;
+        console.log(params);
+        axios.post(`${window.VIDEO_APP.base_url}/profile`, {...params})
+            .then((res) => {
+                this.setState({ ...res.data,'modalVisible': false });
+                message.success(variable_name.replace("_", " ") + " has been updated");
+            }).catch((err) => {
+                console.log(err)
+            })
     }
-    handleUpdateImage2(e) {
-        let {croppedImageUrl} = this.state;
-        let filename = 'asdsad';
-        fetch(croppedImageUrl).then(res => res.blob()).then(blob => {
-            const file = new File([blob], filename, blob)
-            let reader = new FileReader();
-            reader.onload = async (e) => {
-                console.log(e.target)
-                await this.setState({
-                    newFile: e.target.result
-                }, () => {
-                    let {newFile} = this.state;
-                    let company_logo = newFile;
-                    axios.post(`${window.VIDEO_APP.base_url}/profile`, {company_logo})
-                        .then((res) => {
-                            this.setState({...res.data});
-                            this.setState({'modalVisible2':false});
-                        }).catch((err) => {
-                        console.log(err)
-                    })
-                })
-            };
-            reader.readAsDataURL(file);
-        })
-    }
-
+    
     componentDidMount() {
         axios.get('profile')
-            .then(({data}) => {
+            .then(({ data }) => {
                 console.log(data)
-                this.setState({...data, dataloading: true})
+                this.setState({ ...data, dataloading: true })
             }).catch((err) => {
-            console.log(err)
-        })
+                console.log(err)
+            })
     }
 
     render() {
@@ -402,24 +186,24 @@ class Profile extends Component {
         //     const imgWindow = window.open(src);
         //     imgWindow.document.write(image.outerHTML);
         // };
-        const {crop, croppedImageUrl, src,src2} = this.state
-        const {loading, imageUrl} = this.state;
+        const { crop, croppedImageUrl, src, src2 } = this.state
+        const { loading, imageUrl } = this.state;
         const uploadButton = (
             <div>
-                {loading ? <LoadingOutlined/> : <PlusOutlined/>}
-                <div style={{marginTop: 8}}>Upload</div>
+                {loading ? <LoadingOutlined /> : <PlusOutlined />}
+                <div style={{ marginTop: 8 }}>Upload</div>
             </div>
         );
 
         return (
-            <Content style={{padding: '20px 50px'}}>
+            <Content style={{ padding: '20px 50px' }}>
                 <div className="site-layout-content">
                     <PageHeader
                         className="site-page-header site-page-header-responsive"
                         onBack={() => null}
                         title="Profile"
                     >
-                        <Spin spinning={!this.state.dataloading} tip={'Loading'}/>
+                        <Spin spinning={!this.state.dataloading} tip={'Loading'} />
                         {this.state.dataloading && <Form
                             ref={this.formRef} name="control-ref" onFinish={this.onFinish}
                             layout="vertical"
@@ -432,48 +216,48 @@ class Profile extends Component {
                                         },
                                     ]}>
                                         <Input value={this.defaultValue('name')}
-                                               name='name'
-                                               onChange={(e) => this.handleChangeInput(e)}
-                                               placeholder="Full Name"/>
+                                            name='name'
+                                            onChange={(e) => this.handleChangeInput(e)}
+                                            placeholder="Full Name" />
                                     </Form.Item>
 
-                                    <Form.Item label="Company Name" required rules={[{required: true}]}>
+                                    <Form.Item label="Company Name" required rules={[{ required: true }]}>
                                         <Input value={this.defaultValue('company_name')}
-                                               name='company_name'
-                                               onChange={(e) => this.handleChangeInput(e)}
-                                               placeholder="Company Name"/>
+                                            name='company_name'
+                                            onChange={(e) => this.handleChangeInput(e)}
+                                            placeholder="Company Name" />
                                     </Form.Item>
 
                                     <Form.Item label="Personal URL" required>
                                         <Input addonBefore={window.VIDEO_APP.base_url}
-                                               name='username'
-                                               onChange={(e) => this.handleChangeInput(e)}
-                                               value={this.defaultValue('username')} placeholder="Personal URL"/>
+                                            name='username'
+                                            onChange={(e) => this.handleChangeInput(e)}
+                                            value={this.defaultValue('username')} placeholder="Personal URL" />
                                     </Form.Item>
 
                                     <Form.Item label="Website URL" required>
                                         <Input addonBefore='https://'
-                                               name='website'
-                                               onChange={(e) => this.handleChangeInput(e)}
-                                               value={this.defaultValue('website')} placeholder="Website URL"/>
+                                            name='website'
+                                            onChange={(e) => this.handleChangeInput(e)}
+                                            value={this.defaultValue('website')} placeholder="Website URL" />
                                     </Form.Item>
                                     <Form.Item label="Facebook" required>
                                         <Input addonBefore="https://www.facebook.com/"
-                                               name='facebook'
-                                               onChange={(e) => this.handleChangeInput(e)}
-                                               value={this.defaultValue('facebook')} placeholder="Facebook"/>
+                                            name='facebook'
+                                            onChange={(e) => this.handleChangeInput(e)}
+                                            value={this.defaultValue('facebook')} placeholder="Facebook" />
                                     </Form.Item>
                                     <Form.Item label="Youtube" required>
                                         <Input addonBefore="https://www.youtube.com/"
-                                               name='youtube'
-                                               onChange={(e) => this.handleChangeInput(e)}
-                                               value={this.defaultValue('youtube')} placeholder="Youtube"/>
+                                            name='youtube'
+                                            onChange={(e) => this.handleChangeInput(e)}
+                                            value={this.defaultValue('youtube')} placeholder="Youtube" />
                                     </Form.Item>
                                     <Form.Item label="Instagram" required>
                                         <Input addonBefore="https://www.instagram.com/"
-                                               name='instagram'
-                                               onChange={(e) => this.handleChangeInput(e)}
-                                               value={this.defaultValue('instagram')} placeholder="Instagram"/>
+                                            name='instagram'
+                                            onChange={(e) => this.handleChangeInput(e)}
+                                            value={this.defaultValue('instagram')} placeholder="Instagram" />
                                     </Form.Item>
                                     <Form.Item label="About/Bio">
                                         <Editor
@@ -497,10 +281,10 @@ class Profile extends Component {
                                         />
                                     </Form.Item>
 
-                                    <Form.Item label="License" required rules={[{required: true,},]}>
+                                    <Form.Item label="License" required rules={[{ required: true, },]}>
                                         <MaskedInput value={this.defaultValue('license_no')} placeholder="License"
-                                                     onChange={(e) => this.handleChangeInput(e)}
-                                                     mask="#######" name="license_no" size="7"/>
+                                            onChange={(e) => this.handleChangeInput(e)}
+                                            mask="#######" name="license_no" size="7" />
                                     </Form.Item>
 
                                     <Form.Item label="Direct Phone" required rules={[
@@ -509,9 +293,9 @@ class Profile extends Component {
                                         },
                                     ]}>
                                         <MaskedInput value={this.defaultValue('direct_phone')}
-                                                     placeholder="Direct Phone" mask="111-111-1111"
-                                                     onChange={(e) => this.handleChangeInput(e)}
-                                                     name="direct_phone" size="20"/>
+                                            placeholder="Direct Phone" mask="111-111-1111"
+                                            onChange={(e) => this.handleChangeInput(e)}
+                                            name="direct_phone" size="20" />
                                     </Form.Item>
                                     <Form.Item label="Office Phone" required rules={[
                                         {
@@ -519,9 +303,9 @@ class Profile extends Component {
                                         },
                                     ]}>
                                         <MaskedInput value={this.defaultValue('office_phone')}
-                                                     placeholder="Office Phone" mask="111-111-1111"
-                                                     onChange={(e) => this.handleChangeInput(e)}
-                                                     name="office_phone" size="20"/>
+                                            placeholder="Office Phone" mask="111-111-1111"
+                                            onChange={(e) => this.handleChangeInput(e)}
+                                            name="office_phone" size="20" />
                                     </Form.Item>
                                     <Form.Item label="Address" required rules={[
                                         {
@@ -535,13 +319,13 @@ class Profile extends Component {
                                                     country: ['us'],
                                                 }
                                             }}
-                                            onSelect={({description}) => {
+                                            onSelect={({ description }) => {
                                                 geocodeByAddress(description).then((results) => {
-                                                    let {user} = this.state;
+                                                    let { user } = this.state;
                                                     user.address = description;
                                                     user.location_latitude = results[0].geometry.location.lat();
                                                     user.location_longitude = results[0].geometry.location.lng();
-                                                    this.setState({user});
+                                                    this.setState({ user });
                                                 }).catch(error => console.error(error));
                                             }}
 
@@ -552,72 +336,31 @@ class Profile extends Component {
                                     <Form.Item label="Profession and Expertise">
                                         {this.state.categories.length > 0 && <>
                                             <Select defaultValue={this.defaultValue('user_category_id')} showSearch
-                                                    name="user_category_id"
-                                                    onChange={e => this.handleChangeInput(e, 'user_category_id')}
-                                                    placeholder="Choose one of the following Profession and Expertise...">
+                                                name="user_category_id"
+                                                onChange={e => this.handleChangeInput(e, 'user_category_id')}
+                                                placeholder="Choose one of the following Profession and Expertise...">
                                                 {this.state.categories.map((u, key) => u['children'].length > 0 &&
-                                                    <Select.OptGroup key={key} label={u['name']}>
+                                                    <Select.OptGroup key={u['id']} label={u['name']}>
                                                         {u['children'].map((u1, k) => {
                                                             return u1['children'].length > 0 ? u1['children'].map((u2, k) =>
-                                                                    <Select.Option key={key * 1000}
-                                                                                   value={u2['id']}
-                                                                                   data-subtext={u1['name']}>{u2['name']}</Select.Option>) :
-                                                                <Select.Option key={key * 1000}
+                                                                <Select.Option key={u2['id'] * 1000}
+                                                                    value={u2['id']}
+                                                                    data-subtext={u1['name']}>{u2['name']}</Select.Option>) :
+                                                                <Select.Option key={u1['id'] * 1000}
 
-                                                                               value={u1['id']}>{u1['name']}</Select.Option>;
+                                                                    value={u1['id']}>{u1['name']}</Select.Option>;
                                                         })}</Select.OptGroup>)}
                                             </Select>
                                         </>}
                                     </Form.Item>
-                                    <div>
-                                        <input type="file" accept="image/*" onChange={this.onSelectFile}/>
-                                    </div>
-                                    <Modal
-                                        title="Profile Picture"
-                                        visible={this.state.modalVisible}
-                                        onOk={this.handleUpdateImage}
-                                        onCancel={()=>{this.setState({modalVisible:false})}}
-                                        okText="Upload"
-                                        cancelText="Cancel"
-                                    >
-                                        {src && (
-                                            <ReactCrop
-                                                src={src}
-                                                crop={crop}
-                                                ruleOfThirds
-                                                onImageLoaded={this.onImageLoaded}
-                                                onComplete={this.onCropComplete}
-                                                onChange={this.onCropChange}
-                                            />
-                                        )}
-                                    </Modal>
-                                    <div>
-                                        <input type="file" accept="image/*" onChange={this.onSelectFile2}/>
-                                    </div>
-                                    <Modal
-                                        title="Company Logo"
-                                        visible={this.state.modalVisible2}
-                                        onOk={this.handleUpdateImage2}
-                                        onCancel={()=>{this.setState({modalVisible2:false})}}
-                                        okText="Upload"
-                                        cancelText="Cancel"
-                                    >
-                                        {src2 && (
-                                            <div>
-                                                <ReactCrop
-                                                    src={src2}
-                                                    crop={crop}
-                                                    ruleOfThirds
-                                                    onImageLoaded={this.onImageLoaded}
-                                                    onComplete={this.onCropComplete}
-                                                    onChange={this.onCropChange}
-                                                />
-                                            </div>
-                                        )}
-                                    </Modal>
-                                    <Button onClick={(e) => {
-                                        this.handleSubmit()
-                                    }}>
+                                    <Form.Item label="Profile Picture">
+                                        <ImgCrop onChange={e=>this.handleUpdateImage(e)} defaultSrc={this.defaultValue('profile_picture')} />
+                                    </Form.Item>
+                                    <Form.Item label="Company Logo">
+                                        <ImgCrop onChange={e=>this.handleUpdateImage(e,"company_logo")} defaultSrc={this.defaultValue('company_logo')} />
+                                    </Form.Item>
+                                    
+                                    <Button onClick={this.handleSubmit}>
                                         Save
                                     </Button>
                                 </TabPane>
@@ -628,10 +371,10 @@ class Profile extends Component {
                                         },
                                     ]}>
                                         <Input value={this.state.old_password}
-                                               name='old_password'
-                                               type="password"
-                                               onChange={(e) => this.setState({old_password: e.target.value})}
-                                               placeholder="Old Password"/>
+                                            name='old_password'
+                                            type="password"
+                                            onChange={(e) => this.setState({ old_password: e.target.value })}
+                                            placeholder="Old Password" />
                                     </Form.Item>
                                     <Form.Item label="New Password" required rules={[
                                         {
@@ -639,10 +382,10 @@ class Profile extends Component {
                                         },
                                     ]}>
                                         <Input value={this.state.new_password}
-                                               name='new_password'
-                                               type="password"
-                                               onChange={(e) => this.setState({new_password: e.target.value})}
-                                               placeholder="New Password"/>
+                                            name='new_password'
+                                            type="password"
+                                            onChange={(e) => this.setState({ new_password: e.target.value })}
+                                            placeholder="New Password" />
                                     </Form.Item>
                                     <Form.Item label="Confirm Password" required rules={[
                                         {
@@ -650,10 +393,10 @@ class Profile extends Component {
                                         },
                                     ]}>
                                         <Input value={this.state.confirm_password}
-                                               name='confirm_password'
-                                               type="password"
-                                               onChange={(e) => this.setState({confirm_password: e.target.value})}
-                                               placeholder="Confirm Password"/>
+                                            name='confirm_password'
+                                            type="password"
+                                            onChange={(e) => this.setState({ confirm_password: e.target.value })}
+                                            placeholder="Confirm Password" />
                                     </Form.Item>
                                     <Button onClick={this.changePassword}>
                                         Change Password
@@ -671,7 +414,7 @@ class Profile extends Component {
                                         cancelText="No"
                                     >
                                         <Button danger onClick={e => {
-                                            axios.delete("profile/1").then(({}) => {
+                                            axios.delete("profile/1").then(({ }) => {
                                                 $("#logout-form").submit();
                                             })
                                         }}>Delete Account</Button>
