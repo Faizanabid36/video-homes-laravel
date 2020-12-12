@@ -6,6 +6,7 @@ use App\Video;
 use Exception;
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Filters\Video\RotateFilter;
+use FFMpeg\Filters\Video\VideoFilters;
 use FFMpeg\Format\Video\X264;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -42,14 +43,14 @@ class ConvertVideoForStreaming implements ShouldQueue {
 		$lowBitrateFormat = ( new X264( 'aac', 'libx264' ) )->setKiloBitrate( 1000 );
 		// $lowBitrateFormat->setInitialParameters(array('-acodec', 'copy'));
 
-		$video = \FFMpeg::open( $this->video->video_path )->addFilter( '-movflags', '+faststart' );
+		$video = \FFMpeg::open( $this->video->video_path );
 		Log::info( 'Essa Outside Angle', array( $this->angle, $this->video->video_path, $video ) );
 		if ( $this->angle ) {
 			Log::info( 'Essa Inside Angle', array( $this->angle ) );
 			$video->filters()->rotate( $this->angle );
 		}
 
-		$video->filters()->pad( new Dimension( $this->width, $this->height ) );
+		// $video->filters()->pad( new Dimension( $this->width, $this->height ) );
 		// update the database so we know the convertion is done!
 		Log::info(
 			'This is some useful information.',
@@ -64,7 +65,14 @@ class ConvertVideoForStreaming implements ShouldQueue {
 					Log::alert( 'Percentage : ', array( "{$percentage}% transcoded", "{$remaining} seconds left at rate: {$rate}" ) );
 				}
 			)
-			->inFormat( $lowBitrateFormat )->save( getCleanFileName( $this->video->video_path, "_{$this->height}p_converted.mp4" ) );
+			->inFormat( new \ProtoneMedia\LaravelFFMpeg\FFMpeg\CopyFormat() )
+			->addFilter(
+				function ( VideoFilters $filters ) {
+					$filters->resize( new Dimension( $this->width, $this->height ) );
+				}
+			)
+			->addFilter( array( '-movflags', '+faststart' ) )
+			->save( getCleanFileName( $this->video->video_path, "_{$this->height}p_converted.mp4" ) );
 		} catch ( Exception $e ) {
 			Log::error(
 				'JOB Export Error!!!!!!!!',
