@@ -77,7 +77,7 @@ if ( ! function_exists( 'generateThumbnailsFromVideo' ) ) {
 	function generateThumbnailsFromVideo( $media, $path, $angle, $thumbnail_shots = 3 ) {
 		$thumbnail_shots = $media->getDurationInSeconds() >= $thumbnail_shots ? $thumbnail_shots : 1;
 		$divide_result   = (int) floor( $media->getDurationInSeconds() / $thumbnail_shots );
-		$seconds         = $divide_result;
+		$seconds         = 0;
 		$newThumbnail    = array();
 
 		for ( $i = 1; $i <= $thumbnail_shots; $i ++ ) {

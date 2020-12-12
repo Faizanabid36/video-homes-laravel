@@ -60,16 +60,15 @@ class ConvertVideoForStreaming implements ShouldQueue {
 		try {
 			$video->export()
 			->onProgress(
-				function ( $percentage, $remaining, $rate ) use ( &$percentages, &$remainings, &$rates ) {
-					Log::alert( 'Percentage : ', array( $percentage, $remaining, $rate ) );
-
+				function ( $percentage, $remaining, $rate ) {
+					Log::alert( 'Percentage : ', array( "{$percentage}% transcoded", "{$remaining} seconds left at rate: {$rate}" ) );
 				}
 			)
 			->inFormat( $lowBitrateFormat )->save( getCleanFileName( $this->video->video_path, "_{$this->height}p_converted.mp4" ) );
 		} catch ( Exception $e ) {
 			Log::error(
 				'JOB Export Error!!!!!!!!',
-				$e->getMessage()
+				array( $e->getMessage() )
 			);
 		}
 
