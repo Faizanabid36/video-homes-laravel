@@ -43,14 +43,14 @@ class ConvertVideoForStreaming implements ShouldQueue {
 		$lowBitrateFormat = ( new X264( 'aac', 'libx264' ) )->setKiloBitrate( 1000 );
 		// $lowBitrateFormat->setInitialParameters(array('-acodec', 'copy'));
 
-		$video = \FFMpeg::open( $this->video->video_path );
+		$video = \FFMpeg::open( $this->video->video_path )
+		->filters()->pad( new Dimension( $this->width, $this->height ) );
 		Log::info( 'Essa Outside Angle', array( $this->angle, $this->video->video_path, $video ) );
 		if ( $this->angle ) {
 			Log::info( 'Essa Inside Angle', array( $this->angle ) );
 			$video->filters()->rotate( $this->angle );
 		}
 
-		// $video->filters()->pad( new Dimension( $this->width, $this->height ) );
 		// update the database so we know the convertion is done!
 		Log::info(
 			'This is some useful information.',
@@ -59,8 +59,6 @@ class ConvertVideoForStreaming implements ShouldQueue {
 			)
 		);
 		try {
-			$width  = $this->width;
-			$height = $this->height;
 			$video->export()
 			->onProgress(
 				function ( $percentage, $remaining, $rate ) {
@@ -68,11 +66,6 @@ class ConvertVideoForStreaming implements ShouldQueue {
 				}
 			)
 			->inFormat( $lowBitrateFormat )
-			->addFilter(
-				function ( VideoFilters $filters ) use ( $width, $height ) {
-					$filters->resize( new Dimension( $this->width, $this->height ) );
-				}
-			)
 			->addFilter( array( '-movflags', '+faststart' ) )
 			->save( getCleanFileName( $this->video->video_path, "_{$this->height}p_converted.mp4" ) );
 		} catch ( Exception $e ) {
