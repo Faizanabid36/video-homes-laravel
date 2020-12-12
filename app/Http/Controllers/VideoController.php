@@ -33,7 +33,7 @@ class VideoController extends Controller {
 			array(
 				'thumbnail'     => $newThumbnails[1],
 				'original_name' => request()->video->getClientOriginalName(),
-				'video_path'    => str_replace( '/path', '', $path ),
+				'video_path'    => str_replace( 'path/', '', $path ),
 				'title'         => request()->video->getClientOriginalName(),
 				'duration'      => $media->getDurationInSeconds(),
 				'size'          => request()->video->getSize(),
