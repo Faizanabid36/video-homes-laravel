@@ -28,12 +28,13 @@ class VideoController extends Controller {
 		$angle       = getVideoRotation( $videostream );
 		Log::info( "Rotation: $angle" );
 		$dimension     = $videostream->getDimensions();
-		$newThumbnails = generateThumbnailsFromVideo( $media, $path, $angle );
+        $newThumbnails = generateThumbnailsFromVideo( $media, $path, $angle );
+        $path = str_replace( 'path/', '', $path );
 		$video         = Video::create(
 			array(
 				'thumbnail'     => $newThumbnails[1],
 				'original_name' => request()->video->getClientOriginalName(),
-				'video_path'    => str_replace( 'path/', '', $path ),
+				'video_path'    => $path,
 				'title'         => request()->video->getClientOriginalName(),
 				'duration'      => $media->getDurationInSeconds(),
 				'size'          => request()->video->getSize(),
