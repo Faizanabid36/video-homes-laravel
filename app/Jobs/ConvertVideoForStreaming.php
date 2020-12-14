@@ -6,7 +6,6 @@ use App\Video;
 use Exception;
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Filters\Video\RotateFilter;
-use FFMpeg\Filters\Video\VideoFilters;
 use FFMpeg\Format\Video\X264;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -42,13 +41,14 @@ class ConvertVideoForStreaming implements ShouldQueue {
 		// create a video format...
 		$lowBitrateFormat = ( new X264( 'aac', 'libx264' ) )->setKiloBitrate( 1000 );
 
-		$video = \FFMpeg::open( $this->video->video_path )
-		->filters()->pad( new Dimension( $this->width, $this->height ) );
+		$video = \FFMpeg::open( $this->video->video_path );
 		Log::info( 'Essa Outside Angle', array( $this->angle, $this->video->video_path, $video ) );
 		if ( $this->angle ) {
 			Log::info( 'Essa Inside Angle', array( $this->angle ) );
 			$video->filters()->rotate( $this->angle );
 		}
+		$video
+		->filters()->pad( new Dimension( $this->width, $this->height ) );
 
 		// update the database so we know the convertion is done!
 		Log::info(
