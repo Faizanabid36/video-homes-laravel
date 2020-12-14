@@ -156,7 +156,8 @@ class VideosController extends Controller {
 	public function show( $id ) {
 		$video = Video::findOrFail( $id );
 		if ( $video->stream_path ) {
-			$video->stream_path = str_replace( 'public', '', $video->stream_path );
+			die( $video->stream_path );
+			$video->stream_path = str_replace( 'public/', '', $video->stream_path );
 		}
 		return view( 'admin.videos.show', compact( 'video' ) );
 	}
