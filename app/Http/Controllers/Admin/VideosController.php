@@ -159,7 +159,7 @@ class VideosController extends Controller {
 
 			$video->stream_path = str_replace( 'public/', '', $video->stream_path );
 		}
-		dd( $video->toArray() );
+		// dd( $video->toArray() );
 		return view( 'admin.videos.show', compact( 'video' ) );
 	}
 
