@@ -85,9 +85,11 @@ class VideosController extends Controller {
 	 */
 	public function store( Request $request ) {
 		// ini_set('max_execution_time', '300');
-		$file = \Str::random( 16 ) . '.' . request()->video->getClientOriginalExtension();
-		request()->video->storeAs( 'public/uploads/', $file );
-		$path        = 'uploads/' . $file;
+		$public = 'public/';
+		$upload = 'uploads/';
+		$file   = \Str::random( 16 ) . '.' . request()->video->getClientOriginalExtension();
+		request()->video->storeAs( $public . $upload, $file );
+		$path        = $public . $upload . $file;
 		$media       = \FFMpeg::open( $path );
 		$videostream = $media->getStreams()->videos()->first();
 		$angle       = getVideoRotation( $videostream );
@@ -98,14 +100,14 @@ class VideosController extends Controller {
 			array(
 				'thumbnail'     => $newThumbnails[1],
 				'original_name' => request()->video->getClientOriginalName(),
-				'video_path'    => $path,
+				'video_path'    => $upload . $file,
 				'title'         => request()->video->getClientOriginalName(),
 				'duration'      => $media->getDurationInSeconds(),
 				'size'          => request()->video->getSize(),
 				'category_id'   => 1,
 				'video_type'    => 'Public',
 				'width'         => $dimension->getWidth(),
-				'stream_path'   => getCleanFileName( $path, '_240p_converted.mp4' ),
+				'stream_path'   => getCleanFileName( $upload . $file, '_240p_converted.mp4' ),
 			)
 		);
 
