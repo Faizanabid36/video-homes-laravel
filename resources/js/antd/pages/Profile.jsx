@@ -40,10 +40,10 @@ class Profile extends Component {
     constructor(props) {
         super(...arguments);
         this.state = {
-            
+
             x: 1,
             y: 2,
-            
+
             dataloading: false,
             loading: false,
             user: {},
@@ -51,21 +51,21 @@ class Profile extends Component {
             new_password: '',
             confirm_password: '',
             categories: [],
-           
+
         };
         this.formRef = React.createRef();
-        
+
         this.beforeUpload = this.beforeUpload.bind(this);
         this.defaultValue = this.defaultValue.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChangeInput = this.handleChangeInput.bind(this);
         this.changePassword = this.changePassword.bind(this);
-        
+
         this.handleUpdateImage = this.handleUpdateImage.bind(this);
-        
+
     }
 
-    
+
 
     onSelectFile(e) {
         if (e.target.files && e.target.files.length > 0) {
@@ -86,7 +86,7 @@ class Profile extends Component {
         }
     };
 
-    
+
     changePassword() {
         let { old_password, new_password, confirm_password } = this.state
         axios.put('profile/1', { old_password, new_password, confirm_password })
@@ -147,7 +147,7 @@ class Profile extends Component {
         return isJpgOrPng && isLt2M;
     }
 
-    
+
     handleUpdateImage(data,variable_name= "profile_picture") {
         let params = {};
         params[variable_name] = data;
@@ -160,7 +160,7 @@ class Profile extends Component {
                 console.log(err)
             })
     }
-    
+
     componentDidMount() {
         axios.get('profile')
             .then(({ data }) => {
@@ -172,20 +172,6 @@ class Profile extends Component {
     }
 
     render() {
-        // const onPreview = async file => {
-        //     let src = file.url;
-        //     if (!src) {
-        //         src = await new Promise(resolve => {
-        //             const reader = new FileReader();
-        //             reader.readAsDataURL(file.originFileObj);
-        //             reader.onload = () => resolve(reader.result);
-        //         });
-        //     }
-        //     const image = new Image();
-        //     image.src = src;
-        //     const imgWindow = window.open(src);
-        //     imgWindow.document.write(image.outerHTML);
-        // };
         const { crop, croppedImageUrl, src, src2 } = this.state
         const { loading, imageUrl } = this.state;
         const uploadButton = (
@@ -359,7 +345,7 @@ class Profile extends Component {
                                     <Form.Item label="Company Logo">
                                         <ImgCrop onChange={e=>this.handleUpdateImage(e,"company_logo")} defaultSrc={this.defaultValue('company_logo')} />
                                     </Form.Item>
-                                    
+
                                     <Button onClick={this.handleSubmit}>
                                         Save
                                     </Button>

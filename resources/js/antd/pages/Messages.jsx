@@ -27,12 +27,11 @@ export default class Messages extends React.Component {
         let {inputText, to_id} = this.state;
         await axios.post('send_message', {inputText, to_id})
             .then(async (res) => {
-                console.log(res.data)
                 let nextMessages = await this.state.messages.concat([{
                     message: this.state.inputText,
                     contact_user_id: this.state.user_id
                 }]);
-                await this.setState({messages: nextMessages, inputText: ''});
+                await this.setState({messages: nextMessages, inputText: ''},()=>{document.getElementById('scroller').scrollBy(0,1000000000)});
             })
             .catch((err) => {
                 console.log(err)
@@ -45,13 +44,12 @@ export default class Messages extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.match.params.id)
         let message_id = this.props.match.params.id
         axios.post('my_messages', {message_id})
             .then((res) => {
-                console.log(res)
                 this.setState({...res.data}, () => {
-                    this.setState({dataloading: true})
+                    this.setState({dataloading: true},()=>{document.getElementById('scroller').scrollBy(0,1000000000)})
+
                 })
             })
             .catch((err) => {
@@ -68,7 +66,11 @@ export default class Messages extends React.Component {
                         className="site-page-header site-page-header-responsive"
                         title="Message History">
 
-                        <ul style={{
+                        <ul
+                            id={'scroller'}
+                            style={{
+                            height:'250px',
+                            overflowY:"scroll",
                             listStyle: 'none',
                             margin: 0,
                             padding: 0
