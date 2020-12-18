@@ -186,8 +186,8 @@ class Profile extends Component {
                 <div className="site-layout-content">
                     <PageHeader
                         className="site-page-header site-page-header-responsive"
-                        onBack={() => null}
-                        title="Profile"
+                        onBack={() => window.location.hash = "#/"}
+                        title="Video"
                     >
                         <Spin spinning={!this.state.dataloading} tip={'Loading'} />
                         {this.state.dataloading && <Form
