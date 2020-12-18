@@ -53,7 +53,7 @@ class UserCategory extends Model {
         return $query->selectRaw( 'user_categories.*,uc1.name as parent_name' )
                      ->leftJoin( 'user_categories as uc1', 'user_categories.parent_id', 'uc1.id' )
                         ->when($with_priority,function ($q){
-                            return $q->whereNull('parent_id')->orderBy('priority')->orderBy('slug');
+                            return $q->whereNull('uc1.parent_id')->orderBy('priority')->orderBy('slug');
                         })->get()->toArray();
     }
 
