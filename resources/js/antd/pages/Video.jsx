@@ -63,7 +63,6 @@ class Video extends Component {
 
                             {this.state.approvedVideos.length > 0 ? this.state.approvedVideos.map((item, k) => {
                                 return <Col id={'video-card-' + item.id}
-                                            offset={1}
                                             xs={24} sm={24} md={24} lg={8} xl={8}
                                             key={k}>
                                     <Card
