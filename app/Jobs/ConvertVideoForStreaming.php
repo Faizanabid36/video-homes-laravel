@@ -6,7 +6,6 @@ use App\Video;
 use Exception;
 use FFMpeg\Coordinate\Dimension;
 use FFMpeg\Filters\Video\RotateFilter;
-use FFMpeg\Filters\Video\VideoFilters;
 use FFMpeg\Format\Video\X264;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -41,21 +40,21 @@ class ConvertVideoForStreaming implements ShouldQueue {
 	public function handle() {
 		// create a video format...
 		$lowBitrateFormat = ( new X264( 'aac', 'libx264' ) )->setKiloBitrate( 1000 );
-		// $lowBitrateFormat->setInitialParameters(array('-acodec', 'copy'));
-
-		$video = \FFMpeg::open( $this->video->video_path )
-		->filters()->pad( new Dimension( $this->width, $this->height ) );
-		Log::info( 'Essa Outside Angle', array( $this->angle, $this->video->video_path, $video ) );
+		$public           = 'public/';
+		$video            = \FFMpeg::open( $public . $this->video->video_path );
+		Log::info( 'Essa Outside Angle', array( $this->angle, $public . $this->video->video_path, $video ) );
 		if ( $this->angle ) {
 			Log::info( 'Essa Inside Angle', array( $this->angle ) );
 			$video->filters()->rotate( $this->angle );
 		}
+		$video
+		->filters()->pad( new Dimension( $this->width, $this->height ) );
 
 		// update the database so we know the convertion is done!
 		Log::info(
 			'This is some useful information.',
 			array(
-				'file_path' => $this->video->stream_path . "_{$this->height}p_converted.mp4",
+				'file_path' => $public . $this->video->stream_path . "_{$this->height}p_converted.mp4",
 			)
 		);
 		try {
@@ -67,7 +66,7 @@ class ConvertVideoForStreaming implements ShouldQueue {
 			)
 			->inFormat( $lowBitrateFormat )
 			->addFilter( array( '-movflags', '+faststart' ) )
-			->save( getCleanFileName( $this->video->video_path, "_{$this->height}p_converted.mp4" ) );
+			->save( getCleanFileName( $public . $this->video->video_path, "_{$this->height}p_converted.mp4" ) );
 		} catch ( Exception $e ) {
 			Log::error(
 				'JOB Export Error!!!!!!!!',
