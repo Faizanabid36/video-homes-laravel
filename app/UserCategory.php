@@ -52,9 +52,9 @@ class UserCategory extends Model {
     public function scopeLevelCategories( $query,$with_priority=null ) {
         return $query->selectRaw( 'user_categories.*,uc1.name as parent_name' )
                      ->leftJoin( 'user_categories as uc1', 'user_categories.parent_id', 'uc1.id' )
-            ->when($with_priority,function ($q){
-                return $q->orderBy('priority');
-            })->get()->toArray();
+                        ->when($with_priority,function ($q){
+                            return $q->whereNull('parent_id')->orderBy('priority')->orderBy('slug');
+                        })->get()->toArray();
     }
 
 }
