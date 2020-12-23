@@ -10,6 +10,7 @@ import {
     LogoutOutlined,
     MenuFoldOutlined,
     MessageOutlined,
+    NotificationOutlined,
     ProfileOutlined,
     SettingOutlined,
     StarOutlined,
@@ -143,8 +144,9 @@ class App extends React.Component {
 
     componentDidMount() {
         axios.get('logged_in_user').then((res) => {
-            this.setState({user: res.data.user, notifications: res.data.notifications, dataloaded: true})
-            console.log('here', res.data.user.user_extra)
+            this.setState({...res.data},()=>{
+                this.setState({dataloaded: true})
+            })
         })
             .catch((err) => {
                 console.log(err)
@@ -217,6 +219,16 @@ class App extends React.Component {
             })}
         </Menu>;
     }
+    videoNotificationMenu() {
+        return <Menu onClick={this.menuClick}>
+            {this.state.video_notifications.map((item, i) => {
+                return <Menu.Item key={item.id}>
+                    {item.data.text}
+                    <hr/>
+                </Menu.Item>
+            })}
+        </Menu>;
+    }
 
     render() {
         return (
@@ -277,7 +289,14 @@ class App extends React.Component {
 
                                     <Dropdown overlay={this.notificationMenu()}>
                                         <Badge count={this.state.notifications.length} size={'md'}>
-                                            <BellOutlined style={{fontSize: "20px"}} onClick={e => e.preventDefault()}/>
+                                            <MessageOutlined style={{fontSize: "20px"}}
+                                                             onClick={e => e.preventDefault()}/>
+                                        </Badge>
+                                    </Dropdown>
+                                    <Dropdown overlay={this.videoNotificationMenu()}>
+                                        <Badge count={this.state.video_notifications.length} size={'md'}>
+                                            <BellOutlined style={{fontSize: "20px"}}
+                                                                  onClick={e => e.preventDefault()}/>
                                         </Badge>
                                     </Dropdown>
                                     <Dropdown overlay={this.profileMenu()}>

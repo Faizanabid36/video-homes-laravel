@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\ConvertVideoForStreaming;
+use App\Notifications\VideoUploaded;
 use App\Video;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -194,9 +195,9 @@ class VideosController extends Controller {
 			)
 		);
 		$requestData = $request->all();
-
 		$video = Video::findOrFail( $id );
 		$video->update( $requestData );
+        auth()->user()->notify(new VideoUploaded($video,auth()->user()));
 
 		return redirect( 'admin/videos' )->with( 'flash_message', 'Video updated!' );
 	}

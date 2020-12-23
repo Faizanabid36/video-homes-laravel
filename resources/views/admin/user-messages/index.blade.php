@@ -44,7 +44,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->message }}</td>
-                                        <td>{{ $item->type=='contact'?'Message':ucfirst($item->type) }}</td>
+                                        <td>{{ $item->type=='contact'?$item->contact_user_id==0?'Enquiry':'Message':ucfirst($item->type) }}</td>
                                         <td>
                                             @if($item->type!='contact')
                                                 <a href="{{route('directory_by_username',[$item->video->user->username,$item->video->video_id])}}">
@@ -52,23 +52,7 @@
                                                 </a>
                                             @endif
                                         </td>
-
                                         <td>
-                                            {{--                                            <a href="{{ url('/admin/user-message/' . $item->id) }}"--}}
-                                            {{--                                               title="View UserCategory">--}}
-                                            {{--                                                <button class="btn btn-info btn-sm"><i class="fa fa-eye"--}}
-                                            {{--                                                                                       aria-hidden="true"></i> View--}}
-                                            {{--                                                </button>--}}
-                                            {{--                                            </a>--}}
-{{--                                            <a--}}
-{{--                                                href="{{route('user-message.edit',$item->id)}}"--}}
-{{--                                                --}}{{--                                                href="{{ url('/admin/user-message/' . $item->id . '/edit') }}"--}}
-{{--                                                title="Edit Message/Review">--}}
-{{--                                                <button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o"--}}
-{{--                                                                                          aria-hidden="true"></i> Edit--}}
-{{--                                                </button>--}}
-{{--                                            </a>--}}
-
                                             <form method="POST"
                                                   action="{{ url('/admin/user-message' . '/' . $item->id) }}"
                                                   accept-charset="UTF-8" style="display:inline">

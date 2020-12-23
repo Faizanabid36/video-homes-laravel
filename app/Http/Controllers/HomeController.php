@@ -33,7 +33,8 @@ class HomeController extends Controller
             'uploaded_videos_space' => round($user->videos->sum('size') / (1024 * 1024 * 1024), 3)
         ]);
         $notifications = UserMessage::whereReplyUserId(auth()->user()->id)->whereType('contact')->whereNull('read_at')->get();
-        return ['user' => $user, 'notifications' => $notifications];
+        $video_notifications  = auth()->user()->notifications;
+        return ['user' => $user, 'notifications' => $notifications,'video_notifications'=>$video_notifications];
     }
 
 

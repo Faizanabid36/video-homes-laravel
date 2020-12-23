@@ -104,24 +104,19 @@
                     <div class="text-center text-white">
                         <h1>Say Hello!</h1>
                         <p> Please contact us for more information.</p>
-                        @if(auth()->check())
-                            <form class="form bg-white text-dark p-3" method="POST" action="{{route('to_user')}}">
-                                @csrf
-                                <input type="hidden" name="contact_user_id" value="1">
-                                <input type="hidden" name="video_id" value="0">
-                                <div class="form-group">
-                                    <label for="message">Message</label>
-                                    <textarea name="message" class="form-control" id="message" rows="3"
-                                              placeholder="Message here"></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary">SEND</button>
-                            </form>
-                        @else
-                            <a href="{{route('login')}}" class="btn btn-info text-white">Login to
-                                Contact Us</a>
-                        @endif
+                        <form class="form bg-white text-dark p-3" method="POST" action="{{route('enquiry')}}">
+                            @csrf
+                            <input type="hidden" name="contact_user_id" value="0">
+                            <input type="hidden" name="type" value="contact">
+                            <input type="hidden" name="video_id" value="-1">
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea name="message" class="form-control" id="message" rows="3"
+                                          placeholder="Message here"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">SEND</button>
+                        </form>
                     </div>
-
                 </div>
             </div>
         </div>

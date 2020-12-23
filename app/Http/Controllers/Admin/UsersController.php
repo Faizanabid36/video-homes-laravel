@@ -7,7 +7,7 @@ use App\Http\Requests;
 
 use App\User;
 use Illuminate\Http\Request;
-use phpseclib\Crypt\Hash;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -131,5 +131,22 @@ class UsersController extends Controller
         User::destroy($id);
 
         return redirect('admin/users')->with('flash_message', 'User deleted!');
+    }
+
+
+    public function reset_password($id)
+    {
+        $user = User::whereId($id)->firstOrFail();
+        return view('admin.users.reset_password',compact('user'));
+    }
+    public function reset_user_password(Request $request , $id)
+    {
+        $this->validate($request,[
+            'password' => 'min:6|required_with:confirm_password|same:confirm_password',
+            'confirm_password' => 'min:6'
+        ]);
+        $user = User::whereId($id)->firstOrFail();
+        $user->update(['password'=> Hash::make($request->password)]);
+        return redirect('admin/users')->with('flash_message', 'Password Reset!');
     }
 }
