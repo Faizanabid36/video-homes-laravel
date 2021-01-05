@@ -88,65 +88,67 @@ class VideosController extends Controller {
 		// ini_set('max_execution_time', '300');
 		$public = 'public/';
 		$upload = 'uploads/';
-		$file   = \Str::random( 16 ) . '.' . request()->video->getClientOriginalExtension();
-		request()->video->storeAs( $public . $upload, $file );
-		$path        = $public . $upload . $file;
-		$media       = \FFMpeg::open( $path );
-		$videostream = $media->getStreams()->videos()->first();
-		$angle       = getVideoRotation( $videostream );
-		Log::info( "Rotation: $angle" );
-		$dimension     = $videostream->getDimensions();
-		$newThumbnails = generateThumbnailsFromVideo( $media, $path, $angle );
-		$video         = Video::create(
-			array(
-				'thumbnail'     => $newThumbnails[1],
-				'original_name' => request()->video->getClientOriginalName(),
-				'video_path'    => $upload . $file,
-				'title'         => request()->video->getClientOriginalName(),
-				'duration'      => $media->getDurationInSeconds(),
-				'size'          => request()->video->getSize(),
-				'category_id'   => 1,
-				'video_type'    => 'Public',
-				'width'         => $dimension->getWidth(),
-				'stream_path'   => getCleanFileName( $upload . $file, '_240p_converted.mp4' ),
-			)
-		);
+        $file   = \Str::random( 16 ) . '.' . request()->video->getClientOriginalExtension();
+        request()->video->storeAs( $public . $upload, $file );
+        $path        = $public . $upload . $file;
+        $media       = \FFMpeg::open( $path );
+        $duration    = $media->getDurationInSeconds();
+        $videostream = $media->getVideoStream();
+        $angle       = getVideoRotation( $videostream );
+        Log::info( "Rotation: $angle" );
+        $dimension     = $videostream->getDimensions();
+        $newThumbnails = generateThumbnailsFromVideo( $media, $path, $angle );
+        $video         = Video::create(
+            array(
+                'thumbnail'     => $newThumbnails[1],
+                'original_name' => request()->video->getClientOriginalName(),
+                'video_path'    => $upload . $file,
+                'title'         => request()->video->getClientOriginalName(),
+                'duration'      => $duration,
+                'size'          => request()->video->getSize(),
+                'category_id'   => 1,
+                'video_type'    => ucfirst( auth()->user()->user_extra->default_video_state ),
+                'width'         => $dimension->getWidth(),
+                'stream_path'   => getCleanFileName( $upload . $file, '_240p_converted.mp4' ),
+                'is_video_approved'    => 1,
+            )
+        );
 
-		ConvertVideoForStreaming::dispatch(
-			$video,
-			320,
-			240,
-			array(
-				'converted_for_streaming_at' => Carbon::now(),
-				'processed'                  => true,
-			),
-			$angle
-		);
-		if ( $video->width >= 640 ) {
-			ConvertVideoForStreaming::dispatch( $video, 640, 360, array( '360p' => 1 ), $angle );
-		}
-		if ( $video->width >= 854 ) {
-			ConvertVideoForStreaming::dispatch( $video, 854, 480, array( '480p' => 1 ), $angle, 1000 );
-		}
-		if ( $video->width >= 1280 ) {
-			ConvertVideoForStreaming::dispatch( $video, 1280, 720, array( '720p' => 1 ), $angle, 1000 );
-		}
-		if ( $video->width >= 1920 ) {
-			ConvertVideoForStreaming::dispatch( $video, 1920, 1080, array( '1080p' => 1 ), $angle, 2000 );
-		}
-		if ( $video->width >= 2560 ) {
-			ConvertVideoForStreaming::dispatch( $video, 2560, 1440, array( '1440p' => 1 ), $angle, 2000 );
-		}
-		if ( $video->width >= 3840 ) {
-			ConvertVideoForStreaming::dispatch( $video, 3840, 2160, array( '4k' => 1 ), $angle, 2000 );
-		}
-		if ( $video->width >= 7680 ) {
-			ConvertVideoForStreaming::dispatch( $video, 7680, 4320, array( '8k' => 1 ), $angle, 2000 );
-		}
-		$message = 'Video is uploading... in background';
+        ConvertVideoForStreaming::dispatch(
+            $video,
+            320,
+            240,
+            array(
+                'converted_for_streaming_at' => Carbon::now(),
+                'processed'                  => 1,
+            ),
+            $angle
+        );
+        if ( $video->width >= 640 ) {
+            ConvertVideoForStreaming::dispatch( $video, 640, 360, array( '360p' => 1 ), $angle );
+        }
+        if ( $video->width >= 854 ) {
+            ConvertVideoForStreaming::dispatch( $video, 854, 480, array( '480p' => 1 ), $angle, 1000 );
+        }
+        if ( $video->width >= 1280 ) {
+            ConvertVideoForStreaming::dispatch( $video, 1280, 720, array( '720p' => 1 ), $angle, 1000 );
+        }
+        if ( $video->width >= 1920 ) {
+            ConvertVideoForStreaming::dispatch( $video, 1920, 1080, array( '1080p' => 1 ), $angle, 2000 );
+        }
+        if ( $video->width >= 2560 ) {
+            ConvertVideoForStreaming::dispatch( $video, 2560, 1440, array( '1440p' => 1 ), $angle, 2000 );
+        }
+        if ( $video->width >= 3840 ) {
+            ConvertVideoForStreaming::dispatch( $video, 3840, 2160, array( '4k' => 1 ), $angle, 2000 );
+        }
+        if ( $video->width >= 7680 ) {
+            ConvertVideoForStreaming::dispatch( $video, 7680, 4320, array( '8k' => 1 ), $angle, 2000 );
+        }
+        $message = 'Video is uploading... in background';
 
 		// return compact('message', 'video');
-		return back()->withMessage( 'Video Has Been Uploaded' );
+		return back()->withMessage( $message );
 	}
 
 	/**

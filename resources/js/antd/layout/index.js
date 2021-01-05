@@ -224,7 +224,6 @@ class App extends React.Component {
             {this.state.video_notifications.map((item, i) => {
                 return <Menu.Item key={item.id}>
                     {item.data.text}
-                    <hr/>
                 </Menu.Item>
             })}
         </Menu>;

@@ -49,7 +49,6 @@ class RegisterController extends Controller {
 	 */
 	public function showRegistrationForm() {
 		$user_category = UserCategory::levelCategories(true);
-		// $user_category = collect( buildTree( $user_category ) )->values();
 
 		// return $user_category;
 		return view( 'auth.register', compact( 'user_category' ) );
