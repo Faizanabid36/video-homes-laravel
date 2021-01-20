@@ -30,7 +30,6 @@ class EditVideo extends Component {
     }
 
     onUpdate() {
-        let self = this;
         axios.put(`video/${this.props.match.params.id}`, {...this.state.video}).then((res) => {
             if (res.data.message)
                 message.success(res.data.message)
@@ -68,7 +67,6 @@ class EditVideo extends Component {
     }
 
     render() {
-
         const contentStyle = {
             height: '160px',
             color: '#fff',
@@ -142,6 +140,18 @@ class EditVideo extends Component {
                                 </Carousel>
                                 {/*<Icon type="right-circle" onClick={this.next}/>*/}
                             </div>}
+                            <Form.Item name="thumbnail_index" label="Thumbnail Image">
+                                <Radio.Group defaultValue={this.state.video.thumbnail}>
+                                    <Radio onChange={(e) => this.onChange(e, 'thumbnails')}
+                                           value={this.state.thumbnails[1]}>1st</Radio>
+                                    <Radio onChange={(e) => this.onChange(e, 'thumbnails')}
+
+                                           value={this.state.thumbnails[2]}>2nd</Radio>
+                                    <Radio onChange={(e) => this.onChange(e, 'thumbnails')}
+
+                                           value={this.state.thumbnails[3]}>3rd</Radio>
+                                </Radio.Group>
+                            </Form.Item>
 
 
                             <Form.Item label="Title" required rules={[{required: true}]}>

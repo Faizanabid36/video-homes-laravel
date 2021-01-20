@@ -64,18 +64,34 @@
                             {{ method_field('PATCH') }}
                             {{ csrf_field() }}
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                <label
-                                    class="btn btn-sm btn-{{ (isset($video) && 1 == $video->is_video_approved) ? 'info' : 'secondary' }}"><input
-                                        onchange="document.getElementById('status').submit();"
-                                        name="is_video_approved" type="radio"
-                                        value="1" {{ (isset($video) && 1 == $video->is_video_approved) ? 'checked' : '' }}>
-                                    Approve</label>
-                                <label
-                                    class="btn btn-sm btn-{{ (isset($video) && 0 == $video->is_video_approved) ? 'info' : 'secondary' }}"><input
-                                        onchange="document.getElementById('status').submit();"
-                                        name="is_video_approved" type="radio"
-                                        value="2" @if (isset($video)) {{ (0 == $video->is_video_approved) ? 'checked' : '' }} @else {{ 'checked' }} @endif>
-                                    Reject</label>
+                                @if($video->is_video_approved==0)
+                                    <label
+                                        class="btn btn-sm btn-{{ (isset($video) && 1 == $video->is_video_approved) ? 'info' : 'secondary' }}"><input
+                                            onchange="document.getElementById('status').submit();"
+                                            name="is_video_approved" type="radio"
+                                            value="1" {{ (isset($video) && 1 == $video->is_video_approved) ? 'checked' : '' }}>
+                                        Approve</label>
+                                    <label
+                                        class="btn btn-sm btn-{{ (isset($video) && 0 == $video->is_video_approved) ? 'info' : 'secondary' }}"><input
+                                            onchange="document.getElementById('status').submit();"
+                                            name="is_video_approved" type="radio"
+                                            value="2" @if (isset($video)) {{ (0 == $video->is_video_approved) ? 'checked' : '' }} @else {{ 'checked' }} @endif>
+                                        Reject</label>
+                                @elseif($video->is_video_approved==1)
+                                    <label
+                                        class="btn btn-sm btn-{{ (isset($video) && 0 == $video->is_video_approved) ? 'info' : 'secondary' }}"><input
+                                            onchange="document.getElementById('status').submit();"
+                                            name="is_video_approved" type="radio"
+                                            value="2" @if (isset($video)) {{ (0 == $video->is_video_approved) ? 'checked' : '' }} @else {{ 'checked' }} @endif>
+                                        Reject</label>
+                                @elseif($video->is_video_approved==2)
+                                    <label
+                                        class="btn btn-sm btn-{{ (isset($video) && 1 == $video->is_video_approved) ? 'info' : 'secondary' }}"><input
+                                            onchange="document.getElementById('status').submit();"
+                                            name="is_video_approved" type="radio"
+                                            value="1" {{ (isset($video) && 1 == $video->is_video_approved) ? 'checked' : '' }}>
+                                        Approve</label>
+                                @endif
                             </div>
                         </form>
                     </div>

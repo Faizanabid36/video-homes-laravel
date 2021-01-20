@@ -17,7 +17,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $data = UserCategory::levelCategories();
+        $data = UserCategory::levelCategories(true);
         return response(
             array(
                 'user' => collect(auth()->user()->user_extra)->merge(collect(auth()->user())->except(array('avatara', 'company_logo'))->all())->except(

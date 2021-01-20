@@ -24,6 +24,8 @@ Auth::routes();
 
 Route::get( 'playlist/watch/{id}','MainController@playlist_videos')->name( 'playlist_videos' );
 Route::get( 'playlist/watch','MainController@playlist_videos')->name( 'playlist' );
+Route::post('enquiry', 'UserMessageController@enquiry')->name('enquiry');
+
 Route::group(
 	array( 'middleware' => 'auth' ),
 	function () {
@@ -95,6 +97,8 @@ Route::group(
 		Route::prefix( 'admin' )->group(
 			function () {
                 Route::view('/', 'admin.home')->name('admin_panel');
+                Route::get('reset_password/{id}','Admin\\UsersController@reset_password')->name('admin.reset_password');
+                Route::post('reset_password/{id}','Admin\\UsersController@reset_user_password')->name('admin.reset_password.store');
                 Route::resource('categories', 'Admin\\CategoriesController');
                 Route::resource('pages', 'Admin\\PagesController');
                 Route::resource('user-categories', 'Admin\\UserCategoriesController');

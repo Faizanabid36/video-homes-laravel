@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserCategory extends Model {
 
+
 	protected $guarded = array();
 
 	protected $with = array( 'children', 'list' );
@@ -17,6 +18,7 @@ class UserCategory extends Model {
 	public function list() {
 		return $this->hasMany( UserExtra::class, 'user_category_id' );
 	}
+
 	public function parent() {
 		return $this->belongsTo( $this, 'parent_id' )->without( array( 'children', 'list' ) );
 	}
@@ -44,18 +46,27 @@ class UserCategory extends Model {
 				return $query->whereSlug( $level2 );
 			}
 		)->get();
+	}
+
+	public function scopeGetOrderedCategories( $query, $with_priority = null ) {
+		return $query->whereNull( 'parent_id' )->when(
+			$with_priority,
+			function ( $q ) {
+				return $q->whereNull( 'parent_id' )->orderBy( 'priority' )->orderBy( 'slug' );
+			}
+		)->get();
 
 	}
 
 	public static function boot() {
 		parent::boot();
 		static::creating(
-			function( $user_category ) {
+			function ( $user_category ) {
 				$user_category->slug = \Str::slug( $user_category->name );
 			}
 		);
 		static::updating(
-			function( $user_category ) {
+			function ( $user_category ) {
 				$user_category->slug = \Str::slug( $user_category->name );
 			}
 		);
@@ -71,10 +82,15 @@ class UserCategory extends Model {
 		);
 	}
 
-	public function scopeLevelCategories( $query ) {
+	public function scopeLevelCategories( $query, $with_priority = null ) {
 		return $query->selectRaw( 'user_categories.*,uc1.name as parent_name' )
-					 ->leftJoin( 'user_categories as uc1', 'user_categories.parent_id', 'uc1.id' )
-					 ->get()->toArray();
+			->leftJoin( 'user_categories as uc1', 'user_categories.parent_id', 'uc1.id' )
+			->when(
+				$with_priority,
+				function ( $q ) {
+					return $q->whereNull( 'uc1.parent_id' )->orderBy( 'priority' )->orderBy( 'slug' );
+				}
+			)->get()->toArray();
 	}
 
 }

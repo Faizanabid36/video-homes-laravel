@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-// import {Pie} from '@ant-design/charts';
 import {Card, Col, Layout, Row} from 'antd';
 import axios from "axios";
 import {Doughnut, HorizontalBar, Line} from 'react-chartjs-2';
@@ -75,26 +74,26 @@ class Dashboard extends Component {
                 <div className="site-layout-content">
                     <div className="site-card-wrapper">
                         <Row gutter={16}>
-                            <Col span={12}>
+                            <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                                 <Card title="Traffic Source" bordered={false}>
                                     <Doughnut
                                         data={this.state.viewsSource}
                                     />
                                 </Card>
                             </Col>
-                            <Col span={12}>
+                            <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                                 <Card title="Player Impressions" bordered={false}>
                                     <Doughnut
                                         data={this.state.loadedOrViewed}
                                     />
                                 </Card>
                             </Col>
-                            <Col span={12}>
+                            <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                                 <Card title="Views within 7 Days" bordered={false}>
                                     <Line data={this.state.lineChart}/>
                                 </Card>
                             </Col>
-                            <Col span={12}>
+                            <Col xs={24} sm={24} md={24} lg={12} xl={12}>
                                 <Card title="Top 5 Most Watched Videos" bordered={false}>
                                     <HorizontalBar data={this.state.barData}/>
                                 </Card>

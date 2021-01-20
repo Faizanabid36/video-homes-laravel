@@ -48,10 +48,16 @@ class UserMessageController extends Controller
      */
     public function store(Request $request)
     {
+
         request()->validate([
             "contact_user_id" => "required|exists:users,id",
             "video_id" => "required|exists:videos,id",
         ]);
+        UserMessage::create(request()->except('_token'));
+        return back()->with(["message_sent" => "Message Sent!"]);
+    }
+    public function enquiry(Request $request)
+    {
         UserMessage::create(request()->except('_token'));
         return back()->with(["message_sent" => "Message Sent!"]);
     }

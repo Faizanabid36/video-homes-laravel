@@ -30,6 +30,12 @@
     </select>
     {!! $errors->first('parent_id_2', '<p class="help-block">:message</p>') !!}
 </div>
+<div class="form-group {{ $errors->has('priority') ? 'has-error' : ''}}">
+    <label for="priority" class="control-label">{{ 'Priority' }}</label>
+    <input class="form-control" name="priority" type="number"  min="1" id="priority" value="{{ isset($usercategory->priority) ? $usercategory->priority : ''}}" required>
+    <span class="help-block">lower values has greater priority. 1 will be displayed first, 10 will be displayed after that</span>
+    {!! $errors->first('priority', '<p class="help-block">:message</p>') !!}
+</div>
 
 <div class="form-group">
     <input class="btn btn-primary" type="submit" value="{{ $formMode === 'edit' ? 'Update' : 'Create' }}">

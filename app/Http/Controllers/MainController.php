@@ -28,7 +28,7 @@ class MainController extends Controller
 
     public function directory($level1 = null, $level2 = null)
     {
-        $industries = UserCategory::getCategories();
+        $industries = UserCategory::getOrderedCategories(true);
         $categories = UserCategory::getCategories($level1, $level2);
         $video_categories = Category::all();
         $users = collect(grabUsers($categories));
@@ -115,7 +115,7 @@ class MainController extends Controller
             $related_videos = Video::wherePlaylistId($video->playlist_id)->whereUserId($video->user_id)->where('id', '!=', $video->id)->get();
         else
             $related_videos = Video::wherePlaylistId($video->playlist_id)->whereIsVideoApproved(true)->whereUserId($video->user_id)->where('id', '!=', $video->id)->get();
-    
+
         $user = $video->user;
         $username = $user->username;
         $ratingsUser = UserMessage::userRating($user->id)->get();
@@ -148,7 +148,7 @@ class MainController extends Controller
             if($playlist_id)
                 return view($video && !$video->processed ? 'directory.processing' : 'playlist.playlist', compact('ratings', 'user', 'rating', 'video', 'related_videos', 'views'));
             else
-                return view($video && !$video->processed ? 'directory.processing' : 'playlist.single', compact('ratings', 'user', 'rating', 'video', 'related_videos', 'views'));  
+                return view($video && !$video->processed ? 'directory.processing' : 'playlist.single', compact('ratings', 'user', 'rating', 'video', 'related_videos', 'views'));
         }
         return view($video && !$video->processed ? 'directory.processing' : 'playlist.playlist', compact('ratings', 'user', 'rating', 'video', 'related_videos', 'views'));
          }

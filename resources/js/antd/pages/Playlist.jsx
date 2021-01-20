@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import {Button, Empty, Form, Input, Layout, message, PageHeader, Space, Table} from 'antd';
+import {Button, Col, Empty, Form, Input, Layout, message, PageHeader, Space, Table,Row} from 'antd';
 import {CloudUploadOutlined} from '@ant-design/icons';
 import axios from "axios";
 
@@ -174,25 +174,37 @@ class Playlist extends Component {
                     </Form>
                 </>;
             default:
-                return this.state.playlists.length > 0 ? <Table dataSource={this.state.playlists}>
-                    <Column title="Name" dataIndex="name" key="name"/>
-                    <Column title="Description" dataIndex="description" key="description"/>
-                    <Column
-                        title="Action"
-                        key="action"
-                        render={(text, record) => (
-                            <Space size="middle" key={text.id}>
-                                <Button type="primary"
-                                        onClick={e => this.setState({
-                                            action: 'edit',
-                                            id: text.id
-                                        })}><CloudUploadOutlined/> Edit</Button>
-                                <Button type="primary"
-                                        onClick={e => this.deletePlaylist(text.id)}><CloudUploadOutlined/> Delete</Button>
-                            </Space>
-                        )}
-                    />
-                </Table> : <Empty description={"No Playlist found"}>
+                return this.state.playlists.length > 0 ? <Row gutter={12}>
+                    <Col span={24}>
+                        <Table
+                            responsive
+                            dataSource={this.state.playlists}>
+                            <Col span={24}>
+                                <Column title="Name" dataIndex="name" key="name"/>
+                            </Col>
+                            <Col span={24}>
+                                <Column title="Description" dataIndex="description" key="description"/>
+                            </Col>
+                            <Col span={24}>
+                                <Column
+                                    title="Action"
+                                    key="action"
+                                    render={(text, record) => (
+                                        <Space size="middle" key={text.id}>
+                                            <Button type="primary"
+                                                    onClick={e => this.setState({
+                                                        action: 'edit',
+                                                        id: text.id
+                                                    })}> Edit</Button>
+                                            <Button type="danger"
+                                                    onClick={e => this.deletePlaylist(text.id)}>Delete</Button>
+                                        </Space>
+                                    )}
+                                />
+                            </Col>
+                        </Table>
+                    </Col>
+                </Row> : <Empty description={"No Playlist found"}>
                     <Button type="primary" onClick={e => this.setState({action: 'create'})}>
                         <CloudUploadOutlined/> Create
                     </Button>

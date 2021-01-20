@@ -153,21 +153,21 @@ class Dashboard extends Component {
                         </Space>
                     </div>
                     <Modal
-                        width={800}
+                        width={'70%'}
+                        style={{margin:'0px auto'}}
                         title="Video Details"
                         visible={this.state.visible}
                         onOk={this.handleOkModal}
                         onCancel={this.handleCancelModal}>
                         <Row gutter={16}>
-                            <Col span={16}>
+                            <Col xs={24} sm={24} md={24} lg={24} xl={24}>
                                 <Card title="Traffic Source" bordered={false}>
                                     <Doughnut
                                         data={this.state.viewsSource}
                                     />
-                                    {/*<Pie style={{width: "100%", height: "400px"}} {...configVideoSource}/>*/}
                                 </Card>
                             </Col>
-                            <Col span={16}>
+                            <Col xs={24} sm={24} md={24} lg={24} xl={24}>
                                 <Card title="Player Impressions" bordered={false}>
                                     <Doughnut
                                         data={this.state.loadedOrViewed}
@@ -175,17 +175,8 @@ class Dashboard extends Component {
                                     {/*<Pie style={{width: "100%", height: "400px"}} {...configLoadedOrViewed}/>*/}
                                 </Card>
                             </Col>
-                            <Col span={16}>
+                            <Col xs={24} sm={24} md={24} lg={24} xl={24}>
                                 <Card title="Views within 7 Days" bordered={false}>
-                                    {/*<Line style={{width: "100%", height: "400px"}}  {...{*/}
-                                    {/*    data: this.state.lineChart,*/}
-                                    {/*    title: {*/}
-                                    {/*        visible: true,*/}
-                                    {/*        text: 'Line chart with data points',*/}
-                                    {/*    },*/}
-                                    {/*    xField: 'date',*/}
-                                    {/*    yField: 'views',*/}
-                                    {/*}}/>*/}
                                     <Line data={this.state.lineChart}/>
                                 </Card>
                             </Col>

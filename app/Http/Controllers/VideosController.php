@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Jobs\ConvertVideoForStreaming;
+use App\Notifications\VideoUploaded;
 use App\Video;
 use App\VideoView;
 use App\Playlist;
@@ -92,6 +93,7 @@ class VideosController extends Controller {
 				'stream_path'   => getCleanFileName( $upload . $file, '_240p_converted.mp4' ),
 			)
 		);
+        auth()->user()->notify(new VideoUploaded($video,auth()->user()));
 
 		ConvertVideoForStreaming::dispatch(
 			$video,
@@ -167,8 +169,11 @@ class VideosController extends Controller {
 	 * @return array
 	 */
 	public function update( $id ) {
-		$video = Video::whereVideoId( $id )->firstOrFail();
-		$video->update( request( array( 'description', 'video_location', 'latitude', 'longitude', 'title', 'thumbnail', 'video_type', 'tags', 'category_id', 'playlist_id' ) ) );
+        $video = Video::whereVideoId( $id )->firstOrFail();
+	    if(!is_null(request()->get('thumbnails'))){
+	        $video->update(['thumbnail'=>\request()->get('thumbnails')]);
+        }
+		$video->update( request( array( 'description', 'video_location', 'latitude', 'longitude', 'title', 'video_type', 'tags', 'category_id', 'playlist_id' ) ) );
 		return array( 'message' => $video ? 'Information Updated' : 'Error Updating' );
 	}
 
