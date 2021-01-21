@@ -255,8 +255,8 @@ function grabUsers( $categories, $forceClear = false ) {
 		if ( isset( $val['list'] ) && ! empty( $val['list'] ) ) {
 			foreach ( $val['list'] as $user ) {
 				$user = is_array( $user ) ? $user : $user->toArray();
-				if ( $user['user_id'] ) {
-					dd( $user['user_id'] );
+				if ( $user['user_id'] && $user['user_id']['active'] === 1 ) {
+
 					$data[ $user['user_id']['id'] ] = collect( $user['user_id'] )->merge( collect( $user )->except( 'user_id' ) )->toArray();
 				}
 			}
