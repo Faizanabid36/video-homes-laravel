@@ -25,12 +25,7 @@ class UserCategory extends Model {
 
 
 	public function scopeGetCategories( $query, $level1 = null, $level2 = null ) {
-		return $query->whereHas(
-			'parent',
-			function( $query ) {
-				return $query->whereActive( 1 );
-			}
-		)->when(
+		return $query->when(
 			! $level1,
 			function ( $query ) {
 				return $query->whereNull( 'parent_id' );
