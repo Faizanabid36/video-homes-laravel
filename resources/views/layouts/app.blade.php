@@ -22,7 +22,6 @@
 </head>
 <body class="parentcontainer">
 @yield('container')
-@yield('content')
 
 <script src="{{ asset('js/app.js') }}"></script>
 @yield('footer_script')

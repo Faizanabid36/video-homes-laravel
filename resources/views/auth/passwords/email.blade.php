@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.public.app',["title"=>"Reset"])
 
 @section('content')
 <div class="container">
