@@ -77,7 +77,7 @@
                                                         onclick="return confirm(&quot;Confirm delete?&quot;)"><i
                                                         class="fa fa-trash-o" aria-hidden="true"></i> Delete
                                                 </button>
-                                            </form>
+                                            </form> 
                                             <button class="btn btn-warning btn-sm" title="Delete User">
                                                 <a href="{{route('admin.reset_password',$item->id)}}">Reset Password</a>
                                             </button>
