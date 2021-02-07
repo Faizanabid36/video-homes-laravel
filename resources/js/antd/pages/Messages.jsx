@@ -47,6 +47,7 @@ export default class Messages extends React.Component {
         let message_id = this.props.match.params.id
         axios.post('my_messages', {message_id})
             .then((res) => {
+                console.log(res);
                 this.setState({...res.data}, () => {
                     this.setState({dataloading: true},()=>{document.getElementById('scroller').scrollBy(0,1000000000)})
 
@@ -77,6 +78,10 @@ export default class Messages extends React.Component {
                         }}>{this.state.messages.map((message, index) => {
                             console.log(this.state.user_id + "and" + message.contact_user_id)
                             return <Card type="inner" key={index}>
+                                <h6 className={this.state.user_id !== message.contact_user_id ? 'pull-left' : 'pull-right'}>
+                                {message.user.name}
+                                </h6>
+                                <br/>
                                 <h5
                                     className={this.state.user_id !== message.contact_user_id ? 'pull-left' : 'pull-right'}>
                                     {message.message}<br/>
@@ -93,7 +98,7 @@ export default class Messages extends React.Component {
                                        value={this.state.inputText}
                                        placeholder="Enter Message Here..."/>
                                 <Button onClick={this.handleSubmit} className={"col-md-2 pull-right"} type="primary"
-                                        icon={<SendOutlined/>}>Send</Button>
+                                        icon={<SendOutlined/>}>Send </Button>
                             </Form.Item>
                         </Form>
                     </PageHeader>}

@@ -3,7 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
+
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+
 
 class Admin extends Middleware
 {
@@ -14,7 +16,7 @@ class Admin extends Middleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle( $request, Closure $next ) {
+    public function handle( $request, Closure $next , ...$guard) {
 
         if(!auth()->user()){
             return redirect( 'login' );

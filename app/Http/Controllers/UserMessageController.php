@@ -25,7 +25,7 @@ class UserMessageController extends Controller
         } else {
             $usermessages = UserMessage::latest()->paginate($perPage);
         }
-
+        
         return view('admin.user-messages.index', compact('usermessages'));
     }
 
@@ -166,6 +166,8 @@ class UserMessageController extends Controller
         $messageIds = collect($messages)->map(function ($message) {
             return $message->id;
         });
+        // dd($messages);
+        // print_r($messages);
         UserMessage::whereIn('id', $messageIds)->update(['read_at' => now()]);
         $user_id = auth()->user()->id;
         return compact('messages', 'to_id', 'user_id');
@@ -193,6 +195,7 @@ class UserMessageController extends Controller
         })->values();
         $user_id = auth()->user()->id;
         $user = auth()->user();
+        
         return compact('messages', 'user_id','user');
     }
 

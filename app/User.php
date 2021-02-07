@@ -53,6 +53,8 @@ class User extends Authenticatable
             Video::whereUserId($user->id)->delete();
             UserMessage::where('reply_user_id', $user->id)->delete();
             UserMessage::where('contact_user_id', $user->id)->delete();
+            UserExtra::where('user_id', $user->id)->delete();
+
         });
     }
 

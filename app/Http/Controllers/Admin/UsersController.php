@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 
 use App\User;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -129,6 +130,7 @@ class UsersController extends Controller
     public function destroy($id)
     {
         User::destroy($id);
+
 
         return redirect('admin/users')->with('flash_message', 'User deleted!');
     }
