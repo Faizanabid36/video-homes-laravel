@@ -15,6 +15,7 @@ export default class Messages extends React.Component {
             from_id: 0,
             to_id: 0,
             user_id: 0,
+            u_name : '',
         }
         this.onChange = this.onChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -29,8 +30,10 @@ export default class Messages extends React.Component {
             .then(async (res) => {
                 let nextMessages = await this.state.messages.concat([{
                     message: this.state.inputText,
-                    contact_user_id: this.state.user_id
+                    contact_user_id: this.state.user_id,
+                    
                 }]);
+                
                 await this.setState({messages: nextMessages, inputText: ''},()=>{document.getElementById('scroller').scrollBy(0,1000000000)});
             })
             .catch((err) => {
@@ -48,6 +51,7 @@ export default class Messages extends React.Component {
         axios.post('my_messages', {message_id})
             .then((res) => {
                 console.log(res);
+                
                 this.setState({...res.data}, () => {
                     this.setState({dataloading: true},()=>{document.getElementById('scroller').scrollBy(0,1000000000)})
 
@@ -78,8 +82,9 @@ export default class Messages extends React.Component {
                         }}>{this.state.messages.map((message, index) => {
                             console.log(this.state.user_id + "and" + message.contact_user_id)
                             return <Card type="inner" key={index}>
+                                
                                 <h6 className={this.state.user_id !== message.contact_user_id ? 'pull-left' : 'pull-right'}>
-                                {message.user.name}
+                                {message.user ? message.user.name : ''}
                                 </h6>
                                 <br/>
                                 <h5

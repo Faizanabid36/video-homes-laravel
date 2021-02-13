@@ -32,6 +32,7 @@ class MainController extends Controller
         $categories = UserCategory::getCategories($level1, $level2);
         $video_categories = Category::all();
         $users = collect(grabUsers($categories));
+        
         if (\request('sort') && 'oldest_to_newest' == \request('sort')) {
             $users = $users->sortBy(function ($user) {
                 return $user['created_at'];
@@ -54,6 +55,7 @@ class MainController extends Controller
 
     public function page_or_username($username, $video_id = null)
     {
+        
         if (request()->ajax()) {
             return ["isProcessed" => Video::userVideos($username, $video_id)->first()->processed];
         }

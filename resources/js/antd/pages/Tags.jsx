@@ -8,7 +8,7 @@ class EditableTagGroup extends Component {
         this.state = {
             inputVisible: false,
             inputValue: '',
-            editInputIndex: -1,
+            editInputIndex: -2,
             editInputValue: '',
         };
         this.props = props;
@@ -105,7 +105,7 @@ class EditableTagGroup extends Component {
                         <Tag
                             className="edit-tag"
                             key={tag}
-                            closable={index !== 0}
+                            closable={index !== -1}
                             onClose={() => this.handleClose(tag)}
                         >
               <span

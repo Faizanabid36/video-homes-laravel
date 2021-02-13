@@ -1,4 +1,4 @@
-@extends('layouts.public.app',["title"=>$video ? $video->title : "No Video Uploaded By {$user->name}"])
+@extends('layouts.public.app',["title"=>$video ? "$video->title" : "No Video Uploaded By {$user->name}"])
 @section('content')
     <div class="container">
         <div class="row">

@@ -30,7 +30,7 @@ class UsersController extends Controller
         } else {
             $users = User::whereRole(2)->latest()->paginate($perPage);
         }
-
+       
         return view('admin.users.index', compact('users'));
     }
 

@@ -300,7 +300,7 @@ class App extends React.Component {
                                     </Dropdown>
                                     <Dropdown overlay={this.profileMenu()}>
                                         <a onClick={(e) => e.preventDefault()}>
-                                            <Avatar style={{marginTop: '-12px'}}
+                                            <Avatar style={{margin: '5px'}}
                                                     src={this.state.user.user_extra.profile_picture}/>
                                             {this.state.user.name}
                                         </a>

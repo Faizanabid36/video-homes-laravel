@@ -113,7 +113,7 @@ Route::group(
                 Route::get('/my_video/edit/{id}', 'Admin\\VideosController@edit_my_video')->name('admin.my_video.edit');
                 Route::post('/my_video/edit/{id}', 'Admin\\VideosController@update_my_video')->name('admin.update_my_video');
                 Route::get('reported_query_videos', 'UserMessageController@reported_videos')->name('reported_query_videos');
-                Route::get('reviews','Admin\\ReviewController@index')->name('admin.reviews');
+                // Route::get('reviews','Admin\\ReviewController@index')->name('admin.reviews');
             }
 		);
 	}

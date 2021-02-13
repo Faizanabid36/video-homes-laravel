@@ -15,7 +15,7 @@ class Category extends Model {
     public function scopeApprovedVideos( $query ) {
         return $query->with( [
             'videos' => function ( $q ) {
-                return $q->whereProcessed( 1 )->whereIsVideoApproved( 1 );
+                return $q->whereProcessed( 1 )->whereIsVideoApproved( 1 )->whereVideoType('Public');
             }
         ] );
     }

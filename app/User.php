@@ -57,7 +57,11 @@ class User extends Authenticatable
 
         });
     }
-
+    
+    public function userall()
+    {
+        return $this->hasMany(UserExtra::class ) ;
+    }
     public function blockedusers()
     {
         return $this->hasMany(BlockedUser::class, 'user_id', 'id');
