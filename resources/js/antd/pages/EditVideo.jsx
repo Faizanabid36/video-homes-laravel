@@ -150,6 +150,16 @@ class EditVideo extends Component {
                                     <Radio onChange={(e) => this.onChange(e, 'thumbnails')}
 
                                            value={this.state.thumbnails[3]}>3rd</Radio>
+
+                                    <Radio onChange={(e) => this.onChange(e, 'thumbnails')}
+                                           value={this.state.thumbnails[4]}>4rth</Radio>
+
+                                    <Radio onChange={(e) => this.onChange(e, 'thumbnails')}
+
+                                           value={this.state.thumbnails[5]}>5th</Radio>
+                                    <Radio onChange={(e) => this.onChange(e, 'thumbnails')}
+
+                                           value={this.state.thumbnails[6]}>6th</Radio>
                                 </Radio.Group>
                             </Form.Item>
 

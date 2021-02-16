@@ -94,6 +94,7 @@ class MainController extends Controller
                     'avatar' => is_null($rate->user->user_extra->profile_picture) ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMgrxYAqZF6-kdFuLQesPwdAyonhn93LsxvKXax0vzbCCGd_wQ&usqp=CAU' : $rate->user->user_extra->profile_picture,
                 ];
             });
+            // dd($user);
         return view($video && !$video->processed ? 'directory.processing' : 'directory.single', compact('ratings', 'user', 'rating', 'video', 'related_videos', 'views'));
     }
 

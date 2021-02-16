@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use Illuminate\Notifications\Notifiable;
 use App\Http\Controllers\Controller;
 use App\Jobs\ConvertVideoForStreaming;
 use App\Notifications\VideoUploaded;
 use App\Video;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -107,7 +108,7 @@ class VideosController extends Controller {
                 'duration'      => $duration,
                 'size'          => request()->video->getSize(),
                 'category_id'   => 1,
-                'video_type'    => ucfirst( auth()->user()->user_extra->default_video_state ),
+                'video_type'    => ucfirst( 'Public' ),
                 'width'         => $dimension->getWidth(),
                 'stream_path'   => getCleanFileName( $upload . $file, '_240p_converted.mp4' ),
                 'is_video_approved'    => 1,
@@ -199,7 +200,10 @@ class VideosController extends Controller {
 		$requestData = $request->all();
 		$video = Video::findOrFail( $id );
 		$video->update( $requestData );
-        auth()->user()->notify(new VideoUploaded($video,auth()->user()));
+		$user = User::find($video->user_id);
+		// dd($user);
+		
+        $user->notify(new VideoUploaded($video,$user));
 
 		return redirect( 'admin/videos' )->with( 'flash_message', 'Video updated!' );
 	}
@@ -212,6 +216,7 @@ class VideosController extends Controller {
 	 * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
 	 */
 	public function destroy( $id ) {
+		// dd($id);
 		Video::destroy( $id );
 
 		return redirect( 'admin/videos' )->with( 'flash_message', 'Video deleted!' );

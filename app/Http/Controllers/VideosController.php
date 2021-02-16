@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Category;
 use App\Jobs\ConvertVideoForStreaming;
 use App\Notifications\VideoUploaded;
@@ -142,7 +143,7 @@ class VideosController extends Controller {
 		$categories = Category::orderBy( 'name', 'ASC' )->get();
 		$playlists  = Playlist::whereUserId( auth()->user()->id )->get();
 		$thumbnails = array();
-		for ( $i = 1; $i <= 3; $i++ ) {
+		for ( $i = 1; $i <= 6; $i++ ) {
 			$thumbnails[ $i ] = preg_replace( '/(-)\d(\.png)/', "-$i$2", $video->thumbnail, 1 );
 		}
 		$video->username = auth()->user()->username;

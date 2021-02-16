@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
 class DeleteVideos implements ShouldQueue {
 	use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 	protected $video;
+	
 
 	/**
 	 * Create a new job instance.
@@ -21,7 +22,7 @@ class DeleteVideos implements ShouldQueue {
 	 * @return void
 	 */
 	public function __construct( $video ) {
-				$this->video = $video;
+		$this->video = $video;
 	}
 
 	/**

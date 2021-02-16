@@ -74,16 +74,16 @@ if ( ! function_exists( 'getCleanFileName' ) ) {
 	}
 }
 if ( ! function_exists( 'generateThumbnailsFromVideo' ) ) {
-	function generateThumbnailsFromVideo( $media, $path, $angle, $thumbnail_shots = 3 ) {
+	function generateThumbnailsFromVideo( $media, $path, $angle, $thumbnail_shots = 6 ) {
 		$thumbnail_shots = $media->getDurationInSeconds() >= $thumbnail_shots ? $thumbnail_shots : 1;
 		$divide_result   = (int) floor( $media->getDurationInSeconds() / $thumbnail_shots );
 		$seconds         = 0;
 		$newThumbnail    = array();
 
-		for ( $i = 1; $i <= $thumbnail_shots; $i ++ ) {
+		for ( $i = 1; $i <= $thumbnail_shots; $i++ ) {
 			$media              = \FFMpeg::open( $path );
 			$newThumbnail[ $i ] = str_replace( '.' . request()->video->getClientOriginalExtension(), "-$i.png", str_replace( 'public/', '', $path ) );
-
+			
 			try {
 				$media->getFrameFromSeconds( $seconds )->export()->toDisk( 'public' )->save( $newThumbnail[ $i ] );
 				if ( $angle ) {

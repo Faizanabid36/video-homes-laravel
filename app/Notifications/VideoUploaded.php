@@ -60,13 +60,16 @@ class VideoUploaded extends Notification
     public function toDatabase($notifiable)
     {
         
-        if ($this->video->is_video_approved == "2")
+        if ($this->video->is_video_approved == "2"){
             $message = 'Video \'' . $this->video->title . '\' has been rejected by admin';
-        elseif ($this->video->is_video_approved == "1")
+        }
+        elseif ($this->video->is_video_approved == "1"){
             $message = 'Video \'' . $this->video->title . '\' has been approved';
+        }
         else {
             $message = 'Video \''.$this->video->title.'\' is uploaded and pending for approval';
         }
+        // dd($this);
         return [
             'title'=>$this->video->title,
             'user'=>$this->user,

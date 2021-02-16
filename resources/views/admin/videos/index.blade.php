@@ -79,7 +79,7 @@
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
                                                 <button type="submit" class="btn btn-danger btn-sm" title="Delete Video"
-                                                        onclick="return confirm(&quot;Confirm delete?&quot;)"><i
+                                                       ><i
                                                         class="fa fa-trash-o" aria-hidden="true"></i> Delete
                                                 </button>
                                             </form>

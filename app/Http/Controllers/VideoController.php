@@ -217,7 +217,7 @@ class VideoController extends Controller {
 		$video      = Video::whereVideoId( $video_id )->firstOrFail();
 		$categories = Category::all();
 		$thumbnails = array();
-		for ( $i = 1; $i <= 3; $i++ ) {
+		for ( $i = 1; $i <= 6; $i++ ) {
 			$thumbnails[ $i ] = preg_replace( '/(-)\d(\.png)/', "-$i$2", $video->thumbnail, 1 );
 		}
 		$video->username = auth()->user()->username;

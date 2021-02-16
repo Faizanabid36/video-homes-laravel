@@ -399,7 +399,7 @@
             </div>
 
         </div>
-
+@if( auth()->id() != $video->user_id )
         <div class="row">
             <div class="col-12">
 
@@ -633,6 +633,7 @@
 
         </div>
 
+ @endif
 
     </div>  <!--parentContainer -->
 @endsection
