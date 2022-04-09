@@ -39,7 +39,7 @@
         "jquery-ui": "^1.12.1",
         "less-loader": "^7.1.0",
         "mediaelement": "^4.2.16",
-        "moment": "^2.29.1",
+        "moment": "^2.29.2",
         "react": "^16.14.0",
         "react-avatar-edit": "^0.8.3",
         "react-bootstrap": "^1.4.0",
